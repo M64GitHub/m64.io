@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="zig, performance, branch-prediction, rendering">
+  <title>When “Optimized” Code Runs Slower</title>
+  <meta property="og:image" content="https://m64.io/posts/when-optimized-code-runs-slower/images/preview.png">
+  <meta property="og:title" content="When “Optimized” Code Runs Slower">
+  <meta property="og:description" content="What a terminal renderer taught me about branch prediction, CPU pipelines, and the beauty of being wrong.">
+  <link rel="stylesheet" href="../article-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <nav class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+  <li ><a href="#intro">Intro</a></li>
+  <li ><a href="#unexpected-first-run-results">Unexpected First-Run Results</a></li>
+  <li ><a href="#checking-the-code">Checking the Code</a></li>
+  <li ><a href="#breaking-it-apart">Breaking It Apart</a></li>
+  <li ><a href="#verifying-the-phenomenon">Verifying the Phenomenon</a></li>
+  <li ><a href="#branch-prediction-the-hidden-performance-killer">Branch Prediction — the Hidden Performance Killer</a></li>
+  <li ><a href="#conclusion">Conclusion</a></li>
+</ul>
+</nav>
+
+    </aside>
+
+    <main class="article-content">
+      <div class="article-tags">
+    <span class="tag">#zig</span> <span class="tag">#performance</span> <span class="tag">#branch-prediction</span> <span class="tag">#rendering</span>
+  </div>
+<h1 id="when-optimized-code-runs-slower">When “Optimized” Code Runs Slower</h1>
+<p><strong>What a terminal renderer taught me about branch prediction, CPU pipelines, and the beauty of being wrong.</strong></p>
+<div class="article-byline">M. Schallner, 2025.11.10</div>
+<h2 id="intro">Intro</h2>
+<p>I’ve been building <strong>movy</strong>, a terminal graphics engine in Zig that turns pixel data into colorful ANSI escape sequences.</p>
+<p>Its first renderer — <code>render()</code> — was simple and fast. Binary transparency only: a pixel was either there or it wasn’t. Clean, predictable, no math.</p>
+<p>But I wanted to go further. I wanted <strong>alpha blending</strong> — smooth transparency, soft fades, subtle light effects.</p>
+<p>So I added two new compositing paths:</p>
+<ol>
+<li><strong><code>renderWithAlpha()</code></strong> — full alpha compositing with per-pixel blending</li>
+<li><strong><code>renderWithAlphaToBg()</code></strong> — an <em>optimized</em> variant tuned for opaque backgrounds</li>
+</ol>
+<p>Once those were in place, the obvious question came up:</p>
+<p>How much slower would this make rendering? Would alpha blending prove practical, or simply add a stylish way to waste cycles?</p>
+<p>To find out, I built a detailed benchmark suite — same sprites, same overlaps, same frame counts — only the render method changed.</p>
+<p>When I ran it the first time, the results looked completely wrong.<br>Everything about the data seemed to defy logic.</p>
+<p>What followed would lead me deep into the rabbit hole of branch prediction and CPU pipelines — and remind me that when benchmarks look too wrong to be true, it’s usually the <em>measurement</em> that needs debugging.</p>
+<h2 id="unexpected-first-run-results">Unexpected First-Run Results</h2>
+<figure class="article-image">
+  <div class="image-placeholder">
+    <img src="images/chart-comparing-the-three-methods-for-10x10-sprites-with-3-overlapping-surfaces.png" alt="Chart comparing the three methods for 10x10 sprites with 3 overlapping surfaces" onerror="this.parentElement.innerHTML='<div class=placeholder-notice>Image: Chart comparing the three methods for 10x10 sprites with 3 overlapping surfaces<br><small>Place image at: arender/output/when-optimized-code-runs-slower/images/chart-comparing-the-three-methods-for-10x10-sprites-with-3-overlapping-surfaces.png</small></div>'">
+  </div>
+  <figcaption>Chart comparing the three methods for 10x10 sprites with 3 overlapping surfaces</figcaption>
+</figure>
+<p>On paper, the outcome was obvious.
+<code>render()</code> should dominate. It does no math, no blending — just copies pixels.
+<code>renderWithAlpha()</code> and <code>renderWithAlphaToBg()</code> both do more work, so they should be 2–3× slower.</p>
+<p>That’s what the benchmark was supposed to confirm.</p>
+<p>Instead, the data completely contradicted what I expected.</p>
+<p><strong>10×10 sprites, 3 overlapping surfaces:</strong></p>
+<pre><code>render():              1.70 µs/iteration  (SLOWEST)
+renderWithAlphaToBg(): 1.16 µs/iteration  (32% faster)
+renderWithAlpha():     0.85 µs/iteration  (2× faster!)
+</code></pre><p>The “fast path” was the slowest.
+The “optimized” one lost to the “unoptimized” one.
+And the full alpha blender — the one doing the <em>most</em> arithmetic — was the fastest of all.</p>
+<p>This outcome didn’t make sense logically.<br>To investigate, I extended the test — more layers, more overlap.</p>
+<p><strong>10×10 sprites, 5 overlapping surfaces:</strong></p>
+<figure class="article-image">
+  <div class="image-placeholder">
+    <img src="images/chart-comparing-the-three-methods-for-10x10-sprites-with-5-overlapping-surfaces.png" alt="Chart comparing the three methods for 10x10 sprites with 5 overlapping surfaces" onerror="this.parentElement.innerHTML='<div class=placeholder-notice>Image: Chart comparing the three methods for 10x10 sprites with 5 overlapping surfaces<br><small>Place image at: arender/output/when-optimized-code-runs-slower/images/chart-comparing-the-three-methods-for-10x10-sprites-with-5-overlapping-surfaces.png</small></div>'">
+  </div>
+  <figcaption>Chart comparing the three methods for 10x10 sprites with 5 overlapping surfaces</figcaption>
+</figure>
+<pre><code>render():              0.93 µs/iteration  (45% faster than before!)
+renderWithAlphaToBg(): 2.09 µs/iteration  
+renderWithAlpha():     1.35 µs/iteration
+</code></pre><p>Now <code>render()</code> was not just faster — with <em>5 surfaces</em> it was in total also <em>45% faster</em> than it was on 3 surfaces, despite doing <em>more work.</em></p>
+<p>At that point, I was staring at the terminal, wondering if I’d just broken physics.</p>
+<p>This benchmark data was undeniable — and completely irrational.</p>
+<p>Two things stood out, both equally baffling:</p>
+<ol>
+<li>With <strong>three</strong> surfaces, the supposedly “fast” <code>render()</code> was the <em>slowest</em> of all — even slower than full alpha blending.</li>
+<li>Adding <strong>more</strong> surfaces — five instead of three — somehow made <code>render()</code> <em>faster.</em></li>
+</ol>
+<p>Clearly, something in my “fast path” wasn’t behaving as expected. To understand the cause, I examined the code more closely.</p>
+<h2 id="checking-the-code">Checking the Code</h2>
+<p>Here’s the core of <code>render()</code> — the original, binary transparency path (simplified):</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">for</span> (surfaces) |surface| {
+    <span class="hljs-keyword">for</span> (each_pixel_in_surface) |_| {
+        <span class="hljs-comment">// Bounds checking</span>
+        <span class="hljs-keyword">if</span> (out_y &lt; <span class="hljs-number">0</span> or out_y &gt;= height) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (out_x &lt; <span class="hljs-number">0</span> or out_x &gt;= width) <span class="hljs-keyword">continue</span>;
+        
+        <span class="hljs-comment">// Skip transparent pixels</span>
+        <span class="hljs-keyword">if</span> (surface.shadow_map[idx_in] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;
+
+        <span class="hljs-comment">// Only write if destination is not already occupied</span>
+        <span class="hljs-keyword">if</span> (out_surface.shadow_map[idx_out] != <span class="hljs-number">1</span>) {
+            out_surface.color_map[idx_out] = surface.color_map[idx_in];
+            out_surface.shadow_map[idx_out] = <span class="hljs-number">1</span>;
+        }
+    }
+}
+</code></pre><p>At first glance, the logic seems straightforward.<br>But there’s a pattern here — <strong>three distinct types of conditional checks:</strong></p>
+<ol>
+<li><strong>Bounds checking:</strong> is the pixel inside the output surface?</li>
+<li><strong>Transparency check:</strong> is the source pixel visible?</li>
+<li><strong>Occupancy check:</strong> has something already drawn here?</li>
+</ol>
+<p>The alpha-blending version looked similar, but with one crucial difference:</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">for</span> (surfaces) |surface| {
+    <span class="hljs-keyword">for</span> (each_pixel_in_surface) |_| {
+        <span class="hljs-comment">// Bounds checking</span>
+        <span class="hljs-keyword">if</span> (out_x &lt; <span class="hljs-number">0</span> or out_x &gt;= width) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (out_y &lt; <span class="hljs-number">0</span> or out_y &gt;= height) <span class="hljs-keyword">continue</span>;
+
+        <span class="hljs-comment">// Skip transparent pixels</span>
+        <span class="hljs-keyword">if</span> (surface.shadow_map[idx_in] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;
+
+        <span class="hljs-comment">// Always blend — no occupancy check</span>
+        <span class="hljs-keyword">const</span> blended = blend_colors(
+            surface.color_map[idx_in],
+            out_surface.color_map[idx_out]
+        );
+        out_surface.color_map[idx_out] = blended;
+    }
+}
+</code></pre><p>The alpha version performs <strong>more work per pixel</strong> — multiplications and divisions — yet it contains <strong>fewer branches.</strong><br>It always blends, without any final “should I draw?” decision.</p>
+<p>That difference stood out. It suggested that the extra conditionals might be costing more than the arithmetic itself.
+I wasn’t ready to draw conclusions yet, but the hypothesis fit the data too well to ignore.</p>
+<p>If that was true, the problem wasn’t arithmetic — it was <strong>control flow.</strong>  </p>
+<h2 id="breaking-it-apart">Breaking It Apart</h2>
+<p>I decided to strip the renderer down and test each factor in isolation.</p>
+<h3 id="strong-test-0-stripping-away-noise-strong"><strong>Test 0: Stripping Away Noise</strong></h3>
+<p>The goal was to isolate what might be causing the slowdown — especially the occupancy check — by removing anything nonessential.<br>Since my test sprites were always fully inside the output surface, I started by removing the bounds- and transparency checks to keep only the core logic.</p>
+<p>So I created a clean variant — same logic, stripped to the core:</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">for</span> (<span class="hljs-number">0.</span>.surface.h) |y| {
+    <span class="hljs-keyword">for</span> (<span class="hljs-number">0.</span>.surface.w) |x| {
+        <span class="hljs-comment">// Only occupancy check remains</span>
+        <span class="hljs-keyword">if</span> (out_surface.shadow_map[idx_out] != <span class="hljs-number">1</span>) {
+            out_surface.color_map[idx_out] = surface.color_map[idx_in];
+            out_surface.shadow_map[idx_out] = <span class="hljs-number">1</span>;
+        }
+    }
+}
+</code></pre><p>The result?</p>
+<pre><code>renderOriginalClean() 3 surfaces: 0.67 µs  (2.5× faster!)
+renderOriginalClean() 5 surfaces: 0.95 µs
+</code></pre><p>The speedup was <strong>massive</strong>.
+And more importantly — the <strong>anomaly vanished.</strong></p>
+<p>Three surfaces were now faster than five, exactly as expected. That meant it wasn’t just about the occupancy check we’d isolated.
+The reversal was gone, but the reason for this massive improvement wasn’t yet clear.</p>
+<h3 id="strong-test-1-alpha-without-bounds-strong"><strong>Test 1: Alpha Without Bounds</strong></h3>
+<p>Next, I cleaned up the alpha-blending versions the same way — removing bounds checks to see if they’d show the same effect.</p>
+<pre><code>renderWithAlphaClean()     3 surfaces: 0.87 µs
+renderWithAlphaClean()     5 surfaces: 1.24 µs  (42% slower, as expected)
+
+renderWithAlphaToBgClean() 3 surfaces: 1.16 µs  
+renderWithAlphaToBgClean() 5 surfaces: 2.09 µs  (80% slower)
+</code></pre><p>Every alpha version scaled <em>normally</em>.<br>No reversal. No anomaly.<br>The pattern held: more surfaces → more time.</p>
+<p>That ruled out the blending math itself — it wasn’t the reason alpha blending had outperformed <code>render()</code> earlier. Whatever caused <strong>that</strong> first reversal between <code>render()</code>and the alpha versions was still hiding somewhere deeper in the control flow.</p>
+<h3 id="strong-test-2-going-branchless-strong"><strong>Test 2: Going Branchless</strong></h3>
+<p>Having seen improvement from fewer branches, the next step was to quantify the effect of removing them entirely.</p>
+<p>So I made a version with <strong>no conditionals</strong> — it always wrote output, no decisions, no skipping.</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">const</span> occupied = out_surface.shadow_map[idx_out];
+<span class="hljs-keyword">const</span> empty = <span class="hljs-number">1</span> - occupied;
+
+out_surface.color_map[idx_out] = .{
+    .r = old_color.r * occupied + new_color.r * empty,
+    .g = old_color.g * occupied + new_color.g * empty,
+    .b = old_color.b * occupied + new_color.b * empty,
+};
+</code></pre><p>Results:</p>
+<pre><code>renderNoBranchClean() 3 surfaces: 0.81 µs  (21% slower)
+renderNoBranchClean() 5 surfaces: 1.19 µs
+</code></pre><p>Going branchless <em>hurt performance.</em>  </p>
+<p>The math-heavy version was slower than the conditional one. </p>
+<h3 id="strong-test-3-perfect-prediction-strong"><strong>Test 3: Perfect Prediction</strong></h3>
+<p>After seeing that removing branches entirely slowed things down, I wanted to test the opposite extreme — <strong>keep the branch</strong>, but make it <em>perfectly predictable</em>.</p>
+<p>I rewrote the loop to make every branch outcome deterministic — a checkerboard pattern of alternating writes:</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">if</span> ((x + y) % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) {
+    out_surface.color_map[idx_out] = surface_in.color_map[idx_in];
+}
+</code></pre><p>The result?</p>
+<pre><code>renderPredictablePatternClean() 3 surfaces: 0.52 µs  (FASTEST yet!)
+renderPredictablePatternClean() 5 surfaces: 0.67 µs
+</code></pre><p><strong>Boom.</strong><br>When the branch became perfectly predictable, performance maxed out.</p>
+<p>That was the moment everything clicked.</p>
+<p>The mystery finally made sense — the anomalies all pointed to <strong>branch prediction.</strong></p>
+<figure class="article-image">
+  <div class="image-placeholder">
+    <img src="images/chart-comparing-the-three-methods-accross-sprite-sizes-with-3-overlapping-surfaces.png" alt="Chart comparing the three methods accross sprite sizes with 3 overlapping surfaces" onerror="this.parentElement.innerHTML='<div class=placeholder-notice>Image: Chart comparing the three methods accross sprite sizes with 3 overlapping surfaces<br><small>Place image at: arender/output/when-optimized-code-runs-slower/images/chart-comparing-the-three-methods-accross-sprite-sizes-with-3-overlapping-surfaces.png</small></div>'">
+  </div>
+  <figcaption>Chart comparing the three methods accross sprite sizes with 3 overlapping surfaces</figcaption>
+</figure>
+<p>But I was not done yet ...</p>
+<h3 id="strong-bonus-the-fastest-branchless-variant-strong"><strong>Bonus: The Fastest Branchless Variant</strong></h3>
+<p>Even after confirming that predictable branches win, I still wanted to know:<br><em>Is there any truly branchless approach that can compete?</em></p>
+<p>So I added two more experimental variants — both technically branchless, but very different in how they work.</p>
+<h4 id="strong-bitwise-mask-selection-strong"><strong>Bitwise Mask Selection</strong></h4>
+<p>Instead of <code>if</code>, this version builds a bitmask that’s all 1s if the destination pixel is empty, or 0 otherwise.<br>It then merges the colors using pure logical operations:</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">const</span> occupied = out_surface.shadow_map[idx_out];
+<span class="hljs-comment">// 0xFF if empty, 0x00 if occupied</span>
+<span class="hljs-keyword">const</span> mask = ~(occupied *% ~<span class="hljs-meta">@as</span>(<span class="hljs-built_in">u8</span>, <span class="hljs-number">0</span>)); 
+
+<span class="hljs-keyword">const</span> old_color = out_surface.color_map[idx_out];
+<span class="hljs-keyword">const</span> new_color = surface_in.color_map[idx_in];
+
+out_surface.color_map[idx_out] = .{
+    .r = (old_color.r &amp; ~mask) | (new_color.r &amp; mask),
+    .g = (old_color.g &amp; ~mask) | (new_color.g &amp; mask),
+    .b = (old_color.b &amp; ~mask) | (new_color.b &amp; mask),
+};
+</code></pre><h4 id="strong-conditional-move-cmov-strong"><strong>Conditional Move (CMOV)</strong></h4>
+<p>This keeps an <code>if</code> in the source, but on modern CPUs, the compiler often emits a <strong>conditional move (CMOV)</strong> instruction.<br>That means the CPU executes both sides and conditionally commits the result — no pipeline stalls, no mispredictions.</p>
+<pre><code class="hljs language-zig"><span class="hljs-keyword">const</span> new_color = <span class="hljs-keyword">if</span> (out_surface.shadow_map[idx_out] == <span class="hljs-number">0</span>)
+    surface_in.color_map[idx_in]
+<span class="hljs-keyword">else</span>
+    out_surface.color_map[idx_out];
+
+out_surface.color_map[idx_out] = new_color;
+</code></pre><p>Then I benchmarked both against all previous “clean” variants.</p>
+<figure class="article-image">
+  <div class="image-placeholder">
+    <img src="images/performance-overhead-relative-to-baseline-render-3-overlapping-surfaces.png" alt="Performance overhead relative to baseline render - 3 overlapping surfaces" onerror="this.parentElement.innerHTML='<div class=placeholder-notice>Image: Performance overhead relative to baseline render - 3 overlapping surfaces<br><small>Place image at: arender/output/when-optimized-code-runs-slower/images/performance-overhead-relative-to-baseline-render-3-overlapping-surfaces.png</small></div>'">
+  </div>
+  <figcaption>Performance overhead relative to baseline render - 3 overlapping surfaces</figcaption>
+</figure>
+<h3 id="strong-what-i-found-strong"><strong>What I Found</strong></h3>
+<p>None of the fully branchless methods won outright.</p>
+<ul>
+<li>The <strong>bitwise</strong> version performed almost identically to the arithmetic one — proving that the cost wasn’t in math type but in <em>unconditional work</em>.</li>
+<li>The <strong>conditional-move</strong> version did slightly better, but still couldn’t beat the well-predicted branch of <code>renderOriginalClean()</code>.</li>
+<li>Only the <strong>predictable-pattern</strong> version consistently outperformed all others — because it let the CPU <em>keep guessing right.</em></li>
+</ul>
+<p>By that point, I had rewritten and tested every variation I could think of — fewer branches, predictable patterns, even branchless math.<br>Yet something still felt off.  </p>
+<p>So before diving any deeper, I decided to go back to the very beginning — the benchmark itself.</p>
+<h2 id="verifying-the-phenomenon">Verifying the Phenomenon</h2>
+<p>To rule out artifacts, I changed the harness:</p>
+<ul>
+<li><strong>Randomized test order</strong> across methods and iteration count</li>
+<li>Added a short <strong>warm-up</strong> (discarded iterations before timing)</li>
+</ul>
+<p>With those fixes, the dramatic anomalies <strong>largely disappeared</strong>:</p>
+<pre><code>render():              3 surfaces:   0.64µs
+renderWithAlpha():     3 surfaces:   0.92µs
+renderWithAlphaToBg(): 3 surfaces:   1.10µs
+render():              5 surfaces:   0.91µs
+renderWithAlpha():     5 surfaces:   1.40µs
+renderWithAlphaToBG(): 3 surfaces:   1.65µs
+</code></pre><p><strong>That was the missing piece</strong>.<br>The mystery wasn’t hiding in the renderer at all; it was in the benchmark.</p>
+<p>The so-called <em>optimization anomaly</em> had simply been a <strong>cold-start effect</strong> — the first run always began before the cache and branch predictor had warmed up.</p>
+<p>Still, one question puzzled me: <em>why</em> had that first run exaggerated the difference so dramatically?</p>
+<h2 id="branch-prediction-the-hidden-performance-killer">Branch Prediction — the Hidden Performance Killer</h2>
+<p>Why did that first cold run behave so differently — and why did performance improve so dramatically once the CPU had warmed up?</p>
+<p>Modern processors don’t just execute instructions — they <strong>predict</strong> them.
+Every conditional branch (<code>if</code>, <code>while</code>, <code>for</code>, etc.) forces the CPU to guess which path the program will take <em>before</em> it knows the result.
+Waiting would stall the pipeline, so the processor speculates and executes ahead.
+If the guess is right, everything continues at full speed.
+If it’s wrong, the speculative work must be discarded — a <strong>branch misprediction.</strong></p>
+<p>On modern chips, that penalty is harsh: roughly <strong>15–20 cycles per miss</strong>. This can become significant when repeated millions of times.</p>
+<h3 id="branch-interactions-and-predictability">Branch Interactions and Predictability</h3>
+<p>In <code>render()</code>, there are <strong>three</strong> branches, nested tightly inside the hot loop:
+bounds checking, transparency checking, and occupancy checking.</p>
+<p>Together, they form overlapping, irregular patterns — especially when multiple surfaces overlap in semi-repeating ways.</p>
+<figure class="article-image">
+  <div class="image-placeholder">
+    <img src="images/test-positioning-and-order-of-3-surfaces.png" alt="Test positioning and order of 3 surfaces" onerror="this.parentElement.innerHTML='<div class=placeholder-notice>Image: Test positioning and order of 3 surfaces<br><small>Place image at: arender/output/when-optimized-code-runs-slower/images/test-positioning-and-order-of-3-surfaces.png</small></div>'">
+  </div>
+  <figcaption>Test positioning and order of 3 surfaces</figcaption>
+</figure>
+<p><strong>With three surfaces:</strong></p>
+<ul>
+<li>Surface 2: 100 % of pixels visible (nothing drawn yet)</li>
+<li>Surface 1: ~75 % visible</li>
+<li>Surface 0: ~75 % visible</li>
+</ul>
+<p>So roughly one-third of the time the branch saw a “fully empty” region, and two-thirds of the time it saw overlap — a <strong>33 / 66 %</strong> rhythm that alternated frequently.</p>
+<figure class="article-image">
+  <div class="image-placeholder">
+    <img src="images/test-positioning-and-order-of-5-surfaces.png" alt="Test positioning and order of 5 surfaces" onerror="this.parentElement.innerHTML='<div class=placeholder-notice>Image: Test positioning and order of 5 surfaces<br><small>Place image at: arender/output/when-optimized-code-runs-slower/images/test-positioning-and-order-of-5-surfaces.png</small></div>'">
+  </div>
+  <figcaption>Test positioning and order of 5 surfaces</figcaption>
+</figure>
+<p><strong>With five surfaces:</strong></p>
+<ul>
+<li>Surface  4:     100 % visible</li>
+<li>Surfaces 3 → 0:  75 % visible each</li>
+</ul>
+<p>Here the predictor encountered a steadier <strong>20 / 80 %</strong> pattern, repeating less often.
+The overall workload was higher, but the branch outcomes were far more regular — exactly the kind of consistency that keeps a predictor accurate.</p>
+<p>When the predictor learns that a condition is “usually true,” it speculates accordingly.
+But if the pattern shifts — say, a new surface overlaps differently — it suddenly mispredicts, stalling the pipeline.</p>
+<p>That explains the apparent anomaly:</p>
+<ul>
+<li>With <strong>three surfaces</strong>, overlap patterns changed often — confusing the predictor.</li>
+<li>With <strong>five surfaces</strong>, overlaps repeated more regularly — the predictor stabilized.</li>
+</ul>
+<p>So <code>render()</code> appeared <em>45 % faster</em> with <em>more work</em>, simply because its control flow became more predictable once the predictor had enough consistent data.</p>
+<p>In other words, the entire anomaly came down to <strong>branch prediction dynamics</strong>.
+Once warmed up, everything behaved exactly as expected — but the first run had exposed just how much a few nested conditionals can confuse a modern CPU before its predictor learns the pattern.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>What seemed at first like a simple benchmark that refused to make sense, turned out to be the behavior driven by the CPU — a reminder that “fast” and “slow” are rarely absolutes, but moving targets shaped by prediction, caching, and history.</p>
+<p>It also showed how easy it is for measurement itself to mislead.
+When data looks wrong, sometimes the real problem is <em>how</em> it’s being observed.</p>
+<p><strong>Cold Start</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Has Bounds</th>
+<th>Has Occupancy</th>
+<th>3 surfaces</th>
+<th>5 surfaces</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>render()</td>
+<td>✔</td>
+<td>✔</td>
+<td><strong>1.70 µs</strong></td>
+<td><strong>0.93 µs</strong></td>
+<td><strong>Anomaly</strong></td>
+</tr>
+<tr>
+<td>renderWithAlpha()</td>
+<td>✔</td>
+<td>–</td>
+<td>0.85 µs</td>
+<td>1.35 µs</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>renderOriginalClean()</td>
+<td>–</td>
+<td>✔</td>
+<td>0.67 µs</td>
+<td>0.95 µs</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>renderWithAlphaClean()</td>
+<td>–</td>
+<td>–</td>
+<td>0.87 µs</td>
+<td>1.24 µs</td>
+<td>Normal</td>
+</tr>
+</tbody></table>
+<p><strong>Steady State</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Has Bounds</th>
+<th>Has Occupancy</th>
+<th>3 surfaces</th>
+<th>5 surfaces</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>render()</td>
+<td>✔</td>
+<td>✔</td>
+<td><strong>0.69 µs</strong></td>
+<td><strong>0.95 µs</strong></td>
+<td><strong>Normal</strong></td>
+</tr>
+<tr>
+<td>renderWithAlpha()</td>
+<td>✔</td>
+<td>–</td>
+<td>0.92 µs</td>
+<td>1.27 µs</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>renderOriginalClean()</td>
+<td>–</td>
+<td>✔</td>
+<td>0.72 µs</td>
+<td>0.98 µs</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>renderWithAlphaClean()</td>
+<td>–</td>
+<td>–</td>
+<td>0.89 µs</td>
+<td>1.24 µs</td>
+<td>Normal</td>
+</tr>
+</tbody></table>
+<p>The real insight wasn’t the anomaly itself, but how sensitive modern CPUs are to <strong>pattern predictability</strong> — and how easily a benchmark can tell the wrong story.</p>
+<p>Key lessons:</p>
+<ul>
+<li>The <strong>combination</strong> of bounds and occupancy checks created destructive interference in the branch predictor.</li>
+<li>Predictable work can beat clever skipping.</li>
+<li>Simpler control flow can beat smaller instruction counts.</li>
+<li>Fixing one hazard can expose another.</li>
+<li><strong>Measurement methodology matters</strong> — always warm up the cache and branch predictor before comparing results.</li>
+</ul>
+<blockquote>
+<p>I thought I was optimizing -<br>But the branch predictor was <strong>smarter than me.</strong></p>
+</blockquote>
+<p><strong>Trust the profiler. Respect the pipeline.</strong>
+<strong>And remember — sometimes the <code>dumb</code> path is the <code>smart</code> one.</strong></p>
+<hr>
+<blockquote>
+<p>All benchmark data and charts in this article were generated using the movy performance suite.</p>
+</blockquote>
+<blockquote>
+<p>You can find <strong>movy</strong> on GitHub:
+<a href="https://github.com/M64GitHub/movy">github.com/M64GitHub/movy</a></p>
+</blockquote>
+
+    </main>
+  </div>
+
+  <script>
+    // Smooth scrolling for TOC links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Highlight current section in TOC
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          document.querySelectorAll('.table-of-contents a').forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === '#' + id) {
+              a.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-100px 0px -66%' });
+
+    document.querySelectorAll('h2[id]').forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>
