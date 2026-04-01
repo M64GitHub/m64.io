@@ -4,10 +4,10 @@ set -euo pipefail
 CONFIG_FILE="${HOME}/.openclaw/openclaw.json"
 
 # Resolve plugin directory: use local repo if running from it, otherwise download
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_DIR="$(dirname "$SCRIPT_DIR")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "")"
+REPO_DIR="$(dirname "$SCRIPT_DIR" 2>/dev/null || echo "")"
 
-if [[ -f "$REPO_DIR/packages/openclaw/index.ts" ]]; then
+if [[ -n "$REPO_DIR" && -f "$REPO_DIR/packages/openclaw/index.ts" ]]; then
   # Running from the repo — use it directly
   PLUGIN_DIR="$REPO_DIR"
   LOCAL_MODE=true
@@ -23,7 +23,14 @@ echo "🔌 NATS Agent Plugin for OpenClaw"
 echo ""
 
 # --- Guided setup ---
-read -rp "Agent name (how you appear on the network): " AGENT_NAME
+# When piped from curl, stdin is the script — read from terminal instead
+if [[ -t 0 ]]; then
+  INPUT=/dev/stdin
+else
+  INPUT=/dev/tty
+fi
+
+read -rp "Agent name (how you appear on the network): " AGENT_NAME < "$INPUT"
 if [[ -z "$AGENT_NAME" ]]; then
   echo "Error: agent name is required."
   exit 1
@@ -33,10 +40,10 @@ if [[ ! "$AGENT_NAME" =~ ^[-a-zA-Z0-9_]+$ ]]; then
   exit 1
 fi
 
-read -rp "Description [OpenClaw agent]: " DESCRIPTION
+read -rp "Description [OpenClaw agent]: " DESCRIPTION < "$INPUT"
 DESCRIPTION="${DESCRIPTION:-OpenClaw agent}"
 
-read -rp "NATS server URL [demo.nats.io]: " NATS_URL
+read -rp "NATS server URL [demo.nats.io]: " NATS_URL < "$INPUT"
 NATS_URL="${NATS_URL:-demo.nats.io}"
 
 echo ""
