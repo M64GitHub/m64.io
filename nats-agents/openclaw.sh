@@ -55,7 +55,7 @@ else
   echo "Downloading plugin..."
   rm -rf "$PLUGIN_DIR"
   mkdir -p "$PLUGIN_DIR"
-  curl -fsSL "$REPO_URL" | tar xz --strip-components=1 -C "$PLUGIN_DIR"
+  curl -fsSL "$REPO_URL" | tar xz -C "$PLUGIN_DIR"
   echo "Installing dependencies..."
   cd "$PLUGIN_DIR" && npm install --omit=dev --silent 2>/dev/null
 fi
