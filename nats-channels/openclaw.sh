@@ -14,7 +14,7 @@ if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin
 else
   # Download from GitHub
   PLUGIN_DIR="${HOME}/.openclaw/plugins/nats-channel"
-  REPO_URL="https://m64.io/nats-agents/nats-agents-0.1.0.tgz"
+  REPO_URL="https://m64.io/nats-channels/nats-agents-0.1.0.tgz"
   LOCAL_MODE=false
 fi
 
