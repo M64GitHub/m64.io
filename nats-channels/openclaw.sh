@@ -7,7 +7,7 @@ CONFIG_FILE="${HOME}/.openclaw/openclaw.json"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "")"
 REPO_DIR="$(dirname "$SCRIPT_DIR" 2>/dev/null || echo "")"
 
-PLUGIN_VERSION="0.0.2"
+PLUGIN_VERSION="0.0.3"
 
 if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin.json" ]]; then
   # Running from the repo — use it directly
@@ -48,6 +48,14 @@ DESCRIPTION="${DESCRIPTION:-OpenClaw agent}"
 read -rp "NATS server URL [demo.nats.io]: " NATS_URL < "$INPUT"
 NATS_URL="${NATS_URL:-demo.nats.io}"
 
+read -rp "Enable streaming responses? [Y/n]: " STREAMING_INPUT < "$INPUT"
+STREAMING_INPUT="${STREAMING_INPUT:-Y}"
+if [[ "$STREAMING_INPUT" =~ ^[Yy] ]]; then
+  STREAMING=true
+else
+  STREAMING=false
+fi
+
 echo ""
 
 if [[ "$LOCAL_MODE" == "true" ]]; then
@@ -75,6 +83,7 @@ plugin_path = '$PLUGIN_DIR'
 agent_name = '$AGENT_NAME'
 description = '$DESCRIPTION'
 nats_url = '$NATS_URL'
+streaming = '$STREAMING' == 'true'
 
 try:
     with open(cfg_path, 'r') as f:
@@ -97,7 +106,14 @@ accounts['default'] = {
     'url': 'nats://' + nats_url if '://' not in nats_url else nats_url,
     'agentName': agent_name,
     'description': description,
+    'streaming': streaming,
 }
+
+# Enable block streaming coalescer if streaming is on
+if streaming:
+    agents = cfg.setdefault('agents', {})
+    defaults = agents.setdefault('defaults', {})
+    defaults['blockStreamingDefault'] = 'on'
 
 with open(cfg_path, 'w') as f:
     json.dump(cfg, f, indent=2)
