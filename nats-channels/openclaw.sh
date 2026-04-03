@@ -7,7 +7,7 @@ CONFIG_FILE="${HOME}/.openclaw/openclaw.json"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "")"
 REPO_DIR="$(dirname "$SCRIPT_DIR" 2>/dev/null || echo "")"
 
-PLUGIN_VERSION="0.0.4"
+PLUGIN_VERSION="0.0.5"
 
 if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin.json" ]]; then
   # Running from the repo — use it directly
@@ -44,6 +44,8 @@ fi
 
 read -rp "Description [OpenClaw agent]: " DESCRIPTION < "$INPUT"
 DESCRIPTION="${DESCRIPTION:-OpenClaw agent}"
+
+read -rp "Organization namespace (optional, for shared servers): " ORG < "$INPUT"
 
 read -rp "NATS server URL [demo.nats.io]: " NATS_URL < "$INPUT"
 NATS_URL="${NATS_URL:-demo.nats.io}"
@@ -84,6 +86,7 @@ agent_name = '$AGENT_NAME'
 description = '$DESCRIPTION'
 nats_url = '$NATS_URL'
 streaming = '$STREAMING' == 'true'
+org = '$ORG'
 
 try:
     with open(cfg_path, 'r') as f:
@@ -102,12 +105,15 @@ if plugin_path not in paths:
 channels = cfg.setdefault('channels', {})
 nats = channels.setdefault('nats', {})
 accounts = nats.setdefault('accounts', {})
-accounts['default'] = {
+account = {
     'url': 'nats://' + nats_url if '://' not in nats_url else nats_url,
     'agentName': agent_name,
     'description': description,
     'streaming': streaming,
 }
+if org:
+    account['org'] = org
+accounts['default'] = account
 
 with open(cfg_path, 'w') as f:
     json.dump(cfg, f, indent=2)
