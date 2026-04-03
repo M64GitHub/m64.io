@@ -7,6 +7,8 @@ CONFIG_FILE="${HOME}/.openclaw/openclaw.json"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "")"
 REPO_DIR="$(dirname "$SCRIPT_DIR" 2>/dev/null || echo "")"
 
+PLUGIN_VERSION="0.0.2"
+
 if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin.json" ]]; then
   # Running from the repo — use it directly
   PLUGIN_DIR="$REPO_DIR"
@@ -14,12 +16,12 @@ if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin
 else
   # Download from GitHub
   PLUGIN_DIR="${HOME}/.openclaw/plugins/nats-channel"
-  REPO_URL="https://m64.io/nats-channels/nats-agents-0.1.0.tgz"
+  REPO_URL="https://m64.io/nats-channels/nats-agents-${PLUGIN_VERSION}.tgz"
   LOCAL_MODE=false
 fi
 
 echo ""
-echo "🔌 NATS Agent Plugin for OpenClaw"
+echo "🔌 NATS Agent Plugin for OpenClaw v${PLUGIN_VERSION}"
 echo ""
 
 # --- Guided setup ---
