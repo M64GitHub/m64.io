@@ -14,14 +14,14 @@ if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin
   PLUGIN_DIR="$REPO_DIR"
   LOCAL_MODE=true
 else
-  # Download from GitHub
+  # Download tarball
   PLUGIN_DIR="${HOME}/.openclaw/plugins/nats-channel"
-  REPO_URL="https://m64.io/nats-channels/nats-agents-basic-${PLUGIN_VERSION}.tgz"
+  REPO_URL="https://m64.io/nats-channels/nats-agents-${PLUGIN_VERSION}.tgz"
   LOCAL_MODE=false
 fi
 
 echo ""
-echo "🔌 NATS Agent Plugin for OpenClaw v${PLUGIN_VERSION}"
+echo "🔌 NATS Agent Plugin for OpenClaw (full) v${PLUGIN_VERSION}"
 echo ""
 
 # --- Guided setup ---
@@ -50,6 +50,14 @@ read -rp "Organization namespace (optional, for shared servers): " ORG < "$INPUT
 read -rp "NATS server URL [demo.nats.io]: " NATS_URL < "$INPUT"
 NATS_URL="${NATS_URL:-demo.nats.io}"
 
+read -rp "Enable end-to-end encryption? [y/N]: " ENCRYPTION_INPUT < "$INPUT"
+ENCRYPTION_INPUT="${ENCRYPTION_INPUT:-N}"
+if [[ "$ENCRYPTION_INPUT" =~ ^[Yy] ]]; then
+  ENCRYPTION=true
+else
+  ENCRYPTION=false
+fi
+
 echo ""
 
 if [[ "$LOCAL_MODE" == "true" ]]; then
@@ -77,6 +85,7 @@ plugin_path = '$PLUGIN_DIR'
 agent_name = '$AGENT_NAME'
 description = '$DESCRIPTION'
 nats_url = '$NATS_URL'
+encryption = '$ENCRYPTION' == 'true'
 org = '$ORG'
 
 try:
@@ -100,6 +109,7 @@ account = {
     'url': 'nats://' + nats_url if '://' not in nats_url else nats_url,
     'agentName': agent_name,
     'description': description,
+    'encryption': encryption,
 }
 if org:
     account['org'] = org
