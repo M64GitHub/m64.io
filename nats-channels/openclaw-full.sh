@@ -7,7 +7,7 @@ CONFIG_FILE="${HOME}/.openclaw/openclaw.json"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo "")"
 REPO_DIR="$(dirname "$SCRIPT_DIR" 2>/dev/null || echo "")"
 
-PLUGIN_VERSION="0.0.3"
+PLUGIN_VERSION="0.0.4"
 
 if [[ -n "$REPO_DIR" && -f "$REPO_DIR/index.ts" && -f "$REPO_DIR/openclaw.plugin.json" ]]; then
   # Running from the repo — use it directly
