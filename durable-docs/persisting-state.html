@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Persisting state · @synadia-ai/durable</title>
+    <meta name="description" content="How a workflow's entire state is persisted: an append-only JetStream journal, the optimistic-append (CAS) primitive, two-phase steps, the KV status index, durable timers, and retention." />
+    <meta property="og:title" content="Persisting state · @synadia-ai/durable" />
+    <meta property="og:description" content="How a workflow's entire state is persisted: an append-only JetStream journal, the optimistic-append (CAS) primitive, two-phase steps, the KV status index, durable timers, and retention." />
+    <meta property="og:type" content="website" />
+    <script>(function(){try{var t=localStorage.getItem("durable-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;450;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body>
+    <div class="scrim"></div>
+    <div class="shell">
+      <aside class="side">
+        <a class="brand" href="./index.html">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11M4 12h11M4 19h7"/><path d="M16 9l4 3-4 3"/></svg></span>
+          <span class="name"><b>durable</b></span>
+          <span class="ver">v0.1</span>
+        </a>
+        <nav class="nav" aria-label="Documentation">
+        <div class="label">Get started</div>
+        <a class="navlink" href="./index.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>Overview</a>
+        <a class="navlink" href="./how-it-works.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M4 4v14"/></svg></span>How it works</a>
+        <a class="navlink active" href="./persisting-state.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span>Persisting state</a>
+        <div class="label">Walkthrough</div>
+        <a class="navlink" href="./crash-replay.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg></span>Crash → replay</a>
+        <div class="label">Migrating</div>
+        <a class="navlink" href="./temporal.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2a2.83 2.83 0 0 0-3-3z"/><path d="M9 11a14 14 0 0 1 8-8c2 0 4 2 4 4a14 14 0 0 1-8 8z"/><circle cx="15" cy="9" r="1.4"/></svg></span>Coming from Temporal</a>
+        <a class="navlink" href="./celery.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></span>Coming from Celery</a>
+        <a class="navlink" href="./sidekiq.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.4"/><rect x="3" y="10" width="18" height="4" rx="1.4"/><rect x="3" y="16" width="18" height="4" rx="1.4"/></svg></span>Coming from Sidekiq</a>
+        <div class="label">Recipes</div>
+        <a class="navlink" href="./ai-image.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-4 5 4 3-2 5 4"/></svg></span>AI image generation</a>
+        <a class="navlink" href="./weekly-email.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>Weekly email</a>
+        <div class="label">Reference</div>
+        <a class="navlink" href="./limitations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></span>Limitations & comparison</a>
+        <a class="navlink" href="./protocol.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M5 12h14M5 17h9"/><circle cx="19" cy="17" r="1.6"/></svg></span>Wire protocol</a>
+        <a class="navlink" href="./design.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>Deep-dive design</a>
+        <div class="label">Project</div>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener">GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs" target="_blank" rel="noopener">All walkthroughs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts/blob/main/README.md" target="_blank" rel="noopener">README<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </nav>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="./index.html" style="color: inherit; text-decoration: none">Docs</a>
+            <span class="sep">/</span>
+            <span class="here">Persisting state</span>
+          </nav>
+          <div class="right">
+            <a class="icon-btn" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.68 22a.55.55 0 0 0 .73-.53v-2c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83a2.2 2.2 0 0 1 .64-1.35c-2.22-.25-4.55-1.11-4.55-4.94a3.87 3.87 0 0 1 1.03-2.69 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.69c0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74a.55.55 0 0 0 .74.53A10.5 10.5 0 0 0 12 1.5z"/></svg></a>
+            <button class="icon-btn" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          </div>
+        </header>
+
+        <div class="body-grid">
+          <main class="content">
+<header class="prose" style="margin-bottom: 26px">
+  <div class="section-eyebrow" style="margin-bottom:14px">Concepts</div>
+  <h1>How state is persisted</h1>
+  <p class="lede" style="font-size:17px;color:var(--ink-dim);margin-top:8px">
+    There is no database and no durable-execution server. A workflow's entire state is an ordered,
+    append-only <strong>log on NATS JetStream</strong> — and one append primitive is the whole
+    correctness story.
+  </p>
+</header>
+
+<article class="prose">
+
+<h2 id="the-substrate"><a class="h-anchor" href="#the-substrate" aria-label="Link to this section">#</a>The substrate: four NATS resources</h2>
+<p>
+  All durability lives in NATS. The library provisions four resources (idempotently) and never needs
+  anything else — no Postgres, no Redis, no control plane. Your only processes are NATS and your own
+  workers with the library embedded.
+</p>
+
+<figure class="diagram-fig">
+  <svg viewBox="0 0 720 432" role="img" aria-label="Your only processes are NATS and your own workers. The library turns JetStream streams + KV into the journal, work queue, timer scheduler, and status index — there is no separate durable-execution server." preserveAspectRatio="xMidYMid meet">
+<defs>
+    <marker id="ar-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="context-stroke" />
+    </marker>
+  </defs>
+    <!-- client -->
+    <rect class="dg-box" x="250" y="14" width="220" height="56" rx="10" />
+    <text class="dg-h" x="360" y="40" text-anchor="middle">Client</text>
+    <text class="dg-sub" x="360" y="58" text-anchor="middle">start · result · status · signal</text>
+    <line class="dg-edge-a" x1="360" y1="70" x2="360" y2="106" marker-end="url(#ar-arrow)" />
+    <text class="dg-cap" x="372" y="92">start → append + enqueue</text>
+
+    <!-- engine -->
+    <rect class="dg-engine" x="26" y="112" width="668" height="200" rx="14" />
+    <text class="dg-cap dg-fill-a" x="46" y="136">NATS CLUSTER — THE ENGINE · JETSTREAM</text>
+
+    <rect class="dg-box-j" x="46" y="150" width="192" height="146" rx="10" />
+    <text class="dg-h" x="142" y="180" text-anchor="middle">DE_JOURNAL</text>
+    <text class="dg-sub" x="142" y="199" text-anchor="middle">stream · de.journal.{run}</text>
+    <text class="dg-cap dg-fill-a" x="142" y="252" text-anchor="middle">SOURCE OF TRUTH</text>
+    <text class="dg-note" x="142" y="272" text-anchor="middle">append-only,</text>
+    <text class="dg-note" x="142" y="287" text-anchor="middle">one ordered log per run</text>
+
+    <rect class="dg-box" x="264" y="150" width="192" height="146" rx="10" />
+    <text class="dg-h" x="360" y="180" text-anchor="middle">DE_WORK</text>
+    <text class="dg-sub" x="360" y="199" text-anchor="middle">work queue · de.work.{wf}</text>
+    <text class="dg-cap" x="360" y="252" text-anchor="middle">WORK QUEUE</text>
+    <text class="dg-note" x="360" y="272" text-anchor="middle">start / resume / signal</text>
+    <text class="dg-note" x="360" y="287" text-anchor="middle">items, load-balanced</text>
+
+    <rect class="dg-box" x="482" y="150" width="192" height="146" rx="10" />
+    <text class="dg-h" x="578" y="180" text-anchor="middle">DE_RUNS</text>
+    <text class="dg-sub" x="578" y="199" text-anchor="middle">KV · {run} → status</text>
+    <text class="dg-cap" x="578" y="252" text-anchor="middle">INDEX / HINT ONLY</text>
+    <text class="dg-note" x="578" y="272" text-anchor="middle">never gates a</text>
+    <text class="dg-note" x="578" y="287" text-anchor="middle">progress decision</text>
+
+    <!-- workers -->
+    <rect class="dg-box" x="250" y="356" width="220" height="64" rx="10" />
+    <text class="dg-h" x="360" y="383" text-anchor="middle">Worker(s)</text>
+    <text class="dg-sub" x="360" y="402" text-anchor="middle">pull → replay → advance → ack</text>
+
+    <line class="dg-edge" x1="316" y1="312" x2="316" y2="356" marker-end="url(#ar-arrow)" />
+    <text class="dg-cap" x="300" y="338" text-anchor="end">deliver work</text>
+    <line class="dg-edge-a" x1="404" y1="356" x2="404" y2="312" marker-end="url(#ar-arrow)" />
+    <text class="dg-cap" x="420" y="338">load · replay · append · status</text>
+  </svg>
+  <figcaption>Your only processes are NATS and your own workers. The library turns JetStream streams + KV into the journal, work queue, timer scheduler, and status index — there is no separate durable-execution server.</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Resource</th><th>Kind</th><th>Holds</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr><td><code>DE_JOURNAL</code></td><td>stream (file)</td><td><code>de.journal.{run}</code> — one ordered subject per run</td><td><strong>The source of truth.</strong> Every step, value, signal, and terminal result.</td></tr>
+    <tr><td><code>DE_WORK</code></td><td>stream (work&nbsp;queue)</td><td><code>de.work.{wf}</code> — start / resume / signal / child-done items</td><td>“Make progress on run X.” One durable pull consumer per workflow, load-balanced across workers.</td></tr>
+    <tr><td><code>DE_TIMERS</code></td><td>stream (scheduled)</td><td><code>de.timer.&gt;</code> — a native JetStream schedule + its wake target</td><td>Fires <code>ctx.sleep</code> / <code>ctx.await</code> timeouts as a future wake.</td></tr>
+    <tr><td><code>DE_RUNS</code></td><td>KV bucket</td><td><code>{run}</code> → <code>{ status, wf, version, result? }</code></td><td>A fast status <strong>index / hint</strong> — never trusted for a progress decision.</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="the-journal"><a class="h-anchor" href="#the-journal" aria-label="Link to this section">#</a>State is a log, not rows</h2>
+<p>
+  Most engines store workflow state as mutable rows you read and update. Here, state is the
+  <em>journal</em>: an append-only list of entries on the run's own subject, in the exact order they
+  happened. You never update an entry — you only append the next one. To know a run's state, you read
+  its log from the start; to make progress, you append.
+</p>
+
+<figure class="diagram-fig">
+  <svg viewBox="0 0 720 210" role="img" aria-label="Each run is one append-only log on its own subject. Every write is an optimistic append — “accept only if the last sequence is still N.” A lost race returns error 10071, which the library maps to a FencedError. KV create/update(rev) is the same primitive." preserveAspectRatio="xMidYMid meet">
+<defs>
+    <marker id="jr-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="context-stroke" />
+    </marker>
+  </defs>
+    <text class="dg-cap dg-fill-a" x="20" y="32">de.journal.order-42</text>
+    <text class="dg-note" x="178" y="32">append-only · ordered · the run's whole state</text>
+    <line class="dg-edge" x1="20" y1="44" x2="700" y2="44" />
+    
+    <rect class="dg-cell" x="20" y="54" width="150" height="80" rx="9" />
+    <text class="dg-kind" x="36" y="80">start</text>
+    <text class="dg-sub" x="36" y="104">{ cart, amount }</text>
+    <text class="dg-seq" x="158" y="124" text-anchor="end">seq 0</text>
+    
+    <rect class="dg-cell" x="182" y="54" width="150" height="80" rx="9" />
+    <text class="dg-kind" x="198" y="80">run</text>
+    <text class="dg-sub" x="198" y="104">reserve → ✓</text>
+    <text class="dg-seq" x="320" y="124" text-anchor="end">seq 1</text>
+    
+    <rect class="dg-cell" x="344" y="54" width="150" height="80" rx="9" />
+    <text class="dg-kind" x="360" y="80">run</text>
+    <text class="dg-sub" x="360" y="104">authorize → ✓</text>
+    <text class="dg-seq" x="482" y="124" text-anchor="end">seq 2</text>
+    
+    <rect class="dg-cell ghost" x="540" y="54" width="150" height="80" rx="9" />
+    <text class="dg-kind" x="556" y="80">run</text>
+    <text class="dg-sub" x="556" y="104">capture …</text>
+    <text class="dg-seq" x="678" y="124" text-anchor="end">seq 3</text>
+    <text class="dg-cap" x="517" y="84" text-anchor="middle">append</text>
+    <line class="dg-edge-a" x1="498" y1="94" x2="536" y2="94" marker-end="url(#jr-arrow)" />
+    <text class="dg-mono dg-fill-a" x="360" y="172" text-anchor="middle">the next append asserts  expect: lastSubjectSequence = 2</text>
+    <text class="dg-note" x="360" y="192" text-anchor="middle"><tspan class="dg-win">match → accept</tspan>   ·   <tspan class="dg-lose">mismatch → 10071 (FencedError)</tspan></text>
+  </svg>
+  <figcaption>Each run is one append-only log on its own subject. Every write is an <em>optimistic append</em> — “accept only if the last sequence is still N.” A lost race returns error <code>10071</code>, which the library maps to a <code>FencedError</code>. KV <code>create</code>/<code>update(rev)</code> is the same primitive.</figcaption>
+</figure>
+
+<p>
+  Because the log is ordered and immutable, reconstructing state is deterministic and a crash is
+  harmless: whatever was appended is durable, and whatever wasn't simply didn't happen. The wire layout
+  of these entries is frozen at <code>v:1</code> and specified language-neutrally in the
+  <a href="./protocol.html">wire protocol</a>, so a Go or Python worker could read the very same log.
+</p>
+
+<h2 id="the-primitive"><a class="h-anchor" href="#the-primitive" aria-label="Link to this section">#</a>The one primitive: optimistic append</h2>
+<p>
+  Everything that must be correct under concurrency reduces to a single NATS capability — an
+  <strong>optimistic (compare-and-swap) append</strong>. When publishing to a run's journal subject,
+  you assert the sequence you expect to be appending after:
+</p>
+
+<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-comment">// &quot;accept this append only if the subject&#x27;s last entry is still sequence S&quot;</span>
+<span class="hljs-keyword">await</span> js.<span class="hljs-title function_">publish</span>(subject, data, {
+  <span class="hljs-attr">expect</span>: { <span class="hljs-attr">lastSubjectSequence</span>: S },
+  <span class="hljs-attr">msgID</span>: <span class="hljs-string">&quot;…&quot;</span>, <span class="hljs-comment">// dedup: a redelivered identical append is recognized, not duplicated</span>
+});</code></pre>
+
+<p>
+  If another worker already appended, the server rejects yours with one specific error —
+  <strong><code>10071</code>, “wrong last sequence”</strong> — which the library maps to a
+  <code>FencedError</code> and handles everywhere. Progress is <em>never</em> gated on a plain read (a
+  read can be served by a lagging replica); it is always an ordered append or a CAS. KV
+  <code>create</code> / <code>update(rev)</code> is the same primitive under the hood, since a KV bucket
+  is itself a stream.
+</p>
+<blockquote><p>
+  <strong>One mechanism, one error code.</strong> The journal append, the KV index write, the
+  idempotent start, the timer schedule — all the same optimistic-append/CAS, all surfacing the same
+  <code>10071</code> when they lose a race.
+</p></blockquote>
+
+<h2 id="two-phase"><a class="h-anchor" href="#two-phase" aria-label="Link to this section">#</a>Two-phase steps: persist intent before the effect</h2>
+<p>
+  A durable step (<code>ctx.run</code>) is written in <strong>two phases</strong>. The step's
+  <em>intent</em> (<code>step-begin</code>) is CAS-appended <em>before</em> the side effect runs; the
+  effect runs; then the result (<code>step-end</code>) is appended. This ordering is what makes a
+  redelivered or duplicated worker safe:
+</p>
+
+<figure class="diagram-fig">
+  <svg viewBox="0 0 720 300" role="img" aria-label="A step records its intent (step-begin) with a CAS append before the side effect — so a fresh zombie worker is fenced before it can fire, and every step is journaled exactly once. Exactly-once state, at-least-once effects (key non-idempotent effects on ctx.key())." preserveAspectRatio="xMidYMid meet">
+<defs>
+    <marker id="tp-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="context-stroke" />
+    </marker>
+  </defs>
+    <rect class="dg-box" x="18" y="28" width="160" height="58" rx="10" />
+    <text class="dg-h" x="98" y="53" text-anchor="middle">Worker A</text>
+    <text class="dg-sub" x="98" y="72" text-anchor="middle">reaches step N</text>
+
+    <rect class="dg-box" x="18" y="214" width="160" height="58" rx="10" />
+    <text class="dg-h" x="98" y="239" text-anchor="middle">Worker B</text>
+    <text class="dg-sub dg-lose" x="98" y="258" text-anchor="middle">fresh zombie · redelivered</text>
+
+    <rect class="dg-box-j" x="238" y="100" width="214" height="100" rx="11" />
+    <text class="dg-h" x="345" y="130" text-anchor="middle">DE_JOURNAL</text>
+    <text class="dg-sub" x="345" y="152" text-anchor="middle">append step-begin(N)</text>
+    <text class="dg-mono dg-fill-a" x="345" y="174" text-anchor="middle">expect lastSeq = S</text>
+    <text class="dg-note" x="345" y="192" text-anchor="middle">the LOG elects the writer, not the queue</text>
+
+    <line class="dg-edge" x1="178" y1="62" x2="236" y2="120" marker-end="url(#tp-arrow)" />
+    <line class="dg-edge" x1="178" y1="240" x2="236" y2="180" marker-end="url(#tp-arrow)" />
+
+    <rect class="dg-box-win" x="506" y="26" width="196" height="92" rx="10" />
+    <text class="dg-h dg-win" x="604" y="52" text-anchor="middle">✓ A wins</text>
+    <text class="dg-sub" x="604" y="74" text-anchor="middle">runs the side effect,</text>
+    <text class="dg-sub" x="604" y="92" text-anchor="middle">then appends step-end</text>
+    <text class="dg-note" x="604" y="110" text-anchor="middle">step journaled exactly once</text>
+
+    <rect class="dg-box-lose" x="506" y="182" width="196" height="92" rx="10" />
+    <text class="dg-h dg-lose" x="604" y="208" text-anchor="middle">✗ B fenced</text>
+    <text class="dg-sub" x="604" y="230" text-anchor="middle">10071 → FencedError</text>
+    <text class="dg-note" x="604" y="252" text-anchor="middle">stops <tspan class="dg-fill-a">before</tspan> any effect runs</text>
+
+    <line class="dg-edge-a" x1="452" y1="135" x2="504" y2="72" marker-end="url(#tp-arrow)" />
+    <line class="dg-edge" x1="452" y1="165" x2="504" y2="228" marker-end="url(#tp-arrow)" />
+  </svg>
+  <figcaption>A step records its <em>intent</em> (<code>step-begin</code>) with a CAS append <em>before</em> the side effect — so a fresh zombie worker is fenced before it can fire, and every step is journaled exactly once. <strong>Exactly-once state, at-least-once effects</strong> (key non-idempotent effects on <code>ctx.key()</code>).</figcaption>
+</figure>
+
+<p>
+  Because the <em>log</em> elects the writer (not the queue), each step is <strong>journaled exactly
+  once</strong> — the workflow's result is deterministic no matter how many workers briefly touched the
+  run. What is <strong>at-least-once</strong> is the step function's <em>execution</em>: across the
+  begin → end window a crash, an ack-timeout redelivery, or a second worker on a concurrent wake can
+  re-run <code>fn</code>. That is the standard durable-execution contract — <strong>exactly-once state,
+  at-least-once effects</strong> — and the reason a non-idempotent effect (charging a card, sending an
+  email) should key on <code>ctx.key()</code> (<code>${runId}:${seq}</code>, stable across re-runs):
+</p>
+
+<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;charge&quot;</span>, <span class="hljs-function">() =&gt;</span>
+  stripe.<span class="hljs-property">charges</span>.<span class="hljs-title function_">create</span>(
+    { amount, <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;usd&quot;</span>, source },
+    { <span class="hljs-attr">idempotencyKey</span>: ctx.<span class="hljs-title function_">key</span>() }, <span class="hljs-comment">// same key on every re-run of this step</span>
+  ),
+);</code></pre>
+
+<h2 id="lifecycle"><a class="h-anchor" href="#lifecycle" aria-label="Link to this section">#</a>The life of a write</h2>
+<p>
+  Putting it together: starting a run and advancing it are both just CAS appends, with the work queue
+  deciding only <em>who</em> gets to try next — never <em>what</em> the state is.
+</p>
+
+<figure class="diagram-fig">
+  <svg viewBox="0 0 720 214" role="img" aria-label="Every progress decision is a CAS append to the journal; a crash anywhere just means the next worker reloads that log and replays. The KV index is updated as a convenience and is never on the correctness path." preserveAspectRatio="xMidYMid meet">
+<defs>
+    <marker id="lc-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="context-stroke" />
+    </marker>
+  </defs>
+    
+    <circle class="dg-node" cx="64" cy="78" r="17" />
+    <text class="dg-node-n" x="64" y="84" text-anchor="middle">1</text>
+    <text class="dg-kind dg-fill-a" x="64" y="34" text-anchor="middle">client</text>
+    <text class="dg-sub" x="64" y="124" text-anchor="middle">client.start()</text>
+    <text class="dg-sub" x="64" y="142" text-anchor="middle"></text>
+    
+    <circle class="dg-node" cx="218" cy="78" r="17" />
+    <text class="dg-node-n" x="218" y="84" text-anchor="middle">2</text>
+    <text class="dg-kind dg-fill-a" x="218" y="34" text-anchor="middle">journal</text>
+    <text class="dg-sub" x="218" y="124" text-anchor="middle">append start</text>
+    <text class="dg-sub" x="218" y="142" text-anchor="middle">(CAS · msgID)</text>
+    
+    <circle class="dg-node" cx="372" cy="78" r="17" />
+    <text class="dg-node-n" x="372" y="84" text-anchor="middle">3</text>
+    <text class="dg-kind dg-fill-a" x="372" y="34" text-anchor="middle">queue</text>
+    <text class="dg-sub" x="372" y="124" text-anchor="middle">work item on</text>
+    <text class="dg-sub" x="372" y="142" text-anchor="middle">DE_WORK</text>
+    
+    <circle class="dg-node" cx="526" cy="78" r="17" />
+    <text class="dg-node-n" x="526" y="84" text-anchor="middle">4</text>
+    <text class="dg-kind dg-fill-a" x="526" y="34" text-anchor="middle">worker</text>
+    <text class="dg-sub" x="526" y="124" text-anchor="middle">load + replay,</text>
+    <text class="dg-sub" x="526" y="142" text-anchor="middle">run the frontier</text>
+    
+    <circle class="dg-node" cx="668" cy="78" r="17" />
+    <text class="dg-node-n" x="668" y="84" text-anchor="middle">5</text>
+    <text class="dg-kind dg-fill-a" x="668" y="34" text-anchor="middle">journal</text>
+    <text class="dg-sub" x="668" y="124" text-anchor="middle">append step-end</text>
+    <text class="dg-sub" x="668" y="142" text-anchor="middle">/ result (CAS)</text>
+    <line class="dg-edge" x1="84" y1="78" x2="198" y2="78" marker-end="url(#lc-arrow)" />
+    <line class="dg-edge" x1="238" y1="78" x2="352" y2="78" marker-end="url(#lc-arrow)" />
+    <line class="dg-edge" x1="392" y1="78" x2="506" y2="78" marker-end="url(#lc-arrow)" />
+    <line class="dg-edge" x1="546" y1="78" x2="648" y2="78" marker-end="url(#lc-arrow)" />
+    <line class="dg-edge dashed" x1="668" y1="156" x2="668" y2="178" />
+    <line class="dg-edge dashed" x1="668" y1="178" x2="64" y2="178" />
+    <text class="dg-note" x="64" y="198" text-anchor="start">terminal entry → handle.result() resolves · DE_RUNS index updated (the status hint)</text>
+  </svg>
+  <figcaption>Every progress decision is a CAS append to the journal; a crash anywhere just means the next worker reloads that log and replays. The KV index is updated as a convenience and is never on the correctness path.</figcaption>
+</figure>
+
+<ol>
+  <li><strong>Start</strong> appends a <code>start</code> entry (idempotent on <code>runId</code>) and drops a work item on <code>DE_WORK</code>.</li>
+  <li>A free worker <strong>pulls</strong> the item and <strong>loads the journal</strong>.</li>
+  <li>It <strong>replays</strong> the function from the top: journaled <code>ctx.*</code> calls return their saved value; the first un-journaled one is the live frontier — it runs for real and is appended.</li>
+  <li>At a terminal (<code>result</code> / <code>failed</code> / <code>continued</code>) the worker appends it, updates the <code>DE_RUNS</code> hint, and acks. At a <code>sleep</code> / <code>await</code> it suspends; a later wake re-enqueues the run.</li>
+  <li>If the worker dies anywhere, the item is redelivered once its ack lease expires and another worker resumes from step&nbsp;2 — the journal is unchanged, so nothing is lost or repeated in state.</li>
+</ol>
+
+<h2 id="kv-index"><a class="h-anchor" href="#kv-index" aria-label="Link to this section">#</a>Why the KV index is only a hint</h2>
+<p>
+  <code>DE_RUNS</code> exists so <code>handle.status()</code> and the dashboard can answer “what's the
+  state of this run?” cheaply, without scanning a journal. It is written <em>after</em> the journal as a
+  best-effort convenience. Crucially, the runtime <strong>never reads it to make a decision</strong> —
+  if a worker dies after appending a terminal but before updating the KV, the status hint is stale yet
+  the run is genuinely done; <code>handle.result()</code> reads the journal (the truth) and resolves
+  correctly. The index can lag or be wrong; the log cannot.
+</p>
+
+<h2 id="timers-signals"><a class="h-anchor" href="#timers-signals" aria-label="Link to this section">#</a>Timers and signals are persisted too</h2>
+<p>
+  Waiting is durable. <code>ctx.sleep(name, ms)</code> uses <strong>native JetStream message
+  scheduling</strong>: the wake is a real message the server delivers at the deadline — it survives
+  worker restarts, because nothing in your process is holding the timer. <code>ctx.await(name)</code>
+  parks the run until <code>client.signal(runId, name, data)</code> appends a signal entry; with
+  <code>timeoutMs</code> a durable timer races the signal, and signal-vs-timeout is resolved
+  deterministically by journal order. A parked run consumes no worker — it is just a log waiting for its
+  next entry.
+</p>
+
+<h2 id="retention"><a class="h-anchor" href="#retention" aria-label="Link to this section">#</a>Durability, bounds & retention</h2>
+<ul>
+  <li><strong>File storage, replicated.</strong> Streams are file-backed; on a NATS cluster the journal inherits JetStream replication, so durability is whatever your NATS already guarantees.</li>
+  <li><strong>Bounded per run.</strong> Each stream sets <code>max_bytes</code> (required on NGS). For long-running or looping workflows, <code>ctx.continueAsNew(input)</code> ends the current generation and starts a fresh one with an <em>empty</em> journal — keeping any single run's log bounded no matter how long it runs.</li>
+    <li><strong>8&nbsp;MiB payloads.</strong> An entry (and any step result) is bounded by the NATS max payload; object-store offload for larger values is a documented non-goal for v0.1.</li>
+  <li><strong>No external state.</strong> Workers are stateless; restart them freely. Everything needed to resume a run is in NATS.</li>
+</ul>
+
+<p style="margin-top:20px">
+  Want the exact entry kinds, append rules, and algorithms? See the
+  <a href="./protocol.html">wire protocol</a> and the
+  <a href="./design.html">deep-dive design</a> (§§3–7), or read a journal as it is built in the
+  <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs/journal-on-the-wire.md" target="_blank" rel="noopener">journal-on-the-wire walkthrough</a>.
+</p>
+
+</article>
+<nav class="pager" aria-label="Pagination"><a class="prev" href="./how-it-works.html"><span class="dir">← Previous</span><span class="ttl">How it works</span></a><a class="next" href="./crash-replay.html"><span class="dir">Next →</span><span class="ttl">Crash → replay</span></a></nav>
+          </main>
+          <nav class="toc" aria-label="On this page">
+        <div class="toc-h">On this page</div>
+        <a href="#the-substrate" class="lvl-2" data-toc="the-substrate">The substrate: four NATS resources</a>
+        <a href="#the-journal" class="lvl-2" data-toc="the-journal">State is a log, not rows</a>
+        <a href="#the-primitive" class="lvl-2" data-toc="the-primitive">The one primitive: optimistic append</a>
+        <a href="#two-phase" class="lvl-2" data-toc="two-phase">Two-phase steps: persist intent before the effect</a>
+        <a href="#lifecycle" class="lvl-2" data-toc="lifecycle">The life of a write</a>
+        <a href="#kv-index" class="lvl-2" data-toc="kv-index">Why the KV index is only a hint</a>
+        <a href="#timers-signals" class="lvl-2" data-toc="timers-signals">Timers and signals are persisted too</a>
+        <a href="#retention" class="lvl-2" data-toc="retention">Durability, bounds & retention</a>
+      </nav>
+        </div>
+      </div>
+    </div>
+    <script>
+(function () {
+  var root = document.documentElement;
+  function setTheme(next, persist) {
+    root.classList.add("theme-anim");
+    setTimeout(function () { root.classList.remove("theme-anim"); }, 320);
+    root.setAttribute("data-theme", next);
+    if (persist) { try { localStorage.setItem("durable-theme", next); } catch (e) {} }
+  }
+  var toggle = document.getElementById("theme-toggle");
+  if (toggle) toggle.addEventListener("click", function () {
+    setTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light", true);
+  });
+  try {
+    var mq = matchMedia("(prefers-color-scheme: light)");
+    mq.addEventListener("change", function (e) {
+      var s = null; try { s = localStorage.getItem("durable-theme"); } catch (x) {}
+      if (s !== "light" && s !== "dark") setTheme(e.matches ? "light" : "dark", false);
+    });
+  } catch (e) {}
+
+  // copy-to-clipboard for code blocks
+  document.querySelectorAll(".code-head .copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = btn.closest("pre");
+      var code = pre && pre.querySelector("code");
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).then(function () {
+        btn.classList.add("ok");
+        var label = btn.querySelector(".t");
+        var prev = label ? label.textContent : "";
+        if (label) label.textContent = "copied";
+        setTimeout(function () { btn.classList.remove("ok"); if (label) label.textContent = prev; }, 1300);
+      });
+    });
+  });
+
+  // mobile drawer
+  var side = document.querySelector(".side");
+  var scrim = document.querySelector(".scrim");
+  var menu = document.getElementById("menu-btn");
+  function close() { side && side.classList.remove("open"); scrim && scrim.classList.remove("show"); }
+  if (menu) menu.addEventListener("click", function () {
+    side && side.classList.toggle("open"); scrim && scrim.classList.toggle("show");
+  });
+  if (scrim) scrim.addEventListener("click", close);
+  document.querySelectorAll(".side a").forEach(function (a) { a.addEventListener("click", close); });
+
+  // TOC scroll-spy
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a[data-toc]"));
+  if (tocLinks.length) {
+    var byId = {};
+    tocLinks.forEach(function (a) { byId[a.getAttribute("data-toc")] = a; });
+    var targets = tocLinks
+      .map(function (a) { return document.getElementById(a.getAttribute("data-toc")); })
+      .filter(Boolean);
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          tocLinks.forEach(function (a) { a.classList.remove("active"); });
+          var link = byId[en.target.id];
+          if (link) link.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
+    targets.forEach(function (t) { spy.observe(t); });
+  }
+})();
+</script>
+  </body>
+</html>

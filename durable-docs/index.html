@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Overview · @synadia-ai/durable</title>
+    <meta name="description" content="Lightweight durable execution on NATS / JetStream — a library, not a server. Write workflows as ordinary async functions; every side-effecting step is journaled and replayed after a crash." />
+    <meta property="og:title" content="Overview · @synadia-ai/durable" />
+    <meta property="og:description" content="Lightweight durable execution on NATS / JetStream — a library, not a server. Write workflows as ordinary async functions; every side-effecting step is journaled and replayed after a crash." />
+    <meta property="og:type" content="website" />
+    <script>(function(){try{var t=localStorage.getItem("durable-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;450;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body>
+    <div class="scrim"></div>
+    <div class="shell">
+      <aside class="side">
+        <a class="brand" href="./index.html">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11M4 12h11M4 19h7"/><path d="M16 9l4 3-4 3"/></svg></span>
+          <span class="name"><b>durable</b></span>
+          <span class="ver">v0.1</span>
+        </a>
+        <nav class="nav" aria-label="Documentation">
+        <div class="label">Get started</div>
+        <a class="navlink active" href="./index.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>Overview</a>
+        <a class="navlink" href="./how-it-works.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M4 4v14"/></svg></span>How it works</a>
+        <a class="navlink" href="./persisting-state.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span>Persisting state</a>
+        <div class="label">Walkthrough</div>
+        <a class="navlink" href="./crash-replay.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg></span>Crash → replay</a>
+        <div class="label">Migrating</div>
+        <a class="navlink" href="./temporal.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2a2.83 2.83 0 0 0-3-3z"/><path d="M9 11a14 14 0 0 1 8-8c2 0 4 2 4 4a14 14 0 0 1-8 8z"/><circle cx="15" cy="9" r="1.4"/></svg></span>Coming from Temporal</a>
+        <a class="navlink" href="./celery.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></span>Coming from Celery</a>
+        <a class="navlink" href="./sidekiq.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.4"/><rect x="3" y="10" width="18" height="4" rx="1.4"/><rect x="3" y="16" width="18" height="4" rx="1.4"/></svg></span>Coming from Sidekiq</a>
+        <div class="label">Recipes</div>
+        <a class="navlink" href="./ai-image.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-4 5 4 3-2 5 4"/></svg></span>AI image generation</a>
+        <a class="navlink" href="./weekly-email.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>Weekly email</a>
+        <div class="label">Reference</div>
+        <a class="navlink" href="./limitations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></span>Limitations & comparison</a>
+        <a class="navlink" href="./protocol.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M5 12h14M5 17h9"/><circle cx="19" cy="17" r="1.6"/></svg></span>Wire protocol</a>
+        <a class="navlink" href="./design.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>Deep-dive design</a>
+        <div class="label">Project</div>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener">GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs" target="_blank" rel="noopener">All walkthroughs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts/blob/main/README.md" target="_blank" rel="noopener">README<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </nav>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="./index.html" style="color: inherit; text-decoration: none">Docs</a>
+            <span class="sep">/</span>
+            <span class="here">Overview</span>
+          </nav>
+          <div class="right">
+            <a class="icon-btn" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.68 22a.55.55 0 0 0 .73-.53v-2c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83a2.2 2.2 0 0 1 .64-1.35c-2.22-.25-4.55-1.11-4.55-4.94a3.87 3.87 0 0 1 1.03-2.69 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.69c0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74a.55.55 0 0 0 .74.53A10.5 10.5 0 0 0 12 1.5z"/></svg></a>
+            <button class="icon-btn" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          </div>
+        </header>
+
+        <div class="body-grid">
+          <main class="content landing">
+<section class="hero">
+  <div class="eyebrow"><span class="pip"></span>v0.1 · durable execution on NATS / JetStream</div>
+  <h1>Workflows that <span class="grad">survive crashes</span> — with no new server to run.</h1>
+  <p class="lede">
+    <b>@synadia-ai/durable</b> is a lightweight durable-execution library on NATS / JetStream — a
+    <b>library, not a server</b>. Write workflows as ordinary <code>async</code> functions; every
+    side-effecting or nondeterministic step is journaled to an ordered log and <b>replayed</b> after a
+    crash instead of being re-executed. Your NATS cluster is the engine.
+  </p>
+  <div class="cta-row">
+    <a class="cta primary" href="./how-it-works.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11l-1 8.5L18.5 10.5H12z"/></svg> How it works</a>
+    <a class="cta ghost" href="./crash-replay.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg> See crash → replay</a>
+    <a class="cta ghost" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.68 22a.55.55 0 0 0 .73-.53v-2c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83a2.2 2.2 0 0 1 .64-1.35c-2.22-.25-4.55-1.11-4.55-4.94a3.87 3.87 0 0 1 1.03-2.69 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.69c0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74a.55.55 0 0 0 .74.53A10.5 10.5 0 0 0 12 1.5z"/></svg> GitHub</a>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Why this exists</div>
+  <div class="prose">
+    <p>
+      Imagine a function that reserves inventory, charges a card, and ships an order. If the process
+      crashes after charging but before shipping, a naïve retry double-charges and a non-retry loses
+      the order. You end up hand-rolling state machines, status columns, and idempotency tables.
+    </p>
+    <p>
+      <strong>Durable execution</strong> makes that function survive crashes on its own. You write
+      normal code; on a restart the runtime picks up <em>exactly</em> where it left off — completed
+      steps are not run again, and the unfinished one resumes. Most systems deliver this with a
+      dedicated server you operate, scale, and back with a database. This library doesn't:
+      <strong>the NATS cluster is the engine.</strong>
+    </p>
+  </div>
+  <div class="split">
+    <div class="panel them">
+      <div class="tag">Traditional durable execution</div>
+      <h3>A server you operate</h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span>A dedicated control plane to deploy, scale, patch & secure</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span>A separate database (Postgres / Cassandra) behind it</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span>A network hop to a control plane to start a workflow</span></li>
+      </ul>
+    </div>
+    <div class="panel us">
+      <div class="tag">@synadia-ai/durable</div>
+      <h3>Just NATS + your workers</h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>No new service — JetStream streams + KV are the journal, queue, timer scheduler & status index</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Stateless workers; all durability lives in NATS</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>It's a library — embed it, no extra hop</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>A language-neutral wire format, so Go / Python / … SDKs can follow</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="prose">
+    <blockquote>
+      <p>
+        <strong>“No server” doesn't mean “no infrastructure.”</strong> NATS is infrastructure. It means
+        no <em>new, durable-execution-specific</em> service. If you already run NATS, you already run the
+        engine.
+      </p>
+    </blockquote>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Where your state lives</div>
+  <div class="prose">
+    <p>
+      There is no database and no durable-execution server — a workflow's entire state is an ordered,
+      append-only log on NATS JetStream. The library provisions a small, fixed set of resources and
+      turns them into the journal, work queue, timer scheduler, and status index:
+    </p>
+    <figure class="diagram-fig">
+  <svg viewBox="0 0 720 432" role="img" aria-label="Your only processes are NATS and your own workers. The library turns JetStream streams + KV into the journal, work queue, timer scheduler, and status index — there is no separate durable-execution server." preserveAspectRatio="xMidYMid meet">
+<defs>
+    <marker id="ar-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="context-stroke" />
+    </marker>
+  </defs>
+    <!-- client -->
+    <rect class="dg-box" x="250" y="14" width="220" height="56" rx="10" />
+    <text class="dg-h" x="360" y="40" text-anchor="middle">Client</text>
+    <text class="dg-sub" x="360" y="58" text-anchor="middle">start · result · status · signal</text>
+    <line class="dg-edge-a" x1="360" y1="70" x2="360" y2="106" marker-end="url(#ar-arrow)" />
+    <text class="dg-cap" x="372" y="92">start → append + enqueue</text>
+
+    <!-- engine -->
+    <rect class="dg-engine" x="26" y="112" width="668" height="200" rx="14" />
+    <text class="dg-cap dg-fill-a" x="46" y="136">NATS CLUSTER — THE ENGINE · JETSTREAM</text>
+
+    <rect class="dg-box-j" x="46" y="150" width="192" height="146" rx="10" />
+    <text class="dg-h" x="142" y="180" text-anchor="middle">DE_JOURNAL</text>
+    <text class="dg-sub" x="142" y="199" text-anchor="middle">stream · de.journal.{run}</text>
+    <text class="dg-cap dg-fill-a" x="142" y="252" text-anchor="middle">SOURCE OF TRUTH</text>
+    <text class="dg-note" x="142" y="272" text-anchor="middle">append-only,</text>
+    <text class="dg-note" x="142" y="287" text-anchor="middle">one ordered log per run</text>
+
+    <rect class="dg-box" x="264" y="150" width="192" height="146" rx="10" />
+    <text class="dg-h" x="360" y="180" text-anchor="middle">DE_WORK</text>
+    <text class="dg-sub" x="360" y="199" text-anchor="middle">work queue · de.work.{wf}</text>
+    <text class="dg-cap" x="360" y="252" text-anchor="middle">WORK QUEUE</text>
+    <text class="dg-note" x="360" y="272" text-anchor="middle">start / resume / signal</text>
+    <text class="dg-note" x="360" y="287" text-anchor="middle">items, load-balanced</text>
+
+    <rect class="dg-box" x="482" y="150" width="192" height="146" rx="10" />
+    <text class="dg-h" x="578" y="180" text-anchor="middle">DE_RUNS</text>
+    <text class="dg-sub" x="578" y="199" text-anchor="middle">KV · {run} → status</text>
+    <text class="dg-cap" x="578" y="252" text-anchor="middle">INDEX / HINT ONLY</text>
+    <text class="dg-note" x="578" y="272" text-anchor="middle">never gates a</text>
+    <text class="dg-note" x="578" y="287" text-anchor="middle">progress decision</text>
+
+    <!-- workers -->
+    <rect class="dg-box" x="250" y="356" width="220" height="64" rx="10" />
+    <text class="dg-h" x="360" y="383" text-anchor="middle">Worker(s)</text>
+    <text class="dg-sub" x="360" y="402" text-anchor="middle">pull → replay → advance → ack</text>
+
+    <line class="dg-edge" x1="316" y1="312" x2="316" y2="356" marker-end="url(#ar-arrow)" />
+    <text class="dg-cap" x="300" y="338" text-anchor="end">deliver work</text>
+    <line class="dg-edge-a" x1="404" y1="356" x2="404" y2="312" marker-end="url(#ar-arrow)" />
+    <text class="dg-cap" x="420" y="338">load · replay · append · status</text>
+  </svg>
+  <figcaption>Your only processes are NATS and your own workers. The library turns JetStream streams + KV into the journal, work queue, timer scheduler, and status index — there is no separate durable-execution server.</figcaption>
+</figure>
+    <p style="text-align:center">
+      <a class="cta ghost" href="./persisting-state.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg> How state is persisted →</a>
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Read the docs</div>
+  <div class="cards">
+    <a class="card" href="./how-it-works.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M4 4v14"/></svg></div>
+      <h3>How it works</h3>
+      <p>The gentle tour — why there's no durable-execution server, the journal-then-replay trick, and the one NATS primitive everything rests on.</p>
+    </a>
+    <a class="card" href="./persisting-state.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg></div>
+      <h3>How state is persisted</h3>
+      <p>Where a run's whole state lives — the append-only JetStream journal, the CAS primitive, two-phase steps, and the KV index — with diagrams.</p>
+    </a>
+    <a class="card" href="./crash-replay.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg></div>
+      <h3>Crash → replay</h3>
+      <p>The headline, proven: run a workflow, kill it mid-flight, watch a fresh worker replay the journal and finish — each effect firing once.</p>
+    </a>
+    <a class="card" href="./protocol.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M5 12h14M5 17h9"/><circle cx="19" cy="17" r="1.6"/></svg></div>
+      <h3>Wire protocol</h3>
+      <p>The normative, language-neutral spec (v:1, RFC-2119) — for writing a Go / Python / … SDK that shares the same NATS streams.</p>
+    </a>
+    <a class="card" href="./design.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div>
+      <h3>Deep-dive design</h3>
+      <p>The rigorous account: exact API, the two-phase replay algorithm, the resource layout, and every correctness invariant.</p>
+    </a>
+    <a class="card" href="./limitations.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></div>
+      <h3>Limitations &amp; comparison</h3>
+      <p>What v0.1 doesn't do vs Temporal and Inngest — a capability table, the real production blockers, and the roadmap-vs-fundamental split.</p>
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Migrating from your queue or engine</div>
+  <div class="prose">
+    <p>
+      Already running background jobs or workflows elsewhere? These guides translate the everyday
+      patterns — tasks, retries, timers, multi-step sequences, cron — into durable workflows.
+    </p>
+  </div>
+  <div class="cards">
+    <a class="card" href="./temporal.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2a2.83 2.83 0 0 0-3-3z"/><path d="M9 11a14 14 0 0 1 8-8c2 0 4 2 4 4a14 14 0 0 1-8 8z"/><circle cx="15" cy="9" r="1.4"/></svg></div>
+      <h3>from Temporal</h3>
+      <p>Activities, signals, timers, child workflows, continue-as-new — the same model, with no Temporal cluster or database to operate.</p>
+    </a>
+    <a class="card" href="./celery.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div>
+      <h3>from Celery</h3>
+      <p>Tasks, retries, countdowns, chains, beat — turned into durable workflows that survive a crash mid-pipeline with exactly-once state.</p>
+    </a>
+    <a class="card" href="./sidekiq.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.4"/><rect x="3" y="10" width="18" height="4" rx="1.4"/><rect x="3" y="16" width="18" height="4" rx="1.4"/></svg></div>
+      <h3>from Sidekiq</h3>
+      <p>Jobs, retries, perform_in, chained sequences, cron — as one crash-safe workflow instead of hand-chained, hand-deduped jobs.</p>
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Recipes — build something real</div>
+  <div class="prose">
+    <p>
+      End-to-end workflows for the jobs people actually run — an expensive AI call made exactly-once, and
+      a recurring email that survives restarts and runs forever on a bounded journal.
+    </p>
+  </div>
+  <div class="cards">
+    <a class="card" href="./ai-image.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-4 5 4 3-2 5 4"/></svg></div>
+      <h3>Generate a Ghibli image</h3>
+      <p>A real image-generation workflow: slow, costly, non-idempotent calls made exactly-once and crash-safe, with a human-in-the-loop regenerate loop.</p>
+    </a>
+    <a class="card" href="./weekly-email.html">
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <h3>Send a weekly email</h3>
+      <p>The recurring-job pattern — a durable weekly timer, an exactly-once send, and continue-as-new to run forever with a bounded journal. No external cron.</p>
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Quickstart</div>
+  <div class="prose">
+    <p>Install the library plus the NATS clients (bring your own connection):</p>
+    <pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-sh">npm install @synadia-ai/durable @nats-io/jetstream @nats-io/kv
+npm install @nats-io/transport-node   <span class="hljs-comment"># bring your own connection</span></code></pre>
+    <p>Define a workflow, run a worker, start a run — and get a result that survives restarts:</p>
+    <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@nats-io/transport-node&quot;</span>;
+<span class="hljs-keyword">import</span> { createClient, createWorker, defineWorkflow } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@synadia-ai/durable&quot;</span>;
+
+<span class="hljs-keyword">const</span> charge = <span class="hljs-title function_">defineWorkflow</span>(<span class="hljs-string">&quot;charge&quot;</span>, <span class="hljs-title function_">async</span> (ctx, <span class="hljs-attr">input</span>: { <span class="hljs-attr">cartId</span>: <span class="hljs-built_in">string</span>; <span class="hljs-attr">amount</span>: <span class="hljs-built_in">number</span> }) =&gt; {
+  <span class="hljs-keyword">const</span> orderId = <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;reserve&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reserveInventory</span>(input.<span class="hljs-property">cartId</span>));
+  <span class="hljs-keyword">const</span> authId = <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;authorize&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">authorize</span>(orderId, input.<span class="hljs-property">amount</span>));
+  <span class="hljs-keyword">return</span> { <span class="hljs-attr">receipt</span>: <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;capture&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">capture</span>(authId)) };
+});
+
+<span class="hljs-keyword">const</span> nc = <span class="hljs-keyword">await</span> <span class="hljs-title function_">connect</span>({ <span class="hljs-attr">servers</span>: <span class="hljs-string">&quot;nats://127.0.0.1:4222&quot;</span> });
+
+<span class="hljs-keyword">const</span> worker = <span class="hljs-title function_">createWorker</span>({ nc, <span class="hljs-attr">workflows</span>: [charge] });
+<span class="hljs-keyword">await</span> worker.<span class="hljs-title function_">start</span>();
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-title function_">createClient</span>({ nc });
+<span class="hljs-keyword">const</span> handle = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">start</span>(charge, { <span class="hljs-attr">cartId</span>: <span class="hljs-string">&quot;c_1&quot;</span>, <span class="hljs-attr">amount</span>: <span class="hljs-number">42</span> });
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">await</span> handle.<span class="hljs-title function_">result</span>()); <span class="hljs-comment">// resolves when the run completes — survives worker restarts</span></code></pre>
+    <p>
+      If the worker crashes mid-run, a restart <strong>replays</strong> <code>reserve</code> /
+      <code>authorize</code> from the journal (without re-executing them) and resumes from the first
+      unfinished step — see the <a href="./crash-replay.html">crash → replay walkthrough</a>. A runnable
+      version is in <a href="https://github.com/synadia-ai/durable-ts/blob/main/examples/charge.ts" target="_blank" rel="noopener">examples/charge.ts</a>.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">The model in one breath</div>
+  <div class="prose">
+    <ul>
+      <li>
+        A workflow is a normal <code>async</code> function over a <code>ctx</code>. Anything
+        nondeterministic or side-effecting goes through <code>ctx.*</code> and is journaled —
+        <code>ctx.run(name, fn)</code> for steps, <code>ctx.now / random / uuid()</code> for
+        determinism, <code>ctx.sleep / await / call / continueAsNew</code> for the rest.
+      </li>
+      <li>
+        On replay the function re-runs from the top: journaled <code>ctx.*</code> calls return their
+        saved value (no re-execution); the first un-journaled call is the live frontier.
+      </li>
+      <li>
+        <strong>Two-phase steps.</strong> A step's intent is CAS-appended <em>before</em> the side
+        effect, so a fresh zombie worker is fenced before it can fire, and every step is journaled
+        exactly once. The whole correctness story is one NATS primitive: an optimistic append
+        (<code>expect.lastSubjectSequence</code>) whose lost race is a single error code,
+        <code>10071</code>.
+      </li>
+      <li>
+        <strong>Exactly-once state, at-least-once effects</strong> — the standard durable-execution
+        contract. <code>ctx.key()</code> (<code>${runId}:${seq}</code>) is the idempotency key that
+        makes your effect safe.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>Apache-2.0 · Synadia</span>
+  <span class="spacer"></span>
+  <a href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener">GitHub</a>
+  <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs" target="_blank" rel="noopener">All 12 walkthroughs</a>
+  <a href="https://github.com/synadia-ai/durable-ts/blob/main/README.md" target="_blank" rel="noopener">README</a>
+</footer>
+          </main>
+          
+        </div>
+      </div>
+    </div>
+    <script>
+(function () {
+  var root = document.documentElement;
+  function setTheme(next, persist) {
+    root.classList.add("theme-anim");
+    setTimeout(function () { root.classList.remove("theme-anim"); }, 320);
+    root.setAttribute("data-theme", next);
+    if (persist) { try { localStorage.setItem("durable-theme", next); } catch (e) {} }
+  }
+  var toggle = document.getElementById("theme-toggle");
+  if (toggle) toggle.addEventListener("click", function () {
+    setTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light", true);
+  });
+  try {
+    var mq = matchMedia("(prefers-color-scheme: light)");
+    mq.addEventListener("change", function (e) {
+      var s = null; try { s = localStorage.getItem("durable-theme"); } catch (x) {}
+      if (s !== "light" && s !== "dark") setTheme(e.matches ? "light" : "dark", false);
+    });
+  } catch (e) {}
+
+  // copy-to-clipboard for code blocks
+  document.querySelectorAll(".code-head .copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = btn.closest("pre");
+      var code = pre && pre.querySelector("code");
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).then(function () {
+        btn.classList.add("ok");
+        var label = btn.querySelector(".t");
+        var prev = label ? label.textContent : "";
+        if (label) label.textContent = "copied";
+        setTimeout(function () { btn.classList.remove("ok"); if (label) label.textContent = prev; }, 1300);
+      });
+    });
+  });
+
+  // mobile drawer
+  var side = document.querySelector(".side");
+  var scrim = document.querySelector(".scrim");
+  var menu = document.getElementById("menu-btn");
+  function close() { side && side.classList.remove("open"); scrim && scrim.classList.remove("show"); }
+  if (menu) menu.addEventListener("click", function () {
+    side && side.classList.toggle("open"); scrim && scrim.classList.toggle("show");
+  });
+  if (scrim) scrim.addEventListener("click", close);
+  document.querySelectorAll(".side a").forEach(function (a) { a.addEventListener("click", close); });
+
+  // TOC scroll-spy
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a[data-toc]"));
+  if (tocLinks.length) {
+    var byId = {};
+    tocLinks.forEach(function (a) { byId[a.getAttribute("data-toc")] = a; });
+    var targets = tocLinks
+      .map(function (a) { return document.getElementById(a.getAttribute("data-toc")); })
+      .filter(Boolean);
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          tocLinks.forEach(function (a) { a.classList.remove("active"); });
+          var link = byId[en.target.id];
+          if (link) link.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
+    targets.forEach(function (t) { spy.observe(t); });
+  }
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wire protocol · @synadia-ai/durable</title>
+    <meta name="description" content="The language-neutral, RFC-2119 wire specification (v:1) — for anyone writing a Go / Python / … SDK that interoperates on the same NATS streams." />
+    <meta property="og:title" content="Wire protocol · @synadia-ai/durable" />
+    <meta property="og:description" content="The language-neutral, RFC-2119 wire specification (v:1) — for anyone writing a Go / Python / … SDK that interoperates on the same NATS streams." />
+    <meta property="og:type" content="website" />
+    <script>(function(){try{var t=localStorage.getItem("durable-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;450;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body>
+    <div class="scrim"></div>
+    <div class="shell">
+      <aside class="side">
+        <a class="brand" href="./index.html">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11M4 12h11M4 19h7"/><path d="M16 9l4 3-4 3"/></svg></span>
+          <span class="name"><b>durable</b></span>
+          <span class="ver">v0.1</span>
+        </a>
+        <nav class="nav" aria-label="Documentation">
+        <div class="label">Get started</div>
+        <a class="navlink" href="./index.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>Overview</a>
+        <a class="navlink" href="./how-it-works.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M4 4v14"/></svg></span>How it works</a>
+        <a class="navlink" href="./persisting-state.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span>Persisting state</a>
+        <div class="label">Walkthrough</div>
+        <a class="navlink" href="./crash-replay.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg></span>Crash → replay</a>
+        <div class="label">Migrating</div>
+        <a class="navlink" href="./temporal.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2a2.83 2.83 0 0 0-3-3z"/><path d="M9 11a14 14 0 0 1 8-8c2 0 4 2 4 4a14 14 0 0 1-8 8z"/><circle cx="15" cy="9" r="1.4"/></svg></span>Coming from Temporal</a>
+        <a class="navlink" href="./celery.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></span>Coming from Celery</a>
+        <a class="navlink" href="./sidekiq.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.4"/><rect x="3" y="10" width="18" height="4" rx="1.4"/><rect x="3" y="16" width="18" height="4" rx="1.4"/></svg></span>Coming from Sidekiq</a>
+        <div class="label">Recipes</div>
+        <a class="navlink" href="./ai-image.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M3 16l5-4 5 4 3-2 5 4"/></svg></span>AI image generation</a>
+        <a class="navlink" href="./weekly-email.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>Weekly email</a>
+        <div class="label">Reference</div>
+        <a class="navlink" href="./limitations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></span>Limitations & comparison</a>
+        <a class="navlink active" href="./protocol.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M5 12h14M5 17h9"/><circle cx="19" cy="17" r="1.6"/></svg></span>Wire protocol</a>
+        <a class="navlink" href="./design.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>Deep-dive design</a>
+        <div class="label">Project</div>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener">GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs" target="_blank" rel="noopener">All walkthroughs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="ext" href="https://github.com/synadia-ai/durable-ts/blob/main/README.md" target="_blank" rel="noopener">README<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </nav>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="./index.html" style="color: inherit; text-decoration: none">Docs</a>
+            <span class="sep">/</span>
+            <span class="here">Wire protocol</span>
+          </nav>
+          <div class="right">
+            <a class="icon-btn" href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.68 22a.55.55 0 0 0 .73-.53v-2c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83a2.2 2.2 0 0 1 .64-1.35c-2.22-.25-4.55-1.11-4.55-4.94a3.87 3.87 0 0 1 1.03-2.69 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.69c0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74a.55.55 0 0 0 .74.53A10.5 10.5 0 0 0 12 1.5z"/></svg></a>
+            <button class="icon-btn" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          </div>
+        </header>
+
+        <div class="body-grid">
+          <main class="content">
+<header class="prose" style="margin-bottom: 26px">
+  <div class="section-eyebrow" style="margin-bottom:14px">Reference · normative</div>
+  <h1>Wire protocol</h1>
+  <p class="lede" style="font-size:17px;color:var(--ink-dim);margin-top:8px">The language-neutral, RFC-2119 wire specification (v:1) — for anyone writing a Go / Python / … SDK that interoperates on the same NATS streams.</p>
+</header>
+<article class="prose">
+<p><strong>Wire version:</strong> 1 (<code>v:1</code>)
+<strong>Library:</strong> <code>@synadia-ai/durable</code> v0.1 (reference implementation)
+<strong>Status:</strong> Draft
+<strong>Date:</strong> 2026-06-17</p>
+<h2 id="1-introduction"><a class="h-anchor" href="#1-introduction" aria-label="Link to this section">#</a>1. Introduction</h2>
+<p>This document defines a protocol for executing <strong>durable workflows</strong> over NATS JetStream. A workflow is an
+ordinary function whose every nondeterministic or side-effecting operation is recorded to an append-only
+log; on a crash the function re-runs from the top and recorded operations are <strong>replayed</strong> (returned from
+the log) instead of re-executed. Workers that follow this protocol journal runs, distribute work, schedule
+timers, route signals, and invoke sub-workflows using a uniform set of NATS resources and message shapes —
+so an implementation in any language interoperates with another over the same streams.</p>
+<p>There is <strong>no durable-execution server</strong>. The NATS cluster <em>is</em> the engine: JetStream streams are the
+journal, the work queue, and the timer scheduler; a KV bucket is the status index. The participants are a
+<strong>worker</strong> (executes and journals runs) and a <strong>client</strong> (starts, observes, and signals runs).</p>
+<p>Built on three NATS primitives, used as-is:</p>
+<ul>
+<li><strong>JetStream streams</strong> — ordered, append-only logs with <strong>optimistic concurrency</strong> (<code>expect</code>) and
+<strong>message deduplication</strong> (<code>Nats-Msg-Id</code>); a work-queue stream for at-least-once dispatch; and
+<strong>native message scheduling</strong> for timers.</li>
+<li><strong>JetStream KV</strong> — a revisioned key/value bucket (itself a stream) for the status index.</li>
+<li><strong>Core publish/subscribe &amp; request/reply</strong> — addressing and routing by subject.</li>
+</ul>
+<p>The protocol adds only what is missing: a <strong>resource layout</strong> (§3), a <strong>subject convention</strong> (§4), the
+<strong>journal wire format</strong> (§5), the <strong>work-item format</strong> (§6), the <strong>timer / signal / sub-workflow</strong>
+conventions (§7–§9), and the <strong>algorithms</strong> that tie them together (§11).</p>
+<p>Out of scope for wire v1:</p>
+<ul>
+<li>A <strong>gating KV lease</strong> (would narrow the at-least-once window under concurrent multi-worker load;
+correctness holds without it — §14).</li>
+<li><strong>Cancellation</strong> (no signal to stop a run).</li>
+<li><strong>In-flight versioning / patching</strong> (a <code>wfVersion</code> is carried but running workflows are not patched).</li>
+<li><strong>Parallel fan-out</strong> (no durable <code>Future</code>; <code>ctx.run</code> is blocking).</li>
+<li><strong>Payloads larger than the NATS <code>max_payload</code></strong> (8 MiB default); no object-store offload.</li>
+</ul>
+<h3 id="1-1-conventions"><a class="h-anchor" href="#1-1-conventions" aria-label="Link to this section">#</a>1.1 Conventions</h3>
+<p>Normative keywords — <strong>MUST</strong>, <strong>MUST NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, <strong>MAY</strong> — follow RFC 2119 and
+RFC 8174.</p>
+<p>&quot;The protocol&quot; is the wire contract defined here. &quot;An implementation&quot; (or &quot;SDK&quot;) is a language-specific
+library built on top; the TypeScript <code>@synadia-ai/durable</code> package is the reference implementation. Design
+rationale and prose algorithms live in <a href="./design.html"><code>DESIGN.md</code></a>; this document is the normative wire
+contract.</p>
+<p>A <strong>run</strong> is one execution of a workflow, identified by a <code>runId</code>. A <strong>workflow</strong> is identified by a
+<code>name</code>. A <strong>command</strong> is a single <code>ctx.*</code> operation a workflow issues (it occupies a monotonic per-run
+sequence number, §5.2).</p>
+<h3 id="1-2-version"><a class="h-anchor" href="#1-2-version" aria-label="Link to this section">#</a>1.2 Version</h3>
+<p>The wire format is <strong>frozen at <code>v:1</code></strong>. Every journal entry carries <code>&quot;v&quot;: 1</code> (§5.1); a decoder <strong>MUST</strong>
+reject an entry whose <code>v</code> is not <code>1</code>. The format is deliberately small and explicit so it can be an
+inter-language contract — the journal, not any one SDK, is the standard.</p>
+<p>The library implementing this protocol is independently versioned (v0.1) and may add capabilities without
+changing the wire format; wire-breaking changes bump <code>v</code>. Compatibility rules are in §15.</p>
+<h3 id="1-3-roles"><a class="h-anchor" href="#1-3-roles" aria-label="Link to this section">#</a>1.3 Roles</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Responsibilities</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Client</strong></td>
+<td>Start a run (idempotently), observe it (<code>result</code> / <code>status</code>), and <code>signal</code> it. Holds no run state. (§11.1, §11.5–6, §9)</td>
+</tr>
+<tr>
+<td><strong>Worker</strong></td>
+<td>Bind the per-workflow consumers, drive each work item by loading the journal and executing to the next halt, journal entries, schedule timers, and deliver sub-workflow results. (§6, §11.2–4)</td>
+</tr>
+</tbody></table>
+</div><p>A process MAY be a worker, a client, or both. Multiple workers MAY run concurrently for the same workflow
+(§6.3); correctness does not depend on their count.</p>
+<hr>
+<h2 id="2-foundations-the-one-primitive"><a class="h-anchor" href="#2-foundations-the-one-primitive" aria-label="Link to this section">#</a>2. Foundations — the one primitive</h2>
+<p>Everything that must be correct under concurrency reduces to a single NATS operation: the <strong>optimistic
+append</strong> (compare-and-set, &quot;CAS&quot;).</p>
+<h3 id="2-1-optimistic-append-cas"><a class="h-anchor" href="#2-1-optimistic-append-cas" aria-label="Link to this section">#</a>2.1 Optimistic append (CAS)</h3>
+<p>A write to a journal subject <strong>MUST</strong> be a JetStream publish carrying both an expected sequence and a
+dedup id:</p>
+<pre class="diagram"><code>publish(subject, payload, {
+  msgID: &lt;dedup id&gt;,                              # Nats-Msg-Id header
+  expect: { lastSubjectSequence: &lt;S&gt; }            # Nats-Expected-Last-Subject-Sequence header
+})</code></pre>
+<ul>
+<li><strong><code>expect.lastSubjectSequence: S</code></strong> asserts &quot;the last message currently on this subject has stream
+sequence <code>S</code>.&quot; If another writer has appended since, the server rejects the publish with
+<code>JetStreamApiError</code> <strong>code <code>10071</code></strong> (<code>StreamWrongLastSequence</code>). This is the <strong>single-writer fence</strong>:
+the rejected writer has lost the race and <strong>MUST</strong> stop (it is a zombie). Implementations surface this
+as a <code>FencedError</code>.</li>
+<li><strong><code>msgID</code></strong> (the <code>Nats-Msg-Id</code> header) is JetStream <strong>deduplication</strong>: a redelivered identical publish
+lands at most once. It is belt-and-suspenders on top of the CAS — an ambiguous ack can be retried
+safely.</li>
+</ul>
+<p>KV writes are the same primitive (a KV bucket is a stream): <code>create</code> / <code>update(revision)</code> is a CAS.</p>
+<h3 id="2-2-no-progress-on-a-plain-read"><a class="h-anchor" href="#2-2-no-progress-on-a-plain-read" aria-label="Link to this section">#</a>2.2 No progress on a plain read</h3>
+<p>A worker <strong>MUST NOT</strong> gate progress on a plain read of mutable state (a <code>kv.get</code>, a non-CAS stream read) —
+in a clustered deployment such a read may be served by a replica and be stale. Every progress decision is
+either an <strong>ordered replay</strong> of the journal (§11.2) or a <strong>CAS append</strong> (§2.1). The status index (§10) is
+a read-only hint and never gates progress.</p>
+<blockquote>
+<p>This single primitive is the whole concurrency model: no locks, no leader election, no coordinator.</p>
+</blockquote>
+<hr>
+<h2 id="3-resources"><a class="h-anchor" href="#3-resources" aria-label="Link to this section">#</a>3. Resources</h2>
+<p>An implementation provisions four JetStream resources, named from a configurable <strong>prefix</strong> (default
+<code>de</code>; uppercased for stream/bucket names). Provisioning <strong>MUST</strong> be idempotent (create-if-absent).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Kind</th>
+<th>Subjects / keys</th>
+<th>Required config</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DE_JOURNAL</code></td>
+<td>Stream</td>
+<td><code>de.journal.*</code> (one token = <code>runId</code>)</td>
+<td>File storage; <strong>Limits</strong> retention; <code>max_bytes</code> set.</td>
+</tr>
+<tr>
+<td><code>DE_WORK</code></td>
+<td>Stream</td>
+<td><code>de.work.*</code> (one token = <code>workflow</code>)</td>
+<td>File storage; <strong>WorkQueue</strong> retention; <code>max_bytes</code> set.</td>
+</tr>
+<tr>
+<td><code>DE_TIMERS</code></td>
+<td>Stream</td>
+<td><code>de.timer.&gt;</code></td>
+<td>File storage; <strong>Limits</strong> retention; <code>max_bytes</code> set; <strong><code>allow_msg_schedules: true</code></strong>.</td>
+</tr>
+<tr>
+<td><code>DE_RUNS</code></td>
+<td>KV bucket</td>
+<td>key = <code>runId</code></td>
+<td>File storage; <code>history: 1</code>; <code>max_bytes</code> set.</td>
+</tr>
+</tbody></table>
+</div><p>Requirements:</p>
+<ul>
+<li>Every stream <strong>MUST</strong> set <code>max_bytes</code> (NGS / R1 streams require it). On a single replica, file storage
+is required. <code>max_bytes</code> is a reservation, not on-demand — sizing is the deployer&#39;s concern.</li>
+<li><code>DE_WORK</code> <strong>MUST</strong> use <strong>WorkQueue</strong> retention: a message is removed once acknowledged, so the stream&#39;s
+message count is the live backlog.</li>
+<li><code>DE_TIMERS</code> <strong>MUST</strong> enable native message scheduling (<code>allow_msg_schedules</code>). A scheduled message&#39;s
+wake target <strong>MUST</strong> be a subject in the <strong>same</strong> stream (cross-stream schedule targets are rejected by
+the server) — hence both the schedule and its wake live under <code>de.timer.&gt;</code> (§7).</li>
+<li><code>DE_RUNS</code> history is <code>1</code> (only the latest record per run is retained; it is a hint, §10).</li>
+</ul>
+<p>A non-default prefix <code>P</code> replaces <code>de</code>/<code>DE</code> throughout (<code>P.journal.*</code>, <code>P_JOURNAL</code>, …). All participants
+sharing a logical deployment <strong>MUST</strong> use the same prefix.</p>
+<hr>
+<h2 id="4-subjects-identifiers"><a class="h-anchor" href="#4-subjects-identifiers" aria-label="Link to this section">#</a>4. Subjects &amp; identifiers</h2>
+<h3 id="4-1-subjects"><a class="h-anchor" href="#4-1-subjects" aria-label="Link to this section">#</a>4.1 Subjects</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Subject</th>
+<th>Token(s)</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>de.journal.{runId}</code></td>
+<td><code>runId</code></td>
+<td>The run&#39;s append-only journal (the source of truth, §5).</td>
+</tr>
+<tr>
+<td><code>de.work.{workflow}</code></td>
+<td><code>workflow</code></td>
+<td>The work queue for a workflow (start / wake items, §6).</td>
+</tr>
+<tr>
+<td><code>de.timer.sched.{runId}.{seq}</code></td>
+<td><code>runId</code>, <code>seq</code></td>
+<td>A timer&#39;s schedule-definition message (§7).</td>
+</tr>
+<tr>
+<td><code>de.timer.wake.{workflow}</code></td>
+<td><code>workflow</code></td>
+<td>Where a fired timer delivers its wake work item (§7).</td>
+</tr>
+<tr>
+<td>KV key <code>{runId}</code> in <code>DE_RUNS</code></td>
+<td><code>runId</code></td>
+<td>The run&#39;s status record (a hint, §10).</td>
+</tr>
+</tbody></table>
+</div><h3 id="4-2-identifier-rules"><a class="h-anchor" href="#4-2-identifier-rules" aria-label="Link to this section">#</a>4.2 Identifier rules</h3>
+<p>A <code>runId</code> and a <code>workflow</code> name are each used <strong>both</strong> as a subject token <strong>and</strong> as a KV key. KV keys
+forbid some characters that subjects allow (notably <code>~</code>), so both <strong>MUST</strong> match the safe intersection:</p>
+<pre class="diagram"><code>^[A-Za-z0-9_-]+$        # ASCII letters, digits, '-', '_'</code></pre>
+<p>An implementation <strong>MUST</strong> reject any <code>runId</code> or <code>workflow</code> name outside this set before use.</p>
+<h3 id="4-3-derived-runids"><a class="h-anchor" href="#4-3-derived-runids" aria-label="Link to this section">#</a>4.3 Derived runIds</h3>
+<p>Two run kinds derive their <code>runId</code> deterministically (both stay within §4.2):</p>
+<ul>
+<li><strong>continue-as-new generations</strong> (§11.4): generation <code>0</code> is the base <code>runId</code> itself; generation <code>n &gt; 0</code>
+is <strong><code>{base}_g{n}</code></strong> (e.g. <code>sub-acme</code>, <code>sub-acme_g1</code>, <code>sub-acme_g2</code>).</li>
+<li><strong>sub-workflow children</strong> (§9): a child started by <code>ctx.call</code> at command <code>seq</code> defaults to
+<strong><code>{parentRunId}_{seq}</code></strong> (e.g. <code>checkout-ok_4</code>). An implementation MAY allow an explicit child runId
+override.</li>
+</ul>
+<h3 id="4-4-examples-wildcards"><a class="h-anchor" href="#4-4-examples-wildcards" aria-label="Link to this section">#</a>4.4 Examples &amp; wildcards</h3>
+<pre class="diagram"><code>de.journal.checkout-ok            # one run's journal
+de.work.checkout                  # the &quot;checkout&quot; workflow's work queue
+de.timer.wake.subscription        # fired timers for the &quot;subscription&quot; workflow
+de.journal.&gt;                      # every run's journal (admin / export)
+de.work.&gt;                         # every workflow's queue
+de.timer.&gt;                        # all timer schedules + wakes</code></pre>
+<hr>
+<h2 id="5-the-journal-wire-format-v1"><a class="h-anchor" href="#5-the-journal-wire-format-v1" aria-label="Link to this section">#</a>5. The journal (wire format <code>v:1</code>)</h2>
+<p>A run&#39;s journal is the ordered sequence of messages on <code>de.journal.{runId}</code>. It is the <strong>sole source of
+truth</strong> for the run; everything else (the status index, the work queue) is derived or advisory.</p>
+<h3 id="5-1-entry-envelope"><a class="h-anchor" href="#5-1-entry-envelope" aria-label="Link to this section">#</a>5.1 Entry envelope</h3>
+<p>Every entry is a JSON object encoded as compact UTF-8 (the default codec; an implementation MAY support
+another codec but <code>v:1</code> denotes JSON). Every entry <strong>MUST</strong> carry:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>v</code></td>
+<td>number</td>
+<td>Wire version. <strong>MUST</strong> be <code>1</code>. Decoders <strong>MUST</strong> reject any other value.</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>string</td>
+<td>Entry discriminator (§5.3). Decoders <strong>MUST</strong> reject an unknown kind.</td>
+</tr>
+<tr>
+<td><code>seq</code></td>
+<td>number</td>
+<td>Command position (§5.2). <code>-1</code> for non-command entries.</td>
+</tr>
+<tr>
+<td><code>ts</code></td>
+<td>number</td>
+<td>Wall-clock ms at write time. <strong>Informational only</strong> — implementations <strong>MUST NOT</strong> use <code>ts</code> for any control decision.</td>
+</tr>
+</tbody></table>
+</div><p>Additional fields are per-kind (§5.3). Decoders <strong>MUST</strong> reject an entry missing <code>v</code>, <code>kind</code>, or <code>seq</code>.</p>
+<h3 id="5-2-command-sequence"><a class="h-anchor" href="#5-2-command-sequence" aria-label="Link to this section">#</a>5.2 Command sequence</h3>
+<p><code>seq</code> is the <strong>command position</strong>: a per-run counter, <code>0, 1, 2, …</code>, assigned in workflow-execution order
+to each <code>ctx.*</code> <strong>command</strong> (<code>run</code>, <code>now</code>, <code>random</code>, <code>uuid</code>, <code>sleep</code>, <code>await</code>, <code>call</code>). Replay matches a
+command to its recorded entry by this position (§11.2).</p>
+<ul>
+<li>A <strong>two-phase step</strong> (<code>ctx.run</code>) shares <strong>one</strong> <code>seq</code> across its <code>step-begin</code> and <code>step-end</code> entries.</li>
+<li><strong>Event</strong> entries that record something external — <code>signal</code>, <code>resolve</code> — and <strong>terminal</strong> entries —
+<code>result</code>, <code>fail</code>, <code>continued</code> — do <strong>not</strong> consume a command position; they carry <code>seq = -1</code>
+(<code>NON_COMMAND_SEQ</code>). A <code>resolve</code> references the command it completes via <code>resolvesSeq</code>.</li>
+</ul>
+<h3 id="5-3-entry-kinds"><a class="h-anchor" href="#5-3-entry-kinds" aria-label="Link to this section">#</a>5.3 Entry kinds</h3>
+<p>The fourteen kinds and their per-kind fields:</p>
+<p><strong><code>start</code></strong> — the first entry of every run (<code>seq</code> 0):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>wf</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Workflow name.</td>
+</tr>
+<tr>
+<td><code>wfVersion</code></td>
+<td>number</td>
+<td>Yes</td>
+<td>Workflow version recorded at start.</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>The run&#39;s input (JSON-serializable).</td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>object</td>
+<td>No</td>
+<td>Sub-workflow link: <code>{ runId, seq, wf }</code> of the caller (§9).</td>
+</tr>
+<tr>
+<td><code>generation</code></td>
+<td>number</td>
+<td>No</td>
+<td>continue-as-new generation; default <code>0</code> (§11.4).</td>
+</tr>
+<tr>
+<td><code>base</code></td>
+<td>string</td>
+<td>No</td>
+<td>The chain&#39;s generation-0 runId; default = this <code>runId</code> (§11.4).</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>step-begin</code></strong> — a step&#39;s intent, appended <strong>before</strong> the side effect runs:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Step name (matched on replay).</td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Idempotency key for the effect: <strong><code>{runId}:{seq}</code></strong> (§14).</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>step-end</code></strong> — a step&#39;s recorded result (same <code>seq</code> as its <code>step-begin</code>):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Step name (MUST match the begin).</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>The step&#39;s return value.</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>now</code> / <code>random</code> / <code>uuid</code></strong> — a captured deterministic value:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>value</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>The captured value (ms number / float / uuid string).</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>sleep</code></strong> — a durable timer command:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Timer name.</td>
+</tr>
+<tr>
+<td><code>dueMs</code></td>
+<td>number</td>
+<td>Yes</td>
+<td>Absolute deadline (ms since epoch); deterministic once recorded.</td>
+</tr>
+<tr>
+<td><code>schedSubj</code></td>
+<td>string</td>
+<td>No</td>
+<td>Subject of the native schedule that fires the wake (§7).</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>await</code></strong> — block until a signal of <code>name</code> arrives:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Signal name to wait for.</td>
+</tr>
+<tr>
+<td><code>dueMs</code></td>
+<td>number</td>
+<td>No</td>
+<td>Absolute timeout deadline, if <code>ctx.await</code> was given a <code>timeoutMs</code> (§8).</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>signal</code></strong> (non-command, <code>seq</code> -1) — a delivered external signal:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Signal name (matched FIFO to a same-named <code>await</code>).</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>Signal payload.</td>
+</tr>
+<tr>
+<td><code>signalId</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Dedup id so a redelivered signal is appended once.</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>call</code></strong> — invoke a sub-workflow:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Sub-workflow name.</td>
+</tr>
+<tr>
+<td><code>childRunId</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The child run&#39;s id (§4.3).</td>
+</tr>
+<tr>
+<td><code>wf</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Sub-workflow name (same as <code>name</code>).</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>The child&#39;s input.</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>resolve</code></strong> (non-command, <code>seq</code> -1) — completes a <code>sleep</code> / <code>await</code> / <code>call</code>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>resolvesSeq</code></td>
+<td>number</td>
+<td>Yes</td>
+<td>The command <code>seq</code> being completed.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>any</td>
+<td>No</td>
+<td>Result value (for a completed <code>call</code>).</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>object</td>
+<td>No</td>
+<td><code>{ name, message }</code> for a failed sub-workflow (§9).</td>
+</tr>
+</tbody></table>
+</div><p>A <code>resolve</code> with neither <code>value</code> nor <code>error</code> completes a <code>sleep</code> (timer fired) or a timed-out <code>await</code>
+(§8). A <code>resolve</code> carrying <code>value</code>/<code>error</code> completes a <code>call</code>.</p>
+<p><strong><code>result</code></strong> (terminal, <code>seq</code> -1) — the run returned:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>value</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>The run&#39;s return value.</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>fail</code></strong> (terminal, <code>seq</code> -1) — the run failed:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>error</code></td>
+<td>object</td>
+<td>Yes</td>
+<td><code>{ name, message }</code> of the logic error (§12).</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>continued</code></strong> (terminal, <code>seq</code> -1) — continue-as-new started a fresh generation:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>nextRunId</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The next generation&#39;s runId (<code>{base}_g{generation}</code>).</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>any</td>
+<td>Yes</td>
+<td>Input handed to the next generation.</td>
+</tr>
+<tr>
+<td><code>generation</code></td>
+<td>number</td>
+<td>Yes</td>
+<td>The next generation&#39;s number (this gen + 1).</td>
+</tr>
+<tr>
+<td><code>base</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The chain&#39;s generation-0 runId.</td>
+</tr>
+</tbody></table>
+</div><h3 id="5-4-append-rules-msgid-expect"><a class="h-anchor" href="#5-4-append-rules-msgid-expect" aria-label="Link to this section">#</a>5.4 Append rules — <code>msgID</code> &amp; <code>expect</code></h3>
+<p>Each entry is appended with the §2.1 CAS. The <code>expect.lastSubjectSequence</code> is the stream sequence of the
+<strong>previous</strong> entry on this subject (<code>0</code> for the first, the <code>start</code>). The <code>msgID</code> (<code>Nats-Msg-Id</code>) follows a
+fixed convention so a retried publish is idempotent:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Entry</th>
+<th><code>msgID</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>start</code></td>
+<td><code>{runId}:start</code></td>
+</tr>
+<tr>
+<td><code>step-begin</code></td>
+<td><code>{runId}:{seq}:b</code></td>
+</tr>
+<tr>
+<td><code>step-end</code></td>
+<td><code>{runId}:{seq}:e</code></td>
+</tr>
+<tr>
+<td><code>now</code> / <code>random</code> / <code>uuid</code></td>
+<td><code>{runId}:{seq}</code></td>
+</tr>
+<tr>
+<td><code>sleep</code> / <code>await</code> / <code>call</code></td>
+<td><code>{runId}:{seq}</code></td>
+</tr>
+<tr>
+<td><code>signal</code></td>
+<td><code>{runId}:sig:{signalId}</code></td>
+</tr>
+<tr>
+<td><code>resolve</code></td>
+<td><code>{runId}:{seq}:r</code></td>
+</tr>
+<tr>
+<td><code>result</code> / <code>fail</code> / <code>continued</code></td>
+<td><code>{runId}:terminal</code></td>
+</tr>
+</tbody></table>
+</div><p>The single <code>{runId}:terminal</code> id for all terminal kinds ensures a run records <strong>at most one</strong> terminal
+entry: a second writer attempting a different terminal is deduplicated, and the journal&#39;s terminal is
+canonical.</p>
+<h3 id="5-5-reading-a-journal"><a class="h-anchor" href="#5-5-reading-a-journal" aria-label="Link to this section">#</a>5.5 Reading a journal</h3>
+<p>To load a run, read all messages on <code>de.journal.{runId}</code> <strong>in stream order</strong> and decode each (§5.1). The
+ordered list is the run&#39;s full state. A run is <strong>terminal</strong> iff it contains a <code>result</code>, <code>fail</code>, or
+<code>continued</code> entry; it has <strong>at most one</strong> such entry (§5.4).</p>
+<hr>
+<h2 id="6-the-work-queue"><a class="h-anchor" href="#6-the-work-queue" aria-label="Link to this section">#</a>6. The work queue</h2>
+<p>Work is dispatched as <strong>work items</strong>: JSON messages on <code>de.work.{workflow}</code>, consumed by that workflow&#39;s
+durable consumer.</p>
+<h3 id="6-1-work-item-shape"><a class="h-anchor" href="#6-1-work-item-shape" aria-label="Link to this section">#</a>6.1 Work-item shape</h3>
+<pre><div class="code-head"><span class="lang">json</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;runId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;checkout-ok&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;start&quot;</span> <span class="hljs-punctuation">}</span></code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>runId</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The run this item drives.</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>One of <code>start</code>, <code>timer</code>, <code>signal</code>, <code>child-done</code> (and the reserved <code>resume</code>, §6.5).</td>
+</tr>
+<tr>
+<td><code>resolvesSeq</code></td>
+<td>number</td>
+<td>For <code>timer</code> / <code>child-done</code></td>
+<td>The command <code>seq</code> this wake completes.</td>
+</tr>
+<tr>
+<td><code>signal</code></td>
+<td>object</td>
+<td>For <code>signal</code></td>
+<td><code>{ name, data, id }</code> — the inbound signal (<code>id</code> gives idempotency).</td>
+</tr>
+<tr>
+<td><code>child</code></td>
+<td>object</td>
+<td>For <code>child-done</code></td>
+<td>The finished sub-workflow&#39;s outcome: <code>{ id, ok: true, value }</code> or <code>{ id, ok: false, error }</code> (<code>id</code> = childRunId).</td>
+</tr>
+</tbody></table>
+</div><h3 id="6-2-work-item-msgids"><a class="h-anchor" href="#6-2-work-item-msgids" aria-label="Link to this section">#</a>6.2 Work-item <code>msgID</code>s</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Subject</th>
+<th><code>msgID</code></th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>start</code></td>
+<td><code>de.work.{workflow}</code></td>
+<td><code>{runId}:work:start</code></td>
+<td>Enqueued once per new run / generation.</td>
+</tr>
+<tr>
+<td><code>signal</code></td>
+<td><code>de.work.{workflow}</code></td>
+<td><code>{runId}:sig:{id}</code></td>
+<td><code>id</code> is the signal&#39;s uuid.</td>
+</tr>
+<tr>
+<td><code>child-done</code></td>
+<td><code>de.work.{parentWf}</code></td>
+<td><code>{childRunId}:done</code></td>
+<td>Delivered to the parent&#39;s queue (§9).</td>
+</tr>
+<tr>
+<td><code>timer</code></td>
+<td>(delivered by schedule)</td>
+<td>schedule id <code>{runId}:sched:{seq}</code></td>
+<td>Fired by native scheduling (§7).</td>
+</tr>
+</tbody></table>
+</div><h3 id="6-3-consumers"><a class="h-anchor" href="#6-3-consumers" aria-label="Link to this section">#</a>6.3 Consumers</h3>
+<p>For each registered workflow, a worker binds <strong>one durable pull consumer</strong> on <code>DE_WORK</code>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Durable name</td>
+<td><code>de-worker-{workflow}</code></td>
+</tr>
+<tr>
+<td>Filter subject</td>
+<td><code>de.work.{workflow}</code></td>
+</tr>
+<tr>
+<td>Ack policy</td>
+<td>Explicit</td>
+</tr>
+<tr>
+<td>Ack wait</td>
+<td>Implementation-configurable; default <strong>30 s</strong>.</td>
+</tr>
+<tr>
+<td>Max deliver</td>
+<td><code>-1</code> (unlimited redelivery)</td>
+</tr>
+</tbody></table>
+</div><p>Multiple worker processes binding the same durable name <strong>share</strong> the consumer; JetStream load-balances
+items across them (this is horizontal scale — add a worker, get throughput). A run is processed by
+exactly one worker at a time per item; correctness across overlap rests on the journal CAS (§2), not on
+the consumer count.</p>
+<h3 id="6-4-acknowledgement-semantics"><a class="h-anchor" href="#6-4-acknowledgement-semantics" aria-label="Link to this section">#</a>6.4 Acknowledgement semantics</h3>
+<p>After driving a work item (§11.2), the worker <strong>MUST</strong>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Action</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Run reached a terminal (<code>result</code>/<code>fail</code>)</td>
+<td><strong>ack</strong></td>
+<td>Done; (notify parent first if a sub-workflow, §9).</td>
+</tr>
+<tr>
+<td>Run did <code>continueAsNew</code></td>
+<td><strong>ack</strong></td>
+<td>Generation done; next generation already enqueued (§11.4).</td>
+</tr>
+<tr>
+<td>Run <strong>suspended</strong> (sleep/await/call)</td>
+<td><strong>ack</strong></td>
+<td>A wake (timer/signal/child-done) will re-enqueue it.</td>
+</tr>
+<tr>
+<td><strong>Fenced</strong> (lost a CAS race)</td>
+<td><strong>term</strong></td>
+<td>Another worker owns this run; abandon this delivery.</td>
+</tr>
+<tr>
+<td>Unparseable item / no journal for <code>runId</code></td>
+<td><strong>term</strong></td>
+<td>Nothing to drive.</td>
+</tr>
+<tr>
+<td><strong>Infrastructure</strong> error (non-fenced)</td>
+<td><strong>nak</strong></td>
+<td>Transient; redeliver and replay (safe).</td>
+</tr>
+</tbody></table>
+</div><p>A suspended run is acked, not held: it occupies no worker and no memory until a wake re-enqueues it.</p>
+<h3 id="6-5-the-resume-kind"><a class="h-anchor" href="#6-5-the-resume-kind" aria-label="Link to this section">#</a>6.5 The <code>resume</code> kind</h3>
+<p><code>resume</code> is reserved in the work-item schema for an explicit re-drive. Wire v1 workers do not emit it
+(wakes use <code>timer</code> / <code>signal</code> / <code>child-done</code>); implementations <strong>MUST</strong> accept the schema field and <strong>MAY</strong>
+treat a <code>resume</code> item as a no-payload re-drive of the run.</p>
+<hr>
+<h2 id="7-timers-ctx-sleep-and-await-timeouts"><a class="h-anchor" href="#7-timers-ctx-sleep-and-await-timeouts" aria-label="Link to this section">#</a>7. Timers (<code>ctx.sleep</code> and <code>await</code> timeouts)</h2>
+<p>A durable timer rides <strong>native JetStream message scheduling</strong>. To arm a wake at absolute <code>dueMs</code> for run
+<code>runId</code>&#39;s command <code>seq</code>:</p>
+<ol>
+<li>Construct the wake work item: <code>{ runId, kind: &quot;timer&quot;, resolvesSeq: seq }</code>.</li>
+<li>Publish it to <strong><code>de.timer.sched.{runId}.{seq}</code></strong> with a single-shot schedule firing <strong>at</strong> <code>dueMs</code>
+and <strong>targeting <code>de.timer.wake.{workflow}</code></strong>, deduplicated by <code>msgID = {runId}:sched:{seq}</code>:</li>
+</ol>
+<pre class="diagram"><code>publish(&quot;de.timer.sched.{runId}.{seq}&quot;, &lt;timer work item&gt;, {
+  schedule: { specification: &lt;Date(dueMs)&gt;, target: &quot;de.timer.wake.{workflow}&quot; },
+  msgID:    &quot;{runId}:sched:{seq}&quot;
+})</code></pre>
+<p>The <code>msgID</code> makes re-arming the same <code>(runId, seq)</code> on replay idempotent — a step that replays does not
+create a second wake. Because schedule targets <strong>MUST</strong> be in the same stream, the wake subject lives
+under <code>de.timer.&gt;</code> (§3).</p>
+<p>When the schedule fires, the server delivers the timer work item to <code>de.timer.wake.{workflow}</code>. The worker
+binds a second durable pull consumer per workflow for these:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Durable name</td>
+<td><code>de-timer-{workflow}</code></td>
+</tr>
+<tr>
+<td>Filter subject</td>
+<td><code>de.timer.wake.{workflow}</code></td>
+</tr>
+<tr>
+<td>Ack policy</td>
+<td>Explicit; same ack-wait as §6.3</td>
+</tr>
+</tbody></table>
+</div><p>On receiving a <code>timer</code> item the worker appends a <code>resolve</code> (<code>resolvesSeq = seq</code>, no value) to the journal
+if not already present (idempotent via <code>msgID {runId}:{seq}:r</code>), then re-drives the run (§11.3). The
+deadline is journaled (the <code>sleep</code>/<code>await</code> entry&#39;s <code>dueMs</code>), so it survives restarts regardless of which
+worker is alive when it fires.</p>
+<blockquote>
+<p>Native scheduling requires a NATS server with message scheduling support (the reference deployment pins
+<code>nats-server</code> ≥ 2.14). The deadline lives in the journal and the schedule; no process holds it in memory.</p>
+</blockquote>
+<hr>
+<h2 id="8-signals-ctx-await-client-signal"><a class="h-anchor" href="#8-signals-ctx-await-client-signal" aria-label="Link to this section">#</a>8. Signals (<code>ctx.await</code> + <code>client.signal</code>)</h2>
+<p>A signal is external input delivered to a parked run.</p>
+<ol>
+<li><strong>Send.</strong> <code>client.signal(runId, name, data)</code> resolves the run&#39;s workflow (via the status index, §10,
+or the run&#39;s <code>start</code> entry) and publishes a <code>signal</code> work item to <code>de.work.{workflow}</code>:
+<code>{ runId, kind: &quot;signal&quot;, signal: { name, data, id } }</code> with <code>msgID = {runId}:sig:{id}</code> (a fresh uuid
+<code>id</code>).</li>
+<li><strong>Record.</strong> On receiving it, the worker appends a <code>signal</code> journal entry (§5.3) <strong>before</strong> replay, if
+no entry with that <code>signalId</code> exists (idempotent via <code>msgID {runId}:sig:{signalId}</code>), then re-drives.</li>
+<li><strong>Match.</strong> During replay, <code>ctx.await(name)</code> matches the earliest unconsumed <code>signal</code> of that <code>name</code>
+(<strong>FIFO per name</strong>), in journal order. The match is deterministic, so replay always pairs the same
+signal with the same await.</li>
+</ol>
+<p><strong>Timeout.</strong> <code>ctx.await(name, { timeoutMs })</code> records <code>dueMs</code> on the <code>await</code> entry and <strong>also</strong> arms a
+timer (§7). The signal and the timer <strong>race</strong>; whichever produces a journal entry first wins,
+deterministically by journal order. A timeout (a <code>resolve</code> with no matching signal) makes <code>ctx.await</code>
+throw a catchable <code>DurableTimeoutError</code> (§12) — control flow, not a failure.</p>
+<hr>
+<h2 id="9-sub-workflows-ctx-call"><a class="h-anchor" href="#9-sub-workflows-ctx-call" aria-label="Link to this section">#</a>9. Sub-workflows (<code>ctx.call</code>)</h2>
+<p><code>ctx.call(workflow, input)</code> runs a child workflow and resumes the parent with its result.</p>
+<ol>
+<li><strong>Record.</strong> The parent appends a <code>call</code> entry (<code>childRunId</code>, <code>wf</code>, <code>input</code>) at its command <code>seq</code>.</li>
+<li><strong>Start child.</strong> The worker starts the child run idempotently (§11.1) — appending the child&#39;s <code>start</code>
+entry with a <strong><code>parent</code> link</strong> <code>{ runId, seq, wf }</code> — and enqueues the child&#39;s <code>start</code> work item. The
+parent then <strong>suspends</strong> (§6.4).</li>
+<li><strong>Deliver result.</strong> When the child reaches a terminal, the worker reads the child&#39;s <code>parent</code> link and
+publishes a <code>child-done</code> work item to the parent&#39;s queue <code>de.work.{parentWf}</code> with
+<code>msgID = {childRunId}:done</code>: <code>{ runId: parent.runId, kind: &quot;child-done&quot;, resolvesSeq: parent.seq, child: { id: childRunId, ok, value | error } }</code>.</li>
+<li><strong>Resume parent.</strong> The worker appends a <code>resolve</code> (with <code>value</code> on success, or <code>error</code> on failure) for
+the parent&#39;s <code>call</code> seq, then re-drives. On success <code>ctx.call</code> returns the value; on <strong>failure</strong> it
+throws a <code>WorkflowFailure</code> (a child failure fails the parent unless caught — §12, and the basis for
+saga compensation).</li>
+</ol>
+<p>A child is an ordinary run with its own journal and consumer; sub-workflows compose to any depth. The
+<code>parent</code> link threads forward across a child&#39;s own <code>continueAsNew</code> (§11.4).</p>
+<hr>
+<h2 id="10-status-index-deruns-kv"><a class="h-anchor" href="#10-status-index-deruns-kv" aria-label="Link to this section">#</a>10. Status index (<code>DE_RUNS</code> KV)</h2>
+<p>The worker maintains a per-run record in the <code>DE_RUNS</code> KV (key = <code>runId</code>) as a <strong>fast hint</strong> for
+observers. It is <strong>never</strong> read to gate progress (§2.2); the journal is the truth.</p>
+<pre><div class="code-head"><span class="lang">json</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-json"><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suspended&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;wf&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purchase&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;updatedMs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1781667505735</span> <span class="hljs-punctuation">}</span></code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>One of <code>pending</code>, <code>running</code>, <code>suspended</code>, <code>completed</code>, <code>failed</code>, <code>continued</code>.</td>
+</tr>
+<tr>
+<td><code>wf</code></td>
+<td>string</td>
+<td>Workflow name.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>number</td>
+<td>Workflow version.</td>
+</tr>
+<tr>
+<td><code>updatedMs</code></td>
+<td>number</td>
+<td>Last update (ms since epoch).</td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td>any</td>
+<td>Present when <code>completed</code>.</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>object</td>
+<td><code>{ name, message }</code>, present when <code>failed</code>.</td>
+</tr>
+<tr>
+<td><code>next</code></td>
+<td>string</td>
+<td>Next generation runId, present when <code>continued</code>.</td>
+</tr>
+</tbody></table>
+</div><p>Writes are plain puts. A <code>suspended</code> write <strong>MUST NOT</strong> downgrade a record already in a terminal status
+(<code>completed</code>/<code>failed</code>/<code>continued</code>) — the journal terminal wins. Because there is no gating lease in v1, a
+stale read can race a concurrent finalize, but a terminal status is never clobbered back to <code>suspended</code>,
+and observers that need the truth read the journal.</p>
+<hr>
+<h2 id="11-algorithms"><a class="h-anchor" href="#11-algorithms" aria-label="Link to this section">#</a>11. Algorithms</h2>
+<h3 id="11-1-start-idempotent"><a class="h-anchor" href="#11-1-start-idempotent" aria-label="Link to this section">#</a>11.1 Start (idempotent)</h3>
+<ol>
+<li>Validate <code>runId</code> and <code>workflow</code> name (§4.2).</li>
+<li>Provision resources (§3) if not already.</li>
+<li>Append the <code>start</code> entry with <code>expect.lastSubjectSequence = 0</code> and <code>msgID = {runId}:start</code> (§5.4).</li>
+<li>If the append was <strong>not</strong> a duplicate: write <code>status: running</code> (§10) and enqueue a <code>start</code> work item
+(§6.2). If it <strong>was</strong> a duplicate, or the append was <strong>fenced</strong> (<code>10071</code>): the run already exists —
+do nothing further.</li>
+<li>Return a handle bound to <code>runId</code>.</li>
+</ol>
+<p>Starting the same <code>runId</code> twice is therefore a no-op: the <code>runId</code> is the idempotency key for start.</p>
+<h3 id="11-2-execute-replay-two-phase-intent-first"><a class="h-anchor" href="#11-2-execute-replay-two-phase-intent-first" aria-label="Link to this section">#</a>11.2 Execute / replay (two-phase, intent-first)</h3>
+<p>A worker drives a work item by loading the journal (§5.5) and running the workflow function from the top.
+Each <code>ctx.*</code> command consults the journal at its <code>seq</code>:</p>
+<ul>
+<li><strong>Recorded</strong> (its entry exists): return the recorded value <strong>without re-executing</strong> the effect.</li>
+<li><strong>Fresh</strong> (no entry at this <code>seq</code>): it is the <strong>live frontier</strong> — execute it and append.</li>
+</ul>
+<p><code>ctx.run</code> is <strong>two-phase, intent-first</strong>:</p>
+<ol>
+<li>Append <code>step-begin</code> via CAS <strong>before</strong> running the function. A <em>fresh</em> zombie that lost the begin-CAS
+is fenced here and <strong>never fires the effect</strong>.</li>
+<li>Run the function (the side effect).</li>
+<li>Append <code>step-end</code> (CAS). If this loses the CAS, reconcile: reload and adopt the canonical <code>step-end</code>
+value if a competitor wrote it.</li>
+</ol>
+<p>Each step is <strong>journaled exactly once</strong> (the <code>step-end</code> CAS picks one winner); the function may <strong>execute
+more than once</strong> across the begin→end window (§14).</p>
+<p><strong>Determinism guards</strong> (§12): a command whose recorded entry has a different <strong>name</strong> at its position, a
+different <strong>kind</strong> at its position, or a replay that consumes <strong>fewer</strong> commands than recorded, <strong>MUST</strong>
+fail the run with a <code>NonDeterminismError</code>.</p>
+<p><strong>Out-of-band control.</strong> Suspension, fencing, infra-retry, and continue-as-new are <strong>not</strong> thrown through
+user code (a user <code>try/catch</code> cannot swallow them). A <code>ctx.*</code> operation that cannot complete inline
+signals the executor out of band, which maps it to a §6.4 outcome.</p>
+<h3 id="11-3-suspend-resume"><a class="h-anchor" href="#11-3-suspend-resume" aria-label="Link to this section">#</a>11.3 Suspend / resume</h3>
+<p><code>sleep</code>, <code>await</code>, and <code>call</code> <strong>suspend</strong> the run: they record their command entry, arrange a wake (a timer
+schedule §7, a pending signal §8, or a child start §9), and the worker acks (§6.4). A wake work item later
+appends the matching <code>resolve</code> (or <code>signal</code>) and re-drives from §11.2; replay reaches the same <code>ctx.*</code>,
+now finds it resolved, and continues.</p>
+<h3 id="11-4-continueasnew"><a class="h-anchor" href="#11-4-continueasnew" aria-label="Link to this section">#</a>11.4 continueAsNew</h3>
+<p><code>ctx.continueAsNew(input)</code> ends the current generation and atomically starts a fresh one:</p>
+<ol>
+<li>The worker appends a <code>continued</code> terminal: <code>nextRunId = {base}_g{generation+1}</code>, the next <code>generation</code>,
+the chain <code>base</code>, and the next <code>input</code>.</li>
+<li>It starts the next generation (§11.1: append its <code>start</code> with <code>generation</code>/<code>base</code>/<code>parent</code> carried, and
+enqueue) <strong>idempotently</strong>, then writes <code>status: continued</code> with <code>next = nextRunId</code> (§10).</li>
+</ol>
+<p>Each generation has a fresh, empty journal, so a run may recur indefinitely with a bounded log. Code after
+<code>continueAsNew</code> never runs (it suspends like a terminal op).</p>
+<h3 id="11-5-result"><a class="h-anchor" href="#11-5-result" aria-label="Link to this section">#</a>11.5 Result</h3>
+<p>To await a run&#39;s outcome, poll its journal (§5.5) for a terminal:</p>
+<ul>
+<li><code>result</code> → return its <code>value</code>.</li>
+<li><code>continued</code> → set <code>runId = nextRunId</code> and <strong>continue polling</strong> (the original handle transparently
+follows the chain to whichever generation finally returns).</li>
+<li><code>fail</code> → throw <code>WorkflowFailure</code> carrying <code>&quot;{error.name}: {error.message}&quot;</code>.</li>
+</ul>
+<p>Resolving against the <strong>journal</strong> (not the KV hint) is required — the journal is the truth. A bounded poll
+that never observes a terminal throws <code>DurableTimeoutError</code> (§12).</p>
+<h3 id="11-6-status"><a class="h-anchor" href="#11-6-status" aria-label="Link to this section">#</a>11.6 Status</h3>
+<p><code>status(runId)</code> reads the <code>DE_RUNS</code> record (§10). Absent record → <code>pending</code>. This is a hint; callers
+needing certainty use <code>result</code> (§11.5).</p>
+<hr>
+<h2 id="12-error-model"><a class="h-anchor" href="#12-error-model" aria-label="Link to this section">#</a>12. Error model</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FencedError</code></td>
+<td>A CAS append lost (<code>10071</code>).</td>
+<td>The losing worker stops; its work item is <strong>term</strong>&#39;d (§6.4). Out of band — never thrown through user code.</td>
+</tr>
+<tr>
+<td><code>NonDeterminismError</code></td>
+<td>Replay diverged from the journal (name / kind mismatch, shorter path).</td>
+<td>The run <strong>fails</strong> terminally — a <code>fail</code> entry is journaled (§5.3).</td>
+</tr>
+<tr>
+<td><code>WorkflowFailure</code></td>
+<td>The workflow function threw, or a sub-workflow failed.</td>
+<td>The run <strong>fails</strong> terminally — <code>fail</code> journaled.</td>
+</tr>
+<tr>
+<td><code>SerializationError</code></td>
+<td>A step result / input / continue value cannot be encoded.</td>
+<td><strong>Deterministic</strong> programming error → the run <strong>fails</strong> terminally (it would loop forever if retried).</td>
+</tr>
+<tr>
+<td><code>DurableTimeoutError</code></td>
+<td>A bounded wait elapsed (<code>ctx.await</code> <code>timeoutMs</code>, or <code>result(timeout)</code>).</td>
+<td>For <code>await</code>: a <strong>catchable</strong> control-flow signal. For <code>result</code>: a client-side timeout.</td>
+</tr>
+</tbody></table>
+</div><p><strong>The dividing line:</strong> a <strong>logic</strong> error (a throw, a failed assertion, replay non-determinism, an
+unencodable value) <strong>fails the run</strong> — the error is journaled as a terminal <code>fail</code> and <code>result</code> rejects
+with it. An <strong>infrastructure</strong> error (a transient publish/scheduler failure that is <strong>not</strong> a fence) is
+<strong>retried</strong> — the work item is <strong>nak</strong>&#39;d and redelivered, and replay resumes safely (§6.4). A blip never
+loses work; only genuine logic errors end a run.</p>
+<hr>
+<h2 id="13-invariants"><a class="h-anchor" href="#13-invariants" aria-label="Link to this section">#</a>13. Invariants</h2>
+<p>A conforming implementation <strong>MUST</strong> preserve all four:</p>
+<ol>
+<li><strong>The ordered journal (<code>de.journal.{runId}</code>) is the sole source of truth.</strong> The KV index is a
+cache/hint only.</li>
+<li><strong>Every progress decision is a CAS append or an ordered replay — never a plain mutable read</strong> (§2.2).</li>
+<li><strong>Single-writer per run is the <code>step-begin</code> / append CAS</strong> (no gating lease in v1).</li>
+<li><strong>The step idempotency key is <code>{runId}:{seq}</code></strong> (<code>step-begin.key</code>, exposed as <code>ctx.key()</code>); dedup is a
+convenience, but <code>seq</code> + CAS is the guard.</li>
+</ol>
+<hr>
+<h2 id="14-guarantees-exactly-once-state-at-least-once-effects"><a class="h-anchor" href="#14-guarantees-exactly-once-state-at-least-once-effects" aria-label="Link to this section">#</a>14. Guarantees — exactly-once state, at-least-once effects</h2>
+<blockquote>
+<p><strong>Each step is journaled exactly once (so the run&#39;s result is deterministic), but a step&#39;s <em>function</em>
+may execute more than once.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Exactly-once state.</strong> The <code>step-end</code> CAS picks a single winner per <code>seq</code>; replay returns recorded
+values. No matter how many workers, crashes, or redeliveries a run took, its result is built from the
+recorded entries.</li>
+<li><strong>At-least-once effects.</strong> Between <code>step-begin</code> and <code>step-end</code> the result is not yet recorded, so a
+resume (crash, ack-timeout redelivery, or a second worker on a concurrent wake) <strong>re-runs the
+function</strong>. A <em>fresh</em> zombie is fenced before the effect (§11.2), but an in-flight one can repeat.</li>
+<li><strong>Making effects safe.</strong> A non-idempotent side effect <strong>SHOULD</strong> key on <code>ctx.key()</code> (<code>{runId}:{seq}</code>,
+stable across every re-run of that step) — e.g. <code>INSERT … ON CONFLICT (key)</code> or a provider-side
+idempotency key. This is the rule in any multi-worker deployment, not a crash-only precaution.</li>
+</ul>
+<hr>
+<h2 id="15-versioning"><a class="h-anchor" href="#15-versioning" aria-label="Link to this section">#</a>15. Versioning</h2>
+<ul>
+<li>The <strong>wire format</strong> is <code>v:1</code>, frozen. Every entry carries <code>&quot;v&quot;: 1</code>; decoders <strong>MUST</strong> reject other
+versions (§5.1). A wire-breaking change bumps <code>v</code>; there is no in-band <code>v:1</code>↔<code>v:2</code> shim.</li>
+<li>The <strong>library</strong> (<code>@synadia-ai/durable</code>) is independently versioned (v0.1, pre-1.0, unstable). It may add
+capabilities (e.g. a gating lease, cancellation) without changing the wire; such additions are additive
+and interoperable with existing <code>v:1</code> journals.</li>
+<li>The <strong>workflow</strong> version (<code>wfVersion</code> on <code>start</code>) is carried for future in-flight patching; v1 does not
+patch running workflows (changing a workflow&#39;s command shape under an in-flight run is a determinism
+violation — §12).</li>
+</ul>
+<hr>
+<h2 id="16-implementation-checklist"><a class="h-anchor" href="#16-implementation-checklist" aria-label="Link to this section">#</a>16. Implementation checklist</h2>
+<p>A <strong>worker</strong> conforms when it:</p>
+<ul>
+<li>Provisions the four resources with the §3 config (idempotently), under a shared prefix.</li>
+<li>Binds, per workflow, a <code>de-worker-{workflow}</code> consumer on <code>DE_WORK</code> and a <code>de-timer-{workflow}</code> consumer
+on <code>DE_TIMERS</code> (Explicit ack, <code>max_deliver: -1</code>) (§6.3, §7).</li>
+<li>Drives each work item by loading the journal and executing two-phase, intent-first, with the determinism
+guards (§11.2); records <code>signal</code> / <code>resolve</code> events before replay (§7–§9).</li>
+<li>Appends entries with the §5.4 <code>msgID</code> + <code>expect</code> CAS; treats <code>10071</code> as a fence and <strong>term</strong>s (§6.4).</li>
+<li>Acks on terminal / suspend / continue, naks on infra error, terms on fence / unparseable / no-journal
+(§6.4).</li>
+<li>Arms timers via native scheduling to a same-stream wake subject, deduped by <code>{runId}:sched:{seq}</code> (§7).</li>
+<li>Starts sub-workflows with a <code>parent</code> link and delivers <code>child-done</code> to the parent&#39;s queue on terminal
+(§9).</li>
+<li>Writes the <code>DE_RUNS</code> hint without ever downgrading a terminal status (§10).</li>
+<li>Fails the run terminally on a logic error (throw / non-determinism / unencodable) and retries (nak) on a
+non-fenced infra error (§12).</li>
+</ul>
+<p>A <strong>client</strong> conforms when it:</p>
+<ul>
+<li>Validates identifiers (§4.2) and starts runs idempotently (<code>{runId}:start</code> + <code>expect: 0</code>) (§11.1).</li>
+<li>Resolves <code>result</code> against the <strong>journal</strong> terminal and follows <code>continued</code> across generations (§11.5).</li>
+<li>Sends signals as <code>signal</code> work items to the run&#39;s workflow queue, with a unique <code>id</code> (§8).</li>
+<li>Treats <code>DE_RUNS</code> (<code>status</code>) as a hint, not as truth (§10).</li>
+</ul>
+<hr>
+<h2 id="appendix-a-resource-subject-quick-reference"><a class="h-anchor" href="#appendix-a-resource-subject-quick-reference" aria-label="Link to this section">#</a>Appendix A — Resource &amp; subject quick reference</h2>
+<pre class="diagram"><code># Streams / KV (prefix &quot;de&quot;; uppercase for names)
+DE_JOURNAL   stream  file/limits             subjects: de.journal.*
+DE_WORK      stream  file/workqueue          subjects: de.work.*
+DE_TIMERS    stream  file/limits + schedules subjects: de.timer.&gt;
+DE_RUNS      kv      file, history 1         key: {runId}
+
+# Subjects
+de.journal.{runId}                 # the run's journal (truth)
+de.work.{workflow}                 # the workflow's work queue
+de.timer.sched.{runId}.{seq}       # a timer's schedule definition
+de.timer.wake.{workflow}           # fired-timer wake delivery
+
+# Consumers (per workflow)
+de-worker-{workflow}   on DE_WORK    filter de.work.{workflow}
+de-timer-{workflow}    on DE_TIMERS  filter de.timer.wake.{workflow}
+
+# Identifier rule: ^[A-Za-z0-9_-]+$   (subject token ∩ KV key)
+# Derived runIds: continue-as-new {base}_g{n} (gen 0 = base);  child {parentRunId}_{seq}</code></pre>
+<h2 id="appendix-b-msgid-conventions"><a class="h-anchor" href="#appendix-b-msgid-conventions" aria-label="Link to this section">#</a>Appendix B — <code>msgID</code> conventions</h2>
+<pre class="diagram"><code># Journal entries (on de.journal.{runId})
+{runId}:start            # start
+{runId}:{seq}:b          # step-begin
+{runId}:{seq}:e          # step-end
+{runId}:{seq}            # now / random / uuid / sleep / await / call
+{runId}:sig:{signalId}   # signal
+{runId}:{seq}:r          # resolve
+{runId}:terminal         # result / fail / continued  (one terminal per run)
+
+# Work items (on de.work.{workflow})
+{runId}:work:start       # start item
+{runId}:sig:{id}         # signal item
+{childRunId}:done        # child-done item (to parent's queue)
+
+# Timer schedule (on de.timer.sched.{runId}.{seq})
+{runId}:sched:{seq}      # the native schedule (dedups re-arm)</code></pre>
+<h2 id="appendix-c-byte-level-wire-example"><a class="h-anchor" href="#appendix-c-byte-level-wire-example" aria-label="Link to this section">#</a>Appendix C — Byte-level wire example</h2>
+<p>A complete <code>checkout</code> run that reserved inventory, awaited (and received) a <code>payment</code> signal, charged,
+slept, called a <code>ship</code> sub-workflow, and shipped. Each line is one message on <code>de.journal.checkout-ok</code>
+(<code>seq N</code> is the JetStream <strong>stream</strong> sequence; gaps are other runs interleaved in the shared stream):</p>
+<pre><div class="code-head"><span class="lang">text</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-text">seq 267  {&quot;kind&quot;:&quot;start&quot;,&quot;seq&quot;:0,&quot;wf&quot;:&quot;checkout&quot;,&quot;wfVersion&quot;:1,&quot;input&quot;:{&quot;cartId&quot;:&quot;c-100&quot;,&quot;region&quot;:&quot;us-west&quot;},&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 269  {&quot;kind&quot;:&quot;step-begin&quot;,&quot;seq&quot;:0,&quot;name&quot;:&quot;reserve-inventory&quot;,&quot;key&quot;:&quot;checkout-ok:0&quot;,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 270  {&quot;kind&quot;:&quot;step-end&quot;,&quot;seq&quot;:0,&quot;name&quot;:&quot;reserve-inventory&quot;,&quot;value&quot;:&quot;ord-c-100&quot;,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 271  {&quot;kind&quot;:&quot;await&quot;,&quot;seq&quot;:1,&quot;name&quot;:&quot;payment&quot;,&quot;dueMs&quot;:…,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 275  {&quot;kind&quot;:&quot;signal&quot;,&quot;seq&quot;:-1,&quot;name&quot;:&quot;payment&quot;,&quot;data&quot;:{&quot;approved&quot;:true},&quot;signalId&quot;:&quot;0bc7…&quot;,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 276  {&quot;kind&quot;:&quot;step-begin&quot;,&quot;seq&quot;:2,&quot;name&quot;:&quot;charge-card&quot;,&quot;key&quot;:&quot;checkout-ok:2&quot;,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 277  {&quot;kind&quot;:&quot;step-end&quot;,&quot;seq&quot;:2,&quot;name&quot;:&quot;charge-card&quot;,&quot;value&quot;:&quot;rcpt-c-100&quot;,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 278  {&quot;kind&quot;:&quot;sleep&quot;,&quot;seq&quot;:3,&quot;name&quot;:&quot;settle&quot;,&quot;dueMs&quot;:…,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 283  {&quot;kind&quot;:&quot;resolve&quot;,&quot;seq&quot;:-1,&quot;resolvesSeq&quot;:3,&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 284  {&quot;kind&quot;:&quot;call&quot;,&quot;seq&quot;:4,&quot;name&quot;:&quot;ship&quot;,&quot;childRunId&quot;:&quot;checkout-ok_4&quot;,&quot;wf&quot;:&quot;ship&quot;,&quot;input&quot;:{…},&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 291  {&quot;kind&quot;:&quot;resolve&quot;,&quot;seq&quot;:-1,&quot;resolvesSeq&quot;:4,&quot;value&quot;:{&quot;tracking&quot;:&quot;TRK-ord-c-100&quot;},&quot;v&quot;:1,&quot;ts&quot;:…}
+seq 292  {&quot;kind&quot;:&quot;result&quot;,&quot;seq&quot;:-1,&quot;value&quot;:{&quot;status&quot;:&quot;shipped&quot;,&quot;detail&quot;:&quot;ord-c-100 · TRK-ord-c-100&quot;},&quot;v&quot;:1,&quot;ts&quot;:…}</code></pre>
+<p>The same message carries the §2.1 CAS headers — here the first three entries:</p>
+<pre><div class="code-head"><span class="lang">text</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-text">[267] de.journal.checkout-ok   Nats-Msg-Id: checkout-ok:start    Nats-Expected-Last-Subject-Sequence: 0
+[269] de.journal.checkout-ok   Nats-Msg-Id: checkout-ok:0:b      Nats-Expected-Last-Subject-Sequence: 267
+[270] de.journal.checkout-ok   Nats-Msg-Id: checkout-ok:0:e      Nats-Expected-Last-Subject-Sequence: 269</code></pre>
+<p>Inspect any run live:</p>
+<pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-sh">nats stream view DE_JOURNAL --subject <span class="hljs-string">&#x27;de.journal.checkout-ok&#x27;</span>   <span class="hljs-comment"># payloads + headers</span></code></pre>
+<p>See the <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs/journal-on-the-wire.md" target="_blank" rel="noopener">journal-on-the-wire walkthrough</a> for the annotated tour,
+and <a href="./design.html"><code>DESIGN.md</code></a> for the design rationale behind every choice here.</p>
+
+</article>
+<nav class="pager" aria-label="Pagination"><a class="prev" href="./limitations.html"><span class="dir">← Previous</span><span class="ttl">Limitations &amp; how we compare</span></a><a class="next" href="./design.html"><span class="dir">Next →</span><span class="ttl">Deep-dive design</span></a></nav>
+          </main>
+          <nav class="toc" aria-label="On this page">
+        <div class="toc-h">On this page</div>
+        <a href="#1-introduction" class="lvl-2" data-toc="1-introduction">1. Introduction</a>
+        <a href="#1-1-conventions" class="lvl-3" data-toc="1-1-conventions">1.1 Conventions</a>
+        <a href="#1-2-version" class="lvl-3" data-toc="1-2-version">1.2 Version</a>
+        <a href="#1-3-roles" class="lvl-3" data-toc="1-3-roles">1.3 Roles</a>
+        <a href="#2-foundations-the-one-primitive" class="lvl-2" data-toc="2-foundations-the-one-primitive">2. Foundations — the one primitive</a>
+        <a href="#2-1-optimistic-append-cas" class="lvl-3" data-toc="2-1-optimistic-append-cas">2.1 Optimistic append (CAS)</a>
+        <a href="#2-2-no-progress-on-a-plain-read" class="lvl-3" data-toc="2-2-no-progress-on-a-plain-read">2.2 No progress on a plain read</a>
+        <a href="#3-resources" class="lvl-2" data-toc="3-resources">3. Resources</a>
+        <a href="#4-subjects-identifiers" class="lvl-2" data-toc="4-subjects-identifiers">4. Subjects & identifiers</a>
+        <a href="#4-1-subjects" class="lvl-3" data-toc="4-1-subjects">4.1 Subjects</a>
+        <a href="#4-2-identifier-rules" class="lvl-3" data-toc="4-2-identifier-rules">4.2 Identifier rules</a>
+        <a href="#4-3-derived-runids" class="lvl-3" data-toc="4-3-derived-runids">4.3 Derived runIds</a>
+        <a href="#4-4-examples-wildcards" class="lvl-3" data-toc="4-4-examples-wildcards">4.4 Examples & wildcards</a>
+        <a href="#5-the-journal-wire-format-v1" class="lvl-2" data-toc="5-the-journal-wire-format-v1">5. The journal (wire format v:1)</a>
+        <a href="#5-1-entry-envelope" class="lvl-3" data-toc="5-1-entry-envelope">5.1 Entry envelope</a>
+        <a href="#5-2-command-sequence" class="lvl-3" data-toc="5-2-command-sequence">5.2 Command sequence</a>
+        <a href="#5-3-entry-kinds" class="lvl-3" data-toc="5-3-entry-kinds">5.3 Entry kinds</a>
+        <a href="#5-4-append-rules-msgid-expect" class="lvl-3" data-toc="5-4-append-rules-msgid-expect">5.4 Append rules — msgID & expect</a>
+        <a href="#5-5-reading-a-journal" class="lvl-3" data-toc="5-5-reading-a-journal">5.5 Reading a journal</a>
+        <a href="#6-the-work-queue" class="lvl-2" data-toc="6-the-work-queue">6. The work queue</a>
+        <a href="#6-1-work-item-shape" class="lvl-3" data-toc="6-1-work-item-shape">6.1 Work-item shape</a>
+        <a href="#6-2-work-item-msgids" class="lvl-3" data-toc="6-2-work-item-msgids">6.2 Work-item msgIDs</a>
+        <a href="#6-3-consumers" class="lvl-3" data-toc="6-3-consumers">6.3 Consumers</a>
+        <a href="#6-4-acknowledgement-semantics" class="lvl-3" data-toc="6-4-acknowledgement-semantics">6.4 Acknowledgement semantics</a>
+        <a href="#6-5-the-resume-kind" class="lvl-3" data-toc="6-5-the-resume-kind">6.5 The resume kind</a>
+        <a href="#7-timers-ctx-sleep-and-await-timeouts" class="lvl-2" data-toc="7-timers-ctx-sleep-and-await-timeouts">7. Timers (ctx.sleep and await timeouts)</a>
+        <a href="#8-signals-ctx-await-client-signal" class="lvl-2" data-toc="8-signals-ctx-await-client-signal">8. Signals (ctx.await + client.signal)</a>
+        <a href="#9-sub-workflows-ctx-call" class="lvl-2" data-toc="9-sub-workflows-ctx-call">9. Sub-workflows (ctx.call)</a>
+        <a href="#10-status-index-deruns-kv" class="lvl-2" data-toc="10-status-index-deruns-kv">10. Status index (DE_RUNS KV)</a>
+        <a href="#11-algorithms" class="lvl-2" data-toc="11-algorithms">11. Algorithms</a>
+        <a href="#11-1-start-idempotent" class="lvl-3" data-toc="11-1-start-idempotent">11.1 Start (idempotent)</a>
+        <a href="#11-2-execute-replay-two-phase-intent-first" class="lvl-3" data-toc="11-2-execute-replay-two-phase-intent-first">11.2 Execute / replay (two-phase, intent-first)</a>
+        <a href="#11-3-suspend-resume" class="lvl-3" data-toc="11-3-suspend-resume">11.3 Suspend / resume</a>
+        <a href="#11-4-continueasnew" class="lvl-3" data-toc="11-4-continueasnew">11.4 continueAsNew</a>
+        <a href="#11-5-result" class="lvl-3" data-toc="11-5-result">11.5 Result</a>
+        <a href="#11-6-status" class="lvl-3" data-toc="11-6-status">11.6 Status</a>
+        <a href="#12-error-model" class="lvl-2" data-toc="12-error-model">12. Error model</a>
+        <a href="#13-invariants" class="lvl-2" data-toc="13-invariants">13. Invariants</a>
+        <a href="#14-guarantees-exactly-once-state-at-least-once-effects" class="lvl-2" data-toc="14-guarantees-exactly-once-state-at-least-once-effects">14. Guarantees — exactly-once state, at-least-once effects</a>
+        <a href="#15-versioning" class="lvl-2" data-toc="15-versioning">15. Versioning</a>
+        <a href="#16-implementation-checklist" class="lvl-2" data-toc="16-implementation-checklist">16. Implementation checklist</a>
+        <a href="#appendix-a-resource-subject-quick-reference" class="lvl-2" data-toc="appendix-a-resource-subject-quick-reference">Appendix A — Resource & subject quick reference</a>
+        <a href="#appendix-b-msgid-conventions" class="lvl-2" data-toc="appendix-b-msgid-conventions">Appendix B — msgID conventions</a>
+        <a href="#appendix-c-byte-level-wire-example" class="lvl-2" data-toc="appendix-c-byte-level-wire-example">Appendix C — Byte-level wire example</a>
+      </nav>
+        </div>
+      </div>
+    </div>
+    <script>
+(function () {
+  var root = document.documentElement;
+  function setTheme(next, persist) {
+    root.classList.add("theme-anim");
+    setTimeout(function () { root.classList.remove("theme-anim"); }, 320);
+    root.setAttribute("data-theme", next);
+    if (persist) { try { localStorage.setItem("durable-theme", next); } catch (e) {} }
+  }
+  var toggle = document.getElementById("theme-toggle");
+  if (toggle) toggle.addEventListener("click", function () {
+    setTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light", true);
+  });
+  try {
+    var mq = matchMedia("(prefers-color-scheme: light)");
+    mq.addEventListener("change", function (e) {
+      var s = null; try { s = localStorage.getItem("durable-theme"); } catch (x) {}
+      if (s !== "light" && s !== "dark") setTheme(e.matches ? "light" : "dark", false);
+    });
+  } catch (e) {}
+
+  // copy-to-clipboard for code blocks
+  document.querySelectorAll(".code-head .copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var pre = btn.closest("pre");
+      var code = pre && pre.querySelector("code");
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).then(function () {
+        btn.classList.add("ok");
+        var label = btn.querySelector(".t");
+        var prev = label ? label.textContent : "";
+        if (label) label.textContent = "copied";
+        setTimeout(function () { btn.classList.remove("ok"); if (label) label.textContent = prev; }, 1300);
+      });
+    });
+  });
+
+  // mobile drawer
+  var side = document.querySelector(".side");
+  var scrim = document.querySelector(".scrim");
+  var menu = document.getElementById("menu-btn");
+  function close() { side && side.classList.remove("open"); scrim && scrim.classList.remove("show"); }
+  if (menu) menu.addEventListener("click", function () {
+    side && side.classList.toggle("open"); scrim && scrim.classList.toggle("show");
+  });
+  if (scrim) scrim.addEventListener("click", close);
+  document.querySelectorAll(".side a").forEach(function (a) { a.addEventListener("click", close); });
+
+  // TOC scroll-spy
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a[data-toc]"));
+  if (tocLinks.length) {
+    var byId = {};
+    tocLinks.forEach(function (a) { byId[a.getAttribute("data-toc")] = a; });
+    var targets = tocLinks
+      .map(function (a) { return document.getElementById(a.getAttribute("data-toc")); })
+      .filter(Boolean);
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          tocLinks.forEach(function (a) { a.classList.remove("active"); });
+          var link = byId[en.target.id];
+          if (link) link.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
+    targets.forEach(function (t) { spy.observe(t); });
+  }
+})();
+</script>
+  </body>
+</html>
