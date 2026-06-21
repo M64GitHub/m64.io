@@ -163,9 +163,24 @@ literally the <code>ctx.</code> prefix — and the runtime <em>fails loud</em> i
 <td>a child run + a work-queue item</td>
 </tr>
 <tr>
+<td><code>ctx.startCall / startSleep / startAwait</code></td>
+<td>start an op without blocking → a <code>DurableFuture</code></td>
+<td>the same <code>call</code>/<code>sleep</code>/<code>await</code> commands — no new wire kinds</td>
+</tr>
+<tr>
+<td><code>await Promise.all([...]) / ctx.race([...])</code></td>
+<td>fan out &amp; await many ops concurrently</td>
+<td>each future resolved from the journal; <code>race</code> picks the journal-earliest branch</td>
+</tr>
+<tr>
 <td><code>ctx.continueAsNew(input)</code></td>
 <td>restart fresh; bound the journal</td>
 <td>a <code>continued</code> terminal → a new generation (chained runId)</td>
+</tr>
+<tr>
+<td><code>ctx.onCancel(fn)</code></td>
+<td>compensation that runs if the run is cancelled</td>
+<td>journaled cleanup steps, run LIFO &amp; non-cancellably</td>
 </tr>
 <tr>
 <td><code>ctx.key()</code></td>
@@ -178,12 +193,17 @@ literally the <code>ctx.</code> prefix — and the runtime <em>fails loud</em> i
 <td>stream append (start) + reading the journal / KV</td>
 </tr>
 <tr>
+<td><code>client.cancel(runId)</code></td>
+<td>hard-stop a run → terminal <code>cancelled</code></td>
+<td>a <code>cancel</code> work-item → <code>cancel-requested</code> + <code>cancelled</code> journal entries</td>
+</tr>
+<tr>
 <td>a <code>worker</code></td>
 <td>runs your workflow code</td>
 <td>a <strong>JetStream pull consumer</strong> (queue group) over the work stream</td>
 </tr>
 </tbody></table>
-</div><p>Every <code>ctx.*</code> primitive above is implemented today.</p>
+</div><p>Every primitive above is implemented and tested today — the full <code>ctx</code> surface, fan-out and cancellation included.</p>
 <p>The whole thing rests on <strong>one</strong> NATS capability, used everywhere (see §7): an <em>optimistic append</em>
 (<code>expect.lastSubjectSequence</code>) plus message dedup (<code>Nats-Msg-Id</code>).</p>
 <hr>
