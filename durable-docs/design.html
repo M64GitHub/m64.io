@@ -70,7 +70,7 @@
   <p class="lede" style="font-size:17px;color:var(--ink-dim);margin-top:8px">The rigorous account: exact API surface, the two-phase replay algorithm, the resource layout, and every invariant the correctness model rests on.</p>
 </header>
 <article class="prose">
-<p><strong>Status: implemented &amp; evolving.</strong> This began as the Phase 0 design note; the library now implements the <strong>full v0.1 <code>ctx</code> surface</strong> (<code>run</code> / <code>now</code> / <code>random</code> / <code>uuid</code> / <code>sleep</code> / <code>await</code> / <code>call</code>) plus the client and worker. The model, invariants, and resource layout below are kept current. A few API points have shifted since (e.g. <code>ctx.assert</code> returns <code>void</code>, not an <code>asserts</code> predicate; there is no gating lease yet — the journal CAS is the single-writer guard); the <strong>code is the source of truth</strong> for exact signatures, <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/CHANGELOG.md" target="_blank" rel="noopener"><code>CHANGELOG.md</code></a> tracks what&#39;s shipped, and <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/LEARNINGS.md" target="_blank" rel="noopener"><code>LEARNINGS.md</code></a> records the gotchas.</p>
+<p><strong>Status: implemented &amp; evolving.</strong> This began as the Phase 0 design note; the library now implements the <strong>full <code>ctx</code> surface</strong> (<code>run</code> / <code>now</code> / <code>random</code> / <code>uuid</code> / <code>sleep</code> / <code>await</code> / <code>call</code>) plus the client and worker. The model, invariants, and resource layout below are kept current. A few API points have shifted since (e.g. <code>ctx.assert</code> returns <code>void</code>, not an <code>asserts</code> predicate; there is no gating lease yet — the journal CAS is the single-writer guard); the <strong>code is the source of truth</strong> for exact signatures, <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/CHANGELOG.md" target="_blank" rel="noopener"><code>CHANGELOG.md</code></a> tracks what&#39;s shipped, and <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/LEARNINGS.md" target="_blank" rel="noopener"><code>LEARNINGS.md</code></a> records the gotchas.</p>
 <p>Lightweight durable execution implemented entirely on NATS/JetStream primitives. The NATS
 cluster is the engine; this is a library, not a server. Guiding principle (your steer):
 <strong>maximum correctness over brief-adherence — when a more robust path exists, take it.</strong></p>
@@ -101,7 +101,7 @@ redelivered zombie is fenced <strong>before</strong> it can fire the effect (§4
 <p>A workflow is a <strong>normal <code>async</code> function</strong>. Every nondeterministic or side-effecting operation goes
 through <code>ctx.*</code>, which journals to the ordered log. On crash/restart the function re-runs from the top;
 journaled ops return their recorded value (replay, no re-execution); the first un-journaled op is the
-<strong>live frontier</strong> and actually runs. <code>ctx.run</code> calls are <strong>blocking</strong> in v0.1 (no <code>Future</code>/fan-out yet — Q7).</p>
+<strong>live frontier</strong> and actually runs. <code>ctx.run</code> calls are <strong>blocking</strong>; start an op <em>without</em> blocking with <code>ctx.startCall</code> → a <code>DurableFuture</code>, and fan out with <code>Promise.all</code> / <code>ctx.race</code>.</p>
 <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">const</span> charge = <span class="hljs-title function_">defineWorkflow</span>(
   <span class="hljs-string">&quot;charge&quot;</span>,
   <span class="hljs-title function_">async</span> (<span class="hljs-attr">ctx</span>: <span class="hljs-title class_">Ctx</span>, <span class="hljs-attr">input</span>: { <span class="hljs-attr">cartId</span>: <span class="hljs-built_in">string</span> }): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Receipt</span>&gt; =&gt; {
@@ -130,85 +130,100 @@ We use <code>async/await</code>, not generators (Appendix B).</p>
 <span class="hljs-keyword">function</span> defineWorkflow&lt;I, O&gt;(
   <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>,
   <span class="hljs-attr">fn</span>: <span class="hljs-title class_">WorkflowFn</span>&lt;I, O&gt;,
-  <span class="hljs-attr">opts</span>?: { <span class="hljs-attr">version</span>?: <span class="hljs-built_in">number</span> }, <span class="hljs-comment">// default 1; carried in journal (no patching in v0.1)</span>
+  <span class="hljs-attr">opts</span>?: { <span class="hljs-attr">version</span>?: <span class="hljs-built_in">number</span> }, <span class="hljs-comment">// default 1; carried in journal (no patching yet)</span>
 ): <span class="hljs-title class_">Workflow</span>&lt;I, O&gt;;</code></pre>
 <p><code>defineWorkflow</code> returns a typed token used for registration <strong>and</strong> typed <code>start</code>/<code>call</code> (end-to-end
 <code>I</code>/<code>O</code> inference — borrowed from Resonate&#39;s typed <code>register()</code>).</p>
 <h3 id="2-2-the-context-object"><a class="h-anchor" href="#2-2-the-context-object" aria-label="Link to this section">#</a>2.2 The context object</h3>
-<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Ctx</span> {
-  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">runId</span>: <span class="hljs-built_in">string</span>;
-  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">workflow</span>: <span class="hljs-built_in">string</span>;
-  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">version</span>: <span class="hljs-built_in">number</span>;
-  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">attempt</span>: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// redelivery attempt of the current frontier (informational)</span>
+<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class=&quot;hljs-keyword&quot;>interface</span> <span class=&quot;hljs-title class_&quot;>Ctx</span> {
+  <span class=&quot;hljs-keyword&quot;>readonly</span> <span class=&quot;hljs-attr&quot;>runId</span>: <span class=&quot;hljs-built_in&quot;>string</span>;
+  <span class=&quot;hljs-keyword&quot;>readonly</span> <span class=&quot;hljs-attr&quot;>workflow</span>: <span class=&quot;hljs-built_in&quot;>string</span>;
+  <span class=&quot;hljs-keyword&quot;>readonly</span> <span class=&quot;hljs-attr&quot;>version</span>: <span class=&quot;hljs-built_in&quot;>number</span>;
+  <span class=&quot;hljs-keyword&quot;>readonly</span> <span class=&quot;hljs-attr&quot;>attempt</span>: <span class=&quot;hljs-built_in&quot;>number</span>; <span class=&quot;hljs-comment&quot;>// redelivery attempt of the current frontier (informational)</span>
 
-  <span class="hljs-comment">// --- core primitive: journal a step (intent-first, two-phase under the hood) ---</span>
-  run&lt;T&gt;(<span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">fn</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Promise</span>&lt;T&gt; | T, <span class="hljs-attr">opts</span>?: <span class="hljs-title class_">StepOptions</span>): <span class="hljs-title class_">Promise</span>&lt;T&gt;;
+  <span class=&quot;hljs-comment&quot;>// --- core primitive: journal a step (intent-first, two-phase under the hood) ---</span>
+  run&lt;T&gt;(<span class=&quot;hljs-attr&quot;>name</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>fn</span>: <span class=&quot;hljs-function&quot;>() =&gt;</span> <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;T&gt; | T, <span class=&quot;hljs-attr&quot;>opts</span>?: <span class=&quot;hljs-title class_&quot;>StepOptions</span>): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;T&gt;;
 
-  <span class="hljs-comment">// --- deterministic builtins (single journaled value-capture each) ---</span>
-  <span class="hljs-title function_">now</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">number</span>&gt;; <span class="hljs-comment">// ms since epoch, recorded at frontier</span>
-  <span class="hljs-title function_">random</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">number</span>&gt;; <span class="hljs-comment">// [0,1), recorded</span>
-  <span class="hljs-title function_">uuid</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">string</span>&gt;; <span class="hljs-comment">// recorded</span>
+  <span class=&quot;hljs-comment&quot;>// --- deterministic builtins (single journaled value-capture each) ---</span>
+  <span class=&quot;hljs-title function_&quot;>now</span>(): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>number</span>&gt;; <span class=&quot;hljs-comment&quot;>// ms since epoch, recorded at frontier</span>
+  <span class=&quot;hljs-title function_&quot;>random</span>(): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>number</span>&gt;; <span class=&quot;hljs-comment&quot;>// [0,1), recorded</span>
+  <span class=&quot;hljs-title function_&quot;>uuid</span>(): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>string</span>&gt;; <span class=&quot;hljs-comment&quot;>// recorded</span>
 
-  <span class="hljs-comment">// --- durable timer: suspend until due (native JetStream schedule) ---</span>
-  <span class="hljs-title function_">sleep</span>(<span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">ms</span>: <span class="hljs-built_in">number</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt;;
+  <span class=&quot;hljs-comment&quot;>// --- durable timer: suspend until due (native JetStream schedule) ---</span>
+  <span class=&quot;hljs-title function_&quot;>sleep</span>(<span class=&quot;hljs-attr&quot;>name</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>ms</span>: <span class=&quot;hljs-built_in&quot;>number</span>): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>void</span>&gt;;
 
-  <span class="hljs-comment">// --- signal: block until externally resolved (durable-promise-as-signal) ---</span>
-  <span class="hljs-keyword">await</span>&lt;T&gt;(<span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">opts</span>?: { <span class="hljs-attr">timeoutMs</span>?: <span class="hljs-built_in">number</span> }): <span class="hljs-title class_">Promise</span>&lt;T&gt;;
+  <span class=&quot;hljs-comment&quot;>// --- signal: block until externally resolved (durable-promise-as-signal) ---</span>
+  <span class=&quot;hljs-keyword&quot;>await</span>&lt;T&gt;(<span class=&quot;hljs-attr&quot;>name</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>opts</span>?: { <span class=&quot;hljs-attr&quot;>timeoutMs</span>?: <span class=&quot;hljs-built_in&quot;>number</span> }): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;T&gt;;
 
-  <span class="hljs-comment">// --- sub-workflow ---</span>
-  call&lt;I, O&gt;(<span class="hljs-attr">workflow</span>: <span class="hljs-title class_">Workflow</span>&lt;I, O&gt;, <span class="hljs-attr">input</span>: I, <span class="hljs-attr">opts</span>?: <span class="hljs-title class_">CallOptions</span>): <span class="hljs-title class_">Promise</span>&lt;O&gt;;
+  <span class=&quot;hljs-comment&quot;>// --- sub-workflow ---</span>
+  call&lt;I, O&gt;(<span class=&quot;hljs-attr&quot;>workflow</span>: <span class=&quot;hljs-title class_&quot;>Workflow</span>&lt;I, O&gt;, <span class=&quot;hljs-attr&quot;>input</span>: I, <span class=&quot;hljs-attr&quot;>opts</span>?: <span class=&quot;hljs-title class_&quot;>CallOptions</span>): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;O&gt;;
 
-  <span class="hljs-comment">// --- end this generation, start a fresh one (bounds the journal for long/looping runs) ---</span>
-  <span class="hljs-title function_">continueAsNew</span>(<span class="hljs-attr">input</span>: <span class="hljs-built_in">unknown</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">never</span>&gt;; <span class="hljs-comment">// code after never runs; result() follows the chain</span>
+  <span class=&quot;hljs-comment&quot;>// --- end this generation, start a fresh one (bounds the journal for long/looping runs) ---</span>
+  <span class=&quot;hljs-title function_&quot;>continueAsNew</span>(<span class=&quot;hljs-attr&quot;>input</span>: <span class=&quot;hljs-built_in&quot;>unknown</span>): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>never</span>&gt;; <span class=&quot;hljs-comment&quot;>// code after never runs; result() follows the chain</span>
 
-  <span class="hljs-comment">// --- step idempotency key for user side-effects: `${runId}:${stepSeq}` (invariant #4) ---</span>
-  <span class="hljs-title function_">key</span>(): <span class="hljs-built_in">string</span>;
+  <span class=&quot;hljs-comment&quot;>// --- durable fan-out: start an op without blocking → a DurableFuture (a thenable) ---</span>
+  <span class=&quot;hljs-comment&quot;>//     await f / Promise.all / Promise.allSettled all work; race with ctx.race (native Promise.race is unsafe).</span>
+  startCall&lt;I, O&gt;(<span class=&quot;hljs-attr&quot;>workflow</span>: <span class=&quot;hljs-title class_&quot;>Workflow</span>&lt;I, O&gt;, <span class=&quot;hljs-attr&quot;>input</span>: I, <span class=&quot;hljs-attr&quot;>opts</span>?: <span class=&quot;hljs-title class_&quot;>CallOptions</span>): <span class=&quot;hljs-title class_&quot;>DurableFuture</span>&lt;O&gt;;
+  <span class=&quot;hljs-title function_&quot;>startSleep</span>(<span class=&quot;hljs-attr&quot;>name</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>ms</span>: <span class=&quot;hljs-built_in&quot;>number</span>): <span class=&quot;hljs-title class_&quot;>DurableFuture</span>&lt;<span class=&quot;hljs-built_in&quot;>void</span>&gt;;
+  startAwait&lt;T&gt;(<span class=&quot;hljs-attr&quot;>name</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>opts</span>?: { <span class=&quot;hljs-attr&quot;>timeoutMs</span>?: <span class=&quot;hljs-built_in&quot;>number</span> }): <span class=&quot;hljs-title class_&quot;>DurableFuture</span>&lt;T&gt;;
+  race&lt;F <span class=&quot;hljs-keyword&quot;>extends</span> <span class=&quot;hljs-title class_&quot;>DurableFuture</span>&lt;<span class=&quot;hljs-built_in&quot;>unknown</span>&gt;&gt;(<span class=&quot;hljs-attr&quot;>futures</span>: F[]): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-title class_&quot;>Awaited</span>&lt;F&gt;&gt;; <span class=&quot;hljs-comment&quot;>// journal-earliest wins</span>
 
-  <span class="hljs-comment">// --- dependency injection (NATS conn, http clients, config) ---</span>
-  get&lt;T&gt;(<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>): T;
+  <span class=&quot;hljs-comment&quot;>// --- cancellation: opt-in compensation; runs LIFO &amp; non-cancellably before the cancelled terminal ---</span>
+  <span class=&quot;hljs-title function_&quot;>onCancel</span>(<span class=&quot;hljs-attr&quot;>fn</span>: <span class=&quot;hljs-function&quot;>() =&gt;</span> <span class=&quot;hljs-built_in&quot;>void</span> | <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>unknown</span>&gt;): <span class=&quot;hljs-built_in&quot;>void</span>;
 
-  <span class="hljs-comment">// --- invariant guard: fail loud, abort the run (do not catch) ---</span>
-  <span class="hljs-title function_">assert</span>(<span class="hljs-attr">cond</span>: <span class="hljs-built_in">boolean</span>, <span class="hljs-attr">msg</span>?: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span>;
+  <span class=&quot;hljs-comment&quot;>// --- step idempotency key for user side-effects: `${runId}:${stepSeq}` (invariant #4) ---</span>
+  <span class=&quot;hljs-title function_&quot;>key</span>(): <span class=&quot;hljs-built_in&quot;>string</span>;
+
+  <span class=&quot;hljs-comment&quot;>// --- dependency injection (NATS conn, http clients, config) ---</span>
+  get&lt;T&gt;(<span class=&quot;hljs-attr&quot;>key</span>: <span class=&quot;hljs-built_in&quot;>string</span>): T;
+
+  <span class=&quot;hljs-comment&quot;>// --- invariant guard: fail loud, abort the run (do not catch) ---</span>
+  <span class=&quot;hljs-title function_&quot;>assert</span>(<span class=&quot;hljs-attr&quot;>cond</span>: <span class=&quot;hljs-built_in&quot;>boolean</span>, <span class=&quot;hljs-attr&quot;>msg</span>?: <span class=&quot;hljs-built_in&quot;>string</span>): <span class=&quot;hljs-built_in&quot;>void</span>;
 }
 
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">StepOptions</span> {
-  <span class="hljs-attr">retry</span>?: <span class="hljs-title class_">RetryPolicy</span>; <span class="hljs-comment">// inline retry of fn before journaling failure; default: none</span>
+<span class=&quot;hljs-keyword&quot;>interface</span> <span class=&quot;hljs-title class_&quot;>StepOptions</span> {
+  <span class=&quot;hljs-attr&quot;>retry</span>?: <span class=&quot;hljs-title class_&quot;>RetryPolicy</span>; <span class=&quot;hljs-comment&quot;>// inline retry of fn before journaling failure; default: none</span>
 }
-<span class="hljs-keyword">type</span> <span class="hljs-title class_">RetryPolicy</span> =
-  | { <span class="hljs-attr">kind</span>: <span class="hljs-string">&quot;none&quot;</span> }
-  | { <span class="hljs-attr">kind</span>: <span class="hljs-string">&quot;fixed&quot;</span>; <span class="hljs-attr">attempts</span>: <span class="hljs-built_in">number</span>; <span class="hljs-attr">delayMs</span>: <span class="hljs-built_in">number</span> }
-  | { <span class="hljs-attr">kind</span>: <span class="hljs-string">&quot;exponential&quot;</span>; <span class="hljs-attr">attempts</span>: <span class="hljs-built_in">number</span>; <span class="hljs-attr">baseMs</span>: <span class="hljs-built_in">number</span>; <span class="hljs-attr">factor</span>?: <span class="hljs-built_in">number</span>; <span class="hljs-attr">maxMs</span>?: <span class="hljs-built_in">number</span> };
+<span class=&quot;hljs-keyword&quot;>type</span> <span class=&quot;hljs-title class_&quot;>RetryPolicy</span> =
+  | { <span class=&quot;hljs-attr&quot;>kind</span>: <span class=&quot;hljs-string&quot;>&quot;none&quot;</span> }
+  | { <span class=&quot;hljs-attr&quot;>kind</span>: <span class=&quot;hljs-string&quot;>&quot;fixed&quot;</span>; <span class=&quot;hljs-attr&quot;>attempts</span>: <span class=&quot;hljs-built_in&quot;>number</span>; <span class=&quot;hljs-attr&quot;>delayMs</span>: <span class=&quot;hljs-built_in&quot;>number</span> }
+  | { <span class=&quot;hljs-attr&quot;>kind</span>: <span class=&quot;hljs-string&quot;>&quot;exponential&quot;</span>; <span class=&quot;hljs-attr&quot;>attempts</span>: <span class=&quot;hljs-built_in&quot;>number</span>; <span class=&quot;hljs-attr&quot;>baseMs</span>: <span class=&quot;hljs-built_in&quot;>number</span>; <span class=&quot;hljs-attr&quot;>factor</span>?: <span class=&quot;hljs-built_in&quot;>number</span>; <span class=&quot;hljs-attr&quot;>maxMs</span>?: <span class=&quot;hljs-built_in&quot;>number</span> };
 
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">CallOptions</span> {
-  <span class="hljs-attr">runId</span>?: <span class="hljs-built_in">string</span>;
-} <span class="hljs-comment">// default child runId is deterministic: `${parent}_${seq}` (an underscore — runIds are subject tokens)</span></code></pre>
+<span class=&quot;hljs-keyword&quot;>interface</span> <span class=&quot;hljs-title class_&quot;>CallOptions</span> {
+  <span class=&quot;hljs-attr&quot;>runId</span>?: <span class=&quot;hljs-built_in&quot;>string</span>;
+} <span class=&quot;hljs-comment&quot;>// default child runId is deterministic: `${parent}_${seq}` (an underscore — runIds are subject tokens)</span>
+
+<span class=&quot;hljs-comment&quot;>/** Opaque handle to a durable op started but not awaited (`ctx.startCall/startSleep/startAwait`). A thenable —
+ *  `await f`, `Promise.all([...])`, `Promise.allSettled([...])` all work; race with `ctx.race`. */</span>
+<span class=&quot;hljs-keyword&quot;>type</span> <span class=&quot;hljs-title class_&quot;>DurableFuture</span>&lt;T&gt; = <span class=&quot;hljs-title class_&quot;>PromiseLike</span>&lt;T&gt;;</code></pre>
 <blockquote>
 <p><code>now</code>/<code>random</code>/<code>uuid</code> are <code>Promise</code>-returning because the recorded value is durably appended on first
 execution (mental model: <strong>anything through <code>ctx</code> is <code>await</code>ed</strong>). <code>now()</code> cannot be seed-derived, so
 per-call journaling is the only correct option (Q2).</p>
 </blockquote>
 <h3 id="2-3-client-start-observe-signal"><a class="h-anchor" href="#2-3-client-start-observe-signal" aria-label="Link to this section">#</a>2.3 Client (start / observe / signal)</h3>
-<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createClient</span>(<span class="hljs-params"><span class="hljs-attr">opts</span>: { nc: NatsConnection; prefix?: <span class="hljs-built_in">string</span> }</span>): <span class="hljs-title class_">Client</span>; <span class="hljs-comment">// BYO connection</span>
+<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class=&quot;hljs-keyword&quot;>function</span> <span class=&quot;hljs-title function_&quot;>createClient</span>(<span class=&quot;hljs-params&quot;><span class=&quot;hljs-attr&quot;>opts</span>: { nc: NatsConnection; prefix?: <span class=&quot;hljs-built_in&quot;>string</span> }</span>): <span class=&quot;hljs-title class_&quot;>Client</span>; <span class=&quot;hljs-comment&quot;>// BYO connection</span>
 
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Client</span> {
-  start&lt;I, O&gt;(<span class="hljs-attr">workflow</span>: <span class="hljs-title class_">Workflow</span>&lt;I, O&gt;, <span class="hljs-attr">input</span>: I, <span class="hljs-attr">opts</span>?: <span class="hljs-title class_">StartOptions</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Handle</span>&lt;O&gt;&gt;;
-  get&lt;O = <span class="hljs-built_in">unknown</span>&gt;(<span class="hljs-attr">runId</span>: <span class="hljs-built_in">string</span>): <span class="hljs-title class_">Handle</span>&lt;O&gt;; <span class="hljs-comment">// reattach to a run</span>
-  signal&lt;T&gt;(<span class="hljs-attr">runId</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">data</span>: T): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt;; <span class="hljs-comment">// resolve a ctx.await(name)</span>
+<span class=&quot;hljs-keyword&quot;>interface</span> <span class=&quot;hljs-title class_&quot;>Client</span> {
+  start&lt;I, O&gt;(<span class=&quot;hljs-attr&quot;>workflow</span>: <span class=&quot;hljs-title class_&quot;>Workflow</span>&lt;I, O&gt;, <span class=&quot;hljs-attr&quot;>input</span>: I, <span class=&quot;hljs-attr&quot;>opts</span>?: <span class=&quot;hljs-title class_&quot;>StartOptions</span>): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-title class_&quot;>Handle</span>&lt;O&gt;&gt;;
+  get&lt;O = <span class=&quot;hljs-built_in&quot;>unknown</span>&gt;(<span class=&quot;hljs-attr&quot;>runId</span>: <span class=&quot;hljs-built_in&quot;>string</span>): <span class=&quot;hljs-title class_&quot;>Handle</span>&lt;O&gt;; <span class=&quot;hljs-comment&quot;>// reattach to a run</span>
+  signal&lt;T&gt;(<span class=&quot;hljs-attr&quot;>runId</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>name</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>data</span>: T): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>void</span>&gt;; <span class=&quot;hljs-comment&quot;>// resolve a ctx.await(name)</span>
+  <span class=&quot;hljs-title function_&quot;>cancel</span>(<span class=&quot;hljs-attr&quot;>runId</span>: <span class=&quot;hljs-built_in&quot;>string</span>, <span class=&quot;hljs-attr&quot;>opts</span>?: { <span class=&quot;hljs-attr&quot;>reason</span>?: <span class=&quot;hljs-built_in&quot;>string</span> }): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-built_in&quot;>void</span>&gt;; <span class=&quot;hljs-comment&quot;>// uncatchable hard-stop → cancelled</span>
 }
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">StartOptions</span> {
-  <span class="hljs-attr">runId</span>?: <span class="hljs-built_in">string</span>;
-} <span class="hljs-comment">// runId IS the idempotency key for start; default uuid</span>
+<span class=&quot;hljs-keyword&quot;>interface</span> <span class=&quot;hljs-title class_&quot;>StartOptions</span> {
+  <span class=&quot;hljs-attr&quot;>runId</span>?: <span class=&quot;hljs-built_in&quot;>string</span>;
+} <span class=&quot;hljs-comment&quot;>// runId IS the idempotency key for start; default uuid</span>
 
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Handle</span>&lt;O&gt; {
-  <span class="hljs-keyword">readonly</span> <span class="hljs-attr">runId</span>: <span class="hljs-built_in">string</span>;
-  <span class="hljs-title function_">result</span>(<span class="hljs-attr">timeoutMs</span>?: <span class="hljs-built_in">number</span>): <span class="hljs-title class_">Promise</span>&lt;O&gt;; <span class="hljs-comment">// resolves on terminal journal entry; throws on failure</span>
-  <span class="hljs-title function_">status</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">RunStatus</span>&gt;; <span class="hljs-comment">// fast, from KV index (a hint; journal is truth)</span>
+<span class=&quot;hljs-keyword&quot;>interface</span> <span class=&quot;hljs-title class_&quot;>Handle</span>&lt;O&gt; {
+  <span class=&quot;hljs-keyword&quot;>readonly</span> <span class=&quot;hljs-attr&quot;>runId</span>: <span class=&quot;hljs-built_in&quot;>string</span>;
+  <span class=&quot;hljs-title function_&quot;>result</span>(<span class=&quot;hljs-attr&quot;>timeoutMs</span>?: <span class=&quot;hljs-built_in&quot;>number</span>): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;O&gt;; <span class=&quot;hljs-comment&quot;>// resolves on terminal entry; throws on failure / cancellation (CancelledError)</span>
+  <span class=&quot;hljs-title function_&quot;>status</span>(): <span class=&quot;hljs-title class_&quot;>Promise</span>&lt;<span class=&quot;hljs-title class_&quot;>RunStatus</span>&gt;; <span class=&quot;hljs-comment&quot;>// fast, from KV index (a hint; journal is truth)</span>
 }
-<span class="hljs-keyword">type</span> <span class="hljs-title class_">RunStatus</span> = {
-  <span class="hljs-attr">state</span>: <span class="hljs-string">&quot;pending&quot;</span> | <span class="hljs-string">&quot;running&quot;</span> | <span class="hljs-string">&quot;suspended&quot;</span> | <span class="hljs-string">&quot;completed&quot;</span> | <span class="hljs-string">&quot;failed&quot;</span>;
-  <span class="hljs-attr">workflow</span>: <span class="hljs-built_in">string</span>;
-  <span class="hljs-attr">version</span>: <span class="hljs-built_in">number</span>;
-  <span class="hljs-attr">updatedMs</span>: <span class="hljs-built_in">number</span>;
+<span class=&quot;hljs-keyword&quot;>type</span> <span class=&quot;hljs-title class_&quot;>RunStatus</span> = {
+  <span class=&quot;hljs-attr&quot;>state</span>: <span class=&quot;hljs-string&quot;>&quot;pending&quot;</span> | <span class=&quot;hljs-string&quot;>&quot;running&quot;</span> | <span class=&quot;hljs-string&quot;>&quot;suspended&quot;</span> | <span class=&quot;hljs-string&quot;>&quot;completed&quot;</span> | <span class=&quot;hljs-string&quot;>&quot;failed&quot;</span> | <span class=&quot;hljs-string&quot;>&quot;continued&quot;</span> | <span class=&quot;hljs-string&quot;>&quot;cancelled&quot;</span>;
+  <span class=&quot;hljs-attr&quot;>workflow</span>: <span class=&quot;hljs-built_in&quot;>string</span>;
+  <span class=&quot;hljs-attr&quot;>version</span>: <span class=&quot;hljs-built_in&quot;>number</span>;
+  <span class=&quot;hljs-attr&quot;>updatedMs</span>: <span class=&quot;hljs-built_in&quot;>number</span>;
 };</code></pre>
 <h3 id="2-4-worker-the-runtime"><a class="h-anchor" href="#2-4-worker-the-runtime" aria-label="Link to this section">#</a>2.4 Worker (the runtime)</h3>
 <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createWorker</span>(<span class="hljs-params"><span class="hljs-attr">opts</span>: <span class="hljs-title class_">WorkerOptions</span></span>): <span class="hljs-title class_">Worker</span>; <span class="hljs-comment">// BYO connection</span>
@@ -242,7 +257,7 @@ per-call journaling is the only correct option (Q2).</p>
 <pre><div class="code-head"><span class="lang">jsonc</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-jsonc"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;v&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>                       <span class="hljs-comment">// wire-format version (frozen contract for Go/Python/Zig SDKs)</span>
   <span class="hljs-attr">&quot;seq&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>                     <span class="hljs-comment">// command position, monotonic per run (0,1,2,…)</span>
-  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;step-begin&quot;</span><span class="hljs-punctuation">,</span>         <span class="hljs-comment">// start|step-begin|step-end|now|random|uuid|sleep|await|signal|call|resolve|result|fail|continued</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;step-begin&quot;</span><span class="hljs-punctuation">,</span>         <span class="hljs-comment">// start|step-begin|step-end|now|random|uuid|sleep|await|signal|call|resolve|result|fail|continued|cancel-requested|cancelled</span>
   <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;reserve&quot;</span><span class="hljs-punctuation">,</span>            <span class="hljs-comment">// user label (step/sleep/await/call); asserted on replay</span>
   <span class="hljs-attr">&quot;ts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1718563200000</span><span class="hljs-punctuation">,</span>          <span class="hljs-comment">// wall clock at write (informational only)</span>
 
@@ -300,7 +315,12 @@ and <code>step-end</code> share the same <code>seq</code> (the begin is the inte
 <td>duplicate timer/child completion</td>
 </tr>
 <tr>
-<td>result / fail / continued</td>
+<td>cancel-requested (non-command)</td>
+<td><code>{run}:cancel</code></td>
+<td>duplicate cancel delivery (double-cancel collapses to one)</td>
+</tr>
+<tr>
+<td>result / fail / continued / cancelled</td>
 <td><code>{run}:terminal</code></td>
 <td>double-finalize (exactly one terminal per generation)</td>
 </tr>
@@ -309,7 +329,7 @@ and <code>step-end</code> share the same <code>seq</code> (the begin is the inte
 <hr>
 <h2 id="4-replay-algorithm-two-phase-intent-first"><a class="h-anchor" href="#4-replay-algorithm-two-phase-intent-first" aria-label="Link to this section">#</a>4. Replay algorithm (two-phase, intent-first)</h2>
 <pre class="diagram"><code>executeRun(workItem):                         # workItem = {runId, workflow, kind, payload?}
-  lease = acquireOrRenewLease(runId)          # designed coarse gate — v0.1 SKIPS it; the journal CAS below is the sole guard
+  lease = acquireOrRenewLease(runId)          # designed coarse gate — this design SKIPS it; the journal CAS below is the sole guard
   journal = loadJournal(runId)                # ordered read of de.journal.{runId}
   if workItem carries an unjournaled event (signal/timer/child-done):
       appendEvent(runId, event)               # single-writer CAS append (idempotent via msgID)
@@ -401,7 +421,7 @@ and its wake subject (<code>de.timer.wake.{wf}</code>); a per-workflow timers co
 <p><strong>Reads never trust a follower.</strong> KV <code>get</code> may be replica-served (<code>Bucket.direct</code> is real), so progress
 decisions use CAS or ordered journal replay — never a plain <code>get</code>. <code>status()</code> reads the KV index as an explicit
 <em>hint</em>; <code>result()</code> resolves on the journal&#39;s terminal entry (truth).</p>
-<p><strong>Payload bound.</strong> Inputs/results/step-values share an 8 MiB ceiling on NGS. v0.1 documents the limit; large
+<p><strong>Payload bound.</strong> Inputs/results/step-values share an 8 MiB ceiling on NGS. The design documents the limit; large
 blobs (object-store offload via <code>@nats-io/obj</code>) are a v-next hook.</p>
 <hr>
 <h2 id="6-invariant-enforcement-the-correctness-contract"><a class="h-anchor" href="#6-invariant-enforcement-the-correctness-contract" aria-label="Link to this section">#</a>6. Invariant enforcement (the correctness contract)</h2>
@@ -444,7 +464,7 @@ loser reconciles by adopting the recorded value (so the workflow <em>result</em>
 workers touched the run). Because <code>step-begin</code> is CAS-fenced <strong>before</strong> the effect, a <em>fresh</em> zombie is fenced
 before it can fire <code>fn</code>. What is <strong>at-least-once</strong> is <code>fn</code> <em>execution</em> across the begin→end window: if a worker
 is mid-step (begin written, end not yet) and the run is also driven elsewhere — a crash + resume, an <code>AckWait</code>
-redelivery, <strong>or a second worker processing a concurrent wake</strong> — the resume path re-runs <code>fn</code>. v0.1 has no
+redelivery, <strong>or a second worker processing a concurrent wake</strong> — the resume path re-runs <code>fn</code>. There is no
 gating lease, so in a multi-worker deployment this window is real (not only on crash). <code>ctx.key()</code>
 (<code>${runId}:${seq}</code>, stable across re-runs) is the idempotency key that makes the user&#39;s side effect safe, and
 a gating lease would <em>narrow</em> (not remove) the window. This is the standard durable-execution contract —
@@ -458,7 +478,7 @@ server delivers a <code>timer</code> work-item at <code>dueMs</code>; suspend. <
 <code>{kind:&quot;resolve&quot;, resolvesSeq:N}</code> and replays. On a replay before the timer fires, the schedule is <strong>re-ensured
 idempotently</strong> (msgID dedup) so a crash between journaling the command and scheduling can&#39;t deadlock.
 <strong>Verified:</strong> delivery at +1504 ms for a +1500 ms request (Appendix A). Portable fallback (older servers): a
-leader-elected scanner over a timer KV — documented, not built in v0.1.</p>
+leader-elected scanner over a timer KV — documented, not built yet.</p>
 <p><strong>Signals (<code>ctx.await</code>).</strong> <code>client.signal(run, name, data)</code> publishes a <code>signal</code> work-item. The owning worker
 appends <code>{kind:&quot;signal&quot;, name, data}</code> to the journal <strong>in arrival order</strong> (single-writer). <code>ctx.await(name)</code>
 consumes the earliest unconsumed <code>signal</code> with that name; else <code>throw Suspend</code>. Early signals (before the
@@ -482,7 +502,7 @@ work-item (idempotent msgID) so a crash between the <code>continued</code> write
 redelivery the terminal short-circuit re-drives it. <code>Handle.result()</code> transparently follows <code>continued → nextRunId</code>
 to the generation that finally returns. A sub-workflow may continue-as-new — the <code>parent</code> link threads forward, so
 only the final generation notifies the parent. Old generations&#39; logs remain for audit (GC is the documented bound).</p>
-<p><strong>Redelivery is safe by construction.</strong> v0.1 has <strong>no gating lease</strong>, and does not yet extend <code>AckWait</code> via
+<p><strong>Redelivery is safe by construction.</strong> There is <strong>no gating lease</strong>, and does not yet extend <code>AckWait</code> via
 <code>working()</code> for long steps. If <code>AckWait</code> lapses and a work item is redelivered, correctness holds anyway: the
 <code>step-begin</code> CAS fences the double-writer before any effect, and infra errors NAK rather than fail. A gating KV
 lease (to cut wasted concurrent work) and <code>working()</code> for long steps are documented future refinements.</p>
@@ -506,16 +526,16 @@ deployment config uses <code>SYNADIA_DURABLE_* &gt; SYNADIA_* &gt; legacy &gt; d
 shared server + skip-if-absent + inject URL (their harness transfers verbatim).</li>
 </ul>
 <hr>
-<h2 id="9-non-goals-for-v0-1-hooks-left"><a class="h-anchor" href="#9-non-goals-for-v0-1-hooks-left" aria-label="Link to this section">#</a>9. Non-goals for v0.1 (hooks left)</h2>
+<h2 id="9-non-goals-for-v0-1-hooks-left"><a class="h-anchor" href="#9-non-goals-for-v0-1-hooks-left" aria-label="Link to this section">#</a>9. Non-goals (hooks left)</h2>
 <ul>
 <li>In-flight <strong>versioning/patching</strong> — every entry carries <code>wfVersion</code>; replay asserts a stable version.</li>
 <li><strong>Automatic journal GC / snapshotting</strong> — <code>ctx.continueAsNew</code> (implemented, §7) bounds per-generation journal
 growth; reclaiming finished generations&#39; logs (a TTL/GC policy) is still manual.</li>
 <li><strong>Sagas / cross-workflow transactions</strong> as built-ins.</li>
-<li><strong>Durable <code>Future</code>/fan-out</strong> (<code>ctx.beginRun</code>) — v0.1 is blocking <code>ctx.run</code> only (Q7).</li>
+<li><strong>Suspending <code>ctx.onCancel</code> cleanup</strong> and <strong><code>ctx.startRun</code></strong> local-step fan-out — designed, deferred (cancellation and durable fan-out themselves are implemented, §7).</li>
 <li><strong>Object-store offload</strong> for &gt;8 MiB payloads — hook via <code>@nats-io/obj</code>.</li>
 <li><strong>Dashboard/UI</strong>, <strong>non-TS SDKs</strong> — but the §3 wire layout is frozen <code>v:1</code> and language-neutral.</li>
-<li>Separate <strong>activity workers</strong> — v0.1 runs <code>ctx.run</code> steps <strong>inline</strong> in the worker process.</li>
+<li>Separate <strong>activity workers</strong> — <code>ctx.run</code> steps run <strong>inline</strong> in the worker process.</li>
 </ul>
 <hr>
 <h2 id="10-decisions-resolved-remaining-defaults"><a class="h-anchor" href="#10-decisions-resolved-remaining-defaults" aria-label="Link to this section">#</a>10. Decisions (resolved) + remaining defaults</h2>
@@ -526,8 +546,8 @@ growth; reclaiming finished generations&#39; logs (a TTL/GC policy) is still man
 <li><strong>Q5 — timers:</strong> <strong>native JetStream scheduling</strong> (NGS 2.14.2, <code>allow_msg_schedules</code>, verified delivery);
 leader-scanner kept only as a portable fallback.</li>
 <li><strong>Q6 — lease:</strong> designed as a logical lease (<code>deadlineMs</code> in value, CAS-renewed) + <code>markerTTL</code> GC backstop —
-but <strong>deferred</strong>: v0.1 ships with no gating lease, since the journal CAS already guarantees single-writer.</li>
-<li><strong>Q7 — concurrency surface:</strong> blocking <code>ctx.run</code> only for v0.1; durable <code>Future</code> deferred.</li>
+but <strong>deferred</strong>: there is no gating lease, since the journal CAS already guarantees single-writer.</li>
+<li><strong>Q7 — concurrency surface:</strong> blocking <code>ctx.run</code>, plus durable fan-out via <code>ctx.startCall</code> / <code>startSleep</code> / <code>startAwait</code> + <code>ctx.race</code> (shipped); local-step <code>ctx.startRun</code> deferred.</li>
 </ul>
 <p><strong>Remaining recommended-defaults (override anytime):</strong></p>
 <ul>
@@ -603,7 +623,7 @@ numeric version registry; detached-id juggling for unbounded loops (we&#39;ll us
         <a href="#6-invariant-enforcement-the-correctness-contract" class="lvl-2" data-toc="6-invariant-enforcement-the-correctness-contract">6. Invariant enforcement (the correctness contract)</a>
         <a href="#7-crash-semantics-timers-signals-sub-workflows" class="lvl-2" data-toc="7-crash-semantics-timers-signals-sub-workflows">7. Crash semantics, timers, signals, sub-workflows</a>
         <a href="#8-conventions-to-match-from-synadia-agents" class="lvl-2" data-toc="8-conventions-to-match-from-synadia-agents">8. Conventions to match (from ../synadia-agents)</a>
-        <a href="#9-non-goals-for-v0-1-hooks-left" class="lvl-2" data-toc="9-non-goals-for-v0-1-hooks-left">9. Non-goals for v0.1 (hooks left)</a>
+        <a href="#9-non-goals-for-v0-1-hooks-left" class="lvl-2" data-toc="9-non-goals-for-v0-1-hooks-left">9. Non-goals (hooks left)</a>
         <a href="#10-decisions-resolved-remaining-defaults" class="lvl-2" data-toc="10-decisions-resolved-remaining-defaults">10. Decisions (resolved) + remaining defaults</a>
         <a href="#11-verification-strategy-the-mechanics-test-suite-you-asked-for" class="lvl-2" data-toc="11-verification-strategy-the-mechanics-test-suite-you-asked-for">11. Verification strategy (the mechanics test suite you asked for)</a>
         <a href="#appendix-a-verified-primitives-empirical" class="lvl-2" data-toc="appendix-a-verified-primitives-empirical">Appendix A — verified primitives (empirical)</a>
