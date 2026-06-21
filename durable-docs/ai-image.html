@@ -261,7 +261,7 @@
 
 <h2 id="production"><a class="h-anchor" href="#production" aria-label="Link to this section">#</a>Production notes (the honest edges)</h2>
 <ul>
-  <li><strong>Long calls vs. AckWait.</strong> A step must finish within the worker's AckWait or the work item is redelivered and the step re-runs (safe, thanks to the idempotency key — just wasteful). The default is 30 s; high-quality generations can exceed that, so set <code>ackWaitMs</code> above your worst-case step time (we used 120 s). There's no <code>working()</code> to extend AckWait mid-step in v0.1.</li>
+  <li><strong>Long calls vs. AckWait.</strong> A step must finish within the worker's AckWait or the work item is redelivered and the step re-runs (safe, thanks to the idempotency key — just wasteful). The default is 30 s; high-quality generations can exceed that, so set <code>ackWaitMs</code> above your worst-case step time (we used 120 s). There's no <code>working()</code> to extend AckWait mid-step yet.</li>
   <li><strong>Keep bytes out of the journal at scale.</strong> A 1024² PNG is ~1–2 MB of base64. It fits the 8 MiB entry ceiling, but journaling raw bytes bloats the log. For volume, upload <em>inside</em> the generate step and journal only the key:</li>
 </ul>
 <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-comment">// Upload INSIDE the generate step and journal only the key — the 1–2 MB of</span>

@@ -378,7 +378,7 @@
 <ul>
   <li><strong>File storage, replicated.</strong> Streams are file-backed; on a NATS cluster the journal inherits JetStream replication, so durability is whatever your NATS already guarantees.</li>
   <li><strong>Bounded per run.</strong> Each stream sets <code>max_bytes</code> (required on NGS). For long-running or looping workflows, <code>ctx.continueAsNew(input)</code> ends the current generation and starts a fresh one with an <em>empty</em> journal — keeping any single run's log bounded no matter how long it runs.</li>
-    <li><strong>8&nbsp;MiB payloads.</strong> An entry (and any step result) is bounded by the NATS max payload; object-store offload for larger values is a documented non-goal for v0.1.</li>
+    <li><strong>8&nbsp;MiB payloads.</strong> An entry (and any step result) is bounded by the NATS max payload; object-store offload for larger values is a documented non-goal for now.</li>
   <li><strong>No external state.</strong> Workers are stateless; restart them freely. Everything needed to resume a run is in NATS.</li>
 </ul>
 
