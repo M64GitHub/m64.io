@@ -65,7 +65,7 @@
         <div class="body-grid">
           <main class="content landing">
 <section class="hero">
-  <div class="eyebrow"><span class="pip"></span>v0.1 · durable execution on NATS / JetStream</div>
+  <div class="eyebrow"><span class="pip"></span>v0.2 · durable execution on NATS / JetStream</div>
   <h1>Workflows that <span class="grad">survive crashes</span> — with no new server to run.</h1>
   <p class="lede">
     <b>@synadia-ai/durable</b> is a lightweight durable-execution library on NATS / JetStream — a
@@ -230,7 +230,7 @@
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></div>
       <h3>Limitations &amp; comparison</h3>
-      <p>What v0.1 doesn't do vs Temporal and Inngest — a capability table, the real production blockers, and the roadmap-vs-fundamental split.</p>
+      <p>What @synadia-ai/durable doesn't do vs Temporal and Inngest — a capability table, the real production blockers, and the roadmap-vs-fundamental split.</p>
     </a>
   </div>
 </section>
@@ -330,7 +330,9 @@ npm install @nats-io/transport-node   <span class="hljs-comment"># bring your ow
         A workflow is a normal <code>async</code> function over a <code>ctx</code>. Anything
         nondeterministic or side-effecting goes through <code>ctx.*</code> and is journaled —
         <code>ctx.run(name, fn)</code> for steps, <code>ctx.now / random / uuid()</code> for
-        determinism, <code>ctx.sleep / await / call / continueAsNew</code> for the rest.
+        determinism, <code>ctx.sleep / await / call / continueAsNew</code> for the rest — plus durable
+        fan-out (<code>ctx.startCall</code> + <code>Promise.all</code> / <code>ctx.race</code>) and
+        cancellation (<code>client.cancel</code> / <code>ctx.onCancel</code>).
       </li>
       <li>
         On replay the function re-runs from the top: journaled <code>ctx.*</code> calls return their

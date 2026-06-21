@@ -277,17 +277,21 @@ share the same runs later.</li>
 </ul>
 <hr>
 <h2 id="9-status-where-to-go-next"><a class="h-anchor" href="#9-status-where-to-go-next" aria-label="Link to this section">#</a>9. Status &amp; where to go next</h2>
-<p><strong>Built and tested today — the full v0.1 <code>ctx</code> surface:</strong> <code>ctx.run</code> (two-phase, crash-safe),
+<p><strong>Built and tested today — the full <code>ctx</code> surface:</strong> <code>ctx.run</code> (two-phase, crash-safe),
 <code>ctx.now/random/uuid</code>, <strong><code>ctx.sleep</code> durable timers</strong> (native JetStream scheduling), <strong><code>ctx.await</code>
 signals</strong> (<code>client.signal</code>) <strong>+ <code>timeoutMs</code></strong> (a durable timer races the signal), <strong><code>ctx.call</code>
-sub-workflows</strong>, <strong><code>ctx.continueAsNew</code></strong> (chained generations → bounded journals), the client
-(<code>start</code> / <code>result</code> / <code>status</code>), the worker pull-replay loop, and resource provisioning — all green
-(107 tests), with a suite proving replay-without-re-execution, crash-resume, fence-before-effect,
-real-timer suspend/resume, signal FIFO/early delivery, sub-workflow calls, continue-as-new chains, a
+sub-workflows</strong>, <strong><code>ctx.continueAsNew</code></strong> (chained generations → bounded journals), <strong>durable fan-out</strong>
+(<code>ctx.startCall/startSleep/startAwait</code> → a <code>DurableFuture</code>; native <code>Promise.all</code>/<code>Promise.allSettled</code>; <strong><code>ctx.race</code></strong>),
+<strong>cancellation</strong> (<code>client.cancel</code> → an uncatchable hard-stop → terminal <code>cancelled</code>, opt-in <strong><code>ctx.onCancel</code></strong>
+compensation + child cascade), the client (<code>start</code> / <code>result</code> / <code>status</code>), the worker pull-replay loop, and resource provisioning — all green
+(202 tests), with a suite proving replay-without-re-execution, crash-resume, fence-before-effect,
+real-timer suspend/resume, signal FIFO/early delivery, sub-workflow calls, continue-as-new chains,
+durable fan-out (partial-completion replay + deterministic <code>ctx.race</code>), cancellation (uncatchable
+hard-stop, <code>onCancel</code> compensation, child cascade, cancel-vs-completion by stream-seq), a
 multi-worker concurrency/chaos pass (exactly-once journaling, at-least-once effects), and the NATS
 primitives.</p>
-<p><strong>Beyond v0.1:</strong> a gating KV lease, in-flight versioning, automatic GC of finished generations,
-cancellation (there&#39;s no <code>client.cancel</code> yet), and object-store offload for &gt;8 MiB payloads (see
+<p><strong>Not built yet:</strong> a gating KV lease, in-flight versioning, automatic GC of finished generations,
+suspending <code>ctx.onCancel</code> cleanup, <code>ctx.startRun</code> local-step fan-out, and object-store offload for &gt;8 MiB payloads (see
 <code>DESIGN.md</code> §9).</p>
 <ul>
 <li>Want the precise contract (API signatures, the replay algorithm, every invariant)?
