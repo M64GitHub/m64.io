@@ -96,7 +96,7 @@
       <tr><td><strong>Idempotency</strong></td><td>DIY (dedup keys)</td><td><code>ctx.key()</code> → <code>${runId}:${seq}</code></td></tr>
       <tr><td><strong>Delayed run</strong></td><td><code>countdown=</code> / <code>eta=</code></td><td><code>ctx.sleep(name, ms)</code></td></tr>
       <tr><td><strong>Chain (pipeline)</strong></td><td><code>chain(a.s(), b.s())</code></td><td>sequential <code>await ctx.run(...)</code> in one fn</td></tr>
-      <tr><td><strong>Group / chord (fan-out)</strong></td><td><code>group</code> / <code>chord</code></td><td><code>ctx.call</code> per child (blocking in v0.1)</td></tr>
+      <tr><td><strong>Group / chord (fan-out)</strong></td><td><code>group</code> / <code>chord</code></td><td><code>ctx.startCall</code> per child + <code>Promise.all</code> / <code>ctx.race</code></td></tr>
       <tr><td><strong>Periodic</strong></td><td>Celery beat (<code>crontab</code>)</td><td><code>ctx.sleep</code> + <code>ctx.continueAsNew</code></td></tr>
       <tr><td><strong>Crash mid-pipeline</strong></td><td>no built-in resume</td><td><strong>replay from the journal</strong> — resumes where it stopped</td></tr>
     </tbody>
@@ -253,7 +253,7 @@ app.conf.beat_schedule = {
 <ul>
   <li><strong>Reach for durable</strong> when a “job” is really a multi-step process that must not lose a step or repeat an effect across a crash — orders, payments, provisioning, sagas, human-in-the-loop approvals.</li>
   <li><strong>Stay on Celery</strong> for very high-throughput, independent, fire-and-forget tasks where its mature ecosystem, autoscaling, and Python-native story are the point. durable is a durable-execution library, not a drop-in high-volume task queue.</li>
-  <li><strong>Fan-out caveat.</strong> <code>group</code> / <code>chord</code> map to multiple <code>ctx.call</code>s, but <code>ctx.run</code>/<code>ctx.call</code> are blocking in v0.1 — there's no parallel <code>Future</code> fan-out yet.</li>
+  <li><strong>Fan-out.</strong> <code>group</code> / <code>chord</code> map to <code>ctx.startCall</code> per child + native <code>Promise.all</code> / <code>ctx.race</code> — durable fan-out is built in. (Per-branch local-step journaling, <code>ctx.startRun</code>, is the deferred bit; wrap parallel local work in one <code>ctx.run(() =&gt; Promise.all([...]))</code>.)</li>
   <li><strong>Language.</strong> It's TypeScript today; a Python SDK over the same wire format is a future, not a shipped, thing.</li>
 </ul>
 <p>

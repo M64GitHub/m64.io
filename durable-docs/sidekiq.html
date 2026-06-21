@@ -95,7 +95,7 @@
       <tr><td><strong>Retry</strong></td><td><code>sidekiq_options retry: 5</code></td><td><code>ctx.run(…, { retry })</code></td></tr>
       <tr><td><strong>Idempotency</strong></td><td>DIY / unique-jobs</td><td><code>ctx.key()</code> → <code>${runId}:${seq}</code></td></tr>
       <tr><td><strong>Scheduled</strong></td><td><code>perform_in</code> / <code>perform_at</code></td><td><code>ctx.sleep(name, ms)</code></td></tr>
-      <tr><td><strong>Batches (callbacks)</strong></td><td>Sidekiq Pro <code>Batch</code></td><td><code>ctx.call</code> per child (blocking in v0.1)</td></tr>
+      <tr><td><strong>Batches (callbacks)</strong></td><td>Sidekiq Pro <code>Batch</code></td><td><code>ctx.startCall</code> per child + <code>Promise.all</code> / <code>ctx.race</code></td></tr>
       <tr><td><strong>Cron</strong></td><td>sidekiq-cron</td><td><code>ctx.sleep</code> + <code>ctx.continueAsNew</code></td></tr>
       <tr><td><strong>Multi-step on crash</strong></td><td>chain jobs by hand; no resume</td><td><strong>replay from the journal</strong> — resumes where it stopped</td></tr>
     </tbody>
@@ -250,7 +250,7 @@
 <ul>
   <li><strong>Reach for durable</strong> when the work is a multi-step process that must not lose a step or repeat an effect across a crash — checkout, payments, provisioning, sagas, approvals.</li>
   <li><strong>Stay on Sidekiq</strong> for high-throughput, independent background jobs in a Ruby app, where its speed, simplicity, and ecosystem (web UI, Pro/Enterprise) are exactly what you want. durable is a durable-execution library, not a drop-in job processor.</li>
-  <li><strong>Fan-out caveat.</strong> Batch-style fan-out maps to multiple <code>ctx.call</code>s, but <code>ctx.run</code>/<code>ctx.call</code> are blocking in v0.1 — no parallel <code>Future</code> fan-out yet.</li>
+  <li><strong>Fan-out.</strong> Batch-style fan-out maps to <code>ctx.startCall</code> per child + native <code>Promise.all</code> / <code>ctx.race</code> — durable fan-out is built in. (Per-branch local-step journaling, <code>ctx.startRun</code>, is the deferred bit; wrap parallel local work in one <code>ctx.run(() =&gt; Promise.all([...]))</code>.)</li>
   <li><strong>Language.</strong> It's TypeScript today; a Ruby SDK over the same wire format is a future, not a shipped, thing.</li>
 </ul>
 <p>

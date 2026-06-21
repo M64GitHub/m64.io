@@ -204,12 +204,14 @@
 
 <h2 id="unsubscribe"><a class="h-anchor" href="#unsubscribe" aria-label="Link to this section">#</a>Letting people unsubscribe (and stopping a chain)</h2>
 <p>
-  There's no <code>client.cancel</code> in v0.1, so a recurring chain isn't stopped from the outside — it
-  ends by <strong>choosing not to continue</strong>. Check the subscription each cycle (or
-  <code>ctx.await</code> an <code>"unsubscribe"</code> signal) and simply <code>return</code> instead of
-  calling <code>continueAsNew</code>:
+  A recurring chain stops the clean way — by <strong>choosing not to continue</strong>, ending itself
+  rather than being stopped from outside. (An operational <code>client.cancel(runId)</code> also
+  hard-stops a chain and follows it across generations, but a graceful unsubscribe is just a
+  <code>return</code>.) Check the subscription each cycle (or <code>ctx.await</code> an
+  <code>"unsubscribe"</code> signal) and simply <code>return</code> instead of calling
+  <code>continueAsNew</code>:
 </p>
-<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-comment">// There&#x27;s no client.cancel in v0.1 — a forever-loop ends by NOT continuing.</span>
+<pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-comment">// The graceful unsubscribe: a forever-loop ends by NOT continuing (client.cancel also works).</span>
 <span class="hljs-comment">// Check each cycle (or handle an &quot;unsubscribe&quot; signal) and just return:</span>
 <span class="hljs-keyword">const</span> subscribed = <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;check-subscription&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">isSubscribed</span>(input.<span class="hljs-property">to</span>));
 <span class="hljs-keyword">if</span> (!subscribed) <span class="hljs-keyword">return</span> { <span class="hljs-attr">stopped</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">lastWeek</span>: input.<span class="hljs-property">week</span> };
