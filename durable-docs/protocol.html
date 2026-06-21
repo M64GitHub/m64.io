@@ -71,7 +71,7 @@
 </header>
 <article class="prose">
 <p><strong>Wire version:</strong> 1 (<code>v:1</code>)
-<strong>Library:</strong> <code>@synadia-ai/durable</code> v0.1 (reference implementation)
+<strong>Library:</strong> <code>@synadia-ai/durable</code> (reference implementation)
 <strong>Status:</strong> Draft
 <strong>Date:</strong> 2026-06-17</p>
 <h2 id="1-introduction"><a class="h-anchor" href="#1-introduction" aria-label="Link to this section">#</a>1. Introduction</h2>
@@ -118,7 +118,7 @@ sequence number, §5.2).</p>
 <p>The wire format is <strong>frozen at <code>v:1</code></strong>. Every journal entry carries <code>&quot;v&quot;: 1</code> (§5.1); a decoder <strong>MUST</strong>
 reject an entry whose <code>v</code> is not <code>1</code>. The format is deliberately small and explicit so it can be an
 inter-language contract — the journal, not any one SDK, is the standard.</p>
-<p>The library implementing this protocol is independently versioned (v0.1) and may add capabilities without
+<p>The library implementing this protocol is independently versioned (pre-1.0) and may add capabilities without
 changing the wire format; wire-breaking changes bump <code>v</code>. Compatibility rules are in §15.</p>
 <h3 id="1-3-roles"><a class="h-anchor" href="#1-3-roles" aria-label="Link to this section">#</a>1.3 Roles</h3>
 <div class="table-wrap"><table>
@@ -326,7 +326,7 @@ command to its recorded entry by this position (§11.2).</p>
 (<code>NON_COMMAND_SEQ</code>). A <code>resolve</code> references the command it completes via <code>resolvesSeq</code>.</li>
 </ul>
 <h3 id="5-3-entry-kinds"><a class="h-anchor" href="#5-3-entry-kinds" aria-label="Link to this section">#</a>5.3 Entry kinds</h3>
-<p>The fourteen kinds and their per-kind fields:</p>
+<p>The sixteen kinds and their per-kind fields:</p>
 <p><strong><code>start</code></strong> — the first entry of every run (<code>seq</code> 0):</p>
 <div class="table-wrap"><table>
 <thead>
@@ -653,6 +653,40 @@ command to its recorded entry by this position (§11.2).</p>
 <td>The chain&#39;s generation-0 runId.</td>
 </tr>
 </tbody></table>
+</div><p><strong><code>cancel-requested</code></strong> (non-command, <code>seq</code> -1) — <code>client.cancel</code> was delivered; appended before replay so the next suspend frontier observes it (§11.7):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>reason</code></td>
+<td>string</td>
+<td>No</td>
+<td>Optional human-readable reason from the caller.</td>
+</tr>
+</tbody></table>
+</div><p><strong><code>cancelled</code></strong> (terminal, <code>seq</code> -1) — the run was hard-stopped at a suspend frontier (§11.7):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Req</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>reason</code></td>
+<td>string</td>
+<td>No</td>
+<td>Optional reason carried from the <code>cancel-requested</code>.</td>
+</tr>
+</tbody></table>
 </div><h3 id="5-4-append-rules-msgid-expect"><a class="h-anchor" href="#5-4-append-rules-msgid-expect" aria-label="Link to this section">#</a>5.4 Append rules — <code>msgID</code> &amp; <code>expect</code></h3>
 <p>Each entry is appended with the §2.1 CAS. The <code>expect.lastSubjectSequence</code> is the stream sequence of the
 <strong>previous</strong> entry on this subject (<code>0</code> for the first, the <code>start</code>). The <code>msgID</code> (<code>Nats-Msg-Id</code>) follows a
@@ -693,7 +727,7 @@ fixed convention so a retried publish is idempotent:</p>
 <td><code>{runId}:{seq}:r</code></td>
 </tr>
 <tr>
-<td><code>result</code> / <code>fail</code> / <code>continued</code></td>
+<td><code>result</code> / <code>fail</code> / <code>continued</code> / <code>cancelled</code></td>
 <td><code>{runId}:terminal</code></td>
 </tr>
 </tbody></table>
@@ -729,7 +763,7 @@ durable consumer.</p>
 <td><code>kind</code></td>
 <td>string</td>
 <td>Yes</td>
-<td>One of <code>start</code>, <code>timer</code>, <code>signal</code>, <code>child-done</code> (and the reserved <code>resume</code>, §6.5).</td>
+<td>One of <code>start</code>, <code>timer</code>, <code>signal</code>, <code>child-done</code>, <code>cancel</code> (and the reserved <code>resume</code>, §6.5).</td>
 </tr>
 <tr>
 <td><code>resolvesSeq</code></td>
@@ -963,7 +997,7 @@ observers. It is <strong>never</strong> read to gate progress (§2.2); the journ
 <tbody><tr>
 <td><code>status</code></td>
 <td>string</td>
-<td>One of <code>pending</code>, <code>running</code>, <code>suspended</code>, <code>completed</code>, <code>failed</code>, <code>continued</code>.</td>
+<td>One of <code>pending</code>, <code>running</code>, <code>suspended</code>, <code>completed</code>, <code>failed</code>, <code>continued</code>, <code>cancelled</code>.</td>
 </tr>
 <tr>
 <td><code>wf</code></td>
@@ -997,7 +1031,7 @@ observers. It is <strong>never</strong> read to gate progress (§2.2); the journ
 </tr>
 </tbody></table>
 </div><p>Writes are plain puts. A <code>suspended</code> write <strong>MUST NOT</strong> downgrade a record already in a terminal status
-(<code>completed</code>/<code>failed</code>/<code>continued</code>) — the journal terminal wins. Because there is no gating lease in v1, a
+(<code>completed</code>/<code>failed</code>/<code>continued</code>/<code>cancelled</code>) — the journal terminal wins. Because there is no gating lease in v1, a
 stale read can race a concurrent finalize, but a terminal status is never clobbered back to <code>suspended</code>,
 and observers that need the truth read the journal.</p>
 <hr>
@@ -1064,6 +1098,16 @@ that never observes a terminal throws <code>DurableTimeoutError</code> (§12).</
 <h3 id="11-6-status"><a class="h-anchor" href="#11-6-status" aria-label="Link to this section">#</a>11.6 Status</h3>
 <p><code>status(runId)</code> reads the <code>DE_RUNS</code> record (§10). Absent record → <code>pending</code>. This is a hint; callers
 needing certainty use <code>result</code> (§11.5).</p>
+<h3 id="11-7-cancellation"><a class="h-anchor" href="#11-7-cancellation" aria-label="Link to this section">#</a>11.7 Cancellation</h3>
+<p><code>client.cancel(runId, { reason? })</code> is an operational hard-stop, delivered like a signal:</p>
+<ol>
+<li>The client publishes a <code>cancel</code> work item to the run&#39;s <code>de.work.{workflow}</code> with <code>msgID = {runId}:cancel</code> (§6.2). It is a no-op on an already-terminal run, except <code>continued</code> (step 5).</li>
+<li>The worker, <strong>before</strong> replay, appends a <code>cancel-requested</code> entry (CAS, idempotent on <code>{runId}:cancel</code>), then re-drives the run (§11.2) — mirroring the signal / timer event-append.</li>
+<li><strong>Deterministic injection.</strong> At the next suspend <strong>frontier</strong> (the first unresolved <code>sleep</code>/<code>await</code>/<code>call</code>/future-await/<code>race</code>), the run is cancelled <strong>iff</strong> no <code>resolve</code> for that frontier op has a stream-seq <strong>less than</strong> the <code>cancel-requested</code> entry&#39;s stream-seq (i.e. the op had not already completed). This is the same stream-seq rule that resolves signal-vs-timeout (§8) — deterministic across replays. A run with no suspend point runs to completion (a late cancel is a no-op).</li>
+<li><strong>Uncatchable hard-stop.</strong> On cancellation the worker runs any registered <code>ctx.onCancel</code> handlers (LIFO, in a non-cancellable context; they MAY suspend), then appends the <code>cancelled</code> terminal and writes the <code>DE_RUNS</code> hint. The main flow is <strong>abandoned</strong> at the frontier — a user <code>try/catch</code> / <code>finally</code> in the main flow does <strong>not</strong> run (cleanup goes through <code>onCancel</code>).</li>
+<li><strong>Cascade &amp; chain.</strong> The worker publishes <code>cancel</code> to each in-flight child (a <code>call</code> with no <code>resolve</code>), recursively. A child cancelled independently resolves its parent&#39;s <code>call</code> as a failure (<code>error.name = &quot;CancelledError&quot;</code>) — a normal, catchable workflow error. If the run is already <code>continued</code>, the worker <strong>forwards</strong> the cancel to <code>nextRunId</code>, so cancellation follows the chain.</li>
+</ol>
+<p><code>Handle.result()</code> on a cancelled run rejects with <code>CancelledError</code> (§12); <code>status()</code> reports <code>cancelled</code>.</p>
 <hr>
 <h2 id="12-error-model"><a class="h-anchor" href="#12-error-model" aria-label="Link to this section">#</a>12. Error model</h2>
 <div class="table-wrap"><table>
@@ -1098,6 +1142,11 @@ needing certainty use <code>result</code> (§11.5).</p>
 <td><code>DurableTimeoutError</code></td>
 <td>A bounded wait elapsed (<code>ctx.await</code> <code>timeoutMs</code>, or <code>result(timeout)</code>).</td>
 <td>For <code>await</code>: a <strong>catchable</strong> control-flow signal. For <code>result</code>: a client-side timeout.</td>
+</tr>
+<tr>
+<td><code>CancelledError</code></td>
+<td><code>client.cancel</code> hard-stopped the run (or a child was cancelled).</td>
+<td><code>result()</code> rejects with it; surfaced to a parent <code>ctx.call</code> as a catchable failure. Out of band — never thrown through main user code (§11.7).</td>
 </tr>
 </tbody></table>
 </div><p><strong>The dividing line:</strong> a <strong>logic</strong> error (a throw, a failed assertion, replay non-determinism, an
@@ -1138,7 +1187,7 @@ idempotency key. This is the rule in any multi-worker deployment, not a crash-on
 <ul>
 <li>The <strong>wire format</strong> is <code>v:1</code>, frozen. Every entry carries <code>&quot;v&quot;: 1</code>; decoders <strong>MUST</strong> reject other
 versions (§5.1). A wire-breaking change bumps <code>v</code>; there is no in-band <code>v:1</code>↔<code>v:2</code> shim.</li>
-<li>The <strong>library</strong> (<code>@synadia-ai/durable</code>) is independently versioned (v0.1, pre-1.0, unstable). It may add
+<li>The <strong>library</strong> (<code>@synadia-ai/durable</code>) is independently versioned (pre-1.0, unstable). It may add
 capabilities (e.g. a gating lease, cancellation) without changing the wire; such additions are additive
 and interoperable with existing <code>v:1</code> journals.</li>
 <li>The <strong>workflow</strong> version (<code>wfVersion</code> on <code>start</code>) is carried for future in-flight patching; v1 does not
@@ -1199,7 +1248,8 @@ de-timer-{workflow}    on DE_TIMERS  filter de.timer.wake.{workflow}
 {runId}:{seq}            # now / random / uuid / sleep / await / call
 {runId}:sig:{signalId}   # signal
 {runId}:{seq}:r          # resolve
-{runId}:terminal         # result / fail / continued  (one terminal per run)
+{runId}:cancel           # cancel-requested
+{runId}:terminal         # result / fail / continued / cancelled  (one terminal per run)
 
 # Work items (on de.work.{workflow})
 {runId}:work:start       # start item
@@ -1274,6 +1324,7 @@ and <a href="./design.html"><code>DESIGN.md</code></a> for the design rationale 
         <a href="#11-4-continueasnew" class="lvl-3" data-toc="11-4-continueasnew">11.4 continueAsNew</a>
         <a href="#11-5-result" class="lvl-3" data-toc="11-5-result">11.5 Result</a>
         <a href="#11-6-status" class="lvl-3" data-toc="11-6-status">11.6 Status</a>
+        <a href="#11-7-cancellation" class="lvl-3" data-toc="11-7-cancellation">11.7 Cancellation</a>
         <a href="#12-error-model" class="lvl-2" data-toc="12-error-model">12. Error model</a>
         <a href="#13-invariants" class="lvl-2" data-toc="13-invariants">13. Invariants</a>
         <a href="#14-guarantees-exactly-once-state-at-least-once-effects" class="lvl-2" data-toc="14-guarantees-exactly-once-state-at-least-once-effects">14. Guarantees — exactly-once state, at-least-once effects</a>
