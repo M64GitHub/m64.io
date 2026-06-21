@@ -79,7 +79,7 @@
 <blockquote><p>
   These map Temporal's TypeScript SDK to the equivalent <code>@synadia-ai/durable</code> code. The
   durable snippets use the real API; the Temporal snippets are idiomatic and illustrative. This is a
-  focused v0.1 — see <a href="#not-yet">what doesn't map yet</a> for the honest edges.
+  focused — see <a href="#not-yet">what doesn't map yet</a> for the honest edges.
 </p></blockquote>
 
 <h2 id="concept-map"><a class="h-anchor" href="#concept-map" aria-label="Link to this section">#</a>Concept map</h2>
@@ -93,7 +93,9 @@
       <tr><td><strong>Signal</strong></td><td><code>defineSignal</code> + <code>setHandler</code> + <code>condition</code></td><td><code>ctx.await(name)</code> + <code>client.signal()</code></td></tr>
       <tr><td><strong>Signal + timeout</strong></td><td><code>condition(fn, timeout)</code></td><td><code>ctx.await(name, { timeoutMs })</code></td></tr>
       <tr><td><strong>Child workflow</strong></td><td><code>executeChild(wf, …)</code></td><td><code>ctx.call(wf, input)</code></td></tr>
+      <tr><td><strong>Parallel children (fan-out)</strong></td><td><code>Promise.all([executeChild(…)])</code></td><td><code>ctx.startCall</code> + <code>Promise.all</code> / <code>ctx.race</code></td></tr>
       <tr><td><strong>Continue-as-new</strong></td><td><code>continueAsNew(...)</code></td><td><code>ctx.continueAsNew(input)</code></td></tr>
+      <tr><td><strong>Cancellation</strong></td><td><code>CancellationScope</code> / <code>handle.cancel()</code></td><td><code>client.cancel(runId)</code> + <code>ctx.onCancel</code></td></tr>
       <tr><td><strong>Deterministic time / rng</strong></td><td>patched <code>Date</code>, <code>uuid4()</code></td><td><code>ctx.now() / random() / uuid()</code></td></tr>
       <tr><td><strong>Start a run</strong></td><td><code>client.workflow.start(...)</code></td><td><code>client.start(wf, input)</code></td></tr>
       <tr><td><strong>Await the result</strong></td><td><code>handle.result()</code></td><td><code>handle.result()</code></td></tr>
@@ -277,9 +279,30 @@
   <div class="compare-col">
     <div class="compare-tag us">@synadia-ai/durable</div>
     <pre><div class="code-head"><span class="lang">durable</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">const</span> shipment = <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">call</span>(ship, { orderId });
-<span class="hljs-comment">// deterministic child runId: `${parentRunId}.${seq}` (override via opts.runId)</span></code></pre>
+<span class="hljs-comment">// deterministic child runId: `${parentRunId}_${seq}` (override via opts.runId)</span></code></pre>
   </div>
 </div>
+
+<h2 id="fan-out"><a class="h-anchor" href="#fan-out" aria-label="Link to this section">#</a>Parallel children &amp; fan-out → <code>ctx.startCall</code> + <code>Promise.all</code> / <code>ctx.race</code></h2>
+<p>Temporal fans out by starting several children (or activities) and awaiting them together. The durable equivalent: <code>ctx.startCall</code> starts a child <strong>without blocking</strong> and returns a <code>DurableFuture</code>, so native <code>Promise.all</code> / <code>Promise.allSettled</code> await them concurrently, and <code>ctx.race</code> takes the first to finish (the safe alternative to <code>Promise.race</code>, which is unsafe over durable futures).</p>
+<div class="compare">
+  <div class="compare-col">
+    <div class="compare-tag them">Temporal · TypeScript SDK</div>
+    <pre><div class="code-head"><span class="lang">temporal</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class=&quot;hljs-keyword&quot;>import</span> { executeChild } <span class=&quot;hljs-keyword&quot;>from</span> <span class=&quot;hljs-string&quot;>&quot;@temporalio/workflow&quot;</span>;
+
+<span class=&quot;hljs-keyword&quot;>const</span> results = <span class=&quot;hljs-keyword&quot;>await</span> <span class=&quot;hljs-title class_&quot;>Promise</span>.<span class=&quot;hljs-title function_&quot;>all</span>(items.<span class=&quot;hljs-title function_&quot;>map</span>(<span class=&quot;hljs-function&quot;>(<span class=&quot;hljs-params&quot;>item</span>) =&gt;</span> <span class=&quot;hljs-title function_&quot;>executeChild</span>(processItem, { <span class=&quot;hljs-attr&quot;>args</span>: [item] })));</code></pre>
+  </div>
+  <div class="compare-col">
+    <div class="compare-tag us">@synadia-ai/durable</div>
+    <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class=&quot;hljs-comment&quot;>// Start every child in one pass — none blocks — then await them together.</span>
+<span class=&quot;hljs-keyword&quot;>const</span> futures = items.<span class=&quot;hljs-title function_&quot;>map</span>(<span class=&quot;hljs-function&quot;>(<span class=&quot;hljs-params&quot;>item</span>) =&gt;</span> ctx.<span class=&quot;hljs-title function_&quot;>startCall</span>(processItem, item));
+<span class=&quot;hljs-keyword&quot;>const</span> results = <span class=&quot;hljs-keyword&quot;>await</span> <span class=&quot;hljs-title class_&quot;>Promise</span>.<span class=&quot;hljs-title function_&quot;>all</span>(futures); <span class=&quot;hljs-comment&quot;>// suspends until ALL children resolve</span>
+
+<span class=&quot;hljs-comment&quot;>// …or race them and take the first to finish (losing branches run to completion):</span>
+<span class=&quot;hljs-keyword&quot;>const</span> winner = <span class=&quot;hljs-keyword&quot;>await</span> ctx.<span class=&quot;hljs-title function_&quot;>race</span>(items.<span class=&quot;hljs-title function_&quot;>map</span>(<span class=&quot;hljs-function&quot;>(<span class=&quot;hljs-params&quot;>item</span>) =&gt;</span> ctx.<span class=&quot;hljs-title function_&quot;>startCall</span>(processItem, item)));</code></pre>
+  </div>
+</div>
+<p><code>ctx.startSleep</code> / <code>ctx.startAwait</code> fan out timers and signals the same way; <code>ctx.call</code> / <code>ctx.sleep</code> / <code>ctx.await</code> are just <code>await ctx.startCall</code> / <code>startSleep</code> / <code>startAwait</code>.</p>
 
 <h2 id="continue-as-new"><a class="h-anchor" href="#continue-as-new" aria-label="Link to this section">#</a>Continue-as-new → <code>ctx.continueAsNew</code></h2>
 <p>Run “forever” with a bounded log: end this generation and start a fresh one with an empty journal. <code>handle.result()</code> transparently follows the chain.</p>
@@ -305,6 +328,41 @@
 });</code></pre>
   </div>
 </div>
+
+<h2 id="cancellation"><a class="h-anchor" href="#cancellation" aria-label="Link to this section">#</a>Cancellation → <code>client.cancel</code> + <code>ctx.onCancel</code></h2>
+<p>Stop a run from the outside. <code>client.cancel(runId)</code> delivers an <strong>uncatchable hard-stop</strong> at the run's next suspend point — a broad <code>try/catch</code> can't swallow it — and the run ends <code>cancelled</code>. Cleanup is opt-in via <code>ctx.onCancel</code> (handlers run LIFO, non-cancellably), and cancellation <strong>cascades to in-flight children</strong> (Temporal's <code>ParentClosePolicy: REQUEST_CANCEL</code>).</p>
+<div class="compare">
+  <div class="compare-col">
+    <div class="compare-tag them">Temporal · TypeScript SDK</div>
+    <pre><div class="code-head"><span class="lang">temporal</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class=&quot;hljs-keyword&quot;>import</span> { <span class=&quot;hljs-title class_&quot;>CancellationScope</span>, isCancellation } <span class=&quot;hljs-keyword&quot;>from</span> <span class=&quot;hljs-string&quot;>&quot;@temporalio/workflow&quot;</span>;
+
+<span class=&quot;hljs-keyword&quot;>try</span> {
+  <span class=&quot;hljs-keyword&quot;>await</span> <span class=&quot;hljs-title function_&quot;>shipOrder</span>(order);
+} <span class=&quot;hljs-keyword&quot;>catch</span> (e) {
+  <span class=&quot;hljs-keyword&quot;>if</span> (<span class=&quot;hljs-title function_&quot;>isCancellation</span>(e)) {
+    <span class=&quot;hljs-keyword&quot;>await</span> <span class=&quot;hljs-title class_&quot;>CancellationScope</span>.<span class=&quot;hljs-title function_&quot;>nonCancellable</span>(<span class=&quot;hljs-function&quot;>() =&gt;</span> <span class=&quot;hljs-title function_&quot;>refund</span>(order));
+  }
+  <span class=&quot;hljs-keyword&quot;>throw</span> e;
+}
+
+<span class=&quot;hljs-comment&quot;>// elsewhere</span>
+<span class=&quot;hljs-keyword&quot;>await</span> handle.<span class=&quot;hljs-title function_&quot;>cancel</span>();</code></pre>
+  </div>
+  <div class="compare-col">
+    <div class="compare-tag us">@synadia-ai/durable</div>
+    <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class=&quot;hljs-keyword&quot;>const</span> order = <span class=&quot;hljs-title function_&quot;>defineWorkflow</span>(<span class=&quot;hljs-string&quot;>&quot;order&quot;</span>, <span class=&quot;hljs-title function_&quot;>async</span> (ctx, <span class=&quot;hljs-attr&quot;>input</span>: <span class=&quot;hljs-title class_&quot;>Order</span>) =&gt; {
+  ctx.<span class=&quot;hljs-title function_&quot;>onCancel</span>(<span class=&quot;hljs-function&quot;>() =&gt;</span> ctx.<span class=&quot;hljs-title function_&quot;>run</span>(<span class=&quot;hljs-string&quot;>&quot;refund&quot;</span>, <span class=&quot;hljs-function&quot;>() =&gt;</span> <span class=&quot;hljs-title function_&quot;>refund</span>(input))); <span class=&quot;hljs-comment&quot;>// opt-in compensation; runs on cancel</span>
+  <span class=&quot;hljs-keyword&quot;>await</span> ctx.<span class=&quot;hljs-title function_&quot;>run</span>(<span class=&quot;hljs-string&quot;>&quot;charge&quot;</span>, <span class=&quot;hljs-function&quot;>() =&gt;</span> <span class=&quot;hljs-title function_&quot;>charge</span>(input));
+  <span class=&quot;hljs-keyword&quot;>await</span> ctx.<span class=&quot;hljs-title function_&quot;>await</span>(<span class=&quot;hljs-string&quot;>&quot;ship-confirmation&quot;</span>); <span class=&quot;hljs-comment&quot;>// ← a cancel arriving here hard-stops the run → `cancelled`</span>
+});
+
+<span class=&quot;hljs-comment&quot;>// elsewhere — an operational kill switch; cascades to in-flight ctx.call children</span>
+<span class=&quot;hljs-keyword&quot;>await</span> client.<span class=&quot;hljs-title function_&quot;>cancel</span>(runId, { <span class=&quot;hljs-attr&quot;>reason</span>: <span class=&quot;hljs-string&quot;>&quot;customer withdrew&quot;</span> });</code></pre>
+  </div>
+</div>
+<blockquote>
+  <p>The key difference: cancellation is <strong>uncatchable</strong> by design — a main-flow <code>try/finally</code> does <strong>not</strong> run on cancel, so cleanup goes through <code>ctx.onCancel</code>. Temporal's fine-grained cancellation <em>scopes</em> have no equivalent yet.</p>
+</blockquote>
 
 <h2 id="determinism"><a class="h-anchor" href="#determinism" aria-label="Link to this section">#</a>Determinism → <code>ctx.now / random / uuid</code></h2>
 <p>
@@ -332,18 +390,18 @@
 
 <h2 id="not-yet"><a class="h-anchor" href="#not-yet" aria-label="Link to this section">#</a>What doesn't map (yet)</h2>
 <p>
-  Being honest about the edges — <code>@synadia-ai/durable</code> is a focused v0.1, not a drop-in
+  Being honest about the edges — <code>@synadia-ai/durable</code> is a focused, not a drop-in
   Temporal replacement for every feature:
 </p>
 <ul>
-  <li><strong>Cancellation.</strong> There is no <code>client.cancel</code> / cancellation scopes; once started, a run (and its children) runs to completion or failure.</li>
+  <li><strong>Cancellation scopes.</strong> <code>client.cancel</code> + <code>ctx.onCancel</code> (with a cascade to in-flight children) are built in, but Temporal's fine-grained <code>CancellationScope</code>s — and a <em>suspending</em> cleanup handler (a child / sleep inside <code>ctx.onCancel</code>) — have no equivalent yet.</li>
   <li><strong>Rich queries.</strong> No arbitrary <code>defineQuery</code> handlers — observability is <code>handle.status()</code> plus reading the journal (and the live dashboard).</li>
   <li><strong>Versioning / patching.</strong> A <code>version</code> is carried on the journal, but in-flight workflows aren't patched (<code>patched()</code> / <code>getVersion()</code> have no equivalent yet).</li>
-  <li><strong>Search attributes &amp; visibility queries</strong>, a gating worker lease, parallel activity fan-out (<code>ctx.run</code> is blocking), and <code>&gt;8&nbsp;MiB</code> payloads are documented non-goals for now.</li>
+  <li><strong>Search attributes &amp; visibility queries</strong>, a gating worker lease, and <code>&gt;8&nbsp;MiB</code> payloads are documented non-goals for now.</li>
 </ul>
 <p>
-  What you do get is the correctness core — durable steps, timers, signals, child workflows,
-  continue-as-new, crash-replay with exactly-once state — on infrastructure you already operate. See the
+  What you do get is the correctness core — durable steps, timers, signals, child workflows, durable
+  fan-out, cancellation, continue-as-new, crash-replay with exactly-once state — on infrastructure you already operate. See the
   <a href="./how-it-works.html">model</a>, <a href="./persisting-state.html">how state is persisted</a>,
   and the runnable <a href="https://github.com/synadia-ai/durable-ts/blob/main/examples" target="_blank" rel="noopener">examples/</a>.
 </p>
@@ -359,7 +417,9 @@
         <a href="#timers" class="lvl-2" data-toc="timers">Timers → ctx.sleep</a>
         <a href="#signals" class="lvl-2" data-toc="signals">Signals → ctx.await + client.signal</a>
         <a href="#children" class="lvl-2" data-toc="children">Child workflows → ctx.call</a>
+        <a href="#fan-out" class="lvl-2" data-toc="fan-out">Parallel children & fan-out</a>
         <a href="#continue-as-new" class="lvl-2" data-toc="continue-as-new">Continue-as-new → ctx.continueAsNew</a>
+        <a href="#cancellation" class="lvl-2" data-toc="cancellation">Cancellation → client.cancel + ctx.onCancel</a>
         <a href="#determinism" class="lvl-2" data-toc="determinism">Determinism → ctx.now / random / uuid</a>
         <a href="#not-yet" class="lvl-2" data-toc="not-yet">What doesn't map (yet)</a>
       </nav>
