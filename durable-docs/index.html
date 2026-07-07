@@ -363,6 +363,11 @@ npm install @nats-io/transport-node   <span class="hljs-comment"># bring your ow
         load-bearing.)
       </li>
       <li>
+        <strong>Big values just work</strong> — a payload over the broker&#39;s message limit (a model
+        output, a scraped page) offloads to a <code>DE_BLOBS</code> object store and is journaled as a
+        content-addressed, digest-verified ref; replay resolves it transparently (default on).
+      </li>
+      <li>
         <strong>Built for production duty</strong> — bounded worker concurrency with per-run
         serialization, supervised consumers, self-reconciling provisioning with fail-loud limits
         (<code>discard: new</code> everywhere), an injectable metrics/health seam, and a

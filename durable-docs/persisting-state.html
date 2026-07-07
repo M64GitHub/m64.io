@@ -78,9 +78,9 @@
 
 <article class="prose">
 
-<h2 id="the-substrate"><a class="h-anchor" href="#the-substrate" aria-label="Link to this section">#</a>The substrate: four NATS resources</h2>
+<h2 id="the-substrate"><a class="h-anchor" href="#the-substrate" aria-label="Link to this section">#</a>The substrate: six NATS resources</h2>
 <p>
-  All durability lives in NATS. The library provisions four resources (idempotently) and never needs
+  All durability lives in NATS. The library provisions six resources (idempotently) and never needs
   anything else — no Postgres, no Redis, no control plane. Your only processes are NATS and your own
   workers with the library embedded.
 </p>
@@ -144,6 +144,8 @@
     <tr><td><code>DE_WORK</code></td><td>stream (work&nbsp;queue)</td><td><code>de.work.{wf}</code> — start / resume / signal / child-done items</td><td>“Make progress on run X.” One durable pull consumer per workflow, load-balanced across workers.</td></tr>
     <tr><td><code>DE_TIMERS</code></td><td>stream (scheduled)</td><td><code>de.timer.&gt;</code> — a native JetStream schedule + its wake target</td><td>Fires <code>ctx.sleep</code> / <code>ctx.await</code> timeouts as a future wake.</td></tr>
     <tr><td><code>DE_RUNS</code></td><td>KV bucket</td><td><code>{run}</code> → <code>{ status, wf, version, result? }</code></td><td>A fast status <strong>index / hint</strong> — never trusted for a progress decision.</td></tr>
+    <tr><td><code>DE_LEASES</code></td><td>KV bucket</td><td><code>{run}</code> → <code>{ owner, deadline }</code></td><td>The <strong>advisory run lease</strong> — cuts duplicate execution; fail-open, never load-bearing.</td></tr>
+    <tr><td><code>DE_BLOBS</code></td><td>object store</td><td><code>{run}/sha256:…</code> — content-addressed payload blobs</td><td><strong>Offloaded large payloads</strong> — values too big for a message; the journal carries digest-verified refs.</td></tr>
   </tbody>
 </table></div>
 
@@ -196,7 +198,7 @@
 <p>
   Because the log is ordered and immutable, reconstructing state is deterministic and a crash is
   harmless: whatever was appended is durable, and whatever wasn't simply didn't happen. The wire layout
-  of these entries is frozen at <code>v:1</code> and specified language-neutrally in the
+  of these entries is frozen at <code>v:1</code> (offloaded entries use the additive <code>v:2</code> ref form) and specified language-neutrally in the
   <a href="./protocol.html">wire protocol</a>, so a Go or Python worker could read the very same log.
 </p>
 
@@ -398,7 +400,7 @@
           </main>
           <nav class="toc" aria-label="On this page">
         <div class="toc-h">On this page</div>
-        <a href="#the-substrate" class="lvl-2" data-toc="the-substrate">The substrate: four NATS resources</a>
+        <a href="#the-substrate" class="lvl-2" data-toc="the-substrate">The substrate: six NATS resources</a>
         <a href="#the-journal" class="lvl-2" data-toc="the-journal">State is a log, not rows</a>
         <a href="#the-primitive" class="lvl-2" data-toc="the-primitive">The one primitive: optimistic append</a>
         <a href="#two-phase" class="lvl-2" data-toc="two-phase">Two-phase steps: persist intent before the effect</a>

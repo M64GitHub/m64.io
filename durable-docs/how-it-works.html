@@ -234,6 +234,9 @@ whichever worker is free pulls it. The queue load-balances; the journal keeps th
 wakes ride a parallel <code>DE_TIMERS</code> stream populated by native scheduling — see §7.)</li>
 <li><strong><code>DE_RUNS</code></strong> — a KV bucket used only as a fast <strong>status index</strong>. It is never trusted for a
 progress decision (those go to the journal).</li>
+<li>Plus three supporting pieces provisioned the same way: <strong><code>DE_TIMERS</code></strong> (native-scheduling timer
+wakes — §7), <strong><code>DE_LEASES</code></strong> (the advisory run lease), and <strong><code>DE_BLOBS</code></strong> (offloaded large
+payloads — a value too big for a message rides the object store as a digest-verified ref).</li>
 </ul>
 <hr>
 <h2 id="6-the-life-of-a-run"><a class="h-anchor" href="#6-the-life-of-a-run" aria-label="Link to this section">#</a>6. The life of a run</h2>

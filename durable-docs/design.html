@@ -563,7 +563,7 @@ growth; reclaiming finished generations&#39; logs (a TTL/GC policy) is still man
 <li><strong>Sagas / cross-workflow transactions</strong> as built-ins.</li>
 <li><strong>Suspending <code>ctx.onCancel</code> cleanup</strong> and <strong><code>ctx.startRun</code></strong> local-step fan-out — designed, deferred (cancellation and durable fan-out themselves are implemented, §7).</li>
 <li><del><strong>Object-store offload</strong> for &gt;<code>max_payload</code> payloads</del> — <strong>SHIPPED</strong> (P2): <code>DE_BLOBS</code> + content-addressed blob refs, default on (see §5 payload bound + PROTOCOL §5.6).</li>
-<li><strong>Dashboard/UI</strong>, <strong>non-TS SDKs</strong> — but the §3 wire layout is frozen <code>v:1</code> and language-neutral.</li>
+<li><strong>Dashboard/UI</strong>, <strong>non-TS SDKs</strong> — but the §3 wire layout is frozen <code>v:1</code> (plus the additive <code>v:2</code> offloaded form) and language-neutral.</li>
 <li>Separate <strong>activity workers</strong> — <code>ctx.run</code> steps run <strong>inline</strong> in the worker process.</li>
 </ul>
 <hr>
