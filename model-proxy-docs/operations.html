@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Providers & quirks · synadia-model-proxy</title>
-    <meta name="description" content="The verified provider matrix — Ollama, OpenRouter (five upstream vendors, live), OpenAI, Anthropic — their usage-reporting shapes, and how to add your own." />
-    <meta property="og:title" content="Providers & quirks · synadia-model-proxy" />
-    <meta property="og:description" content="The verified provider matrix — Ollama, OpenRouter (five upstream vendors, live), OpenAI, Anthropic — their usage-reporting shapes, and how to add your own." />
+    <title>Operations & flags · synadia-model-proxy</title>
+    <meta name="description" content="Every flag, the healthz counters, the admin CLI, failure semantics, and what to monitor — the operator&#x27;s page." />
+    <meta property="og:title" content="Operations & flags · synadia-model-proxy" />
+    <meta property="og:description" content="Every flag, the healthz counters, the admin CLI, failure semantics, and what to monitor — the operator&#x27;s page." />
     <meta property="og:type" content="website" />
     <script>(function(){try{var t=localStorage.getItem("modelproxy-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,10 +37,10 @@
         <a class="navlink" href="./budget-breaker.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M12 6.5v4"/><circle cx="12" cy="16" r="2.2"/></svg></span>Trip the budget breaker</a>
         <a class="navlink" href="./virtual-key.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10v-6z"/><path d="M9 12l2 2 4-4"/></svg></span>Issue & revoke a virtual key</a>
         <div class="label">Connect</div>
-        <a class="navlink active" href="./providers.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5M3 17l9 5 9-5"/></svg></span>Providers & quirks</a>
+        <a class="navlink" href="./providers.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5M3 17l9 5 9-5"/></svg></span>Providers & quirks</a>
         <a class="navlink" href="./harnesses.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5"/><path d="M6 8h12l-1 6a5 5 0 0 1-10 0z"/><path d="M12 19v3"/></svg></span>Agents & harnesses</a>
         <div class="label">Reference</div>
-        <a class="navlink" href="./operations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></span>Operations & flags</a>
+        <a class="navlink active" href="./operations.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></span>Operations & flags</a>
         <a class="navlink" href="./limitations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></span>Limitations & scope</a>
         <a class="navlink" href="./proven.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v6L4.5 18a3 3 0 0 0 2.6 4.5h9.8a3 3 0 0 0 2.6-4.5L14 8V2"/><path d="M8.5 2h7M7 15h10"/></svg></span>How it's proven</a>
         <a class="navlink" href="./status.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span>Status & the map</a>
@@ -57,7 +57,7 @@
           <nav class="crumbs" aria-label="Breadcrumb">
             <a href="./index.html" style="color: inherit; text-decoration: none">Docs</a>
             <span class="sep">/</span>
-            <span class="here">Providers & quirks</span>
+            <span class="here">Operations & flags</span>
           </nav>
           <div class="right">
             <a class="icon-btn" href="https://github.com/synadia-ai/synadia-model-proxy" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.68 22a.55.55 0 0 0 .73-.53v-2c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83a2.2 2.2 0 0 1 .64-1.35c-2.22-.25-4.55-1.11-4.55-4.94a3.87 3.87 0 0 1 1.03-2.69 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.69c0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74a.55.55 0 0 0 .74.53A10.5 10.5 0 0 0 12 1.5z"/></svg></a>
@@ -68,125 +68,138 @@
         <div class="body-grid">
           <main class="content">
 <article class="prose">
-<h1>Providers &amp; quirks</h1>
+<h1>Operations &amp; flags</h1>
 <p style="color: var(--ink-dim); font-size: 16px; margin-bottom: 6px;">
-  Named upstreams only — never an open relay. What each provider actually does about usage
-  reporting, proven live where it matters, and how to add your own.
+  The operator's page: every flag, the failure contract, the healthz counters worth alarming
+  on, the admin CLI, and deployment notes.
 </p>
 <p>
-  The <code>{provider}</code> token in the URL selects a <strong>config-defined upstream</strong>;
-  clients can never steer the proxy to an arbitrary URL. Five built-ins ship, each overridable:
+  One static Go binary, no runtime dependencies. Remember what you're operating: the fabric's
+  <strong>only fail-closed component</strong> — everything below is in service of keeping the
+  forwarding path boring.
 </p>
+
+<h2 id="flags"><a class="h-anchor" href="#flags" aria-hidden="true">#</a>1. Flags (env fallbacks in parentheses)</h2>
 <div class="table-wrap"><table>
-  <thead><tr><th>name</th><th>origin</th><th>shape</th></tr></thead>
+  <thead><tr><th>flag</th><th>default</th><th>notes</th></tr></thead>
   <tbody>
-    <tr><td><code>openai</code></td><td><code>https://api.openai.com</code></td><td>openai</td></tr>
-    <tr><td><code>anthropic</code></td><td><code>https://api.anthropic.com</code></td><td>anthropic</td></tr>
-    <tr><td><code>openrouter</code></td><td><code>https://openrouter.ai/api</code></td><td>openai</td></tr>
-    <tr><td><code>mistral</code></td><td><code>https://api.mistral.ai</code></td><td>openai</td></tr>
-    <tr><td><code>ollama</code></td><td><code>http://127.0.0.1:11434</code></td><td>openai</td></tr>
+    <tr><td><code>--listen</code></td><td><code>:8080</code></td><td>plain HTTP; add <code>--tls-cert/--tls-key</code> or terminate at an LB</td></tr>
+    <tr><td><code>--proxy-name</code></td><td><code>modelproxy-&lt;hostname&gt;</code></td><td>instance name stamped into records</td></tr>
+    <tr><td><code>--provider</code></td><td>(builtins)</td><td>repeatable, <code>name=origin[,shape=…][,inject_usage=…]</code></td></tr>
+    <tr><td><code>--inject-usage</code></td><td><code>true</code></td><td>the inject+strip mechanism, globally</td></tr>
+    <tr><td><code>--inject-max-bytes</code></td><td>16 MiB</td><td>request-buffer cap for parse/inject; larger bodies skip injection (counted)</td></tr>
+    <tr><td><code>--dial-timeout</code></td><td><code>10s</code></td><td>connect-phase only — there is <strong>no</strong> response timeout, ever</td></tr>
+    <tr><td><code>--drain</code></td><td><code>30s</code></td><td>max wait for in-flight requests on SIGTERM (meter drain is ≤3s on top)</td></tr>
+    <tr><td><code>--js-url</code> <span style="color:var(--ink-faint)">($NATS_URL)</span></td><td>—</td><td>empty = forward-only; metering counted locally and loudly not persisted</td></tr>
+    <tr><td><code>--js-creds</code> <span style="color:var(--ink-faint)">($NATS_CREDS)</span></td><td>—</td><td>credentials file for the metering connection</td></tr>
+    <tr><td><code>--js-context</code> <span style="color:var(--ink-faint)">($NATS_CONTEXT)</span></td><td>—</td><td>NATS CLI context for server/auth/TLS — see precedence below</td></tr>
+    <tr><td><code>--js-stream</code> / <code>--js-subject-prefix</code></td><td><code>LLM_USAGE</code> / <code>audit.llm</code></td><td></td></tr>
+    <tr><td><code>--js-create</code></td><td><code>false</code></td><td>create the stream if absent (else operator-managed)</td></tr>
+    <tr><td><code>--js-max-age</code> / <code>--js-max-bytes</code></td><td><code>720h</code> / 1 GiB</td><td>stream limits when creating (max-bytes always set — NGS requires it)</td></tr>
+    <tr><td><code>--policy</code></td><td><code>false</code></td><td>master switch for enforcement; off ⇒ byte-for-byte MVP proxy</td></tr>
+    <tr><td><code>--policy-strict</code></td><td><code>false</code></td><td>deny llm.call until policy state has synced (default: stale-allow)</td></tr>
+    <tr><td><code>--policy-create</code></td><td><code>false</code></td><td>create the <code>MODELPROXY_POLICY</code> / <code>MODELPROXY_SPEND</code> buckets</td></tr>
+    <tr><td><code>--budgetd</code></td><td><code>false</code></td><td>run the spend aggregator here — <strong>exactly one per tenant domain</strong></td></tr>
+    <tr><td><code>--vault-key-file</code> <span style="color:var(--ink-faint)">($MODELPROXY_VAULT_KEY)</span></td><td>—</td><td>64-hex vault key for sealed provider keys</td></tr>
   </tbody>
 </table></div>
-<p>
-  <code>shape</code> picks the usage extractor. Every path under a provider prefix is forwarded
-  (SDKs also call <code>/v1/models</code>, token counting, …) — generation endpoints produce
-  <code>llm.call</code> records with token parsing, everything else <code>llm.http</code>.
-</p>
+<blockquote>
+  <p>
+    <strong>Context precedence:</strong> a named <code>--js-context</code> supplies the server
+    URL and all auth/TLS material; an <em>explicitly passed</em> <code>--js-url</code> /
+    <code>--js-creds</code> overrides that piece; ambient <code>NATS_URL</code> /
+    <code>NATS_CREDS</code> env vars do not. The CLI's <em>selected</em> context is never used
+    implicitly — connections are always deliberate.
+  </p>
+</blockquote>
 
-<h2 id="the-matrix"><a class="h-anchor" href="#the-matrix" aria-hidden="true">#</a>1. The usage-reporting matrix</h2>
-<p>
-  "Verified" = observed live <em>through the proxy</em>; "reference" = checked against the
-  provider's API documentation:
-</p>
+<h2 id="failure-semantics"><a class="h-anchor" href="#failure-semantics" aria-hidden="true">#</a>2. Failure semantics (the contract)</h2>
 <div class="table-wrap"><table>
-  <thead><tr><th>provider</th><th>non-streaming</th><th>streaming w/o opt-in</th><th>streaming w/ <code>include_usage</code></th><th>status</th></tr></thead>
+  <thead><tr><th>failure</th><th>forwarding</th><th>metering</th></tr></thead>
   <tbody>
-    <tr><td><code>ollama</code></td><td><code>usage</code> in body</td><td><strong>no usage at all</strong> → injection required</td><td>final chunk <code>{"choices":[],"usage":{…}}</code></td><td><strong>verified live</strong> (0.31.1, <code>llama3.1:8b</code>)</td></tr>
-    <tr><td><code>openrouter</code></td><td><code>usage</code> in body (+ <code>cost</code>)</td><td>no usage → injection required</td><td>usage on the <strong>final content chunk</strong> (+ <code>cost</code>) — see <a href="#openrouter">§3</a></td><td><strong>verified live</strong> (5 upstream vendors)</td></tr>
-    <tr><td><code>openai</code></td><td><code>usage</code> in body (incl. cached + reasoning details)</td><td>no usage → injection required</td><td>standard empty-choices final chunk</td><td>reference</td></tr>
-    <tr><td><code>anthropic</code></td><td><code>usage</code> in body (incl. cache read/write)</td><td colspan="2"><strong>native</strong>: <code>message_start</code> + <code>message_delta</code> — zero mutation, <code>stream_native</code></td><td>reference</td></tr>
-    <tr><td><code>mistral</code> / vLLM (custom)</td><td><code>usage</code> in body</td><td>untested</td><td>untested (vLLM supports <code>include_usage</code>)</td><td>pending</td></tr>
+    <tr><td>JetStream slow/down (incl. at startup)</td><td>unaffected — invisible to agents</td><td>drop-and-count; reconnects on its own</td></tr>
+    <tr><td>provider 4xx/5xx</td><td>passed through byte-identical</td><td><code>error_class: provider</code></td></tr>
+    <tr><td>provider unreachable</td><td>proxy-originated <code>502</code> JSON</td><td><code>error_class: network</code></td></tr>
+    <tr><td>client disconnects mid-stream</td><td>upstream canceled immediately</td><td>partial record (<code>client_closed</code>)</td></tr>
+    <tr><td>provider stalls mid-stream</td><td>held open — the client owns timeouts</td><td><code>total_ms</code> reflects reality</td></tr>
+    <tr><td>malformed SSE / unparseable body</td><td>forwarded verbatim, never gated on parse</td><td><code>usage_source: none</code>, counted</td></tr>
+    <tr><td>huge bodies</td><td>streamed through, never buffered whole</td><td>injection skipped over cap, counted</td></tr>
+    <tr><td>policy store (KV) unreachable</td><td>transparent traffic untouched; virtual keys <code>503</code>; budgets/models stale-allow (or <code>503</code> under <code>--policy-strict</code>)</td><td>mirrors freeze at last-known; watches auto-resume</td></tr>
+    <tr><td>vault key wrong/absent</td><td>virtual requests <code>503</code>; everything else untouched</td><td>detected at boot, loud</td></tr>
+    <tr><td>aggregator down/lagging</td><td>unaffected</td><td>spend freezes → overshoot grows with lag; <code>spend_age_s</code> exposes it</td></tr>
+    <tr><td>proxy SIGTERM</td><td>in-flight drain ≤ <code>--drain</code></td><td>sink drain ≤3s, final counters logged</td></tr>
   </tbody>
 </table></div>
 
-<h2 id="five-vendors"><a class="h-anchor" href="#five-vendors" aria-hidden="true">#</a>2. Live proof: five vendors, one proxy, exact costs</h2>
-<p>
-  The credibility test for a meter is variety. These five calls went through the proxy's
-  <code>openrouter</code> provider in one capture session — same prompt, five different
-  upstream AI vendors — and every record carried exact tokens <em>and the provider-priced
-  USD cost</em>:
-</p>
+<h2 id="healthz"><a class="h-anchor" href="#healthz" aria-hidden="true">#</a>3. <code>GET /healthz</code> — the counters</h2>
+<p>Fresh boot with the policy stack on (real):</p>
+<pre><div class="code-head"><span class="lang">json</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>{<span class="hljs-attr">"extract"</span>:{<span class="hljs-attr">"inject_skipped"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"strip_anomalies"</span>:<span class="hljs-number">0</span>},
+ <span class="hljs-attr">"jetstream"</span>:{<span class="hljs-attr">"ack_errs"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"connected"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"dropped"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"published"</span>:<span class="hljs-number">0</span>},
+ <span class="hljs-attr">"meter"</span>:{<span class="hljs-attr">"dropped"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"emitted"</span>:<span class="hljs-number">0</span>},
+ <span class="hljs-attr">"policy"</span>:{<span class="hljs-attr">"enabled"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"strict"</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">"vault_key"</span>:<span class="hljs-literal">true</span>,
+           <span class="hljs-attr">"keys"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"budgets"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"models"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"prices"</span>:<span class="hljs-literal">true</span>,
+           <span class="hljs-attr">"spend_age_s"</span>:<span class="hljs-number">1</span>,
+           <span class="hljs-attr">"denials"</span>:{<span class="hljs-attr">"auth"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"budget"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"model"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"policy_unavailable"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"provider"</span>:<span class="hljs-number">0</span>}},
+ <span class="hljs-attr">"proxy"</span>:<span class="hljs-string">"modelproxy-01"</span>,<span class="hljs-attr">"uptime_s"</span>:<span class="hljs-number">1</span>}</code></pre>
 <div class="table-wrap"><table>
-  <thead><tr><th>model (asked)</th><th>tokens in/out</th><th>provider cost</th><th><code>usage_source</code></th></tr></thead>
+  <thead><tr><th>signal</th><th>healthy</th><th>alarm when</th></tr></thead>
   <tbody>
-    <tr><td><code>openai/gpt-4o-mini</code> <span style="color:var(--ink-faint)">(streamed)</span></td><td>14 / 3</td><td>$0.0000039</td><td><code>stream_injected</code></td></tr>
-    <tr><td><code>anthropic/claude-haiku-4.5</code></td><td>15 / 5</td><td>$0.00004</td><td><code>body</code></td></tr>
-    <tr><td><code>meta-llama/llama-3.1-8b-instruct</code></td><td>17 / 3</td><td>$0.00000049</td><td><code>body</code></td></tr>
-    <tr><td><code>google/gemini-2.5-flash-lite</code></td><td>7 / 1</td><td>$0.0000011</td><td><code>body</code></td></tr>
-    <tr><td><code>mistralai/mistral-small-3.2-24b-instruct</code></td><td>11 / 3</td><td>$0.00000178125</td><td><code>body</code></td></tr>
+    <tr><td><code>meter.dropped</code>, <code>jetstream.dropped</code>, <code>jetstream.ack_errs</code></td><td>0, or flat</td><td>climbing — records are being lost (JetStream sizing/connectivity)</td></tr>
+    <tr><td><code>jetstream.connected</code></td><td><code>true</code></td><td><code>false</code> for longer than a blip</td></tr>
+    <tr><td><code>extract.inject_skipped</code>, <code>extract.strip_anomalies</code></td><td>≈0</td><td>growing — some client/provider pair produces unmeterable streams (<code>usage_source: none</code>)</td></tr>
+    <tr><td><code>policy.spend_age_s</code></td><td>seconds</td><td>minutes — budget overshoot bound is growing (aggregator lagging/down)</td></tr>
+    <tr><td><code>policy.denials.*</code></td><td>whatever your policy intends</td><td>unexpected spikes (<code>auth</code> = key misuse; <code>budget</code> = runaway agents)</td></tr>
+    <tr><td><code>policy.keys/budgets/models/prices</code></td><td><code>true</code> after boot</td><td><code>false</code> — a mirror never loaded (KV reachability)</td></tr>
   </tbody>
 </table></div>
-<ul>
-  <li><strong>The same prompt tokenizes differently per vendor</strong> — 17 tokens for llama, 14 for gpt-4o-mini, 7 for gemini. Exactly why the proxy never estimates: only the provider knows its own tokenizer.</li>
-  <li><strong><code>model</code> vs <code>model_served</code>:</strong> two of the five resolved aliases — asked <code>anthropic/claude-haiku-4.5</code>, served <code>anthropic/claude-4.5-haiku-20251001</code>; asked <code>…mistral-small-3.2-24b-instruct</code>, served <code>…-2506</code>. Records keep both, and the price table matches on <code>model_served</code> first.</li>
-  <li><strong>Those costs feed budgets verbatim</strong> — this session's five calls checkpointed as <code>usd_nano: 51171</code> in <code>MODELPROXY_SPEND</code>, integer-exact (<a href="./budgets.html">budgets</a>).</li>
-</ul>
 
-<h2 id="openrouter"><a class="h-anchor" href="#openrouter" aria-hidden="true">#</a>3. OpenRouter specifics (observed live)</h2>
-<ul>
-  <li><strong>Usage rides the final <em>content</em> chunk</strong> — <code>choices</code> has one entry (the <code>finish_reason: "stop"</code> delta), not the standard empty-choices extra chunk — for every upstream vendor probed (OpenRouter normalizes). The scanner meters it exactly; the strip filter deliberately <strong>spares</strong> it, because removing a content-bearing chunk would be corruption. Consequence on injected streams: OpenRouter clients see a harmless inline <code>usage</code> field they didn't ask for (OpenAI SDKs parse it fine) instead of an extra chunk — records stay <code>stream_injected</code> and exact.</li>
-  <li><strong><code>usage_raw</code> carries OpenRouter's own <code>cost</code> (USD), <code>cost_details</code>, and <code>is_byok</code></strong> verbatim — provider-priced accounting for free.</li>
-  <li>SSE comment keep-alives (<code>: OPENROUTER PROCESSING</code>) cross unharmed — no data payload, ignored by scanner and stripper.</li>
-  <li>Model IDs age out with a 404 <code>{"error":{"message":"No endpoints found…"}}</code> — passed through byte-identical, recorded as <code>error_class: "provider"</code>.</li>
-</ul>
-
-<h2 id="ollama"><a class="h-anchor" href="#ollama" aria-hidden="true">#</a>4. Ollama (the offline dev loop)</h2>
+<h2 id="admin-cli"><a class="h-anchor" href="#admin-cli" aria-hidden="true">#</a>4. The admin CLI</h2>
 <p>
-  Ollama is the reason the whole quickstart runs offline, and its three shapes are the
-  canonical demonstration of the usage gap — all three captured in
-  <a href="./watch-a-call.html">the walkthrough</a>: no usage without opt-in, the final
-  <code>{"choices":[],"usage":{…}}</code> chunk with it, <code>usage</code> in the body when
-  not streaming. Any OpenAI-compatible server (vLLM, LM Studio, llama.cpp server, …) slots in
-  the same way.
+  All policy state management is CLI-over-KV — the fail-closed binary deliberately grows no
+  admin HTTP API. The full surface (real <code>-h</code> output):
+</p>
+<pre><div class="code-head"><span class="lang">text</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>modelproxy admin — manage policy state (NATS KV)
+
+  vault-key generate
+  key create   --owner O --agent A [--providers p1,p2] [--expires 2160h]
+  key list     [--owner O] [--agent A]
+  key disable  --id vk_…      key enable --id vk_…      key delete --id vk_…
+  provider-key set --owner O --provider P [--vault-key-file F]
+                   (key from $PROVIDER_API_KEY or stdin — never argv)
+  budget set    --owner O [--agent A] [--usd-month F] [--usd-day F]
+                [--tokens-month N] [--tokens-day N] [--action deny|warn] [--warn-at 0.8]
+  budget delete --owner O [--agent A]
+  models set    --owner O [--agent A] [--allow g1,g2] [--deny g3,g4]
+  models delete --owner O [--agent A]
+  prices import FILE.json
+
+Connection flags on every subcommand: --js-url --js-creds --js-context
+(NATS_URL / NATS_CREDS / NATS_CONTEXT fallbacks).</code></pre>
+<p>
+  Secrets never ride argv — provider keys come from <code>$PROVIDER_API_KEY</code> or stdin.
+  The buckets are plain KV, so anything that can write KV (the <code>nats</code> CLI, a future
+  console) manages the same state.
 </p>
 
-<h2 id="openai-anthropic"><a class="h-anchor" href="#openai-anthropic" aria-hidden="true">#</a>5. OpenAI &amp; Anthropic direct</h2>
+<h2 id="deployment"><a class="h-anchor" href="#deployment" aria-hidden="true">#</a>5. Deployment notes</h2>
 <ul>
-  <li><strong>openai:</strong> standard shape family — body usage includes <code>prompt_tokens_details.cached_tokens</code> and <code>completion_tokens_details.reasoning_tokens</code>, which normalize into the record's <code>tokens.cached_read</code> / <code>tokens.reasoning</code>.</li>
-  <li><strong>anthropic:</strong> streams report usage <strong>natively</strong> (<code>message_start</code> carries input + cache tokens, <code>message_delta</code> the cumulative output) — the proxy's anthropic path <em>never mutates anything</em>; records read <code>stream_native</code>. Body usage includes <code>cache_creation_input_tokens</code> / <code>cache_read_input_tokens</code> → <code>cached_write</code> / <code>cached_read</code>.</li>
-  <li>Both are reference-verified against current API docs; the shapes are identical in kind to the live-verified ones (Ollama speaks openai-shape, OpenRouter fronts anthropic models). First-party live probes are the one remaining opportunistic item (<a href="./status.html">status</a>).</li>
+  <li><strong>Topology:</strong> N stateless proxy instances behind any TCP/HTTP LB work fine — mirrors are per-instance, fed from the same KV. Run <code>--budgetd</code> on <strong>exactly one</strong> instance per tenant domain (or its own binary later; the durable consumer name is the seam).</li>
+  <li><strong>The stream:</strong> in shared/NGS environments, pre-create <code>LLM_USAGE</code> operator-side (retention to taste, ≥ your longest budget window) and drop <code>--js-create</code>. The proxy needs publish rights on <code>audit.llm.&gt;</code> and KV access only with <code>--policy</code>.</li>
+  <li><strong>TLS:</strong> <code>--tls-cert/--tls-key</code> for direct exposure, or terminate at the LB — the proxy adds no <code>X-Forwarded-For</code>/<code>Via</code> either way (agents' network identity is not leaked upstream).</li>
+  <li><strong>Shutdown:</strong> SIGTERM → in-flight requests drain (≤ <code>--drain</code>, default 30s) → meter sink drains (≤3s) → final counters logged. Rolling restarts lose nothing but momentary capacity.</li>
+  <li><strong>Vault key:</strong> a file with mode 0400 (or the env var from your secret manager). Losing it orphans sealed provider keys — reseal from source keys, don't try to recover.</li>
 </ul>
 
-<h2 id="add-your-own"><a class="h-anchor" href="#add-your-own" aria-hidden="true">#</a>6. Adding your own upstream</h2>
-<pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code><span class="hljs-comment"># add or override providers (repeatable flag); shape picks the extractor:</span>
-modelproxy --provider vllm=http://10.0.0.5:8000,shape=openai \
-           --provider ollama=http://gpubox:11434,shape=openai,inject_usage=false</code></pre>
-<ul>
-  <li><code>shape=openai|anthropic</code> — which usage extractor (and auth-header convention, for virtual keys) applies.</li>
-  <li><code>inject_usage=false</code> — opt a provider out of inject+strip; its no-opt-in streams honestly record <code>usage_source: "none"</code>.</li>
-  <li>The agent-facing URL just uses your name: <code>/m64/agent/dev/vllm/v1/chat/completions</code>.</li>
-</ul>
-
-<h2 id="tolerated-variants"><a class="h-anchor" href="#tolerated-variants" aria-hidden="true">#</a>7. Shape variants the proxy already tolerates</h2>
-<ul>
-  <li><strong>Usage piggybacked on a non-empty-choices final chunk</strong> (OpenRouter, §3): metered exactly, deliberately not stripped.</li>
-  <li><strong>SSE comment keep-alives</strong>: passed through, ignored by the meter.</li>
-  <li><strong>Buffered SSE with a <code>Content-Length</code></strong>: when the strip filter removes bytes, it also drops the stale length so the client's read ends cleanly — a real bug the adversarial harness caught, fixed, and regression-pinned (<a href="./proven.html">how it's proven</a>).</li>
-  <li><strong>Compressed SSE despite <code>Accept-Encoding: identity</code></strong>: verbatim pass-through, counted as a strip anomaly, <code>usage_source: "none"</code> — forwarding-first, always.</li>
-</ul>
-
-<nav class="pager" aria-label="Pagination"><a class="prev" href="./virtual-key.html"><span class="dir">&larr; Previous</span><span class="ttl">Issue & revoke a virtual key</span></a><a class="next" href="./harnesses.html"><span class="dir">Next &rarr;</span><span class="ttl">Agents & harnesses</span></a></nav>
+<nav class="pager" aria-label="Pagination"><a class="prev" href="./harnesses.html"><span class="dir">&larr; Previous</span><span class="ttl">Agents & harnesses</span></a><a class="next" href="./limitations.html"><span class="dir">Next &rarr;</span><span class="ttl">Limitations & scope</span></a></nav>
 </article>
           </main>
       <nav class="toc" aria-label="On this page">
         <div class="toc-h">On this page</div>
-        <a href="#the-matrix" class="lvl-2" data-toc="the-matrix">1. The usage-reporting matrix</a>
-        <a href="#five-vendors" class="lvl-2" data-toc="five-vendors">2. Live proof: five vendors, one proxy, exact costs</a>
-        <a href="#openrouter" class="lvl-2" data-toc="openrouter">3. OpenRouter specifics (observed live)</a>
-        <a href="#ollama" class="lvl-2" data-toc="ollama">4. Ollama (the offline dev loop)</a>
-        <a href="#openai-anthropic" class="lvl-2" data-toc="openai-anthropic">5. OpenAI &amp; Anthropic direct</a>
-        <a href="#add-your-own" class="lvl-2" data-toc="add-your-own">6. Adding your own upstream</a>
-        <a href="#tolerated-variants" class="lvl-2" data-toc="tolerated-variants">7. Shape variants the proxy already tolerates</a>
+        <a href="#flags" class="lvl-2" data-toc="flags">1. Flags (env fallbacks in parentheses)</a>
+        <a href="#failure-semantics" class="lvl-2" data-toc="failure-semantics">2. Failure semantics (the contract)</a>
+        <a href="#healthz" class="lvl-2" data-toc="healthz">3. GET /healthz — the counters</a>
+        <a href="#admin-cli" class="lvl-2" data-toc="admin-cli">4. The admin CLI</a>
+        <a href="#deployment" class="lvl-2" data-toc="deployment">5. Deployment notes</a>
       </nav>
         </div>
       </div>
