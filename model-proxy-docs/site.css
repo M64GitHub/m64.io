@@ -1367,3 +1367,10 @@ a.card .go svg {
 .dg-edge-lose { stroke: var(--failed); stroke-width: 1.7; fill: none; }
 .dg-fill-lose { fill: var(--failed); }
 .brand .name { white-space: nowrap; }
+.dg-box-violet {                                    /* identity / key material */
+  fill: color-mix(in oklab, var(--continued) 10%, var(--bg-2));
+  stroke: color-mix(in oklab, var(--continued) 50%, var(--line-2));
+  stroke-width: 1.5;
+}
+.dg-edge-violet { stroke: var(--continued); stroke-width: 1.7; fill: none; }
+.dg-fill-violet { fill: var(--continued); }
