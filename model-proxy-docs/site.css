@@ -1,0 +1,1369 @@
+/* synadia-model-proxy — documentation site.
+   Same design language as the durable docs (durable-docs/site.css): IBM Plex type,
+   one Synadia-teal accent, layered surfaces, status-coded hues — handcrafted (no
+   utility framework) so the aesthetic stays distinctive, not generic. Tuned
+   for long-form prose: a sidebar, a sticky on-page TOC, and rich content. */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- surfaces (near-black slate, layered for depth) ---- */
+  --bg: #080b11;
+  --bg-1: #0c1018; /* panels */
+  --bg-2: #11161f; /* rows / cards / code */
+  --bg-3: #161d28; /* hover / raised */
+  --line: #1a2230;
+  --line-2: #273141;
+
+  /* ---- ink ---- */
+  --ink-strong: #eef3f8;
+  --ink: #d6dde7;
+  --ink-dim: #8b95a4;
+  --ink-faint: #5b6573;
+  --ink-ghost: #3a424f;
+
+  /* ---- accent: Synadia teal-green ---- */
+  --accent: #2dd4a7;
+  --accent-2: #1d9e7c;
+  --accent-ink: #07251d;
+  --accent-glow: rgba(45, 212, 167, 0.16);
+
+  /* ---- status (used for callouts + protocol keywords) ---- */
+  --running: #4b97f7;
+  --suspended: #e0a83c;
+  --completed: #2dd4a7;
+  --failed: #f2576f;
+  --continued: #a877f7;
+
+  /* ---- type ---- */
+  --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", monospace;
+
+  /* ---- geometry ---- */
+  --r: 8px;
+  --r-sm: 5px;
+  --sidebar-w: 270px;
+  --toc-w: 220px;
+  --topbar-h: 56px;
+  --content-max: 800px;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+
+  --app-bg:
+    radial-gradient(1100px 560px at -5% -10%, var(--accent-glow), transparent 60%),
+    radial-gradient(820px 640px at 105% 0%, rgba(75, 151, 247, 0.06), transparent 55%),
+    linear-gradient(transparent 0 0);
+}
+
+/* ============================================================ light theme
+   Same language inverted for daylight: white panels on a soft cool-gray page;
+   accent + status hues deepened so they stay legible (WCAG-AA) on light. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f5f7fa;
+  --bg-1: #ffffff;
+  --bg-2: #eef1f6;
+  --bg-3: #e4e9f1;
+  --line: #e3e8ef;
+  --line-2: #ccd4e0;
+
+  --ink-strong: #0d1520;
+  --ink: #1b2430;
+  --ink-dim: #556172;
+  --ink-faint: #717c8b;
+  --ink-ghost: #aab2bf;
+
+  --accent: #0b7d61;
+  --accent-2: #096a53;
+  --accent-ink: #ffffff;
+  --accent-glow: rgba(16, 170, 135, 0.16);
+
+  --running: #2563eb;
+  --suspended: #b4690c;
+  --completed: #0b7d61;
+  --failed: #dc2743;
+  --continued: #7c3aed;
+
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 12px 28px -16px rgba(16, 24, 40, 0.2);
+
+  --app-bg:
+    radial-gradient(1100px 560px at -5% -10%, rgba(16, 170, 135, 0.07), transparent 60%),
+    radial-gradient(840px 600px at 105% 0%, rgba(37, 99, 235, 0.05), transparent 55%),
+    linear-gradient(transparent 0 0);
+}
+
+/* Cross-fade only while the user toggles themes (class toggled by the boot script);
+   never present on first paint, so the boot theme applies with no transition. */
+.theme-anim,
+.theme-anim *,
+.theme-anim *::before,
+.theme-anim *::after {
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease,
+    box-shadow 0.28s ease !important;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topbar-h) + 16px);
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: var(--bg);
+  background-image: var(--app-bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: var(--accent-glow);
+  color: var(--ink-strong);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 9px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* ============================================================ shell layout */
+
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ---- sidebar ---- */
+.side {
+  border-right: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-1), var(--bg));
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.brand {
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--bg-1);
+  z-index: 2;
+  text-decoration: none;
+  color: inherit;
+}
+.brand .mark {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+  flex: none;
+}
+.brand .mark svg {
+  width: 100%;
+  height: 100%;
+}
+.brand .name {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  font-size: 14px;
+}
+.brand .name b {
+  color: var(--accent);
+  font-weight: 600;
+}
+.brand .ver {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+.nav {
+  padding: 16px 14px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav .label {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 16px 12px 6px;
+}
+.nav .label:first-child {
+  padding-top: 4px;
+}
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  color: var(--ink-dim);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13.5px;
+  position: relative;
+  transition:
+    background 0.14s ease,
+    color 0.14s ease;
+}
+.nav a svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  flex: none;
+}
+.nav a:hover {
+  background: var(--bg-2);
+  color: var(--ink);
+}
+.nav a.active {
+  background: linear-gradient(90deg, var(--accent-glow), transparent 80%);
+  color: var(--ink-strong);
+}
+.nav a.active::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.nav a.active svg {
+  opacity: 1;
+  color: var(--accent);
+}
+.nav a.ext {
+  color: var(--ink-faint);
+}
+.nav a.ext svg {
+  margin-left: auto;
+  opacity: 0.5;
+  width: 13px;
+  height: 13px;
+}
+
+/* ---- main column ---- */
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  height: var(--topbar-h);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+}
+.topbar .crumbs {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--ink-dim);
+  min-width: 0;
+}
+.topbar .crumbs .sep {
+  color: var(--ink-ghost);
+}
+.topbar .crumbs .here {
+  color: var(--ink-strong);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar .right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.menu-btn {
+  display: none;
+}
+
+/* icon control (theme toggle / github) — matches the UI's icon-btn */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-1);
+  color: var(--ink-dim);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    color 0.14s ease,
+    border-color 0.14s ease,
+    background 0.14s ease;
+}
+.icon-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent-2);
+  background: var(--bg-2);
+}
+.icon-btn:focus-visible {
+  outline: none;
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+/* sun shown in dark mode (to switch to light), moon shown in light mode */
+.icon-btn .i-sun {
+  display: none;
+}
+:root[data-theme="light"] .icon-btn .i-sun {
+  display: block;
+}
+:root[data-theme="light"] .icon-btn .i-moon {
+  display: none;
+}
+
+/* ---- content + toc grid ---- */
+.body-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--toc-w);
+  gap: 40px;
+  width: 100%;
+  max-width: calc(var(--content-max) + var(--toc-w) + 40px);
+  margin: 0 auto;
+  padding: 38px 40px 96px;
+  align-items: start;
+}
+.content {
+  min-width: 0;
+  max-width: var(--content-max);
+}
+
+/* ---- on-page table of contents (right rail) ---- */
+.toc {
+  position: sticky;
+  top: calc(var(--topbar-h) + 28px);
+  align-self: start;
+  font-size: 12.5px;
+  border-left: 1px solid var(--line);
+  padding-left: 16px;
+  max-height: calc(100vh - var(--topbar-h) - 56px);
+  overflow-y: auto;
+}
+.toc .toc-h {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.toc a {
+  display: block;
+  color: var(--ink-dim);
+  text-decoration: none;
+  padding: 4px 0;
+  line-height: 1.4;
+  border-left: 2px solid transparent;
+  margin-left: -16px;
+  padding-left: 14px;
+  transition: color 0.13s;
+}
+.toc a.lvl-3 {
+  padding-left: 26px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.toc a:hover {
+  color: var(--ink);
+}
+.toc a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+/* ============================================================ prose */
+
+.prose {
+  color: var(--ink);
+}
+.prose > *:first-child {
+  margin-top: 0;
+}
+.prose h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink-strong);
+  margin: 0 0 8px;
+}
+.prose h2 {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong);
+  margin: 44px 0 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.prose h3 {
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--ink-strong);
+  margin: 30px 0 10px;
+}
+.prose h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 22px 0 8px;
+}
+/* anchor affordance on hover */
+.prose .h-anchor {
+  position: absolute;
+  margin-left: -22px;
+  width: 22px;
+  color: var(--accent);
+  opacity: 0;
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.12s;
+}
+.prose h2,
+.prose h3 {
+  position: relative;
+}
+.prose h2:hover .h-anchor,
+.prose h3:hover .h-anchor {
+  opacity: 0.85;
+}
+.prose p {
+  margin: 0 0 16px;
+}
+.prose a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  transition:
+    color 0.12s,
+    border-color 0.12s;
+}
+.prose a:hover {
+  border-bottom-color: var(--accent);
+}
+.prose strong {
+  color: var(--ink-strong);
+  font-weight: 600;
+}
+.prose em {
+  color: var(--ink-strong);
+}
+.prose ul,
+.prose ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+.prose li {
+  margin: 5px 0;
+}
+.prose li::marker {
+  color: var(--ink-faint);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 36px 0;
+}
+
+/* inline code */
+.prose :not(pre) > code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 10%, var(--bg-2));
+  border: 1px solid color-mix(in oklab, var(--accent) 18%, var(--line));
+  border-radius: 5px;
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+.prose a code {
+  color: inherit;
+}
+
+/* code blocks */
+.prose pre {
+  position: relative;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  margin: 0 0 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.prose pre > code {
+  display: block;
+  padding: 15px 16px;
+  overflow-x: auto;
+  color: var(--ink);
+  font-feature-settings: "ss01";
+  background: none;
+}
+/* a language tab + copy button live in a header strip */
+.code-head {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 10px 0 13px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-1);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.code-head .lang {
+  color: var(--accent);
+}
+.code-head .copy {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-2);
+  color: var(--ink-dim);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color 0.12s,
+    border-color 0.12s;
+}
+.code-head .copy:hover {
+  color: var(--accent);
+  border-color: var(--accent-2);
+}
+.code-head .copy.ok {
+  color: var(--accent);
+  border-color: var(--accent-2);
+}
+/* ascii-art / plain diagrams: no header strip, render verbatim */
+.prose pre.diagram {
+  background: var(--bg-1);
+  color: var(--ink-dim);
+}
+.prose pre.diagram > code {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* blockquotes → callout */
+.prose blockquote {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: color-mix(in oklab, var(--accent) 7%, var(--bg-1));
+  color: var(--ink-dim);
+}
+.prose blockquote p {
+  margin: 0 0 8px;
+}
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+.prose blockquote strong {
+  color: var(--accent);
+}
+
+/* tables */
+.prose .table-wrap {
+  overflow-x: auto;
+  margin: 0 0 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.prose thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 10px 14px;
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.prose tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+.prose tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--bg-2) 55%, transparent);
+}
+.prose td code,
+.prose th code {
+  white-space: nowrap;
+}
+
+/* images / screenshots */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 6px 0 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+
+/* ============================================================ SVG diagrams
+   Inline figures (svg.ts) recolor with the theme via these vars/classes. */
+.diagram-fig {
+  margin: 8px 0 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: linear-gradient(180deg, var(--bg-1), var(--bg));
+  box-shadow: var(--shadow);
+  padding: 18px 18px 4px;
+  overflow: hidden;
+}
+.diagram-fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.diagram-fig figcaption {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  border-top: 1px solid var(--line);
+  margin: 10px -18px 0;
+  padding: 12px 18px;
+}
+.diagram-fig figcaption code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  color: var(--accent);
+}
+.diagram-fig figcaption strong {
+  color: var(--ink-strong);
+}
+
+/* shapes */
+.dg-engine {
+  fill: color-mix(in oklab, var(--accent) 4%, var(--bg-1));
+  stroke: var(--line-2);
+  stroke-width: 1.5;
+}
+.dg-box {
+  fill: var(--bg-2);
+  stroke: var(--line-2);
+  stroke-width: 1.5;
+}
+.dg-box-j {
+  fill: color-mix(in oklab, var(--accent) 9%, var(--bg-2));
+  stroke: color-mix(in oklab, var(--accent) 55%, var(--line-2));
+  stroke-width: 1.5;
+}
+.dg-cell {
+  fill: var(--bg-2);
+  stroke: var(--line-2);
+  stroke-width: 1.5;
+}
+.dg-cell.ghost {
+  fill: transparent;
+  stroke-dasharray: 4 4;
+  opacity: 0.7;
+}
+.dg-box-win {
+  fill: color-mix(in oklab, var(--completed) 10%, var(--bg-2));
+  stroke: color-mix(in oklab, var(--completed) 50%, var(--line-2));
+  stroke-width: 1.5;
+}
+.dg-box-lose {
+  fill: color-mix(in oklab, var(--failed) 9%, var(--bg-2));
+  stroke: color-mix(in oklab, var(--failed) 48%, var(--line-2));
+  stroke-width: 1.5;
+}
+.dg-node {
+  fill: color-mix(in oklab, var(--accent) 14%, var(--bg-2));
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+/* a "replayed — not really executed" box */
+.dg-box.ghost {
+  fill: color-mix(in oklab, var(--accent) 5%, transparent);
+  stroke: color-mix(in oklab, var(--accent) 45%, var(--line-2));
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+/* lines */
+.dg-edge {
+  stroke: var(--ink-faint);
+  stroke-width: 1.6;
+  fill: none;
+}
+.dg-edge.dashed {
+  stroke-dasharray: 3 4;
+}
+.dg-edge-a {
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  fill: none;
+}
+
+/* text */
+.diagram-fig text {
+  font-family: var(--sans);
+}
+.dg-h {
+  fill: var(--ink-strong);
+  font-size: 14px;
+  font-weight: 600;
+}
+.dg-sub {
+  fill: var(--ink-dim);
+  font-size: 11.5px;
+}
+.dg-kind {
+  fill: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.dg-seq {
+  fill: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+}
+.dg-cap {
+  fill: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+}
+.dg-note {
+  fill: var(--ink-dim);
+  font-size: 10.5px;
+}
+.dg-mono {
+  fill: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.dg-node-n {
+  fill: var(--accent);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+.dg-fill-a {
+  fill: var(--accent);
+}
+.dg-win {
+  fill: var(--completed);
+}
+.dg-lose {
+  fill: var(--failed);
+}
+
+/* ============================================================ comparison table
+   (limitations.ts) — durable vs Temporal vs Inngest. */
+.prose table.cmp td:first-child {
+  font-weight: 500;
+  color: var(--ink-strong);
+}
+.prose table.cmp td:nth-child(2) {
+  background: color-mix(in oklab, var(--accent) 7%, transparent);
+}
+.prose table.cmp tr.grp td {
+  background: var(--bg-1);
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  padding-top: 14px;
+}
+.cmp-y {
+  color: var(--completed);
+  font-weight: 700;
+}
+.cmp-p {
+  color: var(--suspended);
+  font-weight: 700;
+}
+.cmp-n {
+  color: var(--failed);
+  font-weight: 700;
+}
+.cmp-note {
+  color: var(--ink-dim);
+  font-size: 0.9em;
+}
+
+/* ============================================================ compare (Temporal)
+   Two-column side-by-side code (temporal.ts). */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 0 0 20px;
+  align-items: start;
+}
+.compare-col {
+  min-width: 0;
+}
+.compare-col pre {
+  margin: 0;
+}
+.compare-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  color: var(--ink-faint);
+}
+.compare-tag.them::before,
+.compare-tag.us::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.compare-tag.us {
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 40%, transparent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+}
+.compare-tag.them {
+  color: var(--ink-dim);
+}
+
+/* ============================================================ landing page */
+
+.hero {
+  padding: 18px 0 30px;
+}
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent) 32%, transparent);
+  background: color-mix(in oklab, var(--accent) 9%, transparent);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 20px;
+}
+.hero .eyebrow .pip {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  animation: pulse 2.6s infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.hero h1 {
+  font-size: clamp(32px, 5vw, 46px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ink-strong);
+  margin-bottom: 16px;
+}
+.hero h1 .grad {
+  background: linear-gradient(92deg, var(--accent), var(--running));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero .lede {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  max-width: 660px;
+  margin-bottom: 26px;
+}
+.hero .lede b {
+  color: var(--ink-strong);
+  font-weight: 600;
+}
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: var(--r);
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  transition:
+    transform 0.1s,
+    box-shadow 0.18s,
+    border-color 0.14s,
+    background 0.14s;
+}
+.cta svg {
+  width: 16px;
+  height: 16px;
+}
+.cta.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+}
+.cta.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 22px -2px var(--accent-glow);
+}
+.cta.ghost {
+  background: var(--bg-1);
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+.cta.ghost:hover {
+  border-color: var(--accent-2);
+  color: var(--accent);
+}
+
+.section-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* feature / doc-link cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+  gap: 14px;
+  margin: 0 0 16px;
+}
+.card {
+  display: block;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: linear-gradient(180deg, var(--bg-1), var(--bg));
+  padding: 18px;
+  color: var(--ink);
+  position: relative;
+  transition:
+    transform 0.12s,
+    border-color 0.14s,
+    box-shadow 0.18s;
+}
+a.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-2);
+  box-shadow: var(--shadow);
+}
+.card .ic {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 28%, var(--line));
+  margin-bottom: 13px;
+}
+.card .ic svg {
+  width: 17px;
+  height: 17px;
+}
+.card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-strong);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.card p {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  margin: 0;
+}
+a.card .go {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  color: var(--ink-ghost);
+  transition:
+    color 0.13s,
+    transform 0.13s;
+}
+a.card:hover .go {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+a.card .go svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* a tighter two-up explainer (the "no server" diagram + prose) */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+  margin: 0 0 18px;
+}
+.split .panel {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: linear-gradient(180deg, var(--bg-1), var(--bg));
+  padding: 16px 18px;
+}
+.split .panel h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-strong);
+  margin-bottom: 4px;
+}
+.split .panel .tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.split .panel.them .tag {
+  color: var(--ink-faint);
+}
+.split .panel.us {
+  border-color: color-mix(in oklab, var(--accent) 34%, var(--line));
+  background:
+    radial-gradient(420px 130px at 0% 0%, var(--accent-glow), transparent 70%),
+    linear-gradient(180deg, var(--bg-1), var(--bg));
+}
+.split .panel.us .tag {
+  color: var(--accent);
+}
+.split ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+.split li {
+  display: flex;
+  gap: 9px;
+  padding: 5px 0;
+  color: var(--ink-dim);
+}
+.split li svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  margin-top: 3px;
+}
+.split .us li svg {
+  color: var(--accent);
+}
+.split .them li svg {
+  color: var(--failed);
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  margin-top: 60px;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+}
+.footer a {
+  color: var(--ink-dim);
+  text-decoration: none;
+}
+.footer a:hover {
+  color: var(--accent);
+}
+.footer .spacer {
+  flex: 1;
+}
+
+/* prev / next pager at the foot of a doc page */
+.pager {
+  display: flex;
+  gap: 14px;
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.pager a {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 13px 16px;
+  text-decoration: none;
+  background: var(--bg-1);
+  transition:
+    border-color 0.14s,
+    transform 0.12s;
+}
+.pager a:hover {
+  border-color: var(--accent-2);
+  transform: translateY(-1px);
+}
+.pager a.next {
+  text-align: right;
+}
+.pager .dir {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 4px;
+}
+.pager .ttl {
+  color: var(--ink-strong);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ============================================================ syntax highlight
+   build-time highlight.js tokens, themed to the palette (subset of hljs classes). */
+.hljs-comment,
+.hljs-quote {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: var(--continued);
+}
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition {
+  color: var(--accent);
+}
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attr,
+.hljs-variable,
+.hljs-meta,
+.hljs-link {
+  color: var(--running);
+}
+.hljs-title.function_,
+.hljs-function .hljs-title {
+  color: var(--running);
+}
+.hljs-deletion {
+  color: var(--failed);
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 600;
+}
+
+/* ============================================================ responsive */
+
+@media (max-width: 1100px) {
+  .body-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .toc {
+    display: none;
+  }
+}
+@media (max-width: 860px) {
+  :root {
+    --sidebar-w: 0px;
+  }
+  .shell {
+    grid-template-columns: 1fr;
+  }
+  .side {
+    position: fixed;
+    z-index: 40;
+    width: 280px;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  }
+  .side.open {
+    transform: none;
+  }
+  .scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s;
+  }
+  .scrim.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .menu-btn {
+    display: inline-grid;
+  }
+  .body-grid {
+    padding: 26px 20px 80px;
+  }
+  .split,
+  .compare {
+    grid-template-columns: 1fr;
+  }
+  body {
+    font-size: 14.5px;
+  }
+}
+
+/* Synadia wordmark logo in the sidebar brand (theme-adaptive). */
+.brand .logo { height: 17px; width: auto; display: block; flex: none; }
+.brand .logo path { fill: currentColor; }
+
+/* ---- model-proxy diagram additions (same language, two new roles) ---- */
+.dg-fill-ink { fill: var(--ink-faint); }           /* arrowheads on plain edges */
+.dg-box-amber {                                     /* stored/record boxes */
+  fill: color-mix(in oklab, var(--suspended) 10%, var(--bg-2));
+  stroke: color-mix(in oklab, var(--suspended) 50%, var(--line-2));
+  stroke-width: 1.5;
+}
+.dg-edge-amber { stroke: var(--suspended); stroke-width: 1.7; fill: none; }
+.dg-fill-amber { fill: var(--suspended); }
+.dg-edge-lose { stroke: var(--failed); stroke-width: 1.7; fill: none; }
+.dg-fill-lose { fill: var(--failed); }
+.brand .name { white-space: nowrap; }
