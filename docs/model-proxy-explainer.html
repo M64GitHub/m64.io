@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Model Proxy — how the Agent Fabric meters and governs model calls</title>
+
+	<!--
+	  ============================================================================
+	  EXPLAINER TEMPLATE — single-file scrolling explainer (neon/Tron house style)
+	  ----------------------------------------------------------------------------
+	  Copy this file, then swap ONLY the content (header logo, hero, TOC, sections,
+	  footer). The <style> block is the reusable look — keep it verbatim. Reads
+	  top->bottom; no slides, no reveals, no animated mesh (only a scroll-progress
+	  bar). Embed screenshots as base64; hand-color code with .tk-* spans.
+	  See presentation/creation/EXPLAINER-RECIPE.md and VERIFICATION.md.
+	  ============================================================================
+	-->
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+		rel="stylesheet">
+
+	<style>
+		:root {
+			--bg: #04070a;
+			--bg2: #060b10;
+			--panel: #0b141c;
+			--panel2: #0e1a24;
+			--border: #1a2a37;
+			--border-hi: #274050;
+			--ink: #eaf4f2;
+			--read: #cddedb;        /* body copy — softer than ink for long reading */
+			--muted: #8197a3;
+			--faint: #46596333;
+			--faint-s: #5b7280;     /* a readable faint (labels) */
+			--teal: #1fe3a6;
+			--teal-dim: #0e8f6a;
+			--prompt: #38cff5;      /* cyan  — a request / inbound / live */
+			--reply: #ff9d3d;       /* amber — a response / outbound / stored */
+			--heartbeat: #ff5da2;   /* pink  — liveness */
+			--verb: #b78bff;        /* violet */
+			--mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+			--sans: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+			--col: 720px;           /* reading column */
+			--wide: 1080px;         /* figure breakout */
+		}
+
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		html {
+			scroll-behavior: smooth;
+			scroll-padding-top: 86px;
+			-webkit-text-size-adjust: 100%;
+		}
+		@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+		body {
+			background:
+				radial-gradient(1200px 900px at 80% -5%, rgba(31, 227, 166, .07), transparent 60%),
+				radial-gradient(1000px 800px at -5% 12%, rgba(56, 207, 245, .06), transparent 55%),
+				var(--bg);
+			color: var(--read);
+			font-family: var(--sans);
+			font-weight: 400;
+			line-height: 1.72;
+			-webkit-font-smoothing: antialiased;
+			text-rendering: optimizeLegibility;
+		}
+
+		/* faint static grid texture (no animation) */
+		.grid-tex {
+			position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .3;
+			background-image:
+				linear-gradient(rgba(31, 227, 166, .04) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(31, 227, 166, .04) 1px, transparent 1px);
+			background-size: 66px 66px;
+			-webkit-mask-image: radial-gradient(circle at 50% 22%, #000 18%, transparent 72%);
+			mask-image: radial-gradient(circle at 50% 22%, #000 18%, transparent 72%);
+		}
+
+		/* scroll progress bar */
+		#progress {
+			position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60;
+			background: linear-gradient(90deg, var(--teal), var(--prompt));
+			box-shadow: 0 0 10px rgba(31, 227, 166, .6);
+			transform: scaleX(0); transform-origin: left center;
+		}
+
+		/* ---------- sticky header ---------- */
+		header.top {
+			position: sticky; top: 0; z-index: 50;
+			display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+			padding: .85rem clamp(1.1rem, 4vw, 2.4rem);
+			background: rgba(4, 7, 10, .72);
+			backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+			border-bottom: 1px solid var(--border);
+		}
+		.brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--ink); }
+		.brand .logo { height: 19px; width: auto; display: block; }
+		.brand .logo path { fill: #ffffff; }
+		.brand .suffix { color: var(--muted); font-weight: 500; }
+		.brand b { font-family: var(--mono); font-weight: 600; font-size: .95rem; letter-spacing: .02em; }
+		.brand b .dim { color: var(--muted); font-weight: 500; }
+		.topnav { display: flex; align-items: center; gap: clamp(.7rem, 2vw, 1.6rem); font-family: var(--mono); font-size: .82rem; }
+		.topnav a { color: var(--muted); text-decoration: none; transition: color .2s; letter-spacing: .02em; }
+		.topnav a:hover { color: var(--teal); }
+		.topnav a.repo { color: var(--teal); }
+		@media (max-width: 720px) { .topnav .hideable { display: none; } }
+
+		/* ---------- the article grid (full-bleed pattern) ---------- */
+		.doc {
+			position: relative; z-index: 1;
+			display: grid;
+			grid-template-columns: 1fr min(var(--col), calc(100% - 2.4rem)) 1fr;
+			padding-bottom: 6rem;
+		}
+		.doc > * { grid-column: 2; }
+		.doc > .wide { grid-column: 2; width: min(var(--wide), calc(100vw - 2.4rem)); justify-self: center; }
+		@media (min-width: 1140px) { .doc > .wide { width: var(--wide); } }
+
+		/* ---------- hero ---------- */
+		.hero { padding: clamp(3.5rem, 9vh, 7rem) 0 2.5rem; }
+		.kicker {
+			font-family: var(--mono); text-transform: uppercase; letter-spacing: .26em;
+			font-size: .76rem; color: var(--teal); margin-bottom: 1.6rem;
+		}
+		.hero h1 {
+			font-weight: 700; letter-spacing: -.02em; line-height: .98;
+			font-size: clamp(2.8rem, 8vw, 5.4rem); color: var(--ink); margin-bottom: .2rem;
+		}
+		.hero h1 .glow {
+			color: #e2faff;
+			text-shadow: 0 0 6px rgba(56, 207, 245, .9), 0 0 22px rgba(56, 207, 245, .5), 0 0 60px rgba(56, 207, 245, .28);
+		}
+		.tagline { font-size: clamp(1.3rem, 3.2vw, 2rem); font-weight: 300; color: var(--teal); margin: 1.1rem 0 1.4rem; font-style: italic; }
+		.dek { font-size: clamp(1.05rem, 1.7vw, 1.3rem); font-weight: 300; color: var(--muted); max-width: 60ch; }
+
+		.callout {
+			margin-top: 2.4rem; padding: 1.3rem 1.5rem; border-radius: 14px;
+			border: 1px solid rgba(31, 227, 166, .32); border-left: 3px solid var(--teal);
+			background: linear-gradient(90deg, rgba(31, 227, 166, .09), rgba(31, 227, 166, .015));
+			box-shadow: 0 0 30px rgba(31, 227, 166, .1);
+			font-size: 1.06rem; color: var(--read);
+		}
+		.callout b { color: var(--teal); font-weight: 600; }
+		.callout .lab { display: block; font-family: var(--mono); font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--teal); margin-bottom: .5rem; }
+
+		/* ---------- table of contents ---------- */
+		.toc { margin: 2.6rem 0 1rem; padding: 1.3rem 1.5rem; border: 1px solid var(--border); border-radius: 14px; background: rgba(11, 20, 28, .5); }
+		.toc .lab { font-family: var(--mono); font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin-bottom: .9rem; }
+		.toc ol { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: .55rem 1.6rem; counter-reset: toc; }
+		@media (max-width: 620px) { .toc ol { grid-template-columns: 1fr; } }
+		.toc a { counter-increment: toc; display: flex; gap: .7rem; text-decoration: none; color: var(--read); font-size: .96rem; align-items: baseline; }
+		.toc a::before { content: counter(toc, decimal-leading-zero); font-family: var(--mono); font-size: .76rem; color: var(--teal); }
+		.toc a:hover { color: var(--teal); }
+
+		/* ---------- sections & prose ---------- */
+		section { padding: clamp(3rem, 8vh, 5.5rem) 0 0; }
+		section > .kicker { margin-bottom: 1.1rem; }
+		h2 {
+			font-weight: 700; letter-spacing: -.015em; line-height: 1.06;
+			font-size: clamp(1.9rem, 4.2vw, 3rem); color: var(--ink); margin-bottom: 1.5rem;
+		}
+		h3 { font-weight: 600; font-size: clamp(1.2rem, 2.2vw, 1.5rem); color: var(--ink); margin: 2.4rem 0 .8rem; }
+		.em-i { color: var(--teal); font-style: italic; font-weight: 600; }
+		p { margin-bottom: 1.2rem; font-size: clamp(1.02rem, 1.35vw, 1.16rem); max-width: 68ch; }
+		p .lead, p.lead { color: var(--ink); }
+		.lead { font-size: clamp(1.12rem, 1.7vw, 1.34rem) !important; font-weight: 300; color: #dcebe8; }
+		strong, b { color: var(--ink); font-weight: 600; }
+		em { color: var(--prompt); font-style: italic; }
+		a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(31, 227, 166, .3); }
+		a:hover { border-bottom-color: var(--teal); }
+		.t-teal { color: var(--teal); } .t-cyan { color: var(--prompt); } .t-amber { color: var(--reply); }
+		code, .mono { font-family: var(--mono); }
+		p code, li code { font-size: .9em; background: rgba(56, 207, 245, .08); color: #bfe6f5; padding: .08em .4em; border-radius: .35em; border: 1px solid rgba(56, 207, 245, .14); }
+
+		.bullets { list-style: none; margin: .4rem 0 1.4rem; display: flex; flex-direction: column; gap: .7rem; max-width: 66ch; }
+		.bullets li { position: relative; padding-left: 26px; font-size: clamp(1rem, 1.3vw, 1.14rem); }
+		.bullets li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(31, 227, 166, .13); }
+		.bullets li.cyc::before { background: var(--prompt); box-shadow: 0 0 0 4px rgba(56, 207, 245, .13); }
+
+		/* a quiet pull-quote / aside */
+		.aside { margin: 1.8rem 0; padding-left: 1.2rem; border-left: 2px solid var(--prompt); font-size: clamp(1.1rem, 1.9vw, 1.4rem); font-weight: 300; color: var(--ink); font-style: italic; }
+		.aside b { color: var(--teal); font-style: normal; }
+
+		/* ---------- figures ---------- */
+		figure { margin: 1.8rem 0 .4rem; }
+		.wide figure, figure.wide { margin: 2.2rem 0 .6rem; }
+		figcaption { font-family: var(--mono); font-size: .82rem; color: var(--muted); margin-top: .8rem; letter-spacing: .02em; line-height: 1.5; }
+		figcaption b { color: var(--read); font-weight: 500; }
+		.shot { width: 100%; display: block; border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 24px 60px rgba(0, 0, 0, .5); }
+		.figbox {
+			padding: clamp(1.4rem, 3vw, 2.4rem); border: 1px solid var(--border); border-radius: 16px;
+			background: linear-gradient(180deg, rgba(14, 26, 36, .55), rgba(6, 11, 16, .35));
+		}
+
+		/* ---------- cards (3 guarantees / stakes) ---------- */
+		.cards { display: grid; gap: 1.2rem; margin: 1.6rem 0 .4rem; }
+		.cards.three { grid-template-columns: repeat(3, 1fr); }
+		.cards.two { grid-template-columns: repeat(2, 1fr); }
+		@media (max-width: 760px) { .cards.three, .cards.two { grid-template-columns: 1fr; } }
+		.card {
+			position: relative; overflow: hidden;
+			background: linear-gradient(180deg, var(--panel2), var(--panel));
+			border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.4rem;
+		}
+		.card .edge { position: absolute; inset: 0 auto 0 0; width: 3px; }
+		.card .ct { font-family: var(--mono); letter-spacing: .16em; text-transform: uppercase; font-size: .74rem; margin-bottom: .7rem; }
+		.card h4 { font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: .5rem; }
+		.card p { color: var(--muted); font-size: .98rem; margin: 0; font-weight: 300; }
+		.c-teal .ct { color: var(--teal); } .c-teal .edge { background: var(--teal); box-shadow: 0 0 16px var(--teal); }
+		.c-prompt .ct { color: var(--prompt); } .c-prompt .edge { background: var(--prompt); box-shadow: 0 0 16px var(--prompt); }
+		.c-reply .ct { color: var(--reply); } .c-reply .edge { background: var(--reply); box-shadow: 0 0 16px var(--reply); }
+		.c-pink .ct { color: var(--heartbeat); } .c-pink .edge { background: var(--heartbeat); box-shadow: 0 0 16px var(--heartbeat); }
+
+		/* ---------- numbered steps ---------- */
+		.steps { display: flex; flex-direction: column; gap: 1.1rem; margin: 1.4rem 0 .4rem; }
+		.step { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+		.step .n { font-family: var(--mono); font-size: .82rem; font-weight: 600; color: var(--bg); background: var(--teal); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; box-shadow: 0 0 14px rgba(31, 227, 166, .35); }
+		.step .t { font-size: clamp(1rem, 1.3vw, 1.14rem); padding-top: .15rem; }
+		.step .t b { color: var(--ink); } .step .t .cy { color: var(--prompt); font-weight: 600; } .step .t .gd { color: var(--teal); font-weight: 600; }
+
+		/* ---------- code window (the record) ---------- */
+		.editor { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: #070d12; box-shadow: 0 24px 60px rgba(0, 0, 0, .5); }
+		.editor .bar { display: flex; align-items: center; gap: .6rem; padding: .65rem .9rem; background: #0a141b; border-bottom: 1px solid var(--border); }
+		.editor .bar .d { width: 11px; height: 11px; border-radius: 50%; }
+		.d1 { background: #ff5f57; } .d2 { background: #febc2e; } .d3 { background: #28c840; }
+		.editor .bar .fname { font-family: var(--mono); color: var(--muted); font-size: .84rem; margin-left: .5rem; }
+		.editor .bar .tag { margin-left: auto; font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
+		.editor pre { margin: 0; overflow-x: auto; padding: 1.1rem 1.3rem; }
+		.editor code { font-family: var(--mono); font-size: clamp(.76rem, 1vw, .95rem); line-height: 1.7; color: #bcd0cf; white-space: pre; }
+		.tk-key { color: #9fd0e6; } .tk-str { color: var(--reply); } .tk-num { color: var(--heartbeat); } .tk-pun { color: #5b7280; } .tk-cm { color: #46606a; font-style: italic; }
+
+		/* ---------- before/after (redaction) ---------- */
+		.ba { font-family: var(--mono); display: flex; flex-direction: column; gap: .6rem; font-size: clamp(.82rem, 1.05vw, 1rem); margin: 1rem 0; }
+		.ba .lab { color: var(--muted); }
+
+		/* ---------- topology svg ---------- */
+		.topo { width: 100%; height: auto; display: block; }
+		.topo .machine rect { fill: url(#nodefill); stroke: var(--border); stroke-width: 1.5; }
+		.topo .mlabel { font-family: var(--mono); fill: var(--ink); font-size: 18px; font-weight: 600; }
+		.topo .msub { font-family: var(--mono); fill: var(--muted); font-size: 13px; }
+		.topo .loc { font-family: var(--mono); fill: var(--teal); font-size: 11px; letter-spacing: .16em; }
+		.topo .nats text { font-family: var(--mono); fill: #04221a; font-weight: 700; }
+		.topo .hex { fill: var(--teal); filter: drop-shadow(0 0 22px rgba(31, 227, 166, .5)); }
+		.topo .natslabel { font-family: var(--mono); fill: var(--ink); font-size: 13px; letter-spacing: .14em; }
+		.topo .link { stroke: var(--teal); stroke-width: 2; fill: none; opacity: .6; }
+
+		/* mini flow chips (where it lands / why nats) */
+		.flow { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; font-family: var(--mono); font-size: clamp(.85rem, 1.15vw, 1.02rem); }
+		.flow .chip { border: 1px solid var(--border-hi); border-radius: 10px; padding: .6rem 1rem; }
+		.flow .chip.teal { border-color: rgba(31, 227, 166, .45); background: rgba(31, 227, 166, .06); color: var(--teal); }
+		.flow .chip.cyan { border-color: rgba(56, 207, 245, .45); color: var(--prompt); }
+		.flow .arrow { color: var(--teal); font-size: 1.3rem; }
+		.pill { font-family: var(--mono); font-size: .9rem; padding: .45rem .95rem; border-radius: 999px; border: 1px solid var(--faint-s); }
+		.pill.teal { color: var(--teal); border-color: rgba(31, 227, 166, .5); }
+		.pill.cyan { color: var(--prompt); border-color: rgba(56, 207, 245, .5); }
+		.stack { font-family: var(--mono); display: flex; flex-direction: column; gap: .8rem; font-size: clamp(.9rem, 1.2vw, 1.06rem); }
+
+		/* ---------- footer ---------- */
+		footer { margin-top: clamp(4rem, 10vh, 7rem); border-top: 1px solid var(--border); padding-top: 2.6rem; }
+		footer .big { font-weight: 700; font-size: clamp(1.5rem, 3.4vw, 2.4rem); color: var(--ink); letter-spacing: -.01em; margin-bottom: .8rem; }
+		footer .big .em-i { display: inline; }
+		footer .meta { font-family: var(--mono); font-size: .82rem; color: var(--muted); margin-top: 1.4rem; line-height: 1.8; }
+		footer .meta a { color: var(--teal); }
+	</style>
+</head>
+
+
+<body id="top">
+	<div id="progress"></div>
+	<div class="grid-tex"></div>
+
+	<!-- STICKY HEADER — paste the project's REAL logo as <svg class="logo">; it auto-recolors white
+	     (.brand .logo path{fill:#fff}). Extract the SVG verbatim from an asset; don't transcribe paths. -->
+	<header class="top">
+		<a class="brand" href="#top">
+			<svg class="logo" viewBox="0 0 418 87" fill="none" xmlns="http://www.w3.org/2000/svg"
+			role="img" aria-label="Synadia">
+			<path d="M389.545 69.6381C386.434 69.6381 383.662 69.0985 381.229 68.0194C378.795 66.919 376.87 65.3003 375.452 63.1631C374.055 61.0047 373.357 58.3174 373.357 55.1011C373.357 52.3925 373.854 50.1178 374.849 48.2769C375.843 46.4359 377.198 44.9547 378.912 43.8332C380.626 42.7118 382.572 41.8653 384.752 41.294C386.952 40.7227 389.259 40.3206 391.671 40.0879C394.507 39.7916 396.792 39.5166 398.527 39.2626C400.262 38.9876 401.521 38.5855 402.304 38.0565C403.087 37.5275 403.479 36.7446 403.479 35.7077V35.5173C403.479 33.5071 402.844 31.9518 401.574 30.8514C400.326 29.7511 398.548 29.201 396.242 29.201C393.808 29.201 391.872 29.7405 390.433 30.8197C388.994 31.8777 388.042 33.2108 387.577 34.819L375.071 33.8033C375.706 30.8409 376.954 28.2805 378.816 26.1221C380.678 23.9426 383.08 22.271 386.021 21.1072C388.984 19.9222 392.412 19.3297 396.305 19.3297C399.014 19.3297 401.606 19.6471 404.082 20.2819C406.579 20.9167 408.79 21.9007 410.715 23.2338C412.662 24.5669 414.196 26.2808 415.318 28.3757C416.439 30.4494 417 32.9357 417 35.8347V68.7176H404.177V61.957H403.796C403.013 63.4805 401.966 64.8242 400.654 65.988C399.342 67.1306 397.765 68.0299 395.924 68.6859C394.083 69.3207 391.957 69.6381 389.545 69.6381ZM393.417 60.3065C395.406 60.3065 397.162 59.915 398.686 59.1321C400.209 58.328 401.405 57.2488 402.272 55.8946C403.14 54.5403 403.574 53.0062 403.574 51.2922V46.1185C403.151 46.3936 402.569 46.6475 401.828 46.8803C401.109 47.0919 400.294 47.2929 399.384 47.4834C398.474 47.6527 397.564 47.8114 396.654 47.9595C395.745 48.0864 394.919 48.2028 394.179 48.3086C392.592 48.5414 391.206 48.9117 390.021 49.4195C388.836 49.9274 387.915 50.6151 387.259 51.4827C386.603 52.3291 386.275 53.3871 386.275 54.6567C386.275 56.4976 386.942 57.9048 388.275 58.8781C389.629 59.8304 391.343 60.3065 393.417 60.3065Z"
+				fill="#101013" />
+			<path d="M355.508 68.7178V19.9647H369.029V68.7178H355.508ZM362.3 13.6801C360.29 13.6801 358.565 13.0135 357.127 11.6804C355.709 10.3262 355 8.70743 355 6.82417C355 4.96207 355.709 3.36447 357.127 2.03138C358.565 0.677128 360.29 0 362.3 0C364.31 0 366.024 0.677128 367.442 2.03138C368.881 3.36447 369.6 4.96207 369.6 6.82417C369.6 8.70743 368.881 10.3262 367.442 11.6804C366.024 13.0135 364.31 13.6801 362.3 13.6801Z"
+				fill="#101013" />
+			<path d="M320.774 69.5111C317.071 69.5111 313.717 68.5589 310.712 66.6545C307.729 64.7289 305.359 61.9041 303.603 58.1799C301.868 54.4345 301 49.8427 301 44.4046C301 38.8183 301.899 34.1736 303.698 30.4706C305.496 26.7464 307.888 23.9638 310.871 22.1229C313.876 20.2608 317.166 19.3297 320.742 19.3297C323.472 19.3297 325.747 19.7952 327.567 20.7263C329.408 21.6362 330.889 22.7788 332.01 24.1542C333.153 25.5085 334.02 26.8416 334.613 28.1535H335.026V3.71347H348.515V68.7176H335.184V60.9095H334.613C333.978 62.2638 333.079 63.6075 331.915 64.9405C330.772 66.2525 329.281 67.3422 327.44 68.2098C325.62 69.0774 323.398 69.5111 320.774 69.5111ZM325.059 58.7512C327.239 58.7512 329.08 58.1587 330.582 56.9737C332.105 55.7676 333.269 54.0854 334.073 51.927C334.899 49.7687 335.311 47.24 335.311 44.3411C335.311 41.4421 334.909 38.9241 334.105 36.7869C333.301 34.6497 332.137 32.9992 330.614 31.8354C329.09 30.6716 327.239 30.0897 325.059 30.0897C322.837 30.0897 320.965 30.6927 319.441 31.8989C317.918 33.105 316.764 34.7767 315.981 36.9138C315.198 39.051 314.807 41.5268 314.807 44.3411C314.807 47.1765 315.198 49.684 315.981 51.8635C316.785 54.0219 317.939 55.7147 319.441 56.942C320.965 58.1481 322.837 58.7512 325.059 58.7512Z"
+				fill="#101013" />
+			<path d="M269.187 69.6381C266.077 69.6381 263.305 69.0985 260.872 68.0193C258.438 66.919 256.513 65.3003 255.095 63.1631C253.698 61.0047 253 58.3174 253 55.101C253 52.3925 253.497 50.1178 254.492 48.2769C255.486 46.4359 256.84 44.9547 258.554 43.8332C260.268 42.7117 262.215 41.8653 264.395 41.294C266.595 40.7227 268.902 40.3206 271.314 40.0879C274.15 39.7916 276.435 39.5165 278.17 39.2626C279.905 38.9875 281.164 38.5855 281.947 38.0565C282.73 37.5275 283.121 36.7446 283.121 35.7077V35.5173C283.121 33.507 282.487 31.9518 281.217 30.8514C279.969 29.7511 278.191 29.2009 275.885 29.2009C273.451 29.2009 271.515 29.7405 270.076 30.8197C268.637 31.8777 267.685 33.2108 267.22 34.819L254.714 33.8033C255.349 30.8409 256.597 28.2805 258.459 26.1221C260.321 23.9426 262.723 22.271 265.664 21.1072C268.627 19.9222 272.055 19.3297 275.948 19.3297C278.657 19.3297 281.249 19.6471 283.725 20.2819C286.221 20.9167 288.433 21.9007 290.358 23.2338C292.305 24.5669 293.839 26.2808 294.961 28.3757C296.082 30.4494 296.643 32.9357 296.643 35.8347V68.7176H283.82V61.957H283.439C282.656 63.4805 281.609 64.8242 280.297 65.988C278.985 67.1306 277.408 68.0299 275.567 68.6859C273.726 69.3207 271.6 69.6381 269.187 69.6381ZM273.06 60.3065C275.049 60.3065 276.805 59.915 278.329 59.1321C279.852 58.328 281.048 57.2488 281.915 55.8946C282.783 54.5403 283.217 53.0062 283.217 51.2922V46.1185C282.794 46.3936 282.212 46.6475 281.471 46.8803C280.752 47.0919 279.937 47.2929 279.027 47.4834C278.117 47.6526 277.207 47.8113 276.297 47.9595C275.387 48.0864 274.562 48.2028 273.822 48.3086C272.235 48.5414 270.849 48.9117 269.664 49.4195C268.479 49.9274 267.558 50.6151 266.902 51.4826C266.246 52.3291 265.918 53.3871 265.918 54.6567C265.918 56.4976 266.585 57.9048 267.918 58.8781C269.272 59.8303 270.986 60.3065 273.06 60.3065Z"
+				fill="#101013" />
+			<path d="M217.521 40.5322V68.7176H204V19.9645H216.886V28.5661H217.458C218.537 25.7307 220.346 23.4877 222.885 21.8372C225.425 20.1655 228.503 19.3297 232.122 19.3297C235.507 19.3297 238.459 20.0703 240.977 21.5515C243.495 23.0327 245.453 25.1488 246.849 27.8996C248.246 30.6293 248.944 33.8879 248.944 37.6756V68.7176H235.423V40.0879C235.444 37.1043 234.682 34.7767 233.138 33.105C231.593 31.4122 229.466 30.5658 226.758 30.5658C224.938 30.5658 223.33 30.9572 221.933 31.7402C220.558 32.5231 219.479 33.6658 218.696 35.1681C217.934 36.6493 217.542 38.4374 217.521 40.5322Z"
+				fill="#101013" />
+			<path d="M162.22 87C160.506 87 158.898 86.8624 157.395 86.5874C155.914 86.3334 154.687 86.0055 153.714 85.6034L156.761 75.51C158.348 75.9967 159.776 76.2612 161.046 76.3035C162.336 76.3458 163.447 76.0496 164.378 75.4148C165.331 74.78 166.103 73.7008 166.695 72.1773L167.489 70.1141L150 19.9644H164.22L174.313 55.7675H174.821L185.01 19.9644H199.324L180.375 73.9865C179.466 76.6103 178.228 78.8956 176.662 80.8424C175.117 82.8103 173.16 84.3232 170.79 85.3812C168.42 86.4604 165.563 87 162.22 87Z"
+				fill="#101013" />
+			<path d="M132.811 20C132.269 18.5643 131.361 17.3781 130.089 16.4414C128.163 15.0236 125.55 14.3148 122.249 14.3148C120.006 14.3148 118.112 14.6322 116.568 15.267C115.023 15.8806 113.838 16.7376 113.013 17.8379C112.209 18.9383 111.807 20.1867 111.807 21.5833C111.764 22.7471 112.008 23.7628 112.537 24.6304C113.087 25.4979 113.838 26.2491 114.79 26.8839C115.742 27.4976 116.843 28.0372 118.091 28.5027C119.34 28.947 120.673 29.3279 122.09 29.6453L127.931 31.0419C130.766 31.6767 133.369 32.5231 135.739 33.5811C138.109 34.6391 140.161 35.9405 141.896 37.4852C143.632 39.0299 144.975 40.8497 145.927 42.9445C146.901 45.0394 147.398 47.4411 147.419 50.1496C147.398 54.1277 146.382 57.5768 144.372 60.4969C142.383 63.3959 139.505 65.6494 135.739 67.2576C131.993 68.8446 127.476 69.6381 122.186 69.6381C116.938 69.6381 112.367 68.834 108.474 67.2259C104.602 65.6177 101.576 63.2372 99.3962 60.0843C97.6655 57.5392 96.5947 54.5111 96.1837 51H109.778C110.096 52.0338 110.56 52.9564 111.172 53.768C112.293 55.2069 113.785 56.2966 115.647 57.0372C117.53 57.7567 119.657 58.1164 122.027 58.1164C124.355 58.1164 126.375 57.7778 128.089 57.1007C129.825 56.4236 131.168 55.482 132.12 54.2758C133.073 53.0697 133.549 51.6837 133.549 50.1178C133.549 48.6578 133.115 47.4305 132.247 46.436C131.401 45.4414 130.153 44.595 128.502 43.8967C126.873 43.1984 124.873 42.5636 122.503 41.9923L115.425 40.2149C109.945 38.8818 105.617 36.7975 102.443 33.962C99.2692 31.1265 97.6928 27.3071 97.7139 22.5038C97.6928 18.568 98.7402 15.1294 100.856 12.1882C102.993 9.24689 105.924 6.95101 109.648 5.30051C113.372 3.65002 117.605 2.82477 122.344 2.82477C127.169 2.82477 131.38 3.65002 134.977 5.30051C138.595 6.95101 141.41 9.24689 143.42 12.1882C145.002 14.5036 145.982 17.1076 146.358 20H132.811Z"
+				fill="#101013" />
+			<path fill-rule="evenodd" clip-rule="evenodd"
+				d="M72.9179 19.619C63.3369 9.83842 47.7678 9.93822 38.1868 19.7188L22.9171 34.9885C21.1206 36.6851 21.1206 39.5794 22.9171 41.3758L25.3123 43.7711C27.009 45.5675 29.8034 45.5675 31.5998 43.7711L46.8696 28.5014C51.7599 23.6111 59.4446 23.5113 64.2351 28.5014L67.6284 31.8947C72.5187 36.6852 72.4189 44.3699 67.6284 49.2602L52.3587 64.5299C50.5622 66.3263 50.5622 69.1208 52.3587 70.8174L54.7539 73.2127C56.5503 75.0091 59.4446 75.0091 61.1412 73.2127L76.4109 57.943C86.1915 48.362 86.2913 32.7929 76.5107 23.2119L72.9179 19.619Z"
+				fill="#101013" />
+			<path fill-rule="evenodd" clip-rule="evenodd"
+				d="M10.841 58.941C20.422 68.7216 35.9911 68.6218 45.5721 58.8412L60.8418 43.5715C62.6383 41.8749 62.6383 38.9806 60.8418 37.1842L58.4466 34.7889C56.75 32.9925 53.9555 32.9925 52.1591 34.7889L36.8894 50.0586C31.9991 54.9489 24.3143 55.0487 19.5238 50.0586L16.1305 46.6653C11.2402 41.8749 11.34 34.1901 16.1305 29.2998L31.4002 14.0301C33.1967 12.2337 33.1967 9.43921 31.4002 7.74257L29.005 5.34733C27.2086 3.55089 24.3143 3.55089 22.6177 5.34733L7.34797 20.617C-2.43263 30.2978 -2.43263 45.8669 7.24817 55.4479L10.7412 58.941H10.841Z"
+				fill="#101013" />
+		</svg>
+			<b class="suffix">/ model proxy</b>
+		</a>
+		<nav class="topnav">
+			<a class="hideable" href="#datapath">Data path</a>
+			<a class="hideable" href="#record">The record</a>
+			<a class="hideable" href="#trust">Trust loop</a>
+			<a class="repo" href="https://github.com/synadia-ai/synadia-model-proxy">GitHub &#8599;</a>
+		</nav>
+	</header>
+
+	<main class="doc">
+
+		<!-- ===== HERO ===== -->
+		<header class="hero">
+			<div class="kicker">Synadia Agent Fabric &middot; the cost &amp; control lens</div>
+			<h1>Model <span class="glow">Proxy</span></h1>
+			<p class="tagline">A utility meter and breaker panel for your agents' model calls.</p>
+			<p class="dek">Every LLM call your fleet makes — forwarded untouched, metered exactly, governable — through one environment variable.</p>
+			<div class="callout"><span class="lab">In one line</span>Point an agent's base URL at the proxy and every model call is <b>forwarded byte-for-byte</b> while an exact metering record — provider, model, tokens, latency, identity — lands in JetStream; budgets, model policy, and per-agent keys enforce on those same records <b>without ever slowing a call</b>.</div>
+		</header>
+
+		<!-- ===== TOC ===== -->
+		<nav class="toc" aria-label="Contents">
+			<div class="lab">Contents</div>
+			<ol>
+				<li><a href="#problem">The problem</a></li>
+				<li><a href="#not-a-gateway">It's not a gateway</a></li>
+				<li><a href="#contract">The contract: one env var</a></li>
+				<li><a href="#datapath">The data path</a></li>
+				<li><a href="#tokens">Exact tokens &amp; inject+strip</a></li>
+				<li><a href="#record">The record</a></li>
+				<li><a href="#trust">The trust loop (Phase 2)</a></li>
+				<li><a href="#keys">Virtual keys &amp; the vault</a></li>
+				<li><a href="#proof">The proof story</a></li>
+				<li><a href="#status">Status &amp; the map</a></li>
+				<li><a href="#start">Start here</a></li>
+			</ol>
+		</nav>
+
+		<!-- ===== 01 · PROBLEM ===== -->
+		<section id="problem">
+			<div class="kicker">01 &mdash; The problem</div>
+			<h2>Your agents spend real money through a <span class="em-i">pipe you can't see.</span></h2>
+			<p class="lead">Fleets of heterogeneous agents — Claude Code, Codex, custom harnesses — call model providers over opaque HTTPS.</p>
+			<p>Token spend is invisible until the invoice, and the invoice doesn't say which agent. Attribution is guesswork. And when an agent loops at 3&nbsp;a.m., nothing stands between it and the bill.</p>
+			<p>The Agent Fabric observes agents through three lenses over one NATS substrate — and model calls were the blind spot, because they're the one thing agents do that doesn't speak NATS:</p>
+			<div class="figbox" style="margin:1.6rem 0"><div class="flow">
+				<span class="chip">the wire &middot; agent-audit</span><span class="arrow">&middot;</span>
+				<span class="chip teal">cognition &amp; cost &middot; this proxy</span><span class="arrow">&middot;</span>
+				<span class="chip">the work &middot; durable-execution</span>
+			</div></div>
+			<p class="aside">The proxy is the fabric's on-ramp for model traffic — and, since Phase&nbsp;2, its <b>breaker panel</b>.</p>
+		</section>
+
+		<!-- ===== 02 · NOT A GATEWAY ===== -->
+		<section id="not-a-gateway">
+			<div class="kicker">02 &mdash; Kill the wrong box</div>
+			<h2>Deliberately the dumbest possible proxy — <span class="em-i">with the best possible bookkeeping.</span></h2>
+			<p class="lead">Two mental models will mislead you here. Both die now.</p>
+			<p>This is not an LLM gateway, and the metering middleman cannot hurt your traffic. The proxy sits in the model-call critical path — the product's only fail-closed component — so its reliability comes from <strong>scope discipline</strong>, not features.</p>
+			<div class="wide"><figure>
+				<div class="figbox" style="display:grid;grid-template-columns:1fr 1fr;gap:1.4rem">
+					<div style="border:1px solid var(--border);border-radius:12px;padding:1.4rem;background:linear-gradient(180deg,var(--panel2),var(--panel))">
+						<div class="mono" style="color:var(--muted);letter-spacing:.16em;font-size:.7rem;text-transform:uppercase;margin-bottom:.9rem">The wrong box &mdash; "an LLM gateway"</div>
+						<div class="mono" style="color:#5b7280;font-size:.92rem;text-decoration:line-through;text-decoration-thickness:1.5px">caching &middot; routing &middot; fallbacks &middot; retries &middot; prompt rewriting</div>
+						<div class="mono" style="color:#5b7280;font-size:.86rem;margin-top:.8rem">every feature is logic in your critical path &mdash; and somebody else's product. We build none of it.</div>
+					</div>
+					<div style="border:1px solid rgba(31,227,166,.4);border-left:3px solid var(--teal);border-radius:12px;padding:1.4rem;background:linear-gradient(90deg,rgba(31,227,166,.08),rgba(31,227,166,.02))">
+						<div class="mono" style="color:var(--teal);letter-spacing:.16em;font-size:.7rem;text-transform:uppercase;margin-bottom:.9rem">What it actually is</div>
+						<div style="font-size:1rem"><b>Byte-faithful pass-through + exact async metering.</b> The meter reads a passive tee &mdash; it physically cannot gate, delay, or corrupt a forwarded byte. A dead JetStream is invisible to agents.</div>
+					</div>
+				</div>
+				<figcaption>The contrast that frames everything: forwarding is <b>sacred</b>; metering is <b>fail-open</b>.</figcaption>
+			</figure></div>
+			<p class="aside">The cleverness lives in the bookkeeping, never in the pipe. <b>That's the design.</b></p>
+		</section>
+
+		<!-- ===== 03 · THE CONTRACT ===== -->
+		<section id="contract">
+			<div class="kicker">03 &mdash; The contract</div>
+			<h2>Onboarding is an env var. <span class="em-i">Leaving is unsetting it.</span></h2>
+			<p class="lead">Identity rides the URL path, so any SDK that honors a base URL is already integrated — zero code changes.</p>
+			<div class="wide"><figure>
+				<div class="figbox">
+					<div class="mono" style="font-size:clamp(1rem,2vw,1.5rem);letter-spacing:.01em;overflow-x:auto;white-space:nowrap">
+						<span style="color:var(--faint-s)">proxy:8080/</span><span style="color:var(--teal)">{owner}</span><span style="color:var(--faint-s)">/</span><span style="color:var(--prompt)">{agent}</span><span style="color:var(--faint-s)">/</span><span style="color:var(--reply)">{session}</span><span style="color:var(--faint-s)">/</span><span style="color:var(--verb)">{provider}</span><span style="color:var(--faint-s)">/v1/&hellip;</span>
+					</div>
+					<div class="mono" style="margin-top:1.1rem;font-size:.86rem;color:var(--muted);line-height:2">
+						<span style="color:var(--teal)">{owner}</span> operator / account &nbsp;&middot;&nbsp;
+						<span style="color:var(--prompt)">{agent}</span> harness id &nbsp;&middot;&nbsp;
+						<span style="color:var(--reply)">{session}</span> instance &nbsp;&middot;&nbsp;
+						<span style="color:var(--verb)">{provider}</span> a <b style="color:var(--verb)">named allowlist entry</b> &mdash; never an open relay
+					</div>
+				</div>
+				<figcaption>The identity triple mirrors the fabric convention and becomes the JetStream subject tokens. Tokens are validated: <b>[a-zA-Z0-9_-]{1,63}</b>.</figcaption>
+			</figure></div>
+			<p>In practice:</p>
+			<div class="editor" style="margin:1.2rem 0 1.6rem">
+				<div class="bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="fname">onboarding.env</span><span class="tag">the whole integration</span></div>
+				<pre><code><span class="tk-cm"># any OpenAI-compatible SDK</span>
+<span class="tk-key">OPENAI_BASE_URL</span><span class="tk-pun">=</span><span class="tk-str">http://proxy:8080/m64/codex/dev/openai/v1</span>
+<span class="tk-cm"># the Anthropic SDK appends /v1/messages itself</span>
+<span class="tk-key">ANTHROPIC_BASE_URL</span><span class="tk-pun">=</span><span class="tk-str">http://proxy:8080/m64/claude-code/dev/anthropic</span></code></pre>
+			</div>
+			<div class="callout"><span class="lab">The bypass guarantee</span>Unset the variable and traffic goes direct to the provider. The proxy holds no keys (in transparent mode) and no state an agent depends on — <b>never a lock-in point</b>.</div>
+		</section>
+
+		<!-- ===== 04 · DATA PATH ===== -->
+		<section id="datapath">
+			<div class="kicker">04 &mdash; The data path</div>
+			<h2>Two lanes: one <span class="em-i">sacred</span>, one fail-open.</h2>
+			<p class="lead">Forwarding streams byte-for-byte with immediate flush. A passive tee feeds the meter.</p>
+			<p>The metering pipeline is the two-stage fail-open ring transplanted from <code>synadia-agent-audit</code>: a non-blocking in-memory sink (drop-and-count on overflow, its channel never closes), then a JetStream publisher on its <strong>own NATS connection</strong> that retries forever and survives a down server at startup. Records publish to <code>audit.llm.&lt;type&gt;.&lt;agent&gt;.&lt;owner&gt;.&lt;session&gt;</code>.</p>
+			<div class="wide"><figure>
+				<div class="figbox">
+					<svg class="topo" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet">
+					<defs>
+						<linearGradient id="nodefill" x1="0" y1="0" x2="0" y2="1">
+							<stop offset="0" stop-color="#0f1c26"/><stop offset="1" stop-color="#0a141c"/>
+						</linearGradient>
+						<marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+							<path d="M0,0 L10,5 L0,10 z" fill="var(--prompt)"/>
+						</marker>
+						<marker id="arrowA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+							<path d="M0,0 L10,5 L0,10 z" fill="var(--reply)"/>
+						</marker>
+					</defs>
+					<!-- sacred lane -->
+					<g class="node frag machine" data-frag="1">
+						<rect x="40" y="120" width="260" height="140" rx="14"/>
+						<text class="loc" x="64" y="150">ANY FRAMEWORK</text>
+						<text class="mlabel" x="64" y="182">agent</text>
+						<text class="msub" x="64" y="210">OPENAI_BASE_URL=…/m64/codex/dev/…</text>
+					</g>
+					<path class="link frag" data-frag="2" pathLength="1" d="M300,190 L460,190" style="stroke:var(--prompt)" marker-end="url(#arrowC)"/>
+					<g class="node frag machine" data-frag="2">
+						<rect x="465" y="95" width="300" height="190" rx="14" style="stroke:var(--teal-dim)"/>
+						<text class="loc" x="489" y="125">MODELPROXY · ONE BINARY</text>
+						<text class="mlabel" x="489" y="157">forward, untouched</text>
+						<text class="msub" x="489" y="185">streaming · byte-faithful · flush</text>
+						<text class="msub" x="489" y="207">auth forwarded — never stored</text>
+						<text class="msub" x="489" y="229">no caching · no routing · no retries</text>
+					</g>
+					<path class="link frag" data-frag="3" pathLength="1" d="M765,190 L925,190" style="stroke:var(--prompt)" marker-end="url(#arrowC)"/>
+					<g class="node frag machine" data-frag="3">
+						<rect x="930" y="120" width="240" height="140" rx="14"/>
+						<text class="loc" x="954" y="150">NAMED ALLOWLIST ONLY</text>
+						<text class="mlabel" x="954" y="182">provider</text>
+						<text class="msub" x="954" y="210">openai · anthropic · ollama · …</text>
+					</g>
+					<!-- fail-open lane -->
+					<path class="link frag" data-frag="4" pathLength="1" d="M615,285 L615,360" style="stroke:var(--reply)" marker-end="url(#arrowA)"/>
+					<g class="node frag machine" data-frag="4">
+						<rect x="430" y="365" width="370" height="120" rx="14"/>
+						<text class="loc" x="454" y="395" style="fill:var(--reply)">THE TEE — A PASSIVE COPY</text>
+						<text class="mlabel" x="454" y="427">meter ring → jssink</text>
+						<text class="msub" x="454" y="455">non-blocking · drop-and-count · own NATS conn</text>
+					</g>
+					<path class="link frag" data-frag="5" pathLength="1" d="M800,425 L935,425" style="stroke:var(--reply)" marker-end="url(#arrowA)"/>
+					<g class="node frag nats" data-frag="5">
+						<polygon class="hex" points="1000,365 1052,395 1052,455 1000,485 948,455 948,395"/>
+						<text x="1000" y="432" text-anchor="middle" font-size="18">JS</text>
+						<text class="natslabel" x="1000" y="515" text-anchor="middle">LLM_USAGE</text>
+						<text x="1000" y="540" text-anchor="middle" style="font-family:var(--mono);fill:var(--muted);font-size:13px">30-day discard-old ring</text>
+					</g>
+				</svg>
+				</div>
+				<figcaption>Under pressure the meter <b>drops and counts</b> — it never back-pressures a model call. The two lanes touch only at the tee. SIGTERM drains in-flight requests, then the ring (&le;3s), and logs every counter.</figcaption>
+			</figure></div>
+		</section>
+
+		<!-- ===== 05 · EXACT TOKENS ===== -->
+		<section id="tokens">
+			<div class="kicker">05 &mdash; Exact tokens</div>
+			<h2>The provider's numbers — <span class="em-i">or an honest none.</span></h2>
+			<p class="lead">No tokenizer estimates, ever. "Exact from day one" means the provider's own usage object, or <code>usage_source: "none"</code>, counted.</p>
+			<ul class="bullets">
+				<li><b>Anthropic streams</b> report usage natively (<code>message_start</code> / <code>message_delta</code>) — that path never mutates anything.</li>
+				<li><b>Non-streaming responses</b> (both shapes) carry <code>usage</code> in the body.</li>
+				<li><b>OpenAI streams with</b> <code>include_usage</code> append one final usage chunk.</li>
+				<li class="cyc"><b>OpenAI streams without it report nothing at all</b> — verified live against Ollama. And that's the dominant call shape in real fleets.</li>
+			</ul>
+			<h3>Inject + strip — the one sanctioned mutation</h3>
+			<p>For streaming requests that didn't opt in, the proxy asks the provider for the number — and erases the question:</p>
+			<div class="steps">
+				<div class="step"><div class="n">1</div><div class="t"><span class="cy">Inject</span> <code>stream_options.include_usage: true</code> — a value-preserving rewrite: only the top level is re-encoded, so <span class="gd">every other field keeps its exact bytes</span> (int64 seeds and long floats included; pinned by test).</div></div>
+				<div class="step"><div class="n">2</div><div class="t">The provider appends <span class="cy">one extra usage chunk</span> the client's SDK does not expect.</div></div>
+				<div class="step"><div class="n">3</div><div class="t"><span class="gd">Strip exactly that chunk</span> (<code>choices == []</code>, <code>usage != null</code>) from the client-visible stream. At most one event is ever buffered.</div></div>
+				<div class="step"><div class="n">4</div><div class="t">The record says <code>"mutated": true</code>. If a stream stops looking like well-formed SSE, the filter <span class="cy">degrades to verbatim pass-through</span> — worst case the client sees one extra chunk. Forwarding first, always.</div></div>
+			</div>
+			<div class="wide"><figure>
+				<div class="editor">
+					<div class="bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="fname">stream.sse</span><span class="tag">captured live &middot; ollama</span></div>
+					<pre><code><span class="tk-cm"># what the provider sent (after injection) …</span>
+data: {"choices":[{"delta":{"content":" there"},"finish_reason":null}], …}
+data: {"choices":[{"delta":{"content":""},"finish_reason":"stop"}], …}
+<span style="color:var(--reply)">data: {"choices":[],"usage":{"prompt_tokens":17,"completion_tokens":3,"total_tokens":20}}</span>
+data: [DONE]
+
+<span class="tk-cm"># what the client received — the amber chunk diverted into the meter:</span>
+data: {"choices":[{"delta":{"content":" there"},"finish_reason":null}], …}
+data: {"choices":[{"delta":{"content":""},"finish_reason":"stop"}], …}
+data: [DONE]</code></pre>
+				</div>
+				<figcaption>Clients that set <code>include_usage</code> themselves stay <b>100% byte-faithful</b> (<code>stream_opt_in</code>) — injection is the safety net, not the default posture. OpenRouter quirk: usage rides the final <i>content</i> chunk there, so the filter deliberately spares it (docs/PROVIDERS.md).</figcaption>
+			</figure></div>
+		</section>
+
+		<!-- ===== 06 · THE RECORD ===== -->
+		<section id="record">
+			<div class="kicker">06 &mdash; What lands in the stream</div>
+			<h2>One document per call. <span class="em-i">No payloads. No secrets — by construction.</span></h2>
+			<p class="lead">A real record, captured from the live loop (an OpenAI-SDK agent → proxy → Ollama):</p>
+			<div class="wide"><figure>
+				<div class="editor">
+					<div class="bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="fname">audit.llm.call.codex.m64.dev</span><span class="tag">LLM_USAGE</span></div>
+					<pre><code><span class="tk-pun">{</span> <span class="tk-key">"type"</span><span class="tk-pun">:</span> <span class="tk-str">"llm.call"</span><span class="tk-pun">,</span>  <span class="tk-key">"id"</span><span class="tk-pun">:</span> <span class="tk-str">"0DOD46fL4891a13p2DTGI4"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"ts"</span><span class="tk-pun">:</span> <span class="tk-str">"2026-07-07T15:11:33.055247Z"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"owner"</span><span class="tk-pun">:</span> <span class="tk-str">"m64"</span><span class="tk-pun">,</span>  <span class="tk-key">"agent"</span><span class="tk-pun">:</span> <span class="tk-str">"codex"</span><span class="tk-pun">,</span>  <span class="tk-key">"session"</span><span class="tk-pun">:</span> <span class="tk-str">"dev"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"provider"</span><span class="tk-pun">:</span> <span class="tk-str">"ollama"</span><span class="tk-pun">,</span>  <span class="tk-key">"endpoint"</span><span class="tk-pun">:</span> <span class="tk-str">"/v1/chat/completions"</span><span class="tk-pun">,</span>  <span class="tk-key">"stream"</span><span class="tk-pun">:</span> <span class="tk-num">true</span><span class="tk-pun">,</span>
+  <span class="tk-key">"status"</span><span class="tk-pun">:</span> <span class="tk-num">200</span><span class="tk-pun">,</span>  <span class="tk-key">"error_class"</span><span class="tk-pun">:</span> <span class="tk-str">"none"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"model"</span><span class="tk-pun">:</span> <span class="tk-str">"llama3.1:8b"</span><span class="tk-pun">,</span>  <span class="tk-key">"model_served"</span><span class="tk-pun">:</span> <span class="tk-str">"llama3.1:8b"</span><span class="tk-pun">,</span>  <span class="tk-key">"stop_reason"</span><span class="tk-pun">:</span> <span class="tk-str">"stop"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"tokens"</span><span class="tk-pun">:</span> <span class="tk-pun">{</span> <span class="tk-key">"in"</span><span class="tk-pun">:</span> <span class="tk-num">17</span><span class="tk-pun">,</span> <span class="tk-key">"out"</span><span class="tk-pun">:</span> <span class="tk-num">3</span><span class="tk-pun">,</span> <span class="tk-key">"total"</span><span class="tk-pun">:</span> <span class="tk-num">20</span> <span class="tk-pun">},</span>
+  <span class="tk-key">"usage_source"</span><span class="tk-pun">:</span> <span class="tk-str">"stream_injected"</span><span class="tk-pun">,</span>  <span class="tk-key">"mutated"</span><span class="tk-pun">:</span> <span class="tk-num">true</span><span class="tk-pun">,</span>
+  <span class="tk-key">"req_bytes"</span><span class="tk-pun">:</span> <span class="tk-num">111</span><span class="tk-pun">,</span>   <span class="tk-key">"req_sha256"</span><span class="tk-pun">:</span> <span class="tk-str">"12db8e14…"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"resp_bytes"</span><span class="tk-pun">:</span> <span class="tk-num">695</span><span class="tk-pun">,</span>  <span class="tk-key">"resp_sha256"</span><span class="tk-pun">:</span> <span class="tk-str">"afbbfa29…"</span><span class="tk-pun">,</span>
+  <span class="tk-key">"ttfb_ms"</span><span class="tk-pun">:</span> <span class="tk-num">205</span><span class="tk-pun">,</span>  <span class="tk-key">"total_ms"</span><span class="tk-pun">:</span> <span class="tk-num">304</span> <span class="tk-pun">}</span></code></pre>
+				</div>
+				<figcaption><b>Hashes attest the original bytes</b> — what the agent sent and received is provable without storing content, and <code>mutated: true</code> honestly marks that the upstream saw different request bytes. Auth headers have <b>no field to land in</b>; the error snippet is scrubbed by an RE2 redactor. (A few fields elided here for width: <code>proxy</code>, <code>upstream</code>, <code>shape</code>, <code>method</code>, <code>usage_raw</code>.)</figcaption>
+			</figure></div>
+			<p>Records are typed — <code>llm.call</code> (generation endpoints, token-parsed) and <code>llm.http</code> (everything else: status/latency/bytes) — and land in the <code>LLM_USAGE</code> stream, a 30-day discard-old ring. <code>usage_raw</code> keeps the provider's object verbatim; on OpenRouter that includes their <span class="t-amber">USD cost</span> — provider-priced billing data for free.</p>
+		</section>
+
+		<!-- ===== 07 · TRUST LOOP ===== -->
+		<section id="trust">
+			<div class="kicker">07 &mdash; Phase 2 &middot; trust &amp; policy</div>
+			<h2>Your records become <span class="em-i">your enforcement.</span></h2>
+			<p class="lead">Budgets, model allow/deny, and per-agent keys — all opt-in, all built on the records the proxy already emits.</p>
+			<p>The core invariant survived Phase&nbsp;2 intact: <strong>the request path does zero policy I/O</strong>. Enforcement answers from in-memory mirrors fed by KV watches; a dead policy store can only make enforcement <em>stale</em> (last-known state keeps answering, the D1 "stale-allow" posture; <code>--policy-strict</code> flips it), never slow a model call.</p>
+			<div class="wide"><figure>
+				<div class="figbox">
+					<svg class="topo" viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet">
+					<defs>
+						<linearGradient id="nodefill2" x1="0" y1="0" x2="0" y2="1">
+							<stop offset="0" stop-color="#0f1c26"/><stop offset="1" stop-color="#0a141c"/>
+						</linearGradient>
+						<marker id="arrowT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+							<path d="M0,0 L10,5 L0,10 z" fill="var(--teal)"/>
+						</marker>
+						<marker id="arrowP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+							<path d="M0,0 L10,5 L0,10 z" fill="var(--heartbeat)"/>
+						</marker>
+					</defs>
+					<g class="node frag nats" data-frag="1">
+						<polygon class="hex" points="120,160 172,190 172,250 120,280 68,250 68,190"/>
+						<text x="120" y="227" text-anchor="middle" font-size="18">JS</text>
+						<text class="natslabel" x="120" y="310" text-anchor="middle">LLM_USAGE</text>
+						<text x="120" y="334" text-anchor="middle" style="font-family:var(--mono);fill:var(--muted);font-size:13px">every call · every denial</text>
+					</g>
+					<path class="link frag" data-frag="2" pathLength="1" d="M185,220 L295,220" style="stroke:var(--teal)" marker-end="url(#arrowT)"/>
+					<g class="node frag machine" data-frag="2">
+						<rect x="300" y="160" width="240" height="120" rx="14" fill="url(#nodefill2)"/>
+						<text class="loc" x="324" y="190">DURABLE CONSUMER</text>
+						<text class="mlabel" x="324" y="222">budgetd folds</text>
+						<text class="msub" x="324" y="250">integer nano-USD · restart-exact</text>
+					</g>
+					<path class="link frag" data-frag="3" pathLength="1" d="M540,220 L650,220" style="stroke:var(--teal)" marker-end="url(#arrowT)"/>
+					<g class="node frag machine" data-frag="3">
+						<rect x="655" y="160" width="210" height="120" rx="14" fill="url(#nodefill2)"/>
+						<text class="loc" x="679" y="190">NATS KV</text>
+						<text class="mlabel" x="679" y="222">spend + policy</text>
+						<text class="msub" x="679" y="250">budgets · models · keys</text>
+					</g>
+					<path class="link frag" data-frag="4" pathLength="1" d="M865,220 L965,220" style="stroke:var(--teal)" marker-end="url(#arrowT)"/>
+					<g class="node frag machine" data-frag="4">
+						<rect x="970" y="160" width="200" height="120" rx="14" fill="url(#nodefill2)" style="stroke:var(--teal-dim)"/>
+						<text class="loc" x="994" y="190">INSIDE THE PROXY</text>
+						<text class="mlabel" x="994" y="222">in-memory mirrors</text>
+						<text class="msub" x="994" y="250">fed by KV watches</text>
+					</g>
+					<path class="link frag" data-frag="5" pathLength="1" d="M1070,285 C 950,460 320,460 145,295" style="stroke:var(--heartbeat)" marker-end="url(#arrowP)"/>
+					<text class="frag" data-frag="5" x="605" y="465" text-anchor="middle" style="font-family:var(--mono);fill:var(--heartbeat);font-size:15px;letter-spacing:.04em">the next request answers from the mirror — 402 before a byte goes upstream · the denial is itself a record</text>
+				</svg>
+				</div>
+				<figcaption><b>budgetd</b> (in-binary, <code>--budgetd</code>, exactly one per tenant domain) folds records into per-window sums at owner / owner.agent / owner.agent.session grains — ack-after-flush + per-entry sequence guards make restarts exact, never double-counted. Accounting is integer <b>nano-USD</b>; tokens are the always-exact denomination, USD engages when cost is knowable.</figcaption>
+			</figure></div>
+			<h3>Denials SDKs respect</h3>
+			<div class="wide"><figure>
+				<div class="editor">
+					<div class="bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="fname">burn-down</span><span class="tag">captured live</span></div>
+					<pre><code><span class="tk-cm"># a 15-token/day budget, written with the nats CLI:</span>
+$ nats kv put MODELPROXY_POLICY budget.m64 '{"tokens_day":15,"action":"deny"}'
+
+$ curl proxy:8080/m64/claude-code/dev/ollama/v1/chat/completions -d '…'
+<span class="tk-cm"># call 1 — under the cap: 200, streamed, 21 tokens folded</span>
+
+$ curl proxy:8080/m64/claude-code/dev/ollama/v1/chat/completions -d '…'
+<span class="tk-pun">{</span><span class="tk-key">"error"</span><span class="tk-pun">:{</span><span class="tk-key">"type"</span><span class="tk-pun">:</span><span class="tk-str">"budget_exceeded"</span><span class="tk-pun">,</span>
+<span class="tk-key">"message"</span><span class="tk-pun">:</span><span class="tk-str">"denied by synadia-model-proxy policy (budget.m64.tokens_day)"</span><span class="tk-pun">,</span>
+<span class="tk-key">"rule"</span><span class="tk-pun">:</span><span class="tk-str">"budget.m64.tokens_day"</span><span class="tk-pun">}}</span>
+<span class="tk-cm"># HTTP 402 — before a single byte went upstream</span></code></pre>
+				</div>
+				<figcaption><b>402</b> budget &middot; <b>403</b> model policy / key identity &middot; <b>503</b> state unavailable (strict) — statuses OpenAI/Anthropic SDKs surface immediately instead of retrying. Every denial is itself a record (<code>error_class: "policy"</code> + the rule), and threshold crossings emit <code>llm.budget</code> warn/exceeded events for alerting.</figcaption>
+			</figure></div>
+			<p class="aside">Budgets are eventually-consistent guards with an observable staleness bound (<code>spend_age_s</code> in healthz). <b>The hard boundary is the key, not the budget.</b></p>
+		</section>
+
+		<!-- ===== 08 · VIRTUAL KEYS ===== -->
+		<section id="keys">
+			<div class="kicker">08 &mdash; Per-agent keys &middot; the vault</div>
+			<h2>The agent never holds the real key. <span class="em-i">The store never holds a usable one.</span></h2>
+			<div class="steps" style="margin-top:1.6rem">
+				<div class="step"><div class="n">1</div><div class="t">The agent presents <code>sk-syn-v1-…</code> as its ordinary API key. The proxy stores <span class="gd">only its SHA-256</span> — a KV compromise leaks nothing usable.</div></div>
+				<div class="step"><div class="n">2</div><div class="t"><span class="cy">Identity binding:</span> the key's {owner &middot; agent} must match the URL path — <code>403 key_identity_mismatch</code> stops key borrowing across agents. Optional per-key provider allowlists.</div></div>
+				<div class="step"><div class="n">3</div><div class="t">The proxy <span class="gd">unseals the provider key</span> — AES-256-GCM under a vault key that never enters NATS — and swaps auth per provider shape. The virtual key never goes upstream; the real key never comes down; records carry <code>vk_id</code>, never material.</div></div>
+				<div class="step"><div class="n">4</div><div class="t"><span class="cy">Revocation is a KV delete</span> — applied on the next KV-watch tick, typically milliseconds (a frozen mirror during a store outage keeps last-known keys, by design). Wrong or missing vault key fails closed (<code>503</code>) for virtual traffic only; transparent traffic is never affected.</div></div>
+			</div>
+			<div class="wide"><figure>
+				<div class="editor">
+					<div class="bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="fname">modelproxy admin</span><span class="tag">operator surface &middot; CLI over KV</span></div>
+					<pre><code>$ modelproxy admin vault-key generate &gt; vault.key
+$ modelproxy admin provider-key set --owner m64 --provider openrouter \
+      --vault-key-file vault.key --js-context my-ctx   <span class="tk-cm"># secret via stdin/env — never argv</span>
+$ modelproxy admin key create --owner m64 --agent claude-code --providers openrouter --js-context my-ctx
+<span class="tk-key">id:</span>  <span class="tk-str">vk_UNphggd5zSDGz2Sa9tGRLh</span>
+<span class="tk-key">key:</span> <span class="tk-str">sk-syn-v1-…</span>   <span class="tk-cm"># shown ONCE — only its hash is stored</span></code></pre>
+				</div>
+				<figcaption>No HTTP admin API on the fail-closed binary — the CLI talks straight to NATS KV, and the console lands on the same buckets later. Transparent and virtual agents <b>coexist per-request</b>, no flag. Proven live against OpenRouter with a sealed real key.</figcaption>
+			</figure></div>
+		</section>
+
+		<!-- ===== 09 · PROOF ===== -->
+		<section id="proof">
+			<div class="kicker">09 &mdash; The proof story</div>
+			<h2>Adversarially tested — <span class="em-i">then proven live.</span></h2>
+			<p class="lead">Every feature ships with its failure modes exercised: crash, disconnect, concurrency, failure injection — never just the happy path.</p>
+			<div class="cards two">
+				<div class="card c-teal"><span class="edge"></span><div class="ct">conservation</div><h4>Every emit is written or counted</h4><p>Exactly once, under 64-way race — the agent-audit invariants ported as executable philosophy. The sink's channel never closes; a late emit never panics.</p></div>
+				<div class="card c-prompt"><span class="edge"></span><div class="ct">outage mid-load</div><h4>JetStream killed under traffic</h4><p>45 calls through a mid-run broker kill and restart: forwarding latency flat, 44 records durable, 1 counted ack-error. The pipeline reconnects and re-syncs by itself.</p></div>
+				<div class="card c-reply"><span class="edge"></span><div class="ct">the harness bites</div><h4>It found a real bug</h4><p>A buffered-SSE provider (legal, unusual) exposed a stale Content-Length on stripped streams — clients saw truncation. Fixed, regression-pinned.</p></div>
+				<div class="card c-pink"><span class="edge"></span><div class="ct">live exactness</div><h4>Record == what the client saw</h4><p>OpenRouter usage matched the record field-by-field; the Ollama loop runs fully offline; a virtual key completed against the real API with the sealed key swapped in.</p></div>
+			</div>
+			<p style="margin-top:1.6rem">The whole gate — <code>go build ./... &amp;&amp; go vet ./... &amp;&amp; go test -race ./...</code> — runs offline: integration tests spawn their own <code>nats-server -js</code> and skip when tools are absent. <strong>9 packages, green under the race detector.</strong></p>
+		</section>
+
+		<!-- ===== 10 · STATUS ===== -->
+		<section id="status">
+			<div class="kicker">10 &mdash; Where this sits</div>
+			<h2>This repo's roadmap is <span class="em-i">complete.</span></h2>
+			<p class="lead">The proxy is the fabric's slice of product phases 1–2 — built, signed off, live-verified.</p>
+			<div class="figbox" style="margin:1.4rem 0"><div class="flow">
+				<span class="pill teal">1 &middot; Connect + See ✓</span>
+				<span class="pill teal">2 &middot; Trust + policy ✓</span>
+				<span class="pill">3 &middot; Durability — sibling repo</span>
+				<span class="pill">4 &middot; Registry / federation</span>
+				<span class="pill">5 &middot; Meta agent</span>
+			</div></div>
+			<ul class="bullets">
+				<li>The contracts: <b>SPEC.md v1.0</b> (pass-through + metering) and <b>SPEC-PHASE2.md v1.0</b> (budgets &middot; model policy &middot; virtual keys) — both signed off before their code was written.</li>
+				<li>Providers verified live: <b>Ollama</b> and <b>OpenRouter</b> (three upstreams probed); the matrix with per-provider quirks lives in <code>docs/PROVIDERS.md</code>.</li>
+				<li class="cyc">Deliberately out — forever: caching, routing, fallbacks, retries, prompt rewriting, tokenizer estimates. <b>Scope discipline is the feature.</b></li>
+			</ul>
+		</section>
+
+		<!-- ===== 11 · START HERE ===== -->
+		<section id="start">
+			<div class="kicker">11 &mdash; For the joining engineer</div>
+			<h2>Read one file. Run one command. <span class="em-i">Break it on purpose.</span></h2>
+			<div class="steps" style="margin-top:1.6rem">
+				<div class="step"><div class="n">1</div><div class="t">Read the contracts in order: <span class="gd">README.md</span> → <span class="gd">SPEC-PHASE2.md</span> → <span class="gd">SPEC.md</span>. The <code>CLAUDE.md</code> status header is always the current truth.</div></div>
+				<div class="step"><div class="n">2</div><div class="t">The green gate, fully offline: <code>go build ./... &amp;&amp; go vet ./... &amp;&amp; go test -race ./...</code></div></div>
+				<div class="step"><div class="n">3</div><div class="t">The 5-minute demo: <span class="cy">nats-server -js</span> → <span class="cy">modelproxy --js-url … --js-create --policy --policy-create --budgetd</span> → curl a local Ollama → watch the record land (<code>nats stream get LLM_USAGE</code>) → set a budget → watch the <code>402</code>.</div></div>
+				<div class="step"><div class="n">4</div><div class="t">The package map: <span class="gd">meter → jssink</span> (records) &middot; <span class="gd">proxy ← extract</span> (forwarding + usage) &middot; <span class="gd">policy ← policykv ← budgetd</span> (trust). Pure cores, NATS shells — every core unit-tests without a broker.</div></div>
+			</div>
+			<p class="aside">The working style is part of the machine: spec sign-off before code &middot; small green increments &middot; <b>adversarial tests for every feature.</b></p>
+		</section>
+
+		<!-- ===== FOOTER ===== -->
+		<footer>
+			<div class="big">One env var: meters exactly &middot; touches nothing &middot; <span class="em-i">trips before the bill.</span></div>
+			<p style="color:var(--muted)">Status: MVP + Phase 2 complete and live-verified (2026-07-07). Product phases 3–5 live in the sibling repos.</p>
+			<div class="meta"><a href="https://github.com/synadia-ai/synadia-model-proxy">github.com/synadia-ai/synadia-model-proxy</a> &middot; Apache-2.0 &middot; records in <span class="t-amber">LLM_USAGE</span> &middot; policy in NATS KV</div>
+		</footer>
+
+	</main>
+
+	<script>
+		(function () {
+			var bar = document.getElementById("progress"), doc = document.documentElement;
+			function tick() { var m = doc.scrollHeight - doc.clientHeight; bar.style.transform = "scaleX(" + (m > 0 ? doc.scrollTop / m : 0) + ")"; }
+			addEventListener("scroll", tick, { passive: true });
+			addEventListener("resize", tick, { passive: true });
+			tick();
+		})();
+	</script>
+</body>
+
+</html>
