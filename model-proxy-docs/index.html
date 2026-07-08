@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Overview · synadia-model-proxy</title>
-    <meta name="description" content="The metering and policy proxy for agent LLM traffic — every call forwarded untouched, metered exactly to NATS JetStream, governed by budgets, model policy, and virtual keys. One env var to join." />
+    <meta name="description" content="The metering and policy proxy for agent LLM traffic — every call forwarded untouched and metered exactly to NATS JetStream, with opt-in budgets, model policy, virtual keys, and per-agent conversation audit. One env var to join." />
     <meta property="og:title" content="Overview · synadia-model-proxy" />
-    <meta property="og:description" content="The metering and policy proxy for agent LLM traffic — every call forwarded untouched, metered exactly to NATS JetStream, governed by budgets, model policy, and virtual keys. One env var to join." />
+    <meta property="og:description" content="The metering and policy proxy for agent LLM traffic — every call forwarded untouched and metered exactly to NATS JetStream, with opt-in budgets, model policy, virtual keys, and per-agent conversation audit. One env var to join." />
     <meta property="og:type" content="website" />
     <script>(function(){try{var t=localStorage.getItem("modelproxy-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,13 +70,14 @@
         <div class="body-grid">
           <main class="content landing">
 <section class="hero">
-  <div class="eyebrow"><span class="pip"></span>v1.0 · LLM metering &amp; policy on NATS / JetStream</div>
-  <h1>A <span class="grad">utility meter &amp; breaker panel</span> for your agents' model calls.</h1>
+  <div class="eyebrow"><span class="pip"></span>v1.0 · LLM metering, policy &amp; audit on NATS / JetStream</div>
+  <h1>A <span class="grad">meter, breaker panel &amp; flight recorder</span> for your agents' model calls.</h1>
   <p class="lede">
     <b>synadia-model-proxy</b> is the HTTPS model proxy of the Synadia Agent Fabric. Point any
     OpenAI- or Anthropic-style SDK at it with <b>one env var</b>: every call is forwarded
-    <b>byte-faithfully</b> (streaming intact) and metered <b>exactly</b> to NATS JetStream — and,
-    when you switch it on, governed by <b>budgets, model policy, and virtual keys</b>.
+    <b>byte-faithfully</b> (streaming intact) and metered <b>exactly</b> to NATS JetStream. Switch
+    on the rest as you need it — <b>budgets, model policy, virtual keys</b>, and per-agent
+    <b>conversation audit</b>.
   </p>
   <div class="cta-row">
     <a class="cta primary" href="./how-it-works.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11l-1 8.5L18.5 10.5H12z"/></svg> How it works</a>
@@ -117,6 +118,7 @@
       <ul>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Byte-faithful forwarding, streaming intact, provider errors passed through</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Exact, asynchronous metering — a tee that cannot touch the forwarding path</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Opt-in conversation audit for chosen agents — a second tee, delta-encoded, its own stream</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Enforcement answered from in-memory mirrors — zero policy I/O per request</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>One env var to join; unset it to leave — never a lock-in point</span></li>
       </ul>
@@ -126,7 +128,9 @@
     <p>
       That restraint is not a missing roadmap — it's the reliability strategy. The proxy is the
       <strong>only fail-closed component</strong> in the fabric: if it dies, agents' model calls
-      die with it. So it does two things, and only two things, extremely well.
+      die with it. So its always-on core does two things — forward, and keep the books — and
+      every power you switch on (policy, audit) is another passive tee that still cannot gate,
+      delay, or corrupt a forwarded byte.
     </p>
   </div>
 </section>
@@ -207,6 +211,84 @@
       <a href="./record.html">the usage record</a> page.
     </p>
   </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">Switch on the flight recorder</div>
+  <div class="prose">
+    <p>
+      Metering answers <em>how much</em>. But an agent talking straight to a provider over HTTPS
+      is a black box — you can't see <em>what it did</em>, and it never touches NATS for
+      <a href="https://github.com/synadia-ai/synadia-agent-audit" target="_blank" rel="noopener">agent-audit</a>
+      to catch. So the proxy has a second recorder: turn <code>--audit</code> on for the agents you
+      choose and it captures the <strong>conversation</strong> — every prompt, tool call, tool
+      result and reply — into its own stream, replayable turn by turn.
+    </p>
+    <p>
+      It rides the <em>same</em> passive-tee philosophy as the meter — never on the forwarding
+      path, fail-open, drop-and-count. Two things make it scale: it&rsquo;s <strong>opt-in per
+      agent</strong> (a policy rule, not the whole fleet), and it&rsquo;s <strong>delta-encoded</strong>
+      — each message hashed and stored once, so a session&rsquo;s audit volume is what was actually
+      said, not the re-sent history multiplied by every call.
+    </p>
+  </div>
+  <figure class="diagram-fig">
+    <svg viewBox="0 0 760 352" role="img" aria-label="Two records off one pipe: the meter records every call to LLM_USAGE; the recorder captures chosen agents' conversations, delta-encoded, to LLM_AUDIT">
+      <text x="380" y="20" text-anchor="middle" class="dg-cap">FORWARDING UNTOUCHED (SEE ABOVE) — THESE ARE THE TWO RECORDS ONE CALL CAN LEAVE</text>
+
+      <rect x="28" y="146" width="150" height="58" rx="9" class="dg-node"/>
+      <text x="103" y="172" text-anchor="middle" class="dg-h">modelproxy</text>
+      <text x="103" y="190" text-anchor="middle" class="dg-sub">forward · passive tee</text>
+
+      <path d="M178 175 H228" class="dg-edge dashed"/>
+      <text x="203" y="167" text-anchor="middle" class="dg-seq">a copy</text>
+
+      <!-- metering lane (amber, always on) -->
+      <path d="M228 175 V103 H542" class="dg-edge-amber"/>
+      <polygon points="550,103 541,98.6 541,107.4" class="dg-fill-amber"/>
+      <text x="270" y="97" text-anchor="middle" class="dg-seq">always on</text>
+      <text x="550" y="66" class="dg-cap">THE METER — EVERY CALL</text>
+      <rect x="550" y="78" width="182" height="50" rx="9" class="dg-box-amber"/>
+      <text x="641" y="103" text-anchor="middle" class="dg-h">LLM_USAGE</text>
+      <text x="641" y="119" text-anchor="middle" class="dg-sub">tokens · cost · latency</text>
+
+      <!-- audit lane (violet, opt-in, delta) -->
+      <path d="M228 175 V252 H240" class="dg-edge-violet"/>
+      <polygon points="248,252 239,247.6 239,256.4" class="dg-fill-violet"/>
+      <text x="222" y="230" text-anchor="end" class="dg-seq">when enabled</text>
+      <text x="248" y="216" class="dg-cap">THE RECORDER — AGENTS YOU CHOOSE (OPT-IN)</text>
+      <rect x="248" y="228" width="150" height="52" rx="9" class="dg-box"/>
+      <text x="323" y="252" text-anchor="middle" class="dg-h">per-agent gate</text>
+      <text x="323" y="269" text-anchor="middle" class="dg-sub">audit rule?</text>
+      <path d="M398 254 H422" class="dg-edge-violet"/>
+      <polygon points="430,254 421,249.6 421,258.4" class="dg-fill-violet"/>
+      <rect x="430" y="228" width="150" height="52" rx="9" class="dg-box-violet"/>
+      <text x="505" y="252" text-anchor="middle" class="dg-h">convo delta</text>
+      <text x="505" y="269" text-anchor="middle" class="dg-sub">store each msg once</text>
+      <path d="M580 254 H604" class="dg-edge-violet"/>
+      <polygon points="612,254 603,249.6 603,258.4" class="dg-fill-violet"/>
+      <rect x="612" y="228" width="124" height="52" rx="9" class="dg-box-violet"/>
+      <text x="674" y="252" text-anchor="middle" class="dg-h">LLM_AUDIT</text>
+      <text x="674" y="269" text-anchor="middle" class="dg-sub">convo · tool</text>
+
+      <!-- selectivity branch -->
+      <path d="M323 280 V300" class="dg-edge dashed"/>
+      <polygon points="323,300 318.6,291 327.4,291" class="dg-fill-ink"/>
+      <rect x="238" y="300" width="170" height="28" rx="14" class="dg-cell ghost"/>
+      <text x="323" y="318" text-anchor="middle" class="dg-seq">not selected → nothing</text>
+      <text x="583" y="300" text-anchor="middle" class="dg-seq">audit.convo.&gt; · audit.tool.&gt;</text>
+
+      <text x="480" y="344" text-anchor="middle" class="dg-note">Every agent is metered. Only the agents you choose are recorded — delta-encoded, in their own stream.</text>
+    </svg>
+    <figcaption>
+      <strong>Two records off one pipe.</strong> The meter records <em>every</em> call to
+      <code>LLM_USAGE</code>. The recorder — off by default, enabled per agent — captures the
+      conversation to a separate <code>LLM_AUDIT</code> stream, storing each message once and
+      reconstructable turn by turn. Both are passive tees: neither can gate, delay, or corrupt a
+      forwarded byte. See <a href="./audit.html">how conversation audit works</a> or
+      <a href="./capture-session.html">capture &amp; reconstruct a session</a>.
+    </figcaption>
+  </figure>
 </section>
 
 <section>
@@ -321,6 +403,7 @@ export ANTHROPIC_BASE_URL='http://proxy:8080/m64/claude-code/dev/anthropic'</cod
     <ul>
       <li><strong>Forwarding is sacred.</strong> Methods, paths, queries, bodies, auth headers, compression, SSE chunks — byte-identical. Provider errors pass through untouched. The one sanctioned exception (usage injection) is flagged per record as <code>mutated</code>.</li>
       <li><strong>Metering is fail-open.</strong> All parsing happens on teed copies after bytes are on their way to the client. A dead JetStream costs records, never latency — and every dropped record is counted.</li>
+      <li><strong>Audit is opt-in and off the path.</strong> <a href="./audit.html">Conversation capture</a> runs only for agents you enable, on the same teed copies, into a separate <code>LLM_AUDIT</code> stream — delta-encoded so it scales, binary never stored, drop-and-count under pressure.</li>
       <li><strong>Exact numbers or an honest gap.</strong> Records carry the provider's own usage (<code>usage_raw</code> verbatim) or <code>usage_source: "none"</code> — never a tokenizer estimate.</li>
       <li><strong>No secrets, ever.</strong> <code>Authorization</code> / <code>x-api-key</code> have no field to land in; hashes attest the original bytes without storing content.</li>
       <li><strong>Denials SDKs respect.</strong> <code>402</code> budget / <code>403</code> model &amp; identity / <code>503</code> state-unavailable — statuses OpenAI/Anthropic SDKs surface immediately instead of retry-storming. Each denial is itself a record.</li>
