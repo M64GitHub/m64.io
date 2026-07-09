@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Operations & flags · synadia-model-proxy</title>
-    <meta name="description" content="Every flag, the healthz counters, the admin CLI, failure semantics, and what to monitor — the operator&#x27;s page." />
-    <meta property="og:title" content="Operations & flags · synadia-model-proxy" />
-    <meta property="og:description" content="Every flag, the healthz counters, the admin CLI, failure semantics, and what to monitor — the operator&#x27;s page." />
+    <title>Subscriptions (OAuth) · synadia-model-proxy</title>
+    <meta name="description" content="Meter and audit agents on flat-rate OAuth subscriptions (ChatGPT/Codex — the OpenAI Responses API): exact tokens and full conversation capture for accounts with no API key and no per-call bill. Live-verified." />
+    <meta property="og:title" content="Subscriptions (OAuth) · synadia-model-proxy" />
+    <meta property="og:description" content="Meter and audit agents on flat-rate OAuth subscriptions (ChatGPT/Codex — the OpenAI Responses API): exact tokens and full conversation capture for accounts with no API key and no per-call bill. Live-verified." />
     <meta property="og:type" content="website" />
     <script>(function(){try{var t=localStorage.getItem("modelproxy-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,9 +41,9 @@
         <div class="label">Connect</div>
         <a class="navlink" href="./providers.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5M3 17l9 5 9-5"/></svg></span>Providers & quirks</a>
         <a class="navlink" href="./harnesses.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5"/><path d="M6 8h12l-1 6a5 5 0 0 1-10 0z"/><path d="M12 19v3"/></svg></span>Agents & harnesses</a>
-        <a class="navlink" href="./subscriptions.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.6-5 7-5s6.2 1.8 7 5"/></svg></span>Subscriptions (OAuth)</a>
+        <a class="navlink active" href="./subscriptions.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.6-5 7-5s6.2 1.8 7 5"/></svg></span>Subscriptions (OAuth)</a>
         <div class="label">Reference</div>
-        <a class="navlink active" href="./operations.html" aria-current="page"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></span>Operations & flags</a>
+        <a class="navlink" href="./operations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></span>Operations & flags</a>
         <a class="navlink" href="./limitations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></span>Limitations & scope</a>
         <a class="navlink" href="./proven.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v6L4.5 18a3 3 0 0 0 2.6 4.5h9.8a3 3 0 0 0 2.6-4.5L14 8V2"/><path d="M8.5 2h7M7 15h10"/></svg></span>How it's proven</a>
         <a class="navlink" href="./status.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span>Status & the map</a>
@@ -60,7 +60,7 @@
           <nav class="crumbs" aria-label="Breadcrumb">
             <a href="./index.html" style="color: inherit; text-decoration: none">Docs</a>
             <span class="sep">/</span>
-            <span class="here">Operations & flags</span>
+            <span class="here">Subscriptions (OAuth)</span>
           </nav>
           <div class="right">
             <a class="icon-btn" href="https://github.com/synadia-ai/synadia-model-proxy" target="_blank" rel="noopener" aria-label="GitHub repository"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.68 22a.55.55 0 0 0 .73-.53v-2c-2.78.6-3.37-1.18-3.37-1.18-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83a2.2 2.2 0 0 1 .64-1.35c-2.22-.25-4.55-1.11-4.55-4.94a3.87 3.87 0 0 1 1.03-2.69 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.69c0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74a.55.55 0 0 0 .74.53A10.5 10.5 0 0 0 12 1.5z"/></svg></a>
@@ -71,151 +71,140 @@
         <div class="body-grid">
           <main class="content">
 <article class="prose">
-<h1>Operations &amp; flags</h1>
+<h1>Subscriptions (OAuth) — metering without an API key</h1>
 <p style="color: var(--ink-dim); font-size: 16px; margin-bottom: 6px;">
-  The operator's page: every flag, the failure contract, the healthz counters worth alarming
-  on, the admin CLI, and deployment notes.
-</p>
-<p>
-  One static Go binary, no runtime dependencies. Remember what you're operating: the fabric's
-  <strong>only fail-closed component</strong> — everything below is in service of keeping the
-  forwarding path boring.
+  Coding agents increasingly run on <strong>flat-rate OAuth subscriptions</strong> instead of
+  API keys — and their token usage appears on no bill you can query. The proxy makes those
+  accounts first-class: exact per-call tokens and full conversation &amp; tool-call audit,
+  live-verified against a real subscription.
 </p>
 
-<h2 id="flags"><a class="h-anchor" href="#flags" aria-hidden="true">#</a>1. Flags (env fallbacks in parentheses)</h2>
-<div class="table-wrap"><table>
-  <thead><tr><th>flag</th><th>default</th><th>notes</th></tr></thead>
-  <tbody>
-    <tr><td><code>--listen</code></td><td><code>:8080</code></td><td>plain HTTP; add <code>--tls-cert/--tls-key</code> or terminate at an LB</td></tr>
-    <tr><td><code>--proxy-name</code></td><td><code>modelproxy-&lt;hostname&gt;</code></td><td>instance name stamped into records</td></tr>
-    <tr><td><code>--provider</code></td><td>(builtins)</td><td>repeatable, <code>name=origin[,shape=…][,inject_usage=…]</code></td></tr>
-    <tr><td><code>--inject-usage</code></td><td><code>true</code></td><td>the inject+strip mechanism, globally</td></tr>
-    <tr><td><code>--inject-max-bytes</code></td><td>16 MiB</td><td>request-buffer cap for parse/inject; larger bodies skip injection (counted)</td></tr>
-    <tr><td><code>--dial-timeout</code></td><td><code>10s</code></td><td>connect-phase only — there is <strong>no</strong> response timeout, ever</td></tr>
-    <tr><td><code>--drain</code></td><td><code>30s</code></td><td>max wait for in-flight requests on SIGTERM (meter drain is ≤3s on top)</td></tr>
-    <tr><td><code>--js-url</code> <span style="color:var(--ink-faint)">($NATS_URL)</span></td><td>—</td><td>empty = forward-only; metering counted locally and loudly not persisted</td></tr>
-    <tr><td><code>--js-creds</code> <span style="color:var(--ink-faint)">($NATS_CREDS)</span></td><td>—</td><td>credentials file for the metering connection</td></tr>
-    <tr><td><code>--js-context</code> <span style="color:var(--ink-faint)">($NATS_CONTEXT)</span></td><td>—</td><td>NATS CLI context for server/auth/TLS — see precedence below</td></tr>
-    <tr><td><code>--js-stream</code> / <code>--js-subject-prefix</code></td><td><code>LLM_USAGE</code> / <code>audit.llm</code></td><td></td></tr>
-    <tr><td><code>--js-create</code></td><td><code>false</code></td><td>create the stream if absent (else operator-managed)</td></tr>
-    <tr><td><code>--js-max-age</code> / <code>--js-max-bytes</code></td><td><code>720h</code> / 1 GiB</td><td>stream limits when creating (max-bytes always set — NGS requires it)</td></tr>
-    <tr><td><code>--policy</code></td><td><code>false</code></td><td>master switch for enforcement; off ⇒ byte-for-byte MVP proxy</td></tr>
-    <tr><td><code>--policy-strict</code></td><td><code>false</code></td><td>deny llm.call until policy state has synced (default: stale-allow)</td></tr>
-    <tr><td><code>--policy-create</code></td><td><code>false</code></td><td>create the <code>MODELPROXY_POLICY</code> / <code>MODELPROXY_SPEND</code> buckets</td></tr>
-    <tr><td><code>--budgetd</code></td><td><code>false</code></td><td>run the spend aggregator here — <strong>exactly one per tenant domain</strong></td></tr>
-    <tr><td><code>--vault-key-file</code> <span style="color:var(--ink-faint)">($MODELPROXY_VAULT_KEY)</span></td><td>—</td><td>64-hex vault key for sealed provider keys</td></tr>
-    <tr><td><code>--audit</code></td><td><code>false</code></td><td>enable <a href="./audit.html">conversation &amp; tool-call capture</a>; off ⇒ byte-identical proxy</td></tr>
-    <tr><td><code>--audit-default</code></td><td><code>off</code></td><td>capture level when no rule matches: <code>off</code>/<code>metadata</code>/<code>content</code>/<code>full</code></td></tr>
-    <tr><td><code>--audit-tools</code></td><td><code>true</code></td><td>emit <code>llm.tool</code> projection events (per-rule override wins)</td></tr>
-    <tr><td><code>--audit-create</code></td><td><code>false</code></td><td>create the <code>LLM_AUDIT</code> stream if absent</td></tr>
-    <tr><td><code>--audit-max-age</code> / <code>--audit-max-bytes</code></td><td><code>168h</code> / <code>4 GiB</code></td><td><code>LLM_AUDIT</code> retention (DiscardOld ring — self-trims)</td></tr>
-    <tr><td><code>--audit-msg-max</code> / <code>--audit-record-max</code> / <code>--audit-tool-max</code></td><td>32K / 256K / 8K</td><td>content caps (over-cap → attested prefix)</td></tr>
-    <tr><td><code>--audit-msgs-max</code></td><td><code>2048</code></td><td>per-record message-count cap (huge resync truncates + flags, never over the max payload)</td></tr>
-    <tr><td><code>--audit-sessions-max</code> / <code>--audit-states-max</code></td><td>4096 / 4096</td><td>delta-state LRU bounds (eviction ⇒ re-capture once)</td></tr>
-  </tbody>
-</table></div>
+<h2 id="blind-spot"><a class="h-anchor" href="#blind-spot" aria-hidden="true">#</a>1. The blind spot</h2>
+<p>
+  pi and Codex CLI on a ChatGPT plan don't send an <code>sk-…</code> key — they log in once via
+  OAuth and speak the <strong>OpenAI Responses API</strong> to
+  <code>chatgpt.com/backend-api</code> with a bearer token. A flat-rate plan reports
+  <em>no per-call cost anywhere</em>: no usage dashboard per agent, no line items, nothing to
+  reconcile a fleet against. Every such agent is a metering and audit blind spot — precisely the
+  agents doing the most autonomous work.
+</p>
+<p>
+  The Responses API is a different wire shape from chat/completions (<code>instructions</code> +
+  <code>input[]</code> in, type-tagged <code>response.*</code> SSE out, usage riding the terminal
+  <code>response.completed</code> event). The proxy speaks it as its third shape,
+  <code>openai-responses</code> — and one shape covers <strong>every</strong> Responses-API
+  agent, whatever the harness.
+</p>
+
+<h2 id="one-flag"><a class="h-anchor" href="#one-flag" aria-hidden="true">#</a>2. One flag on the proxy</h2>
+<pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>modelproxy --audit --audit-create --policy --policy-create --js-url … --js-create \
+  --provider "openai-codex=https://chatgpt.com/backend-api,shape=openai-responses"</code></pre>
+<p>
+  The agent keeps using its own OAuth token — the proxy forwards <code>Authorization</code>
+  untouched (transparent mode) and stores nothing. Shape-specific behaviors, all automatic:
+</p>
+<ul>
+  <li><strong>Never injected.</strong> Usage is native in the terminal event, so the one
+    sanctioned mutation is off for this shape — request bodies cross byte-identical
+    (<code>mutated: false</code>, <code>usage_source: stream_native</code>).</li>
+  <li><strong>Transport quirks absorbed.</strong> chatgpt.com streams its SSE with
+    <em>no <code>Content-Type</code> header</em> and no <code>[DONE]</code> sentinel; for
+    streaming calls the proxy treats the reply as SSE by request intent and asks the upstream
+    for an uncompressed stream (<code>Accept-Encoding: identity</code> — transport-only, the
+    client's stream is unaffected).</li>
+  <li><strong>Reasoning captured honestly.</strong> Reasoning summaries are captured as
+    <code>thinking</code>; the provider's opaque <code>encrypted_content</code> is scrubbed to
+    a hash marker — attested, never stored.</li>
+</ul>
+
+<h2 id="wire-pi"><a class="h-anchor" href="#wire-pi" aria-hidden="true">#</a>3. Point the agent at it (pi)</h2>
+<p>
+  Subscription harnesses don't read <code>OPENAI_BASE_URL</code> for this path — they have a
+  provider config instead. For <strong>pi</strong>, two small settings (the OAuth login in
+  <code>auth.json</code> keeps working — the token is keyed to the provider, not the URL):
+</p>
+<pre><div class="code-head"><span class="lang">jsonc</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code><span class="hljs-comment">// ~/.pi/agent/models.json — repoint the endpoint, keep the OAuth login:</span>
+{ "providers": { "openai-codex": {
+    "baseUrl": "http://127.0.0.1:8080/{owner}/{agent}/{session}/openai-codex" } } }
+
+<span class="hljs-comment">// ~/.pi/agent/settings.json — the proxy is HTTP/SSE; pi's default tries WebSocket first:</span>
+{ "transport": "sse" }</code></pre>
+
+<h2 id="live-run"><a class="h-anchor" href="#live-run" aria-hidden="true">#</a>4. The live run (2026-07-09, real subscription)</h2>
+<p>
+  Everything below is a real capture: pi on a ChatGPT/Codex subscription, driven headlessly
+  through the built proxy binary, running a real <code>bash ls</code> tool loop. First the
+  metering — <strong>two exact token records</strong>, including a live prompt-cache hit on the
+  second call:
+</p>
+<pre><div class="code-head"><span class="lang">LLM_USAGE</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>model=gpt-5.4-mini-2026-03-17  in=1113 out=57 total=1170 cached=0     source=stream_native mutated=false
+model=gpt-5.4-mini-2026-03-17  in=1190 out=32 total=1222 <span class="hljs-string">cached=1024</span>  source=stream_native mutated=false</code></pre>
+<p>Then the audit side — the whole conversation reconstructed straight off the stream:</p>
+<pre><div class="code-head"><span class="lang">admin audit show local pi codex</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>── transcript reconstructed from 2 record(s) [resync×1] ──
+[ 0] req  system    {text}        {"content":"You are an expert coding assistant operating inside pi…
+[ 1] req  user      {text}        {"role":"user","content":[{"type":"input_text","text":"Use the bash tool…
+[ 2] res            {thinking}    {"content":[],"encrypted_content":"[scrubbed encrypted_content bytes=1188 sha256=b364…
+[ 3] req            {tool_use}    {"type":"function_call","call_id":"call_6LXv…","name":"bash","arguments":"{\"command\":\"ls\"}"…
+[ 4] req            {tool_result} {"type":"function_call_output","call_id":"call_6LXv…","output":"alpha.txt\nbeta.txt\ngamma.md\n"}
+[ 5] res            {thinking}    {"content":[],"encrypted_content":"[scrubbed encrypted_content bytes=1060 sha256=654c…
+[ 6] res  assistant {text}        {"type":"message","status":"completed","content":[{"type":"output_text","text":"I saw .txt and .md files."…</code></pre>
+<p>
+  Two delta records tell the storage story: call&nbsp;1 is the session's first capture
+  (<code>resync</code> — the whole context, once); call&nbsp;2 <strong>dedupes the matched
+  prefix</strong> and stores only what's new — the tool result and the answer. The
+  <code>llm.tool</code> feed carried exactly two events: <code>🔧 bash({"command":"ls"})</code>
+  and its result. And the counters agree with all of it:
+</p>
+<pre><div class="code-head"><span class="lang">healthz</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>"audit": { "captured": 2, "tool_events": 2, "skipped": 0, "truncated": 0,
+           "sink": {"emitted": 4, "dropped": 0}, "jetstream": {"published": 4, "dropped": 0} },
+"meter": { "emitted": 2, "dropped": 0 }</code></pre>
 <blockquote>
   <p>
-    <strong>Context precedence:</strong> a named <code>--js-context</code> supplies the server
-    URL and all auth/TLS material; an <em>explicitly passed</em> <code>--js-url</code> /
-    <code>--js-creds</code> overrides that piece; ambient <code>NATS_URL</code> /
-    <code>NATS_CREDS</code> env vars do not. The CLI's <em>selected</em> context is never used
-    implicitly — connections are always deliberate.
+    <strong>A wire detail worth knowing:</strong> the harness re-serializes some items when it
+    echoes them next turn (drops <code>logprobs</code>/<code>status</code>) but passes
+    reasoning items through byte-stably. The delta engine absorbs the mix — stable echoes
+    dedupe, rebuilt ones re-capture once, with no false <code>divergent</code> flags. Designed
+    on reasoning, then confirmed on the wire.
   </p>
 </blockquote>
 
-<h2 id="failure-semantics"><a class="h-anchor" href="#failure-semantics" aria-hidden="true">#</a>2. Failure semantics (the contract)</h2>
-<div class="table-wrap"><table>
-  <thead><tr><th>failure</th><th>forwarding</th><th>metering</th></tr></thead>
-  <tbody>
-    <tr><td>JetStream slow/down (incl. at startup)</td><td>unaffected — invisible to agents</td><td>drop-and-count; reconnects on its own</td></tr>
-    <tr><td>provider 4xx/5xx</td><td>passed through byte-identical</td><td><code>error_class: provider</code></td></tr>
-    <tr><td>provider unreachable</td><td>proxy-originated <code>502</code> JSON</td><td><code>error_class: network</code></td></tr>
-    <tr><td>client disconnects mid-stream</td><td>upstream canceled immediately</td><td>partial record (<code>client_closed</code>)</td></tr>
-    <tr><td>provider stalls mid-stream</td><td>held open — the client owns timeouts</td><td><code>total_ms</code> reflects reality</td></tr>
-    <tr><td>malformed SSE / unparseable body</td><td>forwarded verbatim, never gated on parse</td><td><code>usage_source: none</code>, counted</td></tr>
-    <tr><td>huge bodies</td><td>streamed through, never buffered whole</td><td>injection skipped over cap, counted</td></tr>
-    <tr><td>policy store (KV) unreachable</td><td>transparent traffic untouched; virtual keys <code>503</code>; budgets/models stale-allow (or <code>503</code> under <code>--policy-strict</code>)</td><td>mirrors freeze at last-known; watches auto-resume</td></tr>
-    <tr><td>vault key wrong/absent</td><td>virtual requests <code>503</code>; everything else untouched</td><td>detected at boot, loud</td></tr>
-    <tr><td>aggregator down/lagging</td><td>unaffected</td><td>spend freezes → overshoot grows with lag; <code>spend_age_s</code> exposes it</td></tr>
-    <tr><td>proxy SIGTERM</td><td>in-flight drain ≤ <code>--drain</code></td><td>sink drain ≤3s, final counters logged</td></tr>
-  </tbody>
-</table></div>
-
-<h2 id="healthz"><a class="h-anchor" href="#healthz" aria-hidden="true">#</a>3. <code>GET /healthz</code> — the counters</h2>
-<p>Fresh boot with the policy stack on (real):</p>
-<pre><div class="code-head"><span class="lang">json</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>{<span class="hljs-attr">"extract"</span>:{<span class="hljs-attr">"inject_skipped"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"strip_anomalies"</span>:<span class="hljs-number">0</span>},
- <span class="hljs-attr">"jetstream"</span>:{<span class="hljs-attr">"ack_errs"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"connected"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"dropped"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"published"</span>:<span class="hljs-number">0</span>},
- <span class="hljs-attr">"meter"</span>:{<span class="hljs-attr">"dropped"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"emitted"</span>:<span class="hljs-number">0</span>},
- <span class="hljs-attr">"policy"</span>:{<span class="hljs-attr">"enabled"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"strict"</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">"vault_key"</span>:<span class="hljs-literal">true</span>,
-           <span class="hljs-attr">"keys"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"budgets"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"models"</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">"prices"</span>:<span class="hljs-literal">true</span>,
-           <span class="hljs-attr">"spend_age_s"</span>:<span class="hljs-number">1</span>,
-           <span class="hljs-attr">"denials"</span>:{<span class="hljs-attr">"auth"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"budget"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"model"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"policy_unavailable"</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">"provider"</span>:<span class="hljs-number">0</span>}},
- <span class="hljs-attr">"proxy"</span>:<span class="hljs-string">"modelproxy-01"</span>,<span class="hljs-attr">"uptime_s"</span>:<span class="hljs-number">1</span>}</code></pre>
-<div class="table-wrap"><table>
-  <thead><tr><th>signal</th><th>healthy</th><th>alarm when</th></tr></thead>
-  <tbody>
-    <tr><td><code>meter.dropped</code>, <code>jetstream.dropped</code>, <code>jetstream.ack_errs</code></td><td>0, or flat</td><td>climbing — records are being lost (JetStream sizing/connectivity)</td></tr>
-    <tr><td><code>jetstream.connected</code></td><td><code>true</code></td><td><code>false</code> for longer than a blip</td></tr>
-    <tr><td><code>extract.inject_skipped</code>, <code>extract.strip_anomalies</code></td><td>≈0</td><td>growing — some client/provider pair produces unmeterable streams (<code>usage_source: none</code>)</td></tr>
-    <tr><td><code>policy.spend_age_s</code></td><td>seconds</td><td>minutes — budget overshoot bound is growing (aggregator lagging/down)</td></tr>
-    <tr><td><code>policy.denials.*</code></td><td>whatever your policy intends</td><td>unexpected spikes (<code>auth</code> = key misuse; <code>budget</code> = runaway agents)</td></tr>
-    <tr><td><code>policy.keys/budgets/models/prices</code></td><td><code>true</code> after boot</td><td><code>false</code> — a mirror never loaded (KV reachability)</td></tr>
-  </tbody>
-</table></div>
-
-<h2 id="admin-cli"><a class="h-anchor" href="#admin-cli" aria-hidden="true">#</a>4. The admin CLI</h2>
+<h2 id="pricing"><a class="h-anchor" href="#pricing" aria-hidden="true">#</a>5. Tokens verbatim — pricing is downstream's call</h2>
 <p>
-  All policy state management is CLI-over-KV — the fail-closed binary deliberately grows no
-  admin HTTP API. The full surface (real <code>-h</code> output):
+  A flat-rate subscription reports no per-call cost, and the proxy synthesizes none: records
+  carry exact tokens plus the provider's verbatim <code>usage</code> object
+  (<code>input_tokens</code>, <code>output_tokens</code>, cache read/write details,
+  <code>reasoning_tokens</code>), and whoever consumes <code>LLM_USAGE</code> applies rates —
+  reference pricing, internal chargeback, or none at all.
 </p>
-<pre><div class="code-head"><span class="lang">text</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>modelproxy admin — manage policy state (NATS KV)
-
-  vault-key generate
-  key create   --owner O --agent A [--providers p1,p2] [--expires 2160h]
-  key list     [--owner O] [--agent A]
-  key disable  --id vk_…      key enable --id vk_…      key delete --id vk_…
-  provider-key set --owner O --provider P [--vault-key-file F]
-                   (key from $PROVIDER_API_KEY or stdin — never argv)
-  budget set    --owner O [--agent A] [--usd-month F] [--usd-day F]
-                [--tokens-month N] [--tokens-day N] [--action deny|warn] [--warn-at 0.8]
-  budget delete --owner O [--agent A]
-  models set    --owner O [--agent A] [--allow g1,g2] [--deny g3,g4]
-  models delete --owner O [--agent A]
-  prices import FILE.json
-  audit enable  OWNER [AGENT] [--level content|metadata|full] [--tools=false]
-  audit disable OWNER [AGENT]                 (writes level "off")
-  audit status  [OWNER [AGENT]]
-  audit show    OWNER AGENT SESSION [--full]  (reconstruct the transcript)
-  audit tail    [--filter coder.acme.*]       (live convo/tool events)
-
-Connection flags on every subcommand: --js-url --js-creds --js-context
-(NATS_URL / NATS_CREDS / NATS_CONTEXT fallbacks).</code></pre>
-<p>
-  Secrets never ride argv — provider keys come from <code>$PROVIDER_API_KEY</code> or stdin.
-  The buckets are plain KV, so anything that can write KV (the <code>nats</code> CLI, a future
-  console) manages the same state.
+<p style="color: var(--ink-dim);">
+  One honest note: the proxy relays the agent's own authenticated traffic byte-identically —
+  whether a given subscription account may be pointed at shared infrastructure is a question of
+  the provider's terms, between you and the provider.
 </p>
 
-<h2 id="deployment"><a class="h-anchor" href="#deployment" aria-hidden="true">#</a>5. Deployment notes</h2>
-<ul>
-  <li><strong>Topology:</strong> N stateless proxy instances behind any TCP/HTTP LB work fine — mirrors are per-instance, fed from the same KV. Run <code>--budgetd</code> on <strong>exactly one</strong> instance per tenant domain (or its own binary later; the durable consumer name is the seam).</li>
-  <li><strong>The stream:</strong> in shared/NGS environments, pre-create <code>LLM_USAGE</code> operator-side (retention to taste, ≥ your longest budget window) and drop <code>--js-create</code>. The proxy needs publish rights on <code>audit.llm.&gt;</code> and KV access only with <code>--policy</code>.</li>
-  <li><strong>TLS:</strong> <code>--tls-cert/--tls-key</code> for direct exposure, or terminate at the LB — the proxy adds no <code>X-Forwarded-For</code>/<code>Via</code> either way (agents' network identity is not leaked upstream).</li>
-  <li><strong>Shutdown:</strong> SIGTERM → in-flight requests drain (≤ <code>--drain</code>, default 30s) → meter sink drains (≤3s) → final counters logged. Rolling restarts lose nothing but momentary capacity.</li>
-  <li><strong>Vault key:</strong> a file with mode 0400 (or the env var from your secret manager). Losing it orphans sealed provider keys — reseal from source keys, don't try to recover.</li>
-</ul>
+<h2 id="try-it"><a class="h-anchor" href="#try-it" aria-hidden="true">#</a>6. Try it yourself</h2>
+<pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code><span class="hljs-comment"># one-command demo (repo's local-tests playground; pi + its OAuth login required):</span>
+cd local-tests &amp;&amp; ./codex.sh
+<span class="hljs-comment"># automated twin — twice opt-in, skips without the env + a valid token:</span>
+MODELPROXY_CODEX_E2E=1 go test -run TestCodexSubscriptionLive ./e2e/ -v</code></pre>
+<p>
+  Contract, signed-off decisions (D1–D8), and the three live captures that pinned every wire
+  fact: <a href="https://github.com/synadia-ai/synadia-model-proxy/blob/main/SPEC-RESPONSES.md" target="_blank" rel="noopener">SPEC-RESPONSES.md</a>.
+  The redacted captures are committed as golden test fixtures — the scanner is tested against
+  the real event sequences, not mocks.
+</p>
 
-<nav class="pager" aria-label="Pagination"><a class="prev" href="./subscriptions.html"><span class="dir">&larr; Previous</span><span class="ttl">Subscriptions (OAuth)</span></a><a class="next" href="./limitations.html"><span class="dir">Next &rarr;</span><span class="ttl">Limitations & scope</span></a></nav>
+<nav class="pager" aria-label="Pagination"><a class="prev" href="./harnesses.html"><span class="dir">&larr; Previous</span><span class="ttl">Agents & harnesses</span></a><a class="next" href="./operations.html"><span class="dir">Next &rarr;</span><span class="ttl">Operations & flags</span></a></nav>
 </article>
           </main>
       <nav class="toc" aria-label="On this page">
         <div class="toc-h">On this page</div>
-        <a href="#flags" class="lvl-2" data-toc="flags">1. Flags (env fallbacks in parentheses)</a>
-        <a href="#failure-semantics" class="lvl-2" data-toc="failure-semantics">2. Failure semantics (the contract)</a>
-        <a href="#healthz" class="lvl-2" data-toc="healthz">3. GET /healthz — the counters</a>
-        <a href="#admin-cli" class="lvl-2" data-toc="admin-cli">4. The admin CLI</a>
-        <a href="#deployment" class="lvl-2" data-toc="deployment">5. Deployment notes</a>
+        <a href="#blind-spot" class="lvl-2" data-toc="blind-spot">1. The blind spot</a>
+        <a href="#one-flag" class="lvl-2" data-toc="one-flag">2. One flag on the proxy</a>
+        <a href="#wire-pi" class="lvl-2" data-toc="wire-pi">3. Point the agent at it (pi)</a>
+        <a href="#live-run" class="lvl-2" data-toc="live-run">4. The live run</a>
+        <a href="#pricing" class="lvl-2" data-toc="pricing">5. Tokens verbatim</a>
+        <a href="#try-it" class="lvl-2" data-toc="try-it">6. Try it yourself</a>
       </nav>
         </div>
       </div>

@@ -41,6 +41,7 @@
         <div class="label">Connect</div>
         <a class="navlink" href="./providers.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5M3 17l9 5 9-5"/></svg></span>Providers & quirks</a>
         <a class="navlink" href="./harnesses.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5"/><path d="M6 8h12l-1 6a5 5 0 0 1-10 0z"/><path d="M12 19v3"/></svg></span>Agents & harnesses</a>
+        <a class="navlink" href="./subscriptions.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.6-5 7-5s6.2 1.8 7 5"/></svg></span>Subscriptions (OAuth)</a>
         <div class="label">Reference</div>
         <a class="navlink" href="./operations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></span>Operations & flags</a>
         <a class="navlink" href="./limitations.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14M12 4l7 3M12 4L5 7"/><path d="M5 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/><path d="M19 7l-2.6 5.5a2.6 2.6 0 0 0 5.2 0z"/></svg></span>Limitations & scope</a>
@@ -136,6 +137,16 @@ ok  	github.com/synadia-ai/synadia-model-proxy/proxy	3.648s</code></pre>
 </ul>
 <pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>set -a; . ./.env; set +a          <span class="hljs-comment"># OPENROUTER_API_KEY=sk-or-…</span>
 go test -run TestOpenRouter ./e2e/ -v</code></pre>
+<p>
+  The same standard covers <a href="./subscriptions.html">OAuth subscriptions</a>: a
+  twice-opt-in live suite drives a <strong>real ChatGPT/Codex subscription</strong> through the
+  proxy — exact tokens asserted from <code>LLM_USAGE</code>, the conversation reconstructed
+  from <code>LLM_AUDIT</code> and compared against what the client actually received. It's the
+  suite that caught chatgpt.com streaming SSE with <em>no <code>Content-Type</code> header</em>
+  — a wire fact no mock would have invented, now pinned by a regression test and redacted
+  golden fixtures from the real captures.
+</p>
+<pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code>MODELPROXY_CODEX_E2E=1 go test -run TestCodexSubscriptionLive ./e2e/ -v</code></pre>
 
 <h2 id="phase-2-suite"><a class="h-anchor" href="#phase-2-suite" aria-hidden="true">#</a>3. The Phase-2 adversarial set</h2>
 <ul>
