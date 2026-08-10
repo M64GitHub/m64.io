@@ -404,7 +404,7 @@ every stream sets <code>max_bytes</code>; file storage; entries ≤ <code>max_pa
 <td><code>DE_TIMERS</code></td>
 <td>stream (file)</td>
 <td><code>de.timer.&gt;</code> (sched + wake)</td>
-<td>limits; <code>max_bytes</code>; <code>allow_msg_schedules</code></td>
+<td>limits; <code>max_bytes</code>; discard <strong>OLD</strong> (forced); <code>allow_msg_schedules</code></td>
 <td><code>@at</code> schedule definitions + same-stream wake delivery (cross-stream targets rejected); one timers consumer per workflow</td>
 </tr>
 <tr>

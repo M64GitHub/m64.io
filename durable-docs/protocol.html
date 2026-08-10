@@ -199,7 +199,7 @@ a read-only hint and never gates progress.</p>
 <td><code>DE_TIMERS</code></td>
 <td>Stream</td>
 <td><code>de.timer.&gt;</code></td>
-<td>File storage; <strong>Limits</strong> retention; <code>max_bytes</code> set; <strong><code>allow_msg_schedules: true</code></strong>.</td>
+<td>File storage; <strong>Limits</strong> retention; <strong><code>discard: old</code></strong> (forced — see below); <code>max_bytes</code> set; <strong><code>allow_msg_schedules: true</code></strong>.</td>
 </tr>
 <tr>
 <td><code>DE_RUNS</code></td>
@@ -229,6 +229,14 @@ message count is the live backlog.</li>
 <li><code>DE_TIMERS</code> <strong>MUST</strong> enable native message scheduling (<code>allow_msg_schedules</code>). A scheduled message&#39;s
 wake target <strong>MUST</strong> be a subject in the <strong>same</strong> stream (cross-stream schedule targets are rejected by
 the server) — hence both the schedule and its wake live under <code>de.timer.&gt;</code> (§7).</li>
+<li><code>DE_TIMERS</code> <strong>MUST</strong> use <strong><code>discard: old</code></strong>, and is the sole exception to the
+fail-loud posture: nats-server ≥ 2.14.3 rejects <code>allow_msg_schedules</code> combined with
+<code>discard: new</code>, and native scheduling is mandatory on this stream. The consequence is a real
+limitation: a full <code>DE_TIMERS</code> evicts by lowest stream sequence, and because only <em>delivered</em>
+wakes are reclaimable, pending schedules occupy the oldest sequences — an evicted schedule is a run that
+never wakes, with no error surfaced anywhere. An implementation <strong>SHOULD</strong> report timers
+utilisation on its hygiene interval and warn before the cap, and a deployment <strong>MUST</strong> size
+<code>DE_TIMERS</code> for its peak retained wakes <em>plus</em> all pending schedules.</li>
 <li><code>DE_RUNS</code> history is <code>1</code> (only the latest record per run is retained; it is a hint, §10).</li>
 <li><code>DE_BLOBS</code> is a standard JetStream <strong>object store</strong> (its chunking is what lets a blob exceed <code>max_payload</code>). Its backing stream <strong>MUST</strong> be <code>discard: new</code> — at <code>max_bytes</code> a full bucket must reject <strong>new</strong> blobs loudly; <code>discard: old</code> would silently delete chunks of existing objects, corrupting journaled runs that reference them.</li>
 </ul>

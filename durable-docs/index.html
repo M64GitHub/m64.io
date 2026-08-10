@@ -370,7 +370,8 @@ npm install @nats-io/transport-node   <span class="hljs-comment"># bring your ow
       <li>
         <strong>Built for production duty</strong> — bounded worker concurrency with per-run
         serialization, supervised consumers, self-reconciling provisioning with fail-loud limits
-        (<code>discard: new</code> everywhere), an injectable metrics/health seam, and a
+        (<code>discard: new</code> on every stream that permits it, and a monitored headroom gauge on
+        the one that does not), an injectable metrics/health seam, and a
         <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/OPERATIONS.md" target="_blank" rel="noopener">production runbook</a>
         (growth &amp; GC, sizing, authorization).
       </li>
@@ -382,7 +383,7 @@ npm install @nats-io/transport-node   <span class="hljs-comment"># bring your ow
   <span>Apache-2.0 · Synadia</span>
   <span class="spacer"></span>
   <a href="https://github.com/synadia-ai/durable-ts" target="_blank" rel="noopener">GitHub</a>
-  <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs" target="_blank" rel="noopener">All 12 walkthroughs</a>
+  <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/walkthroughs" target="_blank" rel="noopener">All 16 walkthroughs</a>
   <a href="https://github.com/synadia-ai/durable-ts/blob/main/README.md" target="_blank" rel="noopener">README</a>
 </footer>
           </main>
