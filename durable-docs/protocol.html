@@ -214,6 +214,12 @@ a read-only hint and never gates progress.</p>
 <td>OPTIONAL (the gating run lease — advisory, never a correctness mechanism). File storage; <code>history: 1</code>; small <code>max_bytes</code>; a max-age TTL as the GC backstop.</td>
 </tr>
 <tr>
+<td><code>DE_PARKED</code></td>
+<td>KV bucket</td>
+<td>key = <code>runId</code></td>
+<td>OPTIONAL (the lost-wake repair — advisory; §6.7). File storage; <code>history: 1</code>; small <code>max_bytes</code>; <strong>no TTL</strong> — a marker must outlive the longest sleep.</td>
+</tr>
+<tr>
 <td><code>DE_BLOBS</code></td>
 <td>Object store</td>
 <td>object name = <code>{runId}/{digest}</code></td>
@@ -230,13 +236,15 @@ message count is the live backlog.</li>
 wake target <strong>MUST</strong> be a subject in the <strong>same</strong> stream (cross-stream schedule targets are rejected by
 the server) — hence both the schedule and its wake live under <code>de.timer.&gt;</code> (§7).</li>
 <li><code>DE_TIMERS</code> <strong>MUST</strong> use <strong><code>discard: old</code></strong>, and is the sole exception to the
-fail-loud posture: nats-server ≥ 2.14.3 rejects <code>allow_msg_schedules</code> combined with
+fail-loud posture: nats-server ≥ 2.14.2 and ≥ 2.12.10 reject <code>allow_msg_schedules</code> combined with
 <code>discard: new</code>, and native scheduling is mandatory on this stream. The consequence is a real
 limitation: a full <code>DE_TIMERS</code> evicts by lowest stream sequence, and because only <em>delivered</em>
 wakes are reclaimable, pending schedules occupy the oldest sequences — an evicted schedule is a run that
 never wakes, with no error surfaced anywhere. An implementation <strong>SHOULD</strong> report timers
 utilisation on its hygiene interval and warn before the cap, and a deployment <strong>MUST</strong> size
-<code>DE_TIMERS</code> for its peak retained wakes <em>plus</em> all pending schedules.</li>
+<code>DE_TIMERS</code> for its peak retained wakes <em>plus</em> all pending schedules. Because the loss is
+silent, an implementation <strong>SHOULD</strong> additionally repair it: every deadline is journaled, so a lost
+wake is re-derivable and <strong>SHOULD</strong> be re-delivered rather than left to strand a run (§6.7).</li>
 <li><code>DE_RUNS</code> history is <code>1</code> (only the latest record per run is retained; it is a hint, §10).</li>
 <li><code>DE_BLOBS</code> is a standard JetStream <strong>object store</strong> (its chunking is what lets a blob exceed <code>max_payload</code>). Its backing stream <strong>MUST</strong> be <code>discard: new</code> — at <code>max_bytes</code> a full bucket must reject <strong>new</strong> blobs loudly; <code>discard: old</code> would silently delete chunks of existing objects, corrupting journaled runs that reference them.</li>
 </ul>
@@ -921,6 +929,24 @@ the consumer count.</p>
 <p><code>resume</code> is reserved in the work-item schema for an explicit re-drive. Wire v1 workers do not emit it
 (wakes use <code>timer</code> / <code>signal</code> / <code>child-done</code>); implementations <strong>MUST</strong> accept the schema field and <strong>MAY</strong>
 treat a <code>resume</code> item as a no-payload re-drive of the run.</p>
+<h3 id="6-6-the-gating-run-lease-optional-advisory"><a class="h-anchor" href="#6-6-the-gating-run-lease-optional-advisory" aria-label="Link to this section">#</a>6.6 The gating run lease (OPTIONAL, advisory)</h3>
+<p>A worker <strong>MAY</strong> gate run <em>execution</em> behind a per-run lease in <code>DE_LEASES</code>, so that at most one worker
+drives a run at a time — arbitrated by KV <code>create</code>/<code>update(revision)</code> on a logical deadline and renewed while
+driving. It narrows the §14 at-least-once window; it is <strong>never</strong> a correctness mechanism. Event appends and
+terminal re-drives stay ungated, and any lease failure <strong>MUST</strong> fail open: the journal CAS remains the only guard.</p>
+<h3 id="6-7-repairing-a-lost-wake-optional-advisory"><a class="h-anchor" href="#6-7-repairing-a-lost-wake-optional-advisory" aria-label="Link to this section">#</a>6.7 Repairing a lost wake (OPTIONAL, advisory)</h3>
+<p><code>DE_TIMERS</code> is the only resource here that can lose recorded state without surfacing an error (§3: it cannot be
+<code>discard: new</code>, so at <code>max_bytes</code> it evicts, and pending schedules occupy the oldest sequences). A lost wake
+strands a run forever — and it is <strong>recoverable</strong>, because the deadline of every <code>sleep</code> and every timed
+<code>await</code> is recorded in the journal.</p>
+<p>An implementation <strong>SHOULD</strong> perform the repair: index runs asleep on a timer in <code>DE_PARKED</code>
+(<code>{runId}</code> → <code>{ wf, seq, dueMs }</code> — written on suspend, removed on wake or terminal), and on its hygiene
+interval deliver the ordinary <code>timer</code> work item for anything past its deadline plus a grace period. Deliver the
+wake rather than re-arming the schedule: a re-arm republishes <code>{runId}:sched:{seq}</code> and would be swallowed by the
+timers stream&#x27;s duplicate window exactly when the loss is recent, and it writes into the stream that is failing.
+Delivery is idempotent by §8 — a <code>resolve</code> is appended only for a <code>seq</code> that has none — so a genuine wake
+arriving later is a no-op. The index is a <strong>hint</strong>: it <strong>MUST NOT</strong> gate anything, and a marker that is missing or
+stale can only cost a redundant re-drive, never a result.</p>
 <hr>
 <h2 id="7-timers-ctx-sleep-and-await-timeouts"><a class="h-anchor" href="#7-timers-ctx-sleep-and-await-timeouts" aria-label="Link to this section">#</a>7. Timers (<code>ctx.sleep</code> and <code>await</code> timeouts)</h2>
 <p>A durable timer rides <strong>native JetStream message scheduling</strong>. To arm a wake at absolute <code>dueMs</code> for run
@@ -1050,6 +1076,11 @@ observers. It is <strong>never</strong> read to gate progress (§2.2); the journ
 <td><code>next</code></td>
 <td>string</td>
 <td>Next generation runId, present when <code>continued</code>.</td>
+</tr>
+<tr>
+<td><code>dueMs</code></td>
+<td>number</td>
+<td>The run&#x27;s earliest pending wake, present only when <code>suspended</code> <strong>on a timer</strong> — absent when it waits on a signal or a child. A hint; the deadline of record is the journal entry&#x27;s.</td>
 </tr>
 </tbody></table>
 </div><p>Writes are plain puts. A <code>suspended</code> write <strong>MUST NOT</strong> downgrade a record already in a terminal status
@@ -1263,6 +1294,7 @@ DE_WORK      stream  file/workqueue          subjects: de.work.*
 DE_TIMERS    stream  file/limits + schedules subjects: de.timer.&gt;
 DE_RUNS      kv      file, history 1         key: {runId}
 DE_LEASES    kv      file, history 1, ttl    key: {runId}     (optional gating lease)
+DE_PARKED    kv      file, history 1, no ttl key: {runId}     (optional lost-wake repair)
 DE_BLOBS     obj     file, discard new       object: {runId}/sha256:{hex}  (payload offload)
 
 # Subjects
@@ -1350,6 +1382,8 @@ and <a href="./design.html"><code>DESIGN.md</code></a> for the design rationale 
         <a href="#6-3-consumers" class="lvl-3" data-toc="6-3-consumers">6.3 Consumers</a>
         <a href="#6-4-acknowledgement-semantics" class="lvl-3" data-toc="6-4-acknowledgement-semantics">6.4 Acknowledgement semantics</a>
         <a href="#6-5-the-resume-kind" class="lvl-3" data-toc="6-5-the-resume-kind">6.5 The resume kind</a>
+        <a href="#6-6-the-gating-run-lease-optional-advisory" class="lvl-3" data-toc="6-6-the-gating-run-lease-optional-advisory">6.6 The gating run lease</a>
+        <a href="#6-7-repairing-a-lost-wake-optional-advisory" class="lvl-3" data-toc="6-7-repairing-a-lost-wake-optional-advisory">6.7 Repairing a lost wake</a>
         <a href="#7-timers-ctx-sleep-and-await-timeouts" class="lvl-2" data-toc="7-timers-ctx-sleep-and-await-timeouts">7. Timers (ctx.sleep and await timeouts)</a>
         <a href="#8-signals-ctx-await-client-signal" class="lvl-2" data-toc="8-signals-ctx-await-client-signal">8. Signals (ctx.await + client.signal)</a>
         <a href="#9-sub-workflows-ctx-call" class="lvl-2" data-toc="9-sub-workflows-ctx-call">9. Sub-workflows (ctx.call)</a>

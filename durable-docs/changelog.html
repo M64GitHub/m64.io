@@ -80,14 +80,30 @@
 
 <article class="prose">
 
+<h2 id="unreleased"><a class="h-anchor" href="#unreleased" aria-label="Link to this section">#</a>Unreleased — the lost wake, repaired</h2>
+<p style="color:var(--ink-dim)"><em>in <code>main</code> · 336 tests · wire <code>v:1</code> + additive <code>v:2</code> (unchanged)</em></p>
+<p>
+  0.5.1 could only warn that a full timers stream silently drops pending schedules. It no longer has to:
+  every deadline is already in the journal, so a wake that goes missing is re-derivable — and now it is
+  re-delivered.
+</p>
+<ul>
+  <li><strong>A lost wake no longer strands a run.</strong> A new <code>DE_PARKED</code> bucket indexes runs asleep on a timer (<code>{run}</code> → <code>{ wf, seq, dueMs }</code>, bounded by the runs parked <em>right now</em>, not by history). The worker&#x27;s existing hygiene pass sweeps for anything past its deadline plus a grace period and delivers the wake itself. Runs resume late instead of never — for eviction, for the upgrade case below, for an errant purge alike. Default on.</li>
+  <li><strong>It repairs through the healthy path.</strong> The sweep delivers the ordinary timer work item rather than re-arming the schedule: a re-arm republishes the same message id and the timers stream&#x27;s 2-minute duplicate window would swallow it exactly when the loss is fresh — and it would write into the stream that is failing. Idempotent either way: the journal only ever records one wake per deadline, so a real wake arriving afterwards is a no-op.</li>
+  <li><strong>A broker upgrade no longer loses the timers stream twice.</strong> nats-server refuses to <em>restore</em> a pre-boundary <code>DE_TIMERS</code> — it hides the stream while leaving its files on disk. Provisioning adopts that store, and now persists the corrected config explicitly; before, the stream came back for one server lifetime and vanished again on the next restart, indefinitely.</li>
+  <li><strong>The affected versions were wrong everywhere.</strong> Bisected against every candidate release binary: the constraint lands in <strong>2.14.2</strong> and <strong>2.12.10</strong> (both 2026-06-02, one upstream change), not 2.14.3.</li>
+  <li><strong>New observability.</strong> <code>maintenance.reconcile</code> reports each sweep — a non-zero <code>redriven</code> is the alarm the server does not raise. <code>status()</code> now reports a parked run&#x27;s deadline.</li>
+</ul>
+<p><a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/CHANGELOG.md" target="_blank" rel="noopener">Full notes →</a></p>
+
 <h2 id="v0-5-1"><a class="h-anchor" href="#v0-5-1" aria-label="Link to this section">#</a>v0.5.1 — Discard compat &amp; timers headroom</h2>
 <p style="color:var(--ink-dim)"><em>2026-08-10 · tag <code>v0.5.1</code> · 315 tests · wire <code>v:1</code> + additive <code>v:2</code></em></p>
 <p>
-  A patch forced by the broker: nats-server 2.14.3 began rejecting native message scheduling combined
+  A patch forced by the broker: nats-server 2.14.2 began rejecting native message scheduling combined
   with <code>discard: new</code>, so 0.5.0 cannot provision against a current server at all.
 </p>
 <ul>
-  <li><strong>Provisioning works again on nats-server ≥ 2.14.3.</strong> <code>DE_TIMERS</code> is created and reconciled with <code>discard: old</code> — the only stream that is, because it is the only one that <em>must</em> carry native scheduling (what makes <code>ctx.sleep</code> and await timeouts fire). Journal, work, and blob storage keep the loud-rejection posture.</li>
+  <li><strong>Provisioning works again on nats-server ≥ 2.14.2 (and ≥ 2.12.10).</strong> <code>DE_TIMERS</code> is created and reconciled with <code>discard: old</code> — the only stream that is, because it is the only one that <em>must</em> carry native scheduling (what makes <code>ctx.sleep</code> and await timeouts fire). Journal, work, and blob storage keep the loud-rejection posture.</li>
   <li><strong>The cost is stated, not buried.</strong> A full timers stream now evicts instead of rejecting, lowest sequence first — and since the hygiene pass can only reclaim <em>delivered</em> wakes, pending schedules are what sinks to the bottom. The longest-dated <code>ctx.sleep</code> is first in line, and its loss surfaces nowhere: no fence, no retry, no terminal. The wire protocol carries this as a normative exception with a sizing requirement.</li>
   <li><strong>A compensating control.</strong> Each hygiene pass emits a <code>maintenance.headroom</code> gauge for the timers stream (<code>bytes</code>, <code>maxBytes</code>, <code>usedPct</code>) and warns past 75 %. The cap cannot be made loud, so the approach is. Alert on it.</li>
   <li><strong>Dashboard fix.</strong> A dashboard started before the first run no longer stays empty forever — the status-bucket watcher retries until the bucket exists and reopens if the watch ends.</li>
@@ -164,6 +180,7 @@
           </main>
           <nav class="toc" aria-label="On this page">
         <div class="toc-h">On this page</div>
+        <a href="#unreleased" class="lvl-2" data-toc="unreleased">Unreleased — the lost wake, repaired</a>
         <a href="#v0-5-1" class="lvl-2" data-toc="v0-5-1">v0.5.1 — Discard compat &amp; timers headroom</a>
         <a href="#v0-5-0" class="lvl-2" data-toc="v0-5-0">v0.5.0 — Large-payload offload</a>
         <a href="#v0-4-0" class="lvl-2" data-toc="v0-4-0">v0.4.0 — Industrial hardening</a>
