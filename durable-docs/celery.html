@@ -28,6 +28,7 @@
         <a class="navlink" href="./index.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></span>Overview</a>
         <a class="navlink" href="./how-it-works.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M4 4v14"/></svg></span>How it works</a>
         <a class="navlink" href="./persisting-state.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span>Persisting state</a>
+        <a class="navlink" href="./examples.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span>Examples</a>
         <div class="label">Walkthrough</div>
         <a class="navlink" href="./crash-replay.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg></span>Crash → replay</a>
         <a class="navlink" href="./fan-out-and-cancellation.html"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M7.3 11l8.4-3.9M7.3 13l8.4 3.9"/></svg></span>Fan-out &amp; cancellation</a>
@@ -323,12 +324,12 @@ app.conf.beat_schedule = {
   <li><strong>Reach for durable</strong> when a “job” is really a multi-step process that must not lose a step or repeat an effect across a crash — orders, payments, provisioning, sagas, human-in-the-loop approvals.</li>
   <li><strong>Stay on Celery</strong> for very high-throughput, independent, fire-and-forget tasks where its mature ecosystem, autoscaling, and Python-native story are the point. durable is a durable-execution library, not a drop-in high-volume task queue.</li>
   <li><strong>Fan-out.</strong> <code>group</code> / <code>chord</code> map to <code>ctx.startCall</code> per child + native <code>Promise.all</code> / <code>ctx.race</code> — durable fan-out is built in. (Per-branch local-step journaling, <code>ctx.startRun</code>, is the deferred bit; wrap parallel local work in one <code>ctx.run(() =&gt; Promise.all([...]))</code>.)</li>
-  <li><strong>Language.</strong> It's TypeScript today; a Python SDK over the same wire format is a future, not a shipped, thing.</li>
+  <li><strong>Language.</strong> It's shipped in both: the Python and TypeScript SDKs run over the same wire format, and every example above is given in both. A Go / Rust worker is a future, not a shipped, thing.</li>
 </ul>
 <p>
   See the <a href="./crash-replay.html">crash → replay walkthrough</a> for the headline in action, how
-  state is <a href="./persisting-state.html">persisted</a>, and the runnable
-  <a href="https://github.com/synadia-ai/durable-ts/blob/main/examples" target="_blank" rel="noopener">examples/</a>.
+  state is <a href="./persisting-state.html">persisted</a>, and the
+  <a href="./examples.html">runnable examples</a> — the same set in both languages, including a <code>blocking_io.py</code> that shows Python&#x27;s sync steps on threads.
 </p>
 
 </article>
