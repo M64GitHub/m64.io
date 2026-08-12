@@ -113,12 +113,20 @@ contract.</p>
 <code>name</code>. A <strong>command</strong> is a single <code>ctx.*</code> operation a workflow issues (it occupies a monotonic per-run
 sequence number, §5.2).</p>
 <h3 id="1-2-version"><a class="h-anchor" href="#1-2-version" aria-label="Link to this section">#</a>1.2 Version</h3>
-<p>The base wire format is <strong>frozen at <code>v:1</code></strong>. A journal entry carries <code>&quot;v&quot;: 1</code> — except an entry whose payload slot is
-<strong>offloaded</strong>, which carries <code>&quot;v&quot;: 2</code>: <code>v:2</code> is exactly the <code>v:1</code> layout with one <code>*Ref</code> field in place of one payload
-field. A decoder <strong>MUST</strong> reject an entry whose <code>v</code> is neither <code>1</code> nor <code>2</code> (and a decoder that does not implement offload
-<strong>MUST</strong> reject <code>v:2</code> — that loud failure is what protects a mixed-version fleet from silently replaying a stripped slot as an
-absent value). The format is deliberately small and explicit so it can be an
-inter-language contract — the journal, not any one SDK, is the standard.</p>
+<p>The base wire format is <strong>frozen at <code>v:1</code></strong>. A journal entry carries <code>&quot;v&quot;: 1</code>, except where one
+payload field is replaced by a stand-in — both additive, both the same layout otherwise:</p>
+<div class="table-wrap"><table>
+    <thead><tr><th><code>v</code></th><th>Layout</th><th>Section</th></tr></thead>
+    <tbody>
+      <tr><td><code>1</code></td><td>the base layout</td><td>§5.1</td></tr>
+      <tr><td><code>2</code></td><td>one <code>*Ref</code> in place of one payload field (offloaded)</td><td>canonical §5.6</td></tr>
+      <tr><td><code>3</code></td><td>one <code>*Enc</code> in place of one payload field, or a <code>*Ref</code> whose blob holds transformed bytes</td><td>§5.7 below</td></tr>
+    </tbody>
+  </table></div>
+<p>A decoder <strong>MUST</strong> reject an entry whose <code>v</code> is none of these, and a decoder that does not implement
+large-payload offload / the payload transform <strong>MUST</strong> reject <code>v:2</code> / <code>v:3</code> respectively — that loud failure is what protects a
+mixed-version fleet from silently replaying a stripped or transformed slot as though it were the value. The format is
+deliberately small and explicit so it can be an inter-language contract — the journal, not any one SDK, is the standard.</p>
 <p>The library implementing this protocol is independently versioned (pre-1.0) and may add capabilities without
 changing the wire format; wire-breaking changes bump <code>v</code>. Compatibility rules are in §15.</p>
 <h3 id="1-3-roles"><a class="h-anchor" href="#1-3-roles" aria-label="Link to this section">#</a>1.3 Roles</h3>
@@ -309,7 +317,7 @@ de.journal.&gt;                      # every run's journal (admin / export)
 de.work.&gt;                         # every workflow's queue
 de.timer.&gt;                        # all timer schedules + wakes</code></pre>
 <hr>
-<h2 id="5-the-journal-wire-format-v1"><a class="h-anchor" href="#5-the-journal-wire-format-v1" aria-label="Link to this section">#</a>5. The journal (wire format <code>v:1</code>)</h2>
+<h2 id="5-the-journal-wire-format-v1"><a class="h-anchor" href="#5-the-journal-wire-format-v1" aria-label="Link to this section">#</a>5. The journal (wire format <code>v:1</code>; <code>v:2</code> offloaded; <code>v:3</code> transformed, §5.7)</h2>
 <p>A run&#39;s journal is the ordered sequence of messages on <code>de.journal.{runId}</code>. It is the <strong>sole source of
 truth</strong> for the run; everything else (the status index, the work queue) is derived or advisory.</p>
 <h3 id="5-1-entry-envelope"><a class="h-anchor" href="#5-1-entry-envelope" aria-label="Link to this section">#</a>5.1 Entry envelope</h3>
@@ -768,6 +776,55 @@ canonical.</p>
 <p>To load a run, read all messages on <code>de.journal.{runId}</code> <strong>in stream order</strong> and decode each (§5.1). The
 ordered list is the run&#39;s full state. A run is <strong>terminal</strong> iff it contains a <code>result</code>, <code>fail</code>, or
 <code>continued</code> entry; it has <strong>at most one</strong> such entry (§5.4).</p>
+<hr>
+<h3 id="5-7-payload-transform"><a class="h-anchor" href="#5-7-payload-transform" aria-label="Link to this section">#</a>5.7 Payload transform (encryption at rest, wire <code>v:3</code>) — OPTIONAL</h3>
+<p>A deployment MAY configure a <strong>payload codec</strong>: a reversible <code>bytes → bytes</code> transform applied to an entry&#x27;s
+<strong>payload slot</strong> (the same four slots large-payload offload uses: <code>input</code>, <code>value</code>, <code>data</code>, <code>error</code>) before it is written. Its purpose is confidentiality at rest — NATS
+authorization is the security boundary, and a principal with read rights on <code>de.journal.&gt;</code> would otherwise see every
+input and result in the clear.</p>
+<p>It is <strong>not</strong> part of the wire format&#x27;s definition: the transform is opaque to this specification and the
+conformance corpus stays plaintext JSON. What IS normative is how a transformed entry is represented, so that a reader
+which cannot reverse the transform fails loud instead of misreading it.</p>
+<p><strong>Scope.</strong> The transform <strong>MUST</strong> apply to the payload slot only. The envelope — <code>v</code>, <code>seq</code>,
+<code>kind</code>, <code>ts</code>, step <code>name</code>, <code>key</code>, <code>signalId</code>, <code>resolvesSeq</code>, <code>childRunId</code>,
+<code>wf</code>, <code>dueMs</code>, blob refs — <strong>MUST</strong> remain in the clear: the replay engine matches commands on it, reading
+depends on it, and observers render it. Kinds with no payload slot are unchanged and stay <code>v:1</code>.</p>
+<p><strong>Inline form.</strong> The slot field is <strong>absent</strong> and the matching <code>*Enc</code> field carries the transform&#x27;s
+output, <strong>base64</strong> (standard alphabet, padded). The <code>*Ref</code> column is the offloaded stand-in for the same slot:</p>
+<div class="table-wrap"><table>
+    <thead><tr><th>Slot</th><th>Ref field (offload)</th><th>Transformed field</th></tr></thead>
+    <tbody>
+      <tr><td><code>input</code></td><td><code>inputRef</code></td><td><code>inputEnc</code></td></tr>
+      <tr><td><code>value</code></td><td><code>valueRef</code></td><td><code>valueEnc</code></td></tr>
+      <tr><td><code>data</code></td><td><code>dataRef</code></td><td><code>dataEnc</code></td></tr>
+      <tr><td><code>error</code></td><td><code>errorRef</code></td><td><code>errorEnc</code></td></tr>
+    </tbody>
+  </table></div>
+<p><strong>Composition with large-payload offload.</strong> The transform runs <strong>BEFORE</strong> the size check, so an oversized transformed payload
+can still offload. When both apply, the entry carries a <code>*Ref</code> (no <code>*Enc</code>) and the <strong>blob holds the
+transformed bytes</strong>; <code>ref.digest</code> is therefore computed over the transformed form, which is what integrity
+verification must cover. <code>v:3</code> subsumes <code>v:2</code>: a <code>v:3</code> entry MAY carry a ref.</p>
+<p><strong>Version.</strong> An entry whose slot was transformed <strong>MUST</strong> be stamped <code>&quot;v&quot;: 3</code>, inline or
+offloaded. Entries without a transformed slot <strong>SHOULD</strong> stay <code>v:1</code>/<code>v:2</code>, so enabling a codec leaves
+existing entries byte-identical and readable.</p>
+<p><strong>Writer rules.</strong></p>
+<ul>
+  <li>The transform <strong>MUST NOT</strong> be applied twice. An entry that already carries a <code>*Enc</code> or <code>*Ref</code> field (a pass-through append — a work item&#x27;s payload journaled verbatim) is written unchanged.</li>
+  <li>The transform need <strong>NOT</strong> be deterministic; a fresh nonce per call is expected. A slot is transformed once at append and only ever reversed afterwards, so replay never re-transforms and never compares outputs. (Consequence: content-addressed blob names stop deduplicating equal payloads — correct, since addressing a secret by its cleartext digest would leak equality.)</li>
+</ul>
+<p><strong>Reader rules.</strong></p>
+<ul>
+  <li>A reader encountering <code>v:3</code> <strong>without</strong> a configured codec <strong>MUST</strong> fail loud and <strong>park</strong> the run (redeliver with backoff), <strong>never</strong> terminally fail it and <strong>never</strong> surface the encoded form as the value. The condition is operational and heals when the codec is configured.</li>
+  <li>A reader whose codec <strong>fails</strong> to reverse a payload (wrong key, altered bytes, malformed base64) <strong>MUST</strong> be treated identically: park, not fail.</li>
+  <li>Reversal happens at journal load, before entries reach the replay engine — as with refs, the engine never sees a transformed slot.</li>
+</ul>
+<p><strong>Deployment rule.</strong> A payload codec is <strong>deployment-wide</strong>: every worker and client on a prefix MUST be
+configured with the same transform, and mixed SDKs MUST agree byte-for-byte on its output. Enabling it is safe going
+forward; disabling it is <strong>not</strong> safe for runs whose journals already carry <code>v:3</code>.</p>
+<p><strong>Status records</strong> written by a deployment with a payload codec <strong>MUST NOT</strong> carry the inline
+<code>result</code> / <code>error</code> — the record is a hint and results resolve through the journal, so redaction costs nothing
+and prevents the status KV, whose read right is the weakest one granted, from holding in the clear exactly what the
+journal protects.</p>
 <hr>
 <h2 id="6-the-work-queue"><a class="h-anchor" href="#6-the-work-queue" aria-label="Link to this section">#</a>6. The work queue</h2>
 <p>Work is dispatched as <strong>work items</strong>: JSON messages on <code>de.work.{workflow}</code>, consumed by that workflow&#39;s
@@ -1370,12 +1427,13 @@ and <a href="./design.html"><code>DESIGN.md</code></a> for the design rationale 
         <a href="#4-2-identifier-rules" class="lvl-3" data-toc="4-2-identifier-rules">4.2 Identifier rules</a>
         <a href="#4-3-derived-runids" class="lvl-3" data-toc="4-3-derived-runids">4.3 Derived runIds</a>
         <a href="#4-4-examples-wildcards" class="lvl-3" data-toc="4-4-examples-wildcards">4.4 Examples & wildcards</a>
-        <a href="#5-the-journal-wire-format-v1" class="lvl-2" data-toc="5-the-journal-wire-format-v1">5. The journal (wire format v:1)</a>
+        <a href="#5-the-journal-wire-format-v1" class="lvl-2" data-toc="5-the-journal-wire-format-v1">5. The journal (v:1 · v:2 · v:3)</a>
         <a href="#5-1-entry-envelope" class="lvl-3" data-toc="5-1-entry-envelope">5.1 Entry envelope</a>
         <a href="#5-2-command-sequence" class="lvl-3" data-toc="5-2-command-sequence">5.2 Command sequence</a>
         <a href="#5-3-entry-kinds" class="lvl-3" data-toc="5-3-entry-kinds">5.3 Entry kinds</a>
         <a href="#5-4-append-rules-msgid-expect" class="lvl-3" data-toc="5-4-append-rules-msgid-expect">5.4 Append rules — msgID & expect</a>
         <a href="#5-5-reading-a-journal" class="lvl-3" data-toc="5-5-reading-a-journal">5.5 Reading a journal</a>
+        <a href="#5-7-payload-transform" class="lvl-3" data-toc="5-7-payload-transform">5.7 Payload transform (v:3)</a>
         <a href="#6-the-work-queue" class="lvl-2" data-toc="6-the-work-queue">6. The work queue</a>
         <a href="#6-1-work-item-shape" class="lvl-3" data-toc="6-1-work-item-shape">6.1 Work-item shape</a>
         <a href="#6-2-work-item-msgids" class="lvl-3" data-toc="6-2-work-item-msgids">6.2 Work-item msgIDs</a>

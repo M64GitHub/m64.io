@@ -123,6 +123,8 @@
       <tr><td>Language-neutral wire spec</td><td><span class="cmp-y">✓</span> <span class="cmp-note">frozen v:1</span></td><td><span class="cmp-n">✗</span> <span class="cmp-note">internal</span></td><td><span class="cmp-n">✗</span> <span class="cmp-note">internal</span></td></tr>
       <tr><td>Observability dashboard</td><td><span class="cmp-y">✓</span> <span class="cmp-note">apps/ui</span></td><td><span class="cmp-y">✓</span></td><td><span class="cmp-y">✓</span></td></tr>
       <tr><td>Metrics / health hooks</td><td><span class="cmp-y">✓</span> <span class="cmp-note">metrics sink + health()</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">SDK metrics</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">dashboard</span></td></tr>
+      <tr><td>Payload encryption at rest</td><td><span class="cmp-y">✓</span> <span class="cmp-note">payload codec (AES-GCM)</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">data converter</span></td><td><span class="cmp-p">~</span> <span class="cmp-note">no customer keys</span></td></tr>
+      <tr><td>Authorization model</td><td><span class="cmp-p">~</span> <span class="cmp-note">NATS subject permissions</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">namespaces + RBAC</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">hosted RBAC</span></td></tr>
       <tr><td>Production runbook</td><td><span class="cmp-y">✓</span> <span class="cmp-note">OPERATIONS.md</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">extensive</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">hosted</span></td></tr>
       <tr><td>Production maturity</td><td><span class="cmp-n">✗</span> <span class="cmp-note">unpublished</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">widely deployed</span></td><td><span class="cmp-y">✓</span> <span class="cmp-note">widely deployed</span></td></tr>
     </tbody></table></div>
@@ -136,7 +138,7 @@
 <ul>
   <li><strong>Versioning of live runs — version-pinned dispatch.</strong> Register multiple <code>(name, version)</code>; each run executes the version it started under, so deploys never break in-flight runs, and <code>continueAsNew({ version })</code> migrates a chain forward. The remaining gap vs Temporal is in-<em>code</em> patching (<code>patched()</code>/<code>getVersion()</code> — evolving a run in place).</li>
   <li><strong>No global flow control.</strong> Durable fan-out now exists (<code>ctx.startCall/startSleep/startAwait</code> + native <code>Promise.all</code> / <code>ctx.race</code>) and each worker caps its own execution (<code>concurrency</code>, default 16, per-run serialization) — but there is still no <em>cluster-wide</em> concurrency limit, rate limit, throttle, debounce, or batching. Inngest's flow control is its headline. Global limits are genuinely <em>harder</em> in a library-on-NATS model with no central coordinator.</li>
-  <li><strong>Unproven in production.</strong> Neither SDK is published — there's no managed / hosted option and no track record at scale yet, and you operate (and must size / replicate) the NATS it rides on (a production runbook — <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/OPERATIONS.md" target="_blank" rel="noopener">OPERATIONS</a> — covers growth, GC, sizing, and authorization). The correctness core is heavily tested (393 tests in TypeScript, 390 in Python, each including a multi-worker chaos pass), but “tested” isn't “battle-tested.”</li>
+  <li><strong>Unproven in production.</strong> Neither SDK is published — there's no managed / hosted option and no track record at scale yet, and you operate (and must size / replicate) the NATS it rides on (a production runbook — <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/OPERATIONS.md" target="_blank" rel="noopener">OPERATIONS</a> — covers growth, GC, sizing, and authorization). The correctness core is heavily tested (415 tests in TypeScript, 410 in Python, each including a multi-worker chaos pass), but “tested” isn't “battle-tested.”</li>
 </ul>
 
 <h2 id="detail"><a class="h-anchor" href="#detail" aria-label="Link to this section">#</a>Limitations in detail</h2>
@@ -163,6 +165,14 @@
   <li><strong>Oversized metadata fails loud.</strong> Payload <em>values</em> over the server limit offload to <code>DE_BLOBS</code> automatically (default on; digest-verified refs); what cannot offload is metadata — a pathological step <em>name</em> — and <code>offload: false</code> restores the strict ceiling.</li>
   <li><strong>Two languages, not seven</strong> — TypeScript and Python SDKs ship against the same wire spec and interoperate on the same runs, but a Go / Rust / … worker is still an implementation someone has to write.</li>
   <li><strong>Unpublished</strong> — neither SDK is on npm or PyPI yet, and there is no managed option or production track record.</li>
+</ul>
+
+<h3 id="security"><a class="h-anchor" href="#security" aria-label="Link to this section">#</a>Security</h3>
+<ul>
+  <li><strong>NATS authorization is the whole security boundary.</strong> There is no server between your code and the streams, so who may touch <code>de.&gt;</code> is decided entirely by your NATS permissions. Publish rights on <code>de.journal.*</code> are effectively admin over the workflow domain: journal entries are unsigned, and the optimistic append that makes the engine correct is <em>concurrency</em> control, not authentication — an attacker reads the current sequence and appends at the next one. <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/OPERATIONS.md#authorization-who-may-touch-de" target="_blank" rel="noopener">OPERATIONS</a> has the threat model and ready-made permission sets for worker / client / read-only observer.</li>
+  <li><strong>Confidentiality is opt-in.</strong> By default a reader of <code>de.journal.&gt;</code> sees every input and result in plaintext. A <strong>payload codec</strong> (<code>payloadCodec</code> / <code>payload_codec</code>, with AES-256-GCM included) encrypts the payload of every entry, the offloaded blobs and the status hint, leaving the envelope readable so replay and the dashboard still work. Off by default; deployment-wide when on.</li>
+  <li><strong>No per-tenant isolation inside one prefix.</strong> NATS wildcards are token-level and a journal subject carries the runId as one opaque token, so no permission can say “only this principal&#x27;s own runs”. Per-<em>workflow</em> scoping works; tenancy is a separate prefix (its own streams) or a separate NATS account.</li>
+  <li><strong>The engine authorizes nothing itself.</strong> A server-based engine can decide “may this caller signal that workflow?”; a library on a shared bus cannot. What it gets in exchange is that there is no extra service to secure, and accounts / JWT / NKeys / mTLS come from NATS.</li>
 </ul>
 
 <h2 id="roadmap"><a class="h-anchor" href="#roadmap" aria-label="Link to this section">#</a>Roadmap vs. fundamental</h2>
@@ -200,6 +210,7 @@
         <a href="#execution" class="lvl-3" data-toc="execution">Execution model</a>
         <a href="#control" class="lvl-3" data-toc="control">Triggering, observability & control</a>
         <a href="#ops" class="lvl-3" data-toc="ops">Scale & operations (sharp edges)</a>
+        <a href="#security" class="lvl-3" data-toc="security">Security</a>
         <a href="#roadmap" class="lvl-2" data-toc="roadmap">Roadmap vs. fundamental</a>
         <a href="#when" class="lvl-2" data-toc="when">When durable is the right call — and when it isn't</a>
       </nav>
