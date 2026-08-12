@@ -73,12 +73,27 @@
     How <strong>@synadia-ai/durable</strong> got here, release by release — each version below is one
     theme, newest first (read bottom-up to watch it grow). The wire format has been frozen at
     <code>v:1</code> since day one (v0.5 adds the additive <code>v:2</code> offloaded-entry form); the test suite is the growth curve: <strong>107 → 202 → 224 →
-    270 → 314 → 315</strong>. The exhaustive, canonical log lives in the repo:
+    270 → 314 → 315 → 338 → 393</strong>, with a second SDK carrying 390 of its own. The exhaustive, canonical log lives in the repo:
     <a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.
   </p>
 </header>
 
 <article class="prose">
+
+<h2 id="v0-6-1"><a class="h-anchor" href="#v0-6-1" aria-label="Link to this section">#</a>v0.6.1 — Two ways a run could stop making progress</h2>
+<p style="color:var(--ink-dim)"><em>2026-08-12 · tag <code>v0.6.1</code> · 393 tests · wire <code>v:1</code> + additive <code>v:2</code> (unchanged)</em></p>
+<p>
+  Both of these were found by building the <strong>second SDK</strong>: a Python implementation of this
+  same wire spec, and the multi-worker chaos suite written for it. One is a permanent stranding, which
+  is the reason to take this patch. Neither changes the wire format, and both are now normative in the
+  <a href="./protocol.html">protocol</a> so that the next implementation cannot repeat them.
+</p>
+<ul>
+  <li><strong>A fenced inbound-event append no longer loses the event.</strong> Before replaying, a worker journals the event its work item carries — a signal, a timer wake, a child&#x27;s outcome, a cancel. That append is an ordinary CAS, and a concurrent writer can win it. Both SDKs treated the resulting fence as “already handled”, on the grounds that the message id makes the entry idempotent — but a message id makes an append <em>at most</em> once, and only a retry makes it <em>at least</em> once. The worker then acked the only copy of the event. For a <code>child-done</code> that is a parent parked <strong>forever</strong> on a child that already finished, with a healthy-looking journal and nothing in any log. The race is ordinary, not exotic: event recording is deliberately ungated by the run lease so that a cancel can always land, so two children of one parent completing at once on two workers is enough. The append is now retried past a fence and the item NAK&#x27;d rather than acked if the event still is not journaled.</li>
+  <li><strong>A hung step now releases the run lease as well as its ack extension.</strong> <code>maxWorkMs</code> exists so that a genuinely hung step stops holding its run: past it the worker stops sending ack progress and the item becomes redeliverable. But the gating lease renewed on its own interval, so the peer that received that redelivery was refused by a lease nobody was really working behind — the escape hatch defeated by the optimization beside it. One work budget is now computed per item and handed to both, so a peer can take the run over.</li>
+  <li><strong>A discarded durable future is fully armed before the run reports its outcome.</strong> Arming a fan-out branch is two operations — journal the command, then start the child or schedule the timer — and only the first rode the queue the executor drains. A <code>ctx.startCall</code> nobody awaits could therefore still have its child start in flight at the moment the worker acked. The executor now drains the arms too.</li>
+</ul>
+<p><a href="https://github.com/synadia-ai/durable-ts/blob/main/docs/CHANGELOG.md#061---2026-08-12" target="_blank" rel="noopener">Full 0.6.1 notes →</a></p>
 
 <h2 id="v0-6-0"><a class="h-anchor" href="#v0-6-0" aria-label="Link to this section">#</a>v0.6.0 — The lost wake, repaired</h2>
 <p style="color:var(--ink-dim)"><em>2026-08-11 · tag <code>v0.6.0</code> · 338 tests · wire <code>v:1</code> + additive <code>v:2</code> (unchanged)</em></p>
@@ -180,6 +195,7 @@
           </main>
           <nav class="toc" aria-label="On this page">
         <div class="toc-h">On this page</div>
+        <a href="#v0-6-1" class="lvl-2" data-toc="v0-6-1">v0.6.1 — Two ways a run could stop making progress</a>
         <a href="#v0-6-0" class="lvl-2" data-toc="v0-6-0">v0.6.0 — The lost wake, repaired</a>
         <a href="#v0-5-1" class="lvl-2" data-toc="v0-5-1">v0.5.1 — Discard compat &amp; timers headroom</a>
         <a href="#v0-5-0" class="lvl-2" data-toc="v0-5-0">v0.5.0 — Large-payload offload</a>

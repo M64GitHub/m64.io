@@ -200,7 +200,7 @@
   Because the log is ordered and immutable, reconstructing state is deterministic and a crash is
   harmless: whatever was appended is durable, and whatever wasn't simply didn't happen. The wire layout
   of these entries is frozen at <code>v:1</code> (offloaded entries use the additive <code>v:2</code> ref form) and specified language-neutrally in the
-  <a href="./protocol.html">wire protocol</a>, so a Go or Python worker could read the very same log.
+  <a href="./protocol.html">wire protocol</a> — which is why a Python worker reads and writes the very same log as a TypeScript one.
 </p>
 
 <h2 id="the-primitive"><a class="h-anchor" href="#the-primitive" aria-label="Link to this section">#</a>The one primitive: optimistic append</h2>

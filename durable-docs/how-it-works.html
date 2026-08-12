@@ -299,8 +299,8 @@ separate database. Your workers are stateless; all durability lives in NATS.</li
 <li><strong>It rides your existing NATS.</strong> Multi-region, clustering, auth, back-pressure, and observability
 are whatever your NATS already provides.</li>
 <li><strong>It&#39;s a library.</strong> Embed it; there&#39;s no network hop to a control plane to start a workflow.</li>
-<li><strong>Portable by design.</strong> The on-stream format is language-neutral, so Go / Python / … workers can
-share the same runs later.</li>
+<li><strong>Portable by design.</strong> The on-stream format is language-neutral, and two SDKs already
+ride it: TypeScript and Python workers share the same runs, the same journal, and the same dashboard.</li>
 </ul>
 <hr>
 <h2 id="9-status-where-to-go-next"><a class="h-anchor" href="#9-status-where-to-go-next" aria-label="Link to this section">#</a>9. Status &amp; where to go next</h2>
@@ -312,13 +312,22 @@ sub-workflows</strong>, <strong><code>ctx.continueAsNew</code></strong> (chained
 <strong>cancellation</strong> (<code>client.cancel</code> → an uncatchable hard-stop → terminal <code>cancelled</code>, opt-in <strong><code>ctx.onCancel</code></strong>
 compensation + child cascade), the client (<code>start</code> / <code>result</code> / <code>status</code>), the worker pull-replay loop (bounded concurrency, supervised consumers, ack-progress heartbeats for long steps, a default-on advisory run lease, an injectable metrics/health seam), <strong>large-payload offload</strong> (values over the broker limit ride the <code>DE_BLOBS</code>
 object store as digest-verified refs), and self-reconciling resource provisioning — all green
-(315 tests), with a suite proving replay-without-re-execution, crash-resume, fence-before-effect,
+(393 tests), with a suite proving replay-without-re-execution, crash-resume, fence-before-effect,
 real-timer suspend/resume, signal FIFO/early delivery, sub-workflow calls, continue-as-new chains,
 durable fan-out (partial-completion replay + deterministic <code>ctx.race</code>), cancellation (uncatchable
 hard-stop, <code>onCancel</code> compensation, child cascade, cancel-vs-completion by stream-seq), a
 multi-worker concurrency/chaos pass (exactly-once journaling, at-least-once effects — and exactly-once <em>execution</em> with the lease on), large-payload
 offload (multi-MiB values round-tripping, crash-replay from the blob store, park-and-heal on a missing blob), and the NATS
 primitives.</p>
+<p><strong>Two SDKs, one wire.</strong> The same feature surface ships in <strong>TypeScript</strong> and
+<strong>Python</strong>, both implementing <a href="./protocol.html">the wire spec</a> against the same
+streams — so a Python client can drive a TypeScript worker, a workflow in one language can
+<code>ctx.call</code> a sub-workflow in the other, and both show up in the same dashboard. TypeScript is
+the reference implementation: a corpus of golden journal entries is generated from its codec, and both
+SDKs assert they reproduce and re-decode every one, which is what keeps “the same wire” from drifting
+into “almost the same wire”. Two names differ, because <code>await</code> and <code>assert</code> are
+Python keywords: <code>ctx.await</code> → <code>ctx.wait</code>, <code>ctx.assert</code> →
+<code>ctx.check</code>.</p>
 <p><strong>Versioning.</strong> A worker can register several versions of a workflow (<code>defineWorkflow(name, fn, { version })</code>); each run stays on the version it started under, so shipping new code never breaks runs already in flight. Migrate a long-running one forward with <code>ctx.continueAsNew(input, { version })</code>. A run whose version isn't deployed anywhere waits (<code>blocked</code>) instead of failing.</p>
 <p>A payload <strong>bigger than the server&#39;s message limit</strong> (a model output, a scraped page, a file) doesn&#39;t
 fail the run: it is <strong>offloaded</strong> — the value is written to a <code>DE_BLOBS</code> object store and the journal

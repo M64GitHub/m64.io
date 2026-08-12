@@ -78,36 +78,54 @@
 
 <article class="prose">
 
-<blockquote><p>
-  <strong>A note on language.</strong> Celery is Python; <code>@synadia-ai/durable</code> is a
-  TypeScript library today. The on-the-wire format is language-neutral (a Python SDK could ride the same
-  NATS), but it doesn't exist yet — so “replace” here means running that workflow on a small TypeScript
-  worker alongside your Python services, all on the NATS you already operate.
-</p></blockquote>
+<blockquote>
+      <p>
+        <strong>A note on language.</strong> Celery is Python — and so is one of
+        durable&#x27;s two SDKs. <code>synadia-durable</code> (Python) and
+        <code>@synadia-ai/durable</code> (TypeScript) implement the same
+        <a href="./protocol.html">wire specification</a> over the same NATS streams, so you can stay in
+        Python end to end, or mix: a Python client driving a TypeScript worker, or a Python workflow
+        calling a TypeScript sub-workflow, is a tested path rather than a hopeful one. Every example
+        below is shown in <strong>both</strong> languages. TypeScript is the reference implementation —
+        the golden journal entries both SDKs are tested against are generated from its codec.
+      </p>
+    </blockquote>
 
 <h2 id="concept-map"><a class="h-anchor" href="#concept-map" aria-label="Link to this section">#</a>Concept map</h2>
-<div class="table-wrap"><table>
-    <thead><tr><th>Concept</th><th>Celery</th><th>@synadia-ai/durable</th></tr></thead>
+  <p>
+    Where the two SDKs differ, the TypeScript form is given first and the Python form after a
+    <code>·</code>. Most of the surface is spelled the same in both.
+  </p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Concept</th><th>Celery</th><th>durable — TypeScript · Python</th></tr></thead>
     <tbody>
-      <tr><td><strong>A task</strong></td><td><code>@app.task</code></td><td><code>ctx.run(name, fn)</code> (a step in a workflow)</td></tr>
+      <tr><td><strong>A task</strong></td><td><code>@app.task</code></td><td><code>ctx.run(name, fn)</code> — a step in a workflow (in Python a plain <code>def</code> runs on a thread)</td></tr>
       <tr><td><strong>Enqueue</strong></td><td><code>task.delay(...)</code> / <code>apply_async</code></td><td><code>client.start(wf, input)</code></td></tr>
-      <tr><td><strong>Worker</strong></td><td><code>celery -A app worker</code></td><td><code>createWorker({ nc, workflows }).start()</code></td></tr>
-      <tr><td><strong>Broker</strong></td><td>Redis / RabbitMQ</td><td>NATS / JetStream (the journal + work queue)</td></tr>
+      <tr><td><strong>Worker</strong></td><td><code>celery -A app worker</code></td><td><code>createWorker({ nc, workflows }).start()</code> · <code>create_worker(nc, [wf]).start()</code></td></tr>
+      <tr><td><strong>Broker</strong></td><td>Redis / RabbitMQ</td><td>NATS / JetStream (the journal + work queue) — the same streams for both</td></tr>
       <tr><td><strong>Result backend</strong></td><td>Redis / DB (opt-in)</td><td>the journal — <code>handle.result()</code> / <code>status()</code></td></tr>
-      <tr><td><strong>Retry</strong></td><td><code>self.retry()</code>, <code>max_retries</code></td><td><code>ctx.run(…, { retry })</code></td></tr>
-      <tr><td><strong>Idempotency</strong></td><td>DIY (dedup keys)</td><td><code>ctx.key()</code> → <code>${runId}:${seq}</code></td></tr>
+      <tr><td><strong>Retry</strong></td><td><code>self.retry()</code>, <code>max_retries</code></td><td><code>ctx.run(…, { retry })</code> · <code>ctx.run(…, retry=RetryPolicy(...))</code></td></tr>
+      <tr><td><strong>Idempotency</strong></td><td>DIY (dedup keys)</td><td><code>ctx.key()</code> → <code>{runId}:{seq}</code></td></tr>
       <tr><td><strong>Delayed run</strong></td><td><code>countdown=</code> / <code>eta=</code></td><td><code>ctx.sleep(name, ms)</code></td></tr>
       <tr><td><strong>Chain (pipeline)</strong></td><td><code>chain(a.s(), b.s())</code></td><td>sequential <code>await ctx.run(...)</code> in one fn</td></tr>
-      <tr><td><strong>Group / chord (fan-out)</strong></td><td><code>group</code> / <code>chord</code></td><td><code>ctx.startCall</code> per child + <code>Promise.all</code> / <code>ctx.race</code></td></tr>
-      <tr><td><strong>Periodic</strong></td><td>Celery beat (<code>crontab</code>)</td><td><code>ctx.sleep</code> + <code>ctx.continueAsNew</code></td></tr>
+      <tr><td><strong>Group / chord (fan-out)</strong></td><td><code>group</code> / <code>chord</code></td><td><code>ctx.startCall</code> · <code>ctx.start_call</code> per child, then <code>Promise.all</code> · <code>asyncio.gather</code>, or <code>ctx.race</code></td></tr>
+      <tr><td><strong>Periodic</strong></td><td>Celery beat (<code>crontab</code>)</td><td><code>ctx.sleep</code> + <code>ctx.continueAsNew</code> · <code>ctx.continue_as_new</code></td></tr>
       <tr><td><strong>Crash mid-pipeline</strong></td><td>no built-in resume</td><td><strong>replay from the journal</strong> — resumes where it stopped</td></tr>
     </tbody>
   </table></div>
+  <p>
+    Only two <code>ctx</code> names differ for a reason other than casing, and both because they
+    are Python keywords: <code>ctx.await</code> is <strong><code>ctx.wait</code></strong> and
+    <code>ctx.assert</code> is <strong><code>ctx.check</code></strong>.
+  </p>
 
 <h2 id="task"><a class="h-anchor" href="#task" aria-label="Link to this section">#</a>A task → a durable step</h2>
 <p>
   A Celery task becomes a <code>ctx.run</code> step inside a workflow. You enqueue with
-  <code>client.start</code> and run a worker — the broker and result backend are both just your NATS.
+  <code>client.start</code> and run a worker — the broker and result backend are both just your NATS. In Python,
+  <code>ctx.run</code> takes a plain <code>def</code> as happily as an <code>async def</code> and
+  dispatches the plain one to a worker thread, so a synchronous vendor SDK (which is most of them)
+  needs no wrapping.
 </p>
 <div class="compare">
   <div class="compare-col">
@@ -127,8 +145,32 @@ charge_card.delay(<span class="hljs-string">&quot;c_1&quot;</span>, <span class=
 <span class="hljs-comment"># run a worker:  $ celery -A tasks worker</span></code></pre>
   </div>
   <div class="compare-col">
-    <div class="compare-tag us">@synadia-ai/durable</div>
-    <pre><div class="code-head"><span class="lang">durable</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@nats-io/transport-node&quot;</span>;
+    <div class="compare-tag us">durable · Python</div>
+    <pre><div class="code-head"><span class="lang">python</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-python"><span class="hljs-keyword">import</span> asyncio
+<span class="hljs-keyword">import</span> nats
+<span class="hljs-keyword">from</span> synadia_durable <span class="hljs-keyword">import</span> Ctx, create_client, create_worker, workflow
+
+<span class="hljs-meta">@workflow(<span class="hljs-params">name=<span class="hljs-string">&quot;charge&quot;</span></span>)</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">charge</span>(<span class="hljs-params">ctx: Ctx, cart: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
+    <span class="hljs-comment"># a blocking vendor SDK: a plain def runs on a worker thread</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;charge-card&quot;</span>, stripe.Charge.create,
+                         amount=cart[<span class="hljs-string">&quot;amount&quot;</span>], source=cart[<span class="hljs-string">&quot;cart_id&quot;</span>])
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>() -&gt; <span class="hljs-literal">None</span>:
+    nc = <span class="hljs-keyword">await</span> nats.connect(<span class="hljs-string">&quot;nats://127.0.0.1:4222&quot;</span>)
+
+    <span class="hljs-comment"># enqueue from your app</span>
+    client = create_client(nc)
+    <span class="hljs-keyword">await</span> client.start(charge, {<span class="hljs-string">&quot;cart_id&quot;</span>: <span class="hljs-string">&quot;c_1&quot;</span>, <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">42</span>})
+
+    <span class="hljs-comment"># run a worker</span>
+    <span class="hljs-keyword">await</span> create_worker(nc, [charge]).start()
+
+asyncio.run(main())</code></pre>
+  </div>
+</div>
+  <div class="compare-tag us">durable · TypeScript</div>
+  <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@nats-io/transport-node&quot;</span>;
 <span class="hljs-keyword">import</span> { createClient, createWorker, defineWorkflow } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@synadia-ai/durable&quot;</span>;
 
 <span class="hljs-keyword">const</span> charge = <span class="hljs-title function_">defineWorkflow</span>(<span class="hljs-string">&quot;charge&quot;</span>, <span class="hljs-title function_">async</span> (ctx, <span class="hljs-attr">input</span>: { <span class="hljs-attr">cartId</span>: <span class="hljs-built_in">string</span>; <span class="hljs-attr">amount</span>: <span class="hljs-built_in">number</span> }) =&gt;
@@ -145,8 +187,6 @@ charge_card.delay(<span class="hljs-string">&quot;c_1&quot;</span>, <span class=
 
 <span class="hljs-comment">// run a worker</span>
 <span class="hljs-keyword">await</span> <span class="hljs-title function_">createWorker</span>({ nc, <span class="hljs-attr">workflows</span>: [charge] }).<span class="hljs-title function_">start</span>();</code></pre>
-  </div>
-</div>
 
 <h2 id="retries"><a class="h-anchor" href="#retries" aria-label="Link to this section">#</a>Retries → built-in, with real idempotency</h2>
 <p>
@@ -167,14 +207,22 @@ charge_card.delay(<span class="hljs-string">&quot;c_1&quot;</span>, <span class=
         <span class="hljs-keyword">raise</span> <span class="hljs-variable language_">self</span>.retry(exc=exc)</code></pre>
   </div>
   <div class="compare-col">
-    <div class="compare-tag us">@synadia-ai/durable</div>
-    <pre><div class="code-head"><span class="lang">durable</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(
-  <span class="hljs-string">&quot;charge&quot;</span>,
-  <span class="hljs-function">() =&gt;</span> gateway.<span class="hljs-title function_">charge</span>(orderId, amount, { <span class="hljs-attr">idempotencyKey</span>: ctx.<span class="hljs-title function_">key</span>() }),
-  { <span class="hljs-attr">retry</span>: { <span class="hljs-attr">kind</span>: <span class="hljs-string">&quot;exponential&quot;</span>, <span class="hljs-attr">attempts</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">baseMs</span>: <span class="hljs-number">2000</span>, <span class="hljs-attr">factor</span>: <span class="hljs-number">2</span> } },
-);</code></pre>
+    <div class="compare-tag us">durable · Python</div>
+    <pre><div class="code-head"><span class="lang">python</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-python"><span class="hljs-keyword">from</span> synadia_durable <span class="hljs-keyword">import</span> RetryPolicy
+
+<span class="hljs-comment"># Read ctx.key() INSIDE the step: outside one it returns the</span>
+<span class="hljs-comment"># run-scoped fallback {runId}:0 — wrong for any step but the first.</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">charge_once</span>() -&gt; <span class="hljs-built_in">dict</span>:
+    <span class="hljs-keyword">return</span> gateway.charge(order_id, amount, idempotency_key=ctx.key())
+
+<span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;charge&quot;</span>, charge_once,
+              retry=RetryPolicy(attempts=<span class="hljs-number">5</span>, delay_ms=<span class="hljs-number">2000</span>, factor=<span class="hljs-number">2.0</span>))</code></pre>
   </div>
 </div>
+  <div class="compare-tag us">durable · TypeScript</div>
+  <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;charge&quot;</span>, <span class="hljs-function">() =&gt;</span> gateway.<span class="hljs-title function_">charge</span>(orderId, amount, { <span class="hljs-attr">idempotencyKey</span>: ctx.<span class="hljs-title function_">key</span>() }), {
+  <span class="hljs-attr">retry</span>: { <span class="hljs-attr">kind</span>: <span class="hljs-string">&quot;exponential&quot;</span>, <span class="hljs-attr">attempts</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">baseMs</span>: <span class="hljs-number">2000</span>, <span class="hljs-attr">factor</span>: <span class="hljs-number">2</span> },
+});</code></pre>
 
 <h2 id="scheduled"><a class="h-anchor" href="#scheduled" aria-label="Link to this section">#</a>Delayed / scheduled → <code>ctx.sleep</code></h2>
 <p>A durable timer: the wake is a scheduled NATS message, so a parked run survives worker restarts and consumes no worker while it waits.</p>
@@ -185,11 +233,14 @@ charge_card.delay(<span class="hljs-string">&quot;c_1&quot;</span>, <span class=
 send_reminder.apply_async((user_id,), countdown=<span class="hljs-number">3600</span>)</code></pre>
   </div>
   <div class="compare-col">
-    <div class="compare-tag us">@synadia-ai/durable</div>
-    <pre><div class="code-head"><span class="lang">durable</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">sleep</span>(<span class="hljs-string">&quot;cool-off&quot;</span>, <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);
-<span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;reminder&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">sendReminder</span>(userId));</code></pre>
+    <div class="compare-tag us">durable · Python</div>
+    <pre><div class="code-head"><span class="lang">python</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-python"><span class="hljs-keyword">await</span> ctx.sleep(<span class="hljs-string">&quot;cool-off&quot;</span>, <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>)
+<span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;reminder&quot;</span>, send_reminder, user_id)</code></pre>
   </div>
 </div>
+  <div class="compare-tag us">durable · TypeScript</div>
+  <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">sleep</span>(<span class="hljs-string">&quot;cool-off&quot;</span>, <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);
+<span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;reminder&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">sendReminder</span>(userId));</code></pre>
 
 <h2 id="chains"><a class="h-anchor" href="#chains" aria-label="Link to this section">#</a>Chains → one crash-safe workflow</h2>
 <p>
@@ -210,8 +261,20 @@ chain(reserve.s(cart), authorize.s(amount), capture.s()).apply_async()
 <span class="hljs-comment"># re-executes `reserve`/`authorize` — you hand-roll state + dedup.</span></code></pre>
   </div>
   <div class="compare-col">
-    <div class="compare-tag us">@synadia-ai/durable</div>
-    <pre><div class="code-head"><span class="lang">durable</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">const</span> checkout = <span class="hljs-title function_">defineWorkflow</span>(<span class="hljs-string">&quot;checkout&quot;</span>, <span class="hljs-title function_">async</span> (ctx, <span class="hljs-attr">input</span>: <span class="hljs-title class_">Cart</span>) =&gt; {
+    <div class="compare-tag us">durable · Python</div>
+    <pre><div class="code-head"><span class="lang">python</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-python"><span class="hljs-meta">@workflow(<span class="hljs-params">name=<span class="hljs-string">&quot;checkout&quot;</span></span>)</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">checkout</span>(<span class="hljs-params">ctx: Ctx, cart: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
+    amount = cart[<span class="hljs-string">&quot;amount&quot;</span>]
+    order_id = <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;reserve&quot;</span>, reserve, cart[<span class="hljs-string">&quot;items&quot;</span>])
+    auth_id = <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;authorize&quot;</span>, authorize, order_id, amount)
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;capture&quot;</span>, capture, auth_id)
+
+<span class="hljs-comment"># crash after `authorize`? a fresh worker replays reserve + authorize from</span>
+<span class="hljs-comment"># the journal (no re-run) and resumes at `capture`. Exactly-once state.</span></code></pre>
+  </div>
+</div>
+  <div class="compare-tag us">durable · TypeScript</div>
+  <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">const</span> checkout = <span class="hljs-title function_">defineWorkflow</span>(<span class="hljs-string">&quot;checkout&quot;</span>, <span class="hljs-title function_">async</span> (ctx, <span class="hljs-attr">input</span>: <span class="hljs-title class_">Cart</span>) =&gt; {
   <span class="hljs-keyword">const</span> orderId = <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;reserve&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">reserve</span>(input.<span class="hljs-property">cart</span>));
   <span class="hljs-keyword">const</span> authId = <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;authorize&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">authorize</span>(orderId, input.<span class="hljs-property">amount</span>));
   <span class="hljs-keyword">return</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;capture&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">capture</span>(authId));
@@ -219,8 +282,6 @@ chain(reserve.s(cart), authorize.s(amount), capture.s()).apply_async()
 
 <span class="hljs-comment">// crash after `authorize`? a fresh worker replays reserve + authorize from</span>
 <span class="hljs-comment">// the journal (no re-run) and resumes at `capture`. Exactly-once state.</span></code></pre>
-  </div>
-</div>
 
 <h2 id="periodic"><a class="h-anchor" href="#periodic" aria-label="Link to this section">#</a>Periodic (beat) → continue-as-new</h2>
 <p>
@@ -242,14 +303,20 @@ app.conf.beat_schedule = {
 }</code></pre>
   </div>
   <div class="compare-col">
-    <div class="compare-tag us">@synadia-ai/durable</div>
-    <pre><div class="code-head"><span class="lang">durable</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">const</span> rollup = <span class="hljs-title function_">defineWorkflow</span>(<span class="hljs-string">&quot;rollup&quot;</span>, <span class="hljs-title function_">async</span> (ctx, <span class="hljs-attr">s</span>: { <span class="hljs-attr">day</span>: <span class="hljs-built_in">number</span> }) =&gt; {
+    <div class="compare-tag us">durable · Python</div>
+    <pre><div class="code-head"><span class="lang">python</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-python"><span class="hljs-meta">@workflow(<span class="hljs-params">name=<span class="hljs-string">&quot;rollup&quot;</span></span>)</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">rollup</span>(<span class="hljs-params">ctx: Ctx, s: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-literal">None</span>:
+    <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;rollup&quot;</span>, do_rollup, s[<span class="hljs-string">&quot;day&quot;</span>])
+    <span class="hljs-keyword">await</span> ctx.sleep(<span class="hljs-string">&quot;one-day&quot;</span>, <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>)
+    <span class="hljs-keyword">await</span> ctx.continue_as_new({<span class="hljs-string">&quot;day&quot;</span>: s[<span class="hljs-string">&quot;day&quot;</span>] + <span class="hljs-number">1</span>})</code></pre>
+  </div>
+</div>
+  <div class="compare-tag us">durable · TypeScript</div>
+  <pre><div class="code-head"><span class="lang">ts</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-ts"><span class="hljs-keyword">const</span> rollup = <span class="hljs-title function_">defineWorkflow</span>(<span class="hljs-string">&quot;rollup&quot;</span>, <span class="hljs-title function_">async</span> (ctx, <span class="hljs-attr">s</span>: { <span class="hljs-attr">day</span>: <span class="hljs-built_in">number</span> }) =&gt; {
   <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">run</span>(<span class="hljs-string">&quot;rollup&quot;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">doRollup</span>(s.<span class="hljs-property">day</span>));
   <span class="hljs-keyword">await</span> ctx.<span class="hljs-title function_">sleep</span>(<span class="hljs-string">&quot;one-day&quot;</span>, <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);
   <span class="hljs-keyword">return</span> ctx.<span class="hljs-title function_">continueAsNew</span>({ <span class="hljs-attr">day</span>: s.<span class="hljs-property">day</span> + <span class="hljs-number">1</span> });
 });</code></pre>
-  </div>
-</div>
 
 <h2 id="when"><a class="h-anchor" href="#when" aria-label="Link to this section">#</a>When durable fits — and when Celery is still the tool</h2>
 <ul>

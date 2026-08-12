@@ -259,7 +259,7 @@ per-call journaling is the only correct option (Q2).</p>
 <p>One ordered log per run on subject <strong><code>de.journal.{runId}</code></strong> in stream <code>DE_JOURNAL</code>. Append-only; the
 <strong>sole source of truth</strong> (invariant #1). Each message is one entry:</p>
 <pre><div class="code-head"><span class="lang">jsonc</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-jsonc"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;v&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>                       <span class="hljs-comment">// wire-format version (frozen contract for Go/Python/Zig SDKs)</span>
+  <span class="hljs-attr">&quot;v&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>                       <span class="hljs-comment">// wire-format version (frozen cross-SDK contract)</span>
   <span class="hljs-attr">&quot;seq&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>                     <span class="hljs-comment">// command position, monotonic per run (0,1,2,…)</span>
   <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;step-begin&quot;</span><span class="hljs-punctuation">,</span>         <span class="hljs-comment">// start|step-begin|step-end|now|random|uuid|sleep|await|signal|call|resolve|result|fail|continued|cancel-requested|cancelled</span>
   <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;reserve&quot;</span><span class="hljs-punctuation">,</span>            <span class="hljs-comment">// user label (step/sleep/await/call); asserted on replay</span>
@@ -545,7 +545,7 @@ config (<code>consistent-type-imports</code> inline, <code>no-explicit-any</code
 file headers (<code>// @scope/pkg — one-liner.</code>), curated <code>index.ts</code> barrel with <code>.js</code> specifiers, base-class error
 hierarchy + <code>./errors</code> subpath, injected <code>SILENT_LOGGER</code> (no <code>console.*</code> in lib).</li>
 <li><strong>Pure-core / shell layering:</strong> journal codec, replay state-machine, and validation stay <strong>transport-free</strong>; all
-<code>@nats-io/*</code> calls live in a thin shell (mirrors their <code>PURE_CORE_FILES</code> rule; eases the future Go/Python/Zig SDKs).</li>
+<code>@nats-io/*</code> calls live in a thin shell (mirrors their <code>PURE_CORE_FILES</code> rule; this is what made the Python SDK a port of the engine rather than a rewrite, and eases any further Go/Rust/Zig one).</li>
 <li><strong>Connection:</strong> <strong>BYO <code>NatsConnection</code></strong>. Ship <code>loadContextOptions</code>/<code>parseNatsUrl</code>/<code>withReconnectDefaults</code> helpers.
 Connection env vars stay generic &amp; un-prefixed (<code>NATS_URL</code>, <code>NATS_CONTEXT</code>, <code>NATS_CREDS</code>|<code>NATS_CREDENTIALS</code>);
 deployment config uses <code>SYNADIA_DURABLE_* &gt; SYNADIA_* &gt; legacy &gt; default</code>. Default URL <code>nats://127.0.0.1:4222</code>.</li>
@@ -563,7 +563,7 @@ growth; reclaiming finished generations&#39; logs (a TTL/GC policy) is still man
 <li><strong>Sagas / cross-workflow transactions</strong> as built-ins.</li>
 <li><strong>Suspending <code>ctx.onCancel</code> cleanup</strong> and <strong><code>ctx.startRun</code></strong> local-step fan-out — designed, deferred (cancellation and durable fan-out themselves are implemented, §7).</li>
 <li><del><strong>Object-store offload</strong> for &gt;<code>max_payload</code> payloads</del> — <strong>SHIPPED</strong> (P2): <code>DE_BLOBS</code> + content-addressed blob refs, default on (see §5 payload bound + PROTOCOL §5.6).</li>
-<li><strong>Dashboard/UI</strong>, <strong>non-TS SDKs</strong> — but the §3 wire layout is frozen <code>v:1</code> (plus the additive <code>v:2</code> offloaded form) and language-neutral.</li>
+<li><del><strong>Dashboard/UI</strong>, <strong>non-TS SDKs</strong></del> — both <strong>SHIPPED</strong>: the live dashboard (<code>apps/ui</code>) and a second implementation in <code>python/</code>, written against the same PROTOCOL.md, with a shared corpus of golden journal entries both SDKs assert against. Further SDKs (Go / Rust / …) are out of scope only in the sense that nobody has written them — the §3 wire layout is frozen <code>v:1</code> (plus the additive <code>v:2</code> offloaded form) and language-neutral.</li>
 <li>Separate <strong>activity workers</strong> — <code>ctx.run</code> steps run <strong>inline</strong> in the worker process.</li>
 </ul>
 <hr>

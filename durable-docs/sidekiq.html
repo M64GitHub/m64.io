@@ -79,10 +79,10 @@
 <article class="prose">
 
 <blockquote><p>
-  <strong>A note on language.</strong> Sidekiq is Ruby; <code>@synadia-ai/durable</code> is a TypeScript
-  library today. The wire format is language-neutral (a Ruby SDK could ride the same NATS), but it
-  doesn't exist yet — so “replace” here means running that workflow on a small TypeScript worker
-  alongside your Ruby app, on the NATS you already operate.
+  <strong>A note on language.</strong> Sidekiq is Ruby; durable ships <strong>TypeScript and Python</strong>
+  SDKs. The wire format is language-neutral and a Ruby SDK could ride the same NATS, but nobody has
+  written one — so “replace” here means running that workflow on a small TypeScript (or Python) worker
+  alongside your Ruby app, on the NATS you already operate. The examples below are TypeScript.
 </p></blockquote>
 
 <h2 id="concept-map"><a class="h-anchor" href="#concept-map" aria-label="Link to this section">#</a>Concept map</h2>
@@ -253,7 +253,7 @@
   <li><strong>Reach for durable</strong> when the work is a multi-step process that must not lose a step or repeat an effect across a crash — checkout, payments, provisioning, sagas, approvals.</li>
   <li><strong>Stay on Sidekiq</strong> for high-throughput, independent background jobs in a Ruby app, where its speed, simplicity, and ecosystem (web UI, Pro/Enterprise) are exactly what you want. durable is a durable-execution library, not a drop-in job processor.</li>
   <li><strong>Fan-out.</strong> Batch-style fan-out maps to <code>ctx.startCall</code> per child + native <code>Promise.all</code> / <code>ctx.race</code> — durable fan-out is built in. (Per-branch local-step journaling, <code>ctx.startRun</code>, is the deferred bit; wrap parallel local work in one <code>ctx.run(() =&gt; Promise.all([...]))</code>.)</li>
-  <li><strong>Language.</strong> It's TypeScript today; a Ruby SDK over the same wire format is a future, not a shipped, thing.</li>
+  <li><strong>Language.</strong> TypeScript and Python SDKs ship over the same wire format; a Ruby one is a future, not a shipped, thing.</li>
 </ul>
 <p>
   See the <a href="./crash-replay.html">crash → replay walkthrough</a>, how state is

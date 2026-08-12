@@ -115,7 +115,7 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>No new service — JetStream streams + KV are the journal, queue, timer scheduler & status index</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Stateless workers; all durability lives in NATS</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>It's a library — embed it, no extra hop</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>A language-neutral wire format, so Go / Python / … SDKs can follow</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>A language-neutral wire format — TypeScript and Python SDKs, one set of streams</span></li>
       </ul>
     </div>
   </div>
@@ -226,7 +226,7 @@
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M5 12h14M5 17h9"/><circle cx="19" cy="17" r="1.6"/></svg></div>
       <h3>Wire protocol</h3>
-      <p>The normative, language-neutral spec (v:1, RFC-2119) — for writing a Go / Python / … SDK that shares the same NATS streams.</p>
+      <p>The normative, language-neutral spec (v:1, RFC-2119) — what the TypeScript and Python SDKs both implement, and what a Go / Rust / … SDK would be written against.</p>
     </a>
     <a class="card" href="./design.html">
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
@@ -326,6 +326,45 @@ npm install @nats-io/transport-node   <span class="hljs-comment"># bring your ow
       <code>authorize</code> from the journal (without re-executing them) and resumes from the first
       unfinished step — see the <a href="./crash-replay.html">crash → replay walkthrough</a>. A runnable
       version is in <a href="https://github.com/synadia-ai/durable-ts/blob/main/examples/charge.ts" target="_blank" rel="noopener">examples/charge.ts</a>.
+    </p>
+    <h3 id="python">The same workflow, in Python</h3>
+    <p>
+      There are two SDKs — <strong>TypeScript and Python</strong> — and they are not two products. They
+      implement the same <a href="./protocol.html">wire specification</a> against the same JetStream
+      streams, so a Python client can start and observe a run that a TypeScript worker executes, a Python
+      workflow can <code>ctx.call</code> a TypeScript sub-workflow, and either one&#x27;s runs appear in
+      the same dashboard. TypeScript is the reference implementation: the conformance vectors both SDKs
+      test against are generated from its codec.
+    </p>
+    <pre><div class="code-head"><span class="lang">sh</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-sh">pip install synadia-durable nats-py</code></pre>
+    <pre><div class="code-head"><span class="lang">python</span><button class="copy" type="button" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="t">copy</span></button></div><code class="hljs language-python"><span class="hljs-keyword">import</span> asyncio, nats
+<span class="hljs-keyword">from</span> synadia_durable <span class="hljs-keyword">import</span> Ctx, create_client, create_worker, workflow
+
+<span class="hljs-meta">@workflow(<span class="hljs-params">name=<span class="hljs-string">&quot;charge&quot;</span></span>)</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">charge</span>(<span class="hljs-params">ctx: Ctx, cart: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
+    order_id = <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;reserve&quot;</span>, reserve_inventory, cart[<span class="hljs-string">&quot;cart_id&quot;</span>])
+    auth_id = <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;authorize&quot;</span>, authorize, order_id, cart[<span class="hljs-string">&quot;amount&quot;</span>])
+    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;receipt&quot;</span>: <span class="hljs-keyword">await</span> ctx.run(<span class="hljs-string">&quot;capture&quot;</span>, capture, auth_id)}
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>() -&gt; <span class="hljs-literal">None</span>:
+    nc = <span class="hljs-keyword">await</span> nats.connect(<span class="hljs-string">&quot;nats://127.0.0.1:4222&quot;</span>)
+
+    worker = create_worker(nc, [charge])
+    <span class="hljs-keyword">await</span> worker.start()
+
+    client = create_client(nc)
+    handle = <span class="hljs-keyword">await</span> client.start(charge, {<span class="hljs-string">&quot;cart_id&quot;</span>: <span class="hljs-string">&quot;c_1&quot;</span>, <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">42</span>})
+    <span class="hljs-built_in">print</span>(<span class="hljs-keyword">await</span> handle.result())  <span class="hljs-comment"># survives worker restarts</span>
+
+asyncio.run(main())</code></pre>
+    <p>
+      Same journal, same guarantees, same <code>ctx</code>. Two names differ because
+      <code>await</code> and <code>assert</code> are Python keywords: <code>ctx.await</code> is
+      <strong><code>ctx.wait</code></strong> and <code>ctx.assert</code> is
+      <strong><code>ctx.check</code></strong>. Steps take a plain <code>def</code> as happily as an
+      <code>async def</code> — a blocking vendor call is dispatched to a worker thread rather than
+      stalling the event loop. Runnable examples live in
+      <a href="https://github.com/synadia-ai/durable-ts/blob/main/python/examples" target="_blank" rel="noopener">python/examples/</a>.
     </p>
   </div>
 </section>
