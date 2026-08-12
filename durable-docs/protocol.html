@@ -807,9 +807,15 @@ verification must cover. <code>v:3</code> subsumes <code>v:2</code>: a <code>v:3
 <p><strong>Version.</strong> An entry whose slot was transformed <strong>MUST</strong> be stamped <code>&quot;v&quot;: 3</code>, inline or
 offloaded. Entries without a transformed slot <strong>SHOULD</strong> stay <code>v:1</code>/<code>v:2</code>, so enabling a codec leaves
 existing entries byte-identical and readable.</p>
+<p><strong>Work-item payloads.</strong> An oversized <code>signal</code> / <code>child-done</code> payload is offloaded
+at publish time, before any journal entry exists to transform — so that offload <strong>MUST</strong> apply the transform
+itself, and the item <strong>MUST</strong> carry <code>payloadEnc: true</code> (§6.1) to say the blob holds codec output.
+Without this the entry&#x27;s payload would be transformed or not according to its <strong>size</strong>, which nothing in the
+programming model expresses and nothing on the journal shows: an untransformed ref reads exactly like a transformed one
+but for <code>v</code>. Work items themselves stay in the clear (§6.1).</p>
 <p><strong>Writer rules.</strong></p>
 <ul>
-  <li>The transform <strong>MUST NOT</strong> be applied twice. An entry that already carries a <code>*Enc</code> or <code>*Ref</code> field (a pass-through append — a work item&#x27;s payload journaled verbatim) is written unchanged.</li>
+  <li>The transform <strong>MUST NOT</strong> be applied twice. An entry that already carries a <code>*Enc</code> or <code>*Ref</code> field (a pass-through append — a work item&#x27;s payload journaled verbatim) is written unchanged; the <code>v</code> it is stamped with comes from the item&#x27;s <code>payloadEnc</code>, not from the appending worker&#x27;s own configuration, because the writer of the blob is the one that knows what is in it.</li>
   <li>The transform need <strong>NOT</strong> be deterministic; a fresh nonce per call is expected. A slot is transformed once at append and only ever reversed afterwards, so replay never re-transforms and never compares outputs. (Consequence: content-addressed blob names stop deduplicating equal payloads — correct, since addressing a secret by its cleartext digest would leak equality.)</li>
 </ul>
 <p><strong>Reader rules.</strong></p>
@@ -862,16 +868,37 @@ durable consumer.</p>
 <td><code>signal</code></td>
 <td>object</td>
 <td>For <code>signal</code></td>
-<td><code>{ name, data, id }</code> — the inbound signal (<code>id</code> gives idempotency).</td>
+<td><code>{ name, data, id }</code> — the inbound signal (<code>id</code> gives idempotency). Offloaded form (§5.6): <code>data</code> absent, <code>dataRef</code> carries the blob ref.</td>
 </tr>
 <tr>
 <td><code>child</code></td>
 <td>object</td>
 <td>For <code>child-done</code></td>
-<td>The finished sub-workflow&#39;s outcome: <code>{ id, ok: true, value }</code> or <code>{ id, ok: false, error }</code> (<code>id</code> = childRunId).</td>
+<td>The finished sub-workflow&#39;s outcome: <code>{ id, ok: true, value }</code> or <code>{ id, ok: false, error }</code> (<code>id</code> = childRunId). Offloaded form: <code>valueRef</code> / <code>errorRef</code> replaces the inline slot.</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>string</td>
+<td>No (for <code>cancel</code>)</td>
+<td>Optional cancellation reason, forwarded to the <code>cancel-requested</code> entry (§11.7).</td>
+</tr>
+<tr>
+<td><code>payloadEnc</code></td>
+<td><code>true</code></td>
+<td>No</td>
+<td>The blob this item&#x27;s <code>*Ref</code> points at holds payload-codec output, not the plain encoded value (§5.7). Absent unless a codec is configured.</td>
 </tr>
 </tbody></table>
-</div><h3 id="6-2-work-item-msgids"><a class="h-anchor" href="#6-2-work-item-msgids" aria-label="Link to this section">#</a>6.2 Work-item <code>msgID</code>s</h3>
+</div>
+<p>Work items ride the same <code>max_payload</code> as journal entries; an oversized <code>signal</code> / <code>child-done</code>
+payload <strong>MUST</strong> be offloaded (§5.6) before publish, named under <code>runId</code> (the run whose journal will
+carry the ref). The worker appends the ref <strong>verbatim</strong> into the corresponding <code>signal</code> /
+<code>resolve</code> entry — it never downloads a blob just to re-embed it — stamping that entry <code>v:2</code>, or
+<code>v:3</code> when the item carries <code>payloadEnc</code> (§5.7).</p>
+<p>The item <strong>itself</strong> is NOT transformed by a payload codec, even when one is configured:
+<code>DE_WORK</code> is a WorkQueue stream, so an item exists only until it is consumed, and dispatch reads its fields.
+The durable copy is the journal entry the worker appends from it, and that one is transformed.</p>
+<h3 id="6-2-work-item-msgids"><a class="h-anchor" href="#6-2-work-item-msgids" aria-label="Link to this section">#</a>6.2 Work-item <code>msgID</code>s</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>

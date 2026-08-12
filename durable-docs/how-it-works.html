@@ -312,7 +312,7 @@ sub-workflows</strong>, <strong><code>ctx.continueAsNew</code></strong> (chained
 <strong>cancellation</strong> (<code>client.cancel</code> → an uncatchable hard-stop → terminal <code>cancelled</code>, opt-in <strong><code>ctx.onCancel</code></strong>
 compensation + child cascade), the client (<code>start</code> / <code>result</code> / <code>status</code>), the worker pull-replay loop (bounded concurrency, supervised consumers, ack-progress heartbeats for long steps, a default-on advisory run lease, an injectable metrics/health seam), <strong>large-payload offload</strong> (values over the broker limit ride the <code>DE_BLOBS</code>
 object store as digest-verified refs), and self-reconciling resource provisioning — all green
-(393 tests), with a suite proving replay-without-re-execution, crash-resume, fence-before-effect,
+(492 tests in TypeScript, 495 in Python), with a suite proving replay-without-re-execution, crash-resume, fence-before-effect,
 real-timer suspend/resume, signal FIFO/early delivery, sub-workflow calls, continue-as-new chains,
 durable fan-out (partial-completion replay + deterministic <code>ctx.race</code>), cancellation (uncatchable
 hard-stop, <code>onCancel</code> compensation, child cascade, cancel-vs-completion by stream-seq), a
