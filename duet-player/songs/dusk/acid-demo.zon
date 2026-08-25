@@ -1,0 +1,184 @@
+// THE ACID DEMO (s96 — B14's victory lap): a real 303-style line on
+// DUSK1 over a four-on-the-floor IT kit — the duet in one file.
+//
+// The 303 idiom, said in DUET's own words: the INS COLUMN is the
+// modifier lane (K01 AC1D the workhorse, K02 ACCENT louder/brighter/
+// more drive, K03 SLIDE — a pitch table entering -300 cents and
+// gliding in, K04 OPEN the square-ish lift, K05 SCREAM at res $E8);
+// the per-NOTE FILTER TABLE is the envelope mod (a one-shot cutoff
+// decay parked on its last step, restarted by every note — the
+// squelch); the DELAY SEND is the dub echo (dotted-8th, rows2 3).
+//
+// `.version = 7`: a pre-XIV.c build refuses this file in words.
+.{
+    .version = 10,
+    .name = "badda bam acid",
+    .author = "",
+    .it = "acid-demo.it",
+    .swi = .{},
+    .mixer = .{
+        .it_sum = .{ .fader = .{ .on = true } },
+        .dusk = .{.{ .slot = 1, .fader = .{ .on = true } }},
+        .dusk_send = .{.{ .idx = 1, .dly = 22 }},
+        .fx = .{ .delay = .{
+            .on = true,
+            .sync = true,
+            .rows2 = 3,
+            .ms = 375,
+            .fdbk = 35,
+            .tone = 0,
+            .mode = "ping",
+            .width = 100,
+            .to_rev = 0,
+            .duck = 0,
+            .ret = 0,
+        } },
+    },
+    .dusk = .{ .slots = .{.{ .slot = 1 }}, .patches = .{
+        .{
+            .idx = 1,
+            .name = "AC1D",
+            .adsr = 2661,
+            .amp = 40,
+            .filter = .{
+                .cutoff = 380,
+                .res = 200,
+                .drive = 96,
+                .lp = true,
+            },
+            .tables = .{ .filter = .{
+                .len = 7,
+                .loop_start = 6,
+                .rate_mode = .per_tick,
+                .rate = 1,
+                .steps = .{
+                    .{ .cutoff = 1250, .set_cutoff = true },
+                    .{ .cutoff = 1080, .set_cutoff = true },
+                    .{ .cutoff = 920, .set_cutoff = true },
+                    .{ .cutoff = 760, .set_cutoff = true },
+                    .{ .cutoff = 620, .set_cutoff = true },
+                    .{ .cutoff = 500, .set_cutoff = true },
+                    .{ .cutoff = 400, .set_cutoff = true },
+                },
+            } },
+        },
+        .{
+            .idx = 2,
+            .name = "ACCENT",
+            .adsr = 2677,
+            .amp = 52,
+            .filter = .{
+                .cutoff = 450,
+                .res = 220,
+                .drive = 128,
+                .lp = true,
+            },
+            .tables = .{ .filter = .{
+                .len = 8,
+                .loop_start = 7,
+                .rate_mode = .per_tick,
+                .rate = 1.5,
+                .steps = .{
+                    .{ .cutoff = 1500, .set_cutoff = true },
+                    .{ .cutoff = 1310, .set_cutoff = true },
+                    .{ .cutoff = 1130, .set_cutoff = true },
+                    .{ .cutoff = 960, .set_cutoff = true },
+                    .{ .cutoff = 800, .set_cutoff = true },
+                    .{ .cutoff = 660, .set_cutoff = true },
+                    .{ .cutoff = 540, .set_cutoff = true },
+                    .{ .cutoff = 450, .set_cutoff = true },
+                },
+            } },
+        },
+        .{
+            .idx = 3,
+            .name = "SLIDE",
+            .adsr = 2661,
+            .amp = 40,
+            .filter = .{
+                .cutoff = 380,
+                .res = 200,
+                .drive = 96,
+                .lp = true,
+            },
+            .tables = .{ .pitch = .{
+                .len = 2,
+                .loop_start = 1,
+                .rate_mode = .per_tick,
+                .rate = 2,
+                .steps = .{ .{ .mode = .detune_cents, .value = -300 }, .{ .mode = .glide_to } },
+            }, .filter = .{
+                .len = 7,
+                .loop_start = 6,
+                .rate_mode = .per_tick,
+                .rate = 1,
+                .steps = .{
+                    .{ .cutoff = 1250, .set_cutoff = true },
+                    .{ .cutoff = 1080, .set_cutoff = true },
+                    .{ .cutoff = 920, .set_cutoff = true },
+                    .{ .cutoff = 760, .set_cutoff = true },
+                    .{ .cutoff = 620, .set_cutoff = true },
+                    .{ .cutoff = 500, .set_cutoff = true },
+                    .{ .cutoff = 400, .set_cutoff = true },
+                },
+            } },
+        },
+        .{
+            .idx = 4,
+            .name = "OPEN",
+            .adsr = 2677,
+            .amp = 42,
+            .morph = 0.45,
+            .filter = .{
+                .cutoff = 520,
+                .res = 204,
+                .drive = 96,
+                .lp = true,
+            },
+            .tables = .{ .filter = .{
+                .len = 8,
+                .loop_start = 7,
+                .rate_mode = .per_tick,
+                .rate = 1,
+                .steps = .{
+                    .{ .cutoff = 1650, .set_cutoff = true },
+                    .{ .cutoff = 1450, .set_cutoff = true },
+                    .{ .cutoff = 1260, .set_cutoff = true },
+                    .{ .cutoff = 1080, .set_cutoff = true },
+                    .{ .cutoff = 910, .set_cutoff = true },
+                    .{ .cutoff = 760, .set_cutoff = true },
+                    .{ .cutoff = 640, .set_cutoff = true },
+                    .{ .cutoff = 520, .set_cutoff = true },
+                },
+            } },
+        },
+        .{
+            .idx = 5,
+            .name = "SCREAM",
+            .adsr = 2693,
+            .amp = 44,
+            .filter = .{
+                .cutoff = 560,
+                .res = 232,
+                .drive = 140,
+                .lp = true,
+            },
+            .tables = .{ .filter = .{
+                .len = 8,
+                .loop_start = 7,
+                .rate_mode = .per_tick,
+                .rate = 2,
+                .steps = .{
+                    .{ .cutoff = 1750, .set_cutoff = true },
+                    .{ .cutoff = 1540, .set_cutoff = true },
+                    .{ .cutoff = 1340, .set_cutoff = true },
+                    .{ .cutoff = 1150, .set_cutoff = true },
+                    .{ .cutoff = 980, .set_cutoff = true },
+                    .{ .cutoff = 830, .set_cutoff = true },
+                    .{ .cutoff = 700, .set_cutoff = true },
+                    .{ .cutoff = 560, .set_cutoff = true },
+                },
+            } },
+        },
+    } },
+}

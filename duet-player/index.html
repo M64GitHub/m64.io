@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DUET — web player</title>
+<link rel="icon" href="data:,">
+<style>
+  /* the palette is src/app/ui/theme.zig's, knob for knob */
+  :root {
+    --bg: #000; --header: #030a1a; --text: #a8d0f8; --dim: #587eb4; --bright: #ecf6ff; --off: #4e525c;
+    --accent: #56a8ff; --hot: #96e0ff; --pink: #e080ff; --pinkdim: #9e62c0; --sep: #2e5a94;
+    --sidhdr: #ffc460; --mute: #eb544a; --solo: #5ce080; --fxduet: #78e6aa; --marker: #966418;
+    --playhead: #0a1c3a; --rowbeatbg: #090f1c;
+  }
+  @font-face { font-family: 'JetBrains Mono'; src: url('JetBrainsMono-Regular.ttf') format('truetype'); font-display: swap; }
+  * { box-sizing: border-box; }
+  /* THE FIT: html's font-size is the page's scale (duet-player.js sets it to 13px x min(width/1280, height/720)),
+     and every size below is in em — a bigger window shows the SAME rows and the SAME effects, larger */
+  html { font-size: 13px; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 1em/1.45 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; }
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  a { color: var(--accent); text-decoration: none; } a:hover { color: var(--hot); }
+  header { background: var(--header); border-bottom: 1px solid var(--sep); padding: 0.3em 0.75em; display: flex; gap: 1.1em; align-items: baseline; flex-wrap: wrap; }
+  header .mark { color: var(--pink); font-weight: bold; letter-spacing: 0.15em; }
+  header .ver { color: var(--dim); }
+  header .badge { color: var(--sidhdr); margin-left: auto; }
+  header .title { color: var(--bright); }
+  header .author { color: var(--dim); }
+  #hud { display: flex; gap: 1.4em; padding: 0.25em 0.75em; border-bottom: 1px solid var(--sep); color: var(--dim); flex-wrap: wrap; }
+  #hud b { color: var(--text); font-weight: normal; }
+  #hud .marker { color: var(--sidhdr); }
+  #controls { display: flex; gap: 0.45em; padding: 0.4em 0.6em; border-bottom: 1px solid var(--sep); align-items: center; flex-wrap: wrap; }
+  button { background: transparent; border: 0; color: var(--accent); font: inherit; padding: 0.08em 0.3em; cursor: pointer; }
+  button:hover { color: var(--hot); } button.on { color: var(--sidhdr); } button:disabled { color: var(--off); cursor: default; }
+  button::before { content: '['; color: var(--dim); } button::after { content: ']'; color: var(--dim); }
+  select { background: var(--header); color: var(--text); border: 1px solid var(--sep); font: inherit; max-width: 28em; }
+  input[type=range] { width: 7em; accent-color: var(--accent); }
+  label { color: var(--dim); }
+  #strip { display: block; width: 100%; height: 23em; }
+  #vizbox { position: relative; border-top: 1px solid var(--sep); }
+  #viz { display: block; width: 100%; height: 18.5em; image-rendering: pixelated; background: #000; }
+  #vizbox::after { /* the scanlines the terminal build draws with half-blocks */
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.28) 2px 4px);
+  }
+  #modes { display: flex; gap: 1.1em; padding: 0.15em 0.75em; color: var(--dim); border-top: 1px solid var(--sep); }
+  #modes span { cursor: pointer; } #modes span.on { color: var(--sidhdr); } #modes .hint { margin-left: auto; }
+  footer { margin-top: auto; padding: 0.3em 0.75em; border-top: 1px solid var(--sep); color: var(--dim); display: flex; gap: 1.2em; flex-wrap: wrap; }
+  #status { color: var(--text); flex: 1 1 100%; min-height: 1.4em; }
+  #status.bad { color: var(--mute); }
+  body.dragging::before { content: 'DROP TO OPEN — .it  .swm .sws .swt .swq  .zon (with its song files)'; position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(3,10,26,0.9); color: var(--hot); font-size: 1.4em; z-index: 9; border: 2px dashed var(--accent); }
+  #selftest { color: var(--dim); white-space: pre; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <span class="mark">DUET</span><span class="ver" id="version">web player</span>
+  <span class="title" id="title">no song</span><span class="author" id="author"></span>
+  <span class="badge" id="badge">[ — ]</span>
+</header>
+<div id="hud">
+  <span>order <b id="p-order">--</b></span><span>pattern <b id="p-pattern">--</b></span><span>row <b id="p-row">--</b></span>
+  <span>speed <b id="p-speed">-</b></span><span>tempo <b id="p-tempo">-</b></span><span>time <b id="p-time">0:00</b></span>
+  <span>chips <b id="p-chips">0</b></span><span>render <b id="p-load">0%</b></span>
+  <span class="marker" id="p-marker"></span>
+</div>
+<div id="controls">
+  <button id="b-play" title="from the top (Enter)">▶ PLAY</button>
+  <button id="b-pause" title="freeze / carry on (Space)">‖ PAUSE</button>
+  <button id="b-stop" title="silence, position kept (Esc)">■ STOP</button>
+  <button id="b-rewind" title="stop and back to the top">⏮ REWIND</button>
+  <button id="b-loop" class="on" title="loop forever, or once (L)">LOOP ∞</button>
+  <label>subtune</label><button id="b-sub-prev">‹</button><span id="p-subtune">-/-</span><button id="b-sub-next">›</button>
+  <button id="b-model" title="the chip model, every live chip">6581</button>
+  <button id="b-quality" title="reSID's sampling">interpolate</button>
+  <label>vol</label><input type="range" id="vol" min="0" max="100" value="80">
+  <label for="files">·</label><button id="b-open">OPEN FILES…</button><input type="file" id="files" multiple class="hidden">
+  <select id="gallery"><option value="">— the gallery —</option></select>
+</div>
+<canvas id="strip"></canvas>
+<div id="modes">
+  <span data-viz="vu">VU BARS</span><span data-viz="spectrum">SPECTRUM</span><span data-viz="scope" class="on">SCOPE</span>
+  <span data-viz="plasma">PLASMA</span><span data-viz="copper">COPPER</span>
+  <span class="hint">←/→ mode · ↑/↓ bar style · click a column header to mute it</span>
+</div>
+<div id="vizbox"><canvas id="viz" width="320" height="120"></canvas></div>
+<footer>
+  <span id="status">loading duet.wasm …</span>
+  <span>libduet — the DUET engine in your browser · GPL-2.0-or-later (reSID by Dag Lem) · SID-Wizard examples by Hermit and friends (WTFPL) · font: JetBrains Mono (<a href="OFL.txt">OFL</a>)</span>
+  <span id="selftest"></span>
+</footer>
+<script type="module" src="duet-player.js"></script>
+</body>
+</html>

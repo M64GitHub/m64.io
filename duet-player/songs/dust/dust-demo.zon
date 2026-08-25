@@ -1,0 +1,12 @@
+// XIII.a — DUST's first corpus file. One SYN column, four notes and a
+// release, played by the DEFAULT PATCH (three sawtooth voices nine
+// cents apart) on a whole reSID of its own. Nothing else in the song
+// makes a sound: the IT side is empty, and the register stream is
+// DUST's alone.
+.{
+    .version = 3,
+    .name = "dust-demo",
+    .it = "dust-demo.it",
+    .it_channels = 8,
+    .dust = .{ .slots = .{ .{ .slot = 1, .patch = 1 } } },
+}

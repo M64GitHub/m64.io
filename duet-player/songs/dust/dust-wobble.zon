@@ -1,0 +1,66 @@
+// A PROBE, not a corpus member (yet): what a GRAIN GATE sounds like
+// with the tables running under it — the thing you remembered.
+//
+// The grain engine owns bit 0 and retriggers at 50 Hz. EVERYTHING ELSE
+// KEEPS SCANNING: the WAVE table walks six waveforms at 12 Hz and the
+// PITCH table arps 0/+7/+12/+4 at 8 Hz, each on its own clock, and the
+// three voices read BOTH through their own PHASE (0/2/4 and 0/1/2), so
+// every grain window opens on three different waveforms at three
+// different notes.
+//
+//   duet tests/corpus/dust/dust-wobble.zon
+//
+// What it is NOT is a dense cloud: the three windows open on the SAME
+// grain edge (s86's ruling), so at 50 Hz you get one ~8 ms burst per
+// 20 ms and 12 ms of silence between them — a chopper with a moving
+// timbre rather than overlapping grains. Staggering the three voices
+// inside the grain period would triple the density; an LFO retriggered
+// PER GRAIN (`on_grain`, still a stub) would scatter them.
+.{
+    .version = 3,
+    .name = "dust-wobble",
+    .it = "dust-topos.it",
+    .it_channels = 8,
+    .dust = .{
+        .slots = .{.{ .slot = 2, .patch = 2 }},
+        .patches = .{.{
+            .idx = 2,
+            .name = "WOBBLE CLOUD",
+            .gate_source = .grain,
+            .grain_hz = 5.0e1,
+            .grain_adsr = 0,
+            .adsr = .{ 0x0089, 0x0089, 0x0089 },
+            .pw = .{ 2048, 1200, 3200 },
+            .detune = .{ 0, -9, 9 },
+            .filter = .{ .cutoff = 1400, .res = 4, .route = 7, .lp = true },
+            .tables = .{
+                .wave = .{
+                    .len = 6,
+                    .rate_mode = .hz,
+                    .rate = 1.2e1,
+                    .phase = .{ 0, 2, 4 },
+                    .steps = .{
+                        .{ .hold = false, .ctrl = 0x10 },
+                        .{ .hold = false, .ctrl = 0x20 },
+                        .{ .hold = false, .ctrl = 0x40 },
+                        .{ .hold = false, .ctrl = 0x50 },
+                        .{ .hold = false, .ctrl = 0x80 },
+                        .{ .hold = false, .ctrl = 0x20 },
+                    },
+                },
+                .pitch = .{
+                    .len = 4,
+                    .rate_mode = .hz,
+                    .rate = 8.0e0,
+                    .phase = .{ 0, 1, 2 },
+                    .steps = .{
+                        .{ .mode = .rel_semitone, .value = 0 },
+                        .{ .mode = .rel_semitone, .value = 7 },
+                        .{ .mode = .rel_semitone, .value = 12 },
+                        .{ .mode = .rel_semitone, .value = 4 },
+                    },
+                },
+            },
+        }},
+    },
+}

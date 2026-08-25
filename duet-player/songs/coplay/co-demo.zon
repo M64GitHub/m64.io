@@ -1,0 +1,11 @@
+// duetracker project (v2) — M8 co-playback: IT + SWM playing TOGETHER.
+// Run it:  duet tests/corpus/coplay/co-demo.zon
+.{
+    .version = 2,
+    .name = "M8 Co-Play Demo",
+    .author = "m64 + claude (SWM: Hermit)",
+    .comment = "PCM drums ride SID-Wizard's Conga Beat - IT is the clock",
+    .it = "co-demo.it",
+    .swm = "../swm/congabeat.swm",
+    .swi = .{},
+}

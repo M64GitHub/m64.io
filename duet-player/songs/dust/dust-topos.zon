@@ -1,0 +1,98 @@
+// XIII.d — THE TOPOLOGIES, in one file. THREE armed DUST slots, one
+// topology each, so the whole letter is audible in a single listen:
+//
+//   SYN1  THE CHORD, STRUMMED. The `.it` plays four roots; the patch
+//         turns each into a major triad — intervals in SPACE, one per
+//         voice — and STRUMS it, so the three gates rise 45 ms apart
+//         and the chord ROLLS instead of arriving in a block.
+//         (Intervals in TIME are a PITCH TABLE, which is why the spec's
+//         `sequential` mode does not exist: amendment A23.)
+//
+//   SYN2  THE GRAIN CLOUD. The gate belongs to the GRAIN ENGINE, which
+//         retriggers all three voices together at 64 Hz through a
+//         window of the chip's own making (attack 2 ms, decay 6 ms to
+//         nothing). What differs between the three grains is what the
+//         voices are HOLDING — three pulse widths, three detunes — the
+//         per-table phase argument, one letter on. An LFO on the
+//         CUTOFF walks the filter under it, so the cloud breathes
+//         instead of buzzing on a grid, and the note's OWN release
+//         (SR $89) shapes the tail after the gating stops. (The grain
+//         RATE is a mod destination too — `grain_rate`, new this letter
+//         — but a route to it would make this file unreadable to the
+//         build we are A/B-ing against: an unknown FIELD is ignored by
+//         the ZON parser, an unknown ENUM LITERAL is a hard error.)
+//
+//   SYN3  THE HARD RESTART, full. A bass on every other row at speed 6
+//         — 190 ms apart, so each note starts while the last one is
+//         still ringing, which is exactly the case a restart exists
+//         for. The player peeks the row that is coming and spends the
+//         12 ms window on the TAIL of the note before it, so the gate
+//         is already down and the envelope already at zero when the
+//         attack lands ON the row boundary (m64's ruling, s86: the
+//         chips' own road).
+//
+// THE FILE IS THE A/B. Every topology field below is additive, so a
+// build from before XIII.d loads this same file, ignores all of them,
+// and renders it flat: no strum, no chord, no grains, no restart.
+//
+//   duet tests/corpus/dust/dust-topos.zon
+//   duet --render out.wav --seconds 7 tests/corpus/dust/dust-topos.zon
+.{
+    .version = 3,
+    .name = "dust-topos",
+    .it = "dust-topos.it",
+    .it_channels = 8,
+    .mixer = .{
+        .syn = .{
+            .{ .slot = 1, .fader = .{ .on = true, .db = -2 }, .pan = -35 },
+            .{ .slot = 2, .fader = .{ .on = true, .db = -4 }, .pan = 40 },
+            .{ .slot = 3, .fader = .{ .on = true, .db = 0 }, .pan = 0 },
+        },
+    },
+    .dust = .{
+        .slots = .{
+            .{ .slot = 1, .patch = 1 },
+            .{ .slot = 2, .patch = 2 },
+            .{ .slot = 3, .patch = 3 },
+        },
+        .patches = .{
+            .{
+                .idx = 1,
+                .name = "STRUM CHORD",
+                .voice_mode = .chord,
+                .chord = .{ 0, 4, 7 },
+                .strum_ms = 45,
+                .wave_base = .{ 0x20, 0x20, 0x20 },
+                .adsr = .{ 0x09A9, 0x09A9, 0x09A9 },
+                .detune = .{ 0, -8, 7 },
+            },
+            .{
+                .idx = 2,
+                .name = "GRAIN CLOUD",
+                .gate_source = .grain,
+                .grain_hz = 6.4e1,
+                .grain_adsr = 0,
+                .wave_base = .{ 0x40, 0x40, 0x40 },
+                .pw = .{ 2048, 1024, 3000 },
+                .detune = .{ 0, -15, 12 },
+                .adsr = .{ 0x0089, 0x0089, 0x0089 },
+                .filter = .{ .cutoff = 1100, .res = 6, .route = 7, .lp = true },
+                .mod = .{
+                    .lfos = .{.{ .idx = 1, .shape = .tri, .rate = 5.0e-1 }},
+                    .routes = .{.{ .idx = 1, .src = .lfo_a, .dst = .cutoff, .amount = 500 }},
+                },
+            },
+            .{
+                .idx = 3,
+                .name = "HR BASS",
+                .hard_restart = .full,
+                .hr_ms = 12,
+                .wave_base = .{ 0x40, 0x40, 0x20 },
+                .pw = .{ 1280, 1400, 2048 },
+                .adsr = .{ 0x0A48, 0x0A48, 0x0A48 },
+                .detune = .{ 0, -7, 6 },
+                .filter = .{ .cutoff = 620, .res = 10, .route = 7, .lp = true },
+            },
+        },
+    },
+}

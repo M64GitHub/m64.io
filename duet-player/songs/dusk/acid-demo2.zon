@@ -1,0 +1,184 @@
+// THE ACID DEMO II (s99 — XIV.f's victory lap): the s96 jam's own
+// riff RE-SAID in the dialect. acid-demo needed FIVE patches as its
+// modifier lane because the pattern could not speak; this file plays
+// ONE workhorse patch and TYPES everything else.
+//
+// K01 AC1D2 is the whole 303: the squelch is `env_b -> cutoff` (no
+// filter table anywhere), the accent is the VOL COLUMN three ways off
+// one number (a RANGED velocity binding into amp -26..0 — §5.4's
+// point, the range IS the instrument — plus velocity->drive exp and
+// velocity->cutoff exp), the slide is `Gxx` (legato, glide chains,
+// the re-gate onto released tails), the CUTOFF KNOB is M01 swept by
+// `Zxx` across the whole track (the acid build as a typed staircase),
+// and M02 SCREAM pushes the res byte toward the $F0 edge for the
+// peak. A slow LFO drifts the morph — the wavetable breathing under
+// the line. K02 STAB is a real Am7 from ONE CELL (XIV.e: voices 4,
+// width 44, spread) that throws ITSELF into the delay with typed `a`
+// letters. K03 WSTL is B14's self-oscillating filter as the LEAD —
+// res $FF, BP, a starved throat (drive 16) over one held A-1 sine —
+// whose melody is TYPED AS Zxx: the cutoff register is exponential
+// (~205 steps/octave), so a macro at cutoff is a pitch lane at ~1.8
+// cents per Z unit.
+//
+// AND IT LOOPS DIFFERENT ON PURPOSE (m64's s99 ruling — the loop is
+// a CONTINUATION, not a re-start): the drop's final `a50` dub throw
+// and the macros' last values ride through the wrap, so pass 2's
+// line enters brighter and swimming in the delay; passes 2+ are
+// identical to each other. Want a dry loop instead? The dialect is
+// the tool: re-type the send at the top (an `a0C` cell on the acid
+// column in the intro re-says the console's 12).
+//
+// `.version = 10`: a pre-XIV.f build refuses this file in words.
+.{
+    .version = 10,
+    .name = "badda bam acid II",
+    .author = "",
+    .it = "acid-demo2.it",
+    .swi = .{},
+    .mixer = .{
+        .it_sum = .{ .fader = .{ .on = true } },
+        .dusk = .{
+            .{ .slot = 1, .fader = .{ .on = true } },
+            .{ .slot = 2, .fader = .{ .on = true } },
+            .{ .slot = 3, .fader = .{ .on = true } },
+        },
+        .dusk_send = .{ .{ .idx = 1, .dly = 12 }, .{ .idx = 3, .dly = 25 } },
+        .fx = .{ .delay = .{
+            .on = true,
+            .sync = true,
+            .rows2 = 3,
+            .ms = 375,
+            .fdbk = 38,
+            .tone = 0,
+            .mode = "ping",
+            .width = 100,
+            .to_rev = 0,
+            .duck = 0,
+            .ret = 0,
+        } },
+    },
+    .dusk = .{ .slots = .{
+        .{ .slot = 1 },
+        .{ .slot = 2, .patch = 2 },
+        .{ .slot = 3, .patch = 3 },
+    }, .patches = .{
+        .{
+            .idx = 1,
+            .name = "AC1D2",
+            .adsr = 2661,
+            .amp = 46,
+            .morph = 0.22,
+            .filter = .{
+                .cutoff = 300,
+                .res = 200,
+                .drive = 60,
+                .lp = true,
+            },
+            .mod = .{
+                .lfos = .{.{
+                    .idx = 1,
+                    .shape = .sine,
+                    .rate = 0.18,
+                }},
+                .envs = .{.{
+                    .idx = 2,
+                    .decay_ms = 140,
+                    .sustain = 0,
+                }},
+                .routes = .{
+                    .{
+                        .idx = 1,
+                        .src = .env_b,
+                        .dst = .cutoff,
+                        .amount = 900,
+                    },
+                    .{
+                        .idx = 2,
+                        .src = .velocity,
+                        .dst = .drive,
+                        .amount = 110,
+                        .curve = .exp,
+                    },
+                    .{
+                        .idx = 3,
+                        .src = .velocity,
+                        .dst = .cutoff,
+                        .amount = 260,
+                        .curve = .exp,
+                    },
+                    .{
+                        .idx = 4,
+                        .dst = .morph,
+                        .amount = 12,
+                    },
+                },
+            },
+            .vel = .{ .dest = .amp, .min = -26 },
+            .macros = .{ .{
+                .idx = 1,
+                .label = "CUTOFF",
+                .dest = .cutoff,
+                .max = 1500,
+            }, .{
+                .idx = 2,
+                .label = "SCREAM",
+                .dest = .resonance,
+                .max = 52,
+            } },
+        },
+        .{
+            .idx = 2,
+            .name = "STAB",
+            .adsr = 2150,
+            .amp = 60,
+            .morph = 0.3,
+            .filter = .{
+                .cutoff = 1400,
+                .res = 112,
+                .drive = 90,
+                .lp = true,
+            },
+            .voices = 4,
+            .interval = .{
+                0,
+                3,
+                7,
+                10,
+                0,
+                0,
+                0,
+                0,
+            },
+            .detune = .{
+                0,
+                -6,
+                6,
+                -9,
+                18,
+                -27,
+                27,
+                -36,
+            },
+            .width = 44,
+        },
+        .{
+            .idx = 3,
+            .name = "WSTL",
+            .adsr = 248,
+            .amp = 38,
+            .morph = 1,
+            .filter = .{
+                .cutoff = 700,
+                .res = 255,
+                .drive = 16,
+                .bp = true,
+            },
+            .macros = .{.{
+                .idx = 1,
+                .label = "PITCH",
+                .dest = .cutoff,
+                .max = 400,
+            }},
+        },
+    } },
+}

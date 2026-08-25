@@ -1,0 +1,17 @@
+// M33 THE SENDS FROM THE GRID — the project half of `sends.it`.
+//
+// The song writes `b64` on channel 2 at row 0 and `b00` at row $20;
+// this file is what those cells DRIVE — an armed REVERB with nothing
+// dialed into it from the console. So the tail you hear can only have
+// come from the grid, and rendering this against the same file with
+// `.on = false` is the A/B (see tests/corpus/MANIFEST.md).
+.{
+    .version = 3,
+    .name = "m33 send automation",
+    .it = "sends.it",
+    .mixer = .{
+        .fx = .{
+            .reverb = .{ .on = true, .space = "hall", .decay = 80, .ret = 3.0 },
+        },
+    },
+}

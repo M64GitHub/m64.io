@@ -1,0 +1,92 @@
+// XIII.d+ — THE CLOUD. The same held notes as `dust-wobble`, through a
+// patch that is granular rather than gated, so the two files are the
+// letter's own A/B:
+//
+//   dust-wobble  spread 0   — all three windows on one edge: 45 bursts
+//                             a second with silence between them, a
+//                             chopper with a moving timbre
+//   dust-cloud   spread 33  — the three stand a third of a period
+//                             apart: 135 grains a second, each ~26 ms
+//                             long, so they OVERLAP — and every one of
+//                             them is a different pitch reading a
+//                             different place in the wave table
+//
+// What makes it a cloud and not a loop is the scatter, and the scatter
+// is two sample-and-hold LFOs set to retrigger **on grain** (XIII.d+:
+// `on_grain` was a stub until there was a grain engine to lock to):
+//
+//   LFO A  S&H, on grain  -> detune_all  ±90 c   every grain its own
+//                                                pitch, inside a
+//                                                semitone
+//   LFO B  S&H, on grain  -> scan_jmp_wav ±5     every grain reads a
+//                                                different step of the
+//                                                wave table — a random
+//                                                position in the
+//                                                material, which is
+//                                                what granular means
+//   LFO C  0.15 Hz tri    -> grain_spread ±28 %  the cloud BREATHES
+//                                                between chopper and
+//                                                cloud, on the
+//                                                destination this
+//                                                letter added
+//
+// The WAVE table still walks six waveforms at 12 Hz underneath all of
+// it, read at three different phases — the wobble is not replaced by
+// the scatter, it is under it.
+//
+//   duet tests/corpus/dust/dust-cloud.zon
+//   duet tests/corpus/dust/dust-wobble.zon   # the same notes, gated
+.{
+    .version = 3,
+    .name = "dust-cloud",
+    .it = "dust-topos.it",
+    .it_channels = 8,
+    .dust = .{
+        .slots = .{.{ .slot = 2, .patch = 2 }},
+        .patches = .{.{
+            .idx = 2,
+            .name = "THE CLOUD",
+            .gate_source = .grain,
+            .grain_hz = 4.5e1,
+            .grain_spread = 33,
+            // a 2 ms attack and a 24 ms decay to nothing: longer than
+            // the 7.4 ms between grains, which is what makes them
+            // overlap instead of pulse
+            .grain_adsr = 256,
+            .wave_base = .{ 0x40, 0x20, 0x40 },
+            .pw = .{ 2048, 1400, 2800 },
+            .detune = .{ 0, -9, 9 },
+            // the NOTE's own release, written before the gate drops
+            .adsr = .{ 0x0089, 0x0089, 0x0089 },
+            .filter = .{ .cutoff = 1250, .res = 4, .route = 7, .lp = true },
+            .tables = .{
+                .wave = .{
+                    .len = 6,
+                    .rate_mode = .hz,
+                    .rate = 1.2e1,
+                    .phase = .{ 0, 2, 4 },
+                    .steps = .{
+                        .{ .hold = false, .ctrl = 0x10 },
+                        .{ .hold = false, .ctrl = 0x20 },
+                        .{ .hold = false, .ctrl = 0x40 },
+                        .{ .hold = false, .ctrl = 0x50 },
+                        .{ .hold = false, .ctrl = 0x80 },
+                        .{ .hold = false, .ctrl = 0x20 },
+                    },
+                },
+            },
+            .mod = .{
+                .lfos = .{
+                    .{ .idx = 1, .shape = .s_and_h, .rate = 1.0e0, .retrig = .on_grain },
+                    .{ .idx = 2, .shape = .s_and_h, .rate = 1.0e0, .retrig = .on_grain },
+                    .{ .idx = 3, .shape = .tri, .rate = 1.5e-1 },
+                },
+                .routes = .{
+                    .{ .idx = 1, .src = .lfo_a, .dst = .detune_all, .amount = 90 },
+                    .{ .idx = 2, .src = .lfo_b, .dst = .scan_jump_wave, .amount = 5 },
+                    .{ .idx = 3, .src = .lfo_c, .dst = .grain_spread, .amount = 28 },
+                },
+            },
+        }},
+    },
+}
