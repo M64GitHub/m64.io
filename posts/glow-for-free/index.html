@@ -23,7 +23,7 @@
           <li><a href="#why-float">Why It Has to Be Float</a></li>
           <li><a href="#bloom-and-trails">Bloom and Trails Are the Same Thing</a></li>
           <li><a href="#the-knobs">The Knobs</a></li>
-          <li><a href="#conclusion">Conclusion</a></li>
+          <li><a href="#where-it-ended-up">Where It Ended Up</a></li>
         </ul>
       </nav>
     </aside>
@@ -37,9 +37,9 @@
       <div class="article-byline">M. Schallner, 2026.08.30</div>
 
       <h2 id="intro">Intro</h2>
-      <p>The first time someone watches <strong>movy</strong> render, the question is always some flavor of the same thing: <em>wait — that's glowing… in a terminal?</em></p>
-      <p>The honest answer is that movy doesn't really draw glow. It draws light, and then it's bad at forgetting.</p>
-      <p>A terminal is a grid of text cells, not a framebuffer. Truecolor gives you 24 bits per cell, and with the <code>▀</code> half-block you get two independently colored pixels per cell. That's enough resolution to be interesting — but the neon look isn't about resolution. It's about what movy does <em>between</em> frames.</p>
+      <p>Since 0.3.0, <strong>movy</strong> has a glow feature: anything drawn through <code>Frame</code> can bloom, and anything that moves leaves a neon trail. I expected that look to be the expensive part of the engine. It turned out to be the cheapest — no bloom pass, no trail system, no per-object bookkeeping. One extra buffer and three operations per frame. This post is about why that's enough.</p>
+      <p>First, the canvas. A terminal is a grid of text cells, not a framebuffer. Truecolor gives you 24 bits per cell, and with the <code>▀</code> half-block you get two independently colored pixels per cell. That's enough resolution to be interesting — but the neon look isn't about resolution. It's about what movy does <em>between</em> frames.</p>
+      <p>movy doesn't really draw glow. It draws light, and then it's bad at forgetting.</p>
 
       <h2 id="the-expensive-way">The Expensive Way</h2>
       <p>The obvious way to make something glow is to glow it: for every bright object, draw a few blurred copies behind it, fading outward, every frame. It works. It's also slow and fiddly — each glowing thing needs its own halo, and if you want <em>trails</em> (that lovely motion smear) you now have to remember where everything was N frames ago and redraw its ghosts.</p>
@@ -97,9 +97,9 @@ frame.<span class="c-fn">composite</span>();    <span class="c-com">// clamp(sol
       </ul>
       <p>Honestly, half of what passes for "art direction" in movy is me dragging <code>glow_decay</code> up and down until a scene feels right.</p>
 
-      <h2 id="conclusion">Conclusion</h2>
-      <p>The lesson I keep relearning: the best effects usually aren't things you add — they're things you <em>simulate</em> and then read off for free. movy doesn't have a glow feature. It has a buffer of light that decays and spreads a little every frame, which is more or less what the phosphor on an old CRT does. Emulate the persistence, and the neon comes out the other side.</p>
-      <p>Glow isn't a feature you add. It's a feature you don't fully remove.</p>
+      <h2 id="where-it-ended-up">Where It Ended Up</h2>
+      <p>Because it costs nothing to switch on, it's switched on almost everywhere now. The two games I'm building on movy — <strong>GR1D</strong>, a Tron-style light-cycle game, and <strong>PHAZE</strong>, a run'n'gun — lean on it hard. Both are still under wraps; when they surface, every frame you'll see is this one buffer at work. And it has escaped the games: <a href="../../duet-player/">DUET</a>, my tracker, pushes its music visualizers and the mixer's VU meters through the same <code>Frame</code>, so the mix glows too.</p>
+      <p>Underneath it's still what it was on day one: a buffer of light that decays and spreads a little every frame — more or less what the phosphor on an old CRT does. Glow isn't a feature you add. It's a feature you don't fully remove.</p>
 
       <nav class="article-nav">
         <a class="nav-prev" href="../movycat/when-simple-isnt-seeking-and-pausing/">← Seeking and Pausing</a>
