@@ -63,7 +63,8 @@ frame.<span class="c-fn">beginFrame</span>();   <span class="c-com">// glow *= 0
 
 <span class="c-com">// ... draw opaque pixels into `solid`, emit light into `glow` ...</span>
 
-frame.<span class="c-fn">composite</span>();    <span class="c-com">// clamp(solid + glow) -> vignette -> scanline -> warmth -> flash -> tint -> surface</span></code></pre>
+frame.<span class="c-fn">composite</span>();    <span class="c-com">// clamp(solid + glow) -> vignette -> scanline</span>
+                      <span class="c-com">//   -> warmth -> flash -> tint -> surface</span></code></pre>
       <p>That's the entire engine of the look. Three operations — <strong>decay, blur, add</strong> — on one buffer. There is no glow "feature" anywhere in here. There's a buffer that fades and spreads, and then you keep pouring light into it.</p>
 
       <figure class="article-image">
