@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulka_Adam_SoundRoutine_f_4.1.0.asm · Chiptune Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>window.ROOT="../../";</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">CHIPTUNE WIKI</span><span class="sub">llm wiki · 565 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/traxweekly-toc.html" class="">TraxWeekly</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="technique"><summary>Techniques <span class="n">32</span></summary><ul><li><a data-slug="channel-interleaving" class="t-technique" href="../../wiki/channel-interleaving.html">Channel interleaving (one channel, two jobs)</a></li><li><a data-slug="chip-samples" class="t-technique" href="../../wiki/chip-samples.html">Chip samples — tiny looped waveforms</a></li><li><a data-slug="chord-arpeggio" class="t-technique" href="../../wiki/chord-arpeggio.html">Chord arpeggio (the 0 3 7 trick)</a></li><li><a data-slug="detune" class="t-technique" href="../../wiki/detune.html">Detune</a></li><li><a data-slug="fake-echo" class="t-technique" href="../../wiki/fake-echo.html">Fake echo / delay</a></li><li><a data-slug="filter-programming" class="t-technique" href="../../wiki/filter-programming.html">Filter programming on the SID</a></li><li><a data-slug="hard-restart" class="t-technique" href="../../wiki/hard-restart.html">Hard restart</a></li><li><a data-slug="instrument-design" class="t-technique" href="../../wiki/instrument-design.html">Instrument design beats note count</a></li><li><a data-slug="instrument-envelopes" class="t-technique" href="../../wiki/instrument-envelopes.html">Instrument envelopes (volume, panning, pitch)</a></li><li><a data-slug="lead-articulation" class="t-technique" href="../../wiki/lead-articulation.html">Lead articulation (velocity, legato, late vibrato, drop-off)</a></li><li><a data-slug="midi-in-trackers" class="t-technique" href="../../wiki/midi-in-trackers.html">MIDI output from trackers (Impulse Tracker macros)</a></li><li><a data-slug="multisampling" class="t-technique" href="../../wiki/multisampling.html">Multisampling and drum-kit instruments</a></li><li><a data-slug="multispeed" class="t-technique" href="../../wiki/multispeed.html">Multispeed (framespeed)</a></li><li><a data-slug="new-note-actions" class="t-technique" href="../../wiki/new-note-actions.html">New Note Actions (NNA)</a></li><li><a data-slug="octave-bass" class="t-technique" href="../../wiki/octave-bass.html">Octave bass</a></li><li><a data-slug="opl-fm-instruments" class="t-technique" href="../../wiki/opl-fm-instruments.html">OPL / AdLib FM instruments in trackers</a></li><li><a data-slug="pitch-slide-and-portamento" class="t-technique" href="../../wiki/pitch-slide-and-portamento.html">Pitch slides and tone portamento</a></li><li><a data-slug="pulse-width-modulation" class="t-technique" href="../../wiki/pulse-width-modulation.html">Pulse width modulation (PWM)</a></li><li><a data-slug="randomization-and-probability" class="t-technique" href="../../wiki/randomization-and-probability.html">Randomization and probability (MayBe, RandomiZe)</a></li><li><a data-slug="recording-samples" class="t-technique" href="../../wiki/recording-samples.html">Recording samples (sources, cabling, sound cards, rates)</a></li><li><a data-slug="retrigger" class="t-technique" href="../../wiki/retrigger.html">Retrigger and resync</a></li><li><a data-slug="reverb-and-compression" class="t-technique" href="../../wiki/reverb-and-compression.html">Reverb and compression (offline, in the sample editor)</a></li><li><a data-slug="ring-modulation-and-sync" class="t-technique" href="../../wiki/ring-modulation-and-sync.html">Ring modulation and oscillator sync</a></li><li><a data-slug="sample-looping" class="t-technique" href="../../wiki/sample-looping.html">Sample looping (perfect loops, sustain loops, long loops)</a></li><li><a data-slug="sample-offset" class="t-technique" href="../../wiki/sample-offset.html">Sample offset tricks</a></li><li><a data-slug="shuffle-funktempo" class="t-technique" href="../../wiki/shuffle-funktempo.html">Shuffle, swing and FunkTempo</a></li><li><a data-slug="sidechain-pump" class="t-technique" href="../../wiki/sidechain-pump.html">Sidechain pump</a></li><li><a data-slug="song-init-and-looping" class="t-technique" href="../../wiki/song-init-and-looping.html">Song initialisation and looping</a></li><li><a data-slug="stereo-panning" class="t-technique" href="../../wiki/stereo-panning.html">Stereo panning</a></li><li><a data-slug="vibrato" class="t-technique" href="../../wiki/vibrato.html">Vibrato and delayed vibrato</a></li><li><a data-slug="volume-slides" class="t-technique" href="../../wiki/volume-slides.html">Volume slides, fades and effect memory</a></li><li><a data-slug="wavetable-programming" class="t-technique" href="../../wiki/wavetable-programming.html">Wavetable programming (waveform / arp tables)</a></li></ul></details><details class="grp" data-grp="concept"><summary>Concepts <span class="n">25</span></summary><ul><li><a data-slug="adsr-envelope" class="t-concept" href="../../wiki/adsr-envelope.html">ADSR envelope</a></li><li><a data-slug="arrangement" class="t-concept" href="../../wiki/arrangement.html">Arrangement — think in 4s and 8s</a></li><li><a data-slug="chiptune" class="t-concept" href="../../wiki/chiptune.html">Chiptune — what the word means</a></li><li><a data-slug="chord-inversions" class="t-concept" href="../../wiki/chord-inversions.html">Chord inversions and voice leading</a></li><li><a data-slug="chord-progressions" class="t-concept" href="../../wiki/chord-progressions.html">Chord progressions</a></li><li><a data-slug="commercial-tracking" class="t-concept" href="../../wiki/commercial-tracking.html">Commercial tracking — selling and producing tracked music</a></li><li><a data-slug="compos" class="t-concept" href="../../wiki/compos.html">Compos — music competitions in the tracker scene</a></li><li><a data-slug="diatonic-chords" class="t-concept" href="../../wiki/diatonic-chords.html">Diatonic chords — why it is not always 0 3 7</a></li><li><a data-slug="effect-command-crosswalk" class="t-concept" href="../../wiki/effect-command-crosswalk.html">Effect command crosswalk (MOD / XM ↔ S3M / IT)</a></li><li><a data-slug="instrument-tables" class="t-concept" href="../../wiki/instrument-tables.html">Instrument tables (wave / pulse / filter)</a></li><li><a data-slug="live-tracking" class="t-concept" href="../../wiki/live-tracking.html">Live tracking — performing with a tracker</a></li><li><a data-slug="orderlist" class="t-concept" href="../../wiki/orderlist.html">Orderlist (sequence)</a></li><li><a data-slug="player-identification" class="t-concept" href="../../wiki/player-identification.html">Player identification (pattern searching)</a></li><li><a data-slug="realism-in-tracked-music" class="t-concept" href="../../wiki/realism-in-tracked-music.html">Realism in tracked music</a></li><li><a data-slug="rhythm-and-groove" class="t-concept" href="../../wiki/rhythm-and-groove.html">Rhythm and groove in 16 rows</a></li><li><a data-slug="sample-ripping" class="t-concept" href="../../wiki/sample-ripping.html">Sample ripping</a></li><li><a data-slug="scales-and-modes" class="t-concept" href="../../wiki/scales-and-modes.html">Scales and modes — your palette of notes</a></li><li><a data-slug="semitone-math" class="t-concept" href="../../wiki/semitone-math.html">Semitones — the only unit you need</a></li><li><a data-slug="serial-composition" class="t-concept" href="../../wiki/serial-composition.html">Serial composition — rows, retrograde, inversion</a></li><li><a data-slug="sid-player-routine" class="t-concept" href="../../wiki/sid-player-routine.html">SID player routine, rastertime and player types</a></li><li><a data-slug="sync" class="t-concept" href="../../wiki/sync.html">Synchronisation with other gear</a></li><li><a data-slug="tracker-scene-history" class="t-concept" href="../../wiki/tracker-scene-history.html">The PC tracker scene 1995–98, as it saw itself</a></li><li><a data-slug="tracker" class="t-concept" href="../../wiki/tracker.html">Tracker</a></li><li><a data-slug="tracking-workflow" class="t-concept" href="../../wiki/tracking-workflow.html">Tracking workflow — advice from the scene</a></li><li><a data-slug="melody-writing" class="t-concept" href="../../wiki/melody-writing.html">Writing melodies that work</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">38</span></summary><ul><li><a data-slug="037-lab" class="t-entity" href="../../wiki/037-lab.html">0 3 7 lab</a></li><li><a data-slug="asterion-sid-tracker" class="t-entity" href="../../wiki/asterion-sid-tracker.html">Asterion Sid Tracker</a></li><li><a data-slug="catweasel" class="t-entity" href="../../wiki/catweasel.html">Catweasel Mk4</a></li><li><a data-slug="cheesecutter" class="t-entity" href="../../wiki/cheesecutter.html">CheeseCutter</a></li><li><a data-slug="whittaker-player" class="t-entity" href="../../wiki/whittaker-player.html">David Whittaker&#x27;s player (the Panther driver)</a></li><li><a data-slug="digiorganizer" class="t-entity" href="../../wiki/digiorganizer.html">DigiOrganizer</a></li><li><a data-slug="duet" class="t-entity" href="../../wiki/duet.html">DUET</a></li><li><a data-slug="fasttracker-2" class="t-entity" href="../../wiki/fasttracker-2.html">FastTracker 2</a></li><li><a data-slug="furnace" class="t-entity" href="../../wiki/furnace.html">Furnace</a></li><li><a data-slug="future-composer" class="t-entity" href="../../wiki/future-composer.html">Future Composer (C64)</a></li><li><a data-slug="goattracker" class="t-entity" href="../../wiki/goattracker.html">GoatTracker</a></li><li><a data-slug="impulse-tracker" class="t-entity" href="../../wiki/impulse-tracker.html">Impulse Tracker</a></li><li><a data-slug="iseq" class="t-entity" href="../../wiki/iseq.html">Iseq (Steve Judd&#x27;s C64 music editor, 2002)</a></li><li><a data-slug="jitt64" class="t-entity" href="../../wiki/jitt64.html">JITT64 (Java Ice Team Tracker)</a></li><li><a data-slug="bjerregaard-player" class="t-entity" href="../../wiki/bjerregaard-player.html">Johannes Bjerregaard&#x27;s player</a></li><li><a data-slug="liblsdj" class="t-entity" href="../../wiki/liblsdj.html">libLSDj</a></li><li><a data-slug="lsdj" class="t-entity" href="../../wiki/lsdj.html">LSDj (Little Sound Dj)</a></li><li><a data-slug="lsdj-wave-cruncher" class="t-entity" href="../../wiki/lsdj-wave-cruncher.html">LSDj Wave Cruncher</a></li><li><a data-slug="lsdpatch" class="t-entity" href="../../wiki/lsdpatch.html">LSDPatch (LSDPatcher)</a></li><li><a data-slug="galway-player" class="t-entity" href="../../wiki/galway-player.html">Martin Galway&#x27;s player (the Ocean &quot;macro-language&quot; driver)</a></li><li><a data-slug="matt-gray-player" class="t-entity" href="../../wiki/matt-gray-player.html">Matt Gray&#x27;s player (Driller / Dominator engine)</a></li><li><a data-slug="musicfile" class="t-entity" href="../../wiki/musicfile.html">MUSICFILE — the Maniacs of Noise driver</a></li><li><a data-slug="ninjatracker" class="t-entity" href="../../wiki/ninjatracker.html">Ninjatracker</a></li><li><a data-slug="openmpt" class="t-entity" href="../../wiki/openmpt.html">OpenMPT</a></li><li><a data-slug="ocean-music-driver" class="t-entity" href="../../wiki/ocean-music-driver.html">Paul Hughes&#x27;s Ocean music driver (Jonathan Dunn&#x27;s player)</a></li><li><a data-slug="protracker" class="t-entity" href="../../wiki/protracker.html">ProTracker</a></li><li><a data-slug="hubbard-player" class="t-entity" href="../../wiki/hubbard-player.html">Rob Hubbard&#x27;s driver (the Monty on the Run player)</a></li><li><a data-slug="rockmonitor" class="t-entity" href="../../wiki/rockmonitor.html">Rockmonitor</a></li><li><a data-slug="schism-tracker" class="t-entity" href="../../wiki/schism-tracker.html">Schism Tracker</a></li><li><a data-slug="scream-tracker-3" class="t-entity" href="../../wiki/scream-tracker-3.html">Scream Tracker 3</a></li><li><a data-slug="sid-factory-ii" class="t-entity" href="../../wiki/sid-factory-ii.html">SID Factory II</a></li><li><a data-slug="sid-wizard" class="t-entity" href="../../wiki/sid-wizard.html">SID-Wizard</a></li><li><a data-slug="siddump" class="t-entity" href="../../wiki/siddump.html">siddump</a></li><li><a data-slug="sidid" class="t-entity" href="../../wiki/sidid.html">SIDId</a></li><li><a data-slug="soundmonitor" class="t-entity" href="../../wiki/soundmonitor.html">Soundmonitor</a></li><li><a data-slug="tfmx" class="t-entity" href="../../wiki/tfmx.html">TFMX</a></li><li><a data-slug="turbo-assembler" class="t-entity" href="../../wiki/turbo-assembler.html">Turbo Assembler (C64)</a></li><li><a data-slug="vice" class="t-entity" href="../../wiki/vice.html">VICE</a></li></ul></details><details class="grp" data-grp="kind-chip"><summary>Chips <span class="n">2</span></summary><ul><li><a data-slug="game-boy-apu" class="t-entity" href="../../wiki/game-boy-apu.html">Game Boy sound hardware (APU)</a></li><li><a data-slug="sid" class="t-entity" href="../../wiki/sid.html">SID (MOS 6581 / 8580)</a></li></ul></details><details class="grp" data-grp="kind-platform"><summary>Platforms <span class="n">3</span></summary><ul><li><a data-slug="commodore-64" class="t-entity" href="../../wiki/commodore-64.html">Commodore 64</a></li><li><a data-slug="game-boy" class="t-entity" href="../../wiki/game-boy.html">Game Boy</a></li><li><a data-slug="gravis-ultrasound" class="t-entity" href="../../wiki/gravis-ultrasound.html">Gravis UltraSound (GUS)</a></li></ul></details><details class="grp" data-grp="kind-format"><summary>Formats <span class="n">5</span></summary><ul><li><a data-slug="it-format" class="t-entity" href="../../wiki/it-format.html">IT module format (.it)</a></li><li><a data-slug="mod-format" class="t-entity" href="../../wiki/mod-format.html">MOD module format (.mod)</a></li><li><a data-slug="s3m-format" class="t-entity" href="../../wiki/s3m-format.html">S3M module format (.s3m)</a></li><li><a data-slug="sid-format" class="t-entity" href="../../wiki/sid-format.html">SID file format (.sid)</a></li><li><a data-slug="xm-format" class="t-entity" href="../../wiki/xm-format.html">XM module format (.xm)</a></li></ul></details><details class="grp" data-grp="kind-person"><summary>People <span class="n">120</span></summary><ul><li><a data-slug="4ntler" class="t-entity" href="../../wiki/4ntler.html">4ntler</a></li><li><a data-slug="acidfrog" class="t-entity" href="../../wiki/acidfrog.html">Acidfrog (Cam Goodman)</a></li><li><a data-slug="aleksi-eeben" class="t-entity" href="../../wiki/aleksi-eeben.html">Aleksi Eeben</a></li><li><a data-slug="amusic" class="t-entity" href="../../wiki/amusic.html">AmusiC (Sotiris Varotsis)</a></li><li><a data-slug="andreas-varga" class="t-entity" href="../../wiki/andreas-varga.html">Andreas Varga</a></li><li><a data-slug="asger-alstrup" class="t-entity" href="../../wiki/asger-alstrup.html">Asger Alstrup</a></li><li><a data-slug="atlantic" class="t-entity" href="../../wiki/atlantic.html">Atlantic (Barry Freeman)</a></li><li><a data-slug="balrog" class="t-entity" href="../../wiki/balrog.html">Balrog (Samuel Cote)</a></li><li><a data-slug="basehead" class="t-entity" href="../../wiki/basehead.html">Basehead (Dan Grandpre)</a></li><li><a data-slug="beaner" class="t-entity" href="../../wiki/beaner.html">Beaner (Sean Cummins)</a></li><li><a data-slug="behemoth" class="t-entity" href="../../wiki/behemoth.html">Behemoth (David Menkes)</a></li><li><a data-slug="big-jim" class="t-entity" href="../../wiki/big-jim.html">Big Jim (James Storer)</a></li><li><a data-slug="blackwolf" class="t-entity" href="../../wiki/blackwolf.html">Blackwolf (Bobby Tamburrino)</a></li><li><a data-slug="blaze-runner" class="t-entity" href="../../wiki/blaze-runner.html">Blaze Runner (Christian Desnoyers)</a></li><li><a data-slug="bob-yannes" class="t-entity" href="../../wiki/bob-yannes.html">Bob Yannes</a></li><li><a data-slug="catspaw" class="t-entity" href="../../wiki/catspaw.html">Catspaw (Brandon Bannerman)</a></li><li><a data-slug="charles-deenen" class="t-entity" href="../../wiki/charles-deenen.html">Charles Deenen</a></li><li><a data-slug="chordian" class="t-entity" href="../../wiki/chordian.html">Chordian (Jens)</a></li><li><a data-slug="chris-abbott" class="t-entity" href="../../wiki/chris-abbott.html">Chris Abbott</a></li><li><a data-slug="chris-huelsbeck" class="t-entity" href="../../wiki/chris-huelsbeck.html">Chris Hülsbeck</a></li><li><a data-slug="claim" class="t-entity" href="../../wiki/claim.html">Claim</a></li><li><a data-slug="clef" class="t-entity" href="../../wiki/clef.html">Clef (Phil Sweeney)</a></li><li><a data-slug="cosmic" class="t-entity" href="../../wiki/cosmic.html">Cosmic (Matthias Ksoll)</a></li><li><a data-slug="daedalus" class="t-entity" href="../../wiki/daedalus.html">Daedalus (Brian Bennetts)</a></li><li><a data-slug="david-whittaker" class="t-entity" href="../../wiki/david-whittaker.html">David Whittaker</a></li><li><a data-slug="defense-mechanism" class="t-entity" href="../../wiki/defense-mechanism.html">Defense Mechanism</a></li><li><a data-slug="dennisc" class="t-entity" href="../../wiki/dennisc.html">DennisC (Dennis Courtney)</a></li><li><a data-slug="deus-ex" class="t-entity" href="../../wiki/deus-ex.html">Deus Ex (Chill Productions)</a></li><li><a data-slug="dustbin" class="t-entity" href="../../wiki/dustbin.html">Dustbin (Stefano Palmonari)</a></li><li><a data-slug="ender" class="t-entity" href="../../wiki/ender.html">Ender (Andrew Burke)</a></li><li><a data-slug="fisherman" class="t-entity" href="../../wiki/fisherman.html">fisherman (Matt Overington)</a></li><li><a data-slug="fred-ink" class="t-entity" href="../../wiki/fred-ink.html">Fred (Ink)</a></li><li><a data-slug="fred-gray" class="t-entity" href="../../wiki/fred-gray.html">Fred Gray</a></li><li><a data-slug="freedom" class="t-entity" href="../../wiki/freedom.html">Freedom (SID composer)</a></li><li><a data-slug="ganja-man" class="t-entity" href="../../wiki/ganja-man.html">Ganja Man (Sam Bashton)</a></li><li><a data-slug="greg-heo" class="t-entity" href="../../wiki/greg-heo.html">Greg Heo</a></li><li><a data-slug="hermit" class="t-entity" href="../../wiki/hermit.html">Hermit (Mihaly Horvath)</a></li><li><a data-slug="hypnogram" class="t-entity" href="../../wiki/hypnogram.html">Hypnogram</a></li><li><a data-slug="infu" class="t-entity" href="../../wiki/infu.html">Infu</a></li><li><a data-slug="injekted" class="t-entity" href="../../wiki/injekted.html">Injekted (Brandon Balliett)</a></li><li><a data-slug="island-of-reil" class="t-entity" href="../../wiki/island-of-reil.html">Island of Reil (Jesse Rothenberg)</a></li><li><a data-slug="jan-harries" class="t-entity" href="../../wiki/jan-harries.html">Jan Harries (Rambones)</a></li><li><a data-slug="jase" class="t-entity" href="../../wiki/jase.html">Jase (Jason Chong)</a></li><li><a data-slug="jeffrey-lim" class="t-entity" href="../../wiki/jeffrey-lim.html">Jeffrey Lim (Pulse)</a></li><li><a data-slug="jeroen-kimmel" class="t-entity" href="../../wiki/jeroen-kimmel.html">Jeroen Kimmel (Red)</a></li><li><a data-slug="jeroen-tel" class="t-entity" href="../../wiki/jeroen-tel.html">Jeroen Tel</a></li><li><a data-slug="johan-kotlinski" class="t-entity" href="../../wiki/johan-kotlinski.html">Johan Kotlinski</a></li><li><a data-slug="johannes-bjerregaard" class="t-entity" href="../../wiki/johannes-bjerregaard.html">Johannes Bjerregaard</a></li><li><a data-slug="jonathan-dunn" class="t-entity" href="../../wiki/jonathan-dunn.html">Jonathan Dunn</a></li><li><a data-slug="jugi" class="t-entity" href="../../wiki/jugi.html">Jugi (Jukka Kaartinen)</a></li><li><a data-slug="kal-zakath" class="t-entity" href="../../wiki/kal-zakath.html">Kal Zakath (John Townsend)</a></li><li><a data-slug="khyron" class="t-entity" href="../../wiki/khyron.html">Khyron (Paul Schultz)</a></li><li><a data-slug="lars-hamre" class="t-entity" href="../../wiki/lars-hamre.html">Lars &quot;ZAP&quot; Hamre</a></li><li><a data-slug="lasse-oorni" class="t-entity" href="../../wiki/lasse-oorni.html">Lasse Öörni (Cadaver)</a></li><li><a data-slug="laxity" class="t-entity" href="../../wiki/laxity.html">Laxity (Thomas E. Petersen)</a></li><li><a data-slug="leinad" class="t-entity" href="../../wiki/leinad.html">Leinad (Daniel Falk)</a></li><li><a data-slug="leviathan" class="t-entity" href="../../wiki/leviathan.html">Leviathan</a></li><li><a data-slug="liam-the-lemming" class="t-entity" href="../../wiki/liam-the-lemming.html">Liam the Lemming (Liam Hesse)</a></li><li><a data-slug="linus-walleij" class="t-entity" href="../../wiki/linus-walleij.html">Linus Walleij</a></li><li><a data-slug="loki" class="t-entity" href="../../wiki/loki.html">Loki (Charles Odom)</a></li><li><a data-slug="lord-pegasus" class="t-entity" href="../../wiki/lord-pegasus.html">Lord Pegasus (Zack Smith)</a></li><li><a data-slug="luca-carrafiello" class="t-entity" href="../../wiki/luca-carrafiello.html">Luca Carrafiello (Luca/FIRE)</a></li><li><a data-slug="luv-kohli" class="t-entity" href="../../wiki/luv-kohli.html">Luv Kohli</a></li><li><a data-slug="maelcum" class="t-entity" href="../../wiki/maelcum.html">Maelcum</a></li><li><a data-slug="martin-galway" class="t-entity" href="../../wiki/martin-galway.html">Martin Galway</a></li><li><a data-slug="martin-walker" class="t-entity" href="../../wiki/martin-walker.html">Martin Walker</a></li><li><a data-slug="master-of-darkness" class="t-entity" href="../../wiki/master-of-darkness.html">Master of Darkness (Todd Andlar)</a></li><li><a data-slug="matt-gray" class="t-entity" href="../../wiki/matt-gray.html">Matt Gray</a></li><li><a data-slug="mellow-d" class="t-entity" href="../../wiki/mellow-d.html">Mellow-D (Jaakko Manninen)</a></li><li><a data-slug="mental-floss" class="t-entity" href="../../wiki/mental-floss.html">Mental Floss (Andrew McCallum)</a></li><li><a data-slug="mesonyx" class="t-entity" href="../../wiki/mesonyx.html">Mesonyx (Jon Dal Kristbjornsson)</a></li><li><a data-slug="mick-rippon" class="t-entity" href="../../wiki/mick-rippon.html">Mick Rippon</a></li><li><a data-slug="mikmak" class="t-entity" href="../../wiki/mikmak.html">Mikmak (Jean-Paul Mikkers)</a></li><li><a data-slug="mosaic" class="t-entity" href="../../wiki/mosaic.html">Mosaic (Renaissance)</a></li><li><a data-slug="nata" class="t-entity" href="../../wiki/nata.html">Nata (Stephan Parth)</a></li><li><a data-slug="necros" class="t-entity" href="../../wiki/necros.html">Necros (Andy Sega)</a></li><li><a data-slug="nemesis" class="t-entity" href="../../wiki/nemesis.html">Nemesis (Andrew Wise)</a></li><li><a data-slug="olivier-lapicque" class="t-entity" href="../../wiki/olivier-lapicque.html">Olivier Lapicque</a></li><li><a data-slug="paganus" class="t-entity" href="../../wiki/paganus.html">Paganus</a></li><li><a data-slug="pariah" class="t-entity" href="../../wiki/pariah.html">Pariah (Edwin de la Vega)</a></li><li><a data-slug="perisoft" class="t-entity" href="../../wiki/perisoft.html">Perisoft (David Wiernicki)</a></li><li><a data-slug="peter-hanning" class="t-entity" href="../../wiki/peter-hanning.html">Peter &quot;Crayon&quot; Hanning</a></li><li><a data-slug="phoenix" class="t-entity" href="../../wiki/phoenix.html">Phoenix (Andrew Voss)</a></li><li><a data-slug="pinion" class="t-entity" href="../../wiki/pinion.html">Pinion (Ryan Hunt)</a></li><li><a data-slug="popcorn" class="t-entity" href="../../wiki/popcorn.html">Popcorn (Chris Campbell)</a></li><li><a data-slug="populus" class="t-entity" href="../../wiki/populus.html">Populus (Nicolas Roberge)</a></li><li><a data-slug="psibelius" class="t-entity" href="../../wiki/psibelius.html">Psibelius (Gene Wie)</a></li><li><a data-slug="purple-motion" class="t-entity" href="../../wiki/purple-motion.html">Purple Motion</a></li><li><a data-slug="quantam-porcupine" class="t-entity" href="../../wiki/quantam-porcupine.html">Quantam Porcupine (Joshua Shagam)</a></li><li><a data-slug="quarex" class="t-entity" href="../../wiki/quarex.html">Quarex (Drew Hunt)</a></li><li><a data-slug="rage" class="t-entity" href="../../wiki/rage.html">Rage (Harri Blom)</a></li><li><a data-slug="reyn-ouwehand" class="t-entity" href="../../wiki/reyn-ouwehand.html">Reyn Ouwehand</a></li><li><a data-slug="richard-bayliss" class="t-entity" href="../../wiki/richard-bayliss.html">Richard Bayliss</a></li><li><a data-slug="rob-hubbard" class="t-entity" href="../../wiki/rob-hubbard.html">Rob Hubbard</a></li><li><a data-slug="ryan-cramer" class="t-entity" href="../../wiki/ryan-cramer.html">Ryan Cramer</a></li><li><a data-slug="ryan-sprott" class="t-entity" href="../../wiki/ryan-sprott.html">Ryan Sprott (Grey)</a></li><li><a data-slug="sabrepulse" class="t-entity" href="../../wiki/sabrepulse.html">Sabrepulse</a></li><li><a data-slug="sami-tammilehto" class="t-entity" href="../../wiki/sami-tammilehto.html">Sami Tammilehto (Psi)</a></li><li><a data-slug="saxy" class="t-entity" href="../../wiki/saxy.html">Saxy (Courtney Risch)</a></li><li><a data-slug="scarzix" class="t-entity" href="../../wiki/scarzix.html">Scarzix (Carsten Berggreen)</a></li><li><a data-slug="scirocco" class="t-entity" href="../../wiki/scirocco.html">Scirocco (Ian Lyman)</a></li><li><a data-slug="shawnm" class="t-entity" href="../../wiki/shawnm.html">shawnm (Shawn, NOISE)</a></li><li><a data-slug="skaven" class="t-entity" href="../../wiki/skaven.html">Skaven</a></li><li><a data-slug="smeghead" class="t-entity" href="../../wiki/smeghead.html">Smeghead (David Oranchak)</a></li><li><a data-slug="stalker" class="t-entity" href="../../wiki/stalker.html">Stalker (Ariel Gross)</a></li><li><a data-slug="stefano-tognon" class="t-entity" href="../../wiki/stefano-tognon.html">Stefano Tognon (ice00)</a></li><li><a data-slug="stephan-schmid" class="t-entity" href="../../wiki/stephan-schmid.html">Stephan Schmid (Steppe)</a></li><li><a data-slug="storlek" class="t-entity" href="../../wiki/storlek.html">Storlek</a></li><li><a data-slug="subhuman" class="t-entity" href="../../wiki/subhuman.html">Subhuman (Seth Miller)</a></li><li><a data-slug="the-zapper" class="t-entity" href="../../wiki/the-zapper.html">The Zapper (Marc Girard, Force Ten)</a></li><li><a data-slug="thehacker" class="t-entity" href="../../wiki/thehacker.html">TheHacker (Krisjanis Gale)</a></li><li><a data-slug="trixter" class="t-entity" href="../../wiki/trixter.html">Trixter (Jim Leonard)</a></li><li><a data-slug="tsm" class="t-entity" href="../../wiki/tsm.html">TSM (Carmine Migliaccio)</a></li><li><a data-slug="u4ia" class="t-entity" href="../../wiki/u4ia.html">U4IA / F8 (James Young)</a></li><li><a data-slug="vadimvs" class="t-entity" href="../../wiki/vadimvs.html">VadimVS (Vadim Shustov)</a></li><li><a data-slug="vegas" class="t-entity" href="../../wiki/vegas.html">Vegas (T.J. Lerner)</a></li><li><a data-slug="vicious" class="t-entity" href="../../wiki/vicious.html">Vicious (VSL)</a></li><li><a data-slug="witchmaster" class="t-entity" href="../../wiki/witchmaster.html">WitchMaster (Mikael Norrgård)</a></li><li><a data-slug="zalt" class="t-entity" href="../../wiki/zalt.html">Zalt (Tobias Garder)</a></li><li><a data-slug="zinc" class="t-entity" href="../../wiki/zinc.html">Zinc (Justin Ray)</a></li></ul></details><details class="grp" data-grp="kind-group"><summary>Groups <span class="n">20</span></summary><ul><li><a data-slug="aim-higher" class="t-entity" href="../../wiki/aim-higher.html">Aim Higher</a></li><li><a data-slug="codemasters" class="t-entity" href="../../wiki/codemasters.html">Codemasters</a></li><li><a data-slug="compunet" class="t-entity" href="../../wiki/compunet.html">Compunet</a></li><li><a data-slug="defiance" class="t-entity" href="../../wiki/defiance.html">Defiance</a></li><li><a data-slug="epinicion" class="t-entity" href="../../wiki/epinicion.html">Epinicion</a></li><li><a data-slug="esper-division" class="t-entity" href="../../wiki/esper-division.html">Esper Division</a></li><li><a data-slug="five-musicians" class="t-entity" href="../../wiki/five-musicians.html">Five Musicians (FM)</a></li><li><a data-slug="future-crew" class="t-entity" href="../../wiki/future-crew.html">Future Crew</a></li><li><a data-slug="hewson" class="t-entity" href="../../wiki/hewson.html">Hewson Consultants</a></li><li><a data-slug="hornet" class="t-entity" href="../../wiki/hornet.html">Hornet</a></li><li><a data-slug="kosmic" class="t-entity" href="../../wiki/kosmic.html">Kosmic (KFMF)</a></li><li><a data-slug="lok" class="t-entity" href="../../wiki/lok.html">LoK</a></li><li><a data-slug="maniacs-of-noise" class="t-entity" href="../../wiki/maniacs-of-noise.html">Maniacs of Noise</a></li><li><a data-slug="noise-group" class="t-entity" href="../../wiki/noise-group.html">NOISE (New Objectives In Sound Exploration)</a></li><li><a data-slug="rainbow-arts" class="t-entity" href="../../wiki/rainbow-arts.html">Rainbow Arts</a></li><li><a data-slug="renaissance" class="t-entity" href="../../wiki/renaissance.html">Renaissance</a></li><li><a data-slug="system-3" class="t-entity" href="../../wiki/system-3.html">System 3</a></li><li><a data-slug="the-modsquad" class="t-entity" href="../../wiki/the-modsquad.html">The Modsquad</a></li><li><a data-slug="triton" class="t-entity" href="../../wiki/triton.html">Triton (Fredrik Huss and Magnus Högdahl)</a></li><li><a data-slug="ultrabeat" class="t-entity" href="../../wiki/ultrabeat.html">Ultrabeat</a></li></ul></details><details class="grp" data-grp="kind-event"><summary>Events <span class="n">2</span></summary><ul><li><a data-slug="20-minute-chip-compo" class="t-entity" href="../../wiki/20-minute-chip-compo.html">20 Minute Chip Compo (20mc)</a></li><li><a data-slug="tiny-sid-compo" class="t-entity" href="../../wiki/tiny-sid-compo.html">Tiny Sid Compo</a></li></ul></details><details class="grp" data-grp="kind-publication"><summary>Publications <span class="n">11</span></summary><ul><li><a data-slug="64er" class="t-entity" href="../../wiki/64er.html">64&#x27;er (magazine)</a></li><li><a data-slug="chipmusic-org" class="t-entity" href="../../wiki/chipmusic-org.html">ChipMusic.org</a></li><li><a data-slug="c64-programmers-reference-guide" class="t-entity" href="../../wiki/c64-programmers-reference-guide.html">Commodore 64 Programmer&#x27;s Reference Guide</a></li><li><a data-slug="commodore-zone" class="t-entity" href="../../wiki/commodore-zone.html">Commodore Zone</a></li><li><a data-slug="hvmec" class="t-entity" href="../../wiki/hvmec.html">HVMEC — High Voltage Music Engines Collection</a></li><li><a data-slug="hvsc" class="t-entity" href="../../wiki/hvsc.html">HVSC — High Voltage SID Collection</a></li><li><a data-slug="intense-tech" class="t-entity" href="../../wiki/intense-tech.html">Intense Tech with Defense Mech</a></li><li><a data-slug="pan-docs" class="t-entity" href="../../wiki/pan-docs.html">Pan Docs</a></li><li><a data-slug="sidin" class="t-entity" href="../../wiki/sidin.html">SIDin (e-zine)</a></li><li><a data-slug="sid-homepage" class="t-entity" href="../../wiki/sid-homepage.html">The SID Homepage (sidmusic.org)</a></li><li><a data-slug="traxweekly" class="t-entity" href="../../wiki/traxweekly.html">TraxWeekly</a></li></ul></details><details class="grp" data-grp="kind-song"><summary>Songs <span class="n">16</span></summary><ul><li><a data-slug="arkanoid" class="t-entity" href="../../wiki/arkanoid.html">Arkanoid (Martin Galway, 1986 Imagine)</a></li><li><a data-slug="commando" class="t-entity" href="../../wiki/commando.html">Commando (C64, 1985)</a></li><li><a data-slug="cybernoid" class="t-entity" href="../../wiki/cybernoid.html">Cybernoid (Jeroen Tel, 1988)</a></li><li><a data-slug="cybernoid-ii" class="t-entity" href="../../wiki/cybernoid-ii.html">Cybernoid II (Jeroen Tel, 1988)</a></li><li><a data-slug="dig-dug" class="t-entity" href="../../wiki/dig-dug.html">Dig Dug (C64, Datasoft 1984) — the music routine</a></li><li><a data-slug="dominator" class="t-entity" href="../../wiki/dominator.html">Dominator (Matt Gray, 1989)</a></li><li><a data-slug="driller" class="t-entity" href="../../wiki/driller.html">Driller (Matt Gray, 1987)</a></li><li><a data-slug="helikopter-jagd" class="t-entity" href="../../wiki/helikopter-jagd.html">Helikopter Jagd (C64, 1986)</a></li><li><a data-slug="hunters-moon" class="t-entity" href="../../wiki/hunters-moon.html">Hunter&#x27;s Moon (Thalamus, 1987)</a></li><li><a data-slug="last-ninja-2" class="t-entity" href="../../wiki/last-ninja-2.html">Last Ninja 2 (Matt Gray, 1988)</a></li><li><a data-slug="modules" class="t-entity" href="../../wiki/modules.html">Modules (Ivan Del Duca, 1988)</a></li><li><a data-slug="monty-on-the-run" class="t-entity" href="../../wiki/monty-on-the-run.html">Monty on the Run (C64, 1985)</a></li><li><a data-slug="sanxion" class="t-entity" href="../../wiki/sanxion.html">Sanxion (C64, 1986)</a></li><li><a data-slug="shades" class="t-entity" href="../../wiki/shades.html">Shades (Chris Hülsbeck, 1986)</a></li><li><a data-slug="great-giana-sisters" class="t-entity" href="../../wiki/great-giana-sisters.html">The Great Giana Sisters (C64, 1987/88)</a></li><li><a data-slug="the-grey-note" class="t-entity" href="../../wiki/the-grey-note.html">The Grey Note (Necros)</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">289</span></summary><ul><li><a data-slug="s-037-lab" class="t-summary" href="../../wiki/s-037-lab.html">0 3 7 lab — techniques &amp; theory (summary)</a></li><li><a data-slug="s-64er-soundmonitor-article" class="t-summary" href="../../wiki/s-64er-soundmonitor-article.html">64&#x27;er 10/1986 — Musik wie noch nie: the Soundmonitor article and manual</a></li><li><a data-slug="s-arcadeattack-matt-gray-interview" class="t-summary" href="../../wiki/s-arcadeattack-matt-gray-interview.html">Arcade Attack — Matt Gray (VGM Maestro) interview (2020/2021)</a></li><li><a data-slug="s-sidmusic-alstrup-waveform-examinations" class="t-summary" href="../../wiki/s-sidmusic-alstrup-waveform-examinations.html">Asger Alstrup — Examination of SID triangle waveform / noise waveform (The SID Homepage, 1995)</a></li><li><a data-slug="s-c64-prg-chapter-4-sound" class="t-summary" href="../../wiki/s-c64-prg-chapter-4-sound.html">C64 Programmer&#x27;s Reference Guide, ch. 4 — Programming Sound and Music on Your Commodore 64 (1982)</a></li><li><a data-slug="s-c64com-matt-gray-interview" class="t-summary" href="../../wiki/s-c64com-matt-gray-interview.html">C64.COM interview #36: Matt Gray (2014)</a></li><li><a data-slug="s-charles-deenen-interviews" class="t-summary" href="../../wiki/s-charles-deenen-interviews.html">Charles Deenen interviews: Domination #11 (1998) and Designing Sound (2010)</a></li><li><a data-slug="s-sid-wizard-charts-and-tables" class="t-summary" href="../../wiki/s-sid-wizard-charts-and-tables.html">Charts and Tables for SID-Wizard 1.6 (document version 1.0, 2014)</a></li><li><a data-slug="s-chipmusic-c64-music-for-dummies" class="t-summary" href="../../wiki/s-chipmusic-c64-music-for-dummies.html">chipmusic.org — C64 Music for Dummies (ant1&#x27;s SID-Wizard 1.0 tutorial, 2012)</a></li><li><a data-slug="s-chipmusic-lsdj-advanced-tricks" class="t-summary" href="../../wiki/s-chipmusic-lsdj-advanced-tricks.html">chipmusic.org — LSDJ Advanced Tricks thread (2012)</a></li><li><a data-slug="s-chipmusic-tables-and-chords-threads" class="t-summary" href="../../wiki/s-chipmusic-tables-and-chords-threads.html">chipmusic.org — LSDJ Chord Cheat Sheet / Advice on Learning Tables threads (2015)</a></li><li><a data-slug="s-chipmusic-lsdj-faq" class="t-summary" href="../../wiki/s-chipmusic-lsdj-faq.html">chipmusic.org — LSDJ FAQ thread (2010–2011)</a></li><li><a data-slug="s-chipmusic-noise-drum-threads" class="t-summary" href="../../wiki/s-chipmusic-noise-drum-threads.html">chipmusic.org — Noise snare / Complete Drum Kit on Noise Channel threads (2014)</a></li><li><a data-slug="s-chipmusic-sid-music-hints-n-tips" class="t-summary" href="../../wiki/s-chipmusic-sid-music-hints-n-tips.html">chipmusic.org — sid music hints&#x27;n&#x27;tips (2013)</a></li><li><a data-slug="s-chipmusic-kotlinski-interviews" class="t-summary" href="../../wiki/s-chipmusic-kotlinski-interviews.html">chipmusic.org — two Johan Kotlinski interviews (2012, 2014)</a></li><li><a data-slug="s-chipmusic-typical-sid-sounds" class="t-summary" href="../../wiki/s-chipmusic-typical-sid-sounds.html">chipmusic.org — What are the typical C64/SID sounds/instruments? (2015)</a></li><li><a data-slug="s-chordian-sid-musicians" class="t-summary" href="../../wiki/s-chordian-sid-musicians.html">Chordian — SID Musicians (JCH&#x27;s verdicts on the game composers, 2018)</a></li><li><a data-slug="s-commodore-64-eu-sid-chip" class="t-summary" href="../../wiki/s-commodore-64-eu-sid-chip.html">commodore-64.eu — The C64 SID Chip (6581 vs 8580 overview)</a></li><li><a data-slug="s-chordian-sf2-instruments" class="t-summary" href="../../wiki/s-chordian-sf2-instruments.html">Composing in SID Factory II, Part 4 — Instruments (Chordian)</a></li><li><a data-slug="s-witchmaster-creating-chiptunes-with-sid-wizard" class="t-summary" href="../../wiki/s-witchmaster-creating-chiptunes-with-sid-wizard.html">Creating Chiptunes with SID-Wizard, Second Edition (summary)</a></li><li><a data-slug="s-csdb-huelsbeck-tfmx-thread" class="t-summary" href="../../wiki/s-csdb-huelsbeck-tfmx-thread.html">CSDb forum: Huelsbeck TFMX? (2006)</a></li><li><a data-slug="s-csdb-soundmonitor-and-shades" class="t-summary" href="../../wiki/s-csdb-soundmonitor-and-shades.html">CSDb release pages: Soundmonitor V1.0 (1986) and Shades (1986)</a></li><li><a data-slug="s-cybernoid-behind-the-notes" class="t-summary" href="../../wiki/s-cybernoid-behind-the-notes.html">Cybernoid I / Cybernoid II &#x27;behind the notes&#x27; videos (2014) and the Lemon64 thread</a></li><li><a data-slug="s-duet-readme" class="t-summary" href="../../wiki/s-duet-readme.html">DUET README (summary)</a></li><li><a data-slug="s-ft2-manual" class="t-summary" href="../../wiki/s-ft2-manual.html">FastTracker v2.08 Manual (Urban Jonsson, 1996)</a></li><li><a data-slug="s-furnace-c64-docs" class="t-summary" href="../../wiki/s-furnace-c64-docs.html">Furnace tracker — C64 (SID) system and instrument documentation</a></li><li><a data-slug="s-audiogang-huelsbeck-interview" class="t-summary" href="../../wiki/s-audiogang-huelsbeck-interview.html">Game Audio Network Guild — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-infu-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-infu-getting-started-with-lsdj.html">Getting started with LSDj with Infu (course)</a></li><li><a data-slug="s-realdmx-sid-players" class="t-summary" href="../../wiki/s-realdmx-sid-players.html">GitHub realdmx/c64_6581_sid_players — Cybernoid II in Deenen&#x27;s MUSICFILE, the MoN SFX player, the Driller listing</a></li><li><a data-slug="s-goattracker-readme" class="t-summary" href="../../wiki/s-goattracker-readme.html">GoatTracker v2.72 readme (summary)</a></li><li><a data-slug="s-hugi38-interview-jeroen-tel" class="t-summary" href="../../wiki/s-hugi38-interview-jeroen-tel.html">Hugi #38 — Up Close &amp; Personal: Jeroen Tel of Maniacs of Noise (2014)</a></li><li><a data-slug="s-hvsc-sid-file-format" class="t-summary" href="../../wiki/s-hvsc-sid-file-format.html">HVSC — SID file format description (PSID v1–v4, RSID)</a></li><li><a data-slug="s-it-hints" class="t-summary" href="../../wiki/s-it-hints.html">Impulse Tracker HINTS.TXT — Hints for Composers (summary)</a></li><li><a data-slug="s-ittech" class="t-summary" href="../../wiki/s-ittech.html">Impulse Tracker ITTECH.TXT — technical reference (summary)</a></li><li><a data-slug="s-it-manual" class="t-summary" href="../../wiki/s-it-manual.html">Impulse Tracker User&#x27;s Manual — IT.TXT (summary)</a></li><li><a data-slug="s-intense-tech-01-wave-synth-deep-dive-part-1" class="t-summary" href="../../wiki/s-intense-tech-01-wave-synth-deep-dive-part-1.html">Intense Tech #01 — LSDj Wave Synth Deep Dive, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-02-wave-synth-deep-dive-part-2" class="t-summary" href="../../wiki/s-intense-tech-02-wave-synth-deep-dive-part-2.html">Intense Tech #02 — LSDj Wave Synth Deep Dive, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-03-dont-sleep-on-z" class="t-summary" href="../../wiki/s-intense-tech-03-dont-sleep-on-z.html">Intense Tech #03 — Don&#x27;t Sleep on Z (Defense Mechanism, after Hypnogram)</a></li><li><a data-slug="s-intense-tech-04-liblsdj" class="t-summary" href="../../wiki/s-intense-tech-04-liblsdj.html">Intense Tech #04 — Manage your LSDj save files with libLSDj (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-05-wave-cruncher-instrument-library" class="t-summary" href="../../wiki/s-intense-tech-05-wave-cruncher-instrument-library.html">Intense Tech #05 — LSDj Wave Cruncher Instrument Library (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-06-groove-and-tick-tricks-part-1" class="t-summary" href="../../wiki/s-intense-tech-06-groove-and-tick-tricks-part-1.html">Intense Tech #06 — Groovy Groove and Tick Tricks, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-07-groove-and-tick-tricks-part-2" class="t-summary" href="../../wiki/s-intense-tech-07-groove-and-tick-tricks-part-2.html">Intense Tech #07 — Groovy Groove and Tick Tricks, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-08-dotcnts-wave-cruncher" class="t-summary" href="../../wiki/s-intense-tech-08-dotcnts-wave-cruncher.html">Intense Tech #08 — DOTCNT&#x27;s LSDj Wave Cruncher (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-09-lets-table-this-discussion" class="t-summary" href="../../wiki/s-intense-tech-09-lets-table-this-discussion.html">Intense Tech #09 — Let&#x27;s Table This Discussion! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-10-kicks-part-1" class="t-summary" href="../../wiki/s-intense-tech-10-kicks-part-1.html">Intense Tech #10 — Get your Kicks with Version 6, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-11-kicks-part-2" class="t-summary" href="../../wiki/s-intense-tech-11-kicks-part-2.html">Intense Tech #11 — Kicks Part 2: Kick Heaven in Version 7 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-12-scoping-out-new-features" class="t-summary" href="../../wiki/s-intense-tech-12-scoping-out-new-features.html">Intense Tech #12 — Scoping Out New Features (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-13-kotlinski-interview" class="t-summary" href="../../wiki/s-intense-tech-13-kotlinski-interview.html">Intense Tech #13 — Interview with LSDj Developer Johan Kotlinski (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-14-lets-appreciate-version-8" class="t-summary" href="../../wiki/s-intense-tech-14-lets-appreciate-version-8.html">Intense Tech #14 — Let&#x27;s Appreciate Version 8 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-15-lets-mix-it-up-and-down" class="t-summary" href="../../wiki/s-intense-tech-15-lets-mix-it-up-and-down.html">Intense Tech #15 — Let&#x27;s Mix It Up (and Down) (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-16-cartridge-family" class="t-summary" href="../../wiki/s-intense-tech-16-cartridge-family.html">Intense Tech #16 — So You Want a Cartridge Family? (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-17-the-joys-of-noise" class="t-summary" href="../../wiki/s-intense-tech-17-the-joys-of-noise.html">Intense Tech #17 — The Joys of Noise (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-18-adsr-makes-life-easier" class="t-summary" href="../../wiki/s-intense-tech-18-adsr-makes-life-easier.html">Intense Tech #18 — ADSR Makes Life Easier! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-19-new-noise-and-910-news" class="t-summary" href="../../wiki/s-intense-tech-19-new-noise-and-910-news.html">Intense Tech #19 — New Noise and 9.1.0 News (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-20-lsdpatch" class="t-summary" href="../../wiki/s-intense-tech-20-lsdpatch.html">Intense Tech #20 — Customize LSDj From Scratch with LSDPatch (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-21-whats-new-in-lsdj-92" class="t-summary" href="../../wiki/s-intense-tech-21-whats-new-in-lsdj-92.html">Intense Tech #21 — What&#x27;s New in LSDj v9.2 (Defense Mechanism)</a></li><li><a data-slug="s-lemon64-hard-restart-threads" class="t-summary" href="../../wiki/s-lemon64-hard-restart-threads.html">Lemon64 threads: SID and ADSR re-triggering? (2008) / Hard restart – what&#x27;s the story? (2015)</a></li><li><a data-slug="s-lemon64-learning-sid-sound-design" class="t-summary" href="../../wiki/s-lemon64-learning-sid-sound-design.html">Lemon64: How does one learn SID sound design these days? (2020)</a></li><li><a data-slug="s-lemon64-sid-wizard-instrument-recommendations" class="t-summary" href="../../wiki/s-lemon64-sid-wizard-instrument-recommendations.html">Lemon64: SID-Wizard instrument recommendations? (2021)</a></li><li><a data-slug="s-lsdj-manual" class="t-summary" href="../../wiki/s-lsdj-manual.html">Little Sound Dj v9.2.6 Operating Manual (summary)</a></li><li><a data-slug="s-matt-gray-dominator-source" class="t-summary" href="../../wiki/s-matt-gray-dominator-source.html">Matt Gray&#x27;s Dominator subtune 6 source (PLAYER V4.2, 1987) and the Reformation driver competition</a></li><li><a data-slug="s-mos-6581-datasheet" class="t-summary" href="../../wiki/s-mos-6581-datasheet.html">MOS 6581 Sound Interface Device (SID) datasheet — the text behind Appendix O</a></li><li><a data-slug="s-newman-driving-the-sid-chip" class="t-summary" href="../../wiki/s-newman-driving-the-sid-chip.html">Newman — Driving the SID chip: Assembly Language, Composition, and Sound Design for the C64 (2017)</a></li><li><a data-slug="s-openmpt-manual-about-openmpt" class="t-summary" href="../../wiki/s-openmpt-manual-about-openmpt.html">OpenMPT manual — About OpenMPT</a></li><li><a data-slug="s-openmpt-manual-compatible-playback" class="t-summary" href="../../wiki/s-openmpt-manual-compatible-playback.html">OpenMPT manual — Compatible Playback</a></li><li><a data-slug="s-openmpt-manual-effect-reference" class="t-summary" href="../../wiki/s-openmpt-manual-effect-reference.html">OpenMPT manual — Effect Reference</a></li><li><a data-slug="s-openmpt-manual-instruments" class="t-summary" href="../../wiki/s-openmpt-manual-instruments.html">OpenMPT manual — Instruments</a></li><li><a data-slug="s-openmpt-manual-module-formats" class="t-summary" href="../../wiki/s-openmpt-manual-module-formats.html">OpenMPT manual — Module formats</a></li><li><a data-slug="s-openmpt-manual-samples" class="t-summary" href="../../wiki/s-openmpt-manual-samples.html">OpenMPT manual — Samples</a></li><li><a data-slug="s-openmpt-manual-song-properties" class="t-summary" href="../../wiki/s-openmpt-manual-song-properties.html">OpenMPT manual — Song Properties (and Tempo Swing)</a></li><li><a data-slug="s-openmpt-manual-zxx-macros" class="t-summary" href="../../wiki/s-openmpt-manual-zxx-macros.html">OpenMPT manual — Zxx Macros</a></li><li><a data-slug="s-pandocs-audio-details" class="t-summary" href="../../wiki/s-pandocs-audio-details.html">Pan Docs — Audio Details</a></li><li><a data-slug="s-pandocs-audio-overview" class="t-summary" href="../../wiki/s-pandocs-audio-overview.html">Pan Docs — Audio Overview</a></li><li><a data-slug="s-pandocs-audio-registers" class="t-summary" href="../../wiki/s-pandocs-audio-registers.html">Pan Docs — Audio Registers</a></li><li><a data-slug="s-protracker-23-readme-and-docs" class="t-summary" href="../../wiki/s-protracker-23-readme-and-docs.html">ProTracker 2.3A ReadMe, 2.0A effect and format docs, version table</a></li><li><a data-slug="s-protracker-23d-help" class="t-summary" href="../../wiki/s-protracker-23d-help.html">ProTracker 2.3d help file (edited by echolevel)</a></li><li><a data-slug="s-realdmx-deenen-test-tunes" class="t-summary" href="../../wiki/s-realdmx-deenen-test-tunes.html">realdmx: Charles Deenen&#x27;s two test tunes — an undated MUSICFILE build and the &#x27;Scoop designs&#x27; Maniacs of Noise player</a></li><li><a data-slug="s-realdmx-bjerregaard-player" class="t-summary" href="../../wiki/s-realdmx-bjerregaard-player.html">realdmx: Johannes Bjerregaard&#x27;s own player — the James Bond 3 demo (a Maniacs of Noise commission) and Myth</a></li><li><a data-slug="s-realdmx-ocean-dunn-hughes-driver" class="t-summary" href="../../wiki/s-realdmx-ocean-dunn-hughes-driver.html">realdmx: Jonathan Dunn&#x27;s Daley Thompson &#x27;88 and Ocean Loader 5 in Paul Hughes&#x27;s Ocean music driver</a></li><li><a data-slug="s-realdmx-galway-arkanoid-player" class="t-summary" href="../../wiki/s-realdmx-galway-arkanoid-player.html">realdmx: Martin Galway&#x27;s Arkanoid — Tognon&#x27;s SIDin #4 reverse-engineering, with the &#x27;sample&#x27; synthesis through $D418</a></li><li><a data-slug="s-realdmx-galway-rambo-player" class="t-summary" href="../../wiki/s-realdmx-galway-rambo-player.html">realdmx: Martin Galway&#x27;s Rambo II loader — the macro-language player, reverse-engineered by dmx87</a></li><li><a data-slug="s-realdmx-ouwehand-mon-tunes" class="t-summary" href="../../wiki/s-realdmx-ouwehand-mon-tunes.html">realdmx: Reyn Ouwehand&#x27;s Armada (MUSICFILE, &#x27;Special version for Reyn Ouwehand&#x27;, 1989) and Dutch Breeze (the 1990 MoN player)</a></li><li><a data-slug="s-realdmx-hubbard-player" class="t-summary" href="../../wiki/s-realdmx-hubbard-player.html">realdmx: Rob Hubbard&#x27;s driver — McSweeney&#x27;s Monty on the Run disassembly and the Commando title</a></li><li><a data-slug="s-realdmx-fredgray-kimmel-whittaker" class="t-summary" href="../../wiki/s-realdmx-fredgray-kimmel-whittaker.html">realdmx: three smaller drivers — Fred Gray&#x27;s Mutants (song as code), Jeroen Kimmel&#x27;s &#x27;Red&#x27;s music player&#x27; (1989) and David Whittaker&#x27;s Panther driver</a></li><li><a data-slug="s-realdmx-audial-arts-fame-players" class="t-summary" href="../../wiki/s-realdmx-audial-arts-fame-players.html">realdmx: two scene players with their own sources — Francois Prijt&#x27;s Audial Arts &#x27;zong player&#x27; v1/v2 (1991) and Adam Bulka&#x27;s FAME &#x27;Sound Routine f 4.1.0&#x27; (1988)</a></li><li><a data-slug="s-remix64-huelsbeck-interview" class="t-summary" href="../../wiki/s-remix64-huelsbeck-interview.html">Remix64 — An Interview with Chris Huelsbeck (2001)</a></li><li><a data-slug="s-remix64-galway-interview" class="t-summary" href="../../wiki/s-remix64-galway-interview.html">Remix64 — An Interview with Martin Galway (Neil Carr, 2001)</a></li><li><a data-slug="s-remix64-ninja-remix" class="t-summary" href="../../wiki/s-remix64-ninja-remix.html">Remix64 — Last Ninja 2 vs Ninja Remix: what&#x27;s the deal? (Chris Abbott)</a></li><li><a data-slug="s-retrogamesmaster-matt-gray-interview" class="t-summary" href="../../wiki/s-retrogamesmaster-matt-gray-interview.html">Retro Gamesmaster — Matt Gray Interview (Peter Ward)</a></li><li><a data-slug="s-emuwiki-huelsbeck-interview" class="t-summary" href="../../wiki/s-emuwiki-huelsbeck-interview.html">Retrogaming Planet / EmuWiki — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-rvg-matt-gray-interview" class="t-summary" href="../../wiki/s-rvg-matt-gray-interview.html">RVG Interviews: Matt Gray (2016)</a></li><li><a data-slug="s-sabrepulse-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-sabrepulse-getting-started-with-lsdj.html">Sabrepulse — Getting started with LSDJ tutorial (mirror at Adventure Kid)</a></li><li><a data-slug="s-schism-tracker-wiki" class="t-summary" href="../../wiki/s-schism-tracker-wiki.html">Schism Tracker wiki and README</a></li><li><a data-slug="s-st3-manual" class="t-summary" href="../../wiki/s-st3-manual.html">Scream Tracker 3.2 User&#x27;s Manual (ST3.DOC)</a></li><li><a data-slug="s-st3-tech-doc" class="t-summary" href="../../wiki/s-st3-tech-doc.html">Scream Tracker 3.20 File Formats And Mixing Info (TECH.DOC)</a></li><li><a data-slug="s-sid-wizard-manual" class="t-summary" href="../../wiki/s-sid-wizard-manual.html">SID-Wizard 1.8 User Manual (summary)</a></li><li><a data-slug="s-sidid-player-list" class="t-summary" href="../../wiki/s-sidid-player-list.html">SIDId (cadaver/sidid): the player-signature list and its notes</a></li><li><a data-slug="s-sidin01-iseq" class="t-summary" href="../../wiki/s-sidin01-iseq.html">SIDin #1 — Iseq music composition program: the comp.sys.cbm threads and Steve Judd&#x27;s Commando cover (2002)</a></li><li><a data-slug="s-sidin01-carrafiello-interview" class="t-summary" href="../../wiki/s-sidin01-carrafiello-interview.html">SIDin #1 — Luca Carrafiello (Luca/FIRE) interview (Stefano Tognon, 2002)</a></li><li><a data-slug="s-sidin01-dig-dug-rip" class="t-summary" href="../../wiki/s-sidin01-dig-dug-rip.html">SIDin #1 — Ripping a game: Dig Dug (Stefano Tognon, 2002)</a></li><li><a data-slug="s-sidin10-goattracker-2" class="t-summary" href="../../wiki/s-sidin10-goattracker-2.html">SIDin #10 — Goattracker 2: a cover in the table-based GT2 (Stefano Tognon, 2006)</a></li><li><a data-slug="s-sidin10-bayliss-interview" class="t-summary" href="../../wiki/s-sidin10-bayliss-interview.html">SIDin #10 — Richard Bayliss interview (Stefano Tognon, 2006)</a></li><li><a data-slug="s-sidin10-tiny-sid-2-part-1" class="t-summary" href="../../wiki/s-sidin10-tiny-sid-2-part-1.html">SIDin #10 — Tiny Sid 2, part 1: XL5, Mini Digi Drum, RM, Miniature Rhapsody (Stefano Tognon, 2006)</a></li><li><a data-slug="s-sidin11-laxity-interview" class="t-summary" href="../../wiki/s-sidin11-laxity-interview.html">SIDin #11 — Laxity interview (Stefano Tognon, 2007)</a></li><li><a data-slug="s-sidin11-sid-factory-vs-ninjatracker" class="t-summary" href="../../wiki/s-sidin11-sid-factory-vs-ninjatracker.html">SIDin #11 — SID Factory vs Ninjatracker (Stefano Tognon, 2007)</a></li><li><a data-slug="s-sidin11-tiny-sid-2-part-2" class="t-summary" href="../../wiki/s-sidin11-tiny-sid-2-part-2.html">SIDin #11 — Tiny Sid 2, part 2: BLOCK ACID DUB and Resolution (Stefano Tognon, 2007)</a></li><li><a data-slug="s-sidin12-hermit-interview" class="t-summary" href="../../wiki/s-sidin12-hermit-interview.html">SIDin #12 — Mihály Horváth (Hermit) interview (Stefano Tognon, 2008)</a></li><li><a data-slug="s-sidin12-ripping-trivia-arcade" class="t-summary" href="../../wiki/s-sidin12-ripping-trivia-arcade.html">SIDin #12 — Ripping Trivia Arcade (Stefano Tognon, 2008)</a></li><li><a data-slug="s-sidin12-tiny-sid-2-part-3" class="t-summary" href="../../wiki/s-sidin12-tiny-sid-2-part-3.html">SIDin #12 — Tiny Sid 2, part 3: Plaster (512 b) and Back To Basics (256 b) (Stefano Tognon, 2008)</a></li><li><a data-slug="s-sidin13-inside-jitt64" class="t-summary" href="../../wiki/s-sidin13-inside-jitt64.html">SIDin #13 — Inside JITT64: the player routine (Stefano Tognon, 2010)</a></li><li><a data-slug="s-sidin13-jitt64-tracker" class="t-summary" href="../../wiki/s-sidin13-jitt64-tracker.html">SIDin #13 — JITT64 Tracker: Tognon&#x27;s Java Ice Team Tracker from the user&#x27;s side (2010)</a></li><li><a data-slug="s-sidin13-tsm-freedom-interview" class="t-summary" href="../../wiki/s-sidin13-tsm-freedom-interview.html">SIDin #13 — TSM &amp; Freedom interview (Stefano Tognon, 2010)</a></li><li><a data-slug="s-sidin14-hunters-moon" class="t-summary" href="../../wiki/s-sidin14-hunters-moon.html">SIDin #14 — Inside Hunter&#x27;s Moon (Martin Walker&#x27;s sound-effects engine, reverse-engineered, 2015)</a></li><li><a data-slug="s-sidin14-dominator-player" class="t-summary" href="../../wiki/s-sidin14-dominator-player.html">SIDin #14 — Inside Matt Gray&#x27;s Dominator player (Tognon&#x27;s commented PLAYER V4.2 and the musician&#x27;s guide to composing in it, 2015)</a></li><li><a data-slug="s-sidin14-scarzix-interview" class="t-summary" href="../../wiki/s-sidin14-scarzix-interview.html">SIDin #14 — Scarzix interview (Carsten Berggreen: JCH&#x27;s editor, CombatZone, the return with CheeseCutter, 2015)</a></li><li><a data-slug="s-sidin15-serpent-demo-player" class="t-summary" href="../../wiki/s-sidin15-serpent-demo-player.html">SIDin #15 — Inside Matt Gray&#x27;s Serpent Demo player (the 4-bit sample voice, reverse-engineered, 2015)</a></li><li><a data-slug="s-sidin15-matt-gray-interview" class="t-summary" href="../../wiki/s-sidin15-matt-gray-interview.html">SIDin #15 — Matt Gray interview (technical questions during Reformation, 2015)</a></li><li><a data-slug="s-sidin-news-digest" class="t-summary" href="../../wiki/s-sidin-news-digest.html">SIDin #1–15 — Editorials and News digest (Stefano Tognon, 2002–2015)</a></li><li><a data-slug="s-sidin02-whittaker-lazy-jones" class="t-summary" href="../../wiki/s-sidin02-whittaker-lazy-jones.html">SIDin #2 — David Whittaker&#x27;s Lazy Jones music routine (Stefano Tognon, 2002)</a></li><li><a data-slug="s-sidin02-cadaver-interview" class="t-summary" href="../../wiki/s-sidin02-cadaver-interview.html">SIDin #2 — Lasse Öörni (Cadaver) interview (Stefano Tognon, 2002)</a></li><li><a data-slug="s-sidin02-matt-gray-driller" class="t-summary" href="../../wiki/s-sidin02-matt-gray-driller.html">SIDin #2 — Matt Gray&#x27;s Driller music routine (Stefano Tognon, 2002)</a></li><li><a data-slug="s-sidin03-pattern-searching-1" class="t-summary" href="../../wiki/s-sidin03-pattern-searching-1.html">SIDin #3 — Music Engine pattern searching, part 1 (Stefano Tognon, 2003)</a></li><li><a data-slug="s-sidin03-ripping-basic-tune" class="t-summary" href="../../wiki/s-sidin03-ripping-basic-tune.html">SIDin #3 — Ripping BASIC based tune: Sheba and Testcard (Stefano Tognon, 2003)</a></li><li><a data-slug="s-sidin03-schmid-interview" class="t-summary" href="../../wiki/s-sidin03-schmid-interview.html">SIDin #3 — Stephan Schmid (Steppe) interview (Stefano Tognon, 2003)</a></li><li><a data-slug="s-sidin04-abbott-interview" class="t-summary" href="../../wiki/s-sidin04-abbott-interview.html">SIDin #4 — Chris Abbott interview (Stefano Tognon, 2003)</a></li><li><a data-slug="s-sidin04-galway-arkanoid" class="t-summary" href="../../wiki/s-sidin04-galway-arkanoid.html">SIDin #4 — Martin Galway&#x27;s Arkanoid music routine, the explanation (Stefano Tognon, 2003)</a></li><li><a data-slug="s-sidin04-ripping-basic-rsid" class="t-summary" href="../../wiki/s-sidin04-ripping-basic-rsid.html">SIDin #4 — Ripping a BASIC program into RSID: Telengard (Stefano Tognon, 2003)</a></li><li><a data-slug="s-sidin05-huelsbeck-interview" class="t-summary" href="../../wiki/s-sidin05-huelsbeck-interview.html">SIDin #5 — Chris Huelsbeck interview (Stefano Tognon, 2004)</a></li><li><a data-slug="s-sidin05-hvmec" class="t-summary" href="../../wiki/s-sidin05-hvmec.html">SIDin #5 — High Voltage Music Engines Collection (Stefano Tognon, 2004)</a></li><li><a data-slug="s-sidin05-pattern-searching-2" class="t-summary" href="../../wiki/s-sidin05-pattern-searching-2.html">SIDin #5 — Music Engines Pattern Searching, part 2: the Lostack database (Stefano Tognon, 2004)</a></li><li><a data-slug="s-sidin06-asterion-sid-tracker" class="t-summary" href="../../wiki/s-sidin06-asterion-sid-tracker.html">SIDin #6 — Asterion Sid Tracker v1.0 reviewed (Stefano Tognon, 2004)</a></li><li><a data-slug="s-sidin06-digiorganizer" class="t-summary" href="../../wiki/s-sidin06-digiorganizer.html">SIDin #6 — Inside DigiOrganizer, Polonius&#x27;s 4-bit sample editor (Stefano Tognon, 2004)</a></li><li><a data-slug="s-sidin06-harries-interview" class="t-summary" href="../../wiki/s-sidin06-harries-interview.html">SIDin #6 — Jan Diabelez Arnt Harries (Rambones) interview (Stefano Tognon, 2004)</a></li><li><a data-slug="s-sidin07-dustbin-interview" class="t-summary" href="../../wiki/s-sidin07-dustbin-interview.html">SIDin #7 — Dustbin (Stefano Palmonari) interview (Stefano Tognon, 2005)</a></li><li><a data-slug="s-sidin07-inside-modules" class="t-summary" href="../../wiki/s-sidin07-inside-modules.html">SIDin #7 — Inside Modules: Ivan Del Duca&#x27;s music engine (Stefano Tognon, 2005)</a></li><li><a data-slug="s-sidin07-xxlarge" class="t-summary" href="../../wiki/s-sidin07-xxlarge.html">SIDin #7 — xxlarge: Ninja&#x27;s 256-byte cover of &#x27;X large&#x27; analysed (Stefano Tognon, 2005)</a></li><li><a data-slug="s-sidin08-eeben-interview" class="t-summary" href="../../wiki/s-sidin08-eeben-interview.html">SIDin #8 — Aleksi Eeben interview (Stefano Tognon, 2005)</a></li><li><a data-slug="s-sidin08-catweasel-mk4" class="t-summary" href="../../wiki/s-sidin08-catweasel-mk4.html">SIDin #8 — Catweasel Mk4: a PCI card with two SID sockets (Stefano Tognon, 2005)</a></li><li><a data-slug="s-sidin08-tiny-sid-512b" class="t-summary" href="../../wiki/s-sidin08-tiny-sid-512b.html">SIDin #8 — Tiny Sid Compo, the 512-byte entries (Stefano Tognon, 2005)</a></li><li><a data-slug="s-sidin09-catweasel-6581" class="t-summary" href="../../wiki/s-sidin09-catweasel-6581.html">SIDin #9 — Catweasel Mk4 follow-up: driver, hardware buffer, two 6581s and the filter (Stefano Tognon, 2006)</a></li><li><a data-slug="s-sidin09-nata-interview" class="t-summary" href="../../wiki/s-sidin09-nata-interview.html">SIDin #9 — Nata (Stephan Parth) interview (Stefano Tognon, 2006)</a></li><li><a data-slug="s-sidin09-tiny-sid-256b" class="t-summary" href="../../wiki/s-sidin09-tiny-sid-256b.html">SIDin #9 — Tiny Sid Compo, the 256-byte entries (Stefano Tognon, 2006)</a></li><li><a data-slug="s-soundmonitor-lineage-wikis" class="t-summary" href="../../wiki/s-soundmonitor-lineage-wikis.html">Soundmonitor lineage and wiki pages: tracker-history/soundmonitor.txt, C64-Wiki.de, de.wikipedia</a></li><li><a data-slug="s-recollection-brief-history-of-sid" class="t-summary" href="../../wiki/s-recollection-brief-history-of-sid.html">The Brief History of SID — Jan Harries (SIDwave), Vandalism News #64 (2015)</a></li><li><a data-slug="s-sidmusic-yannes-interview" class="t-summary" href="../../wiki/s-sidmusic-yannes-interview.html">The SID Homepage — Interview with Bob Yannes (Andreas Varga, August 1996)</a></li><li><a data-slug="s-sidmusic-jeroen-tel-interviews" class="t-summary" href="../../wiki/s-sidmusic-jeroen-tel-interviews.html">The SID Homepage — Interviews with Jeroen Tel (Commodore Zone 1997, 64&#x27;er 3/91)</a></li><li><a data-slug="s-sidmusic-galway-interviews" class="t-summary" href="../../wiki/s-sidmusic-galway-interviews.html">The SID Homepage — Interviews with Martin Galway (Commodore Zone 6–7, Happy Computer 11/86)</a></li><li><a data-slug="s-sidmusic-hubbard-interviews" class="t-summary" href="../../wiki/s-sidmusic-hubbard-interviews.html">The SID Homepage — Interviews with Rob Hubbard (Commodore Zone, Happy Computer 7/86)</a></li><li><a data-slug="s-sidmusic-creation-of-the-sid-chip" class="t-summary" href="../../wiki/s-sidmusic-creation-of-the-sid-chip.html">The SID Homepage — The creation of the SID chip (Christer Rindeblad)</a></li><li><a data-slug="s-tracker-history-notes" class="t-summary" href="../../wiki/s-tracker-history-notes.html">tracker-history release notes (ProTracker, FastTracker, Scream Tracker, Impulse Tracker, Schism, OpenMPT)</a></li><li><a data-slug="s-traxweekly-archive" class="t-summary" href="../../wiki/s-traxweekly-archive.html">TraxWeekly archive at OpenMPT.org (summary)</a></li><li><a data-slug="s-tw001-interview-basehead" class="t-summary" href="../../wiki/s-tw001-interview-basehead.html">TW #1 — Interview with Basehead (Populus)</a></li><li><a data-slug="s-tw001-interview-phoenix" class="t-summary" href="../../wiki/s-tw001-interview-phoenix.html">TW #1 — Interview with Phoenix (Populus)</a></li><li><a data-slug="s-tw001-modal-and-chord-theory" class="t-summary" href="../../wiki/s-tw001-modal-and-chord-theory.html">TW #1 — Modal and Chord Theory (Leviathan)</a></li><li><a data-slug="s-tw010-interview-jugi" class="t-summary" href="../../wiki/s-tw010-interview-jugi.html">TW #10 — Interview with Jugi (White Wizard)</a></li><li><a data-slug="s-tw100-tracking-on-impulse" class="t-summary" href="../../wiki/s-tw100-tracking-on-impulse.html">TW #100 — Tracking on Impulse (Pulse)</a></li><li><a data-slug="s-tw103-interview-mikmak" class="t-summary" href="../../wiki/s-tw103-interview-mikmak.html">TW #103 — Interview with Mikmak (Behemoth)</a></li><li><a data-slug="s-tw105-newbie-interviews" class="t-summary" href="../../wiki/s-tw105-newbie-interviews.html">TW #105 — Interview With A Couple Of Newbies (Behemoth)</a></li><li><a data-slug="s-tw106-a-little-panning" class="t-summary" href="../../wiki/s-tw106-a-little-panning.html">TW #106 — A Little Panning (Airon)</a></li><li><a data-slug="s-tw107-laymans-music-theory" class="t-summary" href="../../wiki/s-tw107-laymans-music-theory.html">TW #107 — Layman&#x27;s Music Theory, part one (Zinc)</a></li><li><a data-slug="s-tw109-interview-skaven" class="t-summary" href="../../wiki/s-tw109-interview-skaven.html">TW #109 — Interview: Skaven (Zinc)</a></li><li><a data-slug="s-tw011-how-to-enhance-your-music-collection" class="t-summary" href="../../wiki/s-tw011-how-to-enhance-your-music-collection.html">TW #11 — How to enhance your music collection (Popcorn)</a></li><li><a data-slug="s-tw011-interview-beaner" class="t-summary" href="../../wiki/s-tw011-interview-beaner.html">TW #11 — Interview with Beaner (Popcorn)</a></li><li><a data-slug="s-tw011-interview-perisoft" class="t-summary" href="../../wiki/s-tw011-interview-perisoft.html">TW #11 — Interview with Perisoft (Popcorn)</a></li><li><a data-slug="s-tw111-interview-khyron" class="t-summary" href="../../wiki/s-tw111-interview-khyron.html">TW #111 — Interview with Khyron (again =) (Jeremy Rice)</a></li><li><a data-slug="s-tw114-commercial-tracking-debate" class="t-summary" href="../../wiki/s-tw114-commercial-tracking-debate.html">TW #113–#118 — The Scene and the Commercial Market: the commercial-tracking debate</a></li><li><a data-slug="s-tw114-live-tracking" class="t-summary" href="../../wiki/s-tw114-live-tracking.html">TW #114 — Live Tracking (xiagox)</a></li><li><a data-slug="s-tw115-tracking-semantics" class="t-summary" href="../../wiki/s-tw115-tracking-semantics.html">TW #115 — Tracking Semantics (Exxon)</a></li><li><a data-slug="s-tw118-reverb-and-compression" class="t-summary" href="../../wiki/s-tw118-reverb-and-compression.html">TW #118 — Reverb and Compression (Airon)</a></li><li><a data-slug="s-tw118-tracking-the-format" class="t-summary" href="../../wiki/s-tw118-tracking-the-format.html">TW #118 — Tracking the Format (Jesper Pedersen)</a></li><li><a data-slug="s-tw119-interview-mental-floss" class="t-summary" href="../../wiki/s-tw119-interview-mental-floss.html">TW #119 — Interview with Mental Floss (Zinc)</a></li><li><a data-slug="s-tw119-reverb-and-audio-gear" class="t-summary" href="../../wiki/s-tw119-reverb-and-audio-gear.html">TW #119 — Reverb and Audio Gear (Rimbo)</a></li><li><a data-slug="s-tw012-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw012-advanced-tracking-tips.html">TW #12 — Advanced Tracking Tips (Necros)</a></li><li><a data-slug="s-tw013-interview-big-jim" class="t-summary" href="../../wiki/s-tw013-interview-big-jim.html">TW #13 — Interview with Big Jim (Popcorn)</a></li><li><a data-slug="s-tw014-interview-pinion" class="t-summary" href="../../wiki/s-tw014-interview-pinion.html">TW #14 — Interview with Pinion (Flood)</a></li><li><a data-slug="s-tw015-advanced-tracking-tips-ii" class="t-summary" href="../../wiki/s-tw015-advanced-tracking-tips-ii.html">TW #15 — Advanced Tracking Tips II (Necros)</a></li><li><a data-slug="s-tw015-interview-claim" class="t-summary" href="../../wiki/s-tw015-interview-claim.html">TW #15 — Interview with Claim (Gator)</a></li><li><a data-slug="s-tw015-interview-sv" class="t-summary" href="../../wiki/s-tw015-interview-sv.html">TW #15 — Interview with SV (GraveDigger)</a></li><li><a data-slug="s-tw016-interview-populus" class="t-summary" href="../../wiki/s-tw016-interview-populus.html">TW #16 — Interview with Populus (Psibelius)</a></li><li><a data-slug="s-tw017-interview-amusic" class="t-summary" href="../../wiki/s-tw017-interview-amusic.html">TW #17 — Interview with AmusiC (Popcorn)</a></li><li><a data-slug="s-tw018-advanced-tracking-tips-iii" class="t-summary" href="../../wiki/s-tw018-advanced-tracking-tips-iii.html">TW #18 — Advanced Tracking Tips III: voicings (Necros)</a></li><li><a data-slug="s-tw018-interview-basehead" class="t-summary" href="../../wiki/s-tw018-interview-basehead.html">TW #18 — Interview With Basehead (again) (Psibelius)</a></li><li><a data-slug="s-tw018-interview-lord-pegasus" class="t-summary" href="../../wiki/s-tw018-interview-lord-pegasus.html">TW #18 — Interview with Lord Pegasus (Psibelius)</a></li><li><a data-slug="s-tw019-interview-quarex" class="t-summary" href="../../wiki/s-tw019-interview-quarex.html">TW #19 — Interview with Quarex (Maelcum)</a></li><li><a data-slug="s-tw002-interview-leinad" class="t-summary" href="../../wiki/s-tw002-interview-leinad.html">TW #2 — Interview with Leinad (Populus)</a></li><li><a data-slug="s-tw021-tracking-tips" class="t-summary" href="../../wiki/s-tw021-tracking-tips.html">TW #21 — Tracking Tips (Dan Hartrell)</a></li><li><a data-slug="s-tw022-interview-jase" class="t-summary" href="../../wiki/s-tw022-interview-jase.html">TW #22 — Interview with Jase (Clef)</a></li><li><a data-slug="s-tw024-in-review-asm95" class="t-summary" href="../../wiki/s-tw024-in-review-asm95.html">TW #24 — In Review: the ASM95 music entries (Necros)</a></li><li><a data-slug="s-tw024-sample-ripping-debate" class="t-summary" href="../../wiki/s-tw024-sample-ripping-debate.html">TW #24, #25, #64, #65 — the sample-ripping debate (Mhoram, Psibelius, Kristian Eriksen, Beacon)</a></li><li><a data-slug="s-tw025-loops-and-extended-samples" class="t-summary" href="../../wiki/s-tw025-loops-and-extended-samples.html">TW #25 — Loops and Extended Samples (The Zapper)</a></li><li><a data-slug="s-tw026-faces-in-the-crowd-intro" class="t-summary" href="../../wiki/s-tw026-faces-in-the-crowd-intro.html">TW #26 — Faces in the Crowd: the column&#x27;s manifesto (Kal Zakath)</a></li><li><a data-slug="s-tw032-20-minute-chip-compo" class="t-summary" href="../../wiki/s-tw032-20-minute-chip-compo.html">TW #26–#33, #50 — the 20 MeEnUhTz Chip Compo column (AmusiC)</a></li><li><a data-slug="s-tw027-interview-basehead-lotus-position" class="t-summary" href="../../wiki/s-tw027-interview-basehead-lotus-position.html">TW #27 — Basehead on Lotus Position (Cyberdmon)</a></li><li><a data-slug="s-tw027-faces-in-the-crowd-master-of-darkness" class="t-summary" href="../../wiki/s-tw027-faces-in-the-crowd-master-of-darkness.html">TW #27 — Faces in the Crowd #1: Master of Darkness (Kal Zakath)</a></li><li><a data-slug="s-tw027-interview-zapper" class="t-summary" href="../../wiki/s-tw027-interview-zapper.html">TW #27 — Interview with Zapper (The Finn)</a></li><li><a data-slug="s-tw028-faces-in-the-crowd-mesonyx" class="t-summary" href="../../wiki/s-tw028-faces-in-the-crowd-mesonyx.html">TW #28 — Faces in the Crowd #2: Mesonyx (Kal Zakath)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-smeghead" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-smeghead.html">TW #29 — Faces in the Crowd #4: Smeghead (Master of Darkness)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-esper-division" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-esper-division.html">TW #29 — Faces in the Crowd #5: Esper Division (DennisC)</a></li><li><a data-slug="s-tw003-interview-chuck-biscuits" class="t-summary" href="../../wiki/s-tw003-interview-chuck-biscuits.html">TW #3 — Interview with Chuck Biscuits (Epeius)</a></li><li><a data-slug="s-tw003-interview-five-musicians" class="t-summary" href="../../wiki/s-tw003-interview-five-musicians.html">TW #3 — Interview with the Five Musicians (Populus)</a></li><li><a data-slug="s-tw003-beginning-the-tracking-experience" class="t-summary" href="../../wiki/s-tw003-beginning-the-tracking-experience.html">TW #3 — Music: Beginning the Tracking Experience (Psibelius)</a></li><li><a data-slug="s-tw030-interview-ender" class="t-summary" href="../../wiki/s-tw030-interview-ender.html">TW #30 — Faces in the Crowd: Interview with Ender (Master of Darkness)</a></li><li><a data-slug="s-tw030-interview-paganus" class="t-summary" href="../../wiki/s-tw030-interview-paganus.html">TW #30 — Faces in the Crowd: Interview with Paganus (Atlantic)</a></li><li><a data-slug="s-tw031-interview-fred" class="t-summary" href="../../wiki/s-tw031-interview-fred.html">TW #31 — Faces in the Crowd: Interview with Fred (Dynamic Harmony)</a></li><li><a data-slug="s-tw031-interview-luv-kohli" class="t-summary" href="../../wiki/s-tw031-interview-luv-kohli.html">TW #31 — Faces in the Crowd: Interview with Luv Kohli (DennisC)</a></li><li><a data-slug="s-tw031-interview-vicious" class="t-summary" href="../../wiki/s-tw031-interview-vicious.html">TW #31 — Faces in the Crowd: Interview with Vicious (Master of Darkness)</a></li><li><a data-slug="s-tw032-fitc-complaints" class="t-summary" href="../../wiki/s-tw032-fitc-complaints.html">TW #32 — Faces in the Crowd: Complaints (Master of Darkness)</a></li><li><a data-slug="s-tw032-interview-zinc" class="t-summary" href="../../wiki/s-tw032-interview-zinc.html">TW #32 — Faces in the Crowd: Interview with Zinc (DennisC)</a></li><li><a data-slug="s-tw032-not-so-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw032-not-so-advanced-tracking-tips.html">TW #32 — Not So Advanced Tracking Tips (Atlantic)</a></li><li><a data-slug="s-tw032-tracker-survey" class="t-summary" href="../../wiki/s-tw032-tracker-survey.html">TW #32–#34 — Tracker Survey / New Tracker (Psibelius, Jason Diamond)</a></li><li><a data-slug="s-tw033-4channel-lives-on" class="t-summary" href="../../wiki/s-tw033-4channel-lives-on.html">TW #33 — 4Channel Lives On (Trixter)</a></li><li><a data-slug="s-tw034-interview-deus-ex" class="t-summary" href="../../wiki/s-tw034-interview-deus-ex.html">TW #34 — Faces in the Crowd: Interview with Deus Ex (Master of Darkness)</a></li><li><a data-slug="s-tw035-interview-loki" class="t-summary" href="../../wiki/s-tw035-interview-loki.html">TW #35 — Interview with Loki (Trifixion)</a></li><li><a data-slug="s-tw037-death-of-the-chiptune-debate" class="t-summary" href="../../wiki/s-tw037-death-of-the-chiptune-debate.html">TW #37–38 — The Death of the Chiptune / Chiptunes Aren&#x27;t Dead!</a></li><li><a data-slug="s-tw039-chord-theory-debate" class="t-summary" href="../../wiki/s-tw039-chord-theory-debate.html">TW #39–40 — Chord Theory? / Chord What? (Maelcum, Trixter, Basehead)</a></li><li><a data-slug="s-tw004-interview-nemesis" class="t-summary" href="../../wiki/s-tw004-interview-nemesis.html">TW #4 — Interview with Nemesis (Populus)</a></li><li><a data-slug="s-tw004-interview-stalker" class="t-summary" href="../../wiki/s-tw004-interview-stalker.html">TW #4 — Interview with Stalker (Zer0)</a></li><li><a data-slug="s-tw040-interview-blackwolf" class="t-summary" href="../../wiki/s-tw040-interview-blackwolf.html">TW #40 — Interview with Blackwolf (Psibelius)</a></li><li><a data-slug="s-tw040-interview-zalt" class="t-summary" href="../../wiki/s-tw040-interview-zalt.html">TW #40 — Interview with Zalt (Psibelius)</a></li><li><a data-slug="s-tw041-interview-mick-rippon" class="t-summary" href="../../wiki/s-tw041-interview-mick-rippon.html">TW #41 — Faces in the Crowd: Interview with Mick Rippon (DennisC)</a></li><li><a data-slug="s-tw041-interview-shawnm" class="t-summary" href="../../wiki/s-tw041-interview-shawnm.html">TW #41 — Interview with Shawn (shawnm / NOISE)</a></li><li><a data-slug="s-tw041-interview-zinc" class="t-summary" href="../../wiki/s-tw041-interview-zinc.html">TW #41 — Interview with Zinc on the Impromptu Compo (DennisC)</a></li><li><a data-slug="s-tw042-impulse-tracker-v1-01" class="t-summary" href="../../wiki/s-tw042-impulse-tracker-v1-01.html">TW #42 — Impulse Tracker v1.01 (Pulse)</a></li><li><a data-slug="s-tw042-interview-balrog" class="t-summary" href="../../wiki/s-tw042-interview-balrog.html">TW #42 — Interview with Balrog (Kosmic)</a></li><li><a data-slug="s-tw043-interview-pariah" class="t-summary" href="../../wiki/s-tw043-interview-pariah.html">TW #43 — Interview with Pariah (V.S.L)</a></li><li><a data-slug="s-tw044-hornet-ratings" class="t-summary" href="../../wiki/s-tw044-hornet-ratings.html">TW #43–#45 — the Demonews ratings argument (Light, Trixter / Hornet)</a></li><li><a data-slug="s-tw044-impulse-tracker-trivia" class="t-summary" href="../../wiki/s-tw044-impulse-tracker-trivia.html">TW #44 — Impulse Tracker Trivia (Random)</a></li><li><a data-slug="s-tw044-interview-acidfrog" class="t-summary" href="../../wiki/s-tw044-interview-acidfrog.html">TW #44 — Interview with Acidfrog (Radiance / Spice)</a></li><li><a data-slug="s-tw046-serial-composition" class="t-summary" href="../../wiki/s-tw046-serial-composition.html">TW #46 — Serial Composition (shawnm / NOISE)</a></li><li><a data-slug="s-tw005-interview-thehacker" class="t-summary" href="../../wiki/s-tw005-interview-thehacker.html">TW #5 — Interview with TheHacker (Popcorn)</a></li><li><a data-slug="s-tw005-what-its-like-to-be-a-pc-musician" class="t-summary" href="../../wiki/s-tw005-what-its-like-to-be-a-pc-musician.html">TW #5 — What it&#x27;s like to be a PC Musician (Necros)</a></li><li><a data-slug="s-tw050-aesthetics-of-composition" class="t-summary" href="../../wiki/s-tw050-aesthetics-of-composition.html">TW #50 — Aesthetics of Composition and Music Groups (Spyder / NOISE)</a></li><li><a data-slug="s-tw050-interview-vadimvs" class="t-summary" href="../../wiki/s-tw050-interview-vadimvs.html">TW #50 — Interview with VadimVS (NOISE)</a></li><li><a data-slug="s-tw051-how-to-listen-to-tracked-music" class="t-summary" href="../../wiki/s-tw051-how-to-listen-to-tracked-music.html">TW #51 — How to listen to tracked music (mrdata)</a></li><li><a data-slug="s-tw052-interview-daedalus" class="t-summary" href="../../wiki/s-tw052-interview-daedalus.html">TW #52 — Interview with Daedalus (Neophyte / Epinicion)</a></li><li><a data-slug="s-tw052-interview-ganja-man" class="t-summary" href="../../wiki/s-tw052-interview-ganja-man.html">TW #52 — Interview with Ganja Man (LoK)</a></li><li><a data-slug="s-tw054-interview-injekted-and-subhuman" class="t-summary" href="../../wiki/s-tw054-interview-injekted-and-subhuman.html">TW #54 — Interview with Injekted &amp; Subhuman (Ultrabeat)</a></li><li><a data-slug="s-tw054-interview-quantam-porcupine" class="t-summary" href="../../wiki/s-tw054-interview-quantam-porcupine.html">TW #54 — Interview with Quantam Porcupine</a></li><li><a data-slug="s-tw054-interview-saxy" class="t-summary" href="../../wiki/s-tw054-interview-saxy.html">TW #54 — Interview with Saxy (XX)</a></li><li><a data-slug="s-tw054-interview-scirocco" class="t-summary" href="../../wiki/s-tw054-interview-scirocco.html">TW #54 — Interview with Scirocco</a></li><li><a data-slug="s-tw055-interview-clef" class="t-summary" href="../../wiki/s-tw055-interview-clef.html">TW #55 — Interview with Clef (Catch 22, ex-Epinicion)</a></li><li><a data-slug="s-tw055-panning-debate" class="t-summary" href="../../wiki/s-tw055-panning-debate.html">TW #55–56 — Panning (GBlues) / Panning? Hello? (Trixter)</a></li><li><a data-slug="s-tw057-interview-catspaw" class="t-summary" href="../../wiki/s-tw057-interview-catspaw.html">TW #57 — Interview with Catspaw (Zinc)</a></li><li><a data-slug="s-tw058-the-finishing-touches" class="t-summary" href="../../wiki/s-tw058-the-finishing-touches.html">TW #58–59 — The Finishing Touches (Catspaw)</a></li><li><a data-slug="s-tw059-tracking-hints" class="t-summary" href="../../wiki/s-tw059-tracking-hints.html">TW #59 — Tracking Hints (Vivid)</a></li><li><a data-slug="s-tw006-naid-opinion-interviews" class="t-summary" href="../../wiki/s-tw006-naid-opinion-interviews.html">TW #6 — The NAID Music Compo: Opinion Interviews (Psibelius)</a></li><li><a data-slug="s-tw060-interview-fisherman" class="t-summary" href="../../wiki/s-tw060-interview-fisherman.html">TW #60 — Faces in the Crowd: fisherman (Zinc)</a></li><li><a data-slug="s-tw060-interview-rage" class="t-summary" href="../../wiki/s-tw060-interview-rage.html">TW #60 — Interview with Rage (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw062-interview-vegas" class="t-summary" href="../../wiki/s-tw062-interview-vegas.html">TW #62 — Interview with Vegas (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw063-interview-ryan-sprott" class="t-summary" href="../../wiki/s-tw063-interview-ryan-sprott.html">TW #63 — Interview with Ryan (Kleitus)</a></li><li><a data-slug="s-tw064-potted-tracking-history" class="t-summary" href="../../wiki/s-tw064-potted-tracking-history.html">TW #64 — Potted Tracking History (Ganja Man)</a></li><li><a data-slug="s-tw065-tracking-as-an-olympic-sport" class="t-summary" href="../../wiki/s-tw065-tracking-as-an-olympic-sport.html">TW #65–#66 — Tracking as an Olympic Sport, parts I–II (Blackwolf)</a></li><li><a data-slug="s-tw066-interview-liam-the-lemming" class="t-summary" href="../../wiki/s-tw066-interview-liam-the-lemming.html">TW #66 — Interview with Liam the Lemming (Kal Zakath)</a></li><li><a data-slug="s-tw066-sound-recording" class="t-summary" href="../../wiki/s-tw066-sound-recording.html">TW #66 — Sound Recording (Cowboy)</a></li><li><a data-slug="s-tw067-interview-u4ia" class="t-summary" href="../../wiki/s-tw067-interview-u4ia.html">TW #67 — Interview with U4IA (Mage)</a></li><li><a data-slug="s-tw007-interview-ryan-cramer" class="t-summary" href="../../wiki/s-tw007-interview-ryan-cramer.html">TW #7 — Interview with Ryan Cramer (Popcorn)</a></li><li><a data-slug="s-tw007-the-importance-of-music-theory" class="t-summary" href="../../wiki/s-tw007-the-importance-of-music-theory.html">TW #7 — The Importance of Music Theory (Future Assassin)</a></li><li><a data-slug="s-tw070-realism-debate" class="t-summary" href="../../wiki/s-tw070-realism-debate.html">TW #70–73 — the realism debate (#trax log, Behemoth, GBlues, Alan Robinson, Raphael, Sturm, brn, It-Alien, Purple Haze, Necros)</a></li><li><a data-slug="s-tw072-composing-whole-modules" class="t-summary" href="../../wiki/s-tw072-composing-whole-modules.html">TW #72 — Composing Whole Modules (Sir Nick / Deck Blasters)</a></li><li><a data-slug="s-tw074-motherboard-sampling" class="t-summary" href="../../wiki/s-tw074-motherboard-sampling.html">TW #74 — Motherboard Sampling (Spieg)</a></li><li><a data-slug="s-tw074-intro-to-musical-theory" class="t-summary" href="../../wiki/s-tw074-intro-to-musical-theory.html">TW #74–86 — Introduction to Musical Theory, vols 1–5 (Greg Heo)</a></li><li><a data-slug="s-tw075-it-percussion-tips" class="t-summary" href="../../wiki/s-tw075-it-percussion-tips.html">TW #75 — IT Percussion Tips (Zinc)</a></li><li><a data-slug="s-tw076-realism-in-mods" class="t-summary" href="../../wiki/s-tw076-realism-in-mods.html">TW #76 — Realism in MODs (Behemoth)</a></li><li><a data-slug="s-tw077-general-tracking-tips" class="t-summary" href="../../wiki/s-tw077-general-tracking-tips.html">TW #77 — General Tracking Tips (Generic Blues)</a></li><li><a data-slug="s-tw077-chip-off-the-block" class="t-summary" href="../../wiki/s-tw077-chip-off-the-block.html">TW #77–81 — A Chip Off the Block / Chiptune Seminar, parts 1–4 (The Modsquad)</a></li><li><a data-slug="s-tw008-interview-blaze-runner" class="t-summary" href="../../wiki/s-tw008-interview-blaze-runner.html">TW #8 — Interview with Blaze Runner (Populus)</a></li><li><a data-slug="s-tw080-trax-mass-interview" class="t-summary" href="../../wiki/s-tw080-trax-mass-interview.html">TW #80 — #trax Mass Interview (Zinc)</a></li><li><a data-slug="s-tw081-it-tip-of-the-week" class="t-summary" href="../../wiki/s-tw081-it-tip-of-the-week.html">TW #81–89 — Impulse Tracker Tip of the Week #1–8 (Pinion) and More Impulse Tracker Tips (Pulse)</a></li><li><a data-slug="s-tw084-perfect-samples-the-piano" class="t-summary" href="../../wiki/s-tw084-perfect-samples-the-piano.html">TW #84 — Perfect Samples: The Piano (Sklathill)</a></li><li><a data-slug="s-tw086-hexadecimal-101" class="t-summary" href="../../wiki/s-tw086-hexadecimal-101.html">TW #86 — Hexadecimal 101 (chinaski)</a></li><li><a data-slug="s-tw086-wrecking-samples-with-impulse-tracker" class="t-summary" href="../../wiki/s-tw086-wrecking-samples-with-impulse-tracker.html">TW #86 — Wrecking Samples with Impulse Tracker (Graham the Happy Scum)</a></li><li><a data-slug="s-tw087-interview-perisoft" class="t-summary" href="../../wiki/s-tw087-interview-perisoft.html">TW #87 — Interview with Perisoft (Pizza Head)</a></li><li><a data-slug="s-tw087-music-theory-a-modern-approach" class="t-summary" href="../../wiki/s-tw087-music-theory-a-modern-approach.html">TW #87–#97 — Music Theory: A Modern Approach (The Modsquad, seven parts)</a></li><li><a data-slug="s-tw009-interview-maelcum" class="t-summary" href="../../wiki/s-tw009-interview-maelcum.html">TW #9 — Interview with Maelcum (k8to)</a></li><li><a data-slug="s-tw009-samples-lameness-preconceptions" class="t-summary" href="../../wiki/s-tw009-samples-lameness-preconceptions.html">TW #9 — Samples, Lameness, Preconceptions, and Fluffy Bunnies (Necros)</a></li><li><a data-slug="s-tw090-interview-cosmic" class="t-summary" href="../../wiki/s-tw090-interview-cosmic.html">TW #90 — Interview with Cosmic/RR (Pizza Head)</a></li><li><a data-slug="s-tw094-stereo-samples-in-impulse-tracker" class="t-summary" href="../../wiki/s-tw094-stereo-samples-in-impulse-tracker.html">TW #94 — Stereo Samples with Impulse Tracker (Zinc)</a></li><li><a data-slug="s-tw096-studio-tracking-tips" class="t-summary" href="../../wiki/s-tw096-studio-tracking-tips.html">TW #96 — Studio Tracking Tips (Zinc)</a></li><li><a data-slug="s-tw098-impulse-tracker-investment" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-investment.html">TW #98 — Impulse Tracker Investment (Pulse)</a></li><li><a data-slug="s-tw098-impulse-tracker-midi" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-midi.html">TW #98 — Impulse Tracker MIDI (Airon)</a></li><li><a data-slug="s-tw099-why-tracking-is-the-perfect-artform" class="t-summary" href="../../wiki/s-tw099-why-tracking-is-the-perfect-artform.html">TW #99 — Why Tracking Is The Perfect Artform (anonymous)</a></li><li><a data-slug="s-ucapps-wavetable-sounds-tutorial-1" class="t-summary" href="../../wiki/s-ucapps-wavetable-sounds-tutorial-1.html">uCApps MIDIbox SID — Wavetable Sounds Tutorial #1 (Thorsten Klose)</a></li><li><a data-slug="s-vandalism63-matt-gray-interview" class="t-summary" href="../../wiki/s-vandalism63-matt-gray-interview.html">Vandalism News #63 — Interview with Matt Gray (Jazzcat, 2014)</a></li><li><a data-slug="s-vgmpf-chris-huelsbeck" class="t-summary" href="../../wiki/s-vgmpf-chris-huelsbeck.html">VGMPF wiki: Chris Hülsbeck</a></li><li><a data-slug="s-vgmpf-maniacs-of-noise" class="t-summary" href="../../wiki/s-vgmpf-maniacs-of-noise.html">VGMPF wiki: Maniacs of Noise, Jeroen Tel, Charles Deenen (+ the C64-Wiki roster)</a></li><li><a data-slug="s-vgmpf-matt-gray" class="t-summary" href="../../wiki/s-vgmpf-matt-gray.html">VGMPF wiki: Matt Gray</a></li><li><a data-slug="s-vgmpf-soundmonitor-tfmx" class="t-summary" href="../../wiki/s-vgmpf-soundmonitor-tfmx.html">VGMPF wiki: Soundmonitor, TFMX Editor (C64) and The Great Giana Sisters (C64)</a></li><li><a data-slug="s-walleij-sid-player-routine" class="t-summary" href="../../wiki/s-walleij-sid-player-routine.html">Walleij — A SID player routine (MIDI-driven player design, note tables, hard restart)</a></li><li><a data-slug="s-wikipedia-chris-huelsbeck" class="t-summary" href="../../wiki/s-wikipedia-chris-huelsbeck.html">Wikipedia (en): Chris Huelsbeck</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by tag / platform</a></li><li><a href="../../inbox/traxweekly-toc.html">TraxWeekly articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › github-realdmx</div>
+<h1>Bulka_Adam_SoundRoutine_f_4.1.0.asm</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#github-realdmx">GitHub realdmx/c64_6581_sid_players (the rest)</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://github.com/realdmx/c64_6581_sid_players">https://github.com/realdmx/c64_6581_sid_players</a> (raw.githubusercontent.com, HEAD; MIT licence on the packaging only — the players and tunes belong to their authors: Hubbard, Galway, Whittaker, Dunn/Paul Hughes/Ocean, Fred Gray, Kimmel, Bjerregaard, Deenen, Ouwehand, Bulka, Prijt)</div><div class="mrow"><span class="mk">file</span> <code>raw/github-realdmx/Bulka_Adam_SoundRoutine_f_4.1.0.asm</code> · 1740 lines · 27 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/github-realdmx/Bulka_Adam_SoundRoutine_f_4.1.0.asm" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-realdmx-audial-arts-fame-players.html">realdmx: two scene players with their own sources — Francois Prijt&#x27;s Audial Arts &#x27;zong player&#x27; v1/v2 (1991) and Adam Bulka&#x27;s FAME &#x27;Sound Routine f 4.1.0&#x27; (1988)</a></div></div><div class="pn"><a href="../../raw/github-realdmx/Bjerregaard_J_Myth.asm.html">← Bjerregaard_J_Myth.asm</a> · <a href="../../raw/github-realdmx/Deenen_Charles_SFX_Player.asm.html">Deenen_Charles_SFX_Player.asm →</a></div></header>
+<pre class="raw"><span id="L1" class="l"> </span>
+<span id="L2" class="l">	; Converted from TurboAssembler to ACME by dmx87</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l"> </span>
+<span id="L5" class="l">	!to &quot;Bulka_Adam_SoundRoutine_f_4.1.0.sid&quot;,plain</span>
+<span id="L6" class="l"> </span>
+<span id="L7" class="l">	* = $0000</span>
+<span id="L8" class="l">	</span>
+<span id="L9" class="l">	!text &quot;PSID&quot;</span>
+<span id="L10" class="l">	!be16 2							; version 2</span>
+<span id="L11" class="l">	!be16 $7c						; data offset</span>
+<span id="L12" class="l">	!be16 $1000							; Load (0 = auto)</span>
+<span id="L13" class="l">	!be16 musicset0					; Init</span>
+<span id="L14" class="l">	!be16 music						; Play</span>
+<span id="L15" class="l">	!be16 1							; num songs</span>
+<span id="L16" class="l">	!be16 1							; first song</span>
+<span id="L17" class="l">	!word 0</span>
+<span id="L18" class="l">	!word 0</span>
+<span id="L19" class="l">-	!text &quot;Sound Routine f 4.1.0&quot;</span>
+<span id="L20" class="l">	!fill 32 - (* - -)</span>
+<span id="L21" class="l">-	!text &quot;Adam Bulka&quot;</span>
+<span id="L22" class="l">	!fill 32 - (* - -)</span>
+<span id="L23" class="l">-	!text &quot;1988 FAME&quot;</span>
+<span id="L24" class="l">	!fill 32 - (* - -)</span>
+<span id="L25" class="l">	!be16 $0014							; v2 flags</span>
+<span id="L26" class="l">	!be16 0							; Start page, page length (reloc)</span>
+<span id="L27" class="l">	!be16 0							; Reserved</span>
+<span id="L28" class="l"> </span>
+<span id="L29" class="l">!pseudopc $1000 {</span>
+<span id="L30" class="l"> </span>
+<span id="L31" class="l"> </span>
+<span id="L32" class="l">;0@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.</span>
+<span id="L33" class="l">;]       SOUND ROUTINE f 4.1.0         ]</span>
+<span id="L34" class="l">;]                                     ]</span>
+<span id="L35" class="l">;]       WRITTEN BY ADAM BULKA         ]</span>
+<span id="L36" class="l">;]                                     ]</span>
+<span id="L37" class="l">;]                                     ]</span>
+<span id="L38" class="l">;]         WORKING VERSION I           ]</span>
+<span id="L39" class="l">;]                                     ]</span>
+<span id="L40" class="l">;] DATE:  27.07.1988   2.29 pm         ]</span>
+<span id="L41" class="l">;-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=</span>
+<span id="L42" class="l"> </span>
+<span id="L43" class="l"> </span>
+<span id="L44" class="l"> </span>
+<span id="L45" class="l">         *= $1000</span>
+<span id="L46" class="l"> </span>
+<span id="L47" class="l">ze0      = $50</span>
+<span id="L48" class="l">ze1      = $51</span>
+<span id="L49" class="l">ze2      = $52</span>
+<span id="L50" class="l">ze3      = $53</span>
+<span id="L51" class="l"> </span>
+<span id="L52" class="l">ze4      = $54</span>
+<span id="L53" class="l">ze5      = $55</span>
+<span id="L54" class="l"> </span>
+<span id="L55" class="l"> </span>
+<span id="L56" class="l">sid      = $d400</span>
+<span id="L57" class="l">volume   = $0f</span>
+<span id="L58" class="l"> </span>
+<span id="L59" class="l"> </span>
+<span id="L60" class="l">bd       = $21</span>
+<span id="L61" class="l">sd       = $29</span>
+<span id="L62" class="l">cd       = $1a</span>
+<span id="L63" class="l"> </span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l">;*************************</span>
+<span id="L66" class="l">;    NOTEN DEFINITION</span>
+<span id="L67" class="l"> </span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l"> </span>
+<span id="L70" class="l">c0       = 0</span>
+<span id="L71" class="l">ch0      = 1</span>
+<span id="L72" class="l">d0       = 2</span>
+<span id="L73" class="l">dh0      = 3</span>
+<span id="L74" class="l">e0       = 4</span>
+<span id="L75" class="l">f0       = 5</span>
+<span id="L76" class="l">fh0      = 6</span>
+<span id="L77" class="l">g0       = 7</span>
+<span id="L78" class="l">gh0      = 8</span>
+<span id="L79" class="l">a0       = 9</span>
+<span id="L80" class="l">ah0      = 10</span>
+<span id="L81" class="l">h0       = 11</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l">c1       = 12</span>
+<span id="L84" class="l">ch1      = 13</span>
+<span id="L85" class="l">d1       = 14</span>
+<span id="L86" class="l">dh1      = 15</span>
+<span id="L87" class="l">e1       = 16</span>
+<span id="L88" class="l">f1       = 17</span>
+<span id="L89" class="l">fh1      = 18</span>
+<span id="L90" class="l">g1       = 19</span>
+<span id="L91" class="l">gh1      = 20</span>
+<span id="L92" class="l">a1       = 21</span>
+<span id="L93" class="l">ah1      = 22</span>
+<span id="L94" class="l">h1       = 23</span>
+<span id="L95" class="l"> </span>
+<span id="L96" class="l">c2       = 24</span>
+<span id="L97" class="l">ch2      = 25</span>
+<span id="L98" class="l">d2       = 26</span>
+<span id="L99" class="l">dh2      = 27</span>
+<span id="L100" class="l">e2       = 28</span>
+<span id="L101" class="l">f2       = 29</span>
+<span id="L102" class="l">fh2      = 30</span>
+<span id="L103" class="l">g2       = 31</span>
+<span id="L104" class="l">gh2      = 32</span>
+<span id="L105" class="l">a2       = 33</span>
+<span id="L106" class="l">ah2      = 34</span>
+<span id="L107" class="l">h2       = 35</span>
+<span id="L108" class="l"> </span>
+<span id="L109" class="l">c3       = 36</span>
+<span id="L110" class="l">ch3      = 37</span>
+<span id="L111" class="l">d3       = 38</span>
+<span id="L112" class="l">dh3      = 39</span>
+<span id="L113" class="l">e3       = 40</span>
+<span id="L114" class="l">f3       = 41</span>
+<span id="L115" class="l">fh3      = 42</span>
+<span id="L116" class="l">g3       = 43</span>
+<span id="L117" class="l">gh3      = 44</span>
+<span id="L118" class="l">a3       = 45</span>
+<span id="L119" class="l">ah3      = 46</span>
+<span id="L120" class="l">h3       = 47</span>
+<span id="L121" class="l"> </span>
+<span id="L122" class="l">c4       = 48</span>
+<span id="L123" class="l">ch4      = 49</span>
+<span id="L124" class="l">d4       = 50</span>
+<span id="L125" class="l">dh4      = 51</span>
+<span id="L126" class="l">e4       = 52</span>
+<span id="L127" class="l">f4       = 53</span>
+<span id="L128" class="l">fh4      = 54</span>
+<span id="L129" class="l">g4       = 55</span>
+<span id="L130" class="l">gh4      = 56</span>
+<span id="L131" class="l">a4       = 57</span>
+<span id="L132" class="l">ah4      = 58</span>
+<span id="L133" class="l">h4       = 59</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l">c5       = 60</span>
+<span id="L136" class="l">ch5      = 61</span>
+<span id="L137" class="l">d5       = 62</span>
+<span id="L138" class="l">dh5      = 63</span>
+<span id="L139" class="l">e5       = 64</span>
+<span id="L140" class="l">f5       = 65</span>
+<span id="L141" class="l">fh5      = 66</span>
+<span id="L142" class="l">g5       = 67</span>
+<span id="L143" class="l">gh5      = 68</span>
+<span id="L144" class="l">a5       = 69</span>
+<span id="L145" class="l">ah5      = 70</span>
+<span id="L146" class="l">h5       = 71</span>
+<span id="L147" class="l"> </span>
+<span id="L148" class="l">c6       = 72</span>
+<span id="L149" class="l">ch6      = 73</span>
+<span id="L150" class="l">d6       = 74</span>
+<span id="L151" class="l">dh6      = 75</span>
+<span id="L152" class="l">e6       = 76</span>
+<span id="L153" class="l">f6       = 77</span>
+<span id="L154" class="l">fh6      = 78</span>
+<span id="L155" class="l">g6       = 79</span>
+<span id="L156" class="l">gh6      = 80</span>
+<span id="L157" class="l">a6       = 81</span>
+<span id="L158" class="l">ah6      = 82</span>
+<span id="L159" class="l">h6       = 83</span>
+<span id="L160" class="l"> </span>
+<span id="L161" class="l">c7       = 84</span>
+<span id="L162" class="l">ch7      = 85</span>
+<span id="L163" class="l">d7       = 86</span>
+<span id="L164" class="l">dh7      = 87</span>
+<span id="L165" class="l">e7       = 88</span>
+<span id="L166" class="l">f7       = 89</span>
+<span id="L167" class="l">fh7      = 90</span>
+<span id="L168" class="l">g7       = 91</span>
+<span id="L169" class="l">gh7      = 92</span>
+<span id="L170" class="l">a7       = 93</span>
+<span id="L171" class="l">ah7      = 94</span>
+<span id="L172" class="l">h7       = 95</span>
+<span id="L173" class="l"> </span>
+<span id="L174" class="l">musicset0</span>
+<span id="L175" class="l"> </span>
+<span id="L176" class="l">         tay</span>
+<span id="L177" class="l"> </span>
+<span id="L178" class="l">         ldx #29*3+3-1</span>
+<span id="L179" class="l">         lda #0</span>
+<span id="L180" class="l">lopp2    sta d400,x</span>
+<span id="L181" class="l">         dex</span>
+<span id="L182" class="l">         bpl lopp2</span>
+<span id="L183" class="l"> </span>
+<span id="L184" class="l">         ldx #$18</span>
+<span id="L185" class="l">         lda #0</span>
+<span id="L186" class="l">lopp3    sta sid,x</span>
+<span id="L187" class="l">         dex</span>
+<span id="L188" class="l">         bpl lopp3</span>
+<span id="L189" class="l"> </span>
+<span id="L190" class="l"> </span>
+<span id="L191" class="l"> </span>
+<span id="L192" class="l">         tya</span>
+<span id="L193" class="l">         asl</span>
+<span id="L194" class="l">         sta ze0</span>
+<span id="L195" class="l">         asl</span>
+<span id="L196" class="l">         clc</span>
+<span id="L197" class="l">         adc ze0</span>
+<span id="L198" class="l">         tax</span>
+<span id="L199" class="l">         lda speedtab,y</span>
+<span id="L200" class="l">         sta speed2+1</span>
+<span id="L201" class="l">         ldy #0</span>
+<span id="L202" class="l">lopp1    lda trackslohi,x</span>
+<span id="L203" class="l">         sta tracklo,y</span>
+<span id="L204" class="l">         inx</span>
+<span id="L205" class="l">         iny</span>
+<span id="L206" class="l">         cpy #6</span>
+<span id="L207" class="l">         bcc lopp1</span>
+<span id="L208" class="l">         lda #$80</span>
+<span id="L209" class="l">         sta beginflag</span>
+<span id="L210" class="l">         rts</span>
+<span id="L211" class="l"> </span>
+<span id="L212" class="l"> </span>
+<span id="L213" class="l">aa35</span>
+<span id="L214" class="l">         cmp #$ff</span>
+<span id="L215" class="l">         bne aa42</span>
+<span id="L216" class="l">         iny</span>
+<span id="L217" class="l">         lda (ze0),y</span>
+<span id="L218" class="l">         sta tracklo,x</span>
+<span id="L219" class="l">         iny</span>
+<span id="L220" class="l">         lda (ze0),y</span>
+<span id="L221" class="l">         sta trackhi,x</span>
+<span id="L222" class="l">         jmp newtrack</span>
+<span id="L223" class="l"> </span>
+<span id="L224" class="l">aa42</span>
+<span id="L225" class="l">         cmp #$a0</span>
+<span id="L226" class="l">         bcs aa36</span>
+<span id="L227" class="l">         and #%00011111</span>
+<span id="L228" class="l">         sta noteadc,x</span>
+<span id="L229" class="l">aa39     iny</span>
+<span id="L230" class="l">         jmp aa37</span>
+<span id="L231" class="l">aa36</span>
+<span id="L232" class="l">         cmp #$c0</span>
+<span id="L233" class="l">         bcs aa38</span>
+<span id="L234" class="l">         and #%00011111</span>
+<span id="L235" class="l">         sta voiceadc,x</span>
+<span id="L236" class="l">         bpl aa39</span>
+<span id="L237" class="l">aa38</span>
+<span id="L238" class="l">         and #%00111111</span>
+<span id="L239" class="l">         sta repeat,x</span>
+<span id="L240" class="l">         iny</span>
+<span id="L241" class="l">         jmp aa37</span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l"> </span>
+<span id="L244" class="l">newtrack</span>
+<span id="L245" class="l">         lda tracklo,x</span>
+<span id="L246" class="l">         sta ze0</span>
+<span id="L247" class="l">         lda trackhi,x</span>
+<span id="L248" class="l">         sta ze1</span>
+<span id="L249" class="l">         lda #0</span>
+<span id="L250" class="l">         tay</span>
+<span id="L251" class="l">         sta steppointer,x</span>
+<span id="L252" class="l"> </span>
+<span id="L253" class="l">         lda repeat,x</span>
+<span id="L254" class="l">         beq nixrepeat</span>
+<span id="L255" class="l"> </span>
+<span id="L256" class="l">         dec repeat,x</span>
+<span id="L257" class="l">         jmp aa34</span>
+<span id="L258" class="l"> </span>
+<span id="L259" class="l">nixrepeat</span>
+<span id="L260" class="l">aa37     lda (ze0),y</span>
+<span id="L261" class="l">         bmi aa35</span>
+<span id="L262" class="l">         asl</span>
+<span id="L263" class="l">         sta aktustep,x</span>
+<span id="L264" class="l">         iny</span>
+<span id="L265" class="l">         tya</span>
+<span id="L266" class="l">         clc</span>
+<span id="L267" class="l">         adc tracklo,x</span>
+<span id="L268" class="l">         sta tracklo,x</span>
+<span id="L269" class="l">         bcc aa34</span>
+<span id="L270" class="l">         inc trackhi,x</span>
+<span id="L271" class="l">         jmp aa34</span>
+<span id="L272" class="l"> </span>
+<span id="L273" class="l"> </span>
+<span id="L274" class="l">aa23</span>
+<span id="L275" class="l">         jmp wibrato</span>
+<span id="L276" class="l"> </span>
+<span id="L277" class="l"> </span>
+<span id="L278" class="l">music</span>
+<span id="L279" class="l">         ldx #2</span>
+<span id="L280" class="l">music1</span>
+<span id="L281" class="l">         bit beginflag</span>
+<span id="L282" class="l">         bmi newtrack</span>
+<span id="L283" class="l"> </span>
+<span id="L284" class="l">         lda speed1</span>
+<span id="L285" class="l">         bne aa23</span>
+<span id="L286" class="l"> </span>
+<span id="L287" class="l">         dec releasecount,x</span>
+<span id="L288" class="l">         bpl aa31</span>
+<span id="L289" class="l"> </span>
+<span id="L290" class="l">         ldy voicenow,x</span>
+<span id="L291" class="l">         lda wavetab-8,y</span>
+<span id="L292" class="l">         bmi aa31</span>
+<span id="L293" class="l"> </span>
+<span id="L294" class="l">         lda #$fe</span>
+<span id="L295" class="l">         sta waveand,x</span>
+<span id="L296" class="l"> </span>
+<span id="L297" class="l">aa31</span>
+<span id="L298" class="l">         dec speedcount,x</span>
+<span id="L299" class="l">         bpl aa23</span>
+<span id="L300" class="l">aa34</span>
+<span id="L301" class="l">         ldy aktustep,x</span>
+<span id="L302" class="l">         lda steps,y</span>
+<span id="L303" class="l">         sta ze0</span>
+<span id="L304" class="l">         lda steps+1,y</span>
+<span id="L305" class="l">         sta ze1</span>
+<span id="L306" class="l">         ldy steppointer,x</span>
+<span id="L307" class="l">aa26     lda (ze0),y</span>
+<span id="L308" class="l">         bmi aa24</span>
+<span id="L309" class="l"> </span>
+<span id="L310" class="l">         cmp #$60</span>
+<span id="L311" class="l">         bcs exarp1</span>
+<span id="L312" class="l">         clc</span>
+<span id="L313" class="l">         adc noteadc,x</span>
+<span id="L314" class="l">         sta notenow,x</span>
+<span id="L315" class="l">         jmp note1</span>
+<span id="L316" class="l"> </span>
+<span id="L317" class="l">exarp1</span>
+<span id="L318" class="l">         and #%00011111</span>
+<span id="L319" class="l">         sta exarpeggio,x</span>
+<span id="L320" class="l">         iny</span>
+<span id="L321" class="l">         jmp aa26</span>
+<span id="L322" class="l"> </span>
+<span id="L323" class="l">aa24</span>
+<span id="L324" class="l">         cmp #$ff</span>
+<span id="L325" class="l">         bne weiter1</span>
+<span id="L326" class="l">         jmp newtrack</span>
+<span id="L327" class="l">weiter1</span>
+<span id="L328" class="l">         cmp #$a0</span>
+<span id="L329" class="l">         bcs aa25</span>
+<span id="L330" class="l">         and #%00011111</span>
+<span id="L331" class="l">         sta speedwert,x</span>
+<span id="L332" class="l">         iny</span>
+<span id="L333" class="l">         jmp aa26</span>
+<span id="L334" class="l"> </span>
+<span id="L335" class="l"> </span>
+<span id="L336" class="l">aa25</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">         cmp #$c0</span>
+<span id="L339" class="l">         bcs aa27</span>
+<span id="L340" class="l">         adc voiceadc,x</span>
+<span id="L341" class="l">         and #%00011111</span>
+<span id="L342" class="l">         asl</span>
+<span id="L343" class="l">         asl</span>
+<span id="L344" class="l">         asl</span>
+<span id="L345" class="l">         sta voicenow,x</span>
+<span id="L346" class="l">         iny</span>
+<span id="L347" class="l">         sty ze2</span>
+<span id="L348" class="l">         tay</span>
+<span id="L349" class="l">         lda fpbyte-8,y</span>
+<span id="L350" class="l">         and #%11110000</span>
+<span id="L351" class="l">         beq aa45</span>
+<span id="L352" class="l"> </span>
+<span id="L353" class="l">         stx filterflag+1</span>
+<span id="L354" class="l">         lsr</span>
+<span id="L355" class="l">         lsr</span>
+<span id="L356" class="l">         lsr</span>
+<span id="L357" class="l">         lsr</span>
+<span id="L358" class="l">         sta filternow+1</span>
+<span id="L359" class="l">         tay</span>
+<span id="L360" class="l">         lda filterfrq-1,y</span>
+<span id="L361" class="l">         sta ffrq+1</span>
+<span id="L362" class="l">         lda filtermode-1,y</span>
+<span id="L363" class="l">         and #%11110000</span>
+<span id="L364" class="l">         ora #volume</span>
+<span id="L365" class="l">         sta filter+1</span>
+<span id="L366" class="l">         lda filtermode-1,y</span>
+<span id="L367" class="l">         asl</span>
+<span id="L368" class="l">         asl</span>
+<span id="L369" class="l">         asl</span>
+<span id="L370" class="l">         asl</span>
+<span id="L371" class="l">         ora filterbyte,x</span>
+<span id="L372" class="l">         jmp aa46</span>
+<span id="L373" class="l"> </span>
+<span id="L374" class="l"> </span>
+<span id="L375" class="l">aa45</span>
+<span id="L376" class="l">         lda d417+1</span>
+<span id="L377" class="l">         and filterand,x</span>
+<span id="L378" class="l">aa46     sta d417+1</span>
+<span id="L379" class="l">         ldy ze2</span>
+<span id="L380" class="l">         jmp aa26</span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l"> </span>
+<span id="L383" class="l">aa27     cmp #$e0</span>
+<span id="L384" class="l">         bcs aa28</span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l">         and #%00011111</span>
+<span id="L387" class="l">         sta speedcount,x</span>
+<span id="L388" class="l">         jmp aa29</span>
+<span id="L389" class="l"> </span>
+<span id="L390" class="l"> </span>
+<span id="L391" class="l">aa28</span>
+<span id="L392" class="l">         and #%00011111</span>
+<span id="L393" class="l">         sta speedwert,x</span>
+<span id="L394" class="l"> </span>
+<span id="L395" class="l">         iny</span>
+<span id="L396" class="l">         lda (ze0),y</span>
+<span id="L397" class="l">         ora #%10000000</span>
+<span id="L398" class="l">         sta portacount,x</span>
+<span id="L399" class="l">         iny</span>
+<span id="L400" class="l">         lda (ze0),y</span>
+<span id="L401" class="l">         clc</span>
+<span id="L402" class="l">         adc noteadc,x</span>
+<span id="L403" class="l">         sta byte1,x</span>
+<span id="L404" class="l">         sta notenow,x</span>
+<span id="L405" class="l">         iny</span>
+<span id="L406" class="l">         lda (ze0),y</span>
+<span id="L407" class="l">         clc</span>
+<span id="L408" class="l">         adc noteadc,x</span>
+<span id="L409" class="l">         sta byte2,x</span>
+<span id="L410" class="l"> </span>
+<span id="L411" class="l"> </span>
+<span id="L412" class="l">note1</span>
+<span id="L413" class="l">         sty ze2</span>
+<span id="L414" class="l">         ldy voicenow,x</span>
+<span id="L415" class="l"> </span>
+<span id="L416" class="l">         lda puls-8,y</span>
+<span id="L417" class="l">         sta pulslohi,x</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l">         lda release-8,y</span>
+<span id="L420" class="l">         bpl aa40</span>
+<span id="L421" class="l"> </span>
+<span id="L422" class="l">         ldy voicebyte,x</span>
+<span id="L423" class="l">         lda #0</span>
+<span id="L424" class="l">         sta sid+5,y</span>
+<span id="L425" class="l">         sta sid+6,y</span>
+<span id="L426" class="l">aa40</span>
+<span id="L427" class="l">         lda speedwert,x</span>
+<span id="L428" class="l">         sta speedcount,x</span>
+<span id="L429" class="l">         lda #0</span>
+<span id="L430" class="l">         sta wibpoint,x</span>
+<span id="L431" class="l">         sta wibcount,x</span>
+<span id="L432" class="l">         sta wavepoint,x</span>
+<span id="L433" class="l">         sta pulscount,x</span>
+<span id="L434" class="l">         sta pulspoint,x</span>
+<span id="L435" class="l">         sta adcwert,x</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">filterflag</span>
+<span id="L438" class="l">         cpx #$ff</span>
+<span id="L439" class="l">         bne nofilter</span>
+<span id="L440" class="l"> </span>
+<span id="L441" class="l">         sta filtercount</span>
+<span id="L442" class="l">         sta filterpoint+1</span>
+<span id="L443" class="l">ffrq</span>
+<span id="L444" class="l">         lda #$ff</span>
+<span id="L445" class="l">         sta d416+1</span>
+<span id="L446" class="l"> </span>
+<span id="L447" class="l">nofilter</span>
+<span id="L448" class="l"> </span>
+<span id="L449" class="l">         lda #$ff</span>
+<span id="L450" class="l">         sta waveand,x</span>
+<span id="L451" class="l"> </span>
+<span id="L452" class="l">         ldy notenow,x</span>
+<span id="L453" class="l">         lda low,y</span>
+<span id="L454" class="l">         sta d400,x</span>
+<span id="L455" class="l">         lda high,y</span>
+<span id="L456" class="l">         sta d401,x</span>
+<span id="L457" class="l"> </span>
+<span id="L458" class="l"> </span>
+<span id="L459" class="l">         ldy voicenow,x</span>
+<span id="L460" class="l"> </span>
+<span id="L461" class="l">         lda wavetab-8,y</span>
+<span id="L462" class="l">         bmi aa32</span>
+<span id="L463" class="l"> </span>
+<span id="L464" class="l">         asl</span>
+<span id="L465" class="l">         asl</span>
+<span id="L466" class="l">         lda release-8,y</span>
+<span id="L467" class="l">         and #%01111111</span>
+<span id="L468" class="l">         bcs aa41</span>
+<span id="L469" class="l"> </span>
+<span id="L470" class="l">         cmp speedwert,x</span>
+<span id="L471" class="l">         bcc aa33</span>
+<span id="L472" class="l">         lda #1</span>
+<span id="L473" class="l"> </span>
+<span id="L474" class="l"> </span>
+<span id="L475" class="l">aa41</span>
+<span id="L476" class="l">         sta ze3</span>
+<span id="L477" class="l">         lda speedwert,x</span>
+<span id="L478" class="l">         sec</span>
+<span id="L479" class="l">         sbc ze3</span>
+<span id="L480" class="l">aa33</span>
+<span id="L481" class="l">         sta releasecount,x</span>
+<span id="L482" class="l"> </span>
+<span id="L483" class="l">aa32</span>
+<span id="L484" class="l">         ldy ze2</span>
+<span id="L485" class="l"> </span>
+<span id="L486" class="l"> </span>
+<span id="L487" class="l">aa29     iny</span>
+<span id="L488" class="l">         tya</span>
+<span id="L489" class="l">         sta steppointer,x</span>
+<span id="L490" class="l"> </span>
+<span id="L491" class="l">counter1</span>
+<span id="L492" class="l">         dex</span>
+<span id="L493" class="l">         bmi aa43</span>
+<span id="L494" class="l">         jmp music1</span>
+<span id="L495" class="l">aa43</span>
+<span id="L496" class="l">         dec speed1</span>
+<span id="L497" class="l">         bpl aa44</span>
+<span id="L498" class="l">speed2</span>
+<span id="L499" class="l">         lda #2</span>
+<span id="L500" class="l">         sta speed1</span>
+<span id="L501" class="l">aa44</span>
+<span id="L502" class="l">         lda #0</span>
+<span id="L503" class="l">         sta beginflag</span>
+<span id="L504" class="l"> </span>
+<span id="L505" class="l">filter</span>
+<span id="L506" class="l"> </span>
+<span id="L507" class="l">         lda #volume+$10</span>
+<span id="L508" class="l">         sta sid+24</span>
+<span id="L509" class="l">d417     lda #0</span>
+<span id="L510" class="l">         sta sid+23</span>
+<span id="L511" class="l">filternow</span>
+<span id="L512" class="l">         ldx #0</span>
+<span id="L513" class="l">         beq aa48</span>
+<span id="L514" class="l"> </span>
+<span id="L515" class="l">         dec filtercount</span>
+<span id="L516" class="l">         bpl d416</span>
+<span id="L517" class="l"> </span>
+<span id="L518" class="l">filterpoint</span>
+<span id="L519" class="l">         lda #0</span>
+<span id="L520" class="l">         cmp filterup-1,x</span>
+<span id="L521" class="l">         bcc aa49</span>
+<span id="L522" class="l"> </span>
+<span id="L523" class="l">         lda filterag-1,x</span>
+<span id="L524" class="l">aa49</span>
+<span id="L525" class="l">         tay</span>
+<span id="L526" class="l"> </span>
+<span id="L527" class="l">         lda ftablo-1,x</span>
+<span id="L528" class="l">         sta ze0</span>
+<span id="L529" class="l">         lda ftabhi-1,x</span>
+<span id="L530" class="l">         sta ze1</span>
+<span id="L531" class="l"> </span>
+<span id="L532" class="l">         lda (ze0),y</span>
+<span id="L533" class="l">         sta filtercount</span>
+<span id="L534" class="l">         iny</span>
+<span id="L535" class="l">         lda (ze0),y</span>
+<span id="L536" class="l">         sta fadcwert+1</span>
+<span id="L537" class="l">         iny</span>
+<span id="L538" class="l">         tya</span>
+<span id="L539" class="l">         sta filterpoint+1</span>
+<span id="L540" class="l"> </span>
+<span id="L541" class="l">d416</span>
+<span id="L542" class="l">         lda #$ff</span>
+<span id="L543" class="l">         clc</span>
+<span id="L544" class="l">fadcwert adc #0</span>
+<span id="L545" class="l">         sta sid+22</span>
+<span id="L546" class="l">         sta d416+1</span>
+<span id="L547" class="l">aa48</span>
+<span id="L548" class="l">         rts</span>
+<span id="L549" class="l"> </span>
+<span id="L550" class="l">stat1</span>
+<span id="L551" class="l">         !by 0</span>
+<span id="L552" class="l"> </span>
+<span id="L553" class="l">setportapara</span>
+<span id="L554" class="l">         stx aa50+1</span>
+<span id="L555" class="l">         and #%01111111</span>
+<span id="L556" class="l">         sta portacount,x</span>
+<span id="L557" class="l">         sta ze2</span>
+<span id="L558" class="l">         lda #0</span>
+<span id="L559" class="l">         sta ze3</span>
+<span id="L560" class="l"> </span>
+<span id="L561" class="l"> </span>
+<span id="L562" class="l">         lda byte2,x</span>
+<span id="L563" class="l">         sta notenow,x</span>
+<span id="L564" class="l">         cmp byte1,x</span>
+<span id="L565" class="l">         bcs aa51</span>
+<span id="L566" class="l"> </span>
+<span id="L567" class="l">         sta ze0</span>
+<span id="L568" class="l">         ldy byte1,x</span>
+<span id="L569" class="l">         ldx ze0</span>
+<span id="L570" class="l"> </span>
+<span id="L571" class="l">         lda #$ff</span>
+<span id="L572" class="l">         sta stat1</span>
+<span id="L573" class="l">         jmp aa52</span>
+<span id="L574" class="l"> </span>
+<span id="L575" class="l">aa51</span>
+<span id="L576" class="l"> </span>
+<span id="L577" class="l">         tay</span>
+<span id="L578" class="l">         lda byte1,x</span>
+<span id="L579" class="l">         tax</span>
+<span id="L580" class="l">         lda #0</span>
+<span id="L581" class="l">         sta stat1</span>
+<span id="L582" class="l"> </span>
+<span id="L583" class="l"> </span>
+<span id="L584" class="l">aa52</span>
+<span id="L585" class="l">         lda low,y</span>
+<span id="L586" class="l">         sec</span>
+<span id="L587" class="l">         sbc low,x</span>
+<span id="L588" class="l">         sta ze0</span>
+<span id="L589" class="l">         lda high,y</span>
+<span id="L590" class="l">         sbc high,x</span>
+<span id="L591" class="l">         sta ze1</span>
+<span id="L592" class="l"> </span>
+<span id="L593" class="l"> </span>
+<span id="L594" class="l">div16</span>
+<span id="L595" class="l"> </span>
+<span id="L596" class="l">         lda #0     ; rest = 0</span>
+<span id="L597" class="l">         sta ze4</span>
+<span id="L598" class="l">         sta ze5</span>
+<span id="L599" class="l">         ldx #16    ; 16 bits</span>
+<span id="L600" class="l"> </span>
+<span id="L601" class="l">divl1    asl ze0    ; 1.op shiften</span>
+<span id="L602" class="l">         rol ze1</span>
+<span id="L603" class="l"> </span>
+<span id="L604" class="l">         rol ze4    ; rest shiften</span>
+<span id="L605" class="l">         rol ze5</span>
+<span id="L606" class="l"> </span>
+<span id="L607" class="l">         sec        ; rest &gt; 2.op</span>
+<span id="L608" class="l">         lda ze4</span>
+<span id="L609" class="l">         sbc ze2</span>
+<span id="L610" class="l">         tay</span>
+<span id="L611" class="l">         lda ze5</span>
+<span id="L612" class="l">         sbc ze3</span>
+<span id="L613" class="l">         bcc divj1  ; nein !</span>
+<span id="L614" class="l">                    ; sonst:</span>
+<span id="L615" class="l">         sty ze4    ; rest=rest-2.op</span>
+<span id="L616" class="l">         sta ze5</span>
+<span id="L617" class="l">         inc ze0    ; faktor + 1</span>
+<span id="L618" class="l"> </span>
+<span id="L619" class="l">divj1    dex</span>
+<span id="L620" class="l">         bne divl1</span>
+<span id="L621" class="l"> </span>
+<span id="L622" class="l"> </span>
+<span id="L623" class="l">aa50</span>
+<span id="L624" class="l">         ldx #0</span>
+<span id="L625" class="l"> </span>
+<span id="L626" class="l">         lda ze0</span>
+<span id="L627" class="l">         eor stat1</span>
+<span id="L628" class="l">         sta byte1,x</span>
+<span id="L629" class="l">         lda ze1</span>
+<span id="L630" class="l">         eor stat1</span>
+<span id="L631" class="l">         sta byte2,x</span>
+<span id="L632" class="l">         jmp pulswib</span>
+<span id="L633" class="l"> </span>
+<span id="L634" class="l"> </span>
+<span id="L635" class="l"> </span>
+<span id="L636" class="l">porta</span>
+<span id="L637" class="l">         bmi setportapara</span>
+<span id="L638" class="l"> </span>
+<span id="L639" class="l">         dec portacount,x</span>
+<span id="L640" class="l"> </span>
+<span id="L641" class="l">         lda d400,x</span>
+<span id="L642" class="l">         clc</span>
+<span id="L643" class="l">         adc byte1,x</span>
+<span id="L644" class="l">         sta d400,x</span>
+<span id="L645" class="l">         lda d401,x</span>
+<span id="L646" class="l">         adc byte2,x</span>
+<span id="L647" class="l">         sta d401,x</span>
+<span id="L648" class="l">         jmp pulswib</span>
+<span id="L649" class="l"> </span>
+<span id="L650" class="l"> </span>
+<span id="L651" class="l"> </span>
+<span id="L652" class="l">aa6</span>
+<span id="L653" class="l">                    ;arpeggio</span>
+<span id="L654" class="l">         sty ze3</span>
+<span id="L655" class="l">         clc</span>
+<span id="L656" class="l">         adc notenow,x</span>
+<span id="L657" class="l">         tay</span>
+<span id="L658" class="l">         lda low,y</span>
+<span id="L659" class="l">         sta d400,x</span>
+<span id="L660" class="l">         lda high,y</span>
+<span id="L661" class="l">         sta d401,x</span>
+<span id="L662" class="l">         ldy ze3</span>
+<span id="L663" class="l">aaa5     jmp aa5</span>
+<span id="L664" class="l"> </span>
+<span id="L665" class="l">tabarp</span>
+<span id="L666" class="l">         bvs aa6</span>
+<span id="L667" class="l">                  ;werte direkt in sid</span>
+<span id="L668" class="l">aa7      sta d401,x</span>
+<span id="L669" class="l">         lda #0</span>
+<span id="L670" class="l">         sta d400,x</span>
+<span id="L671" class="l">         beq aaa5</span>
+<span id="L672" class="l"> </span>
+<span id="L673" class="l">sense</span>
+<span id="L674" class="l">         ldy voicebyte,x</span>
+<span id="L675" class="l">         lda #8</span>
+<span id="L676" class="l">         sta sid+4,y</span>
+<span id="L677" class="l">         lda #0</span>
+<span id="L678" class="l">         sta sid+5,y</span>
+<span id="L679" class="l">         sta sid+6,y</span>
+<span id="L680" class="l">         jmp counter1</span>
+<span id="L681" class="l"> </span>
+<span id="L682" class="l"> </span>
+<span id="L683" class="l"> </span>
+<span id="L684" class="l">wibrato</span>
+<span id="L685" class="l">         ldy voicenow,x</span>
+<span id="L686" class="l">         beq sense</span>
+<span id="L687" class="l"> </span>
+<span id="L688" class="l">         lda portacount,x</span>
+<span id="L689" class="l">         bne porta</span>
+<span id="L690" class="l"> </span>
+<span id="L691" class="l">         lda exarpeggio,x</span>
+<span id="L692" class="l">         beq nixarpeggio</span>
+<span id="L693" class="l"> </span>
+<span id="L694" class="l">         tay</span>
+<span id="L695" class="l">         lda arplo-1,y</span>
+<span id="L696" class="l">         sta tablo</span>
+<span id="L697" class="l">         lda arphi-1,y</span>
+<span id="L698" class="l">         sta tabhi</span>
+<span id="L699" class="l">         lda arpup-1,y</span>
+<span id="L700" class="l">         sta wibup</span>
+<span id="L701" class="l">         lda arpag-1,y</span>
+<span id="L702" class="l">         sta wibag</span>
+<span id="L703" class="l"> </span>
+<span id="L704" class="l">         lda #$c0</span>
+<span id="L705" class="l">         sta ze2</span>
+<span id="L706" class="l">         ldy #0</span>
+<span id="L707" class="l">         beq arpeggio</span>
+<span id="L708" class="l"> </span>
+<span id="L709" class="l">nixarpeggio</span>
+<span id="L710" class="l">         lda wibbyte-8,y</span>
+<span id="L711" class="l">         beq aaa0</span>
+<span id="L712" class="l">         sta ze2</span>
+<span id="L713" class="l">         bpl aa1</span>
+<span id="L714" class="l">nupara   and #%00011111</span>
+<span id="L715" class="l">         tay</span>
+<span id="L716" class="l">arpeggio lda tablo,y</span>
+<span id="L717" class="l">         sta ze0</span>
+<span id="L718" class="l">         lda tabhi,y</span>
+<span id="L719" class="l">         sta ze1</span>
+<span id="L720" class="l">         lda wibpoint,x</span>
+<span id="L721" class="l">         cmp wibup,y</span>
+<span id="L722" class="l">         bcc aa2</span>
+<span id="L723" class="l">         lda wibag,y</span>
+<span id="L724" class="l">aa2</span>
+<span id="L725" class="l">         tay</span>
+<span id="L726" class="l">aa22     lda (ze0),y</span>
+<span id="L727" class="l">         bit ze2</span>
+<span id="L728" class="l">         bmi tabarp</span>
+<span id="L729" class="l">         sta byte1,x</span>
+<span id="L730" class="l">         sta ze3</span>
+<span id="L731" class="l">         and #%00000111</span>
+<span id="L732" class="l">         sta wibcount,x</span>
+<span id="L733" class="l">         iny</span>
+<span id="L734" class="l">         lda (ze0),y</span>
+<span id="L735" class="l">         asl ze3</span>
+<span id="L736" class="l">         bit ze3</span>
+<span id="L737" class="l">         bcc aa3</span>
+<span id="L738" class="l">         bvs aa21</span>
+<span id="L739" class="l">         bpl aaa6</span>
+<span id="L740" class="l">         jmp aa7</span>
+<span id="L741" class="l"> </span>
+<span id="L742" class="l">aa21</span>
+<span id="L743" class="l">         sta adcwert,x</span>
+<span id="L744" class="l">         iny</span>
+<span id="L745" class="l">         jmp aa22</span>
+<span id="L746" class="l"> </span>
+<span id="L747" class="l">aaa6</span>
+<span id="L748" class="l">         jmp aa6</span>
+<span id="L749" class="l"> </span>
+<span id="L750" class="l">aa3</span>
+<span id="L751" class="l">         sta byte2,x</span>
+<span id="L752" class="l">         lsr</span>
+<span id="L753" class="l">         lsr</span>
+<span id="L754" class="l">         lsr</span>
+<span id="L755" class="l">         lsr</span>
+<span id="L756" class="l">         and #%00000111</span>
+<span id="L757" class="l">         sta adccount,x</span>
+<span id="L758" class="l">aa5</span>
+<span id="L759" class="l">         iny</span>
+<span id="L760" class="l">         tya</span>
+<span id="L761" class="l">         sta wibpoint,x</span>
+<span id="L762" class="l">         bit ze2</span>
+<span id="L763" class="l">         bpl backpara</span>
+<span id="L764" class="l">aaa0     jmp pulswib</span>
+<span id="L765" class="l"> </span>
+<span id="L766" class="l"> </span>
+<span id="L767" class="l">aa1</span>
+<span id="L768" class="l">         dec wibcount,x</span>
+<span id="L769" class="l">         bmi nupara</span>
+<span id="L770" class="l">backpara</span>
+<span id="L771" class="l">         lda byte1,x</span>
+<span id="L772" class="l">         bmi aaa0</span>
+<span id="L773" class="l">         lsr</span>
+<span id="L774" class="l">         lsr</span>
+<span id="L775" class="l">         lsr</span>
+<span id="L776" class="l">         and #%00000111</span>
+<span id="L777" class="l">         sta ze2</span>
+<span id="L778" class="l">         lda byte2,x</span>
+<span id="L779" class="l">         lsr</span>
+<span id="L780" class="l">         lsr</span>
+<span id="L781" class="l">         lsr</span>
+<span id="L782" class="l">         and #%00001111</span>
+<span id="L783" class="l">         clc</span>
+<span id="L784" class="l">         adc notenow,x</span>
+<span id="L785" class="l">         tay</span>
+<span id="L786" class="l">         lda low,y</span>
+<span id="L787" class="l">         sbc low-1,y</span>
+<span id="L788" class="l">         sta ze3</span>
+<span id="L789" class="l">         lda high,y</span>
+<span id="L790" class="l">         sbc high-1,y</span>
+<span id="L791" class="l">         clc</span>
+<span id="L792" class="l">         adc adcwert,x</span>
+<span id="L793" class="l">aa9      dec ze2</span>
+<span id="L794" class="l">         bmi aa8</span>
+<span id="L795" class="l">         lsr</span>
+<span id="L796" class="l">         ror ze3</span>
+<span id="L797" class="l">         jmp aa9</span>
+<span id="L798" class="l">aa8</span>
+<span id="L799" class="l">         sta ze2</span>
+<span id="L800" class="l">         lda byte1,x</span>
+<span id="L801" class="l">         and #%01000000</span>
+<span id="L802" class="l">         beq substract</span>
+<span id="L803" class="l"> </span>
+<span id="L804" class="l">         lda d400,x</span>
+<span id="L805" class="l">         clc</span>
+<span id="L806" class="l">         adc ze3</span>
+<span id="L807" class="l">         sta d400,x</span>
+<span id="L808" class="l">         lda d401,x</span>
+<span id="L809" class="l">         adc ze2</span>
+<span id="L810" class="l">         sta d401,x</span>
+<span id="L811" class="l">         jmp aa10</span>
+<span id="L812" class="l">substract</span>
+<span id="L813" class="l">         lda d400,x</span>
+<span id="L814" class="l">         sec</span>
+<span id="L815" class="l">         sbc ze3</span>
+<span id="L816" class="l">         sta d400,x</span>
+<span id="L817" class="l">         lda d401,x</span>
+<span id="L818" class="l">         sbc ze2</span>
+<span id="L819" class="l">         sta d401,x</span>
+<span id="L820" class="l">aa10</span>
+<span id="L821" class="l">         dec adccount,x</span>
+<span id="L822" class="l">         bpl aa11</span>
+<span id="L823" class="l">         lda byte2,x</span>
+<span id="L824" class="l">         lsr</span>
+<span id="L825" class="l">         lsr</span>
+<span id="L826" class="l">         lsr</span>
+<span id="L827" class="l">         lsr</span>
+<span id="L828" class="l">         and #%00000111</span>
+<span id="L829" class="l">         sta adccount,x</span>
+<span id="L830" class="l">         bpl aa14</span>
+<span id="L831" class="l">aa11</span>
+<span id="L832" class="l">         bne pulswib</span>
+<span id="L833" class="l">aa14     lda byte2,x</span>
+<span id="L834" class="l">         bpl aa13</span>
+<span id="L835" class="l">         inc adcwert,x</span>
+<span id="L836" class="l">         jmp pulswib</span>
+<span id="L837" class="l">aa13</span>
+<span id="L838" class="l">         dec adcwert,x</span>
+<span id="L839" class="l"> </span>
+<span id="L840" class="l"> </span>
+<span id="L841" class="l">pulswib</span>
+<span id="L842" class="l">         ldy voicenow,x</span>
+<span id="L843" class="l">         lda fpbyte-8,y</span>
+<span id="L844" class="l">         and #%00001111</span>
+<span id="L845" class="l">         beq wavewib1</span>
+<span id="L846" class="l">         tay</span>
+<span id="L847" class="l">         dec pulscount,x</span>
+<span id="L848" class="l">         bpl aa17</span>
+<span id="L849" class="l"> </span>
+<span id="L850" class="l">         lda ptablo-1,y</span>
+<span id="L851" class="l">         sta ze0</span>
+<span id="L852" class="l">         lda ptabhi-1,y</span>
+<span id="L853" class="l">         sta ze1</span>
+<span id="L854" class="l">         lda pulspoint,x</span>
+<span id="L855" class="l">         cmp pulsup-1,y</span>
+<span id="L856" class="l">         bcc aa16</span>
+<span id="L857" class="l">         lda pulsag-1,y</span>
+<span id="L858" class="l">aa16</span>
+<span id="L859" class="l">         tay</span>
+<span id="L860" class="l">         lda (ze0),y</span>
+<span id="L861" class="l">         sta pulscount,x</span>
+<span id="L862" class="l">         iny</span>
+<span id="L863" class="l">         lda (ze0),y</span>
+<span id="L864" class="l">         sta padcwert,x</span>
+<span id="L865" class="l">         iny</span>
+<span id="L866" class="l">         tya</span>
+<span id="L867" class="l">         sta pulspoint,x</span>
+<span id="L868" class="l"> </span>
+<span id="L869" class="l"> </span>
+<span id="L870" class="l">aa17</span>
+<span id="L871" class="l">         lda pulslohi,x</span>
+<span id="L872" class="l">         clc</span>
+<span id="L873" class="l">         adc padcwert,x</span>
+<span id="L874" class="l">         adc #0</span>
+<span id="L875" class="l">         sta pulslohi,x</span>
+<span id="L876" class="l"> </span>
+<span id="L877" class="l"> </span>
+<span id="L878" class="l"> </span>
+<span id="L879" class="l">wavewib</span>
+<span id="L880" class="l">         ldy voicenow,x</span>
+<span id="L881" class="l">wavewib1 lda wave-8,y</span>
+<span id="L882" class="l">         sta ze2</span>
+<span id="L883" class="l">         lda wavetab-8,y</span>
+<span id="L884" class="l">         and #%00011111</span>
+<span id="L885" class="l">         beq aa19</span>
+<span id="L886" class="l">         tay</span>
+<span id="L887" class="l">         lda wtablo-1,y</span>
+<span id="L888" class="l">         sta ze0</span>
+<span id="L889" class="l">         lda wtabhi-1,y</span>
+<span id="L890" class="l">         sta ze1</span>
+<span id="L891" class="l">         lda wavepoint,x</span>
+<span id="L892" class="l">         cmp ze2</span>
+<span id="L893" class="l">         bcc aa18</span>
+<span id="L894" class="l">         lda waveag-1,y</span>
+<span id="L895" class="l">aa18</span>
+<span id="L896" class="l">         tay</span>
+<span id="L897" class="l">         inc wavepoint,x</span>
+<span id="L898" class="l">         lda (ze0),y</span>
+<span id="L899" class="l">         jmp aa20</span>
+<span id="L900" class="l">aa19</span>
+<span id="L901" class="l">         lda ze2</span>
+<span id="L902" class="l">aa20</span>
+<span id="L903" class="l">         and waveand,x</span>
+<span id="L904" class="l">         sta d404,x</span>
+<span id="L905" class="l"> </span>
+<span id="L906" class="l"> </span>
+<span id="L907" class="l"> </span>
+<span id="L908" class="l">setsid</span>
+<span id="L909" class="l">         ldy voicebyte,x</span>
+<span id="L910" class="l">         lda d400,x</span>
+<span id="L911" class="l">         sta sid,y</span>
+<span id="L912" class="l">         lda d401,x</span>
+<span id="L913" class="l">         sta sid+1,y</span>
+<span id="L914" class="l">         lda pulslohi,x</span>
+<span id="L915" class="l">         sta sid+2,y</span>
+<span id="L916" class="l">         sta sid+3,y</span>
+<span id="L917" class="l">         lda d404,x</span>
+<span id="L918" class="l">         sta sid+4,y</span>
+<span id="L919" class="l">         stx ze2</span>
+<span id="L920" class="l">         lda voicenow,x</span>
+<span id="L921" class="l">         tax</span>
+<span id="L922" class="l">         lda ad-8,x</span>
+<span id="L923" class="l">         sta sid+5,y</span>
+<span id="L924" class="l">         lda sr-8,x</span>
+<span id="L925" class="l">         sta sid+6,y</span>
+<span id="L926" class="l">         ldx ze2</span>
+<span id="L927" class="l">         jmp counter1</span>
+<span id="L928" class="l"> </span>
+<span id="L929" class="l"> </span>
+<span id="L930" class="l"> </span>
+<span id="L931" class="l"> </span>
+<span id="L932" class="l">;***************************************</span>
+<span id="L933" class="l">;              VOICES</span>
+<span id="L934" class="l">ad</span>
+<span id="L935" class="l"> </span>
+<span id="L936" class="l">sr       = ad+1</span>
+<span id="L937" class="l"> </span>
+<span id="L938" class="l">puls     = ad+2</span>
+<span id="L939" class="l"> </span>
+<span id="L940" class="l">wave     = ad+3</span>
+<span id="L941" class="l"> </span>
+<span id="L942" class="l">wibbyte  = ad+4      ;Vibrato Pointer</span>
+<span id="L943" class="l">                     ;Betriebsart</span>
+<span id="L944" class="l">                     ;$80=tab/$c0=arp</span>
+<span id="L945" class="l">fpbyte   = ad+5      ;Lownibble=Puls Po.</span>
+<span id="L946" class="l">                     ;Highnibble=Fil Po.</span>
+<span id="L947" class="l">wavetab  = ad+6</span>
+<span id="L948" class="l"> </span>
+<span id="L949" class="l">release  = ad+7</span>
+<span id="L950" class="l"> </span>
+<span id="L951" class="l"> </span>
+<span id="L952" class="l">;1 bd</span>
+<span id="L953" class="l">         !by $00,$d8,$08,$0c</span>
+<span id="L954" class="l">         !by $c1,$00,$81,$80</span>
+<span id="L955" class="l"> </span>
+<span id="L956" class="l">;2 sd  ;GEFILTERT</span>
+<span id="L957" class="l">         !by $00,$f8,$08,$0f</span>
+<span id="L958" class="l">         !by $c2,$00,$82,$80</span>
+<span id="L959" class="l"> </span>
+<span id="L960" class="l">;3 bd II</span>
+<span id="L961" class="l">         !by $00,$c7,$08,$03</span>
+<span id="L962" class="l">         !by $c3,$00,$81,$80</span>
+<span id="L963" class="l"> </span>
+<span id="L964" class="l">;4 main I</span>
+<span id="L965" class="l">         !by $01,$98,$e7,$41</span>
+<span id="L966" class="l">         !by $04,$01,$40,$03</span>
+<span id="L967" class="l"> </span>
+<span id="L968" class="l">;5 bass I</span>
+<span id="L969" class="l">         !by $01,$ef,$05,$02</span>
+<span id="L970" class="l">         !by $05,$12,$43,$81</span>
+<span id="L971" class="l"> </span>
+<span id="L972" class="l">;6 bass II</span>
+<span id="L973" class="l">         !by $00,$7f,$04,$02</span>
+<span id="L974" class="l">         !by $05,$10,$43,$81</span>
+<span id="L975" class="l"> </span>
+<span id="L976" class="l">;7 floete I</span>
+<span id="L977" class="l">         !by $00,$f8,$00,$11</span>
+<span id="L978" class="l">         !by $04,$00,$40,$03</span>
+<span id="L979" class="l"> </span>
+<span id="L980" class="l">;8 main II</span>
+<span id="L981" class="l">         !by $01,$98,$a0,$04</span>
+<span id="L982" class="l">         !by $04,$01,$44,$03</span>
+<span id="L983" class="l"> </span>
+<span id="L984" class="l">;9 arpeggio I</span>
+<span id="L985" class="l">         !by $01,$3a,$08,$41</span>
+<span id="L986" class="l">         !by $c6,$01,$40,$06</span>
+<span id="L987" class="l"> </span>
+<span id="L988" class="l">;0a arpeggio-short I</span>
+<span id="L989" class="l">         !by $01,$69,$08,$41</span>
+<span id="L990" class="l">         !by $c7,$00,$00,$80</span>
+<span id="L991" class="l"> </span>
+<span id="L992" class="l">;0b short I</span>
+<span id="L993" class="l">         !by $01,$99,$07,$41</span>
+<span id="L994" class="l">         !by $00,$02,$00,$80</span>
+<span id="L995" class="l"> </span>
+<span id="L996" class="l">;0c main III</span>
+<span id="L997" class="l">         !by $01,$99,$e7,$41</span>
+<span id="L998" class="l">         !by $08,$01,$40,$04</span>
+<span id="L999" class="l"> </span>
+<span id="L1000" class="l">;0d sd  ;Nicht Gefiltert</span>
+<span id="L1001" class="l">         !by $00,$f8,$08,$0f</span>
+<span id="L1002" class="l">         !by $c2,$00,$82,$80</span>
+<span id="L1003" class="l"> </span>
+<span id="L1004" class="l">;0e arpeggio I</span>
+<span id="L1005" class="l">         !by $01,$7a,$08,$41</span>
+<span id="L1006" class="l">         !by $c6,$01,$40,$06</span>
+<span id="L1007" class="l"> </span>
+<span id="L1008" class="l">;$0f short !!</span>
+<span id="L1009" class="l">         !by $01,$7f,$05,$02</span>
+<span id="L1010" class="l">         !by $05,$02,$43,$81</span>
+<span id="L1011" class="l"> </span>
+<span id="L1012" class="l"> </span>
+<span id="L1013" class="l">;$10 main II lange halten</span>
+<span id="L1014" class="l">         !by $01,$9d,$a0,$04</span>
+<span id="L1015" class="l">         !by $04,$01,$44,$01</span>
+<span id="L1016" class="l"> </span>
+<span id="L1017" class="l"> </span>
+<span id="L1018" class="l"> </span>
+<span id="L1019" class="l"> </span>
+<span id="L1020" class="l"> </span>
+<span id="L1021" class="l">;**********************</span>
+<span id="L1022" class="l">;     VIBpointer</span>
+<span id="L1023" class="l"> </span>
+<span id="L1024" class="l">tablo</span>
+<span id="L1025" class="l">         !by 0</span>
+<span id="L1026" class="l">         !by &lt;tab1</span>
+<span id="L1027" class="l">         !by &lt;tab2</span>
+<span id="L1028" class="l">         !by &lt;tab3</span>
+<span id="L1029" class="l">         !by &lt;tab4</span>
+<span id="L1030" class="l">         !by &lt;tab5</span>
+<span id="L1031" class="l">         !by &lt;tab6</span>
+<span id="L1032" class="l">         !by &lt;tab7</span>
+<span id="L1033" class="l">         !by &lt;tab8</span>
+<span id="L1034" class="l">tabhi</span>
+<span id="L1035" class="l">         !by 0</span>
+<span id="L1036" class="l">         !by &gt;tab1</span>
+<span id="L1037" class="l">         !by &gt;tab2</span>
+<span id="L1038" class="l">         !by &gt;tab3</span>
+<span id="L1039" class="l">         !by &gt;tab4</span>
+<span id="L1040" class="l">         !by &gt;tab5</span>
+<span id="L1041" class="l">         !by &gt;tab6</span>
+<span id="L1042" class="l">         !by &gt;tab7</span>
+<span id="L1043" class="l">         !by &gt;tab8</span>
+<span id="L1044" class="l"> </span>
+<span id="L1045" class="l">wibup</span>
+<span id="L1046" class="l">         !by 0</span>
+<span id="L1047" class="l">         !by $0b</span>
+<span id="L1048" class="l">         !by $10</span>
+<span id="L1049" class="l">         !by $0a</span>
+<span id="L1050" class="l">         !by $0a</span>
+<span id="L1051" class="l">         !by $0a</span>
+<span id="L1052" class="l">         !by $03</span>
+<span id="L1053" class="l">         !by $03</span>
+<span id="L1054" class="l">         !by $08</span>
+<span id="L1055" class="l"> </span>
+<span id="L1056" class="l">wibag</span>
+<span id="L1057" class="l">         !by 0</span>
+<span id="L1058" class="l">         !by $0a</span>
+<span id="L1059" class="l">         !by $0f</span>
+<span id="L1060" class="l">         !by $09</span>
+<span id="L1061" class="l">         !by $06</span>
+<span id="L1062" class="l">         !by $06</span>
+<span id="L1063" class="l">         !by $00</span>
+<span id="L1064" class="l">         !by $00</span>
+<span id="L1065" class="l">         !by $04</span>
+<span id="L1066" class="l"> </span>
+<span id="L1067" class="l"> </span>
+<span id="L1068" class="l">;**********************</span>
+<span id="L1069" class="l">;    PULSpointer</span>
+<span id="L1070" class="l"> </span>
+<span id="L1071" class="l">ptablo</span>
+<span id="L1072" class="l">         !by &lt;ptab1</span>
+<span id="L1073" class="l">         !by &lt;ptab2</span>
+<span id="L1074" class="l"> </span>
+<span id="L1075" class="l">ptabhi</span>
+<span id="L1076" class="l">         !by &gt;ptab1</span>
+<span id="L1077" class="l">         !by &gt;ptab2</span>
+<span id="L1078" class="l"> </span>
+<span id="L1079" class="l">pulsup</span>
+<span id="L1080" class="l">         !by $08</span>
+<span id="L1081" class="l">         !by $08</span>
+<span id="L1082" class="l">pulsag</span>
+<span id="L1083" class="l"> </span>
+<span id="L1084" class="l">         !by $04</span>
+<span id="L1085" class="l">         !by $04</span>
+<span id="L1086" class="l"> </span>
+<span id="L1087" class="l">;**********************</span>
+<span id="L1088" class="l">;     WAVEpointer</span>
+<span id="L1089" class="l"> </span>
+<span id="L1090" class="l">wtablo</span>
+<span id="L1091" class="l">         !by &lt;wtab1</span>
+<span id="L1092" class="l">         !by &lt;wtab2</span>
+<span id="L1093" class="l">         !by &lt;wtab3</span>
+<span id="L1094" class="l">         !by &lt;wtab4</span>
+<span id="L1095" class="l">         !by &lt;wtab5</span>
+<span id="L1096" class="l"> </span>
+<span id="L1097" class="l">wtabhi</span>
+<span id="L1098" class="l">         !by &gt;wtab1</span>
+<span id="L1099" class="l">         !by &gt;wtab2</span>
+<span id="L1100" class="l">         !by &gt;wtab3</span>
+<span id="L1101" class="l">         !by &gt;wtab4</span>
+<span id="L1102" class="l">         !by &gt;wtab5</span>
+<span id="L1103" class="l"> </span>
+<span id="L1104" class="l">waveag</span>
+<span id="L1105" class="l">         !by $0b</span>
+<span id="L1106" class="l">         !by $0e</span>
+<span id="L1107" class="l">         !by $01</span>
+<span id="L1108" class="l">         !by $03</span>
+<span id="L1109" class="l">         !by $03</span>
+<span id="L1110" class="l"> </span>
+<span id="L1111" class="l"> </span>
+<span id="L1112" class="l"> </span>
+<span id="L1113" class="l">;**********************</span>
+<span id="L1114" class="l">;    FILTERpointer</span>
+<span id="L1115" class="l"> </span>
+<span id="L1116" class="l">ftablo</span>
+<span id="L1117" class="l">         !by &lt;ftab1</span>
+<span id="L1118" class="l">         !by &lt;ftab2</span>
+<span id="L1119" class="l"> </span>
+<span id="L1120" class="l">ftabhi</span>
+<span id="L1121" class="l">         !by &gt;ftab1</span>
+<span id="L1122" class="l">         !by &gt;ftab2</span>
+<span id="L1123" class="l"> </span>
+<span id="L1124" class="l">filterup</span>
+<span id="L1125" class="l">         !by $0c</span>
+<span id="L1126" class="l">         !by $02</span>
+<span id="L1127" class="l"> </span>
+<span id="L1128" class="l">filterag</span>
+<span id="L1129" class="l">         !by $0a</span>
+<span id="L1130" class="l">         !by $00</span>
+<span id="L1131" class="l"> </span>
+<span id="L1132" class="l">filtermode</span>
+<span id="L1133" class="l">         !by $1f</span>
+<span id="L1134" class="l">         !by $1f</span>
+<span id="L1135" class="l"> </span>
+<span id="L1136" class="l">filterfrq</span>
+<span id="L1137" class="l">         !by $e0</span>
+<span id="L1138" class="l">         !by $8e ;$a8</span>
+<span id="L1139" class="l"> </span>
+<span id="L1140" class="l">;***********************</span>
+<span id="L1141" class="l">;EXTENDEDARPEGGIOpointer</span>
+<span id="L1142" class="l"> </span>
+<span id="L1143" class="l">arplo</span>
+<span id="L1144" class="l">         !by &lt;arp1</span>
+<span id="L1145" class="l">         !by &lt;arp2</span>
+<span id="L1146" class="l">         !by &lt;arp3</span>
+<span id="L1147" class="l">         !by &lt;arp4</span>
+<span id="L1148" class="l">arphi</span>
+<span id="L1149" class="l">         !by &gt;arp1</span>
+<span id="L1150" class="l">         !by &gt;arp2</span>
+<span id="L1151" class="l">         !by &gt;arp3</span>
+<span id="L1152" class="l">         !by &gt;arp4</span>
+<span id="L1153" class="l">arpup</span>
+<span id="L1154" class="l">         !by $03</span>
+<span id="L1155" class="l">         !by $03</span>
+<span id="L1156" class="l">         !by $03</span>
+<span id="L1157" class="l">         !by $03</span>
+<span id="L1158" class="l">arpag</span>
+<span id="L1159" class="l">         !by $00</span>
+<span id="L1160" class="l">         !by $00</span>
+<span id="L1161" class="l">         !by $00</span>
+<span id="L1162" class="l">         !by $00</span>
+<span id="L1163" class="l"> </span>
+<span id="L1164" class="l">;**********************</span>
+<span id="L1165" class="l">;ARPTABS</span>
+<span id="L1166" class="l"> </span>
+<span id="L1167" class="l">arp1</span>
+<span id="L1168" class="l">         !by $00,$03,$07</span>
+<span id="L1169" class="l">arp2</span>
+<span id="L1170" class="l">         !by $00,$03,$08</span>
+<span id="L1171" class="l">arp3</span>
+<span id="L1172" class="l">         !by $00,$04,$07</span>
+<span id="L1173" class="l">arp4</span>
+<span id="L1174" class="l">         !by $00,$04,$08</span>
+<span id="L1175" class="l"> </span>
+<span id="L1176" class="l"> </span>
+<span id="L1177" class="l"> </span>
+<span id="L1178" class="l">;***************************************</span>
+<span id="L1179" class="l">;        LOW &amp; HIGH-FREQUENCES</span>
+<span id="L1180" class="l"> </span>
+<span id="L1181" class="l">low</span>
+<span id="L1182" class="l">         !by $16,$27,$38,$4b,$5f,$73</span>
+<span id="L1183" class="l">         !by $8a,$a1,$ba,$d4,$f0,$0e</span>
+<span id="L1184" class="l">         !by $2d,$4e,$71,$96,$bd,$e7</span>
+<span id="L1185" class="l">         !by $13,$42,$74,$a9,$e0,$1b</span>
+<span id="L1186" class="l">         !by $5a,$9b,$e2,$2c,$7b,$ce</span>
+<span id="L1187" class="l">         !by $27,$85,$e8,$51,$c1,$37</span>
+<span id="L1188" class="l">         !by $b4,$37,$c4,$57,$f5,$9c</span>
+<span id="L1189" class="l">         !by $4e,$09,$d0,$a3,$82,$6e</span>
+<span id="L1190" class="l">         !by $68,$6e,$88,$af,$eb,$39</span>
+<span id="L1191" class="l">         !by $9c,$13,$5e,$46,$04,$dc</span>
+<span id="L1192" class="l">         !by $d0,$dc,$10,$5e,$d6,$72</span>
+<span id="L1193" class="l">         !by $38,$26,$42,$8c,$08,$b8</span>
+<span id="L1194" class="l">         !by $a0,$b8,$20,$bc,$ac,$e4</span>
+<span id="L1195" class="l">         !by $70,$4c,$84,$18,$10,$70</span>
+<span id="L1196" class="l">         !by $40,$70,$40,$78,$58,$c8</span>
+<span id="L1197" class="l">         !by $e0,$98,$08,$30,$20</span>
+<span id="L1198" class="l"> </span>
+<span id="L1199" class="l"> </span>
+<span id="L1200" class="l">high</span>
+<span id="L1201" class="l">         !by 1,1,1,1,1,254</span>
+<span id="L1202" class="l">         !by 1,1,1,1,1,2</span>
+<span id="L1203" class="l">         !by 2,2,2,2,2,2</span>
+<span id="L1204" class="l">         !by 3,3,3,3,3,4</span>
+<span id="L1205" class="l">         !by 4,4,4,5,5,5</span>
+<span id="L1206" class="l">         !by 6,6,6,7,7,8</span>
+<span id="L1207" class="l">         !by 8,9,9,10,10,11</span>
+<span id="L1208" class="l">         !by 12,13,13,14,15,16</span>
+<span id="L1209" class="l">         !by 17,18,19,20,21,23</span>
+<span id="L1210" class="l">         !by 24,26,27,29,31,32</span>
+<span id="L1211" class="l">         !by 34,36,39,41,43,46</span>
+<span id="L1212" class="l">         !by 49,52,55,58,62,65</span>
+<span id="L1213" class="l">         !by 69,73,78,82,87,92</span>
+<span id="L1214" class="l">         !by 98,104,110,117,124,131</span>
+<span id="L1215" class="l">         !by 139,147,156,165,175,185</span>
+<span id="L1216" class="l">         !by 196,208,221,234,248</span>
+<span id="L1217" class="l"> </span>
+<span id="L1218" class="l"> </span>
+<span id="L1219" class="l"> </span>
+<span id="L1220" class="l"> </span>
+<span id="L1221" class="l">;***************************************</span>
+<span id="L1222" class="l">;            VARIABLEN</span>
+<span id="L1223" class="l"> </span>
+<span id="L1224" class="l">voicebyte !by 0,7,14</span>
+<span id="L1225" class="l"> </span>
+<span id="L1226" class="l">filterbyte !by 1,2,4</span>
+<span id="L1227" class="l"> </span>
+<span id="L1228" class="l">filterand</span>
+<span id="L1229" class="l">         !by %11111110</span>
+<span id="L1230" class="l">         !by %11111101</span>
+<span id="L1231" class="l">         !by %11111011</span>
+<span id="L1232" class="l"> </span>
+<span id="L1233" class="l"> </span>
+<span id="L1234" class="l"> </span>
+<span id="L1235" class="l">d400     !by 0,0,0</span>
+<span id="L1236" class="l"> </span>
+<span id="L1237" class="l">d401     !by 0,0,0</span>
+<span id="L1238" class="l"> </span>
+<span id="L1239" class="l">notenow  !by 0,0,0</span>
+<span id="L1240" class="l"> </span>
+<span id="L1241" class="l">voicenow !by 0,0,0</span>
+<span id="L1242" class="l"> </span>
+<span id="L1243" class="l">wibcount !by 0,0,0</span>
+<span id="L1244" class="l"> </span>
+<span id="L1245" class="l">wibpoint !by 0,0,0</span>
+<span id="L1246" class="l"> </span>
+<span id="L1247" class="l">adccount !by 0,0,0</span>
+<span id="L1248" class="l"> </span>
+<span id="L1249" class="l">adcwert  !by 0,0,0</span>
+<span id="L1250" class="l"> </span>
+<span id="L1251" class="l">byte1    !by 0,0,0</span>
+<span id="L1252" class="l"> </span>
+<span id="L1253" class="l">byte2    !by 0,0,0 ;10</span>
+<span id="L1254" class="l"> </span>
+<span id="L1255" class="l">pulslohi !by 0,0,0</span>
+<span id="L1256" class="l"> </span>
+<span id="L1257" class="l">padcwert !by 0,0,0</span>
+<span id="L1258" class="l"> </span>
+<span id="L1259" class="l">pulspoint !by 0,0,0</span>
+<span id="L1260" class="l"> </span>
+<span id="L1261" class="l">pulscount !by 0,0,0</span>
+<span id="L1262" class="l"> </span>
+<span id="L1263" class="l">wavepoint !by 0,0,0</span>
+<span id="L1264" class="l"> </span>
+<span id="L1265" class="l">d404     !by 0,0,0</span>
+<span id="L1266" class="l"> </span>
+<span id="L1267" class="l">waveand  !by 0,0,0</span>
+<span id="L1268" class="l"> </span>
+<span id="L1269" class="l">releasecount !by 0,0,0</span>
+<span id="L1270" class="l"> </span>
+<span id="L1271" class="l"> </span>
+<span id="L1272" class="l">tracklo  !by 0,0,0</span>
+<span id="L1273" class="l"> </span>
+<span id="L1274" class="l">trackhi  !by 0,0,0</span>
+<span id="L1275" class="l"> </span>
+<span id="L1276" class="l">repeat   !by 0,0,0</span>
+<span id="L1277" class="l"> </span>
+<span id="L1278" class="l">aktustep !by 0,0,0</span>
+<span id="L1279" class="l"> </span>
+<span id="L1280" class="l">steppointer !by 0,0,0</span>
+<span id="L1281" class="l"> </span>
+<span id="L1282" class="l"> </span>
+<span id="L1283" class="l">noteadc  !by 0,0,0</span>
+<span id="L1284" class="l"> </span>
+<span id="L1285" class="l">voiceadc !by 0,0,0</span>
+<span id="L1286" class="l"> </span>
+<span id="L1287" class="l"> </span>
+<span id="L1288" class="l">speedcount !by 0,0,0</span>
+<span id="L1289" class="l"> </span>
+<span id="L1290" class="l">speedwert !by 0,0,0</span>
+<span id="L1291" class="l"> </span>
+<span id="L1292" class="l">portacount !by 0,0,0</span>
+<span id="L1293" class="l"> </span>
+<span id="L1294" class="l">exarpeggio !by 0,0,0  ;29</span>
+<span id="L1295" class="l"> </span>
+<span id="L1296" class="l"> </span>
+<span id="L1297" class="l">filtercount !by 0</span>
+<span id="L1298" class="l"> </span>
+<span id="L1299" class="l"> </span>
+<span id="L1300" class="l">beginflag !by 0</span>
+<span id="L1301" class="l"> </span>
+<span id="L1302" class="l">speed1   !by 0</span>
+<span id="L1303" class="l"> </span>
+<span id="L1304" class="l"> </span>
+<span id="L1305" class="l"> </span>
+<span id="L1306" class="l">;*****ENDE DES VARIABLEN-SPEICHERS*****</span>
+<span id="L1307" class="l"> </span>
+<span id="L1308" class="l"> </span>
+<span id="L1309" class="l"> </span>
+<span id="L1310" class="l">;************************</span>
+<span id="L1311" class="l">;     STEP-POINTER</span>
+<span id="L1312" class="l"> </span>
+<span id="L1313" class="l">steps</span>
+<span id="L1314" class="l">         !wo s0,s1,s2,s3,s4</span>
+<span id="L1315" class="l">         !wo s5,s6,s7,s8,s9</span>
+<span id="L1316" class="l">         !wo s10,s11,s12,s13</span>
+<span id="L1317" class="l">         !wo s14,s15,s16,s17</span>
+<span id="L1318" class="l"> </span>
+<span id="L1319" class="l"> </span>
+<span id="L1320" class="l">;************************</span>
+<span id="L1321" class="l">;     TRACK-POINTER</span>
+<span id="L1322" class="l">trackslohi</span>
+<span id="L1323" class="l"> </span>
+<span id="L1324" class="l">         !by &lt;track1,&lt;track2,&lt;track3</span>
+<span id="L1325" class="l">         !by &gt;track1,&gt;track2,&gt;track3</span>
+<span id="L1326" class="l"> </span>
+<span id="L1327" class="l">speedtab</span>
+<span id="L1328" class="l">         !by 2</span>
+<span id="L1329" class="l"> </span>
+<span id="L1330" class="l">;************************</span>
+<span id="L1331" class="l"> </span>
+<span id="L1332" class="l"> </span>
+<span id="L1333" class="l">ftab2</span>
+<span id="L1334" class="l">         !by $7f,$00</span>
+<span id="L1335" class="l">wtab1</span>
+<span id="L1336" class="l">         !by $81,$41,$40,$40,$40,$40</span>
+<span id="L1337" class="l">         !by $40,$40,$40,$40,$40,$08</span>
+<span id="L1338" class="l"> </span>
+<span id="L1339" class="l"> </span>
+<span id="L1340" class="l">tab1</span>
+<span id="L1341" class="l">         !by $26,$0b,$08,$05,$03,$01</span>
+<span id="L1342" class="l">         !by $00,$ff,$fe,$fd,$fc</span>
+<span id="L1343" class="l"> </span>
+<span id="L1344" class="l"> </span>
+<span id="L1345" class="l"> </span>
+<span id="L1346" class="l"> </span>
+<span id="L1347" class="l">tab2</span>
+<span id="L1348" class="l">         !by $20,$07,$05,$28</span>
+<span id="L1349" class="l">         !by $26,$05,$28,$2c</span>
+<span id="L1350" class="l">         !by $05,$28,$2a,$05</span>
+<span id="L1351" class="l">         !by $28,$16,$14</span>
+<span id="L1352" class="l"> </span>
+<span id="L1353" class="l"> </span>
+<span id="L1354" class="l">wtab2</span>
+<span id="L1355" class="l">         !by $81,$11,$40,$80</span>
+<span id="L1356" class="l">         !by $80,$10,$80,$80</span>
+<span id="L1357" class="l">         !by $10,$80,$80,$10</span>
+<span id="L1358" class="l">         !by $80,$80,$80,$00</span>
+<span id="L1359" class="l"> </span>
+<span id="L1360" class="l"> </span>
+<span id="L1361" class="l"> </span>
+<span id="L1362" class="l">tab3</span>
+<span id="L1363" class="l">         !by $25,$10,$0c,$08</span>
+<span id="L1364" class="l">         !by $05,$02,$ff,$fd</span>
+<span id="L1365" class="l">         !by $fb,$fa</span>
+<span id="L1366" class="l"> </span>
+<span id="L1367" class="l"> </span>
+<span id="L1368" class="l">ptab1</span>
+<span id="L1369" class="l">         !by $3a,$20</span>
+<span id="L1370" class="l">         !by $0f,$df</span>
+<span id="L1371" class="l">         !by $07,$20,$07,$df</span>
+<span id="L1372" class="l"> </span>
+<span id="L1373" class="l"> </span>
+<span id="L1374" class="l">wtab4</span>
+<span id="L1375" class="l">         !by $21,$21,$21,$41</span>
+<span id="L1376" class="l"> </span>
+<span id="L1377" class="l"> </span>
+<span id="L1378" class="l">tab4</span>
+<span id="L1379" class="l">         !by $05+%10000000,$00</span>
+<span id="L1380" class="l">tab8</span>
+<span id="L1381" class="l">         !by $07+%10000000,$00</span>
+<span id="L1382" class="l"> </span>
+<span id="L1383" class="l">         !by $01+%01010000</span>
+<span id="L1384" class="l">         !by %11110000</span>
+<span id="L1385" class="l">         !by $03+%00010000</span>
+<span id="L1386" class="l">         !by %11110000</span>
+<span id="L1387" class="l">         !by $03+%01010000</span>
+<span id="L1388" class="l">         !by %11110000</span>
+<span id="L1389" class="l"> </span>
+<span id="L1390" class="l"> </span>
+<span id="L1391" class="l"> </span>
+<span id="L1392" class="l">tab5</span>
+<span id="L1393" class="l">         !by $00+%11000000,$e8</span>
+<span id="L1394" class="l">         !by $06+%10000000,$00</span>
+<span id="L1395" class="l"> </span>
+<span id="L1396" class="l">         !by $01+%01000000</span>
+<span id="L1397" class="l">         !by %11111111</span>
+<span id="L1398" class="l">         !by $03+%00000000</span>
+<span id="L1399" class="l">         !by %11111111</span>
+<span id="L1400" class="l">         !by $03+%01000000</span>
+<span id="L1401" class="l">         !by %11111111</span>
+<span id="L1402" class="l"> </span>
+<span id="L1403" class="l"> </span>
+<span id="L1404" class="l"> </span>
+<span id="L1405" class="l"> </span>
+<span id="L1406" class="l">ptab2</span>
+<span id="L1407" class="l">         !by $02,$01,$01,$80</span>
+<span id="L1408" class="l">         !by $0a,$60,$0a,$9f</span>
+<span id="L1409" class="l"> </span>
+<span id="L1410" class="l"> </span>
+<span id="L1411" class="l"> </span>
+<span id="L1412" class="l">ftab1</span>
+<span id="L1413" class="l">         !by $01,$00,$00,$a0</span>
+<span id="L1414" class="l">         !by $01,$f0,$05,$f8</span>
+<span id="L1415" class="l">         !by $00,$f0,$7f,$00</span>
+<span id="L1416" class="l"> </span>
+<span id="L1417" class="l"> </span>
+<span id="L1418" class="l">wtab3</span>
+<span id="L1419" class="l">         !by $81,$41</span>
+<span id="L1420" class="l"> </span>
+<span id="L1421" class="l"> </span>
+<span id="L1422" class="l">tab6</span>
+<span id="L1423" class="l">         !by $00,$07,$04</span>
+<span id="L1424" class="l"> </span>
+<span id="L1425" class="l">tab7</span>
+<span id="L1426" class="l">         !by $00,$18,$0c</span>
+<span id="L1427" class="l"> </span>
+<span id="L1428" class="l"> </span>
+<span id="L1429" class="l">wtab5</span>
+<span id="L1430" class="l">         !by $21,$21,$41</span>
+<span id="L1431" class="l"> </span>
+<span id="L1432" class="l">;************************</span>
+<span id="L1433" class="l">;        STEPS</span>
+<span id="L1434" class="l"> </span>
+<span id="L1435" class="l">s0</span>
+<span id="L1436" class="l">         !by $df,$ff</span>
+<span id="L1437" class="l"> </span>
+<span id="L1438" class="l"> </span>
+<span id="L1439" class="l">s1       !by $a5,$83,e2,$81,e2,e2</span>
+<span id="L1440" class="l">         !by $a2,sd</span>
+<span id="L1441" class="l">         !by $a5,$83,dh2</span>
+<span id="L1442" class="l">         !by e2,$81,e2,e2,e2</span>
+<span id="L1443" class="l">         !by $ff</span>
+<span id="L1444" class="l"> </span>
+<span id="L1445" class="l">s2</span>
+<span id="L1446" class="l">         !by $8b,$a1,bd,$83,bd</span>
+<span id="L1447" class="l">         !by $8f,bd</span>
+<span id="L1448" class="l">         !by $85,bd,$81,bd,$c3,$83,bd</span>
+<span id="L1449" class="l">         !by $8f,bd</span>
+<span id="L1450" class="l">         !by $ff</span>
+<span id="L1451" class="l"> </span>
+<span id="L1452" class="l"> </span>
+<span id="L1453" class="l"> </span>
+<span id="L1454" class="l">s3</span>
+<span id="L1455" class="l">         !by $81,$a1,bd</span>
+<span id="L1456" class="l">         !by $af,e5,d5,h4,e4,g4</span>
+<span id="L1457" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1458" class="l">         !by $a1,bd,$af</span>
+<span id="L1459" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1460" class="l">         !by h3,d4</span>
+<span id="L1461" class="l">         !by $81,$a1,bd</span>
+<span id="L1462" class="l">         !by $af,e5,d5,$a1,bd</span>
+<span id="L1463" class="l">         !by $af,e4,g4</span>
+<span id="L1464" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1465" class="l">         !by $a1,bd,$af</span>
+<span id="L1466" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1467" class="l">         !by h3,d4</span>
+<span id="L1468" class="l"> </span>
+<span id="L1469" class="l"> </span>
+<span id="L1470" class="l"> </span>
+<span id="L1471" class="l">         !by $81,$a1,bd</span>
+<span id="L1472" class="l">         !by $af,e5,d5,h4,e4,g4</span>
+<span id="L1473" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1474" class="l">         !by $a1,bd,$af</span>
+<span id="L1475" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1476" class="l">         !by h3,d4</span>
+<span id="L1477" class="l">         !by $81,$a1,bd</span>
+<span id="L1478" class="l">         !by $af,e5,d5,$a1,bd</span>
+<span id="L1479" class="l">         !by $af,e4,g4</span>
+<span id="L1480" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1481" class="l">         !by $a1,bd,$af</span>
+<span id="L1482" class="l">         !by e4,d4,$89,h3</span>
+<span id="L1483" class="l">         !by $ff</span>
+<span id="L1484" class="l"> </span>
+<span id="L1485" class="l"> </span>
+<span id="L1486" class="l"> </span>
+<span id="L1487" class="l"> </span>
+<span id="L1488" class="l"> </span>
+<span id="L1489" class="l">s5</span>
+<span id="L1490" class="l">         !by $ab,$61,$81</span>
+<span id="L1491" class="l">         !by e4,e4,e5,e4</span>
+<span id="L1492" class="l">         !by e5,e4,e5,e4</span>
+<span id="L1493" class="l">         !by e5,e5,e4,e5</span>
+<span id="L1494" class="l">         !by e4,e5,e4,e4</span>
+<span id="L1495" class="l"> </span>
+<span id="L1496" class="l">         !by $62,$81</span>
+<span id="L1497" class="l">         !by e5,e5,e4,e5</span>
+<span id="L1498" class="l">         !by e4,e5,e4,e5</span>
+<span id="L1499" class="l">         !by $63,e4,e4,e5,e4</span>
+<span id="L1500" class="l">         !by e5,e4,e5,e5</span>
+<span id="L1501" class="l"> </span>
+<span id="L1502" class="l">         !by $ab,$61,$81</span>
+<span id="L1503" class="l">         !by e4,e4,e5,e4</span>
+<span id="L1504" class="l">         !by e5,e4,e5,e4</span>
+<span id="L1505" class="l">         !by e5,e5,e4,e5</span>
+<span id="L1506" class="l">         !by e4,e5,e4,e4</span>
+<span id="L1507" class="l"> </span>
+<span id="L1508" class="l">         !by $62,$81</span>
+<span id="L1509" class="l">         !by e5,e5,e4,e5</span>
+<span id="L1510" class="l">         !by e4,e5,e4,e5</span>
+<span id="L1511" class="l">         !by $64,e4,e4,e5,e4</span>
+<span id="L1512" class="l">         !by e5,e4,e5,e5</span>
+<span id="L1513" class="l"> </span>
+<span id="L1514" class="l"> </span>
+<span id="L1515" class="l">         !by $60,$ff</span>
+<span id="L1516" class="l"> </span>
+<span id="L1517" class="l"> </span>
+<span id="L1518" class="l">s6</span>
+<span id="L1519" class="l">         !by $a2,sd,$a5,h1,d2,dh2</span>
+<span id="L1520" class="l">         !by $ff</span>
+<span id="L1521" class="l">s7</span>
+<span id="L1522" class="l">         !by $83,$a2,sd,$81,$a5,h1</span>
+<span id="L1523" class="l">         !by dh2</span>
+<span id="L1524" class="l">         !by $ff</span>
+<span id="L1525" class="l"> </span>
+<span id="L1526" class="l">s8</span>
+<span id="L1527" class="l">         !by $a2,sd,$a5,h1</span>
+<span id="L1528" class="l">         !by $a2,sd,sd</span>
+<span id="L1529" class="l">         !by $ff</span>
+<span id="L1530" class="l">s9</span>
+<span id="L1531" class="l">         !by $83,h1,$81,d2,dh2</span>
+<span id="L1532" class="l">         !by $ff</span>
+<span id="L1533" class="l"> </span>
+<span id="L1534" class="l"> </span>
+<span id="L1535" class="l">s10</span>
+<span id="L1536" class="l">         !by $a8,$81</span>
+<span id="L1537" class="l">         !by h4,e5,$87,g5</span>
+<span id="L1538" class="l">         !by $81,fh5,g5,$85,$b0,fh5</span>
+<span id="L1539" class="l">         !by e5,$83,d5</span>
+<span id="L1540" class="l">         !by $a8,$81,h4,e5</span>
+<span id="L1541" class="l">         !by $87,g5,$81</span>
+<span id="L1542" class="l">         !by fh5</span>
+<span id="L1543" class="l">         !by g5,$85,$b0,h5,a5,$83,g5</span>
+<span id="L1544" class="l"> </span>
+<span id="L1545" class="l">         !by $a8,$81,h4,e5,$87,g5</span>
+<span id="L1546" class="l">         !by $81,fh5,g5,$85,$b0,fh5</span>
+<span id="L1547" class="l">         !by e5,$83,d5</span>
+<span id="L1548" class="l">         !by $b0,e5,$db</span>
+<span id="L1549" class="l">         !by $ff</span>
+<span id="L1550" class="l"> </span>
+<span id="L1551" class="l"> </span>
+<span id="L1552" class="l"> </span>
+<span id="L1553" class="l">s11</span>
+<span id="L1554" class="l">         !by $83,$a2,sd,sd,$87,sd</span>
+<span id="L1555" class="l">         !by $83,sd,sd,$87,sd</span>
+<span id="L1556" class="l">         !by $83,sd,sd,sd,sd</span>
+<span id="L1557" class="l">         !by $81,sd,sd,sd,sd,sd,sd,sd</span>
+<span id="L1558" class="l">         !by sd,$ff</span>
+<span id="L1559" class="l"> </span>
+<span id="L1560" class="l"> </span>
+<span id="L1561" class="l">s12</span>
+<span id="L1562" class="l">         !by $a5,$85,e2,$81,e3,$81,$a2</span>
+<span id="L1563" class="l">         !by sd,$a5,$81,e3</span>
+<span id="L1564" class="l">         !by $83,e2,$81,e3,e3,$83,e2</span>
+<span id="L1565" class="l">         !by $81,$a2,sd,$a5</span>
+<span id="L1566" class="l">         !by $81,e3,$81,e3,e3</span>
+<span id="L1567" class="l">         !by $a5,$85,e2,$81,e3,$81,$a2</span>
+<span id="L1568" class="l">         !by sd,$a5,$81,e3</span>
+<span id="L1569" class="l">         !by $83,e2,$81,g2,g2,$83,g2</span>
+<span id="L1570" class="l">         !by $81,$a2,sd,$a5</span>
+<span id="L1571" class="l">         !by $81,a2,$81,a2,a2</span>
+<span id="L1572" class="l">         !by $a5,$85,g2,$81,g3,$a2,sd</span>
+<span id="L1573" class="l">         !by $a5,$81,g2,$83,g3</span>
+<span id="L1574" class="l">         !by $a5,$81,g3,g2,f3,g3</span>
+<span id="L1575" class="l">         !by $81,$a2,sd,$a5,$81</span>
+<span id="L1576" class="l">         !by f3,d3,c3</span>
+<span id="L1577" class="l">         !by $a5,$85,g2,$81,g3,$a2,sd</span>
+<span id="L1578" class="l">         !by $a5,$81,g2,$83,g3</span>
+<span id="L1579" class="l">         !by $a5,$81,g3,g3,g2,f3</span>
+<span id="L1580" class="l">         !by $81,$a2,sd,$a5,$81</span>
+<span id="L1581" class="l">         !by g3,g2,f3</span>
+<span id="L1582" class="l">         !by $a5,$81,d2,d2,d2,d3,$a2</span>
+<span id="L1583" class="l">         !by sd,$a5,d2,d3,d2</span>
+<span id="L1584" class="l">         !by $85,d2,$81,d3,$a2,sd</span>
+<span id="L1585" class="l">         !by $a5,$81,d3,a2,f2</span>
+<span id="L1586" class="l">         !by $a5,$81,d2,$83,d2</span>
+<span id="L1587" class="l">         !by $81,d3,$a2</span>
+<span id="L1588" class="l">         !by sd,$a5,d2,d3,d2</span>
+<span id="L1589" class="l">         !by $85,d3,$81,f3,$a2,sd</span>
+<span id="L1590" class="l">         !by $a5,$81,f3,d3,c3</span>
+<span id="L1591" class="l">         !by $a5,$81,e2,e2,$83,e2</span>
+<span id="L1592" class="l">         !by $a2,$81,sd,$a5,$83,e3</span>
+<span id="L1593" class="l">         !by e3,$81,h2,g2,e2,$a2,sd</span>
+<span id="L1594" class="l">         !by $a5,h2,g2,e3</span>
+<span id="L1595" class="l">         !by $a5,$87,e2,$81,$a2,sd</span>
+<span id="L1596" class="l">         !by $81,$a5,h1,e2,fh2</span>
+<span id="L1597" class="l">         !by $85,e3,$81,e3,$a2,sd,sd</span>
+<span id="L1598" class="l">         !by sd,sd,$ff</span>
+<span id="L1599" class="l"> </span>
+<span id="L1600" class="l">s4</span>
+<span id="L1601" class="l">         !by $a0,$df,$ff</span>
+<span id="L1602" class="l"> </span>
+<span id="L1603" class="l"> </span>
+<span id="L1604" class="l">s13</span>
+<span id="L1605" class="l">         !by $61,$ab</span>
+<span id="L1606" class="l">         !by $81,e5,e5,$83,e5,$85,e5</span>
+<span id="L1607" class="l">         !by $62,$81,e5</span>
+<span id="L1608" class="l">         !by $ff</span>
+<span id="L1609" class="l">s14</span>
+<span id="L1610" class="l">         !by $61,$ab</span>
+<span id="L1611" class="l">         !by $81,g5,g5,$83,g5,$85,g5</span>
+<span id="L1612" class="l">         !by $62,$81,g5</span>
+<span id="L1613" class="l">         !by $ff</span>
+<span id="L1614" class="l"> </span>
+<span id="L1615" class="l">s15</span>
+<span id="L1616" class="l">         !by $61,$ab</span>
+<span id="L1617" class="l">         !by $81,d5,d5,$83,d5,$85,d5</span>
+<span id="L1618" class="l">         !by $62,$81,d5</span>
+<span id="L1619" class="l">         !by $ff</span>
+<span id="L1620" class="l"> </span>
+<span id="L1621" class="l">s16</span>
+<span id="L1622" class="l">         !by $63,$ab</span>
+<span id="L1623" class="l">         !by $81,e5,e5,$83,e5,$85,e5</span>
+<span id="L1624" class="l">         !by $64,$81,e5</span>
+<span id="L1625" class="l">         !by $ff</span>
+<span id="L1626" class="l">s17</span>
+<span id="L1627" class="l">         !by $81,$a1,bd</span>
+<span id="L1628" class="l">         !by $af,e5,d5,h4,e4,g4</span>
+<span id="L1629" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1630" class="l">         !by $a1,bd,$af</span>
+<span id="L1631" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1632" class="l">         !by h3,d4</span>
+<span id="L1633" class="l">         !by $81,$a1,bd</span>
+<span id="L1634" class="l">         !by $af,e5,d5,$a1,bd</span>
+<span id="L1635" class="l">         !by $af,e4,g4</span>
+<span id="L1636" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1637" class="l">         !by $a1,bd,$af</span>
+<span id="L1638" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1639" class="l">         !by h3,d4</span>
+<span id="L1640" class="l">         !by $81,$a1,bd</span>
+<span id="L1641" class="l">         !by $af,g5,f5,d5,g4,ah4</span>
+<span id="L1642" class="l">         !by $a1,bd,$af,f5</span>
+<span id="L1643" class="l">         !by $a1,bd,$af</span>
+<span id="L1644" class="l">         !by g4,f4,d4,g3,ah3</span>
+<span id="L1645" class="l">         !by d4,g4</span>
+<span id="L1646" class="l">         !by $81,$a1,bd</span>
+<span id="L1647" class="l">         !by $af,g5,f5,$a1,bd</span>
+<span id="L1648" class="l">         !by $af,g4,ah4</span>
+<span id="L1649" class="l">         !by $a1,bd,$af,g5</span>
+<span id="L1650" class="l">         !by $a1,bd,$af</span>
+<span id="L1651" class="l">         !by g4,f4,d4,g3,ah3</span>
+<span id="L1652" class="l">         !by d4,f4</span>
+<span id="L1653" class="l">         !by $81,$a1,bd</span>
+<span id="L1654" class="l">         !by $af,d5,c5,a4,d4,f4</span>
+<span id="L1655" class="l">         !by $a1,bd,$af,c5</span>
+<span id="L1656" class="l">         !by $a1,bd,$af</span>
+<span id="L1657" class="l">         !by d4,c4,a3,d3,f3</span>
+<span id="L1658" class="l">         !by a3,c4</span>
+<span id="L1659" class="l">         !by $81,$a1,bd</span>
+<span id="L1660" class="l">         !by $af,d5,c5,$a1,bd</span>
+<span id="L1661" class="l">         !by $af,d4,f4</span>
+<span id="L1662" class="l">         !by $a1,bd,$af,c5</span>
+<span id="L1663" class="l">         !by $a1,bd,$af</span>
+<span id="L1664" class="l">         !by d4,c4,a3,d3,f3</span>
+<span id="L1665" class="l">         !by a3,c4</span>
+<span id="L1666" class="l">         !by $81,$a1,bd</span>
+<span id="L1667" class="l">         !by $af,e5,d5,h4,e4,g4</span>
+<span id="L1668" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1669" class="l">         !by $a1,bd,$af</span>
+<span id="L1670" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1671" class="l">         !by h3,d4</span>
+<span id="L1672" class="l">         !by $81,$a1,bd</span>
+<span id="L1673" class="l">         !by $af,e5,d5,$a1,bd</span>
+<span id="L1674" class="l">         !by $af,e4,g4</span>
+<span id="L1675" class="l">         !by $a1,bd,$af,d5</span>
+<span id="L1676" class="l">         !by $a1,bd,$af</span>
+<span id="L1677" class="l">         !by e4,d4,h3,e3,g3</span>
+<span id="L1678" class="l">         !by h3,d4</span>
+<span id="L1679" class="l"> </span>
+<span id="L1680" class="l">         !by $ff</span>
+<span id="L1681" class="l"> </span>
+<span id="L1682" class="l"> </span>
+<span id="L1683" class="l">track1</span>
+<span id="L1684" class="l">         !by $bf+2,2</span>
+<span id="L1685" class="l"> </span>
+<span id="L1686" class="l">         !by 3,3,3,3,3,3,3,11</span>
+<span id="L1687" class="l"> </span>
+<span id="L1688" class="l">         !by 17,17</span>
+<span id="L1689" class="l"> </span>
+<span id="L1690" class="l"> </span>
+<span id="L1691" class="l">         !by 0</span>
+<span id="L1692" class="l">         !by $ff</span>
+<span id="L1693" class="l">         !wo track1</span>
+<span id="L1694" class="l"> </span>
+<span id="L1695" class="l">track2</span>
+<span id="L1696" class="l">         !by 1,6,1,8</span>
+<span id="L1697" class="l">         !by 1,6,1,7</span>
+<span id="L1698" class="l">         !by 1,6,1,8</span>
+<span id="L1699" class="l">         !by 1,6,1,9</span>
+<span id="L1700" class="l"> </span>
+<span id="L1701" class="l">         !by 1,6,1,7</span>
+<span id="L1702" class="l">         !by 1,6,1,9</span>
+<span id="L1703" class="l">         !by 1,6,1,8</span>
+<span id="L1704" class="l"> </span>
+<span id="L1705" class="l">         !by 1,6,1,7</span>
+<span id="L1706" class="l">         !by 1,6,1,8</span>
+<span id="L1707" class="l">         !by 1,6,1,9</span>
+<span id="L1708" class="l">         !by 1,6,1,7</span>
+<span id="L1709" class="l"> </span>
+<span id="L1710" class="l">         !by 1,6,1,9</span>
+<span id="L1711" class="l">         !by 1,6,1,8</span>
+<span id="L1712" class="l">         !by 1,6,1,7</span>
+<span id="L1713" class="l">         !by 1,6,1,8</span>
+<span id="L1714" class="l">         !by 1,6,1,9</span>
+<span id="L1715" class="l"> </span>
+<span id="L1716" class="l">         !by 4,4</span>
+<span id="L1717" class="l">         !by 12,12</span>
+<span id="L1718" class="l">         ;!by 0</span>
+<span id="L1719" class="l"> </span>
+<span id="L1720" class="l"> </span>
+<span id="L1721" class="l">         !by $ff</span>
+<span id="L1722" class="l">         !wo track2</span>
+<span id="L1723" class="l"> </span>
+<span id="L1724" class="l"> </span>
+<span id="L1725" class="l">track3</span>
+<span id="L1726" class="l">         !by $bf+8,0</span>
+<span id="L1727" class="l">         !by 10,10</span>
+<span id="L1728" class="l"> </span>
+<span id="L1729" class="l">         !by 5,5,5,5</span>
+<span id="L1730" class="l"> </span>
+<span id="L1731" class="l">         !by 0,0</span>
+<span id="L1732" class="l">         !by $c3,13,$c3,14,$c3,15</span>
+<span id="L1733" class="l">         !by $c3,16</span>
+<span id="L1734" class="l">         !by $c3,13,$c3,14,$c3,15</span>
+<span id="L1735" class="l">         !by $c3,16</span>
+<span id="L1736" class="l"> </span>
+<span id="L1737" class="l">         !by $ff</span>
+<span id="L1738" class="l">         !wo track3</span>
+<span id="L1739" class="l"> </span>
+<span id="L1740" class="l">}</span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/github-realdmx/Bjerregaard_J_Myth.asm.html">← Bjerregaard_J_Myth.asm</a> · <a href="../../raw/github-realdmx/Deenen_Charles_SFX_Player.asm.html">Deenen_Charles_SFX_Player.asm →</a></div></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-realdmx-audial-arts-fame-players.html">realdmx: two scene players with their own sources — Francois Prijt&#x27;s Audial Arts &#x27;zong player&#x27; v1/v2 (1991) and Adam Bulka&#x27;s FAME &#x27;Sound Routine f 4.1.0&#x27; (1988)</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, TraxWeekly articles…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:technique</code> <code>type:concept</code> <code>type:entity</code> <code>type:summary</code> <code>type:tw</code> · <code>kind:tool</code> <code>kind:person</code> … · <code>platform:c64</code> <code>platform:gameboy</code> <code>platform:pc-tracker</code> · <code>tag:sid</code> · hex and tracker notation search as typed (<code>$0E</code>, <code>Gxx</code>, <code>C-4</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-08-30 · 565 pages · 11352 links · 2 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

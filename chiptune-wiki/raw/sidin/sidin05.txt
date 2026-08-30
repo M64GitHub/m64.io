@@ -1,0 +1,1640 @@
+===== page 1 =====
+“ Cristina Ricci”
+Vice snapshot with CCS64 palette
+Made with the GIMP from a CR photo
+and converted to C64 320x200
+HiRes Mode Bitmap
+by Stefano Tognon
+in 2003
+“ Think to something [Engines]”
+...
+Free Software Group
+1
+===== page 2 =====
+SIDin 5
+version 1.00
+11 January 2004
+2
+===== page 3 =====
+SIDin Contents
+General Index
+Editorials................................................................................................................................................. 4
+News........................................................................................................................................................ 5
+Acid64 Player 1.0................................................................................................................................5
+amaroK 0.5.1.......................................................................................................................................6
+composers.c64.org updated................................................................................................................ 7
+SID2TIA..............................................................................................................................................7
+SID in-depth information site.............................................................................................................7
+Goattraker 1.4c/d/e/f...........................................................................................................................7
+Sidplay2/w..........................................................................................................................................8
+SidAsm 1.0..........................................................................................................................................8
+HVSC 5.4............................................................................................................................................8
+Hardsid PCI........................................................................................................................................ 8
+JC64Dis beta 1....................................................................................................................................9
+SIDPlayer 4.3......................................................................................................................................9
+Resid 0.15........................................................................................................................................... 9
+The SID COMPO III...........................................................................................................................9
+HVSC 5.5..........................................................................................................................................11
+HVSID player plugin v3...................................................................................................................12
+NinjaTracker v1.05........................................................................................................................... 12
+Chris Huelsbeck Interview!...................................................................................................................13
+Music Engines Pattern Searching (part 2).............................................................................................15
+Database format................................................................................................................................15
+Memory locations.............................................................................................................................16
+ID offset............................................................................................................................................ 17
+Messages...........................................................................................................................................18
+Order/Sector......................................................................................................................................18
+Examples...........................................................................................................................................20
+Conclusion........................................................................................................................................28
+High Voltage Music Engines Collection...............................................................................................29
+HVMEC Structure............................................................................................................................ 29
+Editor vs Tracker.............................................................................................................................. 30
+Engines............................................................................................................................................. 30
+Surfing the HVMEC.........................................................................................................................31
+Players...............................................................................................................................................32
+Location............................................................................................................................................33
+Next versions.................................................................................................................................... 33
+Conclusion........................................................................................................................................33
+3
+===== page 4 =====
+Editorials
+Stefano Tognon <ice00@libero.it >
+Hi, again.
+This number is completely devoted to music engines.
+As you can see, the second part of music engines searching is ready. We can so look at a big
+database of engines and we learn how to add new engines signature to it.
+The second article is related to a new project I started: High Voltage Music Engines Collection.
+This project collects and give credits to (all) the available C64 tools for made music.
+The other new thing to say is that I had take the challenge of ripping Marble Madness. It' s now
+only question of time, very long too, but I want to made the rip!
+The used engine is a big waste of code, but I see some music patterns into it that can give me the
+right street for making the rip.
+Expect an article about it in a next issue.
+Finally, I' m planning to do another reverse engineering work about a music driver. However this is
+only in an alpha stage, but it is a good starting.
+I' m sorry for releasing this number after about a month of planned date, but there was some trouble:
+•No Christmas holiday this year :(
+•I have decided to unify my actual 2 most used Linux distro (one for networking and one for developing)
+in a totally new one, so this required many times for recreating my custom options that
+comes out by many years of use.
+•Lot of activity in the engines like you can read in this number that consume many time
+However, there is a good things that compensate for this: you can read an interview with Chris
+Huelsbeck that it is just arrived, so the planned interview for this number will skip to the next.
+Bye
+S.T.
+4
+===== page 5 =====
+News
+Some various news of players, programs , competition and hardware:
+• Acid64 Player 1.0
+• amaroK 0.5.1
+• composers.c64.org updated
+• SID2TIA
+• SID in­ depth information site
+• Goattraker 1.4C/D/F
+• Sidplay2/w
+• SidAsm 1.0
+• HVSC 5.4
+• Hardsid PCI
+• JC64Dis beta 1
+• SIDPlayer 4.3
+• Resid 0.15
+• The SID COMPO III
+• HVSC 5.5
+• HVSID player plugin v3
+• NinjaTracker v1.05
+Acid64 Player 1.0
+ACID 64 player is a Commodore 64 music player
+for Windows that will play SID tunes on a HardSID
+card or Catweasel MK3 PCI/Flipper.
+It emulates the MOS 6510 micro processor to run
+the code of a SID tune and controls the cards for
+playing the music on a real 6581 or 8580 SID chip.
+Features:
+• Supports all HardSID cards
+• Emulation of all 6510 instructions including all undocumented opcodes
+• Exact timing for normal speed and multi speed songs
+• Note press indicator bar for each voice
+• Up to 20 times fast forward
+• Mute & solo voices and change of master volume
+• Toggle filter on/off
+• Switch easy to different HardSID device
+• Drag & drop support for multiple files
+• Minimize to system tray for background playing
+• Go back and forward in the history of played songs
+Released on 30 July 2003 by Wilfred Bos, you can download the player from http://www.acid64.
+com
+5
+===== page 6 =====
+amaroK 0.5.1
+amaroK is a new media player for KDE.
+There are many media players around these days, true.
+What' s missing from most players is a user interface, that doesn'
+t get in the way of the user.
+How many buttons do you have to press for simply adding some new tracks to the playlist?
+amaroK tries to be a little different, providing a simple drag and drop interface, that really makes
+playlist handling easy.
+• fresh playlist concept, very fast to use, with drag and drop
+• plays all formats supported by aRts, including mp3, ogg, audio CDs, streams
+• audio effects, like reverb and compressor
+• compatible with the .m3u and .pls formats for playlists
+• nice GUI, integrates into the KDE look, but with a unique touch
+The last stable version of the player is 0.5.1, but the new 0.6.0 is being developed.
+The good thing about this project is that there is a plugin for reproducing sid files.
+The Mark Kretschmann' s project is available at: http://amarok.sourceforge.net/
+6
+===== page 7 =====
+composers.c64.org updated
+The composers page is now converted to a
+database, with a totally new layout. It was added 51
+new composers, and better photos for 28 composers,
+for a total of 328 composers.
+The new system is very fast in comparison to the previous and more better organized.
+SID2TIA
+Maybe all Atari users around had dreams about listen some Sid tunes into their computer.
+Now, Cybergoth have wrote an utility that convert sid music into the Atari 2600 VCS' s chip, with
+very good result.
+The utility use the TinySID engine and after every player call, the sid registers contents are
+matched as better as possible with TIA registers.
+Look at this thread http://www.atariage.com/forums/viewtopic.php?t=33036 or go to see
+http://home.arcor.de/cybergoth/
+SID in-depth information site
+There is a very interesting site about Sid that
+you may visit: http://www.kubarth.de/sid
+You can found technical articles, sid history,
+die photos, link to hardware devices that use
+the sid chip and lot of software players.
+The project need your help in founding new
+resources about the sid, so don' t hesitate to
+take a look.
+Goattraker 1.4c/d/e/f
+Released on 20 September 2003 the version 1.4c and just one month later the version 1.4d of the
+Cadaver' s C64 tracker that run into a PC computer.
+Goattracker (both mono and stereo versions) was updated for better hardrestart handling
+(wavetable also executed on hardrestart frame) and possibility for manual fadein/out of music.
+The 1.4d version contains bug fixes for $D418 and arpeggio execution.
+Version 1.4e contains the resid­ 015 engine and was released in December and version 1.4f released
+in January contains Funktempo capability.
+Download the mono version at http://covertbitops.c64.org/tools/goattrk.zip , and the stereo version
+at http://covertbitops.c64.org/tools/gstereo.zip
+7
+===== page 8 =====
+Sidplay2/w
+On 23 September 2003, the Windows sid player Sidplay2/w was released.
+In this version you can found:
+• It is now possible to change subtune in the playlist edit for tunes with over 6 subtunes
+• The playlist view keeps selection after the user chooses a new tune to play
+• File|Open and File|Save remembers the file type from last run
+• Lots of libsidplay2 emulation improvements. The major ones are:
++ VIC emulation improved, adding cycle­ stealing
++ Support for BASIC tunes
++ Real C64 environment improved
+Download the player from: http://www.student.nada.kth.se/~d93­ alo/c64/spw/
+SidAsm 1.0
+On 30th September 2003 Gufino released SidDasm V1.0. The program produces disassembler
+output of SID music files and works good for about 99% of sid files. It is able to separate data from
+code, so try it. Both DOS version & Linux version are available for download:
+http://www.student.oulu.fi/~loorni/covert/tools/siddasm1.zip
+http://www.student.oulu.fi/~loorni/covert/tools/siddasm1.tar.gz
+HVSC 5.4
+On 9 October 2003, the High Voltage SID Collection Update #36 was released.
+After this update, the collection should contain 21,272 SID files!
+This update features (all approximates):
+• 566 new SIDs
+• 265 fixed/better rips
+• 52 fixes of PlaySID/Sidplay1 specific SIDs
+• 9 repeats/bad rips eliminated
+• 283 SID credit fixes
+Download the update and the tools from http://www.hvsc.c64.org
+Hardsid PCI
+On 15/10/2003 the HardSid single­ chip card was released at
+http://www.hardsid.com
+You can read a complete review at
+http://www.cbmzone.com/cgi­ bin/index.pl?action=viewnews&id=21
+8
+===== page 9 =====
+JC64Dis beta 1
+Released the new version of the Java disassembler JC64Dis.
+JC64Dis is able to disassembly both prg and sid files, giving comment to know memory location
+used by the programs. Also, it is able to give the instructions flow of sidplayer MUS file.
+From this version, it uses a memory state file produced by patched SIDLD (Sid length detector),
+so sid file can be disassembled knowing the memory location used for code and for data.
+Download from http:\\www.sf.net\projects\jc64
+SIDPlayer 4.3
+Released in early 2003 the new version of Christian Bauer sid player at http://www.unimainz.de/~bauec002/SPMain.html
+This player use SDL library and is so easy to compile in every operating system. The last version
+had:
+• Added support for Catweasel SID hardware in SDL version (use option "
+­­cwsid on"), CIA timer
+speed control now actually works
+The program is affected by a bug that prevent setting IRQ during the play section (some Master composer
+tunes did not sound correctly).
+In the CVS repository there is already a fixed version.
+Resid 0.15
+The last know bug of the Resid engine is now removed. This bug affects the Delay ADSR bug duration.
+You can download the stuff here:
+ftp://ftp.funet.fi/pub/cbm/crossplatform/emulators/resid/resid­ 0.15.tar.gz
+According to Dag Lem, try to listen to these tunes with the new engine that where for sure affected
+by the previous engine bug:
+/VARIOUS/A­ F/Behdad
+_
+Arman/Revenge.sid
+/VARIOUS/M­ R/Mixer/SurSumTheme.sid
+The SID COMPO III
+Even this year at http://www.c64.sk there was the Sid Compo (from 8 october to 8
+november).
+This year there was anonymous submission and composers jury voting system.
+9
+===== page 10 =====
+You can download the 43 tunes (in PSID or C64 format), read the comments, and the final classifications
+at: http://www.c64.sk/index.php?content=article.php&articleid=80&id=1675
+Here I just report the two classifications:
+Yury Rank:
+(191 pts) "Floatee" 3:30 (8580) by Kamil Wolnikowski (Jammer) [2003 Multistyle Labs/Samar]
+(181 pts) "Shining Hour" 4:37 (8580) by Stellan Andersson (Dane) [2003 Crest]
+(158 pts) "Cybersoap" 4:58 (6581) by Timo Taipalus (Abaddon) [2003 Damage/FairLight]
+(151 pts) "One Hit Wonder" 2:35 (8580) by Alexander Rotzsch (Fanta) [2003 Fanta]
+(145 pts) "Downtown Connection" 3:22 (8580) by Michal Hoffmann (Smalltown Boy) [2003 MultiStyle Labs]
+(131 pts) "Illumination" 3:34 (6581) by Lasse Öörni (Cadaver) [2003 Covert Bitops]
+(120 pts) "Downstairs Funk" 2:25 (6581) by Glenn Rune Gallefoss [2003 SHAPE/Blues Muz']
+(96 pts) "MUmaid" 4:52 (8580) by Vincent Merken (Vip) [2003 ViruZ]
+(87 pts) "Celebrating Samhain" 4:06 (6581) by Rafal Kazimierski (Asterion) [2003 Samar]
+(80 pts) "Kingston's Sick" 2:50 (8580) by Ronny Engmann (dalezy) [2003 Creators]
+(79 pts) "Short Metamorphosis" 2:50 (8580) by Stefan Uram (Orcan) [2003 Orcan]
+(73 pts) "Dropping the Dishes" 3:05 (8580) by Gerard Hultink [2003 Gerard Hultink]
+(68 pts) "My Output Is Danceable" 4:05 (8580) by Mark Waldaukat (Heinmukk) [2003 Salva Mea]
+(66 pts) "O Boy" 2:24 (6581) by Yodelking & UL-Tomten [2003 Defiers]
+(53 pts) "The-End" 3:30 (6581) by Kent Hofling (Kenho) [2003 4ba]
+(51 pts) "Nekkid On All Fours" 2:44 (6581) by Marc van den Bovenkamp (No-XS) [2003 Toondichters]
+(51 pts) "Forgotten 80's" 2:23 (8580) by Marcin Romanowski (Sidder) [2003 MultiStyle Labs/Role]
+(51 pts) "Gradius Supernova '86" 4:42 (8580) by Luca Carrafiello (Luca) [2003 FIRE]
+(51 pts) "Monolith" 6:35 (8580) by Mark Thomas Ross (MTR1975) [2003 FunkScientist Productions]
+(50 pts) "Nipponesque xperience" 2:43 (6581) by Daniel M. Gartke (Turtle) [2003 The Demented]
+(41 pts) "The Final Dance" 3:35 (8580) by Arman Behdad (Intensity) [2003 Onslaught/Cosine]
+(32 pts) "Intelligent
+Technology" 3:46 (8580) by Pontus Olsson (pOnToNiuS) [2003 pOnToNiuS]
+_
+(30 pts) "Purity" 2:24 (6581) by Aleksi Eeben [2003 CNCD]
+(29 pts) "Pure" 2:01 (6581) by Bekir Ogurlu (Slowhand) [2003 Independent]
+(27 pts) "Le Tartar and Pretzelism" 6:40 (8580) by Stephan Drost (Pater Pi) [2003 Church 64]
+(23 pts) "Equation of Time" 2:37 (6581) by Kursad Karamahmutoglu(Hydrogen) [2003 Bronx]
+(22 pts) "DataDataDataData" 3:55 (6581) NTSC by Akira K [2003 Kiken Corporation]
+(19 pts) "Divine Unconcern" 4:43 (6581) by Mariusz Cichy (Borgon) [2003 Borgon]
+(19 pts) "Lost Memories " 3:04 (6581) by Manuel Müller (CJ Rayne) [2003 X-Stayle]
+(18 pts) "Chantelle" 4:06 (6581) by Andy Vaisey [2003 FunkScientist Productions]
+(18 pts) "Dark Eagle" 3:10 (8580) by Trond Jensen (TDS) [2003 Creators]
+(15 pts) "Jazzy" 1:55 (6581) by Carl Gustaf Liebe (Yaemon) [2003 Depredators Music Division]
+(11 pts) "Eire Outcast" 2:05 (6581) by Anders Carlsson (Zapac) [2003 Zapac]
+(8 pts) "Archnial" / 4:55 (6581) by Jaymz Julian (A Life in Hell) [2003 Warriors of the Wasteland]
+(8 pts) "Sidcompo 3" 2:02 (6581) by maktone & Jonathan (natan1) [2003 FairLight]
+(6 pts) "Choppy" 2:01 (6581) by Oliver VieBrooks (Six) [2003 Dark Lords of Chaos]
+(6 pts) "Compus
+Mentus" 3:45 (8580) by Andrew Fisher (Merman) [2003 People of Liberty/Role]
+_
+(4 pts) "Tauh" 2:19 (6581) by Pietari Toivonen (hukka) [2003 hukka]
+(4 pts) "Trusted People" 5:37 (8580) by Richard Bayliss [2003 Civitas]
+(0 pts) "Lichtblick" 4:15 (8580) by Robert Dörfler (Lordnikon) [2003 Civitas/Covenant/ULN/TLN]
+(0 pts) "Strong Headache" 3:10 (8580) by Rafal Szyja (Raf) [2003 Samar/Beats Factory]
+(0 pts) "Welcome Home" 2:40 (8580) by Pawel Ruczko (Murdock) [2003 Tropyx]
+(000 pts) "Haunted" 6:34 (6581) (The juror haven't submited her rank) by Vanja Utne (Mermaid)
+[2003 Creators]
+Audience Rank:
+(413 pts) "Illumination" 3:34 (6581) by Lasse Öörni (Cadaver) [2003 Covert Bitops]
+(409 pts) "Downtown Connection" 3:22 (8580) by Michal Hoffmann (Smalltown Boy) [2003 MultiStyle Labs]
+(407 pts) "Shining Hour" 4:37 (8580) by Stellan Andersson (Dane) [2003 Crest]
+(405 pts) "Cybersoap" 4:58 (6581) by Timo Taipalus (Abaddon) [2003 Damage/FairLight]
+(405 pts) "Floatee" 3:30 (8580) by Kamil Wolnikowski (Jammer) [2003 Multistyle Labs/Samar]
+(395 pts) "One Hit Wonder" 2:35 (8580) by Alexander Rotzsch (Fanta) [2003 Fanta]
+(389 pts) "O Boy" 2:24 (6581) by Yodelking & UL-Tomten [2003 Defiers]
+(373 pts) "Downstairs Funk" 2:25 (6581) by Glenn Rune Gallefoss [2003 SHAPE/Blues Muz']
+(371 pts) "Kingston's Sick" 2:50 (8580) by Ronny Engmann (dalezy) [2003 Creators]
+(368 pts) "Short Metamorphosis" 2:50 (8580) by Stefan Uram (Orcan) [2003 Orcan]
+(363 pts) "Nekkid On All Fours" 2:44 (6581) by Marc van den Bovenkamp (No-XS) [2003 Toondichters]
+(356 pts) "Forgotten 80's" 2:23 (8580) by Marcin Romanowski (Sidder) [2003 MultiStyle Labs/Role]
+(353 pts) "Celebrating Samhain" 4:06 (6581) by Rafal Kazimierski (Asterion) [2003 Samar]
+(352 pts) "Dropping the Dishes" 3:05 (8580) by Gerard Hultink [2003 Gerard Hultink]
+(349 pts) "Nipponesque xperience" 2:43 (6581) by Daniel M. Gartke (Turtle) [2003 The Demented]
+(338 pts) "MUmaid" 4:52 (8580) by Vincent Merken (Vip) [2003 ViruZ]
+(330 pts) "My Output Is Danceable" 4:05 (8580) by Mark Waldaukat (Heinmukk) [2003 Salva Mea]
+(322 pts) "Equation of Time" 2:37 (6581) by Kursad Karamahmutoglu(Hydrogen) [2003 Bronx]
+(321 pts) "Lost Memories " 3:04 (6581) by Manuel Müller (CJ Rayne) [2003 X-Stayle]
+(321 pts) "Pure" 2:01 (6581) by Bekir Ogurlu (Slowhand) [2003 Independent]
+(321 pts) "Monolith" 6:35 (8580) by Mark Thomas Ross (MTR1975) [2003 FunkScientist Productions]
+(311 pts) "Tauh" 2:19 (6581) by Pietari Toivonen (hukka) [2003 hukka]
+(310 pts) "The-End" 3:30 (6581) by Kent Hofling (Kenho) [2003 4ba]
+(307 pts) "Jazzy" 1:55 (6581) by Carl Gustaf Liebe (Yaemon) [2003 Depredators Music Division]
+(306 pts) "Gradius Supernova '86" 4:42 (8580) by Luca Carrafiello (Luca) [ 2003 FIRE]
+(301 pts) "The Final Dance" 3:35 (8580) by Arman Behdad (Intensity) [2003 Onslaught/Cosine]
+(299 pts) "Sidcompo 3" 2:02 (6581) by maktone & Jonathan (natan1) [2003 FairLight]
+(299 pts) "Trusted People" 5:37 (8580) by Richard Bayliss [2003 Civitas]
+(294 pts) "Le Tartar and Pretzelism" 6:40 (8580) by Stephan Drost (Pater Pi) [2003 Church 64]
+(289 pts) "Intelligent
+Technology" 3:46 (8580) by Pontus Olsson (pOnToNiuS) [2003 pOnToNiuS]
+_
+(277 pts) "Haunted" 6:34 (6581) by Vanja Utne (Mermaid) [2003 Creators]
+10
+===== page 11 =====
+(274 pts) "Archnial" / 4:55 (6581) by Jaymz Julian (A Life in Hell) [2003 Warriors of the Wasteland]
+(272 pts) "Dark Eagle" 3:10 (8580) by Trond Jensen (TDS) [2003 Creators]
+(265 pts) "Purity" 2:24 (6581) by Aleksi Eeben [2003 CNCD]
+(257 pts) "Eire Outcast" 2:05 (6581) by Anders Carlsson (Zapac) [2003 Zapac]
+(244 pts) "Choppy" 2:01 (6581) by Oliver VieBrooks (Six) [2003 Dark Lords of Chaos]
+(243 pts) "Lichtblick" 4:15 (8580) by Robert Dörfler (Lordnikon) [2003 Civitas/Covenant/ULN/TLN]
+(242 pts) "Chantelle" 4:06 (6581) by Andy Vaisey [2003 FunkScientist Productions]
+(239 pts) "Compus
+Mentus" 3:45 (8580) by Andrew Fisher (Merman) [2003 People of Liberty/Role]
+_
+(237 pts) "Welcome Home" 2:40 (8580) by Pawel Ruczko (Murdock) [2003 Tropy]
+(232 pts) "DataDataDataData" 3:55 (6581) NTSC by Akira K [2003 Kiken Corporation]
+(229 pts) "Divine Unconcern" 4:43 (6581) by Mariusz Cichy (Borgon) [2003 Borgon]
+(152 pts) "Strong Headache" 3:10 (8580) by Rafal Szyja (Raf) [2003 Samar/Beats Factory]
+HVSC 5.5
+Released on 19/12/2003 the Christmas update 37 of HVSC with lot of tunes and some stuff from
+old composers.
+After this update, the collection should contain 23,453 SID files!
+This update features (all approximates):
+1977 new SIDs
+97 fixed/better rips
+219 fixes of PlaySID/Sidplay1 specific SIDs
+7 repeats/bad rips eliminated
+197 SID credit fixes
+86 tunes moved out of /DEMOS to their composers' directories
+4 tunes from /DEMOS/UNKNOWN identified
+15 tunes moved out of /GAMES to their composers' directories
+It' s Christmas time again, and like every year we have prepared something very special for you
+all:
+Not only do we bring you 2 2 8 0 SID tunes (of which almost 2 0 0 0 are new ones), but we also
+decided that it' s not much use having hundreds of digi rips lying around in our Unreleased archive.
+So for all the people who are listening to SID music on a real C64 this might be good news:
+We added all 219 RSID fixes of PSID specific rips in HVSC! Most, if not all of them are digi tunes,
+keep in mind that they can only be listened to on a real C64 or Sidplay2.
+Also be sure to check out Martin Galway' s directory after the update:
+Thanks to Chris Abbott' s great connection to Martin Galway and Alistair "Boz" Bowness ripping
+skills we can finally present you the probably most sought after SID tune on this planet:
+The long lost Street Hawk is here in two fantastic versions, one prototype with less effects and the
+final version with bells and whistles that ought to be used in the game. And of course: Kudos to Martin
+Galway, who kindly provided his disks!
+What more is there to discover in this update?
+• A lot of new tunes from classic composers, such as 20CC, Neil Baldwin, Wally
+Beben, Matthew Cannon, Mark Cooksey, Ian Crabtree, Deek, Danko, Geoff Follin,
+Matt Gray, Stefan Hartwig, Ryo Kawasaki, Marcel Donné, Prosonix, Sonic
+Graffiti, Jeroen Tel, Michael Winterberg and many more.
+• But also some of the current scene composers have unveiled their old tunes to
+us. Just to mention a few: Check out 4-Mat, Agemixer, Abaddon, Amorphis,
+Arman Behdad, Blues Muz'
+, Britelite, Cyberbrain, Daf, Decoy, Ed, Factor6,
+Fanta, Goto80, Jammer, Klax, maktone, Megastyle, Merman, Mitch&Dane, Moog,
+Pater Pi, Rambones, Replay, Sad, Shapie, Skysurfer, SoNiC, Taxim,
+Welle:Erdball, Wizard and the fabulous Nylon.
+• This update contains the compotunes from SID Compo 3, bcnparty 2003,
+Breakpoint 2003, Bronx $7d3, Primary Star 2003, Assembly 2003, Scenecon '03
+and TUM'02 (and a couple more compotunes we found along the way).
+11
+===== page 12 =====
+• Furthermore, we've now added the remainder of the tunes that have appeared in
+the issues of the C64 disk magazine "Domination"
+.
+• To make HVSC friendlier to browse we added the following subdirectories:
+/20CC:
+======
+/Paul
+/van
+Falco
+_
+Santen
+Edwin
+_
+_
+/FAME:
+======
+/Hendriks
+Michael
+_
+/Knipping_
+Holger
+/Rockin
+Limited:
+_
+================
+/Schaefers
+Joerg
+_
+/SoedeSoft:
+===========
+/Soede
+Jeroen
+_
+/Soede
+Michiel
+_
+/VARIOUS/M-R/Mitch
+and
+Dane:
+_
+_
+============================
+/Dane
+/Mitch
+It looks nice and clean now and allows everybody to keep track of their favourite composers easier.
+/VARIOUS/M-R/Megastyle/
+=======================
+The Megastyle musicians Rage, Crockett, Scroll, Lizard and Drumtex wished to be hosted under
+one roof, so we moved /VARIOUS/G­ L/Lizard/ and /VARIOUS/M­ R/Rage/ to the Megastyle directory.
+HVSID player plugin v3
+After more than 1.5 year passed, and the SID player plugin improved once again ;)
+New features:
+• RSID support
+•
+' Correct' author name display (iso­ 8859­ 1 ­> petscii)
+• bugfixed keyboard handling
+• 51 bytes shorter ;)
+Get it from:
+http://singularcrew.hu/ide64warez/
+ftp://c64.rulez.org/pub/c64/IDE64/Tools/Plugins/HVSID
+_player
+_
+v3b.zip
+NinjaTracker v1.05
+Released on 6 January 2004 the new version of the C64 music editor of Cadaver that now include
+a slide duration calculator.
+Download the player here: http://covertbitops.c64.org/tools/ninjatrk.zip
+12
+===== page 13 =====
+Chris Huelsbeck Interview!
+by Stefano Tognon
+This time we can read this interview with Chris Huelsbeck that was done with some emails over
+the last months (thanks Chris). I think you already know Chris as Sid and Amiga composer, but if
+you are more young you can know he for his works on console games.
+Hello, Chris,
+I always start asking to speak about the real life: as you are very famous and well­ know,
+maybe you could say something about your actual work if you prefer.
+My life has changed quite a bit after I moved to the US in February of 1998. I worked since then on
+several high profile projects, like the Star Wars Rogue Squadron series for the Nintendo consoles.
+Other than my busy work, I lead a pretty relaxed life. But I am not famous like a Hollywood star and
+never felt that way, though I had some interesting moments in the early 90s with some fans following
+me everywhere at a trade show. I am also not rich as some people think. In my spare time I like
+to see movies and listen to (or make) music just for fun.
+Speaking about the C64, you wrote your own music stuff (e.g. the Soundmonitor (musicmas ter)):
+how many improvement did you give to your editor during his life and was you inspired
+to other tools for making them?
+The Soundmonitor was my first big software project and was based on my third music player (the
+first was pretty basic for a friends game, the second was for Shades). After that I made 2 revisions
+of the player, one was more memory and CPU efficient (TFM, for "The Final Musicplayer" which funnily
+wasn' t the final one at all ;) ,and the second one added my sample playback. Later I went actually
+back to non­ sample SID sound because the later revisions of the C64 had problems with that
+and the games became so big and resource hungry. So I wrote another editor and player that was
+able to do some very wild SID effects and good drums without samples. It was called TFMX (which
+was for "The Final Musicsystem Extended" ;)
+This is just a my historical curiosity: did you share/sell the source of your soundmonitor editor?
+(e.g. Rockmonitor 2/3 by Dutch USA­ Team is a modified version of your player)
+No, the Rockmonitor was a hack / reverse engineered by those guys.
+Back then I was a bit mad about them, but not anymore...
+If you still have the sources of your C64 works, what about donate them to the C64 community
+before the time damage the disks? (well, I' m an open source people, so the question is
+natural... :) )
+I saved almost everything from my old C64 disks and put them on the PC / CD­ Roms, so nothing
+get' s lost. I have thought about releasing some stuff incl. the sources, but I haven' t found the time
+yet to sort through that chaos on those disks.
+What do you think about people like me (but we are many more) that listen sid music every
+days and still compose music using a chip that is 20 years old?
+I like to listen to the old tunes myself sometimes and maybe I will compose a new piece for the SID
+some day, who knows.
+13
+===== page 14 =====
+The most important question for all your fans: there will be the possibility that one day you
+compose a new C64 tune just for fun? Or, had you some not released C64 music work that is
+still in your old floppy?
+Oops, I guess I just answered that one from the last question. And there may be a couple of unfinished
+pieces that sit in my collection somewhere, but I haven' t found the time yet to go through all
+that stuff.
+Now some quick final (standard) questions:
+Real machine vs emulator: what do you think of?
+The real machine is still the only choice if you want the right atmosphere and the smoothest SID
+sound. But nothing can beat the convenience of the emulators.
+6581 vs 8580 chip: any (musical) preference?
+There is only one true original and later C64 revisions where not as good with playback of samples,
+but the SID voices by themselves didn' t sound that much different to me...
+What is the worst sid that you compose and the better one?
+The worst might be my ugly cover version of "Being Boiled"
+. My favorite is Starball.
+Who are your best sid authors?
+Rob Hubbard, Martin Galway, Jeroen Tel and Ben Daglish
+What are the best sids ever in your opinion?
+Cybernoid, Monty on the run, One man and his droid, The Last V8, Wizball
+Finally, many thanks for the time you give for this interview, and now you can say any things
+you want that the people will read from you!
+Thanks for being patient with me when it comes to answering emails. I try my best to make everybody
+happy, but it sometimes just overwhelms me. You are welcome to visit my site at www.huels beck.com
+and watch out for new tunes on my mp3 page.
+Webography [from Chris]:
+Official site:
+http://www.huelsbeck.com/
+My Game Music CD label:
+http://www.synsoniq.com
+Check also my latest music releases:
+http://www.electronicscene.com/huelsbeck
+14
+===== page 15 =====
+Music Engines Pattern Searching (part 2)
+by Stefano Tognon <ice00@libero.it >
+In issue 3 I describe how with pattern searching we can found music engines.
+Now it' s time to look to the Lada ' Ray' Lostack database of engines that contains the information
+of how to find about 450 engines.
+In this page I will describe how the actual database is made, but some study is being done for
+eventually modify the format of the database for increasing his power.
+Database format
+The database is based onto entry formatted in C­ like code:
+Player { ; begin of 'Player' block - the brace ('{') must be placed ON THE SAME LINE)
+Name=playername ID=offset:value 1 ; player name (sometimes author & player)
+; up to 16 IDs (see bellow) minimum of IDs are 3....
+.
+ID=offset:value N
+Message=offset:length 1 ; up to 16 different "messages"
+. ; if length is zero, message is zero padded
+Message=offset:length N
+OrderPos=offset1,offset2,offset3 ; these addresses in C64 memory contains actual order position
+SecPos=offset1,offset2,offset3 ; these adresses contain the actual row in sector
+} ; mark for block end
+The first field is Name where there is to put the name of the player (and/or author), for examples:
+Name=DMC V4.0
+Name=DMC V4 - clone I
+Name=FALCO PAUL FX
+Name=FUTURE COMPOSER 1.0
+Name=JCH 02/NEWPLAYER V17.G1
+The next important fields are the ID.
+You must specify at least 3 ID for recognize an engine, but you can use a maximum of 16 ID.
+One ID simply specifies the value we must found at the given offset (relative of absolute like we
+see later) into memory/file.
+For finding an engine there is that all the values of the ID at the given offset must be matched.
+Let me take an (invented) examples:
+Player {
+Name=Example 1
+ID=$0000:$10
+ID=$0001:$11
+ID=$0003:$12
+ID=$0006:$13
+}
+This entry will found an engine like this that we found with this Perl pattern searching string (see
+issue 3):
+15
+===== page 16 =====
+'\x10\x11.\x12..\x13'
+But now look at this example:
+Player {
+Name=Example 2
+ID=$0001:$10
+ID=$0002:$11
+ID=$0004:$12
+ID=$0007:$13
+}
+What will this entry found? The same as example1?
+Yes and no: now we see why.
+Memory locations
+This database derived from the Advanced Music Searcher AMS 5.0.415, a tools that run in a C64
+and it is able to find if in memory there are some music engines loaded.
+To do that, AMS scans the memory and applies the search of the IDs: the time required is proportional
+at the number of engines to found and by the number of memory locations it starts for applying
+the search.
+C64 Memory (xx,yy,zz,ll,kk=some values):
+$1000: xx
+$1001: 10
+$1002: 11
+$1003: yy
+$1004: 12
+$1005: zz
+$1006: ll
+$1007: 13
+$1008: kk
+Suppose that AMS applies the searching each $1000 bytes: so from $0000, to $1000, then
+$2000,...
+If AMS searches for Example1 player, it will found that at memory location $1000+$0000 there is
+the value xx that is not the expected (10 ), so Example1 is not found.
+But when search for Example2 , it finds that the value at $1000+$0001 is 10 as expected. Then
+the value at $1000+$0002 is 11, and so on for all the other values: Example2 player is found.
+However, if AMS will search using a 1 byte step in memory ($1000, then $1001, then $1002,...) it
+will found that the player in memory is both Example1 and Example2
+So Example1 and Example2 identify the same player.
+At this point is simple to understand that the relative offsets in the ID are respect at the point
+where the program will apply the search in memory.
+It is most probably that AMS use step of $100 bytes, as usually a player can be relocated in fixed
+memory location: you will found that a player locates the tune at $1000 but not a $1001 (and so Ex ample2
+is the right player pattern to use).
+So, when producing an entry, which offset may we use?
+16
+===== page 17 =====
+ID offset
+The answer to the previous question is simple: depending of how the database will be used.
+Think to possible applications:
+• Sidplayers
+• C64 emulators
+• Sid ripping tools
+• Real C64
+And now we see each case:
+1. Real C64
+In this case the answer is simple: offset must be relative to some fixed memory locations based
+onto steps of $100 or $200. The time needed for a complete scan with a big database is high, and
+so applications (like AMS) must have an database based onto these type of offset.
+But are this kind of applications to use anymore in a real C64? I think that as today the C64 music
+is stored into PSID (RSID) files, there are no needed of use this database in the real C64 for knowing
+the engine used by the sid being listen: it is only necessary that tools like PSID64 calculates the
+engine used by the PSID file being converted during the generation of the C64 prg file. This calculation
+is made using a PC, and so we are in the other category of programs.
+2. Sidplayers, C64 emulators, Sid ripping tools
+All these programs are running into PC, so there is no power problem in running the searching
+byte by byte in memory.
+I would like to motive why the above category of programs can take advantage of using the
+database of engines:
+• C64 emulators
+If a ripper loads a program, that must be ripped, into a C64 emulator, it should be good if an option
+of the emulator will start the scan of the (emulated) memory for searching for known engines: if
+a ripper know the engine he is being ripped it will be more simple his work.
+• Sid ripping tools
+If a ripper uses specific tools (like PSIDedit) for ripping, this is like the previous case.
+• Sidplayers
+I think that it is very interesting to read with which engines a PSID tune is made directly into the
+sidplayer that is reproducing the music.
+The last thing to say for ID offset is that you can even specify absolute offset, like in this example:
+Player {
+Name=Example 3
+ID=#$0300:$10
+ID=#$0301:$11
+ID=#$0303:$12
+}
+In this case the searching of byte $10 is done at the absolute memory location $0300, $11 in
+$301 and $12 in $0303.
+17
+===== page 18 =====
+Even if this can be a good methods for finding engines that put special value into fixed memory locations,
+I think that you must not use this technique anymore.
+In fact, only programs that have an emulated C64 memory (like sidplayers, C64 emulators) can
+look for these fixed values.
+Instead, tools like SIDedit that manage PSID file and so they not have an emulated memory, cannot
+recognize engines that use absolute memory locations.
+Messages
+This special field in the player entry can be used by a sidplayer to show information that could be
+contained into the music.
+You can specify a maximum of 16 messages like in this examples:
+Message=$0012:10
+Message=$0530:0
+In the first we say that a message of length 10 is contained at relative offset $0012, while in the
+second, a message with a variable length (it finishes when a 0 is fount) is positioned at relative off set
+$0530
+Actually, there are no entry in the database that use messages, but engines like Compute' s
+Gazette Sidplayer could take advantage of messages.
+Order/Sector
+Probably the most difficult to understand fields of the database format are OrderPos and SecPos.
+These fields specify where in C64 memory there are the actual values of Order position and Sector
+position.
+The syntax need that 3 offset (relative/absolute) values must be specify: one for each sid voices.
+Here an example:
+OrderPos=$0921,$0922,$0923
+SecPos=$0924,$0924,$0926
+Well, but what are order and sector?
+If you are a musician, you probably know that many kind of music editor/tracker use tracks and
+sectors for let you insert the music like in this example:
+Track v1: 01 02 03 01 01 00
+Track v2: 06 06 06 05 05 00
+Track v3: 08 07 08 07 04 00
+Sector 01: ins1 dur3 C4 C5 D4 D5
+Sector 02: ins1 dur1 A2 dur3 A3
+...
+Sector 08: inst3 dur4 B4 B4 B3 B3
+When the player reproduce your music, he starts with track v1/sector 01 and so put C4 C5 D4 D5
+notes, then track v1/sector 02 with A2, A3 notes and so on (in the same time he manages even the
+tracks/patterns for the other 2 voices in the same manner).
+18
+===== page 19 =====
+For doing this, many players stored the actual values of tracker position and sector position in
+some memory locations: these are the positions we need for OrderPos and SecPos.
+OrderPos voice1 01..................|02........|
+SecPos voice1 01...02...03...04...|01..02....|
+OrderPos voice2 06.......|06.......|
+SecPos voice2 01.. 02..|01.. 02..|
+OrderPos voice3 08..........................|08..........................|
+SecPos voice3 01.....02.....03.....04.....|01.....02.....03.....04.....|
+The above graph try to show what values are stored into OrderPos memory location for voice 1, 2
+and 3, and SecPos for voice 1, 2 and 3 at each player call (timing are all invented).
+We see that OrderPos for voice 1 start with values 01 and after that SecPos for voice 1 takes the
+values 01, 02, 03, 04 (the four notes C4 C5 D4 D5 to play), he passes to value 02.
+Maybe now I think you know what are the true meaning of OrderPos and SecPos, but you probably
+are thinking what is a useful use we can make with these values.
+The answer is simple:
+• We can have a sidplayer that shows in realtime what the player is doing (using some patter lines
+you can really figure how music is made).
+• Detect the true length of the music.
+If you are wondering how the last point can be reached, I let you some hint.
+In all the players that use track position, there are special values (usually $FF and $FE) that are
+used for determine what to do when the track is finished:
+1. One value means to restart the track from the beginning
+2. The other means to stop the sound generation for this voice because the music is finished
+So, for examples, if in a player call we see that the OrderPos value change 2 values, we are experimenting
+the case of track restarting and if this has happened for all the 3 voices, then for sure
+the tune is completely restarted:
+Track1: 01 02 03 FE
+Track2: 05 05 06 07 07 07 FE
+Track3: 08 08 FE
+In this example, the tune will be completely restart when the voice 2 restart, because if we see the
+voice restarting we see something like this:
+Start V3 restart V1 restart V3 restart V2 restart
+So only when all the voices are restarting we can saw that the tune is finished.
+In the type 2 of track final signature, we can saw that the tune is finished as soon as the SecPos
+value did not change anymore after the OrderPos value where changed.
+The last thing to say about OrderPos and SecPos is that some player use only one location as all
+the tree voices use the same track, like in this example:
+Common Track: 01 02 03 ...
+Sector 01:
+Voice 1 note1 note2 note3...
+Voice 2 note1 note2 note3...
+Voice 3 note1 note2 note3...
+19
+===== page 20 =====
+As you can see, in this case we must specify the same values for OrderPos and SecPos, like in
+this example:
+Player {
+Name=TAXIM?
+ID=$0001:$12
+ID=$0002:$C0
+ID=$0004:$0D
+OrderPos=#$02C1,#$02C1,#$02C1
+SecPos=#$02C0,#$02C0,#$02C0
+}
+Examples
+Ok, now it' s time to give a complete example taken from the database
+• Future Composer 1 player
+Player {
+Name=FUTURE COMPOSER 1.0
+ID=$0006:$AD
+ID=$0007:$74
+ID=$0009:$C9
+ID=$000A:$02
+OrderPos=$0921,$0922,$0923
+SecPos=$0924,$0924,$0926
+}
+Ok, there are more than 1000 tunes in HVSC that use this player, so I take one of them: /VARIOUS/G­
+L/Luca/Moonlight
+_
+shadow.sid and present here a partial SIDedit disassembly
+;1800 4C 08 21 JMP $2108
+;1803 4C 17 21 JMP $2117
+;1806 AD 74 21 LDA $2174
+;1809 C9 02 CMP #$02
+;180B F0 07 BEQ 1814
+;180D C9 01 CMP #$01
+;180F D0 19 BNE 182A
+;1811 4C E8 20 JMP $20E8
+;1814 60 RTS
+;1815 01 26 ORA ($26,X)
+;1817 EE 16 18 INC $1816
+;181A EE 16 18 INC $1816
+;181D AD 16 18 LDA $1816
+;1820 C9 32 CMP #$32
+;1822 D0 05 BNE 1829
+;1824 A9 01 LDA #$01
+;1826 8D 15 18 STA $1815
+;1829 60 RTS
+;182A EE 42 21 INC $2142
+;182D EE 43 21 INC $2143
+;1830 EE 44 21 INC $2144
+;1833 A9 1F LDA #$1F
+;1835 8D 18 D4 STA $D418
+;1838 A2 02 LDX #$02
+;183A CE 73 21 DEC $2173
+;183D 10 06 BPL 1845
+;183F AD 1D 21 LDA $211D
+;1842 8D 73 21 STA $2173
+;1845 2C 20 D0 BIT $D020
+;1848 86 FF STX $FF
+;184A BD 1E 21 LDA $211E,X
+;184D 8D 56 21 STA $2156
+;1850 A8 TAY
+;1851 AD 73 21 LDA $2173
+;1854 CD 1D 21 CMP $211D
+;1857 D0 12 BNE 186B
+;1859 BD A1 1E LDA $1EA1,X
+;185C 85 FB STA $FB
+;185E BD A4 1E LDA $1EA4,X
+20
+===== page 21 =====
+;1861 85 FC STA $FC
+;1863 DE 27 21 DEC $2127,X
+;1866 30 06 BMI 186E
+;1868 4C FA 19 JMP $19FA
+;186B 4C 0A 1A JMP $1A0A
+;186E BC 21 21 LDY $2121,X ; read OrderPos
+;1871 B1 FB LDA ($FB),Y
+;1873 C9 FE CMP #$FE ; end mark
+;1875 F0 15 BEQ 188C
+;1877 C9 FF CMP #$FF ; end mark
+;1879 D0 19 BNE 1894
+;187B A9 00 LDA #$00
+;187D 9D 27 21 STA $2127,X
+;1880 9D 21 21 STA $2121,X ; reset OrderPos
+;1883 9D 24 21 STA $2124,X ; reset SecPos
+;1886 8D 72 21 STA $2172
+;1889 4C 6E 18 JMP $186E
+;188C A9 02 LDA #$02
+;188E 8D 74 21 STA $2174
+;1891 4C 0B 21 JMP $210B
+;1894 8D 67 21 STA $2167
+;1897 29 80 AND #$80
+;1899 F0 0E BEQ 18A9
+;189B AD 67 21 LDA $2167
+;189E 29 1F AND #$1F
+;18A0 9D 4F 21 STA $214F,X
+;18A3 FE 21 21 INC $2121,X ; next OrderPos
+;18A6 4C 6E 18 JMP $186E
+;18A9 AD 67 21 LDA $2167
+;18AC 29 40 AND #$40
+;18AE F0 0E BEQ 18BE
+;18B0 AD 67 21 LDA $2167
+;18B3 29 3F AND #$3F
+;18B5 9D 76 21 STA $2176,X
+;18B8 FE 21 21 INC $2121,X ; next OrderPos
+;18BB 4C 6E 18 JMP $186E
+;18BE AD 67 21 LDA $2167
+;18C1 0A ASL
+;18C2 A8 TAY
+;18C3 B9 A7 1E LDA $1EA7,Y
+;18C6 85 FD STA $FD
+;18C8 B9 A8 1E LDA $1EA8,Y
+;18CB 85 FE STA $FE
+;18CD A9 00 LDA #$00
+;18CF 9D 3F 21 STA $213F,X
+;18D2 BC 24 21 LDY $2124,X ; next SecPos
+;18D5 9D 42 21 STA $2142,X
+;18D8 A9 03 LDA #$03
+;18DA 9D 61 21 STA $2161,X
+;18DD B1 FD LDA ($FD),Y
+;18DF 85 F8 STA $F8
+;18E1 29 F0 AND #$F0
+;18E3 C9 F0 CMP #$F0
+;18E5 D0 10 BNE 18F7
+;18E7 A9 01 LDA #$01
+;18E9 9D 80 21 STA $2180,X
+;18EC FE 24 21 INC $2124,X ; next SecPos
+;18EF C8 INY
+;18F0 B1 FD LDA ($FD),Y
+;18F2 85 F8 STA $F8
+;18F4 4C 57 19 JMP $1957
+;18F7 A9 00 LDA #$00
+;18F9 9D 80 21 STA $2180,X
+;18FC A5 F8 LDA $F8
+;18FE 29 F0 AND #$F0
+;1900 C9 E0 CMP #$E0
+;1902 D0 2C BNE 1930
+;1904 A5 F8 LDA $F8
+;1906 29 01 AND #$01
+;1908 18 CLC
+;1909 69 01 ADC #$01
+;190B 9D 3F 21 STA $213F,X
+;190E A5 F8 LDA $F8
+;1910 29 0E AND #$0E
+;1912 4A LSR
+;1913 8D 65 21 STA $2165
+;1916 FE 24 21 INC $2124,X ; next SecPos
+;1919 C8 INY
+;191A B1 FD LDA ($FD),Y
+;191C 48 PHA
+;191D 29 F0 AND #$F0
+;191F 8D 64 21 STA $2164
+;1922 68 PLA
+;1923 29 0F AND #$0F
+;1925 8D F8 1A STA $1AF8
+;1928 FE 24 21 INC $2124,X ; next SecPos
+;192B C8 INY
+;192C B1 FD LDA ($FD),Y
+;192E 85 F8 STA $F8
+;1930 A5 F8 LDA $F8
+;1932 29 E0 AND #$E0
+21
+===== page 22 =====
+;1934 C9 C0 CMP #$C0
+;1936 D0 0A BNE 1942
+;1938 A5 F8 LDA $F8
+;193A 29 1F AND #$1F
+;193C 9D 33 21 STA $2133,X
+;193F 20 ED 19 JSR $19ED
+;1942 A5 F8 LDA $F8
+;1944 29 C0 AND #$C0
+;1946 C9 80 CMP #$80
+;1948 D0 0D BNE 1957
+;194A A5 F8 LDA $F8
+;194C 29 3F AND #$3F
+;194E 9D 2A 21 STA $212A,X
+;1951 20 ED 19 JSR $19ED
+;1954 4C DD 18 JMP $18DD
+;1957 BD 2A 21 LDA $212A,X
+;195A 9D 27 21 STA $2127,X
+;195D A5 F8 LDA $F8
+;195F 18 CLC
+;1960 7D 4F 21 ADC $214F,X
+;1963 9D 30 21 STA $2130,X
+;1966 A8 TAY
+;1967 B9 64 1D LDA $1D64,Y
+;196A 48 PHA
+;196B B9 C4 1D LDA $1DC4,Y
+;196E AC 56 21 LDY $2156
+;1971 99 01 D4 STA $D401,Y
+;1974 9D 36 21 STA $2136,X
+;1977 9D 39 21 STA $2139,X
+;197A 68 PLA
+;197B 99 00 D4 STA $D400,Y
+;197E 9D 3C 21 STA $213C,X
+;1981 BD 80 21 LDA $2180,X
+;1984 D0 46 BNE 19CC
+;1986 BD 33 21 LDA $2133,X
+;1989 0A ASL
+;198A 0A ASL
+;198B 0A ASL
+;198C AA TAX
+;198D 8E 52 21 STX $2152
+;1990 BD 8A 21 LDA $218A,X
+;1993 99 05 D4 STA $D405,Y
+;1996 BD 8B 21 LDA $218B,X
+;1999 99 06 D4 STA $D406,Y
+;199C BD 8C 21 LDA $218C,X
+;199F 48 PHA
+;19A0 BD 88 21 LDA $2188,X
+;19A3 48 PHA
+;19A4 BD 89 21 LDA $2189,X
+;19A7 A6 FF LDX $FF
+;19A9 9D 2D 21 STA $212D,X
+;19AC 9D 79 21 STA $2179,X
+;19AF A9 00 LDA #$00
+;19B1 99 02 D4 STA $D402,Y
+;19B4 9D 45 21 STA $2145,X
+;19B7 68 PLA
+;19B8 9D 4B 21 STA $214B,X
+;19BB 29 0F AND #$0F
+;19BD 99 03 D4 STA $D403,Y
+;19C0 9D 48 21 STA $2148,X
+;19C3 A9 01 LDA #$01
+;19C5 9D 6F 21 STA $216F,X
+;19C8 68 PLA
+;19C9 9D 6C 21 STA $216C,X
+;19CC FE 24 21 INC $2124,X ; next SecPos
+;19CF BC 24 21 LDY $2124,X
+;19D2 B1 FD LDA ($FD),Y
+;19D4 C9 FF CMP #$FF ; end mark
+;19D6 D0 12 BNE 19EA
+;19D8 A9 00 LDA #$00
+;19DA 9D 24 21 STA $2124,X
+;19DD BD 76 21 LDA $2176,X
+;19E0 F0 05 BEQ 19E7
+;19E2 DE 76 21 DEC $2176,X
+;19E5 10 03 BPL 19EA
+;19E7 FE 21 21 INC $2121,X
+;19EA 4C 52 1D JMP $1D52
+;19ED FE 24 21 INC $2124,X ; next SecPos
+;19F0 C8 INY
+;19F1 B1 FD LDA ($FD),Y
+;19F3 C9 FF CMP #$FF ; end mark
+;19F5 F0 E1 BEQ 19D8
+;19F7 85 F8 STA $F8
+;19F9 60 RTS
+;19FA AC 56 21 LDY $2156
+;19FD BD 42 21 LDA $2142,X
+;1A00 F0 08 BEQ 1A0A
+;1A02 BD 2D 21 LDA $212D,X
+;1A05 29 FE AND #$FE
+;1A07 9D 79 21 STA $2179,X
+;1A0A BD 33 21 LDA $2133,X
+22
+===== page 23 =====
+;1A0D 0A ASL
+;1A0E 0A ASL
+;1A0F 0A ASL
+;1A10 A8 TAY
+;1A11 B9 8D 21 LDA $218D,Y
+;1A14 8D 53 21 STA $2153
+;1A17 B9 8E 21 LDA $218E,Y
+;1A1A 8D 54 21 STA $2154
+;1A1D B9 8F 21 LDA $218F,Y
+;1A20 8D 55 21 STA $2155
+;1A23 29 04 AND #$04
+;1A25 D0 0C BNE 1A33
+;1A27 AD 55 21 LDA $2155
+;1A2A 29 10 AND #$10
+;1A2C D0 05 BNE 1A33
+;1A2E AD 53 21 LDA $2153
+;1A31 D0 03 BNE 1A36
+;1A33 4C 30 20 JMP $2030
+;1A36 48 PHA
+;1A37 29 78 AND #$78
+;1A39 4A LSR
+;1A3A 4A LSR
+;1A3B 4A LSR
+;1A3C 9D 58 21 STA $2158,X
+;1A3F 68 PLA
+;1A40 29 07 AND #$07
+;1A42 8D 57 21 STA $2157
+;1A45 BD 5B 21 LDA $215B,X
+;1A48 F0 0A BEQ 1A54
+;1A4A DE 5E 21 DEC $215E,X
+;1A4D D0 19 BNE 1A68
+;1A4F FE 5B 21 INC $215B,X
+;1A52 10 14 BPL 1A68
+;1A54 FE 5E 21 INC $215E,X
+;1A57 BD 58 21 LDA $2158,X
+;1A5A DD 5E 21 CMP $215E,X
+;1A5D B0 09 BCS 1A68
+;1A5F 9D 5E 21 STA $215E,X
+;1A62 DE 5B 21 DEC $215B,X
+;1A65 DE 5E 21 DEC $215E,X
+;1A68 BD 30 21 LDA $2130,X
+;1A6B A8 TAY
+;1A6C B9 65 1D LDA $1D65,Y
+;1A6F 38 SEC
+;1A70 F9 64 1D SBC $1D64,Y
+;1A73 8D 7F 21 STA $217F
+;1A76 B9 C5 1D LDA $1DC5,Y
+;1A79 F9 C4 1D SBC $1DC4,Y
+;1A7C 7D 42 21 ADC $2142,X
+;1A7F 4A LSR
+;1A80 CE 57 21 DEC $2157
+;1A83 30 07 BMI 1A8C
+;1A85 4A LSR
+;1A86 6E 7F 21 ROR $217F
+;1A89 4C 80 1A JMP $1A80
+;1A8C 8D 7E 21 STA $217E
+;1A8F B9 64 1D LDA $1D64,Y
+;1A92 8D 7C 21 STA $217C
+;1A95 B9 C4 1D LDA $1DC4,Y
+;1A98 8D 7D 21 STA $217D
+;1A9B BD 58 21 LDA $2158,X
+;1A9E 4A LSR
+;1A9F A8 TAY
+;1AA0 88 DEY
+;1AA1 30 16 BMI 1AB9
+;1AA3 38 SEC
+;1AA4 AD 7C 21 LDA $217C
+;1AA7 ED 7F 21 SBC $217F
+;1AAA 8D 7C 21 STA $217C
+;1AAD AD 7D 21 LDA $217D
+;1AB0 ED 7E 21 SBC $217E
+;1AB3 8D 7D 21 STA $217D
+;1AB6 4C A0 1A JMP $1AA0
+;1AB9 BD 42 21 LDA $2142,X
+;1ABC C9 04 CMP #$04
+;1ABE 90 2B BCC 1AEB
+;1AC0 BC 5E 21 LDY $215E,X
+;1AC3 88 DEY
+;1AC4 30 16 BMI 1ADC
+;1AC6 18 CLC
+;1AC7 AD 7C 21 LDA $217C
+;1ACA 6D 7F 21 ADC $217F
+;1ACD 8D 7C 21 STA $217C
+;1AD0 AD 7D 21 LDA $217D
+;1AD3 6D 7E 21 ADC $217E
+;1AD6 8D 7D 21 STA $217D
+;1AD9 4C C3 1A JMP $1AC3
+;1ADC AC 56 21 LDY $2156
+;1ADF AD 7C 21 LDA $217C
+;1AE2 99 00 D4 STA $D400,Y
+;1AE5 AD 7D 21 LDA $217D
+23
+===== page 24 =====
+;1AE8 99 01 D4 STA $D401,Y
+;1AEB A6 FF LDX $FF
+;1AED AC 56 21 LDY $2156
+;1AF0 BD 2A 21 LDA $212A,X
+;1AF3 38 SEC
+;1AF4 FD 27 21 SBC $2127,X
+;1AF7 C9 0F CMP #$0F
+;1AF9 90 46 BCC 1B41
+;1AFB BD 3F 21 LDA $213F,X
+;1AFE F0 41 BEQ 1B41
+;1B00 29 03 AND #$03
+;1B02 C9 01 CMP #$01
+;1B04 F0 1F BEQ 1B25
+;1B06 AD 64 21 LDA $2164
+;1B09 38 SEC
+;1B0A BD 3C 21 LDA $213C,X
+;1B0D ED 64 21 SBC $2164
+;1B10 9D 3C 21 STA $213C,X
+;1B13 99 00 D4 STA $D400,Y
+;1B16 BD 36 21 LDA $2136,X
+;1B19 ED 65 21 SBC $2165
+;1B1C 9D 36 21 STA $2136,X
+;1B1F 99 01 D4 STA $D401,Y
+;1B22 4C 41 1B JMP $1B41
+;1B25 AD 64 21 LDA $2164
+;1B28 18 CLC
+;1B29 BD 3C 21 LDA $213C,X
+;1B2C 6D 64 21 ADC $2164
+;1B2F 9D 3C 21 STA $213C,X
+;1B32 99 00 D4 STA $D400,Y
+;1B35 BD 36 21 LDA $2136,X
+;1B38 6D 65 21 ADC $2165
+;1B3B 9D 36 21 STA $2136,X
+;1B3E 99 01 D4 STA $D401,Y
+;1B41 AD 54 21 LDA $2154
+;1B44 F0 6C BEQ 1BB2
+;1B46 29 07 AND #$07
+;1B48 A8 TAY
+;1B49 88 DEY
+;1B4A 98 TYA
+;1B4B 0A ASL
+;1B4C 0A ASL
+;1B4D A8 TAY
+;1B4E B9 95 1E LDA $1E95,Y
+;1B51 DD 42 21 CMP $2142,X
+;1B54 90 03 BCC 1B59
+;1B56 4C 63 1B JMP $1B63
+;1B59 C8 INY
+;1B5A C8 INY
+;1B5B B9 95 1E LDA $1E95,Y
+;1B5E DD 42 21 CMP $2142,X
+;1B61 90 0A BCC 1B6D
+;1B63 C8 INY
+;1B64 B9 95 1E LDA $1E95,Y
+;1B67 8D 4E 21 STA $214E
+;1B6A 4C 75 1B JMP $1B75
+;1B6D AD 54 21 LDA $2154
+;1B70 29 FC AND #$FC
+;1B72 8D 4E 21 STA $214E
+;1B75 BD 6F 21 LDA $216F,X
+;1B78 D0 1D BNE 1B97
+;1B7A BD 45 21 LDA $2145,X
+;1B7D 38 SEC
+;1B7E ED 4E 21 SBC $214E
+;1B81 9D 45 21 STA $2145,X
+;1B84 BD 48 21 LDA $2148,X
+;1B87 E9 00 SBC #$00
+;1B89 9D 48 21 STA $2148,X
+;1B8C C9 01 CMP #$01
+;1B8E B0 22 BCS 1BB2
+;1B90 A9 01 LDA #$01
+;1B92 9D 6F 21 STA $216F,X
+;1B95 D0 1B BNE 1BB2
+;1B97 BD 45 21 LDA $2145,X
+;1B9A 18 CLC
+;1B9B 6D 4E 21 ADC $214E
+;1B9E 9D 45 21 STA $2145,X
+;1BA1 BD 48 21 LDA $2148,X
+;1BA4 69 00 ADC #$00
+;1BA6 9D 48 21 STA $2148,X
+;1BA9 C9 0F CMP #$0F
+;1BAB 90 05 BCC 1BB2
+;1BAD A9 00 LDA #$00
+;1BAF 9D 6F 21 STA $216F,X
+;1BB2 A9 00 LDA #$00
+;1BB4 8D D4 1B STA $1BD4
+;1BB7 BD 4B 21 LDA $214B,X
+;1BBA 29 80 AND #$80
+;1BBC F0 0C BEQ 1BCA
+;1BBE BD 42 21 LDA $2142,X
+;1BC1 29 01 AND #$01
+24
+===== page 25 =====
+;1BC3 F0 05 BEQ 1BCA
+;1BC5 A9 B0 LDA #$B0
+;1BC7 8D D4 1B STA $1BD4
+;1BCA A6 FF LDX $FF
+;1BCC AC 56 21 LDY $2156
+;1BCF BD 45 21 LDA $2145,X
+;1BD2 18 CLC
+;1BD3 69 00 ADC #$00
+;1BD5 99 02 D4 STA $D402,Y
+;1BD8 BD 48 21 LDA $2148,X
+;1BDB 69 00 ADC #$00
+;1BDD 99 03 D4 STA $D403,Y
+;1BE0 AD 55 21 LDA $2155
+;1BE3 29 40 AND #$40
+;1BE5 F0 14 BEQ 1BFB
+;1BE7 A6 FF LDX $FF
+;1BE9 BD 42 21 LDA $2142,X
+;1BEC C9 03 CMP #$03
+;1BEE 90 0B BCC 1BFB
+;1BF0 29 03 AND #$03
+;1BF2 AA TAX
+;1BF3 BD 32 1E LDA $1E32,X
+;1BF6 A6 FF LDX $FF
+;1BF8 9D 79 21 STA $2179,X
+;1BFB 8C 67 21 STY $2167
+;1BFE AD 55 21 LDA $2155
+;1C01 29 01 AND #$01
+;1C03 F0 2A BEQ 1C2F
+;1C05 A6 FF LDX $FF
+;1C07 8E 75 21 STX $2175
+;1C0A A9 89 LDA #$89
+;1C0C 85 F9 STA $F9
+;1C0E A9 1E LDA #$1E
+;1C10 85 FA STA $FA
+;1C12 A6 FF LDX $FF
+;1C14 BD 42 21 LDA $2142,X
+;1C17 A0 0B LDY #$0B
+;1C19 D1 F9 CMP ($F9),Y
+;1C1B B0 33 BCS 1C50
+;1C1D A0 0A LDY #$0A
+;1C1F D1 F9 CMP ($F9),Y
+;1C21 B0 38 BCS 1C5B
+;1C23 88 DEY
+;1C24 C0 06 CPY #$06
+;1C26 D0 F7 BNE 1C1F
+;1C28 D1 F9 CMP ($F9),Y
+;1C2A B0 06 BCS 1C32
+;1C2C 4C 7B 1C JMP $1C7B
+;1C2F 4C 6A 1C JMP $1C6A
+;1C32 A5 FF LDA $FF
+;1C34 0A ASL
+;1C35 D0 03 BNE 1C3A
+;1C37 18 CLC
+;1C38 69 01 ADC #$01
+;1C3A 8D 68 21 STA $2168
+;1C3D AE 72 21 LDX $2172
+;1C40 8A TXA
+;1C41 2D 68 21 AND $2168
+;1C44 D0 08 BNE 1C4E
+;1C46 8A TXA
+;1C47 18 CLC
+;1C48 6D 68 21 ADC $2168
+;1C4B 8D 17 D4 STA $D417
+;1C4E A0 06 LDY #$06
+;1C50 88 DEY
+;1C51 88 DEY
+;1C52 88 DEY
+;1C53 88 DEY
+;1C54 88 DEY
+;1C55 88 DEY
+;1C56 B1 F9 LDA ($F9),Y
+;1C58 4C 73 1C JMP $1C73
+;1C5B 88 DEY
+;1C5C 88 DEY
+;1C5D 88 DEY
+;1C5E 88 DEY
+;1C5F 88 DEY
+;1C60 88 DEY
+;1C61 BD 69 21 LDA $2169,X
+;1C64 18 CLC
+;1C65 71 F9 ADC ($F9),Y
+;1C67 4C 73 1C JMP $1C73
+;1C6A A5 FF LDA $FF
+;1C6C CD 75 21 CMP $2175
+;1C6F D0 0A BNE 1C7B
+;1C71 A9 FF LDA #$FF
+;1C73 A6 FF LDX $FF
+;1C75 9D 69 21 STA $2169,X
+;1C78 8D 16 D4 STA $D416
+;1C7B AC 67 21 LDY $2167
+;1C7E AD 55 21 LDA $2155
+25
+===== page 26 =====
+;1C81 29 10 AND #$10
+;1C83 F0 5E BEQ 1CE3
+;1C85 AD 53 21 LDA $2153
+;1C88 29 0F AND #$0F
+;1C8A AA TAX
+;1C8B BD 3E 1E LDA $1E3E,X
+;1C8E 8D AF 1C STA $1CAF
+;1C91 BD 40 1E LDA $1E40,X
+;1C94 8D B0 1C STA $1CB0
+;1C97 BD 42 1E LDA $1E42,X
+;1C9A 8D B7 1C STA $1CB7
+;1C9D BD 44 1E LDA $1E44,X
+;1CA0 8D B8 1C STA $1CB8
+;1CA3 A6 FF LDX $FF
+;1CA5 BD 42 21 LDA $2142,X
+;1CA8 C9 0F CMP #$0F
+;1CAA B0 34 BCS 1CE0
+;1CAC AA TAX
+;1CAD CA DEX
+;1CAE BD 56 1E LDA $1E56,X
+;1CB1 A4 FF LDY $FF
+;1CB3 99 79 21 STA $2179,Y
+;1CB6 BD 46 1E LDA $1E46,X
+;1CB9 8D 68 21 STA $2168
+;1CBC AD 53 21 LDA $2153
+;1CBF 29 10 AND #$10
+;1CC1 F0 0C BEQ 1CCF
+;1CC3 A6 FF LDX $FF
+;1CC5 BD 30 21 LDA $2130,X
+;1CC8 18 CLC
+;1CC9 6D 68 21 ADC $2168
+;1CCC 4C 42 1D JMP $1D42
+;1CCF AC 56 21 LDY $2156
+;1CD2 AD 68 21 LDA $2168
+;1CD5 18 CLC
+;1CD6 69 0D ADC #$0D
+;1CD8 99 01 D4 STA $D401,Y
+;1CDB A9 00 LDA #$00
+;1CDD 99 00 D4 STA $D400,Y
+;1CE0 4C 52 1D JMP $1D52
+;1CE3 AD 55 21 LDA $2155
+;1CE6 29 80 AND #$80
+;1CE8 F0 34 BEQ 1D1E
+;1CEA A6 FF LDX $FF
+;1CEC AC 56 21 LDY $2156
+;1CEF BD 42 21 LDA $2142,X
+;1CF2 C9 02 CMP #$02
+;1CF4 B0 14 BCS 1D0A
+;1CF6 A9 48 LDA #$48
+;1CF8 99 01 D4 STA $D401,Y
+;1CFB A9 00 LDA #$00
+;1CFD 99 00 D4 STA $D400,Y
+;1D00 A6 FF LDX $FF
+;1D02 A9 81 LDA #$81
+;1D04 9D 79 21 STA $2179,X
+;1D07 4C 52 1D JMP $1D52
+;1D0A BD 3C 21 LDA $213C,X
+;1D0D 99 00 D4 STA $D400,Y
+;1D10 BD 36 21 LDA $2136,X
+;1D13 99 01 D4 STA $D401,Y
+;1D16 BD 2D 21 LDA $212D,X
+;1D19 29 FE AND #$FE
+;1D1B 9D 79 21 STA $2179,X
+;1D1E AD 55 21 LDA $2155
+;1D21 29 04 AND #$04
+;1D23 F0 2D BEQ 1D52
+;1D25 DE 61 21 DEC $2161,X
+;1D28 10 05 BPL 1D2F
+;1D2A A9 02 LDA #$02
+;1D2C 9D 61 21 STA $2161,X
+;1D2F A6 FF LDX $FF
+;1D31 BD 61 21 LDA $2161,X
+;1D34 AA TAX
+;1D35 BD 86 1E LDA $1E86,X
+;1D38 85 41 STA $41
+;1D3A A6 FF LDX $FF
+;1D3C BD 30 21 LDA $2130,X
+;1D3F 18 CLC
+;1D40 65 41 ADC $41
+;1D42 AA TAX
+;1D43 AC 56 21 LDY $2156
+;1D46 BD 64 1D LDA $1D64,X
+;1D49 99 00 D4 STA $D400,Y
+;1D4C BD C4 1D LDA $1DC4,X
+;1D4F 99 01 D4 STA $D401,Y
+;1D52 A6 FF LDX $FF
+;1D54 AC 56 21 LDY $2156
+;1D57 BD 79 21 LDA $2179,X
+;1D5A 99 04 D4 STA $D404,Y
+;1D5D CA DEX
+;1D5E 30 03 BMI 1D63
+26
+===== page 27 =====
+;1D60 4C 45 18 JMP $1845
+;1D63 60 RTS
+...
+;2000 A2 01 LDX #$01
+;2002 8E 74 21 STX $2174
+;2005 AA TAX
+;2006 BD D0 20 LDA $20D0,X
+;2009 85 2C STA $2C
+;200B BD D3 20 LDA $20D3,X
+;200E 85 2D STA $2D
+;2010 A0 05 LDY #$05
+;2012 B1 2C LDA ($2C),Y
+;2014 99 A1 1E STA $1EA1,Y
+;2017 88 DEY
+;2018 10 F8 BPL 2012
+;201A 4C 08 21 JMP $2108
+...
+;2030 AD 53 21 LDA $2153
+;2033 F0 13 BEQ 2048
+;2035 4A LSR
+;2036 4A LSR
+;2037 4A LSR
+;2038 4A LSR
+;2039 AA TAX
+;203A AD 53 21 LDA $2153
+;203D 29 0F AND #$0F
+;203F 8D 88 1E STA $1E88
+;2042 8E 87 1E STX $1E87
+;2045 4C DC 1A JMP $1ADC
+;2048 A9 18 LDA #$18
+;204A A2 0C LDX #$0C
+;204C D0 F1 BNE 203F
+...
+;20D9 A9 00 LDA #$00
+;20DB A2 62 LDX #$62
+;20DD 9D 21 21 STA $2121,X
+;20E0 CA DEX
+;20E1 10 FA BPL 20DD
+;20E3 A9 B0 LDA #$B0
+;20E5 8D 72 21 STA $2172
+;20E8 A9 00 LDA #$00
+;20EA 8D 42 21 STA $2142
+;20ED 8D 43 21 STA $2143
+;20F0 8D 44 21 STA $2144
+;20F3 A2 02 LDX #$02
+;20F5 9D 21 21 STA $2121,X
+;20F8 9D 24 21 STA $2124,X
+;20FB 9D 27 21 STA $2127,X
+;20FE 9D 30 21 STA $2130,X
+;2101 CA DEX
+;2102 10 F1 BPL 20F5
+;2104 8D 74 21 STA $2174
+;2107 60 RTS
+;2108 20 D9 20 JSR $20D9
+;210B A2 00 LDX #$00
+;210D 8A TXA
+;210E 2C 00 D4 BIT $D400
+;2111 E8 INX
+;2112 E0 18 CPX #$18
+;2114 D0 F8 BNE 210E
+;2116 60 RTS
+;2117 A9 02 LDA #$02
+;2119 8D 74 21 STA $2174
+;211C 60 RTS
+In the code, blue is the address for OrderPos , purple is the address of SecPos, red is the color of
+instructions used for the pattern, green are the marks indicator.
+The best way for finding what addresses are OrderPos and SecPos is to search for the mark indicator
+($FF, $FE), as they are very commons.
+We see that the engine is detected only by fee bytes located in the beginning of the file. In particular,
+it is used a low byte of an LDA instruction: as the tune can be relocated, using even the high
+byte cannot detect all the tunes. Note, also, that it is used a low byte of a relocated tune, but it is
+quite common that a low byte stay the same, as usually the tunes are relocated in step of $100
+bytes. However, the new study under patter searching we are applying is to be more accurate into
+relative offset by using the actual Program Counter register for determining the real address. But this
+is all being tested, so we can eventually see it in the future.
+27
+===== page 28 =====
+Conclusion
+What we can say about this database?
+It has a wonderful potential, but unfortunately too much engines are recognized with only 4 IDs
+(like in the above example), as the pattern derives from the AMS database. These can produce
+many false detections if you use a one by one step in searching.
+However don' t worry, we are working in made the database more reliable extending his syntax
+(for example for determining relative address in instructions) and by making some automatic tools
+that can suggest an usable pattern.
+One of the most important point is that the Simon White scanner being developed is able to scan
+all the HVSC for 450 engines in less than 5 seconds!
+Expect more information about engines as soon as the new database will be ready.
+Finally, you can look at http://www.unreal64.net for the Lada player that is actually the unique one
+that take use of the database.
+If you want to see the latest database for contributing in add new engines or fixes already present
+engines email Ray for having it (the database is released under GPL license for allowing contribution
+from everyone).
+28
+===== page 29 =====
+High Voltage Music Engines Collection
+by Stefano Tognon <ice00@libero.it >
+HVMEC is a new project I started after going into engines searching task. The name I choose is
+very similar to HVSC (High Voltage Sid Collection), but the porpoise is very different.
+In HVMEC possibly all music engines making tools are collected, so one people can easy search
+for a particular one. Else, many credits information are given, so this can be a good place for historical
+engines conservation.
+Is this so useful? Well, probably the best place where collect these tools is by adding entries in
+CSDb database. However I think that the possibility of searching for a tools in off­ line mode is more
+evaluable, and it should be more complete if more related stuff (like sources, documentation, ...) are
+collected too.
+So, this could be a good reason for starting this project and else in some discussion board, this
+idea was even proposed some times ago.
+The main reason is however that I always like to know how a sid tune is made and knowing the
+used sid engines can be a good street to achieve that.
+HVMEC Structure
+The HVMEC is composed by two main directory:
+HVMEC
+DATA
+CONTROL
+DATA and CONTROL have then the same sub organization, but they contain different stuff:
+• DATA: contains all binary, documentations, sources, examples of one music engine.
+• CONTROL: contains HTML pages that describe the particular engine (we see all this later).
+This division is a precise choice: as you can imagine, DATA is subject to reach many megabyte of
+space, while CONTROL will remain very little.
+So, the off­ line version of the collection is available always in two package 1:
+1. HVMEC­ x.x­ DATA.zip.gz
+2. HVMEC­ x.x­ CONTROL.zip.gz
+One people can so download only the CONTROL package to see all the collected engines and
+eventually download the DATA package for having all the engines, or only download a particular engine
+by follow the link in the on­ line version of the collection.
+The x.x is the version of the collection like 0.1, 0.2.
+1 The package will be more because I will add a maximum 1MB for a downloaded file. In this case you will see more file
+called DATA and CONTROL
+29
+===== page 30 =====
+Editor vs Tracker
+Each DATA and CONTROL directory are divided like this:
+DATA|CONTROL
+Editor
+Tracker
+Why this division?
+It is a my choice for try to divide that engines into two main category:
+1. Editor: a program where note duration is explicitly declared
+2. Tracker: a program where note duration is not explicitly declared
+So the type 1 category is where you have some instruction to declare the duration of the followed
+notes like DUR 05 in the pattern, when in the tracker the duration is given by the number of events
+between two notes.
+This table should show what I mean with an example of 3 notes with different duration:
+Editor Tracker
+DUR 03
+A4
+B4
+DUR 02
+G4
+A4
+---
+---
+B4
+---
+---
+G4
+---
+Engines
+Each Editor and Tracker directory are now with the same structure:
+Editor/Tracker
+Name
+of
+_
+_
+Engine_xx
+Number
+of
+version
+xx
+_
+_
+_
+Name
+of
+_
+_
+Number
+of
+version
+_
+_
+_yy
+Number
+of
+version
+zz
+_
+_
+_
+Engine_yy
+There are so the names of the engines like Advanced
+Music
+_
+_
+Programmer, SIDwinder, ... and inside
+them, the number of version of the editor, like 1.00 , 1.10 , v1 , v2 , A, B, ...
+Sometimes other numbers like [1x], [2x], [4x], ... are added to the version if the editor was provid30
+===== page 31 =====
+ed for different tunes speed.
+Finally, inside the version directory there are the programs, data, documentations, examples of
+the editor into the DATA base directory, and simple html pages and images into the CONTROL base
+directory.
+Surfing the HVMEC
+If you click to the index.html file into the CONTROL directory, you will see the HTML version of the
+collection. The layout is based onto frames:
+• The top­ left frame contains some links:
+• High Voltage Music Engines Collection : point the browser to the main page with the brief description
+of the collection.
+• Editor : point the browser to the complete list of Editor with some mini images of them
+• Tracker : point the browser to the complete list of Tracker with some mini images of them
+• The center­ left frame: contains the alphabetic list of editor engines link: clicking in one you will
+see the description page of that editor.
+• The down­ left frame: contains the alphabetic list of tracker engines link: clicking in one you will
+see the description page of that tracker.
+• The main right frame: contains the page that a link in the previous frames point to.
+For example, here you can see what happens where you press the Editor/Tracker into the upper31
+===== page 32 =====
+left frame:
+Players
+HVMEC handles even the different player routines an editor can use. For examples you know that
+JCH editor can use different player routines. In this cases, in HVMEC there is a directory called []
+where there are the version numbers of an editor/tracker. Inside it there are all the versions of the
+player routines in the DATA directory, while in CONTROL there is a simple HTML page that contains
+the description of each routines, like in this example:
+32
+===== page 33 =====
+Location
+I like to spend some words about where you can found the HVMEC.
+I thinks that the best mode is that you bookmark this link:
+http://digilander.iol.it/ice00/tsid/hvmec.html
+because here you will find all the links to the on­ line and off­ line version of the collection.
+In fact, as the collection will grown to many megabyte, I have found some free alternative webspace
+onto where place the material, and they are subject to change as soon as more space will be
+needed.
+The other things is that usually the free web­ space did not allow to put executable program into
+ZIP files, probably to avoid illegal sharing of copyrighted material, so big zip stored into the host will
+make suspicious the provider and there is a high probability that the account will be disable!
+All the C64 executable that are into the collection are taken by surfing the web and I hope that
+they are provided by the authors for free download. However, if you find that a particular file in
+HVMEC cannot be freely downloaded, please let me know for removing it from the collection.
+Finally, if you have the challenge of having free web space for mirroring or hosting the collection,
+your help is welcome.
+Next versions
+Next versions of HVMEC will be released when many new engines will be added and/or many
+credits and errors will be fixed, or maybe before an harddisk crash may destruct the already done
+work!
+If you want to know what work is already done, a special page is present in the download page,
+so you can figure what is missed and what will be in the next version.
+Else I think to include a new “sample” category for let an easy search for engines that can be
+used even for making sample based soun.
+Conclusion
+If you like this new collection, there are many task you can do for helping:
+• Send binary/sources/documentation of tools you have
+• Correct/Improve credits about the already present engines
+• Create HTML related stuff of not yet present tools
+Otherwise I hope that by looking to the collection you can found the tool you need for starting
+making sid music into your C64, or that you can use the players for founding the right pattern for the
+pattern searching engine project.
+33
+===== page 34 =====
+34
+===== page 35 =====
+SIDin 5 end
+35
