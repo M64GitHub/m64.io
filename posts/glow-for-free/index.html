@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="zig, movy, rendering, terminal graphics, bloom, neon">
+  <title>Glow for Free</title>
+  <meta property="og:title" content="Glow for Free">
+  <meta property="og:description" content="movy doesn't really draw glow — it draws light and is bad at forgetting. The one persistent buffer behind the bloom and the trails.">
+  <meta property="og:image" content="https://m64.io/posts/glow-for-free/images/glow-compare.png">
+  <link rel="stylesheet" href="../article-style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <nav class="table-of-contents">
+        <h2>Contents</h2>
+        <ul>
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#the-expensive-way">The Expensive Way</a></li>
+          <li><a href="#one-buffer">One Buffer, Persistent</a></li>
+          <li><a href="#decay-blur-add">Decay, Blur, Add</a></li>
+          <li><a href="#why-float">Why It Has to Be Float</a></li>
+          <li><a href="#bloom-and-trails">Bloom and Trails Are the Same Thing</a></li>
+          <li><a href="#the-knobs">The Knobs</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="article-content">
+      <div class="article-tags">
+        <span class="tag">#zig</span> <span class="tag">#movy</span> <span class="tag">#rendering</span> <span class="tag">#graphics</span>
+      </div>
+      <h1 id="glow-for-free">Glow for Free</h1>
+      <p><strong>How movy fakes neon in a terminal with one persistent buffer.</strong></p>
+      <div class="article-byline">M. Schallner, 2026.08.30</div>
+
+      <h2 id="intro">Intro</h2>
+      <p>The first time someone watches <strong>movy</strong> render, the question is always some flavor of the same thing: <em>wait — that's glowing… in a terminal?</em></p>
+      <p>The honest answer is that movy doesn't really draw glow. It draws light, and then it's bad at forgetting.</p>
+      <p>A terminal is a grid of text cells, not a framebuffer. Truecolor gives you 24 bits per cell, and with the <code>▀</code> half-block you get two independently colored pixels per cell. That's enough resolution to be interesting — but the neon look isn't about resolution. It's about what movy does <em>between</em> frames.</p>
+
+      <h2 id="the-expensive-way">The Expensive Way</h2>
+      <p>The obvious way to make something glow is to glow it: for every bright object, draw a few blurred copies behind it, fading outward, every frame. It works. It's also slow and fiddly — each glowing thing needs its own halo, and if you want <em>trails</em> (that lovely motion smear) you now have to remember where everything was N frames ago and redraw its ghosts.</p>
+      <p>That's a lot of bookkeeping for an effect that's supposed to feel effortless. So movy doesn't track objects at all. It tracks light.</p>
+
+      <h2 id="one-buffer">One Buffer, Persistent</h2>
+      <p>A movy <code>Frame</code> keeps two floating-point RGB layers:</p>
+      <pre><code><span class="c-key">solid</span>: []V3   <span class="c-com">// opaque stuff — backgrounds, bodies, tiles. Rewritten every frame.</span>
+<span class="c-key">glow</span>:  []V3   <span class="c-com">// additive light. You add into it — and it PERSISTS across frames.</span></code></pre>
+      <p>You draw opaque pixels into <code>solid</code> (with <code>px</code> / <code>rect</code>), and you emit <em>light</em> into <code>glow</code> (with <code>gpx</code> / <code>grect</code>). The <code>solid</code> layer is normal: clear it, redraw it, done. The <code>glow</code> layer is the trick — nobody clears it. It carries over.</p>
+
+      <h2 id="decay-blur-add">Decay, Blur, Add</h2>
+      <p>Every frame starts with one call, <code>beginFrame()</code>, which does exactly two things to that persistent glow buffer:</p>
+      <ol>
+        <li><strong>Decays it</strong> — multiply every pixel by <code>glow_decay</code> (0.72 by default). Last frame's light drops to about 72% of its brightness.</li>
+        <li><strong>Blurs it</strong> — a cheap separable <strong>1-2-1</strong> blur, so light bleeds a little into its neighbors.</li>
+      </ol>
+      <p>Then you add this frame's fresh emissions on top. At the end, <code>composite()</code> mixes it all down for the terminal:</p>
+      <pre><code><span class="c-com">// once per frame, before you draw anything:</span>
+frame.<span class="c-fn">beginFrame</span>();   <span class="c-com">// glow *= 0.72, then a 1-2-1 blur</span>
+
+<span class="c-com">// ... draw opaque pixels into `solid`, emit light into `glow` ...</span>
+
+frame.<span class="c-fn">composite</span>();    <span class="c-com">// clamp(solid + glow) -> vignette -> scanline -> warmth -> flash -> tint -> surface</span></code></pre>
+      <p>That's the entire engine of the look. Three operations — <strong>decay, blur, add</strong> — on one buffer. There is no glow "feature" anywhere in here. There's a buffer that fades and spreads, and then you keep pouring light into it.</p>
+
+      <figure class="article-image">
+        <div class="compare">
+          <div><img src="images/glow-off.png" alt="A neon scene rendered by movy with the glow buffer zeroed: a magenta outline, an amber horizon, a cyan floor grid and three small moving lights — flat, no halos, no trails" width="960" height="540"><span class="lbl">glow buffer off</span></div>
+          <div><img src="images/glow-on.png" alt="The identical frame with the glow buffer composited in: the outline and horizon bloom, and the moving lights leave fading neon trails" width="960" height="540"><span class="lbl lbl-on">glow buffer on</span></div>
+        </div>
+        <figcaption>The only difference is whether the glow buffer is composited in. Same geometry, same colors, same frame — the halos on the still shapes and the trails behind the moving ones are what the buffer remembered. (Rendered headless with <code>Frame.savePng()</code>, 160×90 px.)</figcaption>
+      </figure>
+
+      <h2 id="why-float">Why It Has to Be Float</h2>
+      <p>Those layers are <code>V3</code> — floating-point RGB — not <code>u8</code>. That's not premium pixels for the fun of it; it's load-bearing.</p>
+      <p>Light is additive: two beams that overlap are brighter than either one alone. If you store color in bytes and clamp at 255 the moment things get bright, every overlap flattens to white-ish mush and the bloom dies on contact. Keep it in float, let values run <em>past</em> 1.0 while they accumulate, and only clamp at the very end, inside <code>composite()</code>. That over-bright headroom — the range you're not allowed to display yet — is exactly where the glow lives.</p>
+
+      <h2 id="bloom-and-trails">Bloom and Trails Are the Same Thing</h2>
+      <p>Here's the part I still find a little too satisfying. I never wrote a "bloom effect." I never wrote a "trail effect." Both just fall out of those same three operations, and which one you get depends on a single thing: whether the light moved.</p>
+      <ul>
+        <li>A bright pixel that <strong>stays put</strong>: each frame it's decayed and blurred, then re-lit at the same spot. It settles into a steady state — a soft, stable halo. That's <strong>bloom</strong>.</li>
+        <li>A bright pixel that <strong>moves</strong>: each frame it lights a new spot while its old positions are still fading and spreading. The fading tail is a <strong>trail</strong>.</li>
+      </ul>
+      <blockquote>Same color at a still position each frame → stable bloom. If it moves → a trail.</blockquote>
+      <p>One buffer, one decay constant, and the difference between two beloved effects is just motion. The glow isn't remembering objects — it's remembering light, and it does the remembering for you.</p>
+
+      <h2 id="the-knobs">The Knobs</h2>
+      <p>Because it's all just a buffer with a decay constant, art-directing the entire aesthetic comes down to a couple of public floats you can change any frame, no recompile:</p>
+      <ul>
+        <li><code>glow_decay</code> (0.72) — persistence. Lower is snappier and drier; higher gives longer, smearier trails. Push it toward 1.0 and the screen stops forgetting anything and the whole thing turns to soup. I know this because I tried it.</li>
+        <li><code>glow_blur</code> — the 1-2-1 blur, on or off. How far light bleeds.</li>
+        <li>and the CRT grade that runs after the mix: <code>scanline_mul</code> (0.87, darken every other pixel row) and <code>vignette_amt</code> (0.22, darken the edges).</li>
+      </ul>
+      <p>Honestly, half of what passes for "art direction" in movy is me dragging <code>glow_decay</code> up and down until a scene feels right.</p>
+
+      <h2 id="conclusion">Conclusion</h2>
+      <p>The lesson I keep relearning: the best effects usually aren't things you add — they're things you <em>simulate</em> and then read off for free. movy doesn't have a glow feature. It has a buffer of light that decays and spreads a little every frame, which is more or less what the phosphor on an old CRT does. Emulate the persistence, and the neon comes out the other side.</p>
+      <p>Glow isn't a feature you add. It's a feature you don't fully remove.</p>
+
+      <nav class="article-nav">
+        <a class="nav-prev" href="../movycat/when-simple-isnt-seeking-and-pausing/">← Seeking and Pausing</a>
+        <a class="nav-index" href="../">all posts</a>
+        <span class="nav-next"></span>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

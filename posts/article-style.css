@@ -140,3 +140,19 @@ em { color: var(--magenta); font-style: italic; }
 .nav-next { text-align: right; }
 .nav-index { color: var(--magenta); }
 .nav-index:hover { text-shadow: 0 0 12px var(--magenta); }
+
+/* Code syntax tokens — brand-colored highlighting for <pre> blocks */
+pre .c-key  { color: var(--magenta); }
+pre .c-str  { color: var(--amber); }
+pre .c-com  { color: var(--text-dim); font-style: italic; }
+pre .c-fn   { color: var(--cyan); }
+pre .c-num  { color: var(--violet); }
+pre .c-type { color: #40ff80; }
+
+/* Two-up comparison figure (glow off | on) */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.compare > div { position: relative; }
+.compare .lbl { position: absolute; top: 8px; left: 10px; font-family: var(--font-mono, ui-monospace, monospace); font-size: 12px;
+  color: var(--text-dim); background: rgba(0,0,0,0.6); padding: 2px 8px; border-radius: 4px; letter-spacing: 0.04em; }
+.compare .lbl-on { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+@media (max-width: 600px) { .compare { grid-template-columns: 1fr; } }
