@@ -1,0 +1,135 @@
+== File formats that can be read and written by OpenMPT == 
+
+=== The ProTracker MOD format (.mod) ===
+
+The MOD format was the first file format for  tracked music on the Commodore Amiga. A very basic version of this format (with only very few pattern commands and short samples supported) was introduced by Karsten Obarski’s Ultimate SoundTracker.
+It was designed to use 4 channels each with one voice. Ultimate SoundTracker was soon superseded by NoiseTracker and ProTracker, which allowed for more tracker commands (effects), longer samples, more patterns and other improvements.  Later, variants of the MOD format that appeared on the Personal Computer extended the number of channels, added panning commands (the Amiga’s four hardware channels had a pre-defined stereo setup) and expanded the Amiga’s frequency limit, allowing for more octaves of notes to be supported.
+
+Arguably one of the most widespread tracker formats (also due to its use in many computer games and demos), it is also one of the simplest to use, but also only provides few pattern commands to use.
+With OpenMPT, you can use up to 99 tracks (the default is 4, and not all applications support that many channels - few support more than 32). Instruments cannot be used in the MOD format, only 8-bit samples with a maximum size of 128 KB per sample and with a limited set of parameters.
+Initial tempo, number of rows (always 64), and the “time signature” cannot be defined (always uses the highlight values provided in the [[Manual:_Setup/Display|Display setup]]).
+There is limited sample control and few global settings.
+
+When creating a MOD file in OpenMPT, you have two options: MOD (Amiga) and MOD (PC). With the former, OpenMPT creates a 4-channel module and applies various ProTracker quirks and Amiga frequency limits (notes are limited to C-4 through B-6). The latter results in an 8-channel module with most ProTracker quirks disabled, and more octaves are available. However, keep in mind that the MOD format has no room for storing playback settings, so OpenMPT has to take a guess which playback quirks to use everytime it loads a MOD file. For instance, if you create an Amiga MOD but then decide to increase its channel count, ProTracker quirks will no longer be applied the next time you load a module. Hence, it is recommended to close and re-open any MOD file after you have a finished working on it, and listen through the entire file to check if it still sounds as intended.
+
+=== The Scream Tracker 3 format (.s3m) ===
+
+Scream Tracker 3′s S3M format added sample tuning (defining the exact frequency of the middle C for samples), increased the number of playback channels, made use of an extra column specifically for volume control (which was extended by other trackers to handle panning commands as well), and compressed pattern data for smaller file sizes.
+Other improvements include the ability to set the initial tempo and speed (ticks per row), initial global and sample volume as well as initial channel panning. Compared to MOD, there is also a different, expanded set of effect commands.
+
+A unique feature of the S3M format is the ability to make use of samples and synthesized FM instruments (via the Yamaha OPL2 chip) at the same time. OpenMPT can fully emulate this chip in software.
+
+=== The FastTracker 2 format (.xm) ===
+
+With the XM format, Fasttracker 2 introduced the concept of “instruments”, which applied volume and panning envelopes to samples. It also added the ability to map several samples to the same instrument for multi-sampled instruments or drum sets. XM uses instrument-based panning – instrument numbers in patterns always reset the channel’s panning to the current sample’s initial panning.
+It uses MOD effect command letters, plus a few of its own for more sound control.
+You can define initial tempos and speeds; provide envelopes to samples by assigning them to instruments; set sample looping and apply automatic sample vibrato oscillation; and with OpenMPT, apply VST plugins to instruments, channels, or the whole track to spice up your old XM compositions.
+
+=== The Impulse Tracker format (.it) ===
+
+Impulse Tracker introduced the IT format, which, in comparison to the XM format, allows instruments to also specify the transposition of assigned samples depending on the note being played, applying resonant filters to samples, and defining “New Note Actions” (NNAs) for instruments to release playing notes on a pattern channel while a new note is already playing, which helps to keep the number of pattern channels at a manageable amount while still being able to have a high polyphony. Like S3M files (and contrary to XM files), panning is channel-based, meaning that channels have an initial pan position which can be overridden by panning commands or instruments’ and samples’ default panning settings.
+Samples also have decent compression in file storage when saving IT files directly in Impulse Tracker or enabling OpenMPT's [[Manual: Hidden Settings#.5BMisc.5D|experimental IT compression settings]].
+IT effect commands use a more advanced set of S3M commands.
+
+=== The OpenMPT format (.mptm) ===
+
+MPTM is OpenMPT’s own format. It is based on the IT format, with added capabilities of [[Manual:_Tuning_Properties|custom sample tunings]], [[Manual:_Parameter_Control_Events|Parameter Control events]], multiple [[Manual:_Patterns#Order_List|Pattern Sequences]], [[Manual: Tempo Swing Settings|tempo swing]], fractional tempos, global resampling settings and many more features. Some features such as VST plugins are currently usable in XM and IT as well but really should only be used in MPTM files. You can find these features by using the [[Manual:_Menus#View|Find Hacks]] functionality in the View menu.
+
+Compared to IT, this format also adds back support for the OPL chip as found in the S3M format with several useful additions, such as being able to use the additional OPL3 waveforms, apply instrument envelopes to FM instruments or controlling the modulator intensity through sample filter cutoff.
+
+=== The MIDI format (.mid) ===
+
+MIDI files are of course not module files, and OpenMPT is by no means a MIDI editor. MIDI files store note data and timing information in a way that is not easily converted to a pattern-based tracker format.
+
+OpenMPT can import many MIDI-sequenced songs in the MID / RMI format, but it is important to remember that sequencer files are not the same as modules and the data within these files does not translate well to a tracking format. MIDI import is thought of as a tool to import your old MIDI-based projects, remix stems and similar things more than as a way to listen to MIDI files in OpenMPT — there are far better MIDI players out there.
+
+When importing MIDI files, experiment with the File Import settings in the [[Manual: Setup/MIDI|MIDI Setup]]. In particular, try different quantization values if not enough note detail can be imported, or lower the Ticks / Row to get rid of some unnecessary Note Delay and Note Cut effects at the cost of a less accurate import.
+
+OpenMPT supports the following General MIDI and XG features:
+* '''MIDI CCs''': Bank Select, Pan Position, Expression, Channel Volume, Hold Pedal, CC 111 loop points, Mono / Poly Operation, All Controllers / Sounds / Notes Off
+* '''RPNs''': Pitch Bend Range, Coarse Tune
+* '''System Exclusive''': Master Volume, Master Transpose, GS Drum Kit. XG System On enables drums on bank 127 on any channel.
+
+OpenMPT reads embedded soundfonts in RMI files, and automatically loads patches from soundfonts that carry the same name as the MIDI file, as long as they are placed in the same directory.
+
+=== Choosing a module format ===
+
+Each format supported by OpenMPT has its own strengths and use cases, so sometimes it might not be obvious which format to pick.
+
+If you do not intend to spread your module files, or if compatibility with other software is not a requirement, using OpenMPT’s MPTM format is the most logical choice, as it is the most advanced among the supported formats, and new features are added to the format every now and then.
+
+If you would like to be able to spread your modules and play your music in a wide variety of legacy module players and trackers, the IT format offers the most features and is supported by a lot of software.
+
+Using the MOD, XM and S3M formats is only recommended if you intend to target a platform or software that only supports those formats. For instance, if you want to be able to play your modules on an Amiga computer, a 4-channel ProTracker MOD file would be the most logical choice.
+
+== File formats that can only be read by OpenMPT ==
+
+The following formats can be imported into OpenMPT. Internally, they are converted to one of the file formats described above.
+Depending on the source format, conversion might not always be accurate. 
+
+* Composer 667 (.667)
+* Composer 669 / UNIS 669 (.669)
+* ASYLUM Music Format / Advanced Music Format (.amf / .dmf)
+* Extreme’s Tracker / Velvet Studio (.ams)
+* Composer 670 / CDFM (.c67)
+* Chuck Biscuits / Black Artist (.cba)
+* Digi Booster Pro (.dbm)
+* Digi Booster (.digi)
+* X-Tracker (.dmf)
+* DSIK (.dsm)
+* Dynamic Studio (.dsm)
+* Digital Symphony (.dsym)
+* Digital Tracker / Digital Home Studio (.dtm)
+* EasyTrax (.etx)
+* Farandole Composer (.far)
+* Future Composer (.fc / .fc13 / .fc14 / .smod)
+* Davey W. Taylor’s FM Tracker (.fmt)
+* Face The Music (.ftm)
+* General Digital Music (.gdm)
+* Game Music Creator (.gmc)
+* Graoumf Tracker (.gtk / .gt2)
+* Ice Tracker / SoundTracker 2.6 (.ice / .st26)
+* Imago Orpheus (.imf)
+* Images Music System (.ims)
+* Impulse Tracker Project (.itp) – legacy OpenMPT format with instruments stored in external files rather than directly in the module
+* Jazz Jackrabbit 2 Music (.j2b)
+* SoundTracker and compatible (.m15 / .stk)
+* DigiTrakker (.mdl)
+* OctaMED (.med)
+* MO3 (.mo3)
+* ChipTracker (.mod)
+* TCB Tracker (.mod)
+* UNIC Tracker v1 (.mod)
+* MadTracker 2 (.mt2)
+* MultiTracker (.mtm)
+* Psycho Pinball / Micro Machines 2 music format (.mus)
+* Oktalyzer (.okt)
+* OggMod-compressed XM files (.oxm)
+* Epic Megagames MASI (.psm)
+* Disorder Tracker 2 (.plm)
+* ProTracker 3.6 IFF (.pt36)
+* PolyTracker (.ptm)
+* PumaTracker (.puma)
+* RealTracker (.rtm)
+* SoundFX / MultiMedia Sound (.sfx / .sfx2 / .mms)
+* Scream Tracker 2 (.stm)
+* Scream Tracker Music Interface Kit (.stx)
+* Soundtracker Pro II (.stp)
+* Symphonie / Symphonie Pro (.symmod)
+* UltraTracker (.ult)
+* Unreal Music (.umx) ''only from Unreal (Tournament 1), Deus Ex and Jazz Jackrabbit 3D''
+* Mod's Grave (.wow)
+* Astroidea XMF (.xmf)
+
+=== Compressed modules ===
+OpenMPT also handles several compression formats, so you do not need to extract modules from these formats to be able to listen to them: Modules in ZIP, RAR, LHA and GZ containers can be opened directly. Modules in ZIP or RAR archives make use of custom file extensions sometimes; Instead of ZIP or RAR, the file extension might be one of the following: MDZ, S3Z, XMZ, ITZ, MPTMZ, MDR. OpenMPT generally does not care about file extensions though, so it does not matter which extension you use for your compressed modules.
+
+OpenMPT cannot save modules into compressed files, you will have to save your work as a normal module first and then compress it e.g. with Windows’ Zip capabilities or other third party compression utilities.
+
+Some module-specific compression routines and compression schemes mostly used on Amiga computers are also supported, for example MMCMP, XPK (many variants), PowerPacker PP20 and others.
+
+Furthermore, OpenMPT can handle MO3 files. [https://www.un4seen.com/mo3.html MO3] is a highly compressed module format with lossy sample compression.
+MO3 encapsulates the features of several module formats (IT, MOD, MPTM, MTM, S3M, XM), but with one big difference: MP3 and Ogg compressed samples.
+It also has a lossless codec for any samples that do not like lossy encoding, and the whole file structure is compressed too.
+
+[[Category:Manual|Module formats]]

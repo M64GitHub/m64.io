@@ -1,0 +1,39 @@
+[Hard restart - what's the story? — Lemon64 forum thread, https://www.lemon64.com/forum/viewtopic.php?p=659158 — fetched 2026-08-30, post text extracted from HTML; 6 posts]
+
+--- commodorejohn — 2015-02-01T06:54:00+00:00
+So I'm looking at trying to build my own playroutine (I'd like something that minimizes space usage, provides only the features I need, and does a few other things GoatTracker doesn't, particularly a synthesizer-style envelope+LFO approach to modulation rather than GT's list-of-delta-values approach) and I'm trying to look into what the "hard restart" voodoo is about. I've gathered that it has to do with the SID's envelope generators not behaving in the expected way at times, but nobody seems to explain exactly how or when this manifests, or why - just "in order to ward off the Envelope Gremlins you must recite the magic incantation x frames before the next note."
+
+Can someone explain more about what the failure mode is, or take a guess as to how it happens? I'd like to actually understand this in order to decide how to handle it in my playroutine, since the typical approach of "hard-cut the note a very audible fraction of a second before it should be cut" sounds less than pleasant to my ears.
+
+--- flavioweb — 2015-02-01T09:30:29+00:00
+http://codebase64.org/doku.php?id=base: ... _explained
+
+--- encore — 2015-02-01T10:50:53+00:00
+It has been discussed quite in detail here, f.ex. cadavers replies. Another approach to understand it is to look at the source of emulators, like: envelope.cc, envelope.h
+
+flavioweb: That's explains a technique on how to play samples using 1 or 2 voices, it doesn't explain the envelope bug.
+
+--- commodorejohn — 2015-02-02T01:14:51+00:00
+That thread seems to mostly boil down to "you can't get a completely deterministic result, so don't bother trying to understand the magic incantation," and the source appears to just trigger it randomly...
+
+--- flavioweb — 2015-02-02T05:41:36+00:00
+The "hard reset" isn't
+
+The whole idea is about starting the pulse by software, and then having the SID turn it back to 0 after a time. Is it possible? ...The keys are the Test bit (the SID wave counter can be reseted anytime), the pulse width register, the wave counter and the SIDs way of generating pulse wave. (Ie. the pulse wave is high, as long as the wave counter is less than the value in the pulse width register).
+
+?
+
+If is this, in the link i posted above there are some explanations...
+
+Otherwise i misunderstood the question...
+
+--- encore — 2015-02-02T07:48:11+00:00
+flavioweb: With 'reset' (I don't think it's called 'hard reset' though?) you're manipulating the test bit. 'Hard restart' is a technique to avoid that the envelope bug occurs. So yes, different subjects.
+
+commodorejohn: As far as I know it's completely deterministic from an emulators point of view and it's quite well explained in envelope.h, around line 118. It's another thing to be deterministic about it from a 6502-programmers standpoint though. The routes I use are either
+
+1. use 'hard restart'
+
+2. finding safe ADSR-values in a song where the bug never triggers (and this depends entirely on the situation/arrangment/instrument/bpm)
+
+3. keep a voice continously in it's sustain mode and simulating new notes with changes in pwm or filter instead.

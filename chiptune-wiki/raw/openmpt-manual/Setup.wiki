@@ -1,0 +1,30 @@
+[[Image: Preferences Icon.png|thumb|Setup icon]]
+
+When you run OpenMPT for the first time, the Options dialog can be reached immediately from the Welcome dialog, but you can dismiss this if you want to just dive right in. You can also open this dialog box any time by clicking on the Setup icon in the Main toolbar, opening the [[Manual: Menus#View|View menu]] in the Main menubar and selecting “Setup”, or pressing the “View Options” keyboard shortcut (<kbd>Ctrl</kbd>+<kbd>F1</kbd> by default; can be changed in the Setup dialog's [[Manual: Setup/Keyboard|Keyboard tab]]).
+
+[[Image:Settings General.png|thumb|300px|Setup dialog]]
+
+== Structure of the Setup dialog ==
+
+Behaviour and display preferences can be accessed by clicking on the tabs the top of the setup dialog. To save the preferences, click on Apply or OK (which will also close the window). The following setup pages are available. Click on any of the list items to read more about the corresponding section.
+
+* [[Manual: Setup/General|General]] - Miscellaneous options.
+* [[Manual: Setup/Soundcard|Soundcard]] - For setting up the device that shall be used to output sound.
+* [[Manual: Setup/Mixer|Mixer]] - For setting up sample interpolation, polyphony and other mixer-related settings.
+* [[Manual: Setup/DSP|DSP]] - For setting up player effects and the global equalizer.
+* [[Manual: Setup/Samples|Samples]] - Default settings for the sample and instrument editor.
+* [[Manual: Setup/Keyboard|Keyboard]] - For keyboard behaviour and shortcut configuration.
+* [[Manual: Setup/Display|Display]] - For configuring the looks of the editor.
+* [[Manual: Setup/MIDI|MIDI]] - For setting up MIDI recording / importing.
+* [[Manual: Setup/Paths / Auto Save|Paths / Auto Save]] - For setting up default directories and the creation of periodic backups.
+* [[Manual: Setup/Update|Update]] - For configuring the automatic update check.
+* [[Manual: Setup/Advanced|Advanced]] - A list of almost all configuration variables for advanced usage.
+* [[Manual: Setup/Wine|Wine]] - For Wine-specific options (not available on Windows systems).
+
+== Technical information ==
+
+Most of the preferences that are set in the Options page are stored in the file <code>mptrack.ini</code> and can be edited in a simple text editor if necessary. Generally, however, you want to make these changes within OpenMPT so you can tell what you are doing. Besides the <code>mptrack.ini</code> file, there is the <code>Keybindings.mkb</code> file (which saves the keyboard shortcuts), the <code>plugin.cache</code> file (which caches information about previously loaded plugins to speed up the loading process of the program) and optionally there are <code>.tun</code> files (which store custom tunings). These files are kept in the folder <code>"%APPDATA%\OpenMPT"</code>. However, when using OpenMPT in portable mode (such as on a removable device), all of these external files are kept in the root directory of the ModPlug Tracker application. In either case, you can use '''Show Settings Folder''' from the [[Manual: Menus#Help|'''Help''' menu]] to open the folder containing all configuration files.
+
+[[Category:Manual|Setup Window]]
+[[Category:Windows|Setup Window]]
+[[de:Handbuch: Setup]]

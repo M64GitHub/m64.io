@@ -1,0 +1,102 @@
+[SID and ADSR re-triggering? — Lemon64 forum thread, https://www.lemon64.com/forum/viewtopic.php?t=26968 — fetched 2026-08-30, post text extracted from HTML; 4 posts]
+
+--- Schema — 2008-05-12T13:51:20+00:00
+Hi all,
+
+I've never fully understood ADSR (re)triggering with the SID on the C64. To illustrate, below is the routine from my Artillery Duel game that starts the "boom" sound when the bullet hits the side of the mountain.
+
+I'm using Voice 2, and triggering and clearing bit #1 in $d40b in short order (so the Decay portion shouldn't matter). i.e. it should go immediately to the Release phase, and it seems to.
+
+However, if I then call this routine again within 2.4 seconds, the envelope
+
+doesn't start again - I just get nothing. Is there a way I can "reset" the
+
+ADSR envelope so it starts again immediately if I need to?
+
+Code: Select all
+
+lda #$0f ; 0 Attack, Slow Decay
+sta $d40c
+lda #$0B ; 0 Sustain, 2.4 second Release
+sta $d40d
+lda #$04 ; Pitch (High)
+sta $d408
+lda #$00 ; Pitch (Low)
+sta $d407
+lda #$81 ; Trigger
+sta $d40b
+lda #$80 ; Release
+sta $d40b
+rts
+
+--- tfg — 2008-05-12T16:06:34+00:00
+This is odd, I thought it should work the way you did it.
+
+Have you tried to switch the values for AD with SR and the order of triggering and releasing the ADSR as well? For the sound in your example it should make not much difference if you leave the gate bit set as there is no sustain specified.
+
+--- iAN CooG — 2008-05-12T18:32:15+00:00
+I don't know much about sid coding, but I think something like this will solve. you have to wait 2 frames at least to allow the sid oscillator to reset ($09=gate bit and test bit set)
+
+Code: Select all
+
+*=$0801
+word eop
+word 7102
+byte $9e,"2061",0
+eop
+word 0
+lda #$0f
+sta $d418
+
+ldy #4
+again
+jsr note
+ldx #$30
+jsr w8frames
+
+dec $d020
+
+dey
+
+bne again
+rts
+
+note
+
+lda #$09
+sta $d40b
+
+ldx #2
+jsr w8frames
+
+lda #$00
+sta $d40b
+
+lda #$0f ; 0 Attack, Slow Decay
+sta $d40c
+lda #$0B ; 0 Sustain, 2.4 second Release
+sta $d40d
+lda #$04 ; Pitch (High)
+sta $d408
+lda #$00 ; Pitch (Low)
+sta $d407
+lda #$81 ; Trigger
+sta $d40b
+lda #$80 ; Release
+sta $d40b
+
+rts
+
+w8frames
+lda $d012
+bmi *-3
+lda $d012
+bpl *-3
+dex
+bne w8frames
+rts
+
+--- Lasse — 2008-05-13T08:41:35+00:00
+Just to be precise, the sid oscillator will be reset immediately when setting testbit.
+
+But the testbit doesn't affect the envelope generator at all, and you need the minimum 2 frame period with gatebit off to be safe. As far as I remember, trying to trigger a sound when the envelope is still at max. volume will result in silence and lockup that lasts until the gatebit gets cleared again.

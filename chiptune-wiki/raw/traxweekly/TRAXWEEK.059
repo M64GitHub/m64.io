@@ -1,0 +1,637 @@
+			     .
+  founded march 12, 1995   _| :            _____  t r a x w e e k l y   # 59
+	   ______________ |___|  _ _______/    /\___________________________
+	 /  ____________/ /\__\ _ _______/____/_____________________________
+	/  /  _________   \/__/    ______\    \_____________________________
+       /  /  /          `_  .  .~         \____\/                 _  __ ___
+      /  /  /     _____   . _ \                                __ ___ _/__/\
+     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/
+   _/__/  / ____/    /__\_________________________________  _____      ___ _
+  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /
+ /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/
+ /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\
+   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \
+  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /
+ /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /
+   /                                                 \____\/\____\ /  /  /
+  /  _____     _____     _____     _____     _____     _____      /  /  /
+ /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /
+ __/____/____/____/____/____/____/____/____/____/____/____/________/  /
+ __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/
+    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW
+
+----------------------------------------------------------------------------
+  - | TraxWeekly Issue #59 | Release date: 05-23-96 | Subscribers: 571 | -
+----------------------------------------------------------------------------
+
+
+/-[Introduction]------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+       ,o@P'` ,o@P^"T@o,  dSSSP^"T@o,   ,o@P^"$$$b   ,o@P^"T@o,
+yyyy   Q$$b   Q$$b  `$$$b `$$$b  `$$$b  Q$$b  `$$$b  Q$$b  `$$$b   yyyyyyyyy
+$$$$b  `$$$b  `$$$b  `$$$b `$$$b  `$$$b `$$$b  `$$$b `$$$b  `$$$b  `$$$$$$$$
+$$$$$b  `$$$b  `$$$b  `$$$b        `$$$b `$$$b        `$$$b  `$$$b  `$$$$$$$
+$$$$$$b  `$$$b  `$$$b  `$$$b        `$$$b `$$$b        `$$$b  `$$$b  `$$$$$$
+$$$$$$$b  `$$$b  `$$$b  `$$$b        `$$$b `$$$b         T$$$,.d$$P   d$$$$$
+$$$$$$$"`                                                           `"$$$$$$
+$$$$$$;     i n t r o d u c t i o n    t o    t r a x w e e k l y     ;$$$$$
+$SQ2$$$,                                                             ,$$iCE$
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Welcome to TraxWeekly #59.
+
+  We have two rather long pieces on tracking technique this week.  Catspaw
+ continues with part of his series on improving songs through the technical
+ aspects of their creation, and Vivid addresses in-song effect processing.
+ It's "crunch" time for schools in the Northern Hemisphere, so apologies
+ if TraxWeekly hasn't been keeping up with music reviews this month.
+
+  Expect some better quality output starting in June!  A reminder to those
+ charitable souls who contribute articles to TraxWeekly: please re-read the
+ format requirements. =)  Thank you!
+  
+                                                    Gene Wie (Psibelius)
+                                                    TraxWeekly Publishing
+                                                    gwie@owl.csusm.edu
+
+
+/-[Contents]----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ ________  _________________________________________________________________
+ /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_
+<   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__
+ \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_
+ _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\
+
+  General Articles
+
+     1. The Finishing Touches.........................Catspaw
+     2. Tracking Hints................................Vivid
+
+  Group Columns
+
+     3. Explizit
+
+  Advertisements
+
+     4. New Italian Demo Site
+
+  Closing
+
+     Distribution
+     Subscription/Contribution Information
+     TraxWeekly Staff Sheet
+     
+     
+/-[General Articles]--------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[1. The Finishing Touches]-------------------------------------[Catspaw]--
+
+                                                                       Intro
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~^~~~^~~~^~~^~~^~~^~^~^~
+     Tracker nightmare #4,732:
+
+ *** DCC SEND:/usr/baygled/newtewnz.zip to necros completed 4.38 kb/sec
+ <baygledawg> necroze: t3ll m3 wh4t j00 th1nk 0f my n3w t3wn!%@%@!
+
+     Now is not the time to realize you forgot to put the finishing touches 
+ on your song. :>
+     Last week, I wrote an article dealing with the finer technical points 
+ of writing tracked music. Now granted, little technical details will not
+ necessarily make bad music good, nor will the lack of them necessarily 
+ ruin otherwise good music... but little details can mean the difference 
+ between a good song with potential, and a great song which has realized that
+ potential.
+     In each week, I'm going to repeat the following short section, which
+ explains the way I do demonstrations of actual tracking...
+
+                                                            Example Notation
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~^~~~^~~~^~~^~~^~~^~^~^~
+
+     In TraxWeekly 15, Basehead published a phenomenal article on tracking
+ tips. In this article, when demonstrating an aspect of tracking, he used an
+ ASCII simulation of an ST3 interface. Now I'm aware that not everyone uses
+ ST3 or Impulse Tracker, but it's what I'm most familiar with, and since
+ Basehead's diagrams worked well for me, I'm going to use them here. To wit:
+
+			   | C#5 16 48 H83 |
+			    /^^^ ^^ ^^ ^^^\
+	       Note & Octave     |   |     ST3/IT Effect & Amount of effect
+				 |   |
+			    sample # |
+				     |
+				   volume
+
+ With that out of the way... on to today's spammage. :>
+
+                                                             Spring Cleaning
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~^~~~^~~~^~~^~~^~~^~^~^~
+
+    I know how it is to be really anxious to release your new song. :> Hell,
+ I've made my own share of mistakes in a rush to get a song out. Still, it's
+ worth it to take the time to clean up after yourself and tie a little bow
+ on the package.
+     What do I mean by that? Well, let's start from the important thing--the
+ actual song data--and work our way down to the miscellanea. Much of this,
+ unfortunately, will be tracker-specific to the ST3/IT interface, as I'm not
+ sure what the equivalents for FT2 and MMEdit will be in many cases--but
+ there should be something for everyone. :>
+
+     Space-saving. If you're one of those mad phat trackers who sits down
+ and tracks something from start to finish in one sitting, not all of this
+ may apply to you... but if you're like the rest of us, you may skip around
+ in patterns a lot, coming back to one at one point, jumping over to
+ another, fiddling with things, writing an intro, etc etc. In all of this
+ jumble, working or temporary patterns, samples, and experiments can go
+ forgotten in the final release. This is the most common source of what's
+ euphemistically referred to as "hidden tracks". As entertaining as these
+ can be for the curious, they're often embarassing--and patterns take up
+ space! Whether or not they're used in the order list, patterns *are* saved
+ and do eat up excess space; a lot more of it, in fact, than you might
+ think. An early tune of mine had almost 30k in dead patterns!
+     Therefore... it's a good idea to go through your song with a fine-
+ toothed comb. Are there any temporary patterns you've forgotten? Samples
+ you loaded at one point and forgot to delete? This one can be especially
+ easy to overlook in FT2 or ST3, which don't make the fact that you have a
+ sample loaded in a given slot jump out at you very well. Clear out unused
+ patterns (in ST3/IT, hit Alt-L twice in that pattern, then clear block)
+ and clean up the order list if necessary.
+     All done with that? Good. :> Now, go through each pattern from top to
+ bottom--this usually shouldn't take too long unless your song is very
+ lenthy, and is worth it. Do you use a lot of vibrato, volumeslides, portas,
+ or other effects at the same value in a row? (ie, in ST3/IT, four or five
+ D10 effects to slide the volume up)
+     If you do, and you haven't done this already, you may want to go
+ through and zero out some of the effect fields. When a given effect has
+ 00 as the parameter, it assumes whatever the last value it was given. This
+ saves a negligible amount of space, but it's something (and is especially
+ important for cutting down the size of chip songs, which tend to use a lot
+ more effects than other songs), and it's a lot easier to type in if you
+ learn to get into the habit of using this. For example:
+
+ 24 | G#5 01 .. D10 | | ... .. .. .00 | | ... .. .. D10 | | C-5 02 .. .00 |
+ 25 | ... .. .. D10 | | ... .. .. .00 | | E-5 02 .. G03 | | C-5 03 32 .00 |
+ 26 | ... .. .. D10 | | ... .. .. .00 | | ... .. .. G03 | | C-5 04 51 Q43 |
+ 27 | ... .. .. D20 | | ... .. .. .00 | | ... .. .. GF0 | | C-5 04 51 Q43 |
+ 28 | ... .. .. H81 | | ... .. .. .00 | | ... .. .. D10 | | C-5 02 .. .00 |
+ 29 | ... .. .. H81 | | ... .. .. .00 | | ... .. .. D10 | | C-5 03 32 .00 |
+ 
+     This is kind of wasteful. It could just as easily be redone like this:
+
+ 24 | G#5 01 .. D10 | | ... .. .. .00 | | ... .. .. D10 | | C-5 02 .. .00 |
+ 25 | ... .. .. D00 | | ... .. .. .00 | | E-5 02 .. G03 | | C-5 03 32 .00 |
+ 26 | ... .. .. D00 | | ... .. .. .00 | | ... .. .. G00 | | C-5 04 51 Q43 |
+ 27 | ... .. .. D20 | | ... .. .. .00 | | ... .. .. GF0 | | C-5 04 51 Q00 |
+ 28 | ... .. .. H81 | | ... .. .. .00 | | ... .. .. D00 | | C-5 02 .. .00 |
+ 29 | ... .. .. H00 | | ... .. .. .00 | | ... .. .. D00 | | C-5 03 32 .00 |
+
+     Much better. :> The lead on the left still rises in volume, and the
+ vibrato continues. The backup instrument in track 3 starts a porta to E-5
+ (which would probably, as a sidenote, sound horrible :), and because an
+ earlier D10 in that row was issued, the D00 can be used to do it again.
+ Finally, in track 4, the retrig on instrument 4 (probably a drum) is
+ continued as normal.
+			  ** be forewarned **
+     Certain effect commands have shared "memories"--that is, two or more
+ effects share the same space in memory for which effect parameter they
+ remember. Common ones are the Fxy and Exy effects, but many of the others
+ differ from format to format. Be sure to consult your tracker's
+ documentation to find out which effects share memory!
+
+     Okay, once all of that cleanup's done.. now it's time to check for
+ obvious flaws. Look for things like the problems with looping mentioned in
+ last week's article. Other things to keep a very close eye on are, for
+ instance, global volume. I've seen many, MANY modules which slide down the
+ global volume at the end for a nice fadeout... but which do not reset it at
+ the beginning of the song.
+     This is really a big no-no. This means that the song can *not* loop...
+ after the first play, no sound will come out because the global volume will
+ still be at 0 or whatever it was left at when the song reached the end and
+ looped around.
+     Anyway, now that I've covered the end of the songwriting process, 
+ let's take a look back at the midst of it...
+
+
+                                                 Volume, Frames, and Retrigs
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~^~~~^~~~^~~^~~^~~^~^~^~
+     Okay, if you're like the rest of us, one of the first effects you
+ probably learned was the volumeslide. In the ST3 command set, this is the
+ Dxy command. If x is 0 and y isn't, the slide is down, and vice versa.
+ Pretty simple, right?
+     Well, kind of. It says in the documentation of most programs that the
+ higher the value, the faster the slide... but beyond that, the explanation
+ is technical and dense. I skipped over it the first few times I read it.
+ So most people find a value that "kind of" fits how fast they want the
+ volume to go down, and issue a long line of those--or they pick an
+ ascension or descension, like 1-2-3. Example:
+
+ 24 | G-5 01 .. D10 | | ... .. .. .00 | | ... .. .. .00 | | B-4 01 .. D10 |
+ 25 | ... .. .. D00 | | ... .. .. .00 | | ... .. .. .00 | | ... .. .. D20 |
+ 26 | ... .. .. D00 | | ... .. .. .00 | | ... .. .. .00 | | ... .. .. D30 |
+ 27 | ... .. .. D00 | | ... .. .. .00 | | ... .. .. .00 | | ... .. .. D40 |
+
+     How many of you know what the tracker docs mean when they talk about
+ "frames"? They're talked about everywhere, from speeds to slides to
+ retrigs, but I've been consistently surprised how many people find it a
+ difficult concept to grasp. A shame too, because understanding frames is a
+ vital key to using effects... well, effectively. =)
+
+     To put it simply, a frame is a slice of time. An extremely short one,
+ merely a fraction of a second. The faster the tempo or bpm, the shorter the
+ duration of a frame. Think of a frame as a tick on a clock. Hold that
+ thought.
+     Now, think back to the speed of the song (set with Axx in the ST3
+ command set). The most common speed is 6, as it is the default. It may seem
+ odd that the larger the number of the speed, the slower the song... until
+ you think of it as a delay. A delay in frames.
+     To wit, whatever you set the speed of the song at, that is how many
+ frames elapse for each row. So in the above example, 24 frames would pass
+ from the beginning of row 24 to the end of row 27. Four rows, six frames
+ per row at speed 6, 24 frames. Are you still with me? That means that at
+ speed 8 there would be 8 frames for each row, and yes, at speed 1 (if you
+ actually need this kind of precision) there would only be one frame for
+ each row.
+
+     Now, that probably sounds obscenely technical. You're probably
+ wondering, "great, but what the smeg does that have to do with tracking?"
+ Read on, my friends, if you haven't already guessed.
+
+     Let's take a look at the basic volumeslide, Dxy. In the documentation,
+ it says that the slide reduces the volume by a number equal to the speed
+ minus one, to cut through the technical drek. So if you're playing at speed
+ 6, an effect of D01 would slide the volume gradually down by 5 over the
+ course of that row. Likewise, a D02 would slide by 10, and so on. a D03 at
+ speed 4 would slide down by 9.
+     You can use this to eliminate the trial and error from your tracking.
+ For instance, let's say you've got a nice string sample doing a chord pad
+ in the background. You want the strings to fade in and out just a tad
+ between changes. Assuming the default volume that you wish the strings to be
+ at is 59, and that this is at speed 6...
+
+ 29 | ... .. .. D02 | | ... .. .. .00 | | ... .. .. D02 | | ... .. .. D02 |
+ 30 | ... .. .. D00 | | ... .. .. .00 | | ... .. .. D00 | | ... .. .. D00 |
+ 31 | ... .. .. D01 | | ... .. .. .00 | | ... .. .. D01 | | ... .. .. D01 |
+ 32 | F-3 02 34 G30 | | ... .. .. .00 | | G#4 02 34 G30 | | A#4 02 34 G30 |
+ 33 | ... .. .. D01 | | ... .. .. .00 | | ... .. .. D01 | | ... .. .. D01 |
+ 34 | ... .. .. D02 | | ... .. .. .00 | | ... .. .. D02 | | ... .. .. D02 |
+ 35 | ... .. .. D00 | | ... .. .. .00 | | ... .. .. D00 | | ... .. .. D00 |
+
+     In this, you have the string sample being forced to begin at volume 34.
+ We then issue a D01 to start a slow slide, which slides it up to 39. Then
+ we have two rows of D02 effects, which each slide it up by 10, giving an
+ end volume of 59. Assuming that the chord prior to the example above began
+ the same way, this slide would be reversed just before this one came in.
+     Simple enough, you think. But what if you want to combine volume slides
+ with normal settings in the volume column? Let's say you're doing a dropoff
+ trick from a prior tracking tips article, which entails going to a high
+ note and doing a fast porta down while dropping the volume. Let's say that
+ we need to toss some effects in there, so, at speed 5:
+
+ 48 | C#6 02 33 UC3 | - Begin the note at volume 37 with a slight vibrato
+ 49 | ... .. .. K20 | - Slide the volume up to 41 while maintaining vibrato
+ 50 | ... .. 44 H82 | - Set the volulme up a little more, increase vibrato
+ 51 | ... .. .. K01 | - maintain vibrato, slide volume down to 40
+ 52 | ... .. 32 H71 | - lessen vibrato, continue slide in volume column
+ 53 | ... .. 20 E0E | - simulate a slide of D03 while doing porta down
+ 54 | ... .. 12 E00 | - decrease slide to D02, continue porta, issue noteoff
+ 55 | ... .. 04 E00 | - continue D02 slide and porta down
+ 55 | ^^^ .. .. .00 | - issue notecut to kill volume and note completely
+
+     Now, let's take a look at another common effect which utilizes
+ frames--the retrig.
+
+     Used properly, the retrig can be one of the most powerful effects that
+ exist. Used poorly, it can give a sense of overkill, or at worst, ruin a
+ song. The way retrig works is commonly misunderstood, so let's bring it
+ back to frames again and look at the command.
+
+     Retrig: Qxy
+     In this, the 'y' is the parameter we want to worry about first. It is
+ directly related to what speed you're at. What retrig does is wait for 'y'
+ frames into the row it's issued on, and then restarts the note. This is
+ great for drum tracks! So assuming we were at speed 6, a retrig of Q03
+ would retrig the note (say, a snare hit) once right in the middle of the
+ row... because 3 is halfway through the six frames of a row at that speed.
+ Simple math, eh?
+     It doesn't stop there, though. You could also issue it as Q02... and at
+ speed six, you would actually get three snare hits in the same row. Or you
+ could issue it as Q04, and you would get the first hit on frame 1 as normal
+ and a second hit on frame 4--which would sound somewhat odd, but if used
+ well, could be cool. :>
+     Note that because of the way retrigs work, I recommend *avoiding*
+ speeds with odd numbers, simply because it is impossible to properly retrig
+ or note delay halfway through the row. Speed 3 isn't that bad, because it's
+ so fast you almost don't need to retrig... but speeds 5, 7, 9, etc, are good
+ ones to  avoid if possible. If you need to get those speeds, play around
+ with the tempo (Txx) effect to give it the feel you need in an even number
+ like 4, 6, or 8.
+     Pretty spiffy, eh? But wait, it gets better. :> Since a triple retrig
+ on, say, a ride cymbal at normal volume, sounds fairly blah, we can add a
+ little bit of spice to it with the 'x' parameter of retrig, which is volume
+ control. The following is reproduced and slightly altered from the Impulse
+ Tracker documentation:
+   ________________________________________________________________________
+  |  Value  :  Vol change each retrig  |  Value  :  Vol change each retrig |
+  |    0    :        No change         |    8    :        No change        |
+  |    1    :           -1             |    9    :           +1            |
+  |    2    :           -2             |    A    :           +2            |
+  |    3    :           -4             |    B    :           +4            |
+  |    4    :           -8             |    C    :           +8            |
+  |    5    :          -16             |    D    :          +16            |
+  |    6    :          *2/3            |    E    :          *3/2           |
+  |    7    :          *1/2            |    F    :           *2            |
+  |    8    :        No change         |                                   |
+  `------------------------------------------------------------------------'
+
+     You may want to print this out. This may seem rather dense at first,
+ but it will quickly become second nature. Let's say you have the
+ abovementioned ride cymbal, which has a default volume of 32. Now let's say
+ you wanted a series of hits on it which did a high-low-high volume trick.
+ Using retrig, and assuming you wanted the second hit to be about volume 24,
+ it would look like this:
+
+ 01 | E-7 05 32 Q43 | - first hit at 32 retrigged halfway through down to 24
+ 02 | E-7 05 28 .00 | - third hit at 28 left alone
+
+     Or for an even better example, let's say you've going a really 'reet
+ marching snare sample that's crisp and clean. You want to do a snare roll
+ with it. Again, at speed 6, volume 50:
+
+ 01 | C-5 04 50 Q53 | - first hit at 50 retrigged halfway through down to 34
+ 02 | C-5 04 42 Q43 | - first hit at 42 retrigged halfway through down to 34
+
+     This gives a rolling feel to the snare. Experiment with these values
+ and use what works best for you. Finally, there's a trick I like to do with
+ tom drums, which I call the "thwump". This assumes the default volume for
+ the tom drum is at 44:
+
+ 31 | A-6 06 04 QC2 | - Start at almost no volume, and retrig up by 8 each
+ 32 | A-6 06 .. .00 | - The final hit at volume 44
+
+     It's hard to describe. Try it in a tracker and see.
+
+                                                           Closing - For Now
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~^~~~^~~~^~~^~~^~~^~^~^~
+     In the solemn interests of keeping the size of TraxWeekly reasonable,
+ I'm going to be spreading this extremely spammy editorial over a few weeks.
+ If people like what I have to say, this may turn into a semi-regular
+ feature for the zine... so if you have comments, feel more than free to
+ email me at the addys listed below, or /msg catspaw on #trax. I'd love to
+ hear any subjects you'd like to see covered, questions you'd like to see
+ answered, and especially any tips and suggestions of your own you'd like
+ to impart. Until then, this is Catsy, signi%#&ghkegg%#^2 .  6 *
+
+ *** catspaw has been kicked off channel #trax by everyone (damn flooder)
+
+       Catspaw / Rat                    Rat City (206) 246-6647
+       catspaw@eskimo.com               catspaw@masterpiece.com
+
+----------------------------------------------------------------------------
+
+
+--[2. Tracking hints]----------------------------------------------[Vivid]--
+
+ In this article, I'll be only discussing the technical side of tracking
+ and not the musical use or abuse of the described effects :) 
+ Some will improve your songs, others won't.
+ (All commands used for explanation are Protracker commands)
+
+ ## Flange/Chorus ##
+ You need at least 2 channels to get it working. The Sample played on 
+ the 2nd channel has to be a little bit delayed, which can be 
+ achieved with either the sample offset(9XX) or the note delay (EDX).
+ Also you can try out a fine pitch slide (E1X or E2X) to have
+ more control on the effect or "flanged sound" you want to get.
+ This works pretty fine on brass leads which should sound more full
+ and clear (also try it out with crashes). 
+ NOTE: I'm not sure if it works on all soundcards.
+
+ ## Timestretching ##
+ Many people who love listening to Jungle music know this effect.
+ It's when a vocal sample sounds like he would be slowed down forever.
+ Normally, timestretching is used when a drumloop or vocals have
+ to be fit to a rhythm or a certain speed. In a tracker, it's only good
+ for creating wierd sounds :).
+ First thing to do is a speed up of your pattern (at least <f05), then
+ the sample has to be played over and over with lots of offset commands.
+ Try to make the sample you use a bit smaller than 128kb so that 
+ the 9XX command can be used at a full value range (ie from 00 to FF).
+
+ Example:
+ 
+ |C-4.01 p8.901|...... ...F04|
+ |C-4.01 p8.902|...... ......|
+ |C-4.01 p8.903|C-4.01 16.901|
+ |C-4.01 p8.904|C-4.01 16.902|
+   ....           ....   
+ |C-4.01 p8.9FF|C-4.01 16.9FC|
+
+ Try it out with the same sample a bit transposed on a different channel,
+ and don't forget to use a smooth echo.
+
+ ## Reverb ##
+ This is more a general hint of how to make your samples sound like they
+ were played in a cathedral. Cool Edit is the only program I would suggest 
+ you to use, because Soundforge/Wave/etc. are not that good at it.
+ (get the win95 version if you're complaining about the calculation time).
+ Try to set the Perception to 0 to have no other feedbacks, then make
+ the lenght around 2048/whatever, and set the attack time to 5ms.
+ The value of the High Frequency Absorption time depends on your own choice,
+ if you want to have a dark reverb decrease it, if you want it more bright,
+ leave the 2000ms set.
+ Back in the tracker, do the echoes with different pan positions so that it
+ will sound a bit more "realistic".
+
+ ## Filtering Samples ##
+ Majic Fred has written a very good article about this in Imphobia #11. 
+ (You should better read it, if you haven't done already)
+ It's one of the most important things to do before you go to a compo or
+ whatever, because every sound equipment is different, and therfore,
+ why should a basedrum have high frequencies <g> ?!
+ Nearly all good sample programs are suitable for doing it, 
+ but you should convert the samples to 16bit and at least to
+ 22khz for having best results.
+
+ If you got comments or new hints, start writing :)
+					yours, vivid [vivid@kosmic.org]
+
+----------------------------------------------------------------------------
+
+
+/-[Group Columns]-----------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[3. Explizit]-------------------------------------------------------------
+                                                                 .____.
+ .....______________.____________________________________________|    |__...
+ :::::\__   _____   |     ______    \     \______)        \_____)_ _____/:::
+ :::::::/  __>/\/   .  __/|  __/    /     /__    \_____    \    \|   |::::::
+ ::::::/   | /  \   :    \|  \_____/     /   \    \_  _____/     \   |::::::
+ :::::/          \__|     \_    :::\    /    /     /   |   \      /  |::::::
+ :::::\__________/::|______/____|:::\_______/_____/________/_____/___:::::::
+ ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::[sYNOPTiC]:::
+ :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+             Explizit TraxWeekly column issue #20 - May 23, 1996
+
+ Hi there!
+
+ Lalalalaaaaalalalalaaaaaaalalalaaaalalalalaaaaaalaaaaaaa
+ ... spread your love all over the world ... boy two unlimited SUCKS !!!!!!
+ I know I'm not supposed to say this, and offcourse, two unlimited DOES
+ suck, but their song sounds nice! They should have made it a bit more
+ underground (and lose the bitch singin') and release it on a sublabel ..
+ Because the mellow-dee does sound nice ...
+ Nah .. who carez about 2unl ....
+
+ Not too many of you know Sturm i guess. Sturm is a young composer i met
+ on my board a couple of months ago. Sturm makes all kind of music but i
+ believe he is in some sort of acid phase (!) right now (BOY i wonder why ;)
+
+ You should check out some of his modules, they really kick butt (well
+ some of 'em =). Visit his homepage on http://huizen.dds.nl/~sturm for
+ a complete list of all his releases. You can also find him on
+ news:alt.binaries.sounds.mod (or something like that) where you can
+ request some of his modules. His mailto:sturm@dds.nl
+
+ Give this guy a chance, he really rules! ;)
+ (I get payed to say that btw!)
+
+ KoM'AH will soon release the first 100% Jungle track for explizit. He
+ made some Jungle tracks before, but they weren't released for Explizit.
+ 'Jungly Vibez 4' is expected to come out when this issue of TraxWeekly
+ is out (around may 20th).
+
+ If you're into KoM'AH's jungle style try to find KMH-JNG1.ZIP somewhere
+ (like on my board) which is as good, if not better than 'JNG4' ..
+
+ A big shout to all USA sysops subscribed to TraxWeekly. We need a LOT
+ more USA bulletin boards to spread our modules through! If you are
+ interested in becoming HQ or distro for your state, please contact me.
+ I can also subscribe you to our list so you'll receive all our future
+ modules by e-mail. We need sites in ALL usa states ... apply now!
+
+ I'm off. C u later...
+                                   Ch:ilm . explizit
+                                   mailto:explizit@dds.nl
+
+ Explizit internet Hq: http://huizen.dds.nl/~explizit
+              USA Ftp: http://www.rpi.edu/~tillbm/site/explizit
+             Euro Ftp:  ftp://sdc.wtm.tudelft.nl/pub/music/groups/EXPLIZIT/
+            Italy Ftp:  ftp://shadow.pegasus.it/music/groups/explizit/
+ Now online: The Explizit HomeSpace3
+ http://huizen.dds.nl/~explizit
+
+----------------------------------------------------------------------------
+
+
+/-[Advertisements]----------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[New Italian Demo Site]---------------------------------------------------
+
+ Now , the demo/music section of the Revenge Of Shadow BBS 
+ is in Internet  the new demo site in Europe / Italy
+
+                      ftp://shadow.pegasus.it
+
+ 680 Megs of Music & Demo Stuff from the best 
+ Music & Demos Groups.....
+
+
+
+ Revenge of Shadow BBS  +39 - (0)464 - 421890  
+     (ITalY)     28.8 bps  
+
+
+
+ The Best Of Demo & Music, Shareware, Games, Zx Spectrum, 
+ C=64, Amstrad CPC, MSX
+ Emulators, Demos Libreries, Internet News,
+  MOD-S3M-MTM-XM Music Modules.
+
+                                Distro Site of :
+
+ Skyjump Team (WHQ) - C.B.R. (WHQ) - Fatal Rage (WHQ) -
+  Radical Rhythms (IHQ)  H.B.E. (IHQ) - The  Factory (IHQ)
+  - Pure Resistance (IHQ) - D.M.K. (IHQ) - Prophecy/Humanoid/
+ Ultra Tracker (IHQ) - Cubic Player (IHQ) - Mazurka (IHQ) -
+   -  Pure/Traxx (IHQ) - Kone/Gas (IHQ) - K.F.M.F. (IHQ) - 
+ Neutron (IHQ) - Explizit (IHQ) - E-nergetic (IHQ) - 
+ Blacktron (IHQ) - Red Indian Product (IHQ)   
+ - Amable (IHQ) - ........ many & many others
+ Support: Future Crew, Apogee, Epic Megagames, Id Software.
+
+  CALL REVENGE OF SHADOW BBS +39-(0)464-421890  
+  UNLIMITED FILES REQUEST !!!!
+                      ftp://shadow.pegasus.it
+
+----------------------------------------------------------------------------/-[Closing]-----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ TraxWeekly is available via FTP from:
+ ftp.cdrom.com /demos/incoming/news (new issues)
+ ftp.cdrom.com /demos/info/traxw/   (back issues)
+
+ To subscribe, send mail to:      listserver@unseen.aztec.co.za
+ and put in the message body:     subscribe trax-weekly [name] (NOT address)
+ To unsubscribe, mail same and:   unsubscribe trax-weekly (in message body)
+
+ Contributions for TraxWeekly must be formatted for *76* columns,
+ must have a space preceding each line, and must be readable and
+ understandable.  NO HIGH ASCII IS ALLOWED.  Different country code
+ pages cause major problems in international distribution, so we
+ must stay with regular text.  Profanities and other derogatory
+ subjects should be avoided if possible.
+
+ Contributions should be mailed as plain ascii text or filemailed
+ (MIME/UUE only) to: gwie@owl.csusm.edu before 6:00pm EST (North
+ America) every Wednesday.
+
+ TraxWeekly does not discriminate based on age, gender, race, political
+ preferences, religious preferences, or eliteness.
+
+ ALL COMMENTS GOOD/BAD AND SUGGESTIONS ARE WELCOME!
+ Please contact the TraxWeekly staff at the following addresses:
+
+  Editor:      Psibelius (Gene Wie).................gwie@owl.csusm.edu
+  Staff:       Atlantic (Barry Freeman).............as566@torfree.net
+	       DennisC (Dennis Courtney)............dennisc@community.net
+               Fred (Fred Fredricks)................fred@paracom.com
+               Kal Zakath (John Townsend)...........jtownsen@sescva.esc.edu
+	       Master of Darkness (Todd Andlar).....as566@torfree.net
+	       Mhoram (John Niespodzianski).........niespodj@neonramp.com
+               Mick Rippon..........................rip@hunterlink.net.au
+               Populus (Nicolas Roberge)............nr@qbc.clic.net
+	       Trifixion (Tyler Vagle)..............trifix@northernnet.com
+               Zinc (Justin Ray)....................rays@direct.ca
+  Reporter:    Island of Reil (Jesse Rothenberg)....jroth@owl.csusm.edu
+  Graphics:    Squidgalator2 (...)..................sq2@sv.net.au
+               White Wizard (...)...................aac348@agora.ulaval.ca
+
+ TraxWeekly is a HORNET affiliation.
+ Copyright (c)1995,1996 - TraxWeekly Publishing, All Rights Reserved.
+
+
+/-[END]---------------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+$P"^````$$$$$P"^````$$$$$P"^```````^"TP"^```````^"``````````^"T$$$$$````^"T$
+$ .o@&$ $$$$$ .o@&$ $$$$$ .o@&$"$&@o.  .o@&$"$&@o.`$$$$$"$&@o. $$$$$ $&@o. $
+$ $$$$$       $$$$$       $$$$$ $$$$$  $$$$$ $$$$$ $$$$$ $$$$$       $$$$$ $
+$ $$$$$"""    $$$$$"$&@o. $$$$$ $$$$P  $$$$$ $$$$P $$$$$ $$$$$ .o@&$"$$$$$ $
+$ $$$$$       $$$$$ $$$$$ $$$$$""^~`   $$$$$""^~`  $$$$$ $$$$$ $$$$$ $$$$$ $
+$ $$$$$       $$$$$ $$$$$ $$$$$        $$$$$       $$$$$ $$$$$ $$$$$ $$$$$ $
+$ $$$$$ $$$$$ $$$$$ $$$$$ $$$$$ $$$$$  $$$$$ $$$$$ $$$$$ $$$$$ $SQ2$ $iCE$ $
+$ $$$$$ $$$$$ $$$$$ $$$$$ $$$$$ $$$$$  $$$$$ $$$$$ $$$$$ $$$$$ $$$$$ $$$$$ $
+$ T$$$$ $$$$P $$$$$ $$$$$ T$$$$ $$$$P  T$$$$ $$$$P $$$$$ $$$$$ T$$$$ $$$$P $
+$, `~^"""^~` ,$$$$$ $$$$$  `~^"""^~` ,, `~^"""^~` ,$$$$$ $$$$$  `~^"""^~`  $
+$$o,.     .,o$$$$$$ $$$$$ o,.     .,o$$o,.     .,o$$$$$$ $$$$$ o,.     .,o$$
+""""""""""""""""""" $$$$P """""""""""""""""""""""""""""" $$$$P """""""""""""
+                    "^`                                  "^`
+                                                          ...traxweekly emag

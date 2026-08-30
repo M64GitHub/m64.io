@@ -1,0 +1,1313 @@
+# Chris Hülsbeck
+
+From Video Game Music Preservation Foundation Wiki
+
+Jump to: navigation, search
+
+| Christopher Friedrich Martin Hülsbeck
+
+|
+
+|
+
+| Born
+| 1968-03-02
+
+| Birth Place
+| Kassel, Hesse, Germany
+
+| Nationality
+| German
+
+| Aliases
+| Chris Huelsbeck
+C Huelsbeck
+The Soundfactory
+Chris Hüllsbeck
+C. Hylsic
+
+| Website
+| www.huelsbeck.com
+
+Chris Hülsbeck is a German composer best known for The Great Giana Sisters (C64) and Turrican.
+
+Hülsbeck's mother, aunt and grandmother were piano teachers. He had lessons at age 5, but dropped out after 2 years due to his grandmother's old-fashioned ways (most memorably hitting students with a stick), his preference to radio over classical music and composing over performing. He initially listened to The Beatles, but upon hearing Popcorn, he wanted a Korg MS-10. While his family could not afford the 2000 DM, he got an electric organ at age 11, recorded his performances on cassette deck and circuit-bended the organ until it exploded. At 12, he also had drum lessons.
+
+Meanwhile, he taught himself BASIC on his uncle's Sirius PC. In 1984, he read about the Commodore 64 and its built-in synthesizer and bought it in December at Kaufhof in Darmstadt (for 500 DM after 6 months of his paper round plus 100 DM from his grandmother, without which he almost bought an Atari 800XL). He attended Adolf-Reichwein-Schule in Langen with C64 game programmers Artur Wystub and Peter Thierolf. Hülsbeck played Archon (C64) with his friends and was the first among them to complete Impossible Mission (C64). Wystub helped Hülsbeck getting started in assembly and programmed the first two games Hülsbeck scored.
+
+In February 1986, Hülsbeck heard of a music contest held by 64'er magazine and composed Shades from 8 PM to 4 AM, merely aiming for top ten, but to his shock reached first place, earning 1500 DM. To the same magazine, he sold Soundmonitor, an influental music editor, which was awarded Listing of the Month. Next, he looked for game developers in the newspapers, played a few C64 songs to the boss of Rainbow Arts on the phone and was hired on the spot. After scoring two games freelance, he found it too tiring to work parallel, waited for his mid-term report card, quit Wirtschaftsgymnasium, and relocated to Rainbow Arts' offices in February or March 1987.
+
+In 1990 and 1991, Hülsbeck co-founded A.U.D.I.O.S.-Entertainment and Kaiko, which he cites as both his most creative and his saddest time: He fell out with Thierolf in 1993 and paid debts until mid-1999. In 1994, he founded Chris Hülsbeck Medienproduktion and started a music contest in 1995, launching Fabian Del Priore's career. In February 1998, when he found his clients uninspired, he was given a chance to score Star Wars: Rogue Squadron (N64) and subsequently also to follow Factor 5 to the US. Since closure of their California office in 2009, he is freelance again.
+
+Hülsbeck married artist Tracy Sheppard on December 31, 2008. They sold their house in Petaluma in 2015 and since travel with their cats in an RV as The Cruisin' Crew. Cited as the Hans Zimmer of video games, he has no further training and still has limits at reading musical notation. He believes that making video game music in the 1980s was about being 70% of a programmer and only 30% of a musician, and that nowadays aspiring video game musicians require endurance and talent above all. He learned a bit of C++ in 2005 but stated that even the compilers drive him crazy. His ultimate goal, favorite composer and platform remain composing for films, John Williams and the Amiga. The least he likes is jazz and opera.
+
+## Contents
+
+- 1 Audio Development
+
+- 1.1 Amiga
+
+- 1.2 Atari ST
+
+- 1.3 Commodore 64
+
+- 1.4 DOS
+
+- 1.5 Genesis / Mega Drive
+
+- 1.6 Nintendo 64
+
+- 1.7 SNES
+
+- 2 Gameography
+
+- 3 Picture Gallery
+
+- 4 Links
+
+## Audio Development
+
+Hülsbeck has used a very long list of equipment since 1987. His first synthesizers were the Ensoniq ESQ-1 and the Korg M1.
+
+### Amiga
+
+In late 1986, Hülsbeck bought an Amiga 1000 for 4200 DM. When he first heard music, namely Title - The Pawn, he was totally amazed.
+
+In 1987, his music was in the RAW format. From January 18 to July 31, 1988, he was using his own DNS format. Later that year, he created TFMX.
+
+### Atari ST
+
+In 1987, Hülsbeck's music was in the RAW format. In the early 1990s, he did a few conversions using TFMX-Editor with a YM2149F chip on a board plugged into the Amiga.
+
+While the ST sound did not appeal to him, he admired Jochen Hippel's work and was happy to own an ST himself for MIDI.
+
+### Commodore 64
+
+In 1985, Hülsbeck started developing a driver, Musicmaster, in Profi-Ass 64 and composed in hex. As that was tedious, he spent the summer of 1986 writing an editor for it, Soundmonitor.
+
+Still in spring 1986, he found a (partly BASIC) program called Digidrums which played samples. After figuring out how, he spent days with Thierolf building a sampler (and breaking CIA chips), plugged into the C64's userport, and added percussion, bass and vocal samples to Musicmaster as a 4th voice. To his disappointment, none of that got out until July 1987, while in February, Arkanoid (C64) by Martin Galway was released. They met in 2005 and had a laugh about this.
+
+Also by July 1987, he had created an optimized version of Musicmaster called The Final Musicplayer, which was only available to Georg Brandt and himself. For sound effects (as well as short echoing jingles, most prominent in Jinks (C64)), he initially wrote separate routines but eventually supported them directly in the music drivers.
+
+In summer 1988, he noticed that newer SID chips did not support samples anymore and programmed an early version of TFMX for the C64.
+
+Hülsbeck likes the uniqueness of the SID sound and highlights the pulse width modulation, but dislikes how unpredictable the filter sounds on every machine. In VICE 3.2, most songs sound best with 6581 (reSID) and a bias of 180 - however, the melody at 2:00 of In-Game - Madness is inaudible there and proves that for some songs, individual filter settings have to be found.
+
+### DOS
+
+Hülsbeck used multiple formats based on TFMX: In 1992, it was the AWS format for the Ad Lib Music Synthesizer Card. In 1993, it was the MDT and SMP formats, where drums play on the Sound Blaster DAC. In 1995, it was MDAT and SMPL.
+
+### Genesis / Mega Drive
+
+Hülsbeck used the AWS format.
+
+### Nintendo 64
+
+Based on TFMX, Hülsbeck designed and tested MusyX Soundtool (W32).
+
+### SNES
+
+Hülsbeck used TFMX.
+
+## Gameography
+
+| Released
+
+| Title
+
+| Sample
+
+| Notes
+
+| 1986-??-??
+
+| Planet of War (C64)
+
+|
+
+|
+
+| 1987-0?-??
+
+| The Antics (C64)
+
+|
+
+|
+
+| 1987-0?-??
+
+| Jinks (C64)
+
+|
+
+|
+
+| 1987-0?-??
+
+| Madness (C64)
+
+|
+
+|
+
+| 1987-0?-??
+
+| Sky-Fighter (AST)
+
+|
+
+|
+
+| 1987-0?-??
+
+| Soldier! (C64)
+
+|
+
+|
+
+| 1987-??-??
+
+| The Baby of Can Guru (C64)
+
+|
+
+|
+
+| 1987-??-??
+
+| Bad Cat (AMI)
+
+|
+
+|
+
+| 1987-??-??
+
+| Bad Cat (AST)
+
+|
+
+| Arranged by Jochen Hippel.
+
+| 1987-??-??
+
+| Bad Cat (C64)
+
+|
+
+|
+
+| 1987-??-??
+
+| Sky-Fighter (AMI)
+
+|
+
+|
+
+| 1987-??-??
+
+| To be on Top (C64)
+
+|
+
+|
+
+| 1988-01-??
+
+| The Great Giana Sisters (C64)
+
+|
+
+|
+
+| 1988-0?-??
+
+| Volleyball Simulator (C64)
+
+|
+
+| Sound Effect Driver.
+
+| 1988-0?-??
+
+| The Great Giana Sisters (AMI)
+
+|
+
+| Arranged by Unknown. Programmed by Thomas Lopatic.
+
+| 1988-0?-??
+
+| The Great Giana Sisters (AST)
+
+|
+
+| Arranged by Jochen Hippel.
+
+| 1988-0?-??
+
+| Katakis (C64)
+
+|
+
+|
+
+| 1988-??-??
+
+| Bad Cat (DOS)
+
+|
+
+|
+
+| 1988-??-??
+
+| Danger Freak (C64)
+
+|
+
+|
+
+| 1988-??-??
+
+| Down at the Trolls (C64)
+
+|
+
+|
+
+| 1988-??-??
+
+| Journey to the Center of the Earth (C64)
+
+|
+
+| Sound Effects.
+
+| 1988-??-??
+
+| PTC (AMI)
+
+|
+
+|
+
+| 1988-??-??
+
+| R-Type (C64)
+
+|
+
+|
+
+| 1988-??-??
+
+| Starball (C64)
+
+|
+
+|
+
+| 1988-??-??
+
+| To be on Top (AST)
+
+|
+
+| Arranged by Jochen Hippel.
+
+| 1989-0?-??
+
+| Circus Attractions (AMI)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Circus Attractions (C64)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Danger Freak (AMI)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Grand Monster Slam (AMI)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Grand Monster Slam (C64)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Hard 'n' Heavy (C64)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Hollywood Poker Pro (AMI)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Hollywood Poker Pro (C64)
+
+|
+
+|
+
+| 1989-0?-??
+
+| Oxxonian (C64)
+
+|
+
+|
+
+| 1989-0?-??
+
+| R-Type (AMI)
+
+|
+
+| Title Music
+
+| 1989-0?-??
+
+| Spherical (C64)
+
+|
+
+| With Ramiro Vaca.
+
+| 1989-??-??
+
+| Hollywood Poker Pro (AST)
+
+|
+
+|
+
+| 1989-??-??
+
+| Circus Attractions (AST)
+
+|
+
+|
+
+| 1989-??-??
+
+| Circus Attractions (DOS)
+
+|
+
+|
+
+| 1989-??-??
+
+| Grand Monster Slam (AST)
+
+|
+
+|
+
+| 1989-??-??
+
+| Grand Monster Slam (DOS)
+
+|
+
+|
+
+| 1989-??-??
+
+| Hard 'n' Heavy (AMI)
+
+|
+
+|
+
+| 1989-??-??
+
+| Rock'n Roll (AMI)
+
+|
+
+| Composed by Ramiro Vaca.
+
+| 1989-??-??
+
+| X-Out (AMI)
+
+|
+
+|
+
+| 1990-03-??
+
+| X-Out (C64)
+
+|
+
+| Arranged by Adam Bulka, Michael Hendriks and Ramiro Vaca.
+
+| 1990-0?-??
+
+| StarTrash (C64)
+
+|
+
+| Title Music
+
+| 1990-0?-??
+
+| Turrican (AMI)
+
+|
+
+|
+
+| 1990-0?-??
+
+| Turrican (C64)
+
+|
+
+|
+
+| 1990-??-??
+
+| Z-Out (AMI)
+
+|
+
+| Title Music
+
+| 1990-??-??
+
+| The Secret of Monkey Island (AMI)
+
+|
+
+| With Rudolf Stember. Composed by Michael Land.
+
+| 1990-??-??
+
+| Death Trap (AMI)
+
+|
+
+| Sound Effects
+
+| 1990-??-??
+
+| Apprentice (AMI)
+
+|
+
+|
+
+| 1990-??-??
+
+| Apprentice (AST)
+
+|
+
+|
+
+| 1990-??-??
+
+| The Carl Lewis Challenge (AMI)
+
+|
+
+|
+
+| 1991-02-??
+
+| Turrican II: The Final Fight (AMI)
+
+|
+
+|
+
+| 1991-0?-??
+
+| Gem'X (AMI)
+
+|
+
+|
+
+| 1991-0?-??
+
+| Gem'X (C64)
+
+|
+
+|
+
+| 1991-??-??
+
+| The Adventures of Quik and Silva (AMI)
+
+|
+
+|
+
+| 1991-??-??
+
+| The Adventures of Quik and Silva (AST)
+
+|
+
+|
+
+| 1991-??-??
+
+| Battle Isle (AMI)
+
+|
+
+|
+
+| 1991-??-??
+
+| Battle Isle (DOS)
+
+|
+
+| Intro Sound
+
+| 1991-??-??
+
+| BugBomber (AMI)
+
+|
+
+|
+
+| 1991-??-??
+
+| Z-Out (AST)
+
+|
+
+| Title Music
+
+| 1992-04-??
+
+| Apidya (AMI)
+
+|
+
+|
+
+| 1992-0?-??
+
+| BugBomber (C64)
+
+|
+
+|
+
+| 1992-0?-??
+
+| Jim Power in Mutant Planet (AMI)
+
+|
+
+|
+
+| 1992-??-??
+
+| Metal Law (AMI)
+
+|
+
+| Title Music
+
+| 1992-??-??
+
+| Jim Power in Mutant Planet (AST)
+
+|
+
+|
+
+| 1992-??-??
+
+| Jim Power in Mutant Planet (CPC)
+
+|
+
+|
+
+| 1992-??-??
+
+| BugBomber (DOS)
+
+|
+
+| Arranged by Matthias Steinwachs.
+
+| 1992-??-??
+
+| The Carl Lewis Challenge (AST)
+
+|
+
+|
+
+| 1992-??-??
+
+| The Carl Lewis Challenge (DOS)
+
+|
+
+|
+
+| 1992-??-??
+
+| Hexuma: Das Auge des Kal (DOS)
+
+|
+
+|
+
+| 1993-??-??
+
+| Turrican III (AMI)
+
+|
+
+|
+
+| 1993-??-??
+
+| Jim Power: The Lost Dimension in 3D (DOS)
+
+|
+
+|
+
+| 1993-03-19
+
+| Jim Power in Mutant Planet (TGCD)
+
+|
+
+|
+
+| 1993-05-??
+
+| Super Turrican (SNES)
+
+|
+
+|
+
+| 1993-12-??
+
+| Jim Power: The Lost Dimension in 3D (SNES)
+
+|
+
+|
+
+| 1994-??-??
+
+| Mega Turrican (GEN)
+
+|
+
+|
+
+| 1994-??-??
+
+| Mad News (DOS)
+
+|
+
+|
+
+| 1994-??-??
+
+| Hurra Deutschland (DOS)
+
+|
+
+|
+
+| 1994-??-??
+
+| Football Limited (AMI)
+
+|
+
+|
+
+| 1994-??-??
+
+| Football Limited (DOS)
+
+|
+
+|
+
+| 1995-??-??
+
+| Turrican II: The Final Fight (DOS)
+
+|
+
+|
+
+| 1995-??-??
+
+| Nectaris (DOS)
+
+|
+
+|
+
+| 1995-??-??
+
+| Eddy & Co (DOS)
+
+|
+
+|
+
+| 1995-??-??
+
+| Caribbean Disaster (DOS)
+
+|
+
+|
+
+| 1995-11-??
+
+| Super Turrican 2 (SNES)
+
+|
+
+|
+
+| 1996-??-??
+
+| Menateus (DOS)
+
+|
+
+|
+
+| 1996-??-??
+
+| International Superstar Soccer Deluxe (GEN)
+
+|
+
+|
+
+| 1996-??-??
+
+| Imperium Romanum (DOS)
+
+|
+
+| Sound Effects
+
+| 1996-10-31
+
+| Tunnel B1 (PS1)
+
+|
+
+|
+
+| 1996-12-??
+
+| Tunnel B1 (DOS)
+
+|
+
+|
+
+| 1997-06-30
+
+| Extreme Assault (DOS)
+
+|
+
+|
+
+| 1998-??-??
+
+| Perry Rhodan: Operation Eastside (PC)
+
+|
+
+| Sound Effects
+
+| 1998-07-31
+
+| Emergency: Fighters for Life (PC)
+
+|
+
+| Sound Effects
+
+| 1998-12-02
+
+| Star Wars: Rogue Squadron 3D (PC)
+
+|
+
+|
+
+| 2000-01-26
+
+| X: Beyond the Frontier (PC)
+
+|
+
+| Sound Effects
+
+| 2000-12-14
+
+| Indiana Jones and the Infernal Machine (N64)
+
+|
+
+|
+
+| 2000-12-18
+
+| Star Wars: Episode I - Battle for Naboo (N64)
+
+|
+
+| Original Music
+
+| 2001-??-??
+
+| X-Gold (PC)
+
+|
+
+| Sound Effects
+
+| 2001-03-11
+
+| Star Wars: Battle for Naboo (PC)
+
+|
+
+|
+
+| 2001-11-09
+
+| Star Wars Rogue Leader: Rogue Squadron II (GC)
+
+|
+
+| Music Director
+
+| 2002-??-??
+
+| X-Tension (PC)
+
+|
+
+| Sound Effects
+
+| 2003-10-15
+
+| Star Wars Rogue Squadron III: Rebel Strike (GC)
+
+|
+
+| Music Director
+
+| 2007-08-30
+
+| Lair (PS3)
+
+|
+
+| Music Director
+
+| 2010-03-17
+
+| ZombieSmash! (iOS)
+
+|
+
+|
+
+| 2010-06-13
+
+| Retro Act (PC)
+
+|
+
+| 'The Wave' Music
+
+| 2011-10-26
+
+| The War of the Worlds (X360)
+
+|
+
+|
+
+| 2012-10-22
+
+| Giana Sisters: Twisted Dreams (PC)
+
+|
+
+|
+
+| 2012-12-21
+
+| Giana Sisters: Twisted Dreams (Backer Exclusive Collector Edition) (PC)
+
+|
+
+|
+
+| 2013-11-27
+
+| Doctor Who Legacy (AND)
+
+|
+
+|
+
+| 2014-02-25
+
+| R-Type II (AND)
+
+|
+
+|
+
+| 2014-11-11
+
+| Leona's Tricky Adventures (PC)
+
+|
+
+|
+
+| 2017-10-31
+
+| Bubsy: The Woolies Strike Back (PC)
+
+|
+
+|
+
+| Unreleased
+
+| Indiana Jones' Greatest Adventures (GEN)
+
+|
+
+|
+
+| Unreleased
+
+| Jim Power: The Lost Dimension in 3D (GEN)
+
+|
+
+|
+
+| Unreleased
+
+| Universal Soldier (SNES)
+
+|
+
+|
+
+| Unreleased
+
+| Unknown Realm (C64)
+
+|
+
+|
+
+## Picture Gallery
+
+-
+
+64'er 10/86, introducing his Soundmonitor.
+
+-
+
+ASM 3/89.
+
+-
+
+Turrican II team (the second from the right). The One #28, January 1991.
+
+-
+
+His website, circa 2000.
+
+-
+
+Unknown source.
+
+-
+
+Circa 2011. Unknown source.
+
+-
+
+Twitter profile picture.
+
+## Links
+
+- mobygames.com/developer/sheet/view/developerId,9245/ - MobyGames.
+
+- facebook.com/chris.huelsbeck - Facebook.
+
+- linkedin.com/in/chris-huelsbeck-540a202 - LinkedIn.
+
+- twitch.tv/c_huelsbeck - Twitch.
+
+- twitter.com/Chris_Huelsbeck - Twitter.
+
+- youtube.com/user/chuelsbeck1968 - Personal YouTube.
+
+- youtube.com/channel/UCWDGeouCi8vqPOyJd4vCVuA - Company YouTube.
+
+- archive.org/details/Happy.Computer.N41.1987.03-Cartman/page/n121 - Interview from Happy-Computer 3/87 (in German).
+
+- archive.org/details/64er_1988_02/page/n27 - Interview from 64'er 2/88 (in German).
+
+- kultboy.com/pic/1953/ - Profile from ASM 3/89 (in German).
+
+- youtube.com/watch?v=WpJgCLyloXg&t=11m49s - Video Interview from 1989 (in German).
+
+- archive.org/details/Aktueller_Software_Markt_-_Sonderausgabe_1989.06/page/n93 - Interview from ASM Sonderausgabe Nr. 6, 1989 (in German)
+
+- youtube.com/watch?v=pO_yljXiXXM&t=2m56s - Video Interview from Ragazzi, October 1989 (in German).
+
+- kultboy.com/pic/133/ - Interview from Amiga Joker 4/90 (in German).
+
+- csdb.dk/release/?id=7153 - C64 Disk Interview from December 22, 1990.
+
+- web.archive.org/web/19970401104630/http://home.allgaeu.org/dreamy/huelsbeck/papers/interviews/powerplay-1991.html - Profile from 1991 (in German).
+
+- archive.org/details/Aktueller_Software_Markt_-_Ausgabe_1992.11/page/n37 - Profile from ASM 11/92 (in German).
+
+- archive.org/details/pcgamesmagazine-1995-09/page/n31 - Interview from PC Games 9/95 (in German).
+
+- archive.org/details/PCSpiel1095/page/n19 - Profile from PC Spiel 10/95 (in German).
+
+- csdb.dk/release/?id=5471 - C64 Disk Interview from January 16, 1996.
+
+- zakalwe.fi/~shd/texts/imr/c156huel.htm - Interview from August 29, 1996.
+
+- csdb.dk/release/?id=9282 - C64 Disk Interview from February 20, 2000 (in German).
+
+- nemmelheim.de/kaiko/interview_e.html - Interview from July 6, 2000 about Kaiko.
+
+- wildmag.de/issue03/i_huelsb.htm - Interview from October 28, 2000 (in German).
+
+- remix64.com/interviews/interview-chris-huelsbeck.html - Interview from June 18, 2001.
+
+- web.archive.org/web/20030510061533/http://www.homepages.at:80/webrainbows/html-version/biographie.html - Interview from October 24, 2002.
+
+- projectfirestart.org/interviste/chris_huelsbeck_eng.html - Interview from October 26, 2003.
+
+- csdb.dk/release/?id=11455 - Interview from January 11, 2004.
+
+- web.archive.org/web/20050219233034/http://www.demonews.de/interviews/index.php?artikel=386&bs=14 - Interview from January 14, 2005 (in German).
+
+- youtube.com/watch?v=wSnvnkywIpo - Video Interview from August 2007 (in German), Part 1/3.
+
+- youtube.com/watch?v=9CliSO7_Mj8 - Video Interview from August 2007 (in German), Part 2/3.
+
+- youtube.com/watch?v=HwFY3IUZ_H8 - Video Interview from August 2007 (in German), Part 3/3.
+
+- lotek64.com/hp/fileretriever.php?extended=0&issue=23 - Interview from October 2007 (in German).
+
+- youtube.com/watch?v=Zy63qODDqSo - Video Interview from August 24, 2008 about Lair and Symphonic Shades (in German).
+
+- satzgold.de/pdf/Artikelprobe_Hesse_GS.pdf - Interview from Classic Gaming 1/2009 about The Great Giana Sisters (in German).
+
+- geemag.de/2009/04/10/einfach-machen/ - Interview from April 10, 2009 (in German).
+
+- youtube.com/watch?v=veya7Bw1c04 - Video Interview from November 13, 2009 about The Great Giana Sisters (in German).
+
+- radio-paralax.de/mitschnitte/Radio_PARALAX_-_Scene-Talk_004_-_22.11.2009.mp3 - Audio Interview from November 22, 2009 (in German).
+
+- kultboy.com/Chris-Huelsbeck-Interview/27/ - Interview from December 26, 2009 (in German).
+
+- retrogamingplanet.it/intervista/dal-c64-alliphone-chris-huelsbeck-ed-i-suoi-30-anni-di-musica/ - Interview from February 25, 2011.
+
+- youtube.com/watch?v=cAG1_56N83Q - Video Interview from July 5, 2011.
+
+- hna.de/kassel/der-c64-mein-maedchen-heimcomputer-machte-kasseler-erfolgreich-1560815.html - Interview from January 12, 2012 (in German).
+
+- 4players.de/4players.php/dispbericht/Allgemein/Interview/9128/75727/0/Chris_Huelsbeck.html - Interview from April 16, 2012 about Turrican Soundtrack Anthology (in German).
+
+- amigapd.com/interview-chris-huelsbeck.html - Interview from June 2012.
+
+- archive.org/details/Sinclair_ZX_Spectrum_and_Commodore_64_Book-2012/page/n133 - Interview from 2012.
+
+- youtube.com/watch?v=X0F-TwCPb5s - Video Interview from February 27, 2014 (in German).
+
+- digitalista.de/interviews/2015/Februar/11/chris-hulsbeck-uber-turrican-great-giana-sisters.html - Interview from February 11, 2015.
+
+- youtube.com/watch?v=Y4R84Fq4iRE - Video Interview from February 12, 2015.
+
+- youtube.com/watch?v=q16ee0NETwE - Video Interview from June 26, 2015.
+
+- youtube.com/watch?v=Rrdm1h6aQiQ - Video Interview from August 20, 2015 (in German).
+
+- youtube.com/watch?v=6mRVckFxOKM&t=28m49s - Audio Interview from July 9, 2016.
+
+- youtube.com/watch?v=8kDucA4rmPA - Video Interview from August 23, 2016 with Factor 5 (in German).
+
+- youtube.com/watch?v=tEiumvcUJz4 - Video Interview from December 16, 2016.
+
+- books.google.de/books?id=gLaODgAAQBAJ&pg=PA184 - Interview from Retro Gamer Spezial 2/2017 (in German).
+
+- youtube.com/watch?v=WS8-muaPE7I - Video Interview from September 6, 2017.
+
+- youtube.com/watch?v=RpUi7yiP7xw - Video Interview from September 20, 2017.
+
+- youtube.com/watch?v=yT5E9v4G2Z0 - Video Interview from October 29, 2017 (in German).
+
+- youtube.com/watch?v=qRykL66ch1I - Video Interview from August 23, 2018 (in German).
+
+- youtube.com/watch?v=F3BVSTNpsl4 - Video Announcement from August 24, 2018 about Rise of the Machines (in German).
+
+- youtube.com/watch?v=dWvU0wUKZQs&t=15m32s - Video Interview from September 2, 2018 (in German).
+
+- eurogamer.de/articles/2019-01-07-turrican-rise-of-the-machine-man-kann-sich-nicht-hinter-aufwendiger-produktion-verstecken - Interview from January 8, 2019 (in German).
+
+Retrieved from "https://www.vgmpf.com/Wiki/index.php?title=Chris_Hülsbeck&oldid=179055"
+
+Categories:
+- German People
+
+- People
+
+- Composers
+
+- Foley Artists
+
+- Sound Programmers
+
+## Navigation menu
+
+### Personal tools
+
+- Create account
+
+- Log in
+
+### Namespaces
+
+- Page
+
+- Discussion
+
+###
+Variants
+
+### Views
+
+- Read
+
+- View source
+
+- View history
+
+### More
+
+###
+Search
+
+### Navigation
+
+- Games
+
+- People
+
+- Songs
+
+- Recent changes
+
+- Random page
+
+- How to Help
+
+### Tools
+
+- What links here
+
+- Related changes
+
+- Special pages
+
+- Printable version
+
+- Permanent link
+
+- Page information
+
+### Google AdSense
+
+- This page was last edited on 25 April 2024, at 11:20.
+
+- Content is available under GNU Free Documentation License 1.2 unless otherwise noted.
+
+- Privacy policy
+
+- About Video Game Music Preservation Foundation Wiki
+
+- Disclaimers
+
+-
+
+-

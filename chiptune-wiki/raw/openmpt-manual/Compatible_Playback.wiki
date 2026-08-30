@@ -1,0 +1,224 @@
+== Why a compatible playback mode? ==
+
+[[Image:Compatible Mode.png|thumb|300px|More compatible playback of modules can be enabled in the [[Manual: Song Properties#Miscellaneous Flags|Song Properties]].<br>When you see this warning icon, it might be a good idea to review the compatibility settings.]]
+
+Playback accuracy has always been a problem with tracked music. While the tracker interface with its effect letters and such is simple and fast to use, the internal algorithms used to process effects are not always as simple as they might appear on-screen. For example, due to a little typo, an effect might behave erratically under certain conditions in its original tracker application.
+
+When another tracker (like OpenMPT) decides to support a certain third-party format (for example the XM format of Fasttracker 2), it should faithfully reproduce the meaning of every effect letter and all other behaviour. Sadly, this has not always been the case with (Open)MPT. In the past, users of other trackers have often complained that OpenMPT does not behave like other trackers and thus replays their music (that has been written in another tracker like Fasttracker 2) incorrectly.
+
+Often, making OpenMPT “emulate” those original behaviours, or indeed “quirks”, is the matter of changing a single line of code. However, the same feature that has previously been playing wrong in (Open)MPT may of course, after having fixed it, sound “wrong” in any modules composed with (Open)MPT that made use of this feature. Thus, the programmers of OpenMPT found it necessary to add a “Compatible Playback” option (to be found in the [[Manual: Song Properties#Miscellaneous Flags|Song Properties]]) to switch between OpenMPT’s and other tracker’s behaviour. That way, people do not have to fear that their modules made with older versions of OpenMPT suddenly sound wrong after upgrading, and people who want to listen to their tunes made with another application can also happily listen to them without problems.
+
+== What should I do when composing a track in OpenMPT? ==
+
+That depends on your intentions and goals. When using OpenMPT’s own MPTM format, you do not need to care about compatibility settings. You do not need to enable any compatible playback settings — it does not hurt to do so, but some commands behave in more logical or consistent way when some compatibility settings are disabled.
+
+However, if you are composing IT and XM modules, you most likely want to spread them on the internet and share them with friends. In that case, it is important to set all compatibility settings to their defaults, because many people are using other players (such as XMPlay, Schism Tracker, MilkyTracker or indeed Impulse Tracker and Fasttracker 2), and all of those try to “emulate” Impulse Tracker and Fasttracker 2 as precisely as possible - they do not want to emulate OpenMPT’s own “quirks”. Thus, if you compose a track in those formats, you are absolutely recommended to enable the most compatible playback by clicking the '''Set Defaults''' button in the compatibility section of the [[Manual: Song Properties#Miscellaneous Flags|Song Properties]] dialog - you do not want to get a bad review on your music because it sounds “totally horrible” in XMPlay, just because you forgot to turn on compatible playback, do you?
+
+You should take Impulse Tracker (for IT files) or Fasttracker 2 (for XM files) as a reference when composing your tracks, or at least XMPlay (a very accurate player for both file formats) if you cannot get the original trackers to run. Upcoming OpenMPT updates will bring further improvements to the compatible playback mode, so if something in OpenMPT sounds different from Impulse Tracker / Fasttracker 2, do not hesitate to report it on our [https://bugs.openmpt.org/ Issue Tracker] and it will most likely sound correct in the next version of OpenMPT - when enabling the respective compatibility setting, that is.
+
+It is advised to use [[Manual: Saving and exporting#Compatibility Export|Compatibility Export]] together with this feature.
+
+== Upgrading from an old OpenMPT version ==
+
+When loading a module made with an earlier version of OpenMPT, only the compatibility settings that apply to this old version are enabled; newer settings will not be enabled automatically. This way, playback will be as close as possible to the version the module was last saved with.
+
+If you resume your work on a module made with an earlier version, it is recommended to switch to the default compatibility settings in the Song Properties dialog — as long as your module still sounds identical afterwards, of course. If it does not, you may want to go through all compatibility settings and review what changes they introduce, and if applicable modify the module so that it will also sound correct after enabling these compatibility settings.
+
+== Playback Compatibility Settings ==
+
+[[Image:Playback Compatibility Settings.png|thumb|300px|Playback Compatibility Settings dialog]]
+
+The Playback Compatibility Settings dialog allows you to edit the detailed compatibility settings. Below is a list of all possible compatibility settings that can be toggled in this dialog.
+
+=== Common compatibility settings ===
+
+The following compatibility settings apply to all formats. Some of them may only be visible in legacy modules saved with old OpenMPT versions.
+
+Greyed out checkboxes indicate the emulation of ''really'' old OpenMPT bugs. After disabling those checkboxes, they will remain unavailable.
+
+* '''OpenMPT 1.17 compatible random variation behaviour for instruments'''<br> Random volume and panning variation behaves like in early OpenMPT versions.
+* '''Plugin volume MIDI CC bug emulation'''<br> Swaps the controller and parameter byte of the MIDI channel volume CC when choosing “MIDI volume” as an instrument’s volume command handling, effectively breaking the MIDI command.
+* '''Old Pitch Wheel behaviour for instrument plugins'''<br> Enables the counterintuitive MIDI pitch wheel behaviour found in earlier OpenMPT versions where sample and plugin portamento did not match.
+* '''Execute regular portamento slides at speed 1'''<br> Only fine and extra-fine portamentos are supposed to do something at a speed of one tick per row. This setting is automatically enabled for modules made with very old versions of OpenMPT.
+* '''Compute note frequency in Hertz rather than periods'''<br> For best accuracy of high-pitched notes, all note slides etc. are computed in Hertz rather than tracker periods.
+* '''Clamp tempo to 32-255 range'''<br> Tempo slides cannot exceed a tempo of 255.
+* '''Global volume slide memory is per-channel'''<br> If disabled, there is only one effect memory for global volume slide commands.
+* '''Panning commands override surround and random pan variation'''<br> If disabled, surround and random pan variation effects are not interrupted by panning commands.
+* '''Note delays next to a row delay are repeated on every row repetition'''<br> Delayed notes that are on the same row as a row delay are retriggered on every row repetition.
+* '''Old volume envelope release node scaling behaviour'''<br> This option is only available when importing modules saved with OpenMPT 1.27 or earlier that make use of the volume envelope release node. With this setting enabled, the volume envelope after the release node is added to the volume at release time, while the new behaviour causes this part of the envelope to be relative to the volume at release time.
+* '''Reset VST volume on note-off'''<br> Previous versions of OpenMPT sent bogus volume commands or dry / wet ratio settings on plugin note-offs. This setting retains this behaviour.
+* '''Send OPL key-off when triggering notes'''<br> Note-off events are sent for OPL instruments also when two notes are played on the same channel without interruption.
+* '''Use old imprecise ping-pong loop end calculation'''<br> In previous versions of OpenMPT, the loop length could be noticeably off for very short ping-pong loops and thus cause those samples to be slightly detuned. This setting retains this behaviour.
+* '''Assume initial plugin MIDI program and bank number is 1'''<br> In previous versions of OpenMPT, if an instrument was set to use MIDI program 1 or bank 1, this program or bank change was not set to plugins (unless another instrument previously explicitly selected a different program or bank for this plugin). Importing such a legacy module will enable this compatibility setting to restore the old behaviour, otherwise it is not available.
+* '''MIDI notes can be sent to channel plugins'''<br> MIDI notes can be sent to channel plugins in addition to instrument plugins. Only available when importing modules made with OpenMPT 1.25 or older.
+* '''Report inaccurate PPQ position to VST plugins (like OpenMPT 1.31 and older)'''<br> When importing a module made with OpenMPT 1.31 or older that contains any VST plugins, this setting is enabled automatically to report the song PPQ position to plugins the same incomplete, broken way as those old versions did.
+* '''Plugin notes with New Note Action set to Continue are affected by note-offs (like OpenMPT 1.31 and older)'''<br> When importing a module made with OpenMPT 1.31 or older that contains any VST plugins, this setting is enabled automatically to use the same buggy New Note Action behaviour for plugins as found in those old versions.
+
+
+=== MPTM compatibility settings ===
+
+The following settings address behaviour changes that were made to make the MPTM format more intuitive:
+
+* '''Full control over OPL notes after note-off'''<br> Allows OPL notes to be controlled (volume, panning, pitch, etc.) after the note has been released.
+* '''New Note Action / Duplicate Note Action set to Note Off and Note Fade affect OPL notes like samples'''<br> Previously, New Note Action / Duplicate Note Action types Note Off and Note Fade would both simply release OPL notes. With this setting enabled, Note Fade fades the note the same way as with samples, and with Note Off the post-sustain part of the volume envelope is applied as well.
+* '''Do not reset OPL channel status at end of envelopes'''<br> This setting is only available in files made with OpenMPT 1.28. It re-enables the old end-of-envelope behaviour that was inconsistent with sample channels.
+
+In addition, all the following compatibility settings for the IT format also apply to MPTM files:
+
+=== IT compatibility settings ===
+
+Impulse Tracker’s playback routine is relatively bug-free and logical.
+OpenMPT’s IT playback is already relatively good even with compatible mode being disabled, however some small (and not-so-small) details are not handled correctly. Sometimes they can cause quite drastic differences in playback.
+
+The following compatibility settings are only available in IT and MPTM modules.
+
+* '''Retrigger instrument envelopes on instrument change'''<br> An instrument number with no note next to it plays the new instrument and plays its envelopes from start.
+* '''Volume column portamento never does fine portamento'''<br> A fine portamento followed by e00 and f00 is not continued as a fine portamento. Instead, its parameter is treated as if it was a normal portamento.
+* '''IT arpeggio algorithm'''<br> Handles arpeggio slightly differently than OpenMPT does by default.
+* '''Out-of-range delay commands queue new instrument'''<br> A note next to a delay command that exceeds the current row’s length is not played, but its instrument number will be used for the next note (if it has no instrument number).
+* '''Gxx shares memory with Exx and Fxx'''<br> All portamento commands use the same memory.
+* '''After finishing a pattern loop, set the pattern loop target to the next row'''<br> A lone SBx effect with no corresponding SB0 will restart its loop one row after the previous loop, if there was one in the same pattern.
+* '''Nested pattern loop behaviour'''<br> If there are several pattern loops running concurrently, execute them like IT and FT2 do.
+* '''Do not reset ping pong direction with instrument numbers'''<br> An instrument number does not cause a ping-pong loop to change its direction.
+* '''IT envelope reset behaviour'''<br> The rules for when to restart envelopes are changed to Impulse Tracker’s WAV writer behaviour.
+* '''Forget the previous note after cutting it'''<br> An instrument number after a note cut cannot restart the previously playing note.
+* '''More IT-like Vibrato, Tremolo and Panbrello handling'''<br> These effects will use Impulse Tracker’s waveforms and retrigger behaviour.
+* '''Ixx behaves like in IT'''<br> Tremor reset and tick counting behaviour is more like in IT.
+* '''Qxx behaves like in IT'''<br> Retrigger tick counting is more like in IT.
+* '''Properly update C-5 frequency when changing note in multisampled instrument'''<br> When playing a multisampled instrument with no instrument numbers in the pattern, the middle-C frequency is still updated properly.
+* '''Clear portamento target after it has been reached'''<br> Once the portamento target has been reached, any subsequent Tone Portamento effects will do nothing.
+* '''Do not reset loop count on pattern break'''<br> If a pattern loop is interrupted by a pattern break, the loop count is remembered for subsequent loops.
+* '''Offset after sample end is treated like in IT'''<br> With “Old Effects” enabled, the offset is clamped to the sample end (so when there is no sample loop, the note will not sound). Otherwise, the sample plays from start.
+* '''Volume and panning random variation work more like in IT'''<br> Among the biggest differences, volume random variation is a percentage of the instrument’s global volume, not of its note volume.
+* '''NNA is reset on every note change, not every instrument change'''<br> When using S7x effects to change an instrument’s NNA behaviour, the original value is reset with the next note rather than the next instrument number.
+* '''SCx really stops the sample and does not just mute it'''<br> A subsequent volume effect cannot pick up a note that was previously stopped using the SCx command.
+* '''IT-style envelope position advance + enable/disable behaviour'''<br> When disabling envelopes, the last value of the envelope keeps being applied.
+* '''More compatible instrument change + portamento'''<br> Resets the volume envelope even on notes with Tone Portamento. A sample change during a Tone Portamento with “Compatible Gxx” enabled does not cause the new sample to be played.
+* '''Do not repeat last sample point in ping pong loop, like IT’s software mixer'''<br> Not noticeable unless you use ping-pong-looped chip samples. If disabled, OpenMPT sounds more like IT’s Gravis Ultrasound driver.
+* '''Use triggered note rather than translated note for PPS and DNA note check'''<br> When modifying the note-to-note mapping of an instrument, the Pitch-Pan-Separation and Duplicate Note Action are based on the note found in the pattern rather than the “translated” note.
+* '''SAx does not apply an offset effect to a note next to it'''<br> High Offset commands next to a note do not instantly apply an offset effect, they only affect subsequent Offset commands.
+* '''User IT’s filter coefficients (unless extended filter range is used) and behaviour'''<br> Higher resonance than OpenMPT’s original filter implementation, and slightly different rules when to enable and disable filters.
+* '''Panning modulation is disabled on surround channels'''<br> Panning random variation, panbrello and panning envelopes are ignored on surround channels, unless OpenMPT’s “Quad Surround” panning mode (S9B command) is enabled.
+* '''Do not retrigger already stopped channels'''<br> A sample is not retriggered if it already stopped playing. Unfortunately, this also affects retriggering very short samples (such as Hi-Hats), so it is advised to put a silent loop at the end of such samples if they need to be retriggered.
+* '''Do not apply any portamento if no previous note is playing'''<br> Applying Tone Portamento on a channel where a note was previously stopped will not slide from this stopped note to the new note but rather play the new note directly at its target frequency.
+* '''Reset note-off on portamento if there is an instrument number in Compatible Gxx mode'''<br> Only reset the “Note Off” status of a note with Tone Portamento if “Compatible Gxx” is enabled.
+* '''Volume column effects share their memory with the effect column'''<br> Volume slides in the volume column have no own effect memory but share it with their effect column counterparts. This setting also ensures that fine volume slides in the volume column are only applied on the very first tick of a row, and not on multiples of the first tick if there is a Pattern Delay command.
+* '''Portamento with sample swap plays the new sample from the beginning'''<br> When swapping samples during a Tone Portamento, they are played from the start rather than being continued at the play position of the old sample.
+* '''Ignore instrument note map entries with no note completely'''<br> When triggering a note that is mapped to nothing at all in an instrument’s sample map, it should not even trigger New Note Actions and such.
+* '''IT-style first tick handling'''<br> If there is a note delay, fine volume slides next to it will be executed on the tick that matches the delay rather than the “true” first tick of the row.
+* '''IT-style sample&hold panbrello waveform'''<br> Setting the panbrello waveform to “random” will cause the speed parameter of the Panbrello command to hold the current random value for the given number of ticks. 
+* '''New notes reset portamento target in IT'''<br> A previous portamento target is not remembered after a note change with no Tone Portamento.
+* '''Do not reset panbrello effect until next note or panning effect'''<br> After executing Panbrello, its panning offset remains on the following rows until a new note or other panning effect is encountered. If disabled, the panning offset is reset immediately.
+* '''Sample and instrument panning is only applied on note change, not instrument change'''<br> An instrument number does not re-apply the sample’s or instrument’s default panning, only a new note does.
+* '''Bxx on the same row as SBx terminates the loop in IT'''<br> Pattern loops that also have a Position Jump on the last row are never executed.
+* '''Instrument number with note-off recalls default volume'''<br> An instrument number next to a Note-Off note will apply the sample’s default volume.
+* '''Lone instrument number after portamento within multi-sampled instrument sets the target sample's settings'''<br> A tone portamento between two notes of the same instrument that are assigned to different samples does not switch to new samples; however, a lone instrument number after such a tone portamento will apply the sample settings (volume and panning) of the target sample while continuing to play the first sample. Additionally, this setting resets the portamento on a stopped note if it is picked up using a lone instrument number.
+* '''Broken release node after sustain end behaviour'''<br> From OpenMPT 1.23 to OpenMPT 1.27, a release node past the sustain loop end did not work correctly if the “IT-style envelope position advance + enable/disable behaviour” compatibility setting was enabled as well. If such a module is loaded, this option is enabled automatically. Otherwise, it is not available.
+* '''Instrument number with note-off retriggers envelopes with Old Effects enabled'''
+* '''Instruments / samples with forced panning do not override channel panning for following instruments / samples'''<br> The panning options of samples and instruments do not override channel panning for any following notes.
+* '''Bxx right of SBx terminates the loop in IT'''<br> If a Bxx command is found right of the terminating SBx command of a pattern loop, the pattern loop is never executed.
+* '''Duplicate Sample Check requires same instrument, Duplicate Note Check uses pattern notes for comparison'''<br> If an instrument has its duplicate check type set to ''Sample'', then these checks are carried out only if the old and new instrument match. If an instrument has its duplicate check type set to ''Note'', the old and new pattern note are compared, regardless of how they are transposed in the instrument.
+* '''Pitch / Pan Separation can be overridden by panning commands'''<br> Rather than applying Pitch / Pan Separation as an offset on top of all other panning, this setting causes it to behave more like an implicit panning command that is overridden if a real panning command is encountered in the pattern data.
+* '''Ignore tone portamento for instrument plugins'''<br> If enabled, tone portamento commands do not slide from one instrument plugin note to the next, but instead keep the old note playing while also triggering the new note simultaneously.
+* '''Reset filter on portamento if new note plays a different sample'''<br> In sample mode, when doing a tone portmento between two differetn samples, the filter may be deactivated in the same way as it can be deactivated when triggering a new note (i.e. when the previous note was playing with filter cutoff fully open and resonance at 0).
+* '''Initial Last Note Memory of each channel is C-0 instead of No Note'''<br> When this setting is active, a lone instrument number with no previous note on the same channel will trigger a C-0 note instead of not doing anything.
+* '''Portamento after note-off does not re-enable sample sustain loop'''<br> When using tone portamento after a note-off event, the sample sustain loop is not re-enabled.
+* '''Ignore pattern cell completely when trying to play unmapped instrument note'''<br> Any effects in a pattern cell are ignored if that pattern cell contains a note or instrument that points to an unmapped entry in the instrument’s sample map.
+* '''Offset command with instrument number recalls offset with last note'''<br> If there is no note, but an instrument number and offset effect, the previous note is used to apply the offset effect to.
+* '''Parameters of conflicting volume and effect column portamento commands may overwrite each other'''<br> This setting emulates the strange interactions between different portamento commands when they are encountered in both the volume and effect column at the same time.
+* '''Note-Off status does not influence Envelope Carry behaviour'''<br> Previously, instrument envelopes restarted after a note-off even if Envelope Carry was enabled. With this setting enabled, they reset only if there is an instrument number without a note.
+* '''Note Cut (SCx) resets note pitch and interacts with tone portamento + row delay''''<br> This setting enables two quirks: When a lone instrument number picks up a note cancelled by an SCx command, any previous portamento effects are undone and the original note pitch is restored. A combination of SCx with a note and tone portamento also ignores the SCx command, unless there is also a pattern delay effect on the same row.
+* '''Do not propagate volume column volume slide memory to regular effect column'''<br>This setting prevents the volume column volume slides c and d from propagating their effect parameter to the memory of the regular effect column Dxy volume slide command.
+* '''Envelope Carry quirk in Compatible Gxx mode with portamento and instrument number'''<br>This setting enables a nasty Impulse Tracker quirk in Compatible Gxx mode: When triggering a new note of an instrument that uses Envelope Carry with both a tone portamento effect and instrument number next to it, the envelope will not necessarily continue playing where the last note left off, but it may pick up the envelope position of a completely unrelated note instead, potentially even from another channel. It is best to avoid this combination of settings.
+
+=== XM compatibility settings ===
+
+Fasttracker 2 has a '''very quirky''' playback routine which makes even common pattern effects (and combinations thereof) behave totally unpredictable.
+These idiosyncrasies are not handled very well (or not at all) when compatible playback is disabled,  so you are '''absolutely advised''' to use the default compatible playback settings for XM Files.
+Many people listen to those files with MilkyTracker and XMPlay, and those two programs emulate Fasttracker 2’s quirks rather well - and so does OpenMPT’s compatible playback mode.
+
+The following compatibility settings are only available in XM modules.
+
+* '''Use smooth Fasttracker 2 volume ramping'''<br> Enables extra smooth sample ramping, like Fasttracker 2 did it. When enabled, percussive instruments (e.g. Bass Drums) will sound very muffled, as most of their attack will be lost.
+* '''Reset note-off on portamento if there is an instrument number'''<br> Resets the “Note Off” status of a note with Tone Portamento.
+* '''FT2 arpeggio algorithm'''<br> FT2 has a very buggy arpeggio command that, among other things, plays arpeggios backwards (second parameter’s note comes first).
+* '''Rxx behaves like in FT2'''<br> The Retrigger command also has very erratic behaviour in FT2, which is emulated by this setting.
+* '''Vibrato depth in volume column does not actually execute the vibrato effect'''<br> The uxx command only sets the vibrato speed for subsequent vibrato commands, but does not actually play a vibrato.
+* '''Do not play portamento-ed note if no previous note is playing'''<br> If there is no playing note, a new note with a Tone Portamento command next to it will not sound.
+* '''FT2-style Kxx handling'''<br> Key Off is another weird command in FT2 and behaves differently with volume commands and instrument numbers next to it.
+* '''Volume-column pan slides are finer'''<br> lxx and rxx are as fine as fine panning slides in Impulse Tracker.
+* '''Offset past sample end stops the note'''<br> Notes with offset commands beyond the sample length are never triggered.
+* '''Do not allow ModPlug extensions to X command'''<br> Only X1x and X2x commands will work, X5x and higher do not.
+* '''Retrigger envelopes if there is a note delay with no note'''<br> A note delay with no note next to it will still retrigger instrument envelopes.
+* '''Lxx only sets the pan envelope position if the volume envelope's sustain flag is set'''
+* '''Portamento with instrument number applies volume settings of new sample, but not the new sample itself'''
+* '''No volume column memory'''<br> Volume column slides do not have a parameter memory.
+* '''Next pattern starts on the same row as the last E60 command'''<br> After a pattern loop has been executed, the next pattern will start from the row where the loop started rather than from the first row. To avoid this, put a Pattern Break command at the end of the pattern.
+* '''Keep processing faded channels for later portamento pickup'''<br> After a channel has been faded out, a Tone Portamento can still pick up this silent note.
+* '''Reload sample settings even if a note-off is placed next to an instrument number'''<br> Even an instrument number next to a Note-Off note will apply the sample’s default volume and panning. 
+* '''Portamento with note delay next to it is ignored'''<br> Tone Portamentos only work on notes with no note delays.
+* '''Ignore out-of-range transposed notes'''<br> A note, after applying the sample’s transpose amount, may not leave a certain range of notes. If it does, it is ignored.
+* '''Bxx or Dxx on the same row as E6x terminates the loop'''<br> Pattern loops that also have a Position Jump or Pattern Break effect on the last row are never executed.
+* '''Portamento target is not reset with new notes'''<br> Applying a Tone Portamento after a new note with no portamento has been triggered will slide back to the last note with portamento.
+* '''Sustain point at end of envelope loop stops the loop after release'''<br> If the sustain point is at the loop end and the sustain point has been released, do not loop anymore. 
+* '''Txx behaves like in FT2'''<br> Tremor is another somewhat idiosyncratic command in FT2.
+* '''Do not trigger notes with out-of-range note delay'''<br> If the note delay is greater than the ticks per row (ignoring any pattern delays), it is ignored. 
+* '''Use FT2's broken period handling'''<br> When sliding a note too deep, it will wrap around at some point and become a very high note.
+* '''Panning command with delayed note-off is ignored'''<br> If there is a Note Delay and Note-Off, a panning command next to them is ignored.
+* '''FT2-style volume column handling if there is a note delay'''<br> If there is a note delay, volume column effects are ''not'' executed on the first tick and, if there is an instrument number, on the delayed tick.
+* '''Round sample finetune to multiples of 8'''<br> FT2 has a finetune ranging from -128 to 127, but a finetune change only be heard at every multiple of 8.
+* '''Fade instrument on note-off when there is no volume envelope; instrument numbers reset note-off status.'''<br> Instruments with no instrument envelope are instantly muted when a note-off is encountered. If this note-off is not delayed (i.e. there is no EDx effect next to it), the instrument is also faded out, which is only relevant if a volume effect is encountered after the note-off. Additionally, instrument numbers after a note-off reset the note-off status, so the sustain status of the envelope is reset.
+* '''Emulate FT2/ProTracker tremolo ramp down / triangle waveform'''<br> The “ramp down” tremolo waveform (E71) is very buggy and even influenced by vibrato in FT2.
+* '''Portamento Up and Down have separate effect memory'''<br> 1xx and 2xx do not share effect memory.
+* '''If the sustain point of the panning envelope is reached before key-off, it is never released'''
+* '''Delayed instrument-less notes should not recall volume and panning'''<br> From OpenMPT 1.19 to 1.27, notes with a note delay but no instrument number accidentally recalled the sample’s default volume and panning settings, which should only happen if there is an instrument number.
+* '''Tone Portamento direction resets after reaching portamento target from below'''<br> After a tone portamento has reached its target note, FT2 will act as if the tone portamento should always decrease the frequency of the note, so if the note’s frequency is decreased (e.g. with 2xx) afterwards and another Tone Portamento effect is encountered, it will directly jump back to the target note.
+* '''Ignore tone portamento and fine pitch slides for instrument plugins'''<br>If enabled, tone portamento commands do not slide from one instrument plugin note to the next, but instead keep the old note playing while also triggering the new note simultaneously. Additionally, fine and extra-fine pitch slides are not applied to instrument plugins.
+* '''Key-off before auto-vibrato sweep-in is complete resets auto-vibrato depth'''<br> After a note-off / key-off event, sample auto-vibrato only continues to play if it already reached its full depth before the note-off / key-off event.
+* '''Offset effect memory is only updated when the command is next to a note'''<br> The effect memory of the Offset command (9xx) is only updated when the command is placed next to a note.
+
+=== S3M compatibility settings ===
+
+The following compatibility settings are only available in S3M modules. They are not saved in S3M files, but OpenMPT tries to guess the most appropriate settings when loading such files.
+
+S3M files made with OpenMPT always use all compatibility settings. However, when loading S3M files made with less compatible trackers (such as Impulse Tracker), compatible playback settings are disabled automatically as required. Re-saving such a file in OpenMPT will re-enable them.
+
+* '''Do not reset panbrello effect until next note or panning effect'''<br> After executing Panbrello, its panning offset remains on the following rows until a new note or other panning effect is encountered. If disabled, the panning offset is reset immediately.
+* '''Offset past sample end stops the note'''<br> Notes with offset commands beyond the sample length are never triggered.
+* '''Do not process any effects on muted S3M channels'''<br> Any effect commands (even tempo and global volume commands) on muted channels are completely ignored. Many trackers and players still apply these commands on muted channels.
+* '''Most effects share the same memory'''<br> Most effects in Scream Tracker 3 share a single effect memory (the only exception being vibrato and tone portamento effects). Many trackers and players implement effect-specific memory instead.
+* '''Portamento with instrument number applies volume settings of new sample, but not the new sample itself (GUS)'''<br> The default volume of the sample number next to a Tone Portamento command is applied, but no sample swap happens. This emulates the Gravis Ultrasound driver in Scream Tracker 3. Disable this option to emulate Sound Blaster playback instead.
+* '''Do not remember vibrato type in effect memory'''<br> Do not distinguish between vibrato types in effect memory, so that e.g. U1F followed by H00 causes the second effect to play a H1F vibrato. Effectively, this also means that Kxx will never play a fine vibrato.
+* '''Stop note when reaching the format's maximum note frequency'''<br> Only available when importing modules made with old ModPlug Tracker versions or BeRoTracker, notes stop playing when their pitch exceeds the S3M frequency limits after a portamento slide. Otherwise, the poratmento slide stops at the frequency limit.
+* '''Portamento immediately following an arpeggio effect continues at the last arpeggiated note'''<br> If a portamento up or portamento down effect immediately follows an arpeggio effect, it starts sliding from the last arpeggiated note, and not from the channel frequency as it was before the arpeggio.
+* '''Notes without instrument use the previous note's sample offset'''<br> Similarly to the MOD format, this setting causes notes without an instrument number to use the same sample offset as the previous note.
+* '''Notes cannot be retriggered after they have been cut'''<br> The Qxy command (with no note next to it) will not retrigger notes after the previous note has been forcefully cut.
+* '''Enable on-the-fly sample swapping (SoundBlaster driver)'''<br> The Sound Blaster driver in Scream Tracker 3 supports MOD-like sample swapping by just providing a new sample number without a note. As OpenMPT mostly follows Gravis Ultrasound playback for S3M modules, this setting is disabled by default.
+* '''Retrigger effect (Qxy) affects OPL notes'''<br> If disabled, only the note volume is affected by the Qxy effect (like in Scream Tracker 3). Otherwise, OPL notes are restarted like sample notes. This setting is only available for files made with OpenMPT 1.28, which did not use the same retrigger behaviour as Scream Tracker 3.
+* '''Apply lower frequency limit'''<br> This stops notes from sliding down lower than Scream Tracker 3 supports.
+* '''OPL notes with Tone Portamento are delayed until the next row'''<br>Tone Portamento is not available for OPL notes, instead the new note starts playing on the next row without any portamento.
+* '''Ignore combined fine slides (Kxy / Lxy)'''<br> Fine volume slides are not possible with commands K and L, like in Scream Tracker 3.
+
+
+=== MOD compatibility settings ===
+
+The following compatibility settings are only available in MOD modules. They are not saved in MOD files, but OpenMPT tries to guess the most appropriate settings when loading such files.
+
+* '''VBlank timing'''<br> F20 and above sets speed instead of tempo.
+* '''ProTracker one-shot loops'''<br> If (and only if) a sample’s loop starts at 0, the sample is first played in its ''entire'' length. Afterwards, only the loop section of the sample is repeated.
+* '''Ignore panning commands'''<br> 8xx and E8x commands will do nothing.
+* '''Enable on-the-fly sample swapping'''<br> Instrument numbers with no note next to them cause the playing sample to be exchanged by the newly specified sample. The effect takes place as soon as the currently played sample reaches its loop end.
+* '''Emulate FT2/ProTracker tremolo ramp down / triangle waveform'''<br> The “ramp down” tremolo waveform (E71) is very buggy and even influenced by vibrato in ProTracker.
+* '''Out-of-range note delay is played on next row'''<br> A note that is played with a note delay greater than the current ticks per row is postponed to the first tick of the next row, unless the next row already plays another note. The postponed note is played with an instant portamento from a previously playing note rather than being played from start.
+* '''Tempo changes are handled on second tick instead of first'''<br> F20 and above are only applied after the first tick of the row. At a speed of one tick per row, the change happens on the next row.
+
+=== Miscellaneous compatibility settings ===
+
+The following compatibility settings belong to neither of the aforementioned formats; they may be set when importing files from other formats and are not available otherwise.
+
+* '''Beating OPL oscillators'''<br> Only available when importing C67 files, this option slightly detunes OPL instruments based on the channel they are played on to create a fatter sound.
+* '''OPL key-off sets note frequency to 0 Hz'''<br> Only available when importing FMT files, this options sets the note pitch to 0 Hz to cut notes in addition to releasing the note-on flag.
+* '''Offset commands work without a note next to them'''<br> Offset commands can change the playback position of the sample without a note next to them. This behaviour is for example supported in the DMF, MDL and PLM formats.
+* '''New note without instrument number does not play looped samples from the start'''<br> Looped samples continue to play when a new note has no instrument number next to it, as if there was an instant tone portamento effect.
+
+[[Category:Manual|Compatible Playback]]

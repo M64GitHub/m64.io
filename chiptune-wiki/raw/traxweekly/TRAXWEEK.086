@@ -1,0 +1,744 @@
+			     .
+  founded march 12, 1995   _| :            _____  t r a x w e e k l y  # 8 6
+	   ______________ |___|  _ _______/    /\___________________________
+	 /  ____________/ /\__\ _ _______/____/_____________________________
+	/  /  _________   \/__/    ______\    \_____________________________
+       /  /  /          `_  .  .~         \____\/                 _  __ ___
+      /  /  /     _____   . _ \                                __ ___ _/__/\
+     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/
+   _/__/  / ____/    /__\_________________________________  _____      ___ _
+  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /
+ /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/
+ /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\
+   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \
+  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /
+ /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /
+   /                                                 \____\/\____\ /  /  /
+  /  _____     _____     _____     _____     _____     _____      /  /  /
+ /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /
+ __/____/____/____/____/____/____/____/____/____/____/____/________/  /
+ __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/
+    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW
+
+----------------------------------------------------------------------------
+  | TraxWeekly Issue #86 | Release date: 26 Jan. 1997 | Subscribers: 940 |
+----------------------------------------------------------------------------
+
+
+/-[Introduction]------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+  Welcome to TraxWeekly #86.
+
+  Thank you, readers!  I recieved a large batch of articles this week in
+ the mail, so many that I couldn't even include them all for this issue.
+ Also, my apologies for a(nother) late release.  Hopefully, missing TW for
+ a few days has not ruined your weekend (it shouldn't =).
+
+  Lots of tracking articles covering numerous subjects from effects to
+ hexadecimal round out this issue.  I also recieved some letters from RAR
+ supporters who have something to say about their preferred compression
+ standard.
+
+  Enjoy!
+
+						    Gene Wie (Psibelius)
+						    TraxWeekly Publishing
+						    gwie@csusm.edu
+
+
+/-[Contents]----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ ________  _________________________________________________________________
+ /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_
+<   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__
+ \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_
+ _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\
+
+
+  Letters and Feedback
+
+     1. Letter from Udi Meiri
+     2. Letter from Maz
+
+  General Articles
+
+     3. An Outsider's Look into the Demoscene.........Era
+     4. Impulse Tracker Tip of the Week...............Pinion
+     5. Intro to Music Theory: vol 5..................Greg Heo
+     6. Hexadecimal 101...............................Chinaski
+     7. Wrecking Samples with IT......................Graham
+
+  Closing
+
+     Distribution
+     Subscription/Contribution Information
+     TraxWeekly Staff Sheet
+
+
+/-[Letters and Feedback]----------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[1. Letter from Meiri]----------------------------------------------------
+
+ Date: Sat, 18 Jan 1997 12:33:16 +0200
+ From: Meiri <meiri@ibm.net>
+ To: gwie@mailhost1.csusm.edu
+ Subject: Re: Compression Quality of Music
+
+ Regarding smallest tracker file size: Since a song is %90 more or less
+ samples, you shouldn't be troubled by tracker file "overhead". Only MDL
+ files have compressed samples, so use Digitracker instead.
+ If you believe that all people should convert their modules to IT's, you're
+ dead wrong. I believe that the original format should be preserved, since
+ it was the wish of the composer to create the song in the specific format
+ that he chose. Changing the format might also change the song
+ (incompatabilities between trackers). People shouldn't go and distribute
+ converted modules. Don't you hate AMF's?
+
+ Regarding archiver performance: I'll have you know that RAR is not mainly
+ preferred for it's user interface, but for it's superior compression.
+ Setting up "normal" and "multimedia" compression and turning off the "add
+ recovery record" option in RAR will yield %50-%55 compression for ALL
+ modules. I have no idea what options or version you used, but here are my
+ results for Mech8.s3m:
+
+ RAR (2.00) using normal and multimedia compression, and no recovery record
+ (lha, pkzip, and arj don't support this, so it'd be unfair to turn it on
+ since it increases the  file size), Arj (2.50a) using best compression,
+ Pkzip (2.04g) using best compression, and LHA (2.55b) using best
+ compression:
+
+ MECH8    ARJ   474029
+ MECH8    LZH   476550
+ MECH8    RAR   428551
+ MECH8    S3M   745436
+ MECH8    ZIP   472339
+
+ RAR using best and multimedia compression:
+ MECH8    RAR   427909
+
+ Note that there is very little to be gained by using best compression, and
+ it take a while longer to compress this way.
+
+ My suggestion to any listeners that need the extra disk space and use Cubic
+ Player or any other player that supports rar is to compress their songs
+ into one rar file. (don't make a solid archive - it'll take forever to
+ extract!) It gives me a total compression ratio of %54 percent over 601
+ songs (of all types of formats) and saves about 75mb. Extracting a single
+ song doesn't take too long either.
+
+ Udi Meiri
+ meiri@ibm.net (no, I don't work for IBM)
+
+----------------------------------------------------------------------------
+
+
+--[2. Letter from Maz]------------------------------------------------------
+
+ Date: Fri, 17 Jan 97 12:05 SAT
+ From: maz@fh-zwickau.de:
+ To: gwie@mailhost2.csusm.edu
+ Subject: Compression
+
+ Hi there!
+
+ I guess you will get tons of mails from RAR-"fans" regarding the
+ module/packer-test (a "test" with only 2 different files has no value by
+ the way ...):
+
+ > Test Two: Mechanism 8
+ >
+ > Mech 8 in Scream Tracker Format       MECH.S3M           747,596 
+ > Mech 8 in Scream Tracker Format RAR   MECH_S_R RAR       478,933 
+
+ How the hell such a big file with RAR? 50 K bigger than my quick RAR-test??
+ Dictionary-Size 128K, Best Compression, MM-Compression, No Recovery Record
+ I RARed it and got - guess - 427072 (it was mech8.s3m, not mech.s3m, but I
+ guess that will NOT make the big difference)
+
+ I wrote a program for my www-pages, which depacks + recompresses any
+ archive I put into my pages. This little proggy tests ZIP, ARJ, LHA (always
+ with best compression) and RAR in 9 different commandline switch
+ combinations (all dictionary sizes + more...)  - if the file itself is
+ bigger than let's say 50 K I don't need to test ZIP, LHA, ARJ, since I
+ NEVER got another result than RAR WINS. Even the DOS RAR-version can unpack
+ the MM-compressed files + bigger dictionary-sizes.
+
+ > So according to these tests Impulse Tracker is the best program if your
+ > going to leave your files uncompressed. If you do decide to compress them
+ > use Fast Tracker and LHA.
+
+ LHA?? You better should do a module/compression test next time ...
+
+ > Generally though I have seen most people use
+ > either RAR or PKZIP. Why?
+
+ You really don't know it right?
+
+ > RAR has its own menu driven format 
+ > which makes it a bit easier to use.
+
+ ? That should be a reason? The reason is, that rar is the best on packrate
+ with it's multimedia compression!
+ Btw, I use the commandline win32 version - no NC-interface :)
+
+ > LHA unfortuanetly has recieve little
+ > recognition even though it is probably the best compressor.
+
+ Sure it's the worst. My experiences and I _DID_ tests.
+ I guess your "test" was a bit quick and dirty, right :)
+
+ RAR ruulez.
+
+ Bye,
+
+ MAZ
+ maz@fh-zwickau.de
+
+----------------------------------------------------------------------------
+
+
+/-[General Articles]--------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[3. "An Outsider's Outlook Into The Demoscene"]--------------------[Era]--
+
+ (or "How to DEMOnstrate Originality to the Audience")
+ by Era / MARTYR from December 1996 to January 1997
+ in Montreal, Quebec
+
+
+
+ greetings my fellow #trax-ers,
+
+         well, i've been reading TraxWeekly and DemoNews for some time and
+ noticed something peculiar the other day. There seems to be loads of talk
+ about the commercial overtaking of the demoscene (a public invasion of the
+ demoscene's private underground sphere), but nobody ever writes from the
+ perspective of one on the outside. That is why I take this opportunity on
+ this day to write you this article for TraxWeekly. If you like what you
+ read here, I hope that I can write a whole series of articles centered
+ around the same topic.
+         The topic at hand here is what people outside the demoscene think
+ of trackers, coders, and graphists.
+
+ the ambiguity of tracked music
+ ------------------------------
+         I'm sure there have been some of you musicians out there who have
+ composed something wonderful, only to be told by others that your music
+ sounds artificial. Even for those of you who write for yourselves, it must
+ still hurt somewhere emotionally to have your latest triumph dismissed as
+ 'cheap video game music'. That's usually the typical reaction of someone
+ _NOT_ in the demoscene listening to a chiptune.
+         Has it ever happened to you that someone close (or distant) from
+ you has heard your latest masterpiece and said that certain riffs sound
+ exactly like some real-world artist? Does that suck to hear that kind of
+ cold rejection after putting in over 20 hours of your creative soul into
+ the song?
+         In many cases with tracked music lately, some rejection is most
+ certainly deserved. Critique is always important toward self-improvement
+ and nobody is going to improve in their art unless they swallow their
+ pride and listen to others' council. It might mean getting one's ego
+ bruised, but it can be valuable learning so do not take offense if that
+ occurs.
+         It's when you try to compose something original and it winds up
+ sounding like the usual commercial breakbeat (and worse still, everyone
+ you play it for notices), that massive rejection from real-worlders comes
+ into play (unless you acknowledge it to be a cover track).
+         I've heard advice from other trackers about listening to lots of
+ stuff on the radio or from tapes/CDs. This can be a pro and a con. For one
+ thing, it is good because you can get valuable _inspiration_ (notice I did
+ not say plagarism), hence giving you great new ideas to put forward. Also,
+ listening to other tracked music helps, although not too much because that
+ can have detriments. Case in point, there is a musician I have heard who
+ composes as if he's a living replica of The Zapper! / F10. Now, when a
+ musician simply emulates the style of another tracker, then that clearly
+ demostrates a lack of originality and creativity on their part. Lame! :-/
+         The bad thing about listening to other commercial music in the
+ real-world media is that it can "inspire" a musician so much that they
+ fail to realize they are not being original. They are simply indirectly
+ (sometimes through plagarism) emulating the style of their favorite music
+ in the media. I'm all for tracked music supporting all forms of music
+ (rock, heavy metal, new age, classical, grunge, industrial, jazz, etc.),
+ however I do not want to be reminded of the song off the radio I heard
+ yesterday. The whole point to listening to tracked music (in my opinion)
+ is mainly to get away from the crap we hear on the radio, in concerts, and
+ on tapes/CDs. If one truly wanted to hear commercial, mainstream,
+ real-world music, wouldn't they just stick to the traditional medium of
+ radio/TV or tapes/CDs?
+         Another issue has always been sampling: should we or shouldn't we?
+ Well, my opinion is that a lot of people out there just don't know how to
+ make good samples, so I think they should rip. But for those lazy asses
+ that know how and can make their own samples, I think they don't have much
+ reason to rip aside from laziness. I mean, of course samples are the
+ proper musician's tools. They have to be carefully selected and used, but
+ more trackers should make their own samples because it will sound more
+ authentic than by using someone else's sounds. Besides, it places your
+ song in a better context for the other person who is probably thinking
+ "wow! This musician really went all out for the listener...". Composing is
+ a process (refer to Necros' THE PROCESS series of articles) and sampling
+ is part of that process. Ripping is an evil necessity in some cases where
+ the sample one wants is a rare commodity, but where the option exists to
+ make one's own samples, such trackers should take full advantage of their
+ abilities.
+         The last thing I will speak of here is the concept of cover songs
+ and remix songs. Truth be known, I generally find that remixing an old
+ tune is a lot like doing a sequel to a blockbuster movie hit. The second
+ movie usually isn't as impressive as the original. That rule usually can
+ be applied to remixes done in tracked music. There are notable exceptions
+ but that doesn't disclaim the fact that remixes tend to be lamer than the
+ original rendition. I can't really express any advice here from the outer
+ limits except DON'T REMIX. I have to add here that remixing can be done
+ well if done rarely (some songs leave very little inspiration to rearrange
+ it -- choose well). Also, don't reuse the same patterns over and over as I
+ suggest again below. Try to make the remix your own flavor of the song.
+ Don't let it be a slighly modified copy of the original! :-/
+         Cover songs... what can I say? Most of the time, they are great.
+ The problem with them is that they are rarely fully appreciated because
+ they sound like some cheap imitation of the original commercial hit. I've
+ heard one from F10 that sounded pretty close to the original, but none
+ have ever reached that pinnacle of success. That has to do with the fact
+ that most trackers that do a cover song sample the same instruments used
+ in the original commercial song, but not the same _SOUND_. Also, there is
+ a lot of guesswork on the notes transposed into the pattern editor. So
+ what you get is rather a module cover song that sounds about 60%-80% like
+ its original counterpart. The idea I am conveying here is REALISM. With
+ 16-bit sample capabilities of IT and FT2 and the CD-Audio ripping utils
+ out there, maybe trackers can achieve greater realism in their music and
+ we can hear cover songs that sound less artificial, less synthesized in
+ the future.
+ 
+ the false world of graphics
+ ---------------------------
+         I don't know about some of you, but the latest breed of lame has
+ been unfolded within the graphists' world.
+         What am I talking about here? I'm taking about the lamers passing
+ themselves off as graphists just because they know how to use PhotoShop or
+ similar programs. It is really a sad state of affairs when a demogroup is
+ looking for graphists to join and realize that lamers are passing off work
+ that isn't even hand-drawn pixel for pixel.
+         I realize this is bound to offend and I am sorry. This is just my
+ opinion so please don't beat me for it! :-)
+         I mean, any fool with half a brain can use PhotoShop and create
+ beautiful swirling vortexes or kleidoscopic images using those special FX
+ that amount to over 1/2 a meg of non-creative crap. However, don't let 
+ beauty fool you. These pics are often completed in like 15 minutes and
+ show no talent save for an adeptness at using PhotoShop, not drawing. Real 
+ graphists should be able to handcraft their works without the need of such
+ effects in PhotoShop or related products. 
+ 
+ the wacky old world of demos
+ ----------------------------
+         I have to admit before I go into this that I have my own set image
+ of what a demo should be. Please pardon my confusion at any of the
+ elements of demos should there be any.
+         One frustrating thing about demos is their lack of creativity.
+ Mind you, I have seen a few that stand out in the crowd. Namely, some
+ demos from Nooon, Kosmic, and a few sparse others. The simple fact is that
+ most demos simply show off the coding abilities of the coder more so than
+ they convey something of artistic beauty. Who cares about plasma effects
+ or some of the other overdone demo patterns we've all seen in a million
+ other demos before it?
+         My personal vision of what a demo should be is this: the artistic
+ expression of coder, musician, and graphist combined. Not a power trip for
+ some coder to show people that YES, he/she can copy effects his/her fellow
+ coders began 2 years ago! Anyway, I hope people take this idea seriously
+ and we see some semblance of improvement in the demoscene soon.
+         Demos are an audio/visual computerized presentation, so why not
+ make them more like, say for example: music videos, than programming
+ algorithms.
+ 
+ 
+ getting in the last werd
+ ------------------------
+         It's things like seeing repetitive music (STOP REUSING THE EXACT
+ SAME PATTERN 4 OR MORE TIMES!!! ARGH!!!) that define my pet peeve...
+ please don't drag out a song any longer than it needs to be. The length of
+ a demo, pic, or song is simply measured by the imagination of its creator.
+ 
+         Well, I hope this article has given you all a broad outlook on how
+ the real world perceives the underground demoscene. I personally think it
+ should remain underground. Anything mainstream usually becomes corrupt
+ soon after. The whole elitism of the scene is ridiculous, but in any
+ social structure such as this quite inevitable. The Hornet Team, despite
+ criticism for its lack of objectivity in ratings (hey, they're only
+ human!) are doing the demoscene a great service but I feel that they could
+ improve their objectivity if their ratings were more detailed.
+         Anyway, please send me feedback on this article and I hope it will
+ generate enough demand so that I can continue this series. Can't wait to
+ hear more of your tunes... :-)
+
+ Era / MARTYR [admin/poet/listserv]
+ era@myth.org
+ http://www.myth.org/~era/
+
+----------------------------------------------------------------------------
+
+
+--[4. Impulse Tracker Tip of the Week]----------------[pinion (Ryan Hunt)]--
+
+ ---------------------------------------------------------------------------
+ Tip #6: ping-ponged drum loop trick
+ ---------------------------------------------------------------------------
+
+ Often times I've heard drumloops played in reverse to affect a fill or drum
+ break.  Now you could get this effect by loading up the drumloop you're
+ using into the tracker and then reversing it, but that would waste valuable
+ file size, and the idea it to make modules as tight as convieniently
+ possible.  Here's an easier way using IT or FT2.  Very easy...
+
+ <step one> Take any give drum loop (some sound better than others) and give
+ it a ping-pong loop that encompasses the entire sample area (ie- the loop
+ starts at 0 and ends at the last byte.)
+
+ <step two> Trigger the drum loop as usual within your song, but when you
+ want the backwards effect use the sample offset command (Oxx) to start the
+ sample playing at the exact point where the ping-pong starts going backward.
+ It may take some experimentation to get the excat value, but if you're good
+ with hexdecimal you can figure it out.
+
+
+ That's it.  That's all there is to it.  One thing to note is that if your
+ drum loop is larger than a certain number of bytes (I don't the exact value
+ right now =) then you will need to use the set high order command (SAx
+ where x is a value in hex) before using the Oxx command.  It's recommended
+ that you reset the high order to 0 again after doing the offset, because
+ the reset value will carry through to future patterns.
+
+
+ If you need further information on this trick or have an idea for a Tip of
+ the Week email pinion@netcom.com
+
+ -pinion (phluid)
+ email: pinion@netcom.com
+ web  : www.acid.org/phluid/newmain.html
+
+----------------------------------------------------------------------------
+
+
+--[5. introduction to musical theory: volume five]--------------[Greg Heo]--
+
+ [introduction]
+
+  Welcome back.  Today, we will explore the vast field of chords: the
+ building blocks of harmony.  I'll get straight into it...almost ;).
+
+
+ [intervals]
+
+  I'm taking a step back here, because I didn't mention this earlier.
+ Basically, intervals refer to the distance between two notes.  Consider:
+
+  # of semitones apart     name
+         0                unison
+         1                minor second
+         2                major second
+         3                minor third
+         4                major third
+         5                perfect fourth
+         6                augmented fourth / diminished fifth
+         7                perfect fifth
+         8                augmented fifth / minor sixth
+         9                major sixth
+         10               minor seventh
+         11               major seventh
+         12               perfect eighth (octave)
+
+  Note that only the fourth (subdominant), fifth (dominant) and the octave
+ are considered 'perfect' tones.  This will come in later when we discuss
+ basic harmonization.
+
+
+ [symbolization]
+
+  Just some abbreviaions I use:
+    + or M: major
+    - or m: minor
+    A: augmented
+    d: diminished
+    P: perfect
+
+
+ [the major triad]
+
+  triad = three.  this is the very simple one.  It uses I, III, and V.
+ Go track them...wow, sounds pretty :).  actually...it's quite boring.
+ But we'll get to that later...
+
+  "triad" also refers to the distance between notes.  Consider a major
+ triad in the key of C:
+    C                       <--+
+      } major third apart      |
+    E                          |------ perfect fifth (P5)
+      } minor third            |
+    G                       <--+
+
+  And a minor triad:
+    C                       <--+
+       } minor third           |
+    Eb                         |------ P5 again
+       } major third           |
+    G                       <--+
+
+  So what about the other combinations...+3 +3, and -3 -3??
+
+
+ [more triads]
+
+  Well, there's the minor one of course (look up there).  An _augmented_
+ triad is the +3 +3 combination.  Note that in this chord, the total
+ distance is _not_ a P5.  This causes the chord to sound a little 'funny'
+ sounding.  I use the term 'funny' in comparison to a regular P5 triad.
+ Try it out and see (hear?) for yourself.  The diminished triad is the
+ -3 -3 combination, and has the minor third in it, giving it a minor sound.
+ Again, it is not a P5 chord.  Like I said, go try it out.  You gotta
+ listen to this stuff to learn it.
+
+
+ [root position and inversions]
+
+  These triads are said to be in _root_ position.  This is because the I is
+ at the root, or bottom, of the triad.  Now...try playing the notes in a
+ different order...III, V, I.  Note that the I must be the highest note
+ now.  We've kept the same notes, just changed the order.  This is known
+ as _inverting_ the chord.  III-V-I is _first_ inversion.  V-I-III is
+ second inversion.  And there you have it...here's an example
+
+               root   |C-4 .. ...|E-4 .. ...|G-4 .. ...|
+      1st inversion   |E-4 .. ...|G-4 .. ...|C-5 .. ...|
+      2nd inversion   |G-4 .. ...|C-5 .. ...|E-5 .. ...|
+
+  Inversions are _very_ important to break the monotony of having every
+ single chord in root position.
+
+
+ [consonance and dissonance]
+
+  Back in the olden days, composers set down rules as to what sounded
+ right, and what didn't.  Of course, this is all completly subjective, but
+ today's western music is based on this, so I'll discuss it...
+
+  Consonance is the good sounding stuff.  P1 (unison), P8 (octave), P5
+ and P4 are the _perfect consonance_ intervals.  The _imperfect consonance_
+ intervals are M3, m3, M6, and m6.  Finally, the dissonant ones are
+ whatever's left :).
+
+  Notice that in discussing triads, I said they sounded 'funny', but now
+ you can impress everyone and say "i found that this particular tune used
+ many dissonant chords."  wow.
+
+
+ [chords as accompaniment]
+
+  The major triads of I, IV, and V form the basis of simple harmony.
+ Take the example song of, "twinkle twinkle little star" (in the key
+ of C major)
+
+   00|C-5 ...|  I chord (C)     16|F-5 ...|  IV
+     |... ...|                    |... ...|
+   02|C-5 ...|                  18|F-5 ...| 
+     |... ...|                    |... ...|
+   04|G-5 ...|                  20|E-5 ...|  I
+     |... ...|                    |... ...|
+   06|G-5 ...|                  22|E-5 ...|
+     |... ...|                    |... ...|
+   08|A-5 ...|  IV chord (F)    24|D-5 ...|  V
+     |... ...|                    |... ...|
+   10|A-5 ...|                  25|D-5 ...|
+     |... ...|                    |... ...|
+   12|G-5 ...|  I chord (C)     28|C-5 ...|  I
+     |... ...|                    |... ...|
+   14|... ...|                  30|... ...|
+     |... ...|                    |... ...|
+
+  Remebering our scales from last week, and the triad information in this
+ issue, we can easily construct these chords:
+
+  track position 00: C major (no sharps/flats)
+                     I, III, V are: C E G
+        position 08: F major (B is flat)
+                     I, III, V are: F A C
+        position 24: G major (F is sharp)
+                     I, III, V are: G B D
+
+  And there you have it.  Simple harmonization with the perfect tones.
+
+ [conclusion]
+
+  Well, we've scratched the surface of chord theory, but there's still
+ A lot to cover.  Next time, we'll discuss seventh, ninth, and suspended
+ chords.
+
+
+ until then,
+  greg - [river@io.org]
+
+----------------------------------------------------------------------------
+
+
+--[6. Hexadecimal 101]------------------------------------------[chinaski]--
+
+ Howdy. 
+ I'm called chinaski. You aint heard of me, 'cause I havent released any
+ tunes (yet :p).
+
+ I've been tracking for about 8 months now(i know what yer thinkin: "F%#king
+ newbie!"), but I figure I would have started a bit sooner if it weren't for
+ 2 things:     
+     1. Totally inadequate (ST3) and incomplete (FT2) documentation, and
+     2. What the hell is HEXADECIMAL?
+
+ Now, I can't answer the first problem, what with my 2-fingered typing
+ skills and all, but for all the non-programmers and "newbie" trackers out
+ there, maybe I can help with hex.
+
+ Hexadecimal is a numeric system that is "base 16" or has 16 characters: 0
+ -9 plus ABCDEF(as opposed to decimal, which has 10 - 0123456789.). Usually,
+ a prefix of 0 or a suffix of "h", and sometimes both, are used to show that
+ a value is in hex. 
+
+ (Take a look at the addresses for the com ports on an msdos machine......
+ It uses both.)
+     
+ Now, 0 thru 9 work normally, but then comes the tricky part. For 10, you w
+ ould simply use "A", 11 would be "B", and so on. So a quick little
+ reference chart would be something like this:
+
+ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+ 0 1 2 3 4 5 6 7 8 9  A  B  C  D  E  F 10 11 12 13 14 15 16 17 18 19 1A 1B
+ 
+ So you see, to get the decimal equivalent from a Hex number, like say
+ 02Eh,you could multiply the digit that is second from right by 16. then
+ add to it the digit to the right of it.  So,  02Eh  (remember, the "0" and
+ "h" are _not_ part of the value.)
+                    /  \ 
+              2x16=32 + E {14} = (decimal) 40.
+
+ See? Easy. :) Well, actually it can be confusing to people who already
+ know it, so it can take a while to just get used to it. 
+
+ Tracking software usually only uses hex values of 0FFh (256) and smaller, 
+ so that can narrow it down a bit. Sometimes it helps to have a calculator
+ nearby for parameters that require precise values. Maybe even a chart like
+ above might help until you get it ingrained into your head. 
+
+ I hope that this is easy enough to understand ( I tested it on my
+ girlfriend, who hates anything computer-related, and she started to grasp
+ it.....:)). It has helped improve my tracking (and gave me a little head
+ start for my computer science classes ;)
+
+ Now, go track some music ! 
+
+ P.S. -If anyone has a better explanation, or notices a mistake in mine,
+ by all means - let me know! 
+
+               Regards, 
+                    chinaski [curt crosby] 
+
+----------------------------------------------------------------------------
+
+
+--[7. Wrecking Samples with Impulse Tracker]-------[Graham the Happy Scum]--
+
+ Fun ways to destroy your samples on the Sample Window (F3), which may
+ or may not prove useful.
+
+ 1. smoothing samples 
+
+ Do this in either 8-bit or 16-bit, although 16 bit works better. Alt-E
+ changes the length of the sample with interpolation. To smooth it out,
+ which has more of an effect on high frequencies than low, simply hit
+ alt-E, increment the value in the dialog window by 1, and possibly hit
+ alt-E again, and decrement the length by 1. This tends to murk the sample
+ up, but it should be useful in someways
+
+ 2. a really crude 'noise-gate'
+
+ Take a sample (this works best on percussion sounds, like hihats, snares,
+ and claps), Alt-A to unsign it, and Alt-M to amplify it slightly
+ (something like 103 or 104 percent.), then Alt-A to resign it. Really
+ sucks, especially at high values. The main effect is that it reduces low
+ sample values to zero, and makes some samples 'staticky'.
+
+ Probably better to use something like CoolEdit for noise-gates. 
+
+ 3. doing them tres funky 24-note-in-an-octave scales:
+
+ load a sample twice. multiply the sample rate of one by 1.0293 (which is
+ 2^(1/24) for math-boys :), and enter that value into the playback rate one
+ of the samples. 
+
+ Use the two samples in conjunction in your compositions for instant Ravi
+ Shankar melodies. (well, not quite instant. The actual melodies are left
+ as an exercise for the reader.)
+
+ Enjoy!
+
+ Graham the Happy Scum (gths@flat-earth.org)
+
+----------------------------------------------------------------------------
+
+
+/-[Closing]-----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ TraxWeekly is available via FTP from:
+ ftp.cdrom.com /demos/incoming/info (new issues)
+ ftp.cdrom.com /demos/info/traxw/   (back issues)
+
+ To subscribe, send mail to:      listserver@unseen.aztec.co.za
+ and put in the message body:     subscribe trax-weekly [name] (NOT address)
+ To unsubscribe, mail same and:   unsubscribe trax-weekly (in message body)
+
+ Contributions for TraxWeekly must be formatted for *76* columns,
+ must have a space preceding each line, and have some measure of
+ journalistic value.  Please try to avoid the use of high ascii
+ characters, profanity, and above all: use your common sense.
+
+ Contributions should be mailed as plain ascii text or filemailed
+ to: gwie@csusm.edu before 11:00pm PST (North America) every Thursday.
+
+ TraxWeekly is usually released over the listserver and ftp.cdrom.com
+ every Thursday or Friday at 10:00am PST (North America).
+
+ TraxWeekly does not discriminate based on age, gender, race, political
+ or religious statures and standpoints.
+
+ The staff can be reached at the following:
+
+ Editor:   Psibelius (Gene Wie)..............gwie@csusm.edu
+ Staff:    Atlantic (Barry Freeman)..........atlantic@arcos.org
+           Benjamin Krause...................orogork@cs.tu-berlin.de
+           Fred (Fred Fredricks).............fred@paracom.com
+           Kal Zakath (John Townsend)........jtownsen@sescva.esc.edu
+           Kleitus (Seth Katzman)............katzms@rpi.edu
+           Mage (Glen Dwayne Warner).........gdwarner@vinson.navy.mil
+                                             gdwarner@ricochet.net
+
+ Graphic Contributors:
+           Cruel Creator . Stezotehic . Squidgalator2 . White Wizard
+
+ TraxWeekly is a HORNET affiliation.
+ Copyright (c)1995,1996,1997 - TraxWeekly Publishing, All Rights Reserved.
+
+
+/-[END]---------------------------------------------------------------------
+---------------------------------------------------------------------------/
+                                         ::
+                                          :::                  :
+     . ..... ..............................:::.................:....
+                                            :::                :
+                                            ::::               :
+        .::::.      .:::::.:::.     ..::::  ::::               :
+       ::    ::    :::  .::  ::    ::     WW::::               :
+       ::.   ::   :::  .::  ::   .::        ::::               :
+        :::.::.  :::  .:: .::  .:::::...   :: :::..      ... ..: ...
+ ..::::::::::::::::  .:: .:::::::   ::::::::    ::::::.. ::: ::: :::
+                                                               :
+                                              until next week! =)
+           ..  ... .. ....... ............... .................:..... .. .
+                                                               :

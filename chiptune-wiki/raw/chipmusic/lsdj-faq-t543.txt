@@ -1,0 +1,789 @@
+RAW: chipmusic.org forum thread "LSDJ FAQ" | https://chipmusic.org/forums/topic/543/ | fetched 2026-08-30 with a browser user agent | post text extracted from the HTML (post number, author, timestamp; quotes marked [quote author]); signatures, avatars and images not included
+
+--- #1 | andrio | Jan 29, 2010 2:56 pm
+Anything you don't get in lsdj?
+Ask away here. Someone will help you out.
+We're friendly that way. [img: big_smile]
+
+Anyway, I have a question.
+Is it possible to change the BPM for different parts of a song? If not, any ideas on how to get around this?
+
+--- #2 | Jellica | Jan 29, 2010 3:02 pm
+use the T command?
+
+--- #3 | Bit Shifter | Jan 29, 2010 3:02 pm
+A "T" command, placed at a position in the song where you want the tempo to change, will change the BPM.
+
+--- #4 | Bit Shifter | Jan 29, 2010 3:03 pm
+Jellica is faster / stronger / harder / better
+
+--- #5 | egr | Jan 29, 2010 3:16 pm
+Help with the "L" command would be nice. I can't seem to bend notes up in the wav channel, only down?
+
+Also, I hate "prelisten" but it won't stay off!!! Grrrrrr!!! (edit: just emailed about this bug)
+
+Last edited by egr (Jan 29, 2010 3:25 pm)
+
+--- #6 | Jellica | Jan 29, 2010 3:33 pm
+I have the same issue with the L command, it never seems to bend notes how I want - I find it easier to use the P command and play with the vib. type if i want a nice Portamento effect.
+
+--- #7 | aphasia | Jan 29, 2010 3:35 pm
+egr:
+
+If you can't bend *up* then that sounds like a bug as well.
+
+I've found only L01 to be useful musically, everything else is too fast and with a different vib type it just sounds...odd.
+
+--- #8 | RushCoil | Jan 29, 2010 3:55 pm
+Question: When using an external MIDI keyboard/controller (via MC2), it seems that LSDJ will only allow audible responses to key inputs while the LSDJ sequencer it is running, and therefore key strikes are quantized in 16th note increments and sync'ed to the LSDJ clock (or whatever clock it is using). This means that if you simply want to use the DMG as a live instrument (using an external MIDI keyboard controller), you cannot avoid its quantization. I am assuming there is no other mode where you utilize the DMG chip without having the LSDJ sequencer running; is this correct?
+
+Last edited by RushCoil (Jan 29, 2010 3:59 pm)
+
+--- #9 | PixyJunket | Jan 29, 2010 4:10 pm
+I wouldn't mind some usage examples of the volume column in a table.
+
+For example, using the volume column to build a slower or more controlled fade-in than the envelope settings can, I would put something like:
+
+```
+VOL
+01
+21
+41
+61
+81
+A1
+```
+
+But it creates "clicks" at each step, making the fade in effect useless for the most part (at least with the instrument using it isolated, the "clicks" are kind of hidden when everything in playing at once for the most part).
+
+Is that just a bug/feature with LSDJ or is it a hardware limitation?
+
+--- #10 | akira^8GB | Jan 29, 2010 4:11 pm
+Your volume progression is not being smooth, so those are the "clicks" I believe.
+Try using a table, too.
+
+--- #11 | aphasia | Jan 29, 2010 4:12 pm
+[quote RushCoil wrote:]
+
+Question: When using an external MIDI keyboard/controller (via MC2), it seems that LSDJ will only allow audible responses to key inputs while the LSDJ sequencer it is running, and therefore key strikes are quantized in 16th note increments and sync'ed to the LSDJ clock (or whatever clock it is using). This means that if you simply want to use the DMG as a live instrument (using an external MIDI keyboard controller), you cannot avoid its quantization. I am assuming there is no other mode where you utilize the DMG chip without having the LSDJ sequencer running; is this correct?
+
+The way around this is to set the groove as low as possible in that channel and if that's not accurate enough then raise the tempo as well.
+
+--- #12 | aphasia | Jan 29, 2010 4:14 pm
+One thing with volume fade-ins you could do is put 0F first and then after a gap put a sustain envelope of the appropriate volume, and repeat. So that it maybe goes:
+
+0F
+48
+--
+--
+4F
+--
+--
+88
+--
+--
+CF
+--
+--
+
+That's just a guesstimate but that kind of technique might be good.
+
+--- #13 | PixyJunket | Jan 29, 2010 4:16 pm
+[quote Jellica wrote:]
+
+I have the same issue with the L command, it never seems to bend notes how I want - I find it easier to use the P command and play with the vib. type if i want a nice Portamento effect.
+
+L is one of my favorite commands.
+
+One thing you have to note is that it bends the previous note to the new one.
+
+```
+A#6 ---
+--- ---
+--- ---
+--- ---
+C 6 L02
+```
+
+Bends the A# down to a C. But as aphasia noted, you're only going to get something usable with an 01 or 02 (experiment, naturally).
+
+A cool effect is using an L with no note, this bends anything down to nil (or C 3, I'd assume).
+
+```
+A#6 ---
+--- ---
+--- ---
+--- ---
+--- L01
+```
+
+Or something like this, is a cool little sound.
+
+--- #14 | PixyJunket | Jan 29, 2010 4:16 pm
+[quote akira^8GB wrote:]
+
+Your volume progression is not being smooth, so those are the "clicks" I believe.
+Try using a table, too.
+
+That was a table example.
+
+edit: Also note that the clicks are there if you increment by one instead of two as well, sorry for the bad example.
+
+Last edited by PixyJunket (Jan 29, 2010 4:22 pm)
+
+--- #15 | PixyJunket | Jan 29, 2010 4:20 pm
+[quote aphasia wrote:]
+
+One thing with volume fade-ins you could do is put 0F first and then after a gap put a sustain envelope of the appropriate volume, and repeat. So that it maybe goes:
+
+That's just a guesstimate but that kind of technique might be good.
+
+I've done this a few times (actually, I did just this last night on something I was working on, heh) but it's pretty hard to nail exactly where to trigger the sustain, it takes a lot of experimenting to not get a noticable volume jump.. but it works well when you do hit upon it.
+
+--- #16 | RushCoil | Jan 29, 2010 4:21 pm
+@aphasia thank you, I'll give that a try.
+
+--- #17 | egr | Jan 29, 2010 4:23 pm
+[quote PixyJunket wrote:]
+
+[quote Jellica wrote:]
+
+I have the same issue with the L command, it never seems to bend notes how I want - I find it easier to use the P command and play with the vib. type if i want a nice Portamento effect.
+
+L is one of my favorite commands.
+
+One thing you have to note is that it bends the previous note to the new one.
+
+```
+A#6 ---
+--- ---
+--- ---
+--- ---
+C 6 L02
+```
+
+Bends the A# down to a C. But as aphasia noted, you're only going to get something usable with an 01 or 02 (experiment, naturally).
+
+A cool effect is using an L with no note, this bends anything down to nil (or C 3, I'd assume).
+
+```
+A#6 ---
+--- ---
+--- ---
+--- ---
+--- L01
+```
+
+Or something like this, is a cool little sound.
+
+Ah yes, your second example is what I've been doing sort of. I guess I couldn't get my head around not putting the command at the beginning of the bend. More experimentation is in order!
+
+Last edited by egr (Jan 29, 2010 4:32 pm)
+
+--- #18 | PixyJunket | Jan 29, 2010 4:30 pm
+[quote egr wrote:]
+
+Ah yes, your second example is what I've been doing sort of. I guess I couldn't get my head around not putting the command at the beginning of the bend. My experimentation is in order!
+
+Gotcha, so if you want to bend UP, trigger the L with a higher note.
+
+```
+C 5 ---
+--- ---
+--- ---
+--- ---
+A#5 L02
+```
+
+Bends UP to A#6.
+
+```
+C 5 ---
+--- ---
+--- ---
+--- ---
+B B L01
+```
+
+This should (in theory) be the exact opposite effect of using an L on an empty step.
+
+--- #19 | Jellica | Jan 29, 2010 4:40 pm
+[quote PixyJunket wrote:]
+
+[quote akira^8GB wrote:]
+
+Your volume progression is not being smooth, so those are the "clicks" I believe.
+Try using a table, too.
+
+That was a table example.
+
+edit: Also note that the clicks are there if you increment by one instead of two as well, sorry for the bad example.
+
+the clicks are a "feature" !!... well I can't get rid of them, I also get a more noticeable clicking sound when it hits a 0 volume at some point in the table.
+
+The only way to make them fit is to have your volume change increments in time with the amout of ticks that there are in your groove, so the clicks fit in with the beat.
+
+--- #20 | Subway Sonicbeat | Jan 29, 2010 4:43 pm
+The trick with the L command is using the vibration type. Change it from HF/\/ to the type you want. The best for Legatto is sine, cause it changes smoothly. :3
+
+--- #21 | andrio | Feb 2, 2010 11:14 am
+I recently got my cart earlier today (been using an emulator before).
+It isn't REALLY lsdj, but eh. This is what i do.
+
+1. Put cart in gameboy pocket.
+2. Nintendo logo comes up
+3. Nintendo logo comes up
+4. Turn off, turn back on again.
+5. Nintendo logo comes up
+6. Nintendo logo comes up.
+7. Put cart in gameboy color.
+8. Nintendo logo comes up.
+9. LSDJ comes up.
+10. Put cart back into gameboy pocket.
+11. Turn on.
+12. Nintendo logo comes up
+13. LSDJ comes up. I use it for around 20min, no problems.
+14. Press start
+15. Nintendo logo comes up (start was working fine before, and now for some reason this happens)
+16. Nintendo logo comes up
+17. Take cart out.
+18. Go back to 1.
+
+Has anyone else had this? Am I doing something wrong?
+edit: I found out the nintendo logo pops up randomly. It was coincidently appearing when i pressed start.
+But it still hasn't solved the problem.
+
+I can get lucky, but then it'll just restart.
+
+Last edited by andrio (Feb 2, 2010 11:16 am)
+
+--- #22 | Axolotl | Feb 2, 2010 12:00 pm
+[quote andrio wrote:]
+
+I recently got my cart earlier today (been using an emulator before).
+It isn't REALLY lsdj, but eh. This is what i do.
+
+1. Put cart in gameboy pocket.
+2. Nintendo logo comes up
+3. Nintendo logo comes up
+4. Turn off, turn back on again.
+5. Nintendo logo comes up
+6. Nintendo logo comes up.
+7. Put cart in gameboy color.
+8. Nintendo logo comes up.
+9. LSDJ comes up.
+10. Put cart back into gameboy pocket.
+11. Turn on.
+12. Nintendo logo comes up
+13. LSDJ comes up. I use it for around 20min, no problems.
+14. Press start
+15. Nintendo logo comes up (start was working fine before, and now for some reason this happens)
+16. Nintendo logo comes up
+17. Take cart out.
+18. Go back to 1.
+
+Has anyone else had this? Am I doing something wrong?
+edit: I found out the nintendo logo pops up randomly. It was coincidently appearing when i pressed start.
+But it still hasn't solved the problem.
+
+I can get lucky, but then it'll just restart.
+
+Which cart do you have? If you are using an EMS cart with the pocket, it is restarts because of power issues.
+
+--- #23 | tRasH cAn maN | Feb 2, 2010 12:02 pm
+[quote Subway Sonicbeat wrote:]
+
+The trick with the L command is using the vibration type. Change it from HF/\/ to the type you want. The best for Legatto is sine, cause it changes smoothly. :3
+
+I don't think slide or pitch commands are affected by the vibrato waveform. HF/non-HF, yes.
+Oh, and there's no sine. Saw, Triangle and Square. [img: wink]
+
+--- #24 | Turtle413 | Feb 2, 2010 1:06 pm
+Hooked up my homemade LSDJ keyboard (Dell SK-8100 w/ DMG-07 cable) to my game boy DMg.... all I get is blank screen, or pixelated mess when I unplug it w/ The unit on. Can't get it to work, and I got everything right I assume. Started a blank Keyboard file...The Song is set at 00 00 00 00 got chain set at 00 with the phrase at 00 and ins. @ 00. No matter what I do....blank screen and nothing picks up from keyboard? Any suggestions????
+
+--- #25 | xero | Feb 2, 2010 6:15 pm
+[quote Turtle413 wrote:]
+
+Hooked up my homemade LSDJ keyboard (Dell SK-8100 w/ DMG-07 cable) to my game boy DMg.... all I get is blank screen, or pixelated mess when I unplug it w/ The unit on. Can't get it to work, and I got everything right I assume. Started a blank Keyboard file...The Song is set at 00 00 00 00 got chain set at 00 with the phrase at 00 and ins. @ 00. No matter what I do....blank screen and nothing picks up from keyboard? Any suggestions????
+
+when i use my keyboard i start LSDj w/o the keyboard attached.
+i boot up the cart and go to the LSDj project screen.
+then i attach the keyboard, and set the sync mode to: KEYBD
+when you do that, you should notice a hex address popup
+to the right of the "purge" option. (in the image it's: I00)
+[img: http://the.fontvir.us/b10g/img/lsdj.keyboard-16.gif] <http://the.fontvir.us/b10g/img/lsdj.keyboard-16.gif>
+
+Last edited by xero (Feb 2, 2010 6:16 pm)
+
+--- #26 | egr | Feb 2, 2010 6:30 pm
+[quote PixyJunket wrote:]
+
+[quote egr wrote:]
+
+Ah yes, your second example is what I've been doing sort of. I guess I couldn't get my head around not putting the command at the beginning of the bend. My experimentation is in order!
+
+Gotcha, so if you want to bend UP, trigger the L with a higher note.
+
+```
+C 5 ---
+--- ---
+--- ---
+--- ---
+A#5 L02
+```
+
+Bends UP to A#6.
+
+```
+C 5 ---
+--- ---
+--- ---
+--- ---
+B B L01
+```
+
+This should (in theory) be the exact opposite effect of using an L on an empty step.
+
+Finally figured out that the bend starts at the second note position. [img: tongue]
+
+--- #27 | Turtle413 | Feb 2, 2010 9:08 pm
+Xero...I did that too! Wierd that my LSDJ program doesn't give you that PURGE option when you select KEYBOARD in The Sync menu. And like I say... as soon as you plug it in the screen goes blank and program stops functioning. What da heck [img: sad]
+
+--- #28 | tRasH cAn maN | Feb 2, 2010 9:11 pm
+You shouldn't plug/unplug anything while the gameboy is on.
+
+--- #29 | Turtle413 | Feb 2, 2010 9:23 pm
+^yeah I know... you have a better suggestion?
+
+--- #30 | Turtle413 | Feb 2, 2010 9:27 pm
+Plus I just got the DMG for $8. It breaks, then oh well...it breaks. Fixing it will just give me something to do.Anyway... had anyone had this problem with the Dell sk-8100's??? not the sk-8110's these boards are slightly different, but have the same wire colors. And whats up with the PURGE mode? Doesn't appear after you select keyboard on synch???
+
+--- #31 | Turtle413 | Feb 5, 2010 2:42 pm
+[quote Turtle413 wrote:]
+
+Plus I just got the DMG for $8. It breaks, then oh well...it breaks. Fixing it will just give me something to do.Anyway... had anyone had this problem with the Dell sk-8100's??? not the sk-8110's these boards are slightly different, but have the same wire colors. And whats up with the PURGE mode? Doesn't appear after you select keyboard on synch???
+
+Still having the problem??? Any suggestions? Anyone please?
+
+--- #32 | Shonen_ | Feb 5, 2010 2:51 pm
+[quote tRasH cAn maN wrote:]
+
+[quote Subway Sonicbeat wrote:]
+
+The trick with the L command is using the vibration type. Change it from HF/\/ to the type you want. The best for Legatto is sine, cause it changes smoothly. :3
+
+I don't think slide or pitch commands are affected by the vibrato waveform. HF/non-HF, yes.
+Oh, and there's no sine. Saw, Triangle and Square. [img: wink]
+
+Sine = triangle.
+
+--- #33 | nordloef | Feb 5, 2010 2:59 pm
+[quote Turtle413 wrote:]
+
+[quote Turtle413 wrote:]
+
+Plus I just got the DMG for $8. It breaks, then oh well...it breaks. Fixing it will just give me something to do.Anyway... had anyone had this problem with the Dell sk-8100's??? not the sk-8110's these boards are slightly different, but have the same wire colors. And whats up with the PURGE mode? Doesn't appear after you select keyboard on synch???
+
+Still having the problem??? Any suggestions? Anyone please?
+
+Regarding the PURGE. Maybe you're using a relatively new version?
+
+[quote]
+
+2008-12-26: v3.9.2
+
+ * replace project screen "purge sequencer/instruments" with "free unused data,"
+ which also frees unused tables, synths and waves.
+
+About the lsdj keyboard. Sounds like you've got the wires wrong?
+
+--- #34 | nordloef | Feb 5, 2010 3:01 pm
+[quote Shonen_ wrote:]
+
+[quote tRasH cAn maN wrote:]
+
+I don't think slide or pitch commands are affected by the vibrato waveform. HF/non-HF, yes.
+Oh, and there's no sine. Saw, Triangle and Square. [img: wink]
+
+Sine = triangle.
+
+Sine != triangle
+
+--- #35 | tRasH cAn maN | Feb 5, 2010 3:29 pm
+[quote Shonen_ wrote:]
+
+Sine = triangle.
+
+?
+http://upload.wikimedia.org/wikipedia/c … eforms.svg <https://upload.wikimedia.org/wikipedia/commons/7/77/Waveforms.svg>
+
+--- #36 | Beverage | Feb 5, 2010 3:37 pm
+[quote andrio wrote:]
+
+I recently got my cart earlier today (been using an emulator before).
+It isn't REALLY lsdj, but eh. This is what i do.
+
+Has anyone else had this? Am I doing something wrong?
+edit: I found out the nintendo logo pops up randomly. It was coincidently appearing when i pressed start.
+But it still hasn't solved the problem.
+
+I can get lucky, but then it'll just restart.
+
+As someone stated above, it may be a power issue. There's a couple of threads at (gasp) ol' 8bc about this, but none of them are too fruitful. You can have a look.
+
+http://8bitcollective.com/forums/search … =361263592 <http://8bitcollective.com/forums/search.php?search_id=361263592>
+
+As far as I can tell, it may not be fixable - the issue is that the cart you're using (assuming you're not using a Bleepbloop cart) simply draws too much power and can't run in the pocket.
+
+--- #37 | tacticalbread | Feb 5, 2010 3:54 pm
+[quote Shonen_ wrote wrote:]
+
+Sine = triangle
+
+while they may look, and sound, similar,, they're really quite different. A sine wave is considered the 'pure tone' because it has no overtones at all, If you filter a pure sine, nothing happens until the cut off frequency gets to the frequency of the tone, and cuts it off completely. You can actually filter a triangle wave, because it has overtones.
+
+--- #38 | Turtle413 | Feb 5, 2010 4:37 pm
+Regarding the PURGE. Maybe you're using a relatively new version?
+
+[quote]
+
+2008-12-26: v3.9.2
+
+[quote]
+
+* replace project screen "purge sequencer/instruments" with "free unused data,"
+ which also frees unused tables, synths and waves.
+
+About the lsdj keyboard. Sounds like you've got the wires wrong?
+
+I believe the version I'm using is the most current one as of the Jan. '10. Doesn't seem to have the "free unused data" option? Is this going to be a big problem in hooking up a keyboard???
+
+As far as the keyboard assembly...no camera btw so I can't show you the problem.... I followed Thretris's keyboard color code from his tutorial on the sk-8100...I started fresh twice already, but I'm def. willing to give it another whack. So I'll just take it all apart again. I also just grabbed a new continuity tester, now what is your best advice on testing the wires without hacking up the wiring on the pcb ends???? you know what I mean? can you place a clip one end of the tester to the dmg cable thru the male piece then hook up the other alligator clip to the wires next to the pcb on the keyboard? I'm new at using these testers....
+
+--- #39 | nordloef | Feb 5, 2010 6:12 pm
+[quote Turtle413 wrote:]
+
+Regarding the PURGE. Maybe you're using a relatively new version?
+
+[quote]
+
+2008-12-26: v3.9.2
+
+About the lsdj keyboard. Sounds like you've got the wires wrong?
+
+I believe the version I'm using is the most current one as of the Jan. '10. Doesn't seem to have the "free unused data" option? Is this going to be a big problem in hooking up a keyboard???
+
+As far as the keyboard assembly...no camera btw so I can't show you the problem.... I followed Thretris's keyboard color code from his tutorial on the sk-8100...I started fresh twice already, but I'm def. willing to give it another whack. So I'll just take it all apart again. I also just grabbed a new continuity tester, now what is your best advice on testing the wires without hacking up the wiring on the pcb ends???? you know what I mean? can you place a clip one end of the tester to the dmg cable thru the male piece then hook up the other alligator clip to the wires next to the pcb on the keyboard? I'm new at using these testers....
+
+Then its probably called "clean song data" + "clean instr data" which is the same thing just a different name. And it doesn't(shouldn't) affect the lsdj keyboard function in any way.
+
+[quote]
+
+2009-07-26: v3.9.e
+
+ * split up "free unused data" to "clean song data" + "clean instr data"
+ on popular demand.
+
+Unless you're using the exact same model as he used in the tutorial its most likely that the wires in your keyboard have completely different colors. I think I got the same problem once by hooking up the 5v wire where it shouldn't be.
+
+--- #40 | Turtle413 | Feb 5, 2010 8:46 pm
+Thanks nordloef! I'm staring over now...
+
+--- #41 | Turtle413 | Feb 6, 2010 12:13 am
+Brown wire from dmg cable seems to be the facor... I'm still stumped
+
+SK-8100:
+
+--KB-- --DMG--
+green - green
+white - blue
+red - brown
+yellow - yellow (that's how I had my wires, which is the supposed to by right?)
+
+So we can agree that DMG blue carries the +5v...And the green should go with green and yellow with yellow...right??? So here's the problem...The brown wire (DMG) is what screws everything up i guess. No matter what wire (from KB) I hook up to the brown (DMG) things get all screwed up! I'm getting frustrated with all the error, what do you think is wrong with my set up??
+
+--- #42 | nordloef | Feb 6, 2010 1:21 am
+[quote lsdj wiki wrote:]
+
+The DMG-07 4 player adapter cable has all the needed lines (including +5v). I determined the cable colors using a multimeter:
+
+1 brown (+5V)
+2 red (serial out)
+3 yellow (serial in)
+4 – (reserved)
+5 green (clock out)
+6 blue (gnd)
+
+http://wiki.littlesounddj.com/KeyboardInterface <http://wiki.littlesounddj.com/KeyboardInterface>
+
+--- #43 | nordloef | Feb 6, 2010 1:23 am
+[quote Turtle413 wrote:]
+
+And the green should go with green and yellow with yellow...right???
+
+Just because they have the same colors?
+
+--- #44 | Turtle413 | Feb 6, 2010 5:25 am
+hey now I'm a noob. What do you expect? lol I'm having enuff trouble just learning how to master soldering wires....my keyboard is supposed to follow Thretris's color codes for the SK-8100 (he confirmed this w/ me) I'm also using the official DMG-07 cable, so it should be easy, right? hahaha.I'm going to spend the rest of the night getting the damn thing to work. I'll try to post a pic of the wires, somewhere on the web and everyone can point n laugh at my hack wire job! Thanks for those that stuck w/ me on this one! I will succeed! [img: wink]
+
+--- #45 | nordloef | Feb 6, 2010 5:54 am
+According to Thretris blog the wiring for the SK-8110 is like this: (as you probably already know by now)
+
+[img: https://2.bp.blogspot.com/_AunSIWoEFRo/S1q4Fm1f7RI/AAAAAAAAAYE/uRzXmAGOIls/s320/DSC00888.JPG] <https://2.bp.blogspot.com/_AunSIWoEFRo/S1q4Fm1f7RI/AAAAAAAAAYE/uRzXmAGOIls/s320/DSC00888.JPG>
+
+http://thretris.blogspot.com/2010/01/ls … pdate.html <https://thretris.blogspot.com/2010/01/lsdj-keyboard-guide-update.html>
+
+I hope you get it to work.
+
+--- #46 | Turtle413 | Feb 6, 2010 3:24 pm
+...Keyboard is probably shot. Third time I did this exactly like the diagram above (Thretris's). I'll have to test the keyboard first, the next time I try this. Thanks again everyone!
+
+--- #47 | ElevaterMachineROom | Feb 8, 2010 6:12 am
+Im a bit of noob my self and wanted to know if anyone is having trouble transferring their data to a comp by using the LSDJ Carts with a Mini USB plug attached to it? can any one help?
+
+--- #48 | Turtle413 | Feb 8, 2010 7:38 am
+Got that trouble too...That and my computer says I need "administrator access" to do it. I can't figure out how to bypass that on my computer, but that's besides the point. (got my computer 2nd hand from a friend of a friend...not sure what the administrator p/w is, but I never needed until I tried plugging in LSDJ through a usb)
+
+--- #49 | arottenbit | Feb 8, 2010 1:07 pm
+[quote Turtle413 wrote:]
+
+...Keyboard is probably shot. Third time I did this exactly like the diagram above (Thretris's). I'll have to test the keyboard first, the next time I try this. Thanks again everyone!
+
+I really dont think that all the keyboards have the save cable colors.
+
+you should use a tester and follow this scheme.
+
+[img: http://img3.imagebanana.com/img/bubsvv1k/LSDJKeyboard.jpg] <http://img3.imagebanana.com/img/bubsvv1k/LSDJKeyboard.jpg>
+
+--- #50 | Axolotl | Feb 8, 2010 3:56 pm
+[quote Turtle413 wrote:]
+
+Got that trouble too...That and my computer says I need "administrator access" to do it. I can't figure out how to bypass that on my computer, but that's besides the point. (got my computer 2nd hand from a friend of a friend...not sure what the administrator p/w is, but I never needed until I tried plugging in LSDJ through a usb)
+
+Try going into safe mode and making a new administrator account.
+
+--- #51 | ElevaterMachineROom | Feb 8, 2010 11:17 pm
+[quote Turtle413 wrote:]
+
+Got that trouble too...That and my computer says I need "administrator access" to do it. I can't figure out how to bypass that on my computer, but that's besides the point. (got my computer 2nd hand from a friend of a friend...not sure what the administrator p/w is, but I never needed until I tried plugging in LSDJ through a usb)
+
+funny mine dosen't even acknowledge it and i bought it at blipfest this year too. its weird and it kinda upsets me but idk maybe i can find a work around any one else having this problem???
+
+--- #52 | J&amp;HT | Feb 9, 2010 8:43 am
+[quote Turtle413 wrote:]
+
+Got that trouble too...That and my computer says I need "administrator access" to do it. I can't figure out how to bypass that on my computer, but that's besides the point. (got my computer 2nd hand from a friend of a friend...not sure what the administrator p/w is, but I never needed until I tried plugging in LSDJ through a usb)
+
+If you are running Vista then right click the .exe and click "run as administrator" perhaps?
+
+--- #53 | Turtle413 | Feb 9, 2010 9:12 am
+I'm running with Windows XP -tablet PC ver. When I boot it up in 'Safe Mode' it makes you go to the name/password screen. I don't what other name or p/w to put in. We log on with our user name, when we use the computer. The trouble is User Mode is the only mode we can successfully be in. I can't hook up any peripherals obviously, because "You need Administrative Access"
+
+--- #54 | Axolotl | Feb 9, 2010 7:01 pm
+Try the user name "administrator" with no password.
+
+I was hoping for the user select screen to come on with the secret admin user.
+
+--- #55 | concealed | Jan 27, 2011 2:38 am
+Mind if I bump this?
+
+I found it because I also have no idea how to do long volume fades without it kinda clicking up or down in steps (also can't figure out how to pan without it clicking before hand).
+
+Just thought I would bump this so I can keep all of my stupid questions to one thread.
+
+--- #56 | Zef | Jan 27, 2011 6:54 pm
+I'm having the same problems with the panning clicks, I've definitely heard people use it without the clicks being noticable. Anyone know how it's done?
+
+--- #57 | herr_prof | Jan 27, 2011 7:16 pm
+fade the instrument off before doing the panning?
+
+--- #58 | Apprentice8 | Feb 3, 2011 8:26 am
+I don't know if this has already been addressed. I'm new to LSDJ and was wondering...will 2 DMGs sync properly if one is half clocked? Like, will the timing match up and whatnot? Does this question even make sense? ugh.
+
+--- #59 | Subway Sonicbeat | Feb 3, 2011 1:19 pm
+Back to the L command, yes, the frequency changes the speed and I'm pretty sure of it. BUT maybe it works only with the pulse, I dunno fo the wav, maybe that was the thing.
+
+Also, sine and tri look different and sound different.
+
+--- #60 | Kedromelon | Feb 3, 2011 4:39 pm
+[quote Apprentice8 wrote:]
+
+I don't know if this has already been addressed. I'm new to LSDJ and was wondering...will 2 DMGs sync properly if one is half clocked? Like, will the timing match up and whatnot? Does this question even make sense? ugh.
+
+Yes, I have done this myself on one song. Just make sure the one that is NOT underclocked is master. The underclocked DMG will play at the same BPM of the master, and will still play an octave lower.
+
+--- #61 | Apprentice8 | Feb 3, 2011 6:36 pm
+[quote Kedromelon wrote:]
+
+[quote Apprentice8 wrote:]
+
+I don't know if this has already been addressed. I'm new to LSDJ and was wondering...will 2 DMGs sync properly if one is half clocked? Like, will the timing match up and whatnot? Does this question even make sense? ugh.
+
+Yes, I have done this myself on one song. Just make sure the one that is NOT underclocked is master. The underclocked DMG will play at the same BPM of the master, and will still play an octave lower.
+
+Thanks, that is super helpful. I'm writing my first chiptune and am already finding a need for lower bass and more tracks! Searching local thrift stores for old bricks :-)
+
+--- #62 | nickmaynard | Feb 3, 2011 9:08 pm
+[quote Apprentice8 wrote:]
+
+[quote Kedromelon wrote:]
+
+Yes, I have done this myself on one song. Just make sure the one that is NOT underclocked is master. The underclocked DMG will play at the same BPM of the master, and will still play an octave lower.
+
+Thanks, that is super helpful. I'm writing my first chiptune and am already finding a need for lower bass and more tracks! Searching local thrift stores for old bricks :-)
+
+the variable speed knob mod can produce some awesome effects when you sync two gameboys. depending on which is the master, it does some different shit!
+
+--- #63 | Apprentice8 | Feb 3, 2011 9:59 pm
+[quote nickmaynard wrote:]
+
+[quote Apprentice8 wrote:]
+
+Thanks, that is super helpful. I'm writing my first chiptune and am already finding a need for lower bass and more tracks! Searching local thrift stores for old bricks :-)
+
+the variable speed knob mod can produce some awesome effects when you sync two gameboys. depending on which is the master, it does some different shit!
+
+It's funny you should mention that, I actually already purchased the pitch bend mod from Nonelectronics. I'm just waiting for a DMG to put it in. I'm trying not to mod the hell out of my main unit. Will it bend the pitch without changing the tempo if it's linked in as the secondary game boy? Cause that would be BA!
+
+--- #64 | nickmaynard | Feb 3, 2011 10:41 pm
+[quote Apprentice8 wrote:]
+
+[quote nickmaynard wrote:]
+
+the variable speed knob mod can produce some awesome effects when you sync two gameboys. depending on which is the master, it does some different shit!
+
+It's funny you should mention that, I actually already purchased the pitch bend mod from Nonelectronics. I'm just waiting for a DMG to put it in. I'm trying not to mod the hell out of my main unit. Will it bend the pitch without changing the tempo if it's linked in as the secondary game boy? Cause that would be BA!
+
+yeah, if the variable speed gameboy is the master, then turning the knob will change the tempo and pitch of the master but only the tempo of the slave. if the variable speed gameboy is the slave, then turning the knob will only change the pitch of the slave, but the tempo will stay the same.
+
+--- #65 | Apprentice8 | Feb 3, 2011 10:45 pm
+@nickmaynard Thank you so much for the info. Can't wait to start jamming!
+
+--- #66 | nitro2k01 | Feb 4, 2011 12:33 am
+[quote akira^8GB wrote:]
+
+Your volume progression is not being smooth, so those are the "clicks" I believe.
+Try using a table, too.
+
+That's no actually the problem. It's a hardware limitation. To change the volume, the phase of the waveform needs to be restarted, which causes a click. you can get away with using well E commands in a table, where one continues where the other left off, but the volume column is essentially useless, unless you actually want a static-ey sound.
+
+--- #67 | Jansaw | Feb 4, 2011 2:46 am
+[quote Kedromelon wrote:]
+
+[quote Apprentice8 wrote:]
+
+I don't know if this has already been addressed. I'm new to LSDJ and was wondering...will 2 DMGs sync properly if one is half clocked? Like, will the timing match up and whatnot? Does this question even make sense? ugh.
+
+Yes, I have done this myself on one song. Just make sure the one that is NOT underclocked is master. The underclocked DMG will play at the same BPM of the master, and will still play an octave lower.
+
+You can use the underclocked boy as the master; just make sure to set the underclocked tempo to a high number that is divisible. Therefore, you set the non-modded boy to slave and divide the tempo of the underclocked boy by two (Ex: underclocked master @ 254 & un-modded slave @ 127). Easy enough, but sometimes constraining in tempo variation.
+
+--- #68 | Kedromelon | Feb 4, 2011 5:32 pm
+[quote Jansaw wrote:]
+
+[quote Kedromelon wrote:]
+
+Yes, I have done this myself on one song. Just make sure the one that is NOT underclocked is master. The underclocked DMG will play at the same BPM of the master, and will still play an octave lower.
+
+You can use the underclocked boy as the master; just make sure to set the underclocked tempo to a high number that is divisible. Therefore, you set the non-modded boy to slave and divide the tempo of the underclocked boy by two (Ex: underclocked master @ 254 & un-modded slave @ 127). Easy enough, but sometimes constraining in tempo variation.
+
+True, I forgot to mention that. Thanks Jansaw.
+
+--- #69 | Llulagan | Feb 7, 2011 12:48 am
+Sorry is this has been asked on another part of the site, but im trying to make Chords on LSDJ. I know the C command, but it sounds like its alternating the notes in my opinion, is there a way to make them play at the same time without using both the Pulse channels?
+
+--- #70 | an0va | Feb 7, 2011 1:21 am
+That's how the medium works, boss
+
+--- #71 | pixls | Feb 7, 2011 1:52 am
+[quote Llulagan wrote:]
+
+Sorry is this has been asked on another part of the site, but im trying to make Chords on LSDJ. I know the C command, but it sounds like its alternating the notes in my opinion, is there a way to make them play at the same time without using both the Pulse channels?
+
+[quote an0va wrote:]
+
+That's how the medium works, boss
+
+Yeah, each channel is really just one channel, you can't have it do more than one sound at once.
+
+--- #72 | Llulagan | Feb 7, 2011 2:05 am
+[quote pixls wrote:]
+
+[quote Llulagan wrote:]
+
+Sorry is this has been asked on another part of the site, but im trying to make Chords on LSDJ. I know the C command, but it sounds like its alternating the notes in my opinion, is there a way to make them play at the same time without using both the Pulse channels?
+
+[quote an0va wrote:]
+
+That's how the medium works, boss
+
+Yeah, each channel is really just one channel, you can't have it do more than one sound at once.
+
+Alright, thanks
+
+--- #73 | concealed | Feb 7, 2011 3:11 pm
+Yeah the lack of chords is actually one of the only limitations of LSDJ that makes me a little sad...would love to be able to do NES-style chords (e.g. Zelda) just to add a little thickness/depth to the sound.
+
+--- #74 | Jansaw | Feb 7, 2011 3:13 pm
+You can use the tables to try and emulate slower arps, which may sound closer to what you are looking for, but the rest has been said.
+
+--- #75 | pixls | Feb 7, 2011 5:00 pm
+well, it's not really an LSDJ limitation, it's a hardware limitation, you can do chords, but then not much else, you could use two gameboys and have chords on one and other things on another, or something like that, but that's part of making music on the gameboy. It's just how it is.
+
+--- #76 | Zef | Feb 7, 2011 5:11 pm
+I actually enjoy having a lot of the limitations that are there, it inspires creativity and adds to the challenge and fun of it all.
+
+--- #77 | Rei Yano | Feb 7, 2011 5:27 pm
+was curious about those underclocked gameboys. If I had an underclocked GB connected via arduinoboy would that mean that if I set the tempo on ableton live at 160 then the GB's tempo would actually be somewhere around 80? or would it still be instant (160)?
+
+Last edited by Rei Yano (Feb 7, 2011 5:29 pm)
+
+--- #78 | concealed | Feb 7, 2011 6:22 pm
+[quote pixls wrote:]
+
+well, it's not really an LSDJ limitation, it's a hardware limitation, you can do chords, but then not much else, you could use two gameboys and have chords on one and other things on another, or something like that, but that's part of making music on the gameboy. It's just how it is.
+
+yeah when I said "limitations of LSDJ" I really meant "limitations of making music using LSDJ compared to other hardware such as NES." Shame on you for not reading my mind, though!
+
+--- #79 | pixls | Feb 7, 2011 6:47 pm
+[quote Rei Yano wrote:]
+
+was curious about those underclocked gameboys. If I had an underclocked GB connected via arduinoboy would that mean that if I set the tempo on ableton live at 160 then the GB's tempo would actually be somewhere around 80? or would it still be instant (160)?
+
+from what i understand, if you're using an external clock (not the underclocked gameboy) the external clock triggers the notes essentially, so even though the gameboy is running slower the triggers still come in at the same speed, and are triggered at the same time.
+
+... but i could be wrong.
+
+--- #80 | ChipN00b | Feb 11, 2011 8:34 am
+Any good sites for good step by step video tutorials of LSDJ?
+
+--- #81 | 8-Bit-Rex | Feb 11, 2011 2:12 pm
+I've got another question.
+
+Kits in LSDJ. I download a premade kit and flash and all that and it works. When making my own though...sounds like shit. I've messed with all kinds of things (exporting in 16bit, gain, volume, etc.) in Audacity for about a month now and have seen no progress to speak of. Any help or suggestions would be great. I'm trying to broaden my skills and this is definitely a limiter.
+Thanks, fellas!
+
+--- #82 | herr_prof | Feb 11, 2011 2:59 pm
+Did you try using eq roll off of all the higher frequencies before importing?
+
+--- #83 | 8-Bit-Rex | Feb 11, 2011 5:12 pm
+[quote herr_prof wrote:]
+
+Did you try using eq roll off of all the higher frequencies before importing?
+
+Yeah I experimented with that as well with no luck. Any specific numbers I should try possibly?
+Thanks.
+
+--- #84 | KidCalcium | Mar 6, 2011 6:06 pm
+Edit:
+
+Question withdrawn. I figured it out [img: big_smile]
+
+Last edited by KidCalcium (Mar 9, 2011 1:26 am)
+
+--- #85 | Saskrotch | Mar 6, 2011 6:57 pm
+[quote concealed wrote:]
+
+Yeah the lack of chords is actually one of the only limitations of LSDJ that makes me a little sad...would love to be able to do NES-style chords (e.g. Zelda) just to add a little thickness/depth to the sound.
+
+nes and gameboy have the same amount of pulse channels.

@@ -1,0 +1,1 @@
+See https://github.com/schismtracker/schismtracker/issues/37 for a discussion of such.

@@ -1,0 +1,734 @@
+			     .
+  founded march 12, 1995   _| :            _____  t r a x w e e k l y  # 107
+	   ______________ |___|  _ _______/    /\___________________________
+	 /  ____________/ /\__\ _ _______/____/_____________________________
+	/  /  _________   \/__/    ______\    \_____________________________
+       /  /  /          `_  .  .~         \____\/                 _  __ ___
+      /  /  /     _____   . _ \                                __ ___ _/__/\
+     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/
+   _/__/  / ____/    /__\_________________________________  _____      ___ _
+  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /
+ /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/
+ /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\
+   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \
+  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /
+ /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /
+   /                                                 \____\/\____\ /  /  /
+  /  _____     _____     _____     _____     _____     _____      /  /  /
+ /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /
+ __/____/____/____/____/____/____/____/____/____/____/____/________/  /
+ __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/
+    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW
+
+------------------------------------------------------------------------------
+   | TraxWeekly Issue #107 | Release date: 01 Aug 1997 | Subscribers: 954 |
+------------------------------------------------------------------------------
+
+
+]--[Introduction]------------------------------------------------------------[
+
+  Welcome to TraxWeekly Issue #107.
+
+  Last week I fouled up Airon's article on "a little panning," so here you
+ will find it again with the correct diagram.  Our vigilant staff writer Zinc
+ brings us the Demotape Directory again, along with a piece on music theory
+ for the layman.
+
+  Vincent Voois goes in depth on sound cards from Creative Labs, Advanced
+ Gravis, and Terratec.  And of course, I myself am causing trouble by reading
+ other people's emails and making irritating remakrs about them. =)
+
+  Readers!  What do you want to see in TraxWeekly?  Interviews?  TraxCulture?
+ Private and potentially embarassing email conversations? ;)  Please let us
+ know!  Send a message either to me or any of the active staff: Bibby,
+ Behemoth, and of course, Zinc.
+
+  Until next week!
+						    Gene Wie (Psibelius)
+						    TraxWeekly Publishing
+						    gwie@csusm.edu
+
+
+]--[Contents]----------------------------------------------------------------[
+
+ ________  _________________________________________________________________
+ /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_
+<   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__
+ \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_
+ _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\
+
+
+  General Articles
+
+     1. A Little Panning (reprint)....................Airon
+     2. Layman's Music Theory.........................Zinc
+     3. On Proper Requests............................Psibelius
+     4. Gravis vs Creative vs Terratec................Vincent Voois
+     5. DemoTape Directory............................Zinc
+
+  Closing
+
+     Distribution
+     Subscription/Contribution Information
+     TraxWeekly Staff Sheet
+
+
+]--[General Articles]--------------------------------------------------------[
+
+
+--[1. A Little Panning]----------------------------------------------[Airon]--
+
+ Ever sat there and smoked some brain cells over what panning data to put into
+ the command ? I'm talking Impulsetracker here now.
+
+ The panning command sits in the volume column ... so that means ...  uhhm ...
+ from 0 to 64 ... damn! I wanted to have X38 in the volume column to free
+ space for a sample offset or delay command. Don't you hate having to
+ translate between the two datas of the Xyy command and that green stuff in
+ the volume column ?  I do folks and here's your chart for easy reading :
+
+                      OUTER RING - VOLUME COLUMN PANNING 
+                      ----------------------------------
+
+                                32 _    _ 32
+                                     80
+                        30 - 78              88- 34
+
+                  28 - 70                         90 - 36
+                     
+              26 - 68                                 98 - 38
+               
+          24 - 60                                         A0 - 40
+            
+        22 - 58                                             A8 - 42
+                              
+      20 - 50        INNER RING - Xyy command PANNING         B0 - 44
+                     --------------------------------
+    18 - 48                                                     B8 - 46 
+
+   16 - 40                                                       C0 - 48
+
+  14 - 38                                                         C8 - 50
+
+ 12 - 30                                                            D0 - 52
+
+ 10 - 28                                                            D8 - 54
+
+ 08 - 20                                                            E0 - 56
+
+ 06 - 18                                                            E8 - 58
+
+ 04 - 10                                                            F0 - 60
+
+ 02 - 08                                                            F8 - 62
+
+ 00 - 00                                                            FF - 64
+
+
+     This should ease the use of these two ways of panning with commands.
+
+         Cheerio from an English guy
+
+          Tony
+                (Airon / Phase^D musician, Phase^D Webmaster)
+                http://user.cs.tu-berlin.de/~airou/phd
+
+
+------------------------------------------------------------------------------
+
+
+--[2. Layman's Music Theory PART ONE]---------------------------------[Zinc]--
+
+                       (but don't count on future parts
+                        unless i get lots of feedback!)
+
+                                   by Zinc
+                                rays@direct.ca
+
+
+                                 INTRODUCTION:
+                 "Basehead" is an anagram for "He's A Bead"
+
+   Until not too long ago, I thought I didn't need music theory.  Unless I
+ plan on composing 'experimental' techno for the rest of my life, though,
+ I finally realized that I'd have to finally learn how to make different
+ sounds work together.  My problem is that every single article I've ever
+ read in TraxWeekly or Audiophile or elsewhere were written for the learned
+ man (or woman, you sexism freaks!).  Since I have absolutely no formal
+ music training, I have no idea what people are talking about when they
+ try to explain most theory to me.  So, who better to write an article
+ on music theory for the musically challenged than yours truly!  If you
+ have a decent comprehension of theory, you should probably stop reading
+ right now.  If you have no idea how to figure out the notes in an
+ Augmented chord, THIS ARTICLE IS FOR YOU - READ ON!
+
+   Now I know some of you know about theory but decided to read this
+ anyway.  If that's you, don't nitpick about technicalities in my article,
+ but if you want, send me feedback on how I can correct them in the future.
+                                           
+
+  
+                                    CHORDS
+                                   "GOAway"
+                                    
+   First of all, let's start with the basics: chords.  Two or more notes
+ played together is a chord.  Most commonly, a chord will consist of three
+ or most notes.  A three-note chord is called a TRIAD.  The root of a chord
+ is the note from which a chord is constructed.  For example, C is the root
+ note of Cmaj or Cmin etc..  The relationship of the intervals from the root
+ to the other notes of a chord determines the CHORD TYPE.  Triads are most
+ frequently identified by four chord types: MAJOR, MINOR, DIMINISHED, and
+ AUGMENTED.
+
+
+                                  INTERVALS
+     "Using shareware is the art of pretending not to pirate software."
+
+   Hold on there!  Intervals?  I know a C major is C-E-G.  Okay, so let's
+ break this down into intervals, using the C major scale (shown below).
+
+ (ill. 1)         C    D    E    F    G    A    B    C     (D   F   A)
+
+ Scale Degree:    1    2    3    4    5    6    7    8     (9  11  13)
+   Intervals
+      from C:          M2   M3   P4   P5   M6   M7   P8
+
+
+   Your C is a 1. Now, starting from the C, count three scale degrees:
+ C-D-E.  An interval of a 4th, starting on C, would take us to an F.  A
+ 5th, G.  You can see now that a C major contains a 3rd and a 5th.  The fun
+ does not end there, however!  Intervals themselves are measured by their
+ qualities, namely these five:
+
+ (ill. 2)      M  =  Major
+               m  =  Minor
+               P  =  Perfect
+               o  =  Diminished (dim)
+               +  =  Augmented (aug)
+
+ Look back at the C major scale (ill. 1)  You can see that the example of
+ C-E-G, that's right, a Cmaj, had the Intervals of M3 and P5. In fact, all
+ major triads have a M3 and P5.  How exactly does the M, m, P, etc. affect
+ the actual chord?  Here are how the qualities work:
+
+ o  When a MAJOR interval is flattened by half a note, it becomes a MINOR
+    interval.       ie.   M3  ->  m3      
+                           E  ->  Eb      
+                   
+ o  When a MINOR interval is made larger by a half step, it becomes a MAJOR
+    interval.       ie.   m6  ->  M6
+                          Ab  ->  A
+                    
+ o  When a MINOR or PERFECT interval is made smaller by a half step, it
+    becomes a DIMINISHED interval.
+                    ie.   P5  ->  dim5        m7  ->  dim7
+                           G  ->  Gb          Bb  ->  A
+
+ o  When a MAJOR or PERFECT interval is made larger by a half step, it
+    becomes an AUGMENTED interval.
+                    ie.   P4  ->  aug4        M9  ->  aug9
+                           F  ->  F#          
+
+   Here's another wonderful chart!  It's  a Table Of Intervals.  Note that
+ a few intervals are actually the same as another interval.  These are
+ enharmonic equivalents (they sound the same) but are written differently.
+ Remember, one step is one whole note which is two half notes!
+
+ (ill. 3)          m2  1/2 step
+                   M2  1 step
+                 aug2  1 1/2 steps
+                   m3  1 1/2 steps
+                   M3  2 steps
+                   P4  2 1/2 steps
+                 aug4  3 steps
+                 dim5  3 steps
+                   P5  3 1/2 steps
+                 aug5  4 steps
+                   m6  4 steps
+                   M6  4 1/2 steps
+                 dim7  4 1/2 steps
+                   m7  5 steps
+                   M7  5 1/2 steps
+                   P8  6 steps
+                   m9  6 1/2 steps
+                   M9  7 steps
+                 aug9  7 1/2 steps
+                  P11  8 1/2 steps
+                aug11  9 steps
+                  m13  10 steps
+                  M13  10 1/2 steps
+
+
+   You may want to print that out.  Anyways, using your head you should be
+ able to figure out any basic triad.  Let's see if I can do it off the top
+ of my head. Hmm how about F#m.. Okay F#-A-C#?  Let's see. Diminish the
+ 3rd to m3. Checking the chart above (ill. 3) that means we go 1 1/2 steps
+ up... Yep, A... Then, P5 means three and a half steps which would take
+ us to C#.  It works!  If you have a keyboard (actually if you don't know
+ this stuff by now then probably you don't) you can play with all the basic
+ triads, and pretty soon you've memorized them all.  Then you can move on
+ to 7ths and things.  Basehead told me that there's really no way to tell
+ what chords will sound good together unless you just play them, so get a
+ guitar or keyboard and see what sounds good.  
+   
+   Anyways, that was a pretty basic introduction to theory.  Hopefully
+ there will be more theory articles in the future for you to absorb. I
+ won't guarantee a follow-up to this simplistic article, but, like I said,
+ if I get enough people giving me feedback, I'll notice that it was worth
+ writing and I'll definately continue the series.
+
+   Until next time, keep tracking, and get those demotape directory updates
+ in to me! (oh, and AVOID THE LEMONS!)
+
+------------------------------------------------------------------------------
+
+
+--[3. On Proper Requests]----------------------------------------[Psibelius]--
+
+  Probably the most entertaining thing about being a newsletter editor is
+ find juicy emails like this one in your mailbox.  On occasion, they cover
+ numerous subjects from sample and song ripping to temper tantrums being
+ thrown by members of various groups on various subjects.  Often, they are
+ sent to me by various individuals within the scene who, for one reason or
+ another, have earned the general animosity of another individual within
+ the scene.
+
+  Regardless, I did find this particular message fairly funny in a twisted
+ sort of way, and I thought all of you might enjoy a break from all those
+ music theory and tracking technique articles. =)
+
+ -----
+
+ Date: Tue, 29 Jul 1997 11:46:35 -0700
+ To: RaD Man [ACiD Founder] <radman@acid.org>
+ Subject: aghgh
+
+ Guess what, Radman;
+ Nova, Beaner, Rimbo, and I AREN'T in ACiD/pHluid anymore, so why don't
+ you get a clue and take us off the fucking web page?  Didn't it say
+ "Nova and Xenoc were kicked out in spring cleaning because nobody wanted
+ to listen to our music, anyway" in a past newsletter?  You're so full of
+ shit; couldn't even admit that a couple of your best members chose to
+ leave the group for another.  What a bunch of morons.
+ 
+ In the meantime, why don't you get ahold of our new groove disk #2,
+ including songs from Basehead, Scirocco, Ozone, Hunz, Lord Pegasus
+ (Zack), Stalker (Ari), Sirrus, Chris Jarvis, Me, and many more... Feel
+ free to drool and kick yourself as much as you want for being such a
+ dipshit.
+ 
+ -Xenoc [aNaLOGUE '97]
+
+ -----
+
+  Now frankly, this is none of my business at all, but assuming that Xenoc
+ is speaking for Nova, Beaner, and Rimbo...this is no way to ask anyone to
+ do anything.  I think a simple email from a musician that states, "I am
+ no longer part of such-and-such group.  Please remove me from the memberlist
+ in distribution and on the web" is much more efficient at getting results
+ than "get a clue," "you are full of shit," and "you are a moron" stuff.
+
+  A much better way to publicize your "Groove Disk #2" would be to send me
+ an advertisement for the next issue of TraxWeekly, so that the nine hundred
+ plus subscribers here will be alerted to the presence of a new music disk
+ featuring the works of the wonderful Analogue musicians Basehead, Scirocco,
+ Ozone, Hunz, Lord Pegasus (Zack), Stalker (Ari), Sirrus, and Chris Jarvis.
+ Also if one of you would be so kind as to email me at gwie@csusm.edu with
+ the web or ftp location of your "Groove Disk #2," I would be very happy to
+ feature it in next week's issue.
+
+  For those of you who are unaware, Ryan Hunt (aka pinion), who organizes
+ the phluid music group, has had a major hardware problem.  At this point in
+ time he lacks a functioning modem in which to coordinate the activities of
+ the phluid music group.  Those of you who are in the group (or have left
+ recently) have probably heard and seen nothing.  As a result, Mr. Hunt has
+ not been able to get online to update the phluid web page and memberlist.
+ Being familiar with the world wide web will aid in understanding that web
+ pages are sometimes not updated as frequently as one would like.
+
+  As Mr. Hunt is a good friend of mine and lives relatively close to my
+ university, I am temporarily handling the group's affairs.  For those
+ musicians who are in the group, or are even vaguely interested in releasing
+ anything with it, please send me a message at <gwie@csusm.edu> so that I may
+ have things straightened out.  Thank you for your patience.
+
+ Have a good day!
+
+  -G.
+
+------------------------------------------------------------------------------
+
+
+--[4. Gravis VS Creative VS Terratec]------------------------[Vincent Voois]--
+
+ I was reading an intresting looking article about the Gus Extreme 
+ (ViperMax as they called it as OEM) and their comparance to
+ Creative Labs Soundblaster series (pro, 16, AWE 32/64) wich was
+ presented on TraxWeekly 106.
+
+ Since i had various soundcards in my "pc-life" i think it is a good
+ thing to give some good facts about the different cards available..
+ 
+ Not only my experiences but also other people's experiences are
+ involved here.
+ 
+ Nopes, my first soundcard was not a GUS but a Soundblaster compatible
+ clone Prosonic 16 from MediaVision.
+ A good clone alas it did not last for five months when it broke down,
+ so i returned it to my retailer for exchange for a good one.
+ After haven't heard from it in about am onth i bought a Gravis
+ Ultrasound Max.
+ 
+ A real neat soundcard and hey:no stupid software mixing noise! cool!
+ Two weeks later the retailer wich still had my defective Soundblaster,
+ called up and offered me another Soundblaster compatible in exchange
+ for the Prosonic since they had big problems with Mediavision (A
+ complete line of prosonic's were very wrong assembled so many people
+ returned their defective soundcard)
+ 
+ Only because Gravis Max lacked of OPL support on the Max i decided to
+ accept the sb-clone exchange for the Prosonic sb-clone. (Wich became
+ Trust Expert, not THE best but it won't quit on you!).
+ 
+ "What do you want with an OPL-chip then?" That's quiet easy if you got
+ a C64 past and still want to do enough with generated waveforms:you
+ choose a card wich has a simular intergrated circuit like the SID 6581
+ and that became the Yamaha OPL. Okay, the Noise wave sucks, but you
+ can do very neat feedback tricks to create some nice hihats, and you
+ need more tracks than one to have some nice drumsounds created but
+ that's it. I have some s3m's written in adlibmode wich shows it.
+ 
+ Okay, to prevent heading off topic i return to the soundcard facts.
+ 
+ Gravis is capable of offering clear quality and sounding in wavetable
+ what Soundblaster x.x/pro/16 does with softwaremixing, but then
+ without NOISE (no offense against the music group:)).
+ 
+ I have now an AWE 32  (they call it SB32 PNP wich does not have
+ implemented Synths for mid or something in comparance to a complete SB
+ AWE 32).
+ 
+ Disadvantages of the AWE in comparance to GUS tested in Impulse
+ Tracker wich is one of the less editors supporting AWE:
+ 
+ -30 hardware tracks, Creative says 32 but they lie, it is 30,
+  EMU8000 only supports 30 tracks.
+  AWE 64 has 32 hardware and 32 software tracks (bwu, useless to my opinion 
+  wich kind of software supports that? my opinion:buy an AWE32 if you want 
+  EMU8000)
+  AWE 32 has 32 Hardware/Software tracks (?complete nonsense from
+Creative as
+  far as i can concern or might have misunderstood things from their
+  documents online but it looks like 30/256 to me (if you have a fast
+system).)
+ 
+ -Clicking:AWE is not really built for tracking:the more tricks you use
+  and the smaller your samples become, the more awfull clicks you hear,
+  you'ld rather enable Soundblaster 16 mode and listen mod's in it then
+  hear it on the AWE. I have found trick against clicking, but you have
+  to stay off the commandcolumn options, that sucks.
+ 
+ -Plays 16 bit samples only:yeps in IT, 8 bit samples get converted to
+  16 bit in order that IT can play those samples that also creates more
+  clicking specially when samples are very short and looped too.
+ 
+ -44.1 Khz hardware frequency limit:most gus samples sampled above
+  44Khz or will be played with a Khz rate above 44.1 will not be
+  sounded at all!
+ 
+ -EMU updating sucks:When you want to finetune a sample, you have to
+  constantly reinitialise the soundcard to hear the result. I finetune
+  in SB-16 mode since you can hear the result when you change the
+  frequencyvalue right away.
+ 
+ -RAM-upload fucks up sometimes:you have to reinitialise your soundcard
+  in IT because some samples are not placed correctly into the AWE RAM,
+  probably because the ram isn't cleared correctly after playing the
+  previous tune in IT.
+ 
+ -Canned sound:The AWE may sound warmer than it's SB x.x/pro/16
+  variants, it is still sounding canned and it has deprecated it's warm
+  base environment wich sounds colder than in SB x.x/pro/16 mode!
+ 
+ Advantages of AWE in comparance to GUS:
+ 
+ -AWE has digital processing circuit implemented, offers a neat effect
+  on your playing environment in chorussing and reverbing, when you
+  have good quality samples these things can make your song sound very
+  professional. Sure, invest money in external devices wich do that for
+  you, on an AWE these things are just toys when you have that kind of
+  equipment. Besides:when you have badly centered samples, these
+  effects fuck up your samplesounding badly!
+ 
+ -Memory up to 28 MB (huh? why not 32?) yes you have to put two 16 MB
+  simms on it and you loose 4 MB since the EMU8000 seem to reserve the
+  first four MB for midi-instrument mode as i understand from the
+  Creative's docs online, it's really lame but it isn't otherwise.
+ 
+ -It has a REAL surround-mode circuit implemented, hell it has a better
+  Midi environment in samples than gus that's for sure now!
+  Only:a real midifreak uses it's own external divices:he does not buy 
+  an AWE for such purposes.
+
+ -External Soundbank support, hehehe it may look like an advantage, yes
+  if you are a Midifreak without external Midi-equipment, you certainly
+  have the wrong soundcard if you have GUS. 
+  But when you track, you are no midifreak and trackers find external 
+  Soundfonts very lame since it is nothing more than a midifile with
+  it's own samplepack SEPERATED from eachother. I rather have mod wich 
+  is COMPLETE!
+  To "those" midifreaks i advise them to become a modfreak instead :)
+ 
+ Okay, this is info based on AWE 32 against MAX!, i don't have a
+ ViperMax or a GUS PNP, but as i have sensed from various PNP card users:
+ PNP cards suck in overall not only because Window's lacks deinstalling of
+ PNP-carddrivers when it does NOT find the PNP-card anymore, it still
+ keeping detecting PNP cards when you kick them out of your window's
+ user-environment because you want to have another soundcard running in it.
+ It's a typical PNP problem wich also teased many Macintosh users but they
+ had a little problem extra:the PNP-card drivers were implemented on
+ the PNPcard itselves, wich does not seem wrong to me, but any updating
+ was out of the question since they weren't set like you can software
+ update your USR/Rockwell/Zyxell-NVRAM-chips.
+ 
+ Now, the article's topic also mentions Terratec.
+ For the ones who do not know what Terratec produces:EWS.
+ 
+ EWS has 64 hardware channels (YES ultimate cool fact number one) and
+ has supports digital I/O (yes Ultimate cool fact number two) and seem
+ to work properly with extreme samplehandlings such as multilevel command
+ processing (cool fact number three).
+ It has only one bug on the moment in it's digital output:it fucks up
+ the samples, they are fixing it at Terratec but it will be finished in
+ about two months from now i guess.
+ 
+ More specifications and experiences on these soundcards can be read on
+ www.maz-sound.com.
+ 
+ I think Jeffrey Limm can be more specific about what each soundcard 
+ does since he supports various in IT and can be more accurate than me i
+ suppose.
+ 
+ You have also Kurzweill from Turtlebeachexisting, but this is really more
+ a midicard to my opinion, it has GOOD quality but lacks various form of
+ good multileveled sampleprocessing adaption support without crackles
+ and fuckups.
+
+ Not mentioned is the SoundTrack'97 soundcard:i don't know ANYthing about 
+ this soundcard except it is from Hoontec.
+
+ As far as i concern these soundcards, my advise is to save bucks for an
+ EWS and some external digital/analogue processors if you want to have
+ some neat effects to your songs for professional recordings.
+ But above all:use your common sense and ask you retailer if you may test
+ these soundcards locally with your own tools for a good opinion!
+
+ What a descent soundcard should have to my opinion:
+ 
+ -Good RAM support
+ 
+ -Multilevel sampleprocessing support: not only in EMS
+  also controllable on the card's RAM self please!
+ 
+ -OPL and/or MOS 6581 implementation :)
+ 
+ -Digital I/O,
+ 
+ -68Khz hardwarefrequency range,
+ 
+ -Ram expansion up to 64MB (how about recording audiotracks without 
+  wasting HD-space :))
+ 
+ -IF implementing PNP support, only deliver a small driver calling up 
+  cardspecs from a software updatable NVRAM installed on the SOUNDCARD!
+  It does not only prevent problems arising with deinstalling a PNP 
+  soundcard.
+  It can be installed AGAIN without the problems wich arise due to 
+  improper or no full deinstallation.
+ 
+ -IF implementing effect-toys like Chorus, Reverb, Delay, Phasing etc.
+  Send it to the Digital I/O and Recording DMA (the last one is tricky!)
+  too.
+  No surround offcourse, Surround is a playing tool only, people can 
+  have two tin cans and a string between them as playing device! :)
+ 
+ -Last but most important:Give SDK support and specification support, 
+  lacking good support makes you a lame company, whatever you produce!
+ 
+ For firm in averages, GUS wins in all, for professionality: EWS wins 
+ above AWE.
+ 
+ Creative labs still does not seem to show respect for the average 
+ home-made musicians and trackers AND gamedevelopers and they don't
+ deliver what they promise. They seem intrested in the money only.
+ 
+ Let's not discuss the SB 64-bit soundcard since it requires a pentium
+ 90 as a minimum systemrequirement because it has totally NO onboard
+ RAM.
+
+ Creative still has the "go to hell" status from me in spite of the
+ professional level their AWE delivers;
+ GUS deserves it's living;
+ EWS keeps my attention.
+ 
+ Sources:
+  www.creafs.com
+  www.maz-sound.com 
+  Maz' own experiences about EWS and Turtlebeach.
+  www.gravis.com
+  www.terratec.com
+  My own experiences.
+ 
+ Vv.
+ vv@musician.org
+
+------------------------------------------------------------------------------
+
+
+--[5. Demotape Directory]---------------------------------------------[Zinc]--
+
+   Greetings!  This column is back once again for another run.  The last
+ run was way back in February, and finally there is a new listing from
+ Sublevel 3.  I plan on reviewing this CD when I get it. Look for the
+ review in this column. Several of these listings are probably outdated
+ or obselete. If there are any errors TELL ME!
+
+   Remember to mail me with any new listings at rays@direct.ca and give me
+ all the information possible: release date, price, name of album, style(s)
+ used, and so on. Your contact e-mail address is vital!
+
+   NEW: I'll now be accepting listings for those of you who also happen to
+ have bands and want to advertise your indie records.  Also, I'll to an
+ in depth review in this column for anyone who wants to send me a copy of
+ their album.  Contact me if interested and we can work something out.
+
+                             PSEUDO-DISCLAIMER:   :)
+ The following demo tape/cds are organized by artist, alphabetically.
+ All dates are approximate.  There may be surcharges for s&h fees, etc.
+ I am not responsible for misinformation.  Contact me to correct errors.
+ 
+
+                     DEMOTAPE DIRECTORY for SUMMER 1997
+ --------------------------------------------------------------------------
+   B00MER  -  Negative Youth
+   CS - $5 US + SH  ($1.25 extra for metal tape)
+   Industrial/techno
+   September 1996   
+   boomer@a.crl.com  OR  www.atdt.com/bliss/form.html
+ --------------------------------------------------------------------------
+   bibby  -  Subsequence  -  Seclusion Records
+   CS - $5 includes SH
+   Techno-Rock
+   October 1996
+   bibby@juno.com
+   Original .ITs unavailable on the internet.
+ --------------------------------------------------------------------------
+   Electric Keet  -  version one point zero beta
+   CD - $15 or CS - $10
+   Everything. Classical to techno
+   January 1997
+   tracerj@asis.com  OR  http://asis.com/~tracerj/ek.htm
+   18 tracks, five exclusive to CD.
+ --------------------------------------------------------------------------
+   IQ and Maelcum  -  FTZ "Nothing Is True"
+   CD - $8 US + S&H
+   N/A
+   1995
+   maelcum@kosmic.org  OR  www.kosmic.org/areawww/
+ --------------------------------------------------------------------------
+   Mental Floss  -  Grey Matter
+   CS - $10 US
+   mixed techno
+   N/A
+   andrewm@io.org  OR  www.io.org/~andrewm/greymatter
+ --------------------------------------------------------------------------
+   PeriSoft & SupaMart  -  Live Inside Your Computer
+   CS - $6 US
+   Ambient/Trance/Techno
+   July 1996
+   mwiernic@pinion.sl.pitt.edu  OR  supamart@servtechcom
+ --------------------------------------------------------------------------
+   Sublevel 3 - Submerged
+   CD - $?
+   Ambient, Techno, Trip-Hop
+   ?  (guys, please update me on this!)
+   www.sublevel3.org
+ --------------------------------------------------------------------------
+
+                        All listings follow this format:
+
+   Author/Title/[Label]
+   Format/Price  (CS = Cassette, CD = Compact Disc, S&H = Shipping Costs)
+   Style(s) Used
+   Release Date
+   Contact (email/WWW)
+   Other
+
+  Think tracked music is commercially viable? Prove it! Support the scene!
+
+                                      Suggestions and comments are welcome.
+                                                  - zinc  /  rays@direct.ca
+
+------------------------------------------------------------------------------
+
+
+]--[Closing]-----------------------------------------------------------------[
+
+ TraxWeekly is available via FTP from:
+ ftp.hornet.org /pub/demos/incoming/info/ (new issues)
+ ftp.hornet.org /pub/demos/info/traxweek/1995/ (back issues)
+                /pub/demos/info/traxweek/1996/
+                /pub/demos/info/traxweek/1997/
+
+ TraxWeekly is available via WWW from:
+ www.hornet.org, under section "Information" and subsection "TraxWeekly."
+
+ To subscribe, send mail to:    listserver@unseen.aztec.co.za
+ and put in the message body:   subscribe trax-weekly [your *name*, NOT email]
+ To unsubscribe, mail same and: unsubscribe trax-weekly (in the message body)
+
+ Contributions for TraxWeekly must be formatted for *78* columns, and
+ must have a space preceding each line.  Please try to avoid the use of
+ high ascii characters, profanity, and above all, use your common sense.
+
+ Contributions should be mailed as plain ascii text or filemailed
+ to: gwie@csusm.edu before 11:00pm PST every Wednesday.
+
+ TraxWeekly is usually released over the listserver
+ and ftp.cdrom.com every Thursday or Friday.
+
+ TraxWeekly does not discriminate based on age,
+ gender, race, or political and religious views.
+
+ The staff can be reached at the following:
+
+ Editor:   Psibelius (Gene Wie)..............gwie@csusm.edu
+ Writers:  Atlantic (Barry Freeman)..........as566@torfree.net
+           Behemoth (David Menkes)...........behemoth@mscomm.com
+           Bibby (Andrew Bibby)..............bibby@juno.com
+           Mage (Glen Dwayne Warner).........gdwarner@ricochet.net
+           Zinc (Justin Ray).................rays@direct.ca
+
+ ascii graphic contributors:
+ Cruel Creator, Stezotehic, Squidgalator2, Thomas Knuppe, White Wizard
+
+ TraxWeekly is a HORNET affiliation.
+ Copyright (c)1995,1996,1997 - TraxWeekly Publishing, All Rights Reserved.
+
+
+]--[END]---------------------------------------------------------------------[
+
+                                         ::
+                                          :::                  :
+     . ..... ..............................:::.................:....
+                                            :::                :
+                                            ::::               :
+        .::::.      .:::::.:::.     ..::::  ::::               :
+       ::    ::    :::  .::  ::    ::     WW::::               :
+       ::.   ::   :::  .::  ::   .::        ::::               :
+        :::.::.  :::  .:: .::  .:::::...   :: :::..      ... ..: ...
+ ..::::::::::::::::  .:: .:::::::   ::::::::    ::::::.. ::: ::: :::
+                                                               :
+                                              until next week! =)
+           ..  ... .. ....... ............... .................:..... .. .
+                                                               :

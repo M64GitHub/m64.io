@@ -1,0 +1,170 @@
+sid music hints'n'tips — ChipMusic.org forums, topic 10841 (2 pages, 19 posts).
+Source: https://chipmusic.org/forums/topic/10841/sid-music-hintsntips/ (+ /page/2/); fetched 2026-08-30 with a browser user agent; post text extracted from the HTML with post number, date and author; quotes marked with '>'; images, signatures and avatars not included.
+
+
+----- post 1 · Apr 14, 2013 11:30 am · 4mat -----
+Interesting thread going on at CSDB with contributions from Jammer, Jeff and many others. 
+
+Link
+
+One thing that came up was the waveform differences on 6581 & 8580 , there's a really good article about it here
+
+----- post 2 · Apr 14, 2013 7:04 pm · Jellica -----
+im still not happy with my hi-hats
+
+----- post 3 · Apr 15, 2013 12:56 pm · iLKke -----
+Yeah it's a pretty awesome thread. Great starting point for SID noobs (ahem, like me) but also cool to see how different people have different habits. I find that after a while everyone finds a set of magic numbers that seems to always work for them. I must have a hundred protracker songs where the vibrato is either 4A1 or 4A2.
+
+Jellica wrote:
+
+> im still not happy with my hi-hats
+
+If you ever heard a sid tune with the sort of hi-hats you like, it's pretty easy to peek into how they did it
+
+----- post 4 · Apr 15, 2013 1:20 pm · 4mat -----
+You can have a wander through with sid dump.   I had a go at doing at log > gt instrument converter but didn't get it working in the end.
+
+----- post 5 · Apr 15, 2013 1:23 pm · iLKke -----
+Yeah either siddump or jsid player
+
+----- post 6 · Apr 15, 2013 2:39 pm · Jellica -----
+a lot of nice ones are combined with the bass instrument or other sounds but that isnt what i necessarily want to do. as with everything on the sid it takes a little fiddling
+
+----- post 7 · Jul 4, 2013 4:37 am · Awol -----
+I tried using siddump to check out "Electronic Transfer" by Gallefoss and got this error message: "CPU executed abnormally high amount of instructions."
+Is that because it's multispeed (5x)? I really wanted to learn more about that sound that starts at 2:10...
+
+----- post 8 · Jul 4, 2013 6:41 am · xylo -----
+Thanks!
+
+----- post 9 · Jul 4, 2013 12:42 pm · 4mat -----
+Which sound?  The arps or the lead?   The lead sounds like it's an instrument table effect to do the pitching rather than portamento.  It's just pitching up from a lower note over a few frames.  (you could use an un-looped arpeggio to do the same thing)   He's got the whole instrument preset looping (with the gate off so it fades out) which gives the echo effect.  The rapid pulsewidth modulation on there is down to the multispeed.  He's probably got it adding about $40 on each player tick.
+
+The bass tone is a sample loop. (like how chip modules do it)   That 'noise slide' sound that sometimes comes in is probably a really tight instrument preset switching from noise to triangle(?) every couple of frames, would explain the thickness to it.
+
+----- post 10 · Jul 4, 2013 5:28 pm · breakphase -----
+Jellica wrote:
+
+> im still not happy with my hi-hats
+
+I'm dissatisfied with the noise channel in general on c64. I think it's 4 bit or something; it's not as raspy as I like. Anyway a highpass filter helps with hihats, for me.
+
+----- post 11 · Jul 4, 2013 9:42 pm · 4mat -----
+Strange, it's the most versatile noise osc on 8-bit hardware.  I remember when the 8-bit consoles came in it was such a disappointment how limited the Nintendo and Sega ones were to work on in comparisom.
+
+One thing you could try is using the 'metal' noise waveforms.  This guide has the full list:
+
+$81,$80 =   noise waveform. NATIVE WAVEFORM.
+
+$82-$83,$86-$87 = a slight SYNC effect.
+$88-$8f =   reset noise
+$90-$bf =   not used (do not use: the noise dies)
+$c0..$cf =  rare extras(*)
+$d0..$ef =  not used (do not use: the noise dies)
+$f0..$f7 =  (*) rare extas: resets the internal pseudo random
+             generator...
+$f8..$ff =  : resets the internal pseudo random generator,
+             so the noise waveform play different, on some sids the
+             selected noise sounds more "metallic" depending on the
+             value and running SID cycles and other status.
+             Usage: first $f9, then $81
+
+Last edited by 4mat (Jul 4, 2013 9:45 pm)
+
+----- post 12 · Jul 4, 2013 10:46 pm · ilkae -----
+I think I just leveled up from 0 to 1.
+
+----- post 13 · Jul 4, 2013 10:48 pm · defPREMIUM -----
+ding gratz ilkae
+
+----- post 14 · Jul 5, 2013 12:00 am · iLKke -----
+breakphase wrote:
+
+> Jellica wrote:
+
+> im still not happy with my hi-hats
+
+> I'm dissatisfied with the noise channel in general on c64. I think it's 4 bit or something; it's not as raspy as I like. Anyway a highpass filter helps with hihats, for me.
+
+True, I was just about to say the SID noise is teh shiz.
+
+Curious to know more about the raspy noise that you are talking about, breakphase
+
+----- post 15 · Jul 5, 2013 12:27 am · chunter -----
+SID noise (imitating cymbals in the Racing Destruction Set loading song) was the first home computer music that truly surprised me.
+
+(Just saying.)
+
+----- post 16 · Jul 5, 2013 6:38 am · Awol -----
+Thanks for your input 4mat. Yeah, I was talking about that brassy lead sound. I guess it's mostly just a square wave pitched up. For some reason I thought it was more complicated.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+I was having trouble getting siddump to save to a text file until I found this page. I'll just leave these instructions here for my fellow n00bs...
+
+1) Put the siddump program in a folder
+2) Put the .sid file you want to analyze in the same folder
+3) Open a command prompt and navigate to the folder with the cd command
+4) Type something along these lines and hit enter: SIDDUMP sidfilename.sid -tX >textfilename.txt
+    Where X is the song's approximate length in seconds.
+
+The folder will now also contain textfilename.txt. Open it in notepad. If you open it in wordpad the formatting will be incorrect.
+Every row in the txt stands for a video frame. PAL is 50 frames per second, so if the song is PAL (probably), every 50 rows corresponds to 1 second in the song's play time. 60 for NTSC.
+
+----- post 17 · Jul 6, 2013 1:38 am · breakphase -----
+iLKke wrote:
+
+> breakphase wrote:
+
+> I'm dissatisfied with the noise channel in general on c64. I think it's 4 bit or something; it's not as raspy as I like. Anyway a highpass filter helps with hihats, for me.
+
+> True, I was just about to say the SID noise is teh shiz.
+
+> Curious to know more about the raspy noise that you are talking about, breakphase
+
+Oh I guess I was just talking about the 1-bit noise from nes/atari/etc.. it has a little more grit I think because it has a low bit depth. And the drums from that are a little harder in my experience. I don't even know if I'm right about c64 being 4-bit, it just sounds too smooth for me a lot of times. Just a taste thing though.
+
+4mat wrote:
+
+> $81,$80 =   noise waveform. NATIVE WAVEFORM.
+
+> $82-$83,$86-$87 = a slight SYNC effect.
+> $88-$8f =   reset noise
+> $90-$bf =   not used (do not use: the noise dies)
+> $c0..$cf =  rare extras(*)
+> $d0..$ef =  not used (do not use: the noise dies)
+> $f0..$f7 =  (*) rare extas: resets the internal pseudo random
+>              generator...
+> $f8..$ff =  : resets the internal pseudo random generator,
+>              so the noise waveform play different, on some sids the
+>              selected noise sounds more "metallic" depending on the
+>              value and running SID cycles and other status.
+>              Usage: first $f9, then $81
+
+Wow I did not know about these, thanks!
+
+4mat wrote:
+
+> Strange, it's the most versatile noise osc on 8-bit hardware.  I remember when the 8-bit consoles came in it was such a disappointment how limited the Nintendo and Sega ones were to work on in comparisom.
+
+I love everything else about the sid. It's closer to a "real synth" than everything else, but the noise might be a little "too good" for me... "double quotes!"
+
+Last edited by breakphase (Jul 6, 2013 5:38 pm)
+
+----- post 18 · Jul 6, 2013 4:08 am · Awol -----
+I've emailed the SidDump creator to ask if it wouldn't be too difficult to update the tool to work with multispeed tunes. I'll let you guys know if I hear back.
+It's still very useful for single speed though. I ripped a nice kick drum sound from a Mortimer Twang tune.
+
+Anyone have advice for designing multispeed instruments/tracks?
+
+----- post 19 · Jul 6, 2013 7:04 pm · Awol -----
+SidDump has been updated to v1.05 with "partial support for multispeed tunes".
+
+When I asked if updating SidDump to work with multispeed tunes would be difficult, the creator said:
+
+> theoretically it can be difficult, as it may require emulating the full CPU + CIA timer + IRQ environment, which SidDump doesn't really do. However, there may be a simple option of just breaking out when/if the init routine gets stuck into a loop, and executing the code pointed to the interrupt vector as each frame's play call. It may not work for all tunes though.
+
+and:
+
+> check SIDDump 1.05 which was just released. It is not entirely foolproof (depends on how complicated code the player interrupt runs). Some multispeed tunes may work, others perhaps not.
+

@@ -1,0 +1,87 @@
+[SID-Wizard instrument recommendations? — Lemon64 forum thread, https://www.lemon64.com/forum/viewtopic.php?t=78601 — fetched 2026-08-30, post text extracted from HTML; 7 posts; the bass-drum instrument in post 1 was posted as an image and is not in the text]
+
+--- MeneerJansen — 2021-10-13T12:06:51+00:00
+I do not like to "do things C64" on a PC so I'm learning to use SID-Wizard instead of GoatTracker to make some SID tunes.
+
+Very complicated but brilliantly designed program! A lot of excellent example instruments are included in the Zip file. But which do you use? Do you make your own, or tweak the standard instruments? Have you got any tips and tricks?
+
+This is my tweaked version of a Bass Drum that sounds a bit like an Rolald TR-808 BD with a long decay (i.e. the infamous Hip Hop "boooooooom"). See the WFARP section:
+
+--- ziopeppe — 2021-12-04T08:07:39+00:00
+sorry if I intrude, I was wondering if you know the way to transfer the music created with SID-Wizard-1.8 in the basic or assembler program of cbm prg studio.
+
+I used the sid-maker application,
+
+but when converting it's save, it always gives me save error.
+
+this is the procedure I follow.
+
+- Start SID-Wizard-1.8-disk1
+
+-From the menu I choose normal
+
+-I make my own music
+
+-With F8 return to the menu
+
+-Save tune
+
+- Without exiting vice 3.1 I go to the vice menu
+
+- Attack disk image
+
+-Drive 8
+
+- I open the SID-Wizard-1.8-disk1 disk
+
+- I go to the applications folder
+
+- Click on SID-Wizard-1.8-disk1 which gives me the list of all the files on the disk.
+
+- Start SID-Maker-2sid.
+
+- From the list I choose the name of the file that I have created and that I want to convert
+
+ - From the memu I choose c64 / PRG., Normal, Pal, $ 1000,
+
+- from the menu I select my file to convert and I press enter, after a few seconds, "SAVING ERROR" is displayed
+
+I have performed the procedure several times, but always with the same result
+
+--- lalan00b — 2021-12-04T09:01:02+00:00
+@ziopeppe: As the name suggets "SID-Maker-2sid" is for 2SID / stereo tunes. You need to take "SID-Maker".
+
+--- ziopeppe — 2021-12-04T10:39:51+00:00
+sorry, I forgot to point out, that even with Sid-maker -1.8 it gave the same "saving error".
+
+maybe the procedure is wrong, or some parameter is wrong. I wondered if you tried to make a conversion without having difficulty?., do you have any more advice to give me. thanks
+
+--- MeneerJansen — 2021-12-04T12:44:17+00:00
+> ziopeppe wrote:
+> sorry, I forgot to point out, that even with Sid-maker -1.8 it gave the same "saving error".
+>
+maybe the procedure is wrong, or some parameter is wrong. I wondered if you tried to make a conversion without having difficulty?., do you have any more advice to give me. thanks
+
+Do you have enough space on the virual floppy disk?
+
+Also, Vice 3.1 is not recommended. If possible, try to use Vice 3.5. If you're on Linux you'll have to compile it from source I'm afraid.
+
+Good luck!
+
+--- ziopeppe — 2021-12-04T16:40:10+00:00
+i ran your advice, i used vice version 3.5, and i managed to convert them. but when i ask for binary / sequential conversion, it gives me a binary file with sequential extension, which unfortunately cannot be used in cbm prg studio. anyway thank you very much for your help.
+
+I forgot, my OS is WINDOWS 10
+
+--- MeneerJansen — 2021-12-05T11:21:47+00:00
+> ziopeppe wrote:
+> i ran your advice, i used vice version 3.5, and i managed to convert them. but when i ask for binary / sequential conversion, it gives me a binary file with sequential extension, which unfortunately cannot be used in cbm prg studio. anyway thank you very much for your help.
+>
+I forgot, my OS is WINDOWS 10
+
+Do you have the PDF book "Creating Chiptunes with SID-Wizard" (link CSDb)? In chapter 13 they explain how to export to different formats (which I still don't understand). I think I exported to PRG format once and it was recognizes as a ".SID" tune for SID-players like Sidplay64 if I recall correctly.
+
+What format CBM Prg Studio (CPS) needs can only be explained by its author, who is active on this forum. I use Linux and CPS is programmed in Dot Net, wich is always a nightmare (read: impossible) to run in Wine in Linux.
+
+Good luck!
+

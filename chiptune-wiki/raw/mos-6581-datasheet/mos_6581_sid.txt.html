@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mos_6581_sid.txt · Chiptune Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>window.ROOT="../../";</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">CHIPTUNE WIKI</span><span class="sub">llm wiki · 476 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/traxweekly-toc.html" class="">TraxWeekly</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="technique"><summary>Techniques <span class="n">32</span></summary><ul><li><a data-slug="channel-interleaving" class="t-technique" href="../../wiki/channel-interleaving.html">Channel interleaving (one channel, two jobs)</a></li><li><a data-slug="chip-samples" class="t-technique" href="../../wiki/chip-samples.html">Chip samples — tiny looped waveforms</a></li><li><a data-slug="chord-arpeggio" class="t-technique" href="../../wiki/chord-arpeggio.html">Chord arpeggio (the 0 3 7 trick)</a></li><li><a data-slug="detune" class="t-technique" href="../../wiki/detune.html">Detune</a></li><li><a data-slug="fake-echo" class="t-technique" href="../../wiki/fake-echo.html">Fake echo / delay</a></li><li><a data-slug="filter-programming" class="t-technique" href="../../wiki/filter-programming.html">Filter programming on the SID</a></li><li><a data-slug="hard-restart" class="t-technique" href="../../wiki/hard-restart.html">Hard restart</a></li><li><a data-slug="instrument-design" class="t-technique" href="../../wiki/instrument-design.html">Instrument design beats note count</a></li><li><a data-slug="instrument-envelopes" class="t-technique" href="../../wiki/instrument-envelopes.html">Instrument envelopes (volume, panning, pitch)</a></li><li><a data-slug="lead-articulation" class="t-technique" href="../../wiki/lead-articulation.html">Lead articulation (velocity, legato, late vibrato, drop-off)</a></li><li><a data-slug="midi-in-trackers" class="t-technique" href="../../wiki/midi-in-trackers.html">MIDI output from trackers (Impulse Tracker macros)</a></li><li><a data-slug="multisampling" class="t-technique" href="../../wiki/multisampling.html">Multisampling and drum-kit instruments</a></li><li><a data-slug="multispeed" class="t-technique" href="../../wiki/multispeed.html">Multispeed (framespeed)</a></li><li><a data-slug="new-note-actions" class="t-technique" href="../../wiki/new-note-actions.html">New Note Actions (NNA)</a></li><li><a data-slug="octave-bass" class="t-technique" href="../../wiki/octave-bass.html">Octave bass</a></li><li><a data-slug="opl-fm-instruments" class="t-technique" href="../../wiki/opl-fm-instruments.html">OPL / AdLib FM instruments in trackers</a></li><li><a data-slug="pitch-slide-and-portamento" class="t-technique" href="../../wiki/pitch-slide-and-portamento.html">Pitch slides and tone portamento</a></li><li><a data-slug="pulse-width-modulation" class="t-technique" href="../../wiki/pulse-width-modulation.html">Pulse width modulation (PWM)</a></li><li><a data-slug="randomization-and-probability" class="t-technique" href="../../wiki/randomization-and-probability.html">Randomization and probability (MayBe, RandomiZe)</a></li><li><a data-slug="recording-samples" class="t-technique" href="../../wiki/recording-samples.html">Recording samples (sources, cabling, sound cards, rates)</a></li><li><a data-slug="retrigger" class="t-technique" href="../../wiki/retrigger.html">Retrigger and resync</a></li><li><a data-slug="reverb-and-compression" class="t-technique" href="../../wiki/reverb-and-compression.html">Reverb and compression (offline, in the sample editor)</a></li><li><a data-slug="ring-modulation-and-sync" class="t-technique" href="../../wiki/ring-modulation-and-sync.html">Ring modulation and oscillator sync</a></li><li><a data-slug="sample-looping" class="t-technique" href="../../wiki/sample-looping.html">Sample looping (perfect loops, sustain loops, long loops)</a></li><li><a data-slug="sample-offset" class="t-technique" href="../../wiki/sample-offset.html">Sample offset tricks</a></li><li><a data-slug="shuffle-funktempo" class="t-technique" href="../../wiki/shuffle-funktempo.html">Shuffle, swing and FunkTempo</a></li><li><a data-slug="sidechain-pump" class="t-technique" href="../../wiki/sidechain-pump.html">Sidechain pump</a></li><li><a data-slug="song-init-and-looping" class="t-technique" href="../../wiki/song-init-and-looping.html">Song initialisation and looping</a></li><li><a data-slug="stereo-panning" class="t-technique" href="../../wiki/stereo-panning.html">Stereo panning</a></li><li><a data-slug="vibrato" class="t-technique" href="../../wiki/vibrato.html">Vibrato and delayed vibrato</a></li><li><a data-slug="volume-slides" class="t-technique" href="../../wiki/volume-slides.html">Volume slides, fades and effect memory</a></li><li><a data-slug="wavetable-programming" class="t-technique" href="../../wiki/wavetable-programming.html">Wavetable programming (waveform / arp tables)</a></li></ul></details><details class="grp" data-grp="concept"><summary>Concepts <span class="n">24</span></summary><ul><li><a data-slug="adsr-envelope" class="t-concept" href="../../wiki/adsr-envelope.html">ADSR envelope</a></li><li><a data-slug="arrangement" class="t-concept" href="../../wiki/arrangement.html">Arrangement — think in 4s and 8s</a></li><li><a data-slug="chiptune" class="t-concept" href="../../wiki/chiptune.html">Chiptune — what the word means</a></li><li><a data-slug="chord-inversions" class="t-concept" href="../../wiki/chord-inversions.html">Chord inversions and voice leading</a></li><li><a data-slug="chord-progressions" class="t-concept" href="../../wiki/chord-progressions.html">Chord progressions</a></li><li><a data-slug="commercial-tracking" class="t-concept" href="../../wiki/commercial-tracking.html">Commercial tracking — selling and producing tracked music</a></li><li><a data-slug="compos" class="t-concept" href="../../wiki/compos.html">Compos — music competitions in the tracker scene</a></li><li><a data-slug="diatonic-chords" class="t-concept" href="../../wiki/diatonic-chords.html">Diatonic chords — why it is not always 0 3 7</a></li><li><a data-slug="effect-command-crosswalk" class="t-concept" href="../../wiki/effect-command-crosswalk.html">Effect command crosswalk (MOD / XM ↔ S3M / IT)</a></li><li><a data-slug="instrument-tables" class="t-concept" href="../../wiki/instrument-tables.html">Instrument tables (wave / pulse / filter)</a></li><li><a data-slug="live-tracking" class="t-concept" href="../../wiki/live-tracking.html">Live tracking — performing with a tracker</a></li><li><a data-slug="orderlist" class="t-concept" href="../../wiki/orderlist.html">Orderlist (sequence)</a></li><li><a data-slug="realism-in-tracked-music" class="t-concept" href="../../wiki/realism-in-tracked-music.html">Realism in tracked music</a></li><li><a data-slug="rhythm-and-groove" class="t-concept" href="../../wiki/rhythm-and-groove.html">Rhythm and groove in 16 rows</a></li><li><a data-slug="sample-ripping" class="t-concept" href="../../wiki/sample-ripping.html">Sample ripping</a></li><li><a data-slug="scales-and-modes" class="t-concept" href="../../wiki/scales-and-modes.html">Scales and modes — your palette of notes</a></li><li><a data-slug="semitone-math" class="t-concept" href="../../wiki/semitone-math.html">Semitones — the only unit you need</a></li><li><a data-slug="serial-composition" class="t-concept" href="../../wiki/serial-composition.html">Serial composition — rows, retrograde, inversion</a></li><li><a data-slug="sid-player-routine" class="t-concept" href="../../wiki/sid-player-routine.html">SID player routine, rastertime and player types</a></li><li><a data-slug="sync" class="t-concept" href="../../wiki/sync.html">Synchronisation with other gear</a></li><li><a data-slug="tracker-scene-history" class="t-concept" href="../../wiki/tracker-scene-history.html">The PC tracker scene 1995–98, as it saw itself</a></li><li><a data-slug="tracker" class="t-concept" href="../../wiki/tracker.html">Tracker</a></li><li><a data-slug="tracking-workflow" class="t-concept" href="../../wiki/tracking-workflow.html">Tracking workflow — advice from the scene</a></li><li><a data-slug="melody-writing" class="t-concept" href="../../wiki/melody-writing.html">Writing melodies that work</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">26</span></summary><ul><li><a data-slug="037-lab" class="t-entity" href="../../wiki/037-lab.html">0 3 7 lab</a></li><li><a data-slug="duet" class="t-entity" href="../../wiki/duet.html">DUET</a></li><li><a data-slug="fasttracker-2" class="t-entity" href="../../wiki/fasttracker-2.html">FastTracker 2</a></li><li><a data-slug="furnace" class="t-entity" href="../../wiki/furnace.html">Furnace</a></li><li><a data-slug="future-composer" class="t-entity" href="../../wiki/future-composer.html">Future Composer (C64)</a></li><li><a data-slug="goattracker" class="t-entity" href="../../wiki/goattracker.html">GoatTracker</a></li><li><a data-slug="impulse-tracker" class="t-entity" href="../../wiki/impulse-tracker.html">Impulse Tracker</a></li><li><a data-slug="liblsdj" class="t-entity" href="../../wiki/liblsdj.html">libLSDj</a></li><li><a data-slug="lsdj" class="t-entity" href="../../wiki/lsdj.html">LSDj (Little Sound Dj)</a></li><li><a data-slug="lsdj-wave-cruncher" class="t-entity" href="../../wiki/lsdj-wave-cruncher.html">LSDj Wave Cruncher</a></li><li><a data-slug="lsdpatch" class="t-entity" href="../../wiki/lsdpatch.html">LSDPatch (LSDPatcher)</a></li><li><a data-slug="matt-gray-player" class="t-entity" href="../../wiki/matt-gray-player.html">Matt Gray&#x27;s player (Driller / Dominator engine)</a></li><li><a data-slug="musicfile" class="t-entity" href="../../wiki/musicfile.html">MUSICFILE — the Maniacs of Noise driver</a></li><li><a data-slug="openmpt" class="t-entity" href="../../wiki/openmpt.html">OpenMPT</a></li><li><a data-slug="protracker" class="t-entity" href="../../wiki/protracker.html">ProTracker</a></li><li><a data-slug="rockmonitor" class="t-entity" href="../../wiki/rockmonitor.html">Rockmonitor</a></li><li><a data-slug="schism-tracker" class="t-entity" href="../../wiki/schism-tracker.html">Schism Tracker</a></li><li><a data-slug="scream-tracker-3" class="t-entity" href="../../wiki/scream-tracker-3.html">Scream Tracker 3</a></li><li><a data-slug="sid-factory-ii" class="t-entity" href="../../wiki/sid-factory-ii.html">SID Factory II</a></li><li><a data-slug="sid-wizard" class="t-entity" href="../../wiki/sid-wizard.html">SID-Wizard</a></li><li><a data-slug="siddump" class="t-entity" href="../../wiki/siddump.html">siddump</a></li><li><a data-slug="sidid" class="t-entity" href="../../wiki/sidid.html">SIDId</a></li><li><a data-slug="soundmonitor" class="t-entity" href="../../wiki/soundmonitor.html">Soundmonitor</a></li><li><a data-slug="tfmx" class="t-entity" href="../../wiki/tfmx.html">TFMX</a></li><li><a data-slug="turbo-assembler" class="t-entity" href="../../wiki/turbo-assembler.html">Turbo Assembler (C64)</a></li><li><a data-slug="vice" class="t-entity" href="../../wiki/vice.html">VICE</a></li></ul></details><details class="grp" data-grp="kind-chip"><summary>Chips <span class="n">2</span></summary><ul><li><a data-slug="game-boy-apu" class="t-entity" href="../../wiki/game-boy-apu.html">Game Boy sound hardware (APU)</a></li><li><a data-slug="sid" class="t-entity" href="../../wiki/sid.html">SID (MOS 6581 / 8580)</a></li></ul></details><details class="grp" data-grp="kind-platform"><summary>Platforms <span class="n">3</span></summary><ul><li><a data-slug="commodore-64" class="t-entity" href="../../wiki/commodore-64.html">Commodore 64</a></li><li><a data-slug="game-boy" class="t-entity" href="../../wiki/game-boy.html">Game Boy</a></li><li><a data-slug="gravis-ultrasound" class="t-entity" href="../../wiki/gravis-ultrasound.html">Gravis UltraSound (GUS)</a></li></ul></details><details class="grp" data-grp="kind-format"><summary>Formats <span class="n">5</span></summary><ul><li><a data-slug="it-format" class="t-entity" href="../../wiki/it-format.html">IT module format (.it)</a></li><li><a data-slug="mod-format" class="t-entity" href="../../wiki/mod-format.html">MOD module format (.mod)</a></li><li><a data-slug="s3m-format" class="t-entity" href="../../wiki/s3m-format.html">S3M module format (.s3m)</a></li><li><a data-slug="sid-format" class="t-entity" href="../../wiki/sid-format.html">SID file format (.sid)</a></li><li><a data-slug="xm-format" class="t-entity" href="../../wiki/xm-format.html">XM module format (.xm)</a></li></ul></details><details class="grp" data-grp="kind-person"><summary>People <span class="n">103</span></summary><ul><li><a data-slug="4ntler" class="t-entity" href="../../wiki/4ntler.html">4ntler</a></li><li><a data-slug="acidfrog" class="t-entity" href="../../wiki/acidfrog.html">Acidfrog (Cam Goodman)</a></li><li><a data-slug="amusic" class="t-entity" href="../../wiki/amusic.html">AmusiC (Sotiris Varotsis)</a></li><li><a data-slug="andreas-varga" class="t-entity" href="../../wiki/andreas-varga.html">Andreas Varga</a></li><li><a data-slug="asger-alstrup" class="t-entity" href="../../wiki/asger-alstrup.html">Asger Alstrup</a></li><li><a data-slug="atlantic" class="t-entity" href="../../wiki/atlantic.html">Atlantic (Barry Freeman)</a></li><li><a data-slug="balrog" class="t-entity" href="../../wiki/balrog.html">Balrog (Samuel Cote)</a></li><li><a data-slug="basehead" class="t-entity" href="../../wiki/basehead.html">Basehead (Dan Grandpre)</a></li><li><a data-slug="beaner" class="t-entity" href="../../wiki/beaner.html">Beaner (Sean Cummins)</a></li><li><a data-slug="behemoth" class="t-entity" href="../../wiki/behemoth.html">Behemoth (David Menkes)</a></li><li><a data-slug="big-jim" class="t-entity" href="../../wiki/big-jim.html">Big Jim (James Storer)</a></li><li><a data-slug="blackwolf" class="t-entity" href="../../wiki/blackwolf.html">Blackwolf (Bobby Tamburrino)</a></li><li><a data-slug="blaze-runner" class="t-entity" href="../../wiki/blaze-runner.html">Blaze Runner (Christian Desnoyers)</a></li><li><a data-slug="bob-yannes" class="t-entity" href="../../wiki/bob-yannes.html">Bob Yannes</a></li><li><a data-slug="catspaw" class="t-entity" href="../../wiki/catspaw.html">Catspaw (Brandon Bannerman)</a></li><li><a data-slug="charles-deenen" class="t-entity" href="../../wiki/charles-deenen.html">Charles Deenen</a></li><li><a data-slug="chordian" class="t-entity" href="../../wiki/chordian.html">Chordian (Jens)</a></li><li><a data-slug="chris-huelsbeck" class="t-entity" href="../../wiki/chris-huelsbeck.html">Chris Hülsbeck</a></li><li><a data-slug="claim" class="t-entity" href="../../wiki/claim.html">Claim</a></li><li><a data-slug="clef" class="t-entity" href="../../wiki/clef.html">Clef (Phil Sweeney)</a></li><li><a data-slug="cosmic" class="t-entity" href="../../wiki/cosmic.html">Cosmic (Matthias Ksoll)</a></li><li><a data-slug="daedalus" class="t-entity" href="../../wiki/daedalus.html">Daedalus (Brian Bennetts)</a></li><li><a data-slug="defense-mechanism" class="t-entity" href="../../wiki/defense-mechanism.html">Defense Mechanism</a></li><li><a data-slug="dennisc" class="t-entity" href="../../wiki/dennisc.html">DennisC (Dennis Courtney)</a></li><li><a data-slug="deus-ex" class="t-entity" href="../../wiki/deus-ex.html">Deus Ex (Chill Productions)</a></li><li><a data-slug="ender" class="t-entity" href="../../wiki/ender.html">Ender (Andrew Burke)</a></li><li><a data-slug="fisherman" class="t-entity" href="../../wiki/fisherman.html">fisherman (Matt Overington)</a></li><li><a data-slug="fred-ink" class="t-entity" href="../../wiki/fred-ink.html">Fred (Ink)</a></li><li><a data-slug="ganja-man" class="t-entity" href="../../wiki/ganja-man.html">Ganja Man (Sam Bashton)</a></li><li><a data-slug="greg-heo" class="t-entity" href="../../wiki/greg-heo.html">Greg Heo</a></li><li><a data-slug="hermit" class="t-entity" href="../../wiki/hermit.html">Hermit (Mihaly Horvath)</a></li><li><a data-slug="hypnogram" class="t-entity" href="../../wiki/hypnogram.html">Hypnogram</a></li><li><a data-slug="infu" class="t-entity" href="../../wiki/infu.html">Infu</a></li><li><a data-slug="injekted" class="t-entity" href="../../wiki/injekted.html">Injekted (Brandon Balliett)</a></li><li><a data-slug="island-of-reil" class="t-entity" href="../../wiki/island-of-reil.html">Island of Reil (Jesse Rothenberg)</a></li><li><a data-slug="jase" class="t-entity" href="../../wiki/jase.html">Jase (Jason Chong)</a></li><li><a data-slug="jeffrey-lim" class="t-entity" href="../../wiki/jeffrey-lim.html">Jeffrey Lim (Pulse)</a></li><li><a data-slug="jeroen-tel" class="t-entity" href="../../wiki/jeroen-tel.html">Jeroen Tel</a></li><li><a data-slug="johan-kotlinski" class="t-entity" href="../../wiki/johan-kotlinski.html">Johan Kotlinski</a></li><li><a data-slug="johannes-bjerregaard" class="t-entity" href="../../wiki/johannes-bjerregaard.html">Johannes Bjerregaard</a></li><li><a data-slug="jugi" class="t-entity" href="../../wiki/jugi.html">Jugi (Jukka Kaartinen)</a></li><li><a data-slug="kal-zakath" class="t-entity" href="../../wiki/kal-zakath.html">Kal Zakath (John Townsend)</a></li><li><a data-slug="khyron" class="t-entity" href="../../wiki/khyron.html">Khyron (Paul Schultz)</a></li><li><a data-slug="lars-hamre" class="t-entity" href="../../wiki/lars-hamre.html">Lars &quot;ZAP&quot; Hamre</a></li><li><a data-slug="lasse-oorni" class="t-entity" href="../../wiki/lasse-oorni.html">Lasse Öörni (Cadaver)</a></li><li><a data-slug="laxity" class="t-entity" href="../../wiki/laxity.html">Laxity (Thomas E. Petersen)</a></li><li><a data-slug="leinad" class="t-entity" href="../../wiki/leinad.html">Leinad (Daniel Falk)</a></li><li><a data-slug="leviathan" class="t-entity" href="../../wiki/leviathan.html">Leviathan</a></li><li><a data-slug="liam-the-lemming" class="t-entity" href="../../wiki/liam-the-lemming.html">Liam the Lemming (Liam Hesse)</a></li><li><a data-slug="linus-walleij" class="t-entity" href="../../wiki/linus-walleij.html">Linus Walleij</a></li><li><a data-slug="loki" class="t-entity" href="../../wiki/loki.html">Loki (Charles Odom)</a></li><li><a data-slug="lord-pegasus" class="t-entity" href="../../wiki/lord-pegasus.html">Lord Pegasus (Zack Smith)</a></li><li><a data-slug="luv-kohli" class="t-entity" href="../../wiki/luv-kohli.html">Luv Kohli</a></li><li><a data-slug="maelcum" class="t-entity" href="../../wiki/maelcum.html">Maelcum</a></li><li><a data-slug="martin-galway" class="t-entity" href="../../wiki/martin-galway.html">Martin Galway</a></li><li><a data-slug="master-of-darkness" class="t-entity" href="../../wiki/master-of-darkness.html">Master of Darkness (Todd Andlar)</a></li><li><a data-slug="matt-gray" class="t-entity" href="../../wiki/matt-gray.html">Matt Gray</a></li><li><a data-slug="mellow-d" class="t-entity" href="../../wiki/mellow-d.html">Mellow-D (Jaakko Manninen)</a></li><li><a data-slug="mental-floss" class="t-entity" href="../../wiki/mental-floss.html">Mental Floss (Andrew McCallum)</a></li><li><a data-slug="mesonyx" class="t-entity" href="../../wiki/mesonyx.html">Mesonyx (Jon Dal Kristbjornsson)</a></li><li><a data-slug="mick-rippon" class="t-entity" href="../../wiki/mick-rippon.html">Mick Rippon</a></li><li><a data-slug="mikmak" class="t-entity" href="../../wiki/mikmak.html">Mikmak (Jean-Paul Mikkers)</a></li><li><a data-slug="mosaic" class="t-entity" href="../../wiki/mosaic.html">Mosaic (Renaissance)</a></li><li><a data-slug="necros" class="t-entity" href="../../wiki/necros.html">Necros (Andy Sega)</a></li><li><a data-slug="nemesis" class="t-entity" href="../../wiki/nemesis.html">Nemesis (Andrew Wise)</a></li><li><a data-slug="olivier-lapicque" class="t-entity" href="../../wiki/olivier-lapicque.html">Olivier Lapicque</a></li><li><a data-slug="paganus" class="t-entity" href="../../wiki/paganus.html">Paganus</a></li><li><a data-slug="pariah" class="t-entity" href="../../wiki/pariah.html">Pariah (Edwin de la Vega)</a></li><li><a data-slug="perisoft" class="t-entity" href="../../wiki/perisoft.html">Perisoft (David Wiernicki)</a></li><li><a data-slug="peter-hanning" class="t-entity" href="../../wiki/peter-hanning.html">Peter &quot;Crayon&quot; Hanning</a></li><li><a data-slug="phoenix" class="t-entity" href="../../wiki/phoenix.html">Phoenix (Andrew Voss)</a></li><li><a data-slug="pinion" class="t-entity" href="../../wiki/pinion.html">Pinion (Ryan Hunt)</a></li><li><a data-slug="popcorn" class="t-entity" href="../../wiki/popcorn.html">Popcorn (Chris Campbell)</a></li><li><a data-slug="populus" class="t-entity" href="../../wiki/populus.html">Populus (Nicolas Roberge)</a></li><li><a data-slug="psibelius" class="t-entity" href="../../wiki/psibelius.html">Psibelius (Gene Wie)</a></li><li><a data-slug="purple-motion" class="t-entity" href="../../wiki/purple-motion.html">Purple Motion</a></li><li><a data-slug="quantam-porcupine" class="t-entity" href="../../wiki/quantam-porcupine.html">Quantam Porcupine (Joshua Shagam)</a></li><li><a data-slug="quarex" class="t-entity" href="../../wiki/quarex.html">Quarex (Drew Hunt)</a></li><li><a data-slug="rage" class="t-entity" href="../../wiki/rage.html">Rage (Harri Blom)</a></li><li><a data-slug="reyn-ouwehand" class="t-entity" href="../../wiki/reyn-ouwehand.html">Reyn Ouwehand</a></li><li><a data-slug="rob-hubbard" class="t-entity" href="../../wiki/rob-hubbard.html">Rob Hubbard</a></li><li><a data-slug="ryan-cramer" class="t-entity" href="../../wiki/ryan-cramer.html">Ryan Cramer</a></li><li><a data-slug="ryan-sprott" class="t-entity" href="../../wiki/ryan-sprott.html">Ryan Sprott (Grey)</a></li><li><a data-slug="sabrepulse" class="t-entity" href="../../wiki/sabrepulse.html">Sabrepulse</a></li><li><a data-slug="sami-tammilehto" class="t-entity" href="../../wiki/sami-tammilehto.html">Sami Tammilehto (Psi)</a></li><li><a data-slug="saxy" class="t-entity" href="../../wiki/saxy.html">Saxy (Courtney Risch)</a></li><li><a data-slug="scirocco" class="t-entity" href="../../wiki/scirocco.html">Scirocco (Ian Lyman)</a></li><li><a data-slug="shawnm" class="t-entity" href="../../wiki/shawnm.html">shawnm (Shawn, NOISE)</a></li><li><a data-slug="skaven" class="t-entity" href="../../wiki/skaven.html">Skaven</a></li><li><a data-slug="smeghead" class="t-entity" href="../../wiki/smeghead.html">Smeghead (David Oranchak)</a></li><li><a data-slug="stalker" class="t-entity" href="../../wiki/stalker.html">Stalker (Ariel Gross)</a></li><li><a data-slug="storlek" class="t-entity" href="../../wiki/storlek.html">Storlek</a></li><li><a data-slug="subhuman" class="t-entity" href="../../wiki/subhuman.html">Subhuman (Seth Miller)</a></li><li><a data-slug="the-zapper" class="t-entity" href="../../wiki/the-zapper.html">The Zapper (Marc Girard, Force Ten)</a></li><li><a data-slug="thehacker" class="t-entity" href="../../wiki/thehacker.html">TheHacker (Krisjanis Gale)</a></li><li><a data-slug="trixter" class="t-entity" href="../../wiki/trixter.html">Trixter (Jim Leonard)</a></li><li><a data-slug="u4ia" class="t-entity" href="../../wiki/u4ia.html">U4IA / F8 (James Young)</a></li><li><a data-slug="vadimvs" class="t-entity" href="../../wiki/vadimvs.html">VadimVS (Vadim Shustov)</a></li><li><a data-slug="vegas" class="t-entity" href="../../wiki/vegas.html">Vegas (T.J. Lerner)</a></li><li><a data-slug="vicious" class="t-entity" href="../../wiki/vicious.html">Vicious (VSL)</a></li><li><a data-slug="witchmaster" class="t-entity" href="../../wiki/witchmaster.html">WitchMaster (Mikael Norrgård)</a></li><li><a data-slug="zalt" class="t-entity" href="../../wiki/zalt.html">Zalt (Tobias Garder)</a></li><li><a data-slug="zinc" class="t-entity" href="../../wiki/zinc.html">Zinc (Justin Ray)</a></li></ul></details><details class="grp" data-grp="kind-group"><summary>Groups <span class="n">20</span></summary><ul><li><a data-slug="aim-higher" class="t-entity" href="../../wiki/aim-higher.html">Aim Higher</a></li><li><a data-slug="codemasters" class="t-entity" href="../../wiki/codemasters.html">Codemasters</a></li><li><a data-slug="compunet" class="t-entity" href="../../wiki/compunet.html">Compunet</a></li><li><a data-slug="defiance" class="t-entity" href="../../wiki/defiance.html">Defiance</a></li><li><a data-slug="epinicion" class="t-entity" href="../../wiki/epinicion.html">Epinicion</a></li><li><a data-slug="esper-division" class="t-entity" href="../../wiki/esper-division.html">Esper Division</a></li><li><a data-slug="five-musicians" class="t-entity" href="../../wiki/five-musicians.html">Five Musicians (FM)</a></li><li><a data-slug="future-crew" class="t-entity" href="../../wiki/future-crew.html">Future Crew</a></li><li><a data-slug="hewson" class="t-entity" href="../../wiki/hewson.html">Hewson Consultants</a></li><li><a data-slug="hornet" class="t-entity" href="../../wiki/hornet.html">Hornet</a></li><li><a data-slug="kosmic" class="t-entity" href="../../wiki/kosmic.html">Kosmic (KFMF)</a></li><li><a data-slug="lok" class="t-entity" href="../../wiki/lok.html">LoK</a></li><li><a data-slug="maniacs-of-noise" class="t-entity" href="../../wiki/maniacs-of-noise.html">Maniacs of Noise</a></li><li><a data-slug="noise-group" class="t-entity" href="../../wiki/noise-group.html">NOISE (New Objectives In Sound Exploration)</a></li><li><a data-slug="rainbow-arts" class="t-entity" href="../../wiki/rainbow-arts.html">Rainbow Arts</a></li><li><a data-slug="renaissance" class="t-entity" href="../../wiki/renaissance.html">Renaissance</a></li><li><a data-slug="system-3" class="t-entity" href="../../wiki/system-3.html">System 3</a></li><li><a data-slug="the-modsquad" class="t-entity" href="../../wiki/the-modsquad.html">The Modsquad</a></li><li><a data-slug="triton" class="t-entity" href="../../wiki/triton.html">Triton (Fredrik Huss and Magnus Högdahl)</a></li><li><a data-slug="ultrabeat" class="t-entity" href="../../wiki/ultrabeat.html">Ultrabeat</a></li></ul></details><details class="grp" data-grp="kind-event"><summary>Events <span class="n">1</span></summary><ul><li><a data-slug="20-minute-chip-compo" class="t-entity" href="../../wiki/20-minute-chip-compo.html">20 Minute Chip Compo (20mc)</a></li></ul></details><details class="grp" data-grp="kind-publication"><summary>Publications <span class="n">10</span></summary><ul><li><a data-slug="64er" class="t-entity" href="../../wiki/64er.html">64&#x27;er (magazine)</a></li><li><a data-slug="chipmusic-org" class="t-entity" href="../../wiki/chipmusic-org.html">ChipMusic.org</a></li><li><a data-slug="c64-programmers-reference-guide" class="t-entity" href="../../wiki/c64-programmers-reference-guide.html">Commodore 64 Programmer&#x27;s Reference Guide</a></li><li><a data-slug="commodore-zone" class="t-entity" href="../../wiki/commodore-zone.html">Commodore Zone</a></li><li><a data-slug="hvsc" class="t-entity" href="../../wiki/hvsc.html">HVSC — High Voltage SID Collection</a></li><li><a data-slug="intense-tech" class="t-entity" href="../../wiki/intense-tech.html">Intense Tech with Defense Mech</a></li><li><a data-slug="pan-docs" class="t-entity" href="../../wiki/pan-docs.html">Pan Docs</a></li><li><a data-slug="sidin" class="t-entity" href="../../wiki/sidin.html">SIDin (e-zine)</a></li><li><a data-slug="sid-homepage" class="t-entity" href="../../wiki/sid-homepage.html">The SID Homepage (sidmusic.org)</a></li><li><a data-slug="traxweekly" class="t-entity" href="../../wiki/traxweekly.html">TraxWeekly</a></li></ul></details><details class="grp" data-grp="kind-song"><summary>Songs <span class="n">12</span></summary><ul><li><a data-slug="commando" class="t-entity" href="../../wiki/commando.html">Commando (C64, 1985)</a></li><li><a data-slug="cybernoid" class="t-entity" href="../../wiki/cybernoid.html">Cybernoid (Jeroen Tel, 1988)</a></li><li><a data-slug="cybernoid-ii" class="t-entity" href="../../wiki/cybernoid-ii.html">Cybernoid II (Jeroen Tel, 1988)</a></li><li><a data-slug="dominator" class="t-entity" href="../../wiki/dominator.html">Dominator (Matt Gray, 1989)</a></li><li><a data-slug="driller" class="t-entity" href="../../wiki/driller.html">Driller (Matt Gray, 1987)</a></li><li><a data-slug="helikopter-jagd" class="t-entity" href="../../wiki/helikopter-jagd.html">Helikopter Jagd (C64, 1986)</a></li><li><a data-slug="last-ninja-2" class="t-entity" href="../../wiki/last-ninja-2.html">Last Ninja 2 (Matt Gray, 1988)</a></li><li><a data-slug="monty-on-the-run" class="t-entity" href="../../wiki/monty-on-the-run.html">Monty on the Run (C64, 1985)</a></li><li><a data-slug="sanxion" class="t-entity" href="../../wiki/sanxion.html">Sanxion (C64, 1986)</a></li><li><a data-slug="shades" class="t-entity" href="../../wiki/shades.html">Shades (Chris Hülsbeck, 1986)</a></li><li><a data-slug="great-giana-sisters" class="t-entity" href="../../wiki/great-giana-sisters.html">The Great Giana Sisters (C64, 1987/88)</a></li><li><a data-slug="the-grey-note" class="t-entity" href="../../wiki/the-grey-note.html">The Grey Note (Necros)</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">236</span></summary><ul><li><a data-slug="s-037-lab" class="t-summary" href="../../wiki/s-037-lab.html">0 3 7 lab — techniques &amp; theory (summary)</a></li><li><a data-slug="s-64er-soundmonitor-article" class="t-summary" href="../../wiki/s-64er-soundmonitor-article.html">64&#x27;er 10/1986 — Musik wie noch nie: the Soundmonitor article and manual</a></li><li><a data-slug="s-arcadeattack-matt-gray-interview" class="t-summary" href="../../wiki/s-arcadeattack-matt-gray-interview.html">Arcade Attack — Matt Gray (VGM Maestro) interview (2020/2021)</a></li><li><a data-slug="s-sidmusic-alstrup-waveform-examinations" class="t-summary" href="../../wiki/s-sidmusic-alstrup-waveform-examinations.html">Asger Alstrup — Examination of SID triangle waveform / noise waveform (The SID Homepage, 1995)</a></li><li><a data-slug="s-c64-prg-chapter-4-sound" class="t-summary" href="../../wiki/s-c64-prg-chapter-4-sound.html">C64 Programmer&#x27;s Reference Guide, ch. 4 — Programming Sound and Music on Your Commodore 64 (1982)</a></li><li><a data-slug="s-c64com-matt-gray-interview" class="t-summary" href="../../wiki/s-c64com-matt-gray-interview.html">C64.COM interview #36: Matt Gray (2014)</a></li><li><a data-slug="s-charles-deenen-interviews" class="t-summary" href="../../wiki/s-charles-deenen-interviews.html">Charles Deenen interviews: Domination #11 (1998) and Designing Sound (2010)</a></li><li><a data-slug="s-sid-wizard-charts-and-tables" class="t-summary" href="../../wiki/s-sid-wizard-charts-and-tables.html">Charts and Tables for SID-Wizard 1.6 (document version 1.0, 2014)</a></li><li><a data-slug="s-chipmusic-c64-music-for-dummies" class="t-summary" href="../../wiki/s-chipmusic-c64-music-for-dummies.html">chipmusic.org — C64 Music for Dummies (ant1&#x27;s SID-Wizard 1.0 tutorial, 2012)</a></li><li><a data-slug="s-chipmusic-lsdj-advanced-tricks" class="t-summary" href="../../wiki/s-chipmusic-lsdj-advanced-tricks.html">chipmusic.org — LSDJ Advanced Tricks thread (2012)</a></li><li><a data-slug="s-chipmusic-tables-and-chords-threads" class="t-summary" href="../../wiki/s-chipmusic-tables-and-chords-threads.html">chipmusic.org — LSDJ Chord Cheat Sheet / Advice on Learning Tables threads (2015)</a></li><li><a data-slug="s-chipmusic-lsdj-faq" class="t-summary" href="../../wiki/s-chipmusic-lsdj-faq.html">chipmusic.org — LSDJ FAQ thread (2010–2011)</a></li><li><a data-slug="s-chipmusic-noise-drum-threads" class="t-summary" href="../../wiki/s-chipmusic-noise-drum-threads.html">chipmusic.org — Noise snare / Complete Drum Kit on Noise Channel threads (2014)</a></li><li><a data-slug="s-chipmusic-sid-music-hints-n-tips" class="t-summary" href="../../wiki/s-chipmusic-sid-music-hints-n-tips.html">chipmusic.org — sid music hints&#x27;n&#x27;tips (2013)</a></li><li><a data-slug="s-chipmusic-kotlinski-interviews" class="t-summary" href="../../wiki/s-chipmusic-kotlinski-interviews.html">chipmusic.org — two Johan Kotlinski interviews (2012, 2014)</a></li><li><a data-slug="s-chipmusic-typical-sid-sounds" class="t-summary" href="../../wiki/s-chipmusic-typical-sid-sounds.html">chipmusic.org — What are the typical C64/SID sounds/instruments? (2015)</a></li><li><a data-slug="s-chordian-sid-musicians" class="t-summary" href="../../wiki/s-chordian-sid-musicians.html">Chordian — SID Musicians (JCH&#x27;s verdicts on the game composers, 2018)</a></li><li><a data-slug="s-commodore-64-eu-sid-chip" class="t-summary" href="../../wiki/s-commodore-64-eu-sid-chip.html">commodore-64.eu — The C64 SID Chip (6581 vs 8580 overview)</a></li><li><a data-slug="s-chordian-sf2-instruments" class="t-summary" href="../../wiki/s-chordian-sf2-instruments.html">Composing in SID Factory II, Part 4 — Instruments (Chordian)</a></li><li><a data-slug="s-witchmaster-creating-chiptunes-with-sid-wizard" class="t-summary" href="../../wiki/s-witchmaster-creating-chiptunes-with-sid-wizard.html">Creating Chiptunes with SID-Wizard, Second Edition (summary)</a></li><li><a data-slug="s-csdb-huelsbeck-tfmx-thread" class="t-summary" href="../../wiki/s-csdb-huelsbeck-tfmx-thread.html">CSDb forum: Huelsbeck TFMX? (2006)</a></li><li><a data-slug="s-csdb-soundmonitor-and-shades" class="t-summary" href="../../wiki/s-csdb-soundmonitor-and-shades.html">CSDb release pages: Soundmonitor V1.0 (1986) and Shades (1986)</a></li><li><a data-slug="s-cybernoid-behind-the-notes" class="t-summary" href="../../wiki/s-cybernoid-behind-the-notes.html">Cybernoid I / Cybernoid II &#x27;behind the notes&#x27; videos (2014) and the Lemon64 thread</a></li><li><a data-slug="s-duet-readme" class="t-summary" href="../../wiki/s-duet-readme.html">DUET README (summary)</a></li><li><a data-slug="s-ft2-manual" class="t-summary" href="../../wiki/s-ft2-manual.html">FastTracker v2.08 Manual (Urban Jonsson, 1996)</a></li><li><a data-slug="s-furnace-c64-docs" class="t-summary" href="../../wiki/s-furnace-c64-docs.html">Furnace tracker — C64 (SID) system and instrument documentation</a></li><li><a data-slug="s-audiogang-huelsbeck-interview" class="t-summary" href="../../wiki/s-audiogang-huelsbeck-interview.html">Game Audio Network Guild — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-infu-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-infu-getting-started-with-lsdj.html">Getting started with LSDj with Infu (course)</a></li><li><a data-slug="s-realdmx-sid-players" class="t-summary" href="../../wiki/s-realdmx-sid-players.html">GitHub realdmx/c64_6581_sid_players — Cybernoid II in Deenen&#x27;s MUSICFILE, the MoN SFX player, the Driller listing</a></li><li><a data-slug="s-goattracker-readme" class="t-summary" href="../../wiki/s-goattracker-readme.html">GoatTracker v2.72 readme (summary)</a></li><li><a data-slug="s-hugi38-interview-jeroen-tel" class="t-summary" href="../../wiki/s-hugi38-interview-jeroen-tel.html">Hugi #38 — Up Close &amp; Personal: Jeroen Tel of Maniacs of Noise (2014)</a></li><li><a data-slug="s-hvsc-sid-file-format" class="t-summary" href="../../wiki/s-hvsc-sid-file-format.html">HVSC — SID file format description (PSID v1–v4, RSID)</a></li><li><a data-slug="s-it-hints" class="t-summary" href="../../wiki/s-it-hints.html">Impulse Tracker HINTS.TXT — Hints for Composers (summary)</a></li><li><a data-slug="s-ittech" class="t-summary" href="../../wiki/s-ittech.html">Impulse Tracker ITTECH.TXT — technical reference (summary)</a></li><li><a data-slug="s-it-manual" class="t-summary" href="../../wiki/s-it-manual.html">Impulse Tracker User&#x27;s Manual — IT.TXT (summary)</a></li><li><a data-slug="s-intense-tech-01-wave-synth-deep-dive-part-1" class="t-summary" href="../../wiki/s-intense-tech-01-wave-synth-deep-dive-part-1.html">Intense Tech #01 — LSDj Wave Synth Deep Dive, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-02-wave-synth-deep-dive-part-2" class="t-summary" href="../../wiki/s-intense-tech-02-wave-synth-deep-dive-part-2.html">Intense Tech #02 — LSDj Wave Synth Deep Dive, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-03-dont-sleep-on-z" class="t-summary" href="../../wiki/s-intense-tech-03-dont-sleep-on-z.html">Intense Tech #03 — Don&#x27;t Sleep on Z (Defense Mechanism, after Hypnogram)</a></li><li><a data-slug="s-intense-tech-04-liblsdj" class="t-summary" href="../../wiki/s-intense-tech-04-liblsdj.html">Intense Tech #04 — Manage your LSDj save files with libLSDj (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-05-wave-cruncher-instrument-library" class="t-summary" href="../../wiki/s-intense-tech-05-wave-cruncher-instrument-library.html">Intense Tech #05 — LSDj Wave Cruncher Instrument Library (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-06-groove-and-tick-tricks-part-1" class="t-summary" href="../../wiki/s-intense-tech-06-groove-and-tick-tricks-part-1.html">Intense Tech #06 — Groovy Groove and Tick Tricks, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-07-groove-and-tick-tricks-part-2" class="t-summary" href="../../wiki/s-intense-tech-07-groove-and-tick-tricks-part-2.html">Intense Tech #07 — Groovy Groove and Tick Tricks, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-08-dotcnts-wave-cruncher" class="t-summary" href="../../wiki/s-intense-tech-08-dotcnts-wave-cruncher.html">Intense Tech #08 — DOTCNT&#x27;s LSDj Wave Cruncher (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-09-lets-table-this-discussion" class="t-summary" href="../../wiki/s-intense-tech-09-lets-table-this-discussion.html">Intense Tech #09 — Let&#x27;s Table This Discussion! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-10-kicks-part-1" class="t-summary" href="../../wiki/s-intense-tech-10-kicks-part-1.html">Intense Tech #10 — Get your Kicks with Version 6, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-11-kicks-part-2" class="t-summary" href="../../wiki/s-intense-tech-11-kicks-part-2.html">Intense Tech #11 — Kicks Part 2: Kick Heaven in Version 7 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-12-scoping-out-new-features" class="t-summary" href="../../wiki/s-intense-tech-12-scoping-out-new-features.html">Intense Tech #12 — Scoping Out New Features (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-13-kotlinski-interview" class="t-summary" href="../../wiki/s-intense-tech-13-kotlinski-interview.html">Intense Tech #13 — Interview with LSDj Developer Johan Kotlinski (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-14-lets-appreciate-version-8" class="t-summary" href="../../wiki/s-intense-tech-14-lets-appreciate-version-8.html">Intense Tech #14 — Let&#x27;s Appreciate Version 8 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-15-lets-mix-it-up-and-down" class="t-summary" href="../../wiki/s-intense-tech-15-lets-mix-it-up-and-down.html">Intense Tech #15 — Let&#x27;s Mix It Up (and Down) (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-16-cartridge-family" class="t-summary" href="../../wiki/s-intense-tech-16-cartridge-family.html">Intense Tech #16 — So You Want a Cartridge Family? (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-17-the-joys-of-noise" class="t-summary" href="../../wiki/s-intense-tech-17-the-joys-of-noise.html">Intense Tech #17 — The Joys of Noise (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-18-adsr-makes-life-easier" class="t-summary" href="../../wiki/s-intense-tech-18-adsr-makes-life-easier.html">Intense Tech #18 — ADSR Makes Life Easier! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-19-new-noise-and-910-news" class="t-summary" href="../../wiki/s-intense-tech-19-new-noise-and-910-news.html">Intense Tech #19 — New Noise and 9.1.0 News (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-20-lsdpatch" class="t-summary" href="../../wiki/s-intense-tech-20-lsdpatch.html">Intense Tech #20 — Customize LSDj From Scratch with LSDPatch (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-21-whats-new-in-lsdj-92" class="t-summary" href="../../wiki/s-intense-tech-21-whats-new-in-lsdj-92.html">Intense Tech #21 — What&#x27;s New in LSDj v9.2 (Defense Mechanism)</a></li><li><a data-slug="s-lemon64-hard-restart-threads" class="t-summary" href="../../wiki/s-lemon64-hard-restart-threads.html">Lemon64 threads: SID and ADSR re-triggering? (2008) / Hard restart – what&#x27;s the story? (2015)</a></li><li><a data-slug="s-lemon64-learning-sid-sound-design" class="t-summary" href="../../wiki/s-lemon64-learning-sid-sound-design.html">Lemon64: How does one learn SID sound design these days? (2020)</a></li><li><a data-slug="s-lemon64-sid-wizard-instrument-recommendations" class="t-summary" href="../../wiki/s-lemon64-sid-wizard-instrument-recommendations.html">Lemon64: SID-Wizard instrument recommendations? (2021)</a></li><li><a data-slug="s-lsdj-manual" class="t-summary" href="../../wiki/s-lsdj-manual.html">Little Sound Dj v9.2.6 Operating Manual (summary)</a></li><li><a data-slug="s-matt-gray-dominator-source" class="t-summary" href="../../wiki/s-matt-gray-dominator-source.html">Matt Gray&#x27;s Dominator subtune 6 source (PLAYER V4.2, 1987) and the Reformation driver competition</a></li><li><a data-slug="s-mos-6581-datasheet" class="t-summary" href="../../wiki/s-mos-6581-datasheet.html">MOS 6581 Sound Interface Device (SID) datasheet — the text behind Appendix O</a></li><li><a data-slug="s-newman-driving-the-sid-chip" class="t-summary" href="../../wiki/s-newman-driving-the-sid-chip.html">Newman — Driving the SID chip: Assembly Language, Composition, and Sound Design for the C64 (2017)</a></li><li><a data-slug="s-openmpt-manual-about-openmpt" class="t-summary" href="../../wiki/s-openmpt-manual-about-openmpt.html">OpenMPT manual — About OpenMPT</a></li><li><a data-slug="s-openmpt-manual-compatible-playback" class="t-summary" href="../../wiki/s-openmpt-manual-compatible-playback.html">OpenMPT manual — Compatible Playback</a></li><li><a data-slug="s-openmpt-manual-effect-reference" class="t-summary" href="../../wiki/s-openmpt-manual-effect-reference.html">OpenMPT manual — Effect Reference</a></li><li><a data-slug="s-openmpt-manual-instruments" class="t-summary" href="../../wiki/s-openmpt-manual-instruments.html">OpenMPT manual — Instruments</a></li><li><a data-slug="s-openmpt-manual-module-formats" class="t-summary" href="../../wiki/s-openmpt-manual-module-formats.html">OpenMPT manual — Module formats</a></li><li><a data-slug="s-openmpt-manual-samples" class="t-summary" href="../../wiki/s-openmpt-manual-samples.html">OpenMPT manual — Samples</a></li><li><a data-slug="s-openmpt-manual-song-properties" class="t-summary" href="../../wiki/s-openmpt-manual-song-properties.html">OpenMPT manual — Song Properties (and Tempo Swing)</a></li><li><a data-slug="s-openmpt-manual-zxx-macros" class="t-summary" href="../../wiki/s-openmpt-manual-zxx-macros.html">OpenMPT manual — Zxx Macros</a></li><li><a data-slug="s-pandocs-audio-details" class="t-summary" href="../../wiki/s-pandocs-audio-details.html">Pan Docs — Audio Details</a></li><li><a data-slug="s-pandocs-audio-overview" class="t-summary" href="../../wiki/s-pandocs-audio-overview.html">Pan Docs — Audio Overview</a></li><li><a data-slug="s-pandocs-audio-registers" class="t-summary" href="../../wiki/s-pandocs-audio-registers.html">Pan Docs — Audio Registers</a></li><li><a data-slug="s-protracker-23-readme-and-docs" class="t-summary" href="../../wiki/s-protracker-23-readme-and-docs.html">ProTracker 2.3A ReadMe, 2.0A effect and format docs, version table</a></li><li><a data-slug="s-protracker-23d-help" class="t-summary" href="../../wiki/s-protracker-23d-help.html">ProTracker 2.3d help file (edited by echolevel)</a></li><li><a data-slug="s-remix64-huelsbeck-interview" class="t-summary" href="../../wiki/s-remix64-huelsbeck-interview.html">Remix64 — An Interview with Chris Huelsbeck (2001)</a></li><li><a data-slug="s-remix64-galway-interview" class="t-summary" href="../../wiki/s-remix64-galway-interview.html">Remix64 — An Interview with Martin Galway (Neil Carr, 2001)</a></li><li><a data-slug="s-remix64-ninja-remix" class="t-summary" href="../../wiki/s-remix64-ninja-remix.html">Remix64 — Last Ninja 2 vs Ninja Remix: what&#x27;s the deal? (Chris Abbott)</a></li><li><a data-slug="s-retrogamesmaster-matt-gray-interview" class="t-summary" href="../../wiki/s-retrogamesmaster-matt-gray-interview.html">Retro Gamesmaster — Matt Gray Interview (Peter Ward)</a></li><li><a data-slug="s-emuwiki-huelsbeck-interview" class="t-summary" href="../../wiki/s-emuwiki-huelsbeck-interview.html">Retrogaming Planet / EmuWiki — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-rvg-matt-gray-interview" class="t-summary" href="../../wiki/s-rvg-matt-gray-interview.html">RVG Interviews: Matt Gray (2016)</a></li><li><a data-slug="s-sabrepulse-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-sabrepulse-getting-started-with-lsdj.html">Sabrepulse — Getting started with LSDJ tutorial (mirror at Adventure Kid)</a></li><li><a data-slug="s-schism-tracker-wiki" class="t-summary" href="../../wiki/s-schism-tracker-wiki.html">Schism Tracker wiki and README</a></li><li><a data-slug="s-st3-manual" class="t-summary" href="../../wiki/s-st3-manual.html">Scream Tracker 3.2 User&#x27;s Manual (ST3.DOC)</a></li><li><a data-slug="s-st3-tech-doc" class="t-summary" href="../../wiki/s-st3-tech-doc.html">Scream Tracker 3.20 File Formats And Mixing Info (TECH.DOC)</a></li><li><a data-slug="s-sid-wizard-manual" class="t-summary" href="../../wiki/s-sid-wizard-manual.html">SID-Wizard 1.8 User Manual (summary)</a></li><li><a data-slug="s-sidid-player-list" class="t-summary" href="../../wiki/s-sidid-player-list.html">SIDId (cadaver/sidid): the player-signature list and its notes</a></li><li><a data-slug="s-sidin02-matt-gray-driller" class="t-summary" href="../../wiki/s-sidin02-matt-gray-driller.html">SIDin #2 — Matt Gray&#x27;s Driller music routine (Stefano Tognon, 2002)</a></li><li><a data-slug="s-soundmonitor-lineage-wikis" class="t-summary" href="../../wiki/s-soundmonitor-lineage-wikis.html">Soundmonitor lineage and wiki pages: tracker-history/soundmonitor.txt, C64-Wiki.de, de.wikipedia</a></li><li><a data-slug="s-recollection-brief-history-of-sid" class="t-summary" href="../../wiki/s-recollection-brief-history-of-sid.html">The Brief History of SID — Jan Harries (SIDwave), Vandalism News #64 (2015)</a></li><li><a data-slug="s-sidmusic-yannes-interview" class="t-summary" href="../../wiki/s-sidmusic-yannes-interview.html">The SID Homepage — Interview with Bob Yannes (Andreas Varga, August 1996)</a></li><li><a data-slug="s-sidmusic-jeroen-tel-interviews" class="t-summary" href="../../wiki/s-sidmusic-jeroen-tel-interviews.html">The SID Homepage — Interviews with Jeroen Tel (Commodore Zone 1997, 64&#x27;er 3/91)</a></li><li><a data-slug="s-sidmusic-galway-interviews" class="t-summary" href="../../wiki/s-sidmusic-galway-interviews.html">The SID Homepage — Interviews with Martin Galway (Commodore Zone 6–7, Happy Computer 11/86)</a></li><li><a data-slug="s-sidmusic-hubbard-interviews" class="t-summary" href="../../wiki/s-sidmusic-hubbard-interviews.html">The SID Homepage — Interviews with Rob Hubbard (Commodore Zone, Happy Computer 7/86)</a></li><li><a data-slug="s-sidmusic-creation-of-the-sid-chip" class="t-summary" href="../../wiki/s-sidmusic-creation-of-the-sid-chip.html">The SID Homepage — The creation of the SID chip (Christer Rindeblad)</a></li><li><a data-slug="s-tracker-history-notes" class="t-summary" href="../../wiki/s-tracker-history-notes.html">tracker-history release notes (ProTracker, FastTracker, Scream Tracker, Impulse Tracker, Schism, OpenMPT)</a></li><li><a data-slug="s-traxweekly-archive" class="t-summary" href="../../wiki/s-traxweekly-archive.html">TraxWeekly archive at OpenMPT.org (summary)</a></li><li><a data-slug="s-tw001-interview-basehead" class="t-summary" href="../../wiki/s-tw001-interview-basehead.html">TW #1 — Interview with Basehead (Populus)</a></li><li><a data-slug="s-tw001-interview-phoenix" class="t-summary" href="../../wiki/s-tw001-interview-phoenix.html">TW #1 — Interview with Phoenix (Populus)</a></li><li><a data-slug="s-tw001-modal-and-chord-theory" class="t-summary" href="../../wiki/s-tw001-modal-and-chord-theory.html">TW #1 — Modal and Chord Theory (Leviathan)</a></li><li><a data-slug="s-tw010-interview-jugi" class="t-summary" href="../../wiki/s-tw010-interview-jugi.html">TW #10 — Interview with Jugi (White Wizard)</a></li><li><a data-slug="s-tw100-tracking-on-impulse" class="t-summary" href="../../wiki/s-tw100-tracking-on-impulse.html">TW #100 — Tracking on Impulse (Pulse)</a></li><li><a data-slug="s-tw103-interview-mikmak" class="t-summary" href="../../wiki/s-tw103-interview-mikmak.html">TW #103 — Interview with Mikmak (Behemoth)</a></li><li><a data-slug="s-tw105-newbie-interviews" class="t-summary" href="../../wiki/s-tw105-newbie-interviews.html">TW #105 — Interview With A Couple Of Newbies (Behemoth)</a></li><li><a data-slug="s-tw106-a-little-panning" class="t-summary" href="../../wiki/s-tw106-a-little-panning.html">TW #106 — A Little Panning (Airon)</a></li><li><a data-slug="s-tw107-laymans-music-theory" class="t-summary" href="../../wiki/s-tw107-laymans-music-theory.html">TW #107 — Layman&#x27;s Music Theory, part one (Zinc)</a></li><li><a data-slug="s-tw109-interview-skaven" class="t-summary" href="../../wiki/s-tw109-interview-skaven.html">TW #109 — Interview: Skaven (Zinc)</a></li><li><a data-slug="s-tw011-how-to-enhance-your-music-collection" class="t-summary" href="../../wiki/s-tw011-how-to-enhance-your-music-collection.html">TW #11 — How to enhance your music collection (Popcorn)</a></li><li><a data-slug="s-tw011-interview-beaner" class="t-summary" href="../../wiki/s-tw011-interview-beaner.html">TW #11 — Interview with Beaner (Popcorn)</a></li><li><a data-slug="s-tw011-interview-perisoft" class="t-summary" href="../../wiki/s-tw011-interview-perisoft.html">TW #11 — Interview with Perisoft (Popcorn)</a></li><li><a data-slug="s-tw111-interview-khyron" class="t-summary" href="../../wiki/s-tw111-interview-khyron.html">TW #111 — Interview with Khyron (again =) (Jeremy Rice)</a></li><li><a data-slug="s-tw114-commercial-tracking-debate" class="t-summary" href="../../wiki/s-tw114-commercial-tracking-debate.html">TW #113–#118 — The Scene and the Commercial Market: the commercial-tracking debate</a></li><li><a data-slug="s-tw114-live-tracking" class="t-summary" href="../../wiki/s-tw114-live-tracking.html">TW #114 — Live Tracking (xiagox)</a></li><li><a data-slug="s-tw115-tracking-semantics" class="t-summary" href="../../wiki/s-tw115-tracking-semantics.html">TW #115 — Tracking Semantics (Exxon)</a></li><li><a data-slug="s-tw118-reverb-and-compression" class="t-summary" href="../../wiki/s-tw118-reverb-and-compression.html">TW #118 — Reverb and Compression (Airon)</a></li><li><a data-slug="s-tw118-tracking-the-format" class="t-summary" href="../../wiki/s-tw118-tracking-the-format.html">TW #118 — Tracking the Format (Jesper Pedersen)</a></li><li><a data-slug="s-tw119-interview-mental-floss" class="t-summary" href="../../wiki/s-tw119-interview-mental-floss.html">TW #119 — Interview with Mental Floss (Zinc)</a></li><li><a data-slug="s-tw119-reverb-and-audio-gear" class="t-summary" href="../../wiki/s-tw119-reverb-and-audio-gear.html">TW #119 — Reverb and Audio Gear (Rimbo)</a></li><li><a data-slug="s-tw012-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw012-advanced-tracking-tips.html">TW #12 — Advanced Tracking Tips (Necros)</a></li><li><a data-slug="s-tw013-interview-big-jim" class="t-summary" href="../../wiki/s-tw013-interview-big-jim.html">TW #13 — Interview with Big Jim (Popcorn)</a></li><li><a data-slug="s-tw014-interview-pinion" class="t-summary" href="../../wiki/s-tw014-interview-pinion.html">TW #14 — Interview with Pinion (Flood)</a></li><li><a data-slug="s-tw015-advanced-tracking-tips-ii" class="t-summary" href="../../wiki/s-tw015-advanced-tracking-tips-ii.html">TW #15 — Advanced Tracking Tips II (Necros)</a></li><li><a data-slug="s-tw015-interview-claim" class="t-summary" href="../../wiki/s-tw015-interview-claim.html">TW #15 — Interview with Claim (Gator)</a></li><li><a data-slug="s-tw015-interview-sv" class="t-summary" href="../../wiki/s-tw015-interview-sv.html">TW #15 — Interview with SV (GraveDigger)</a></li><li><a data-slug="s-tw016-interview-populus" class="t-summary" href="../../wiki/s-tw016-interview-populus.html">TW #16 — Interview with Populus (Psibelius)</a></li><li><a data-slug="s-tw017-interview-amusic" class="t-summary" href="../../wiki/s-tw017-interview-amusic.html">TW #17 — Interview with AmusiC (Popcorn)</a></li><li><a data-slug="s-tw018-advanced-tracking-tips-iii" class="t-summary" href="../../wiki/s-tw018-advanced-tracking-tips-iii.html">TW #18 — Advanced Tracking Tips III: voicings (Necros)</a></li><li><a data-slug="s-tw018-interview-basehead" class="t-summary" href="../../wiki/s-tw018-interview-basehead.html">TW #18 — Interview With Basehead (again) (Psibelius)</a></li><li><a data-slug="s-tw018-interview-lord-pegasus" class="t-summary" href="../../wiki/s-tw018-interview-lord-pegasus.html">TW #18 — Interview with Lord Pegasus (Psibelius)</a></li><li><a data-slug="s-tw019-interview-quarex" class="t-summary" href="../../wiki/s-tw019-interview-quarex.html">TW #19 — Interview with Quarex (Maelcum)</a></li><li><a data-slug="s-tw002-interview-leinad" class="t-summary" href="../../wiki/s-tw002-interview-leinad.html">TW #2 — Interview with Leinad (Populus)</a></li><li><a data-slug="s-tw021-tracking-tips" class="t-summary" href="../../wiki/s-tw021-tracking-tips.html">TW #21 — Tracking Tips (Dan Hartrell)</a></li><li><a data-slug="s-tw022-interview-jase" class="t-summary" href="../../wiki/s-tw022-interview-jase.html">TW #22 — Interview with Jase (Clef)</a></li><li><a data-slug="s-tw024-in-review-asm95" class="t-summary" href="../../wiki/s-tw024-in-review-asm95.html">TW #24 — In Review: the ASM95 music entries (Necros)</a></li><li><a data-slug="s-tw024-sample-ripping-debate" class="t-summary" href="../../wiki/s-tw024-sample-ripping-debate.html">TW #24, #25, #64, #65 — the sample-ripping debate (Mhoram, Psibelius, Kristian Eriksen, Beacon)</a></li><li><a data-slug="s-tw025-loops-and-extended-samples" class="t-summary" href="../../wiki/s-tw025-loops-and-extended-samples.html">TW #25 — Loops and Extended Samples (The Zapper)</a></li><li><a data-slug="s-tw026-faces-in-the-crowd-intro" class="t-summary" href="../../wiki/s-tw026-faces-in-the-crowd-intro.html">TW #26 — Faces in the Crowd: the column&#x27;s manifesto (Kal Zakath)</a></li><li><a data-slug="s-tw032-20-minute-chip-compo" class="t-summary" href="../../wiki/s-tw032-20-minute-chip-compo.html">TW #26–#33, #50 — the 20 MeEnUhTz Chip Compo column (AmusiC)</a></li><li><a data-slug="s-tw027-interview-basehead-lotus-position" class="t-summary" href="../../wiki/s-tw027-interview-basehead-lotus-position.html">TW #27 — Basehead on Lotus Position (Cyberdmon)</a></li><li><a data-slug="s-tw027-faces-in-the-crowd-master-of-darkness" class="t-summary" href="../../wiki/s-tw027-faces-in-the-crowd-master-of-darkness.html">TW #27 — Faces in the Crowd #1: Master of Darkness (Kal Zakath)</a></li><li><a data-slug="s-tw027-interview-zapper" class="t-summary" href="../../wiki/s-tw027-interview-zapper.html">TW #27 — Interview with Zapper (The Finn)</a></li><li><a data-slug="s-tw028-faces-in-the-crowd-mesonyx" class="t-summary" href="../../wiki/s-tw028-faces-in-the-crowd-mesonyx.html">TW #28 — Faces in the Crowd #2: Mesonyx (Kal Zakath)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-smeghead" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-smeghead.html">TW #29 — Faces in the Crowd #4: Smeghead (Master of Darkness)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-esper-division" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-esper-division.html">TW #29 — Faces in the Crowd #5: Esper Division (DennisC)</a></li><li><a data-slug="s-tw003-interview-chuck-biscuits" class="t-summary" href="../../wiki/s-tw003-interview-chuck-biscuits.html">TW #3 — Interview with Chuck Biscuits (Epeius)</a></li><li><a data-slug="s-tw003-interview-five-musicians" class="t-summary" href="../../wiki/s-tw003-interview-five-musicians.html">TW #3 — Interview with the Five Musicians (Populus)</a></li><li><a data-slug="s-tw003-beginning-the-tracking-experience" class="t-summary" href="../../wiki/s-tw003-beginning-the-tracking-experience.html">TW #3 — Music: Beginning the Tracking Experience (Psibelius)</a></li><li><a data-slug="s-tw030-interview-ender" class="t-summary" href="../../wiki/s-tw030-interview-ender.html">TW #30 — Faces in the Crowd: Interview with Ender (Master of Darkness)</a></li><li><a data-slug="s-tw030-interview-paganus" class="t-summary" href="../../wiki/s-tw030-interview-paganus.html">TW #30 — Faces in the Crowd: Interview with Paganus (Atlantic)</a></li><li><a data-slug="s-tw031-interview-fred" class="t-summary" href="../../wiki/s-tw031-interview-fred.html">TW #31 — Faces in the Crowd: Interview with Fred (Dynamic Harmony)</a></li><li><a data-slug="s-tw031-interview-luv-kohli" class="t-summary" href="../../wiki/s-tw031-interview-luv-kohli.html">TW #31 — Faces in the Crowd: Interview with Luv Kohli (DennisC)</a></li><li><a data-slug="s-tw031-interview-vicious" class="t-summary" href="../../wiki/s-tw031-interview-vicious.html">TW #31 — Faces in the Crowd: Interview with Vicious (Master of Darkness)</a></li><li><a data-slug="s-tw032-fitc-complaints" class="t-summary" href="../../wiki/s-tw032-fitc-complaints.html">TW #32 — Faces in the Crowd: Complaints (Master of Darkness)</a></li><li><a data-slug="s-tw032-interview-zinc" class="t-summary" href="../../wiki/s-tw032-interview-zinc.html">TW #32 — Faces in the Crowd: Interview with Zinc (DennisC)</a></li><li><a data-slug="s-tw032-not-so-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw032-not-so-advanced-tracking-tips.html">TW #32 — Not So Advanced Tracking Tips (Atlantic)</a></li><li><a data-slug="s-tw032-tracker-survey" class="t-summary" href="../../wiki/s-tw032-tracker-survey.html">TW #32–#34 — Tracker Survey / New Tracker (Psibelius, Jason Diamond)</a></li><li><a data-slug="s-tw033-4channel-lives-on" class="t-summary" href="../../wiki/s-tw033-4channel-lives-on.html">TW #33 — 4Channel Lives On (Trixter)</a></li><li><a data-slug="s-tw034-interview-deus-ex" class="t-summary" href="../../wiki/s-tw034-interview-deus-ex.html">TW #34 — Faces in the Crowd: Interview with Deus Ex (Master of Darkness)</a></li><li><a data-slug="s-tw035-interview-loki" class="t-summary" href="../../wiki/s-tw035-interview-loki.html">TW #35 — Interview with Loki (Trifixion)</a></li><li><a data-slug="s-tw037-death-of-the-chiptune-debate" class="t-summary" href="../../wiki/s-tw037-death-of-the-chiptune-debate.html">TW #37–38 — The Death of the Chiptune / Chiptunes Aren&#x27;t Dead!</a></li><li><a data-slug="s-tw039-chord-theory-debate" class="t-summary" href="../../wiki/s-tw039-chord-theory-debate.html">TW #39–40 — Chord Theory? / Chord What? (Maelcum, Trixter, Basehead)</a></li><li><a data-slug="s-tw004-interview-nemesis" class="t-summary" href="../../wiki/s-tw004-interview-nemesis.html">TW #4 — Interview with Nemesis (Populus)</a></li><li><a data-slug="s-tw004-interview-stalker" class="t-summary" href="../../wiki/s-tw004-interview-stalker.html">TW #4 — Interview with Stalker (Zer0)</a></li><li><a data-slug="s-tw040-interview-blackwolf" class="t-summary" href="../../wiki/s-tw040-interview-blackwolf.html">TW #40 — Interview with Blackwolf (Psibelius)</a></li><li><a data-slug="s-tw040-interview-zalt" class="t-summary" href="../../wiki/s-tw040-interview-zalt.html">TW #40 — Interview with Zalt (Psibelius)</a></li><li><a data-slug="s-tw041-interview-mick-rippon" class="t-summary" href="../../wiki/s-tw041-interview-mick-rippon.html">TW #41 — Faces in the Crowd: Interview with Mick Rippon (DennisC)</a></li><li><a data-slug="s-tw041-interview-shawnm" class="t-summary" href="../../wiki/s-tw041-interview-shawnm.html">TW #41 — Interview with Shawn (shawnm / NOISE)</a></li><li><a data-slug="s-tw041-interview-zinc" class="t-summary" href="../../wiki/s-tw041-interview-zinc.html">TW #41 — Interview with Zinc on the Impromptu Compo (DennisC)</a></li><li><a data-slug="s-tw042-impulse-tracker-v1-01" class="t-summary" href="../../wiki/s-tw042-impulse-tracker-v1-01.html">TW #42 — Impulse Tracker v1.01 (Pulse)</a></li><li><a data-slug="s-tw042-interview-balrog" class="t-summary" href="../../wiki/s-tw042-interview-balrog.html">TW #42 — Interview with Balrog (Kosmic)</a></li><li><a data-slug="s-tw043-interview-pariah" class="t-summary" href="../../wiki/s-tw043-interview-pariah.html">TW #43 — Interview with Pariah (V.S.L)</a></li><li><a data-slug="s-tw044-hornet-ratings" class="t-summary" href="../../wiki/s-tw044-hornet-ratings.html">TW #43–#45 — the Demonews ratings argument (Light, Trixter / Hornet)</a></li><li><a data-slug="s-tw044-impulse-tracker-trivia" class="t-summary" href="../../wiki/s-tw044-impulse-tracker-trivia.html">TW #44 — Impulse Tracker Trivia (Random)</a></li><li><a data-slug="s-tw044-interview-acidfrog" class="t-summary" href="../../wiki/s-tw044-interview-acidfrog.html">TW #44 — Interview with Acidfrog (Radiance / Spice)</a></li><li><a data-slug="s-tw046-serial-composition" class="t-summary" href="../../wiki/s-tw046-serial-composition.html">TW #46 — Serial Composition (shawnm / NOISE)</a></li><li><a data-slug="s-tw005-interview-thehacker" class="t-summary" href="../../wiki/s-tw005-interview-thehacker.html">TW #5 — Interview with TheHacker (Popcorn)</a></li><li><a data-slug="s-tw005-what-its-like-to-be-a-pc-musician" class="t-summary" href="../../wiki/s-tw005-what-its-like-to-be-a-pc-musician.html">TW #5 — What it&#x27;s like to be a PC Musician (Necros)</a></li><li><a data-slug="s-tw050-aesthetics-of-composition" class="t-summary" href="../../wiki/s-tw050-aesthetics-of-composition.html">TW #50 — Aesthetics of Composition and Music Groups (Spyder / NOISE)</a></li><li><a data-slug="s-tw050-interview-vadimvs" class="t-summary" href="../../wiki/s-tw050-interview-vadimvs.html">TW #50 — Interview with VadimVS (NOISE)</a></li><li><a data-slug="s-tw051-how-to-listen-to-tracked-music" class="t-summary" href="../../wiki/s-tw051-how-to-listen-to-tracked-music.html">TW #51 — How to listen to tracked music (mrdata)</a></li><li><a data-slug="s-tw052-interview-daedalus" class="t-summary" href="../../wiki/s-tw052-interview-daedalus.html">TW #52 — Interview with Daedalus (Neophyte / Epinicion)</a></li><li><a data-slug="s-tw052-interview-ganja-man" class="t-summary" href="../../wiki/s-tw052-interview-ganja-man.html">TW #52 — Interview with Ganja Man (LoK)</a></li><li><a data-slug="s-tw054-interview-injekted-and-subhuman" class="t-summary" href="../../wiki/s-tw054-interview-injekted-and-subhuman.html">TW #54 — Interview with Injekted &amp; Subhuman (Ultrabeat)</a></li><li><a data-slug="s-tw054-interview-quantam-porcupine" class="t-summary" href="../../wiki/s-tw054-interview-quantam-porcupine.html">TW #54 — Interview with Quantam Porcupine</a></li><li><a data-slug="s-tw054-interview-saxy" class="t-summary" href="../../wiki/s-tw054-interview-saxy.html">TW #54 — Interview with Saxy (XX)</a></li><li><a data-slug="s-tw054-interview-scirocco" class="t-summary" href="../../wiki/s-tw054-interview-scirocco.html">TW #54 — Interview with Scirocco</a></li><li><a data-slug="s-tw055-interview-clef" class="t-summary" href="../../wiki/s-tw055-interview-clef.html">TW #55 — Interview with Clef (Catch 22, ex-Epinicion)</a></li><li><a data-slug="s-tw055-panning-debate" class="t-summary" href="../../wiki/s-tw055-panning-debate.html">TW #55–56 — Panning (GBlues) / Panning? Hello? (Trixter)</a></li><li><a data-slug="s-tw057-interview-catspaw" class="t-summary" href="../../wiki/s-tw057-interview-catspaw.html">TW #57 — Interview with Catspaw (Zinc)</a></li><li><a data-slug="s-tw058-the-finishing-touches" class="t-summary" href="../../wiki/s-tw058-the-finishing-touches.html">TW #58–59 — The Finishing Touches (Catspaw)</a></li><li><a data-slug="s-tw059-tracking-hints" class="t-summary" href="../../wiki/s-tw059-tracking-hints.html">TW #59 — Tracking Hints (Vivid)</a></li><li><a data-slug="s-tw006-naid-opinion-interviews" class="t-summary" href="../../wiki/s-tw006-naid-opinion-interviews.html">TW #6 — The NAID Music Compo: Opinion Interviews (Psibelius)</a></li><li><a data-slug="s-tw060-interview-fisherman" class="t-summary" href="../../wiki/s-tw060-interview-fisherman.html">TW #60 — Faces in the Crowd: fisherman (Zinc)</a></li><li><a data-slug="s-tw060-interview-rage" class="t-summary" href="../../wiki/s-tw060-interview-rage.html">TW #60 — Interview with Rage (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw062-interview-vegas" class="t-summary" href="../../wiki/s-tw062-interview-vegas.html">TW #62 — Interview with Vegas (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw063-interview-ryan-sprott" class="t-summary" href="../../wiki/s-tw063-interview-ryan-sprott.html">TW #63 — Interview with Ryan (Kleitus)</a></li><li><a data-slug="s-tw064-potted-tracking-history" class="t-summary" href="../../wiki/s-tw064-potted-tracking-history.html">TW #64 — Potted Tracking History (Ganja Man)</a></li><li><a data-slug="s-tw065-tracking-as-an-olympic-sport" class="t-summary" href="../../wiki/s-tw065-tracking-as-an-olympic-sport.html">TW #65–#66 — Tracking as an Olympic Sport, parts I–II (Blackwolf)</a></li><li><a data-slug="s-tw066-interview-liam-the-lemming" class="t-summary" href="../../wiki/s-tw066-interview-liam-the-lemming.html">TW #66 — Interview with Liam the Lemming (Kal Zakath)</a></li><li><a data-slug="s-tw066-sound-recording" class="t-summary" href="../../wiki/s-tw066-sound-recording.html">TW #66 — Sound Recording (Cowboy)</a></li><li><a data-slug="s-tw067-interview-u4ia" class="t-summary" href="../../wiki/s-tw067-interview-u4ia.html">TW #67 — Interview with U4IA (Mage)</a></li><li><a data-slug="s-tw007-interview-ryan-cramer" class="t-summary" href="../../wiki/s-tw007-interview-ryan-cramer.html">TW #7 — Interview with Ryan Cramer (Popcorn)</a></li><li><a data-slug="s-tw007-the-importance-of-music-theory" class="t-summary" href="../../wiki/s-tw007-the-importance-of-music-theory.html">TW #7 — The Importance of Music Theory (Future Assassin)</a></li><li><a data-slug="s-tw070-realism-debate" class="t-summary" href="../../wiki/s-tw070-realism-debate.html">TW #70–73 — the realism debate (#trax log, Behemoth, GBlues, Alan Robinson, Raphael, Sturm, brn, It-Alien, Purple Haze, Necros)</a></li><li><a data-slug="s-tw072-composing-whole-modules" class="t-summary" href="../../wiki/s-tw072-composing-whole-modules.html">TW #72 — Composing Whole Modules (Sir Nick / Deck Blasters)</a></li><li><a data-slug="s-tw074-motherboard-sampling" class="t-summary" href="../../wiki/s-tw074-motherboard-sampling.html">TW #74 — Motherboard Sampling (Spieg)</a></li><li><a data-slug="s-tw074-intro-to-musical-theory" class="t-summary" href="../../wiki/s-tw074-intro-to-musical-theory.html">TW #74–86 — Introduction to Musical Theory, vols 1–5 (Greg Heo)</a></li><li><a data-slug="s-tw075-it-percussion-tips" class="t-summary" href="../../wiki/s-tw075-it-percussion-tips.html">TW #75 — IT Percussion Tips (Zinc)</a></li><li><a data-slug="s-tw076-realism-in-mods" class="t-summary" href="../../wiki/s-tw076-realism-in-mods.html">TW #76 — Realism in MODs (Behemoth)</a></li><li><a data-slug="s-tw077-general-tracking-tips" class="t-summary" href="../../wiki/s-tw077-general-tracking-tips.html">TW #77 — General Tracking Tips (Generic Blues)</a></li><li><a data-slug="s-tw077-chip-off-the-block" class="t-summary" href="../../wiki/s-tw077-chip-off-the-block.html">TW #77–81 — A Chip Off the Block / Chiptune Seminar, parts 1–4 (The Modsquad)</a></li><li><a data-slug="s-tw008-interview-blaze-runner" class="t-summary" href="../../wiki/s-tw008-interview-blaze-runner.html">TW #8 — Interview with Blaze Runner (Populus)</a></li><li><a data-slug="s-tw080-trax-mass-interview" class="t-summary" href="../../wiki/s-tw080-trax-mass-interview.html">TW #80 — #trax Mass Interview (Zinc)</a></li><li><a data-slug="s-tw081-it-tip-of-the-week" class="t-summary" href="../../wiki/s-tw081-it-tip-of-the-week.html">TW #81–89 — Impulse Tracker Tip of the Week #1–8 (Pinion) and More Impulse Tracker Tips (Pulse)</a></li><li><a data-slug="s-tw084-perfect-samples-the-piano" class="t-summary" href="../../wiki/s-tw084-perfect-samples-the-piano.html">TW #84 — Perfect Samples: The Piano (Sklathill)</a></li><li><a data-slug="s-tw086-hexadecimal-101" class="t-summary" href="../../wiki/s-tw086-hexadecimal-101.html">TW #86 — Hexadecimal 101 (chinaski)</a></li><li><a data-slug="s-tw086-wrecking-samples-with-impulse-tracker" class="t-summary" href="../../wiki/s-tw086-wrecking-samples-with-impulse-tracker.html">TW #86 — Wrecking Samples with Impulse Tracker (Graham the Happy Scum)</a></li><li><a data-slug="s-tw087-interview-perisoft" class="t-summary" href="../../wiki/s-tw087-interview-perisoft.html">TW #87 — Interview with Perisoft (Pizza Head)</a></li><li><a data-slug="s-tw087-music-theory-a-modern-approach" class="t-summary" href="../../wiki/s-tw087-music-theory-a-modern-approach.html">TW #87–#97 — Music Theory: A Modern Approach (The Modsquad, seven parts)</a></li><li><a data-slug="s-tw009-interview-maelcum" class="t-summary" href="../../wiki/s-tw009-interview-maelcum.html">TW #9 — Interview with Maelcum (k8to)</a></li><li><a data-slug="s-tw009-samples-lameness-preconceptions" class="t-summary" href="../../wiki/s-tw009-samples-lameness-preconceptions.html">TW #9 — Samples, Lameness, Preconceptions, and Fluffy Bunnies (Necros)</a></li><li><a data-slug="s-tw090-interview-cosmic" class="t-summary" href="../../wiki/s-tw090-interview-cosmic.html">TW #90 — Interview with Cosmic/RR (Pizza Head)</a></li><li><a data-slug="s-tw094-stereo-samples-in-impulse-tracker" class="t-summary" href="../../wiki/s-tw094-stereo-samples-in-impulse-tracker.html">TW #94 — Stereo Samples with Impulse Tracker (Zinc)</a></li><li><a data-slug="s-tw096-studio-tracking-tips" class="t-summary" href="../../wiki/s-tw096-studio-tracking-tips.html">TW #96 — Studio Tracking Tips (Zinc)</a></li><li><a data-slug="s-tw098-impulse-tracker-investment" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-investment.html">TW #98 — Impulse Tracker Investment (Pulse)</a></li><li><a data-slug="s-tw098-impulse-tracker-midi" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-midi.html">TW #98 — Impulse Tracker MIDI (Airon)</a></li><li><a data-slug="s-tw099-why-tracking-is-the-perfect-artform" class="t-summary" href="../../wiki/s-tw099-why-tracking-is-the-perfect-artform.html">TW #99 — Why Tracking Is The Perfect Artform (anonymous)</a></li><li><a data-slug="s-ucapps-wavetable-sounds-tutorial-1" class="t-summary" href="../../wiki/s-ucapps-wavetable-sounds-tutorial-1.html">uCApps MIDIbox SID — Wavetable Sounds Tutorial #1 (Thorsten Klose)</a></li><li><a data-slug="s-vandalism63-matt-gray-interview" class="t-summary" href="../../wiki/s-vandalism63-matt-gray-interview.html">Vandalism News #63 — Interview with Matt Gray (Jazzcat, 2014)</a></li><li><a data-slug="s-vgmpf-chris-huelsbeck" class="t-summary" href="../../wiki/s-vgmpf-chris-huelsbeck.html">VGMPF wiki: Chris Hülsbeck</a></li><li><a data-slug="s-vgmpf-maniacs-of-noise" class="t-summary" href="../../wiki/s-vgmpf-maniacs-of-noise.html">VGMPF wiki: Maniacs of Noise, Jeroen Tel, Charles Deenen (+ the C64-Wiki roster)</a></li><li><a data-slug="s-vgmpf-matt-gray" class="t-summary" href="../../wiki/s-vgmpf-matt-gray.html">VGMPF wiki: Matt Gray</a></li><li><a data-slug="s-vgmpf-soundmonitor-tfmx" class="t-summary" href="../../wiki/s-vgmpf-soundmonitor-tfmx.html">VGMPF wiki: Soundmonitor, TFMX Editor (C64) and The Great Giana Sisters (C64)</a></li><li><a data-slug="s-walleij-sid-player-routine" class="t-summary" href="../../wiki/s-walleij-sid-player-routine.html">Walleij — A SID player routine (MIDI-driven player design, note tables, hard restart)</a></li><li><a data-slug="s-wikipedia-chris-huelsbeck" class="t-summary" href="../../wiki/s-wikipedia-chris-huelsbeck.html">Wikipedia (en): Chris Huelsbeck</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by tag / platform</a></li><li><a href="../../inbox/traxweekly-toc.html">TraxWeekly articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › mos-6581-datasheet</div>
+<h1>mos_6581_sid.txt</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#mos-6581-datasheet">MOS 6581 SID datasheet</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="http://archive.6502.org/datasheets/mos_6581_sid.pdf">http://archive.6502.org/datasheets/mos_6581_sid.pdf</a> (Commodore Semiconductor Group datasheet, 12 pages; the text the Programmer's Reference Guide reprints as Appendix O)</div><div class="mrow"><span class="mk">file</span> <code>raw/mos-6581-datasheet/mos_6581_sid.txt</code> · 1261 lines · 40 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/mos-6581-datasheet/mos_6581_sid.txt" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-mos-6581-datasheet.html">MOS 6581 Sound Interface Device (SID) datasheet — the text behind Appendix O</a></div></div></header>
+<pre class="raw"><span id="L1" class="l">===== page 1 =====</span>
+<span id="L2" class="l">com m odore</span>
+<span id="L3" class="l">mos technology</span>
+<span id="L4" class="l">IM M O S</span>
+<span id="L5" class="l">950 R ittenhouse R d „ N orristow n, PA 19403 • Tel.: 215/666-7950 • TW X: 510/660-4168</span>
+<span id="L6" class="l">6581 SOUND INTERFACE DEVICE (SID)</span>
+<span id="L7" class="l">CONCEPT</span>
+<span id="L8" class="l">The 6581 Sound Interface Device (SID) is a single-chip, 3-voice electronic music synthesizer/sound effects</span>
+<span id="L9" class="l">generator compatible with the 65XX and similar microprocessor families. SID provides wide-range, high-</span>
+<span id="L10" class="l">resolution control of pitch (frequency), tone color (harmonic content) and dynamics (volume). Specialized</span>
+<span id="L11" class="l">control circuitry minimizes software overhead, facilitating use in arcade/home video games and low-cost</span>
+<span id="L12" class="l">musical instruments.</span>
+<span id="L13" class="l">6581 SOUND INTERFACE DEVICE (SID)</span>
+<span id="L14" class="l">FEATURES</span>
+<span id="L15" class="l">• 3 Tone Oscillators</span>
+<span id="L16" class="l">Range: 0-4 kHz</span>
+<span id="L17" class="l">• 4 Waveforms per Oscillator</span>
+<span id="L18" class="l">Triangle, Sawtooth,</span>
+<span id="L19" class="l">Variable Pulse, Noise</span>
+<span id="L20" class="l">• 3 Amplitude Modulators</span>
+<span id="L21" class="l">Range: 48 dB</span>
+<span id="L22" class="l">• 3 Envelope Generators</span>
+<span id="L23" class="l">Exponential response</span>
+<span id="L24" class="l">Attack Rate: 2 mS-8S</span>
+<span id="L25" class="l">Decay Rate: 6mS-24S</span>
+<span id="L26" class="l">Sustain Level: 0-peak volume</span>
+<span id="L27" class="l">Release Rate; 6mS-24S</span>
+<span id="L28" class="l">• Oscillator Synchronization</span>
+<span id="L29" class="l">• Ring Modulation</span>
+<span id="L30" class="l">• Programmable Filter</span>
+<span id="L31" class="l">Cutoff range: 30 Hz-12 kHz</span>
+<span id="L32" class="l">12 dB/octave Rolloff</span>
+<span id="L33" class="l">Low pass, Band pass,</span>
+<span id="L34" class="l">High pass, Notch outputs</span>
+<span id="L35" class="l">Variable Resonance</span>
+<span id="L36" class="l">• Master Volume Control</span>
+<span id="L37" class="l">• 2 A/D POT Interfaces</span>
+<span id="L38" class="l">• Random Number/Modulation Generator</span>
+<span id="L39" class="l">• External Audio Input</span>
+<span id="L40" class="l">6581 PIN CONFIGURATION</span>
+<span id="L41" class="l">CAP1A 1 28 Vdd</span>
+<span id="L42" class="l">CAP1B 2 27 AUDIO OUT</span>
+<span id="L43" class="l">CAP2A 3 26 EXT IN</span>
+<span id="L44" class="l">CAP2B 4 25 Vcc</span>
+<span id="L45" class="l">RES 5 6581 24 POT X</span>
+<span id="L46" class="l">02 6 SID 23 POT Y</span>
+<span id="L47" class="l">R/W 7 22 D7</span>
+<span id="L48" class="l">CS 8 21 D6</span>
+<span id="L49" class="l">A0 9 20 D5</span>
+<span id="L50" class="l">A1 10 19 D4</span>
+<span id="L51" class="l">A2 11 18 D3</span>
+<span id="L52" class="l">A3 12 17 D2</span>
+<span id="L53" class="l">A4 13 16 D1</span>
+<span id="L54" class="l">GND 14 15 DO</span>
+<span id="L55" class="l">MOS Technology, Inc.</span>
+<span id="L56" class="l">950 Rittenhouse Rd„ Norristown. PA 19403</span>
+<span id="L57" class="l">Tel.: 215/666-7950 TWX: 510/660-4168</span>
+<span id="L58" class="l">Frontier Manufacturing, Inc.</span>
+<span id="L59" class="l">2955 N. Airway Ave., Costa Mesa, CA 92626</span>
+<span id="L60" class="l">Tel.: 714/979-6300, TLX: 685649</span>
+<span id="L61" class="l">commodore</span>
+<span id="L62" class="l">semiconductor group</span>
+<span id="L63" class="l">A C O M M O D O R E C O M P A N Y</span>
+<span id="L64" class="l">Optoelectronics, Inc.</span>
+<span id="L65" class="l">4350 Beltwood Parkway South, Dallax, TX 75234</span>
+<span id="L66" class="l">Tel.. 214/387-0006 TLX 730969</span>
+<span id="L67" class="l">Commodore Electronics Ltd.</span>
+<span id="L68" class="l">Shing Dao Industrial Building</span>
+<span id="L69" class="l">232 Aberdeen Main Rd., Hong Kong</span>
+<span id="L70" class="l">Tel.: 5/540241, TLX: 78065366</span>
+<span id="L71" class="l">===== page 2 =====</span>
+<span id="L72" class="l">DESCRIPTION</span>
+<span id="L73" class="l">The 6581 consists of three synthesizer “voices”</span>
+<span id="L74" class="l">which can be used independently or in conjunction</span>
+<span id="L75" class="l">with each other (or external audio sources) to create</span>
+<span id="L76" class="l">complex sounds. Each voice consists of a Tone</span>
+<span id="L77" class="l">Oscillator/Waveform Generator, an Envelope</span>
+<span id="L78" class="l">Generator and an Amplitude Modulator. The Tone</span>
+<span id="L79" class="l">Oscillator controls the pitch of the voice over a wide</span>
+<span id="L80" class="l">range. The Oscillator produces four waveforms at</span>
+<span id="L81" class="l">the selected frequency, with the unique harmonic</span>
+<span id="L82" class="l">content of each waveform providing simple control</span>
+<span id="L83" class="l">of tone color. The volume dynamics of the oscillator</span>
+<span id="L84" class="l">are controlled by the Amplitude Modulator under</span>
+<span id="L85" class="l">the direction of the Envelope Generator. When</span>
+<span id="L86" class="l">triggered, the Envelope Generator creates an</span>
+<span id="L87" class="l">amplitude envelope with programmable rates of</span>
+<span id="L88" class="l">increasing and decreasing volume, In addition to</span>
+<span id="L89" class="l">the three voices, a programmable Filter is provided</span>
+<span id="L90" class="l">for generating complex, dynamic tone colors via</span>
+<span id="L91" class="l">subtractive synthesis.</span>
+<span id="L92" class="l">SID allows the microprocessor to read the</span>
+<span id="L93" class="l">changing output of the third Oscillator and third</span>
+<span id="L94" class="l">Envelope Generator. These outputs can be used as</span>
+<span id="L95" class="l">a source of modulation information for creating</span>
+<span id="L96" class="l">vibrato, frequency/filter sweeps and similar effects.</span>
+<span id="L97" class="l">The third oscillator can also act as a random</span>
+<span id="L98" class="l">number generator for games. Two A/D converters</span>
+<span id="L99" class="l">are provided for inter-facing SID with</span>
+<span id="L100" class="l">potentiometers. These can be used for “paddles” in</span>
+<span id="L101" class="l">a game environment or as front panel controls in a</span>
+<span id="L102" class="l">music synthesizer, SID can process external audio</span>
+<span id="L103" class="l">signals, allowing multiple SID chips to be daisy-</span>
+<span id="L104" class="l">chained or mixed in complex polyphonic systems.</span>
+<span id="L105" class="l">A4 A3 A2 A1 AO C5 R/W 02 RES</span>
+<span id="L106" class="l">6581 SID BLOCK DIAGRAM</span>
+<span id="L107" class="l">2</span>
+<span id="L108" class="l">===== page 3 =====</span>
+<span id="L109" class="l">SID CONTROL REGISTERS</span>
+<span id="L110" class="l">There are 29 eight-bit registers in SI D which control the generation of sound.These registers are either WRITE-only or READ-only</span>
+<span id="L111" class="l">and are listed below in Table 1.</span>
+<span id="L112" class="l">Address Reg #</span>
+<span id="L113" class="l">A4 A3 A2 A1 AO (Hex) D7</span>
+<span id="L114" class="l">D7 D6 D5</span>
+<span id="L115" class="l">Data</span>
+<span id="L116" class="l">D4 D3 D2 D1 DO</span>
+<span id="L117" class="l">Reg Type</span>
+<span id="L118" class="l">0 0 0</span>
+<span id="L119" class="l">1 0 0</span>
+<span id="L120" class="l">2 0 0</span>
+<span id="L121" class="l">3 0 0</span>
+<span id="L122" class="l">4 0 0</span>
+<span id="L123" class="l">5 0 0</span>
+<span id="L124" class="l">6 0 0</span>
+<span id="L125" class="l">0 0</span>
+<span id="L126" class="l">0 0</span>
+<span id="L127" class="l">0</span>
+<span id="L128" class="l">0</span>
+<span id="L129" class="l">1</span>
+<span id="L130" class="l">1</span>
+<span id="L131" class="l">1</span>
+<span id="L132" class="l">0</span>
+<span id="L133" class="l">1</span>
+<span id="L134" class="l">0</span>
+<span id="L135" class="l">1</span>
+<span id="L136" class="l">0 0</span>
+<span id="L137" class="l">00</span>
+<span id="L138" class="l">01</span>
+<span id="L139" class="l">02</span>
+<span id="L140" class="l">03</span>
+<span id="L141" class="l">04</span>
+<span id="L142" class="l">05</span>
+<span id="L143" class="l">06</span>
+<span id="L144" class="l">F7</span>
+<span id="L145" class="l">F15</span>
+<span id="L146" class="l">PW7</span>
+<span id="L147" class="l">F6</span>
+<span id="L148" class="l">F14</span>
+<span id="L149" class="l">PW6</span>
+<span id="L150" class="l">F5</span>
+<span id="L151" class="l">F13</span>
+<span id="L152" class="l">PW5</span>
+<span id="L153" class="l">F4</span>
+<span id="L154" class="l">F12</span>
+<span id="L155" class="l">PW4</span>
+<span id="L156" class="l">NOISE</span>
+<span id="L157" class="l">ATK3</span>
+<span id="L158" class="l">STN3</span>
+<span id="L159" class="l">rLTL</span>
+<span id="L160" class="l">ATK2</span>
+<span id="L161" class="l">STN2</span>
+<span id="L162" class="l">/ V I</span>
+<span id="L163" class="l">ATK1</span>
+<span id="L164" class="l">STN1</span>
+<span id="L165" class="l">A A</span>
+<span id="L166" class="l">ATK0</span>
+<span id="L167" class="l">STN0</span>
+<span id="L168" class="l">F3</span>
+<span id="L169" class="l">F11</span>
+<span id="L170" class="l">PW3</span>
+<span id="L171" class="l">PW11</span>
+<span id="L172" class="l">TEST</span>
+<span id="L173" class="l">DCY3</span>
+<span id="L174" class="l">RIS3</span>
+<span id="L175" class="l">F2</span>
+<span id="L176" class="l">F10</span>
+<span id="L177" class="l">PW2</span>
+<span id="L178" class="l">PW10</span>
+<span id="L179" class="l">RING</span>
+<span id="L180" class="l">MOD</span>
+<span id="L181" class="l">DCY2</span>
+<span id="L182" class="l">RIS2</span>
+<span id="L183" class="l">F1</span>
+<span id="L184" class="l">F9</span>
+<span id="L185" class="l">PW1</span>
+<span id="L186" class="l">PW9</span>
+<span id="L187" class="l">SYNC</span>
+<span id="L188" class="l">DCY1</span>
+<span id="L189" class="l">RIS1</span>
+<span id="L190" class="l">F0</span>
+<span id="L191" class="l">F8</span>
+<span id="L192" class="l">PWO</span>
+<span id="L193" class="l">PW8</span>
+<span id="L194" class="l">GATE</span>
+<span id="L195" class="l">DCYO</span>
+<span id="L196" class="l">RISO</span>
+<span id="L197" class="l">VOICE 1</span>
+<span id="L198" class="l">Freq Lo</span>
+<span id="L199" class="l">Freq Hi</span>
+<span id="L200" class="l">PW LO</span>
+<span id="L201" class="l">PW HI</span>
+<span id="L202" class="l">Control Reg</span>
+<span id="L203" class="l">Attack/Decay</span>
+<span id="L204" class="l">Sustain/Release</span>
+<span id="L205" class="l">Write-only</span>
+<span id="L206" class="l">Write-only</span>
+<span id="L207" class="l">Write-only</span>
+<span id="L208" class="l">Write-only</span>
+<span id="L209" class="l">Write-only</span>
+<span id="L210" class="l">Write-only</span>
+<span id="L211" class="l">Write-only</span>
+<span id="L212" class="l">7 0 0 1 1 1 07 F7 F6 F5 F4 F3 F2 F1 F0 Freq LO Write-only</span>
+<span id="L213" class="l">8 0 1 0 0 0 08 F15 F14 F13 F12 F11 F10 F9 F8 Freq Hi Write-only</span>
+<span id="L214" class="l">9 0 1 0 0 1 09 PW7 PW6 PW5 PW4 PW3 PW2 PW1 PWO PW LO Write-only</span>
+<span id="L215" class="l">10 0 1 0 1 0 0A— — — — PW11 PW10 PW9 PW8 PW HI Write-only</span>
+<span id="L216" class="l">11 0 1 0 1 1 0B NOISE rur. / V i A A TEST RING</span>
+<span id="L217" class="l">MOD SYNC GATE Control Reg Write-only</span>
+<span id="L218" class="l">12 0 1 1 0 0 OC ATK3 ATK2 ATK1 ATK0 DCY3 DCY2 DCY1 DCYO Attack/Decay Write-only</span>
+<span id="L219" class="l">13 0 1 1 0 1 0D STN3 STN2 STN1 STN0 RIS3 RIS2 RIS1 RISO Sustain/Release Write-only</span>
+<span id="L220" class="l">14 0 1</span>
+<span id="L221" class="l">1 1 0</span>
+<span id="L222" class="l">15 0 1</span>
+<span id="L223" class="l">1 1 1</span>
+<span id="L224" class="l">16 1</span>
+<span id="L225" class="l">0 0 0 0</span>
+<span id="L226" class="l">17 1</span>
+<span id="L227" class="l">0 0</span>
+<span id="L228" class="l">1</span>
+<span id="L229" class="l">1</span>
+<span id="L230" class="l">0 0</span>
+<span id="L231" class="l">19 1</span>
+<span id="L232" class="l">0 0</span>
+<span id="L233" class="l">20 1</span>
+<span id="L234" class="l">0 1 0 0</span>
+<span id="L235" class="l">0E</span>
+<span id="L236" class="l">OF</span>
+<span id="L237" class="l">10</span>
+<span id="L238" class="l">11</span>
+<span id="L239" class="l">12</span>
+<span id="L240" class="l">13</span>
+<span id="L241" class="l">14</span>
+<span id="L242" class="l">F7 F6 F5 F4 F3 F2 F1 F0</span>
+<span id="L243" class="l">F15 F14 F13 F12 F11 F10 F9 F8</span>
+<span id="L244" class="l">PW7 PW6 PW5 PW4 PW3 PW2 PW1 PWO</span>
+<span id="L245" class="l">— — — — PW11 PW10 PW9 PW8</span>
+<span id="L246" class="l">NOISE n iL / V i A A TEST RING</span>
+<span id="L247" class="l">MOD SYNC GATE</span>
+<span id="L248" class="l">ATK3 ATK2 ATK1 ATK0 DCY3 DCY2 DCY1 DCYO</span>
+<span id="L249" class="l">STN3 STN2 STN1 STN0 RIS3 RIS2 RIS1 RISO</span>
+<span id="L250" class="l">VOICE 3</span>
+<span id="L251" class="l">Freq Lo</span>
+<span id="L252" class="l">Freq Hi</span>
+<span id="L253" class="l">PW LO</span>
+<span id="L254" class="l">PW HI</span>
+<span id="L255" class="l">Control Reg</span>
+<span id="L256" class="l">Attack/Decay</span>
+<span id="L257" class="l">Sustain/Release</span>
+<span id="L258" class="l">Write-only</span>
+<span id="L259" class="l">Write-only</span>
+<span id="L260" class="l">Write-only</span>
+<span id="L261" class="l">Write-only</span>
+<span id="L262" class="l">Write-only</span>
+<span id="L263" class="l">Write-only</span>
+<span id="L264" class="l">Write-only</span>
+<span id="L265" class="l">Filter</span>
+<span id="L266" class="l">21 1 0 1 0 1 15— — — — — FC2 FC1 FC0 FC LO Write-only</span>
+<span id="L267" class="l">22 1 0 1 1 0 16 FC10 FC9 FC8 FC7 FC6 FC5 FC4 FC3 FC HI 23 1 0 1 1 1 17 RES3 RES2 RES1 RES0 Filt EX Filt 3 Filt 2 Filt 1 RES/Filt Write-only</span>
+<span id="L268" class="l">Write-only</span>
+<span id="L269" class="l">24 1 1 0 0 0 18 3 OFF HP BP LP VOL3 VOL2 VOL1 VOLO ModeA/ol Write-only</span>
+<span id="L270" class="l">25 1 1 0 0 1 19 PX7 PX6 PX5 PX4 PX3 PX2 PX1 PX0</span>
+<span id="L271" class="l">26 1 1 0 1 0 1A PY7 PY6 PY5 PY4 PY3 PY2 PY1 PY0</span>
+<span id="L272" class="l">27 1 1 0 1 1 1 B 07 06 05 04 03 02 01 00</span>
+<span id="L273" class="l">28 1 1 1 0 0 1C E7 E6 E5 E4 E3 E2 E1 E0</span>
+<span id="L274" class="l">Misc</span>
+<span id="L275" class="l">POTX</span>
+<span id="L276" class="l">POTY</span>
+<span id="L277" class="l">OSC3/Random</span>
+<span id="L278" class="l">ENV3</span>
+<span id="L279" class="l">Read-only</span>
+<span id="L280" class="l">Read-only</span>
+<span id="L281" class="l">Read-only</span>
+<span id="L282" class="l">Read-only</span>
+<span id="L283" class="l">TABLE 1 - SID REGISTER MAP</span>
+<span id="L284" class="l">3</span>
+<span id="L285" class="l">===== page 4 =====</span>
+<span id="L286" class="l">SID REGISTER DESCRIPTION</span>
+<span id="L287" class="l">VOICE 1</span>
+<span id="L288" class="l">Freq Lo/Freq Hi (Registers 00.01)</span>
+<span id="L289" class="l">Together these registers form a 16-bit number which</span>
+<span id="L290" class="l">linearly controls the Frequency of Oscillator 1. The</span>
+<span id="L291" class="l">frequency is determined by the following equation:</span>
+<span id="L292" class="l">Fout = (Fn * Fclk/16777216) Hz</span>
+<span id="L293" class="l">Where Fn is the 16-bit number in the Frequency registers</span>
+<span id="L294" class="l">and Fclk is the system clock applied to the 02 input (pin</span>
+<span id="L295" class="l">6). For a standard 1.0 Mhz clock, the frequency is given</span>
+<span id="L296" class="l">by:</span>
+<span id="L297" class="l">Fout = (Fn * 0.0596) Hz</span>
+<span id="L298" class="l">A complete table of values for generating 8 octaves of</span>
+<span id="L299" class="l">the equally-tempered musical scale with concert A (440</span>
+<span id="L300" class="l">Hz) tuning is provided in appendix A, It should be noted</span>
+<span id="L301" class="l">that the frequency resolution of SID is sufficient for any</span>
+<span id="L302" class="l">tuning scale and allows sweeping from note to note</span>
+<span id="L303" class="l">(portamento) with no discernable frequency steps.</span>
+<span id="L304" class="l">PW Lo/PW Hi (Registers 02.037)</span>
+<span id="L305" class="l">Together these registers form a 12-bit number (bits 4-7 of</span>
+<span id="L306" class="l">PW HI are not used) which linearly controls the Pulse</span>
+<span id="L307" class="l">Width (duty cycle) of the Pulse waveform on Oscillator 1.</span>
+<span id="L308" class="l">The pulse width is determined by the following equation:</span>
+<span id="L309" class="l">PWout = (PWn/40.95) %</span>
+<span id="L310" class="l">Where PWn is the 12-bit number in the Pulse Width</span>
+<span id="L311" class="l">registers.</span>
+<span id="L312" class="l">The pulse width resolution allows the width to be</span>
+<span id="L313" class="l">smoothly swept with no discernable steppeng. Note that</span>
+<span id="L314" class="l">the Pulse waveform on Oscillator 1 must be selected in</span>
+<span id="L315" class="l">order for the Pulse Width registers to have any audible</span>
+<span id="L316" class="l">effect. A value of 0 or 4095 ($FFF) in the Pulse Width</span>
+<span id="L317" class="l">registers will produce a constant DC output, while a value</span>
+<span id="L318" class="l">of 2048 ($800) will produce a square wave.</span>
+<span id="L319" class="l">CONTROL REGISTER (Register 04)</span>
+<span id="L320" class="l">This register contains eight control bits which select</span>
+<span id="L321" class="l">various options on Oscillator 1.</span>
+<span id="L322" class="l">Gate (Bit O)</span>
+<span id="L323" class="l">The GATE bit controls the Envelope Generator for Voice</span>
+<span id="L324" class="l">1. When this bit is set to a one, the Envelope Generator is</span>
+<span id="L325" class="l">Gated (triggered) and the ATTACK/DECAY/SUSTAIN</span>
+<span id="L326" class="l">cycle is initiated. When the bit is reset to a zero, the</span>
+<span id="L327" class="l">RELEASE cycle begins. The Envelope Generator controls</span>
+<span id="L328" class="l">the amplitude of Oscillator 1 appearing at the audio</span>
+<span id="L329" class="l">output, therefore, the GATE bit must be set (along with</span>
+<span id="L330" class="l">suitable envelope parameters) for the selected output of</span>
+<span id="L331" class="l">Oscillator 1 to be audible. A detailed discussion of the</span>
+<span id="L332" class="l">Envelope Generator can be found in Appendix B.</span>
+<span id="L333" class="l">Sync (Bit 1)</span>
+<span id="L334" class="l">The SYNC bit, when set to a one, Synchronizes the</span>
+<span id="L335" class="l">fundamental frequency of Oscillator 1 with the</span>
+<span id="L336" class="l">fundamental frequency of Oscillator 3, producing “Hard</span>
+<span id="L337" class="l">Sync” effects. Varying the frequency of Oscillator 1 with</span>
+<span id="L338" class="l">respect to Oscillator 3 produces a wide range of complex</span>
+<span id="L339" class="l">harmonic structures from Voice 1 at the frequency of</span>
+<span id="L340" class="l">Oscillator 3. In order for sync to occur. Oscillator 3 must</span>
+<span id="L341" class="l">be set to some frequency other than zero but</span>
+<span id="L342" class="l">preferably lower than the frequency of Oscillator 1. No</span>
+<span id="L343" class="l">other parameters of Voice 3 have any effect on sync.</span>
+<span id="L344" class="l">Ring Mod (Bit 2)</span>
+<span id="L345" class="l">The RING MOD bit, when set to a one, replaces the</span>
+<span id="L346" class="l">Triangle waveform output of Oscillator 1 with a “Ring</span>
+<span id="L347" class="l">Modulated&quot; combination of Oscillators 1 and 3. Varying</span>
+<span id="L348" class="l">the frequency of Oscillator 1 with respect to Oscillator 3</span>
+<span id="L349" class="l">produces a wide range of non-harmonic overtone</span>
+<span id="L350" class="l">structures for creating bell or gong sounds and for</span>
+<span id="L351" class="l">special effects. In order for ring modulation to be audible,</span>
+<span id="L352" class="l">the Triangle waveform of Oscillator 1 must be selected</span>
+<span id="L353" class="l">and Oscillator 3 must be set to some frequency other</span>
+<span id="L354" class="l">than zero. No other parameters of Voice 3 have any effect</span>
+<span id="L355" class="l">on ring modulation.</span>
+<span id="L356" class="l">Test (Bit 3)</span>
+<span id="L357" class="l">The TEST bit, when set to a one, resets and locks</span>
+<span id="L358" class="l">Oscillator 1 at zero until the TEST bit is cleared. The</span>
+<span id="L359" class="l">Noise waveform output of Oscillator 1 is also reset and</span>
+<span id="L360" class="l">the Pulse waveform output is held at a DC level. Normally</span>
+<span id="L361" class="l">this bit is used for testing purposes, however, it can be</span>
+<span id="L362" class="l">used to synchronize Oscillator 1 to external events,</span>
+<span id="L363" class="l">allowing the generation of highly complex waveforms</span>
+<span id="L364" class="l">under real-time software control.</span>
+<span id="L365" class="l">A A (Bit 4)</span>
+<span id="L366" class="l">When set to a one, the Triangle waveform output of</span>
+<span id="L367" class="l">Oscillator 1 is selected. The Triangle waveform is low in</span>
+<span id="L368" class="l">harmonics and has a mellow, flute-like quality.</span>
+<span id="L369" class="l">(Bit 5)</span>
+<span id="L370" class="l">When set to a one, the Sawtooth waveform of Oscillator 1</span>
+<span id="L371" class="l">is selected. The Sawtooth waveform is rich in even and</span>
+<span id="L372" class="l">odd harmonics and has a bright, brassy quality.</span>
+<span id="L373" class="l">r\JT_ (Bit 6)</span>
+<span id="L374" class="l">When set to a one, the Pulse waveform output of</span>
+<span id="L375" class="l">Oscillator 1 is selected. The harmonic content of this</span>
+<span id="L376" class="l">waveform can be adjusted by the Pulse Width registers,</span>
+<span id="L377" class="l">producing tone qualities ranging from a bright, hollow</span>
+<span id="L378" class="l">square wave to a nasal, reedy pulse. Sweeping the pulse</span>
+<span id="L379" class="l">width in real-time produces a dynamic “phasing” effect</span>
+<span id="L380" class="l">which adds a sense of motion to the sound. Rapidly</span>
+<span id="L381" class="l">jumping between different pulse widths can produce</span>
+<span id="L382" class="l">interesting harmonic sequences.</span>
+<span id="L383" class="l">Noise (Bit 7)</span>
+<span id="L384" class="l">When set to a one, the Noise output waveform of</span>
+<span id="L385" class="l">Oscillator 1 is selected. This output is a random signal</span>
+<span id="L386" class="l">which changes at the frequency of Oscillator 1. The</span>
+<span id="L387" class="l">sound quality can be varied from a low rumbling to</span>
+<span id="L388" class="l">hissing white noise via the Oscillator 1 Frequency</span>
+<span id="L389" class="l">registers. Noise is useful in creating explosions,</span>
+<span id="L390" class="l">gunshots, jet engines, wind, surf and other unpitched</span>
+<span id="L391" class="l">sounds, as well as snare drums and cymbals. Sweeping</span>
+<span id="L392" class="l">the Oscillator frequency with Noise selected produces a</span>
+<span id="L393" class="l">dramatic rushing effect.</span>
+<span id="L394" class="l">One of the output waveforms must be selected for</span>
+<span id="L395" class="l">Oscillator 1 to be audible, however, it is NOT necessary</span>
+<span id="L396" class="l">to deselect waveforms to silence the output of Voice 1.</span>
+<span id="L397" class="l">The amplitude of Voice 1 at the final output is a function</span>
+<span id="L398" class="l">of the Envelope Generator only.</span>
+<span id="L399" class="l">===== page 5 =====</span>
+<span id="L400" class="l">NOTE: The oscillator output waveforms are NOT additive.</span>
+<span id="L401" class="l">If more than one output waveform is selected</span>
+<span id="L402" class="l">simultaneously, the result will be a logical AN Ding of the</span>
+<span id="L403" class="l">waveforms. Although this technique can be used to</span>
+<span id="L404" class="l">generate additional waveforms beyond the four listed</span>
+<span id="L405" class="l">above, it must be used with care. If any other waveform is</span>
+<span id="L406" class="l">selected while Noise is on, the Noise output can “lock</span>
+<span id="L407" class="l">up”. If this occurs, the Noise output will remain silent until</span>
+<span id="L408" class="l">reset by the TEST bit or by bringing RES (pin 5) low.</span>
+<span id="L409" class="l">Attack/Decay (Register 05)</span>
+<span id="L410" class="l">Bits 4-7 of this register (ATK0-ATK3) select 1 of 16</span>
+<span id="L411" class="l">ATTACK rates for the Voice 1 Envelope Generator. The</span>
+<span id="L412" class="l">ATTACK rate determines how rapidly the output of Voice</span>
+<span id="L413" class="l">1 rises from zero to peak amplitude when the Envelope</span>
+<span id="L414" class="l">Generator is Gated. The 16 ATTACK rates are listed</span>
+<span id="L415" class="l">below in Table 2.</span>
+<span id="L416" class="l">Bits 0-3 (DCY0-DCY3) select 1 of 16 DECAY rates for the</span>
+<span id="L417" class="l">Envelope Generator. The DECAY cycle follows the</span>
+<span id="L418" class="l">ATTACK cycle and the DECAY rate determines how</span>
+<span id="L419" class="l">reapidly the output falls from the peak amplitude to the</span>
+<span id="L420" class="l">selected SUSTAIN level. The 1 6 DECAY rates are listed</span>
+<span id="L421" class="l">in Table 2.</span>
+<span id="L422" class="l">TABLE 2 — ENVELOPE RATES</span>
+<span id="L423" class="l">VALUE ATTACK RATE DECAY/RELEASE</span>
+<span id="L424" class="l">DEC (HEX) (Time/Cycle) (Time/Cycle)</span>
+<span id="L425" class="l">0 (0) 2 mS 6 mS</span>
+<span id="L426" class="l">1 (D 8 mS 24 mS</span>
+<span id="L427" class="l">2 (2) 16 mS 48 mS</span>
+<span id="L428" class="l">3 (3) 24 mS 72 mS</span>
+<span id="L429" class="l">4 (4) 38 mS 114 mS</span>
+<span id="L430" class="l">5 (5) 56 mS 168 mS</span>
+<span id="L431" class="l">6 (6) 68 mS 204 mS</span>
+<span id="L432" class="l">7 (7) 80 mS 240 mS</span>
+<span id="L433" class="l">8 (8) 100 mS 300 mS</span>
+<span id="L434" class="l">9 0) 250 mS 750 mS</span>
+<span id="L435" class="l">10 (A) 500 mS 1.5 S</span>
+<span id="L436" class="l">11 (B) 800 mS 2.4 S</span>
+<span id="L437" class="l">12 (C) 1 S 3 S</span>
+<span id="L438" class="l">13 (D) 3 S 9 S</span>
+<span id="L439" class="l">14 (E) 5 S 15 S</span>
+<span id="L440" class="l">15 (F) 8 S 24 S</span>
+<span id="L441" class="l">NOTE: Envelope rates are based on a 1.0 Mhz 02 clock.</span>
+<span id="L442" class="l">For other 02 frequencies, multiply the given rate by</span>
+<span id="L443" class="l">1 Mhz/02. The rates refer to the amount of time per cycle.</span>
+<span id="L444" class="l">For example, given an ATTACK value of 2, the ATTACK</span>
+<span id="L445" class="l">cycle would take 16 mS to rise from zero to peak</span>
+<span id="L446" class="l">amplitude. The DECAY/RELEASE rates refer to the</span>
+<span id="L447" class="l">amount of time these cycles would take to fall from peak</span>
+<span id="L448" class="l">amplitude to zero.</span>
+<span id="L449" class="l">Sustain/Release (Register 06)</span>
+<span id="L450" class="l">Bits 4-7 of this register (STN0-STN3) select 1 of 16</span>
+<span id="L451" class="l">SUSTAIN levels for the Envelope Generator. The</span>
+<span id="L452" class="l">SUSTAIN cycle follows the DECAY cycle and the output</span>
+<span id="L453" class="l">of Voice 1 will remain at the selected SUSTAIN amplitude</span>
+<span id="L454" class="l">as long as the Gate bit remains set. The SUSTAIN levels</span>
+<span id="L455" class="l">range from zero to peak amplitude in 16 linear steps, with</span>
+<span id="L456" class="l">a SUSTAIN value of 0 selecting zero amplitude and a</span>
+<span id="L457" class="l">SUSTAIN value of 15 (#F) selecting the peak amplitude.</span>
+<span id="L458" class="l">A SUSTAIN value of 8 would cause Voice 1 to SUSTAIN</span>
+<span id="L459" class="l">at an amplitude one-half the peak amplitude reached by</span>
+<span id="L460" class="l">the ATTACK cycle.</span>
+<span id="L461" class="l">Bits 0-3 (RLS0-RLS3) select 1 of 16 RELEASE rates for</span>
+<span id="L462" class="l">the Envelope Generator. The RELEASE cycle follows the</span>
+<span id="L463" class="l">SUSTAIN cycle when the Gate bit is reset to zero. At this</span>
+<span id="L464" class="l">time, the output of Voice 1 will fall from the SUSTAIN</span>
+<span id="L465" class="l">amplitude to zero amplitude at the selected RELEASE</span>
+<span id="L466" class="l">rate. The 16 RELEASE rates are identical to the DECAY</span>
+<span id="L467" class="l">rates.</span>
+<span id="L468" class="l">NOTE: The cycling of the Envelope Generator can be</span>
+<span id="L469" class="l">altered at any point via the Gate bit. The Envelope</span>
+<span id="L470" class="l">Generator can be Gated and Released without restriction.</span>
+<span id="L471" class="l">For example, if the Gate bit is reset before the envelope</span>
+<span id="L472" class="l">has finished the ATTACK cycle, the RELEASE cycle will</span>
+<span id="L473" class="l">immediately begin, starting from whatever amplitude had</span>
+<span id="L474" class="l">been reached. If the envelope is then Gated again</span>
+<span id="L475" class="l">(before the RELEASE cycle has reached zero amplitude),</span>
+<span id="L476" class="l">another ATTACK cycle will begin, starting from whatever</span>
+<span id="L477" class="l">amplitude had been reached. This technique can be</span>
+<span id="L478" class="l">used to generate complex amplitude envelopes via realtime</span>
+<span id="L479" class="l">software control.</span>
+<span id="L480" class="l">Voice 2</span>
+<span id="L481" class="l">Registers 07-$0D control Voice 2 and are functionally</span>
+<span id="L482" class="l">identical to registers 00-06 with these exceptions:</span>
+<span id="L483" class="l">When selected, SYNC synchronizes Oscillator 2 with</span>
+<span id="L484" class="l">Oscillator 1.</span>
+<span id="L485" class="l">When selected, RING MOD replaces the Triangle output</span>
+<span id="L486" class="l">of Oscillator 2 with the ring modulated combination of</span>
+<span id="L487" class="l">Oscillators 2 and 1.</span>
+<span id="L488" class="l">Voice 3</span>
+<span id="L489" class="l">Registers $0E-$14 control Voice 3 and are functionally</span>
+<span id="L490" class="l">identical to registers 00-06 with these exceptions:</span>
+<span id="L491" class="l">When selected, SYNC synchronizes Oscillator 3 with</span>
+<span id="L492" class="l">Oscillator 2.</span>
+<span id="L493" class="l">When selected, RING MOD replaces the Triangle output</span>
+<span id="L494" class="l">of Oscillator 3 with the ring modulated combination of</span>
+<span id="L495" class="l">Oscillators 3 and 2.</span>
+<span id="L496" class="l">Typical operation of a voice consists of selecting the</span>
+<span id="L497" class="l">desired parameters: frequency, waveform effects (SYNC,</span>
+<span id="L498" class="l">RING MOD) and envelope rates, then gating the voice</span>
+<span id="L499" class="l">whenever the sound is desired. The sound can be</span>
+<span id="L500" class="l">sustained for any length of time and terminated by</span>
+<span id="L501" class="l">clearing the Gate bit. Each voice can be used separately,</span>
+<span id="L502" class="l">with independent parameters and gating, or in unison to</span>
+<span id="L503" class="l">create a single, powerful voice. When used in unison, a</span>
+<span id="L504" class="l">slight detuning of each oscillator or tuning to musical</span>
+<span id="L505" class="l">intervals creates a rich, animated sound.</span>
+<span id="L506" class="l">FILTER</span>
+<span id="L507" class="l">FC Lo/FC Hi (Registers $15, $16)</span>
+<span id="L508" class="l">Together these registers form an 11-bit number (bits 3-7</span>
+<span id="L509" class="l">of FC LO are not used) which linearly controls the Cutoff</span>
+<span id="L510" class="l">(or Center) Frequency of the programmable Filter. The</span>
+<span id="L511" class="l">approximate Cutoff Frequency ranges between 30Hz and</span>
+<span id="L512" class="l">10KHz with the recommended capacitor values of</span>
+<span id="L513" class="l">2200pF for CAPI and CAP2.</span>
+<span id="L514" class="l">5</span>
+<span id="L515" class="l">===== page 6 =====</span>
+<span id="L516" class="l">The frequency range of the Filter can be altered to suit</span>
+<span id="L517" class="l">specific applications. Refer to the Pin Description section</span>
+<span id="L518" class="l">for more information.</span>
+<span id="L519" class="l">RES/Filt (Register $17)</span>
+<span id="L520" class="l">Bits 4-7 of this register (RES0-RES3) control the</span>
+<span id="L521" class="l">Resonance of the Filter, resonance of a peaking effect</span>
+<span id="L522" class="l">which emphasizes frequency components at the Cutoff</span>
+<span id="L523" class="l">Frequency of the Filter, causing a sharper sound. There</span>
+<span id="L524" class="l">are 16 Resonance settings ranging linearly from no</span>
+<span id="L525" class="l">resonance (0) to maximum resonance (15 or #F).</span>
+<span id="L526" class="l">Bits 0-3 determine which signals will be routed through</span>
+<span id="L527" class="l">the Filter:</span>
+<span id="L528" class="l">Filt 1 (Bit 0)</span>
+<span id="L529" class="l">When set to a zero, Voice 1 appears directly at the audio</span>
+<span id="L530" class="l">output and the Filter has no effect on it. When set to a</span>
+<span id="L531" class="l">one, Voice 1 will be processed through the Filter and the</span>
+<span id="L532" class="l">harmonic content of Voice 1 will be altered according to</span>
+<span id="L533" class="l">the selected Filter parameters.</span>
+<span id="L534" class="l">Filt 2 (Bit 1)</span>
+<span id="L535" class="l">Same as bit 0 for Voice 2.</span>
+<span id="L536" class="l">Filt 3 (Bit 2)</span>
+<span id="L537" class="l">Same as bit 0 for voice 3.</span>
+<span id="L538" class="l">Filtex (Bit 3)</span>
+<span id="L539" class="l">Same as bit 0 for External audio input (pin 26).</span>
+<span id="L540" class="l">Mode/Vol (Register $18)</span>
+<span id="L541" class="l">Bits 4-7 of this register select various Filter mode and</span>
+<span id="L542" class="l">output options:</span>
+<span id="L543" class="l">LP (Bit 4)</span>
+<span id="L544" class="l">When set to a one, the Low Pass output of the Filter is</span>
+<span id="L545" class="l">selected and sent to the audio output. For a given Filter</span>
+<span id="L546" class="l">input signal, all frequency components below the Filter</span>
+<span id="L547" class="l">Cutoff Frequency are passed unaltered, while all</span>
+<span id="L548" class="l">frequency components above the Cutoff are attenuated at</span>
+<span id="L549" class="l">a rate of 12 dB/Octave. The Low Pass mode produces</span>
+<span id="L550" class="l">full-bodied sounds.</span>
+<span id="L551" class="l">BP (Bit 5)</span>
+<span id="L552" class="l">Same as bit 4 for the Band Pass output. All frequency</span>
+<span id="L553" class="l">components above and below the Cutoff are attenuated</span>
+<span id="L554" class="l">at a rate of 6 dB/Octave. The Band Pass mode produces</span>
+<span id="L555" class="l">thin, open sounds.</span>
+<span id="L556" class="l">HP (Bit 6)</span>
+<span id="L557" class="l">Same as bit 4 for the High Pass output. All frequency</span>
+<span id="L558" class="l">components above the Cutoff are passed unaltered, while</span>
+<span id="L559" class="l">all frequency components below the Cutoff are</span>
+<span id="L560" class="l">attenuated at a rate of 12 dB/Octave. The High Pass</span>
+<span id="L561" class="l">mode produces tinny, buzzy sounds.</span>
+<span id="L562" class="l">3 Off (Bit 7)</span>
+<span id="L563" class="l">When set to a one, the output of Voice 3 is disconnected</span>
+<span id="L564" class="l">from the direct audio path. Setting Voice 3 to bypass the</span>
+<span id="L565" class="l">Filter (FILT 3 = 0) and setting 3 OFF to a one prevents</span>
+<span id="L566" class="l">Voice 3 from reaching the audio output. This allows Voice</span>
+<span id="L567" class="l">3 to be used for modulation purposes without any</span>
+<span id="L568" class="l">undesirable output.</span>
+<span id="L569" class="l">NOTE: The Filter output modes ARE additive and</span>
+<span id="L570" class="l">multiple Filter rhodes may be selected simultaneously.</span>
+<span id="L571" class="l">For example, both LP and HP modes can be selected to</span>
+<span id="L572" class="l">produce a Notch (or Band Reject) Filter response. In</span>
+<span id="L573" class="l">order for the Filter to have any audible effect, at least one</span>
+<span id="L574" class="l">Filter output must be selected and at least one Voice</span>
+<span id="L575" class="l">must be routed through the Filter. The Filter is, perhaps,</span>
+<span id="L576" class="l">the most important element in SID as it allows the</span>
+<span id="L577" class="l">generation of complex tone colors via subtractive</span>
+<span id="L578" class="l">synthesis. The Filter is used to eliminate specific</span>
+<span id="L579" class="l">frequency components from a harmonically-rich input</span>
+<span id="L580" class="l">signal). The best results are achieved by varying the</span>
+<span id="L581" class="l">Cutoff Frequency in real-time.</span>
+<span id="L582" class="l">Bits 0-3 (VOLO-VOL3) select 1 of 16 overall Volume levels</span>
+<span id="L583" class="l">for the final composite audio output. The output volume</span>
+<span id="L584" class="l">levels range from no output (0) to maximum volume (15 or</span>
+<span id="L585" class="l">#F) in 16 linear steps. This control can be used as a</span>
+<span id="L586" class="l">static volume control for balancing levels in multi-chip</span>
+<span id="L587" class="l">systems or for creating dynamic volume effects, such as</span>
+<span id="L588" class="l">Tremolo. Some Volume level other than zero must be</span>
+<span id="L589" class="l">selected in order for SID to produce any sound.</span>
+<span id="L590" class="l">MISC</span>
+<span id="L591" class="l">POTX (Register $19)</span>
+<span id="L592" class="l">This register allows the microprocessor to read the</span>
+<span id="L593" class="l">position of the potentiometer tied to POTX (pin 24), with</span>
+<span id="L594" class="l">values ranging from 0 at minimum resistance, to 255</span>
+<span id="L595" class="l">(#FF) at maximum resistance. The value is always valid</span>
+<span id="L596" class="l">and is updated every 512 02 clock cycles. See the Pin</span>
+<span id="L597" class="l">Description section for information on post and capacitor</span>
+<span id="L598" class="l">values.</span>
+<span id="L599" class="l">POTY (Register $1A)</span>
+<span id="L600" class="l">Same as POTX for the pot tied to POTY (pin 23).</span>
+<span id="L601" class="l">OSC 3/RANDOM (Register $1 B)</span>
+<span id="L602" class="l">This register allows the microprocessor to read the upper</span>
+<span id="L603" class="l">8 output bits of Oscillator 3. The character of the</span>
+<span id="L604" class="l">numbers generated is directly related to the waveform</span>
+<span id="L605" class="l">selected. If the Sawtooth waveform of Oscillator 3 is</span>
+<span id="L606" class="l">selected, this register will present a series of numbers</span>
+<span id="L607" class="l">incrementing from 0 to 255 ($FF) at a rate determined by</span>
+<span id="L608" class="l">the frequency of Oscillator 3. If the Triangle waveform is</span>
+<span id="L609" class="l">selected, the output will increment from 0 up to 255, then</span>
+<span id="L610" class="l">decrement down to 0. If the Pulse waveform is selected,</span>
+<span id="L611" class="l">the output will jump between 0 and 255. Selecting the</span>
+<span id="L612" class="l">Noise waveform will produce a series of random</span>
+<span id="L613" class="l">numbers, therefore, this register can be used as a</span>
+<span id="L614" class="l">random number generator for games. There are</span>
+<span id="L615" class="l">numerous timing and sequencing applications for the</span>
+<span id="L616" class="l">OSC 3 register, however, the chief function is probably</span>
+<span id="L617" class="l">that of a modulation generator. The numbers generated</span>
+<span id="L618" class="l">by this register can be added, via software, to the</span>
+<span id="L619" class="l">Oscillator or Filter Frequency registers or the Pulse Width</span>
+<span id="L620" class="l">registers in real-time. Many dynamic effects can be</span>
+<span id="L621" class="l">generated in this manner. Siren-like sounds can be</span>
+<span id="L622" class="l">created by adding the OSC 3 Sawtooth output to the</span>
+<span id="L623" class="l">frequency control of another oscillator. Synthesizer</span>
+<span id="L624" class="l">&quot;Sample and Hold” effects can be produced by adding</span>
+<span id="L625" class="l">the OSC 3 Noise output to the Filter Frequency control</span>
+<span id="L626" class="l">registers. Vibrato can be produced by setting Oscillator 3</span>
+<span id="L627" class="l">to a frequency around 7 Hz and adding the OSC 3</span>
+<span id="L628" class="l">Triangle output (with proper scaling) to the Frequency</span>
+<span id="L629" class="l">control of another oscillator. An unlimited range of effects</span>
+<span id="L630" class="l">6</span>
+<span id="L631" class="l">===== page 7 =====</span>
+<span id="L632" class="l">are available by altering the frequency of Oscillator 3 and</span>
+<span id="L633" class="l">scaling the OSC 3 output. Normally, when Oscillator 3 is</span>
+<span id="L634" class="l">used for modulation, the audio output of Voice 3 should</span>
+<span id="L635" class="l">be eliminated (3 OFF = 1).</span>
+<span id="L636" class="l">ENV 3 (Register $1C)</span>
+<span id="L637" class="l">Same as OSC 3, but this register allows the</span>
+<span id="L638" class="l">microprocessor to read the output of the Voice 3</span>
+<span id="L639" class="l">Envelope Generator. This output can be added to the</span>
+<span id="L640" class="l">Filter Frequency to produce harmonic envelopes, WAH</span>
+<span id="L641" class="l">WAH, and similar effects. “Phaser” sounds can be</span>
+<span id="L642" class="l">created by adding this output to the frequency control</span>
+<span id="L643" class="l">registers of an oscillator. The Voice 3 Envelope Generator</span>
+<span id="L644" class="l">must be gated in order to produce any output from this</span>
+<span id="L645" class="l">register. The OSC 3 register, however, always reflects the</span>
+<span id="L646" class="l">changing output of the oscillator and is not affected in</span>
+<span id="L647" class="l">any way by the Envelope Generator.</span>
+<span id="L648" class="l">SID PIN DESCRIPTION</span>
+<span id="L649" class="l">CAP1 A, CAP1 B (Pins 1,2)/CAP2A, CAP2B</span>
+<span id="L650" class="l">Pins 3,4)</span>
+<span id="L651" class="l">These pins are used to connect the two integrating</span>
+<span id="L652" class="l">capacitors required by the programmable Filter. C1</span>
+<span id="L653" class="l">connects between pins 1 and 2, C2 between pins 3 and</span>
+<span id="L654" class="l">4. Both capacitors should be the same value. Normal</span>
+<span id="L655" class="l">operation of the Filter over the audio range</span>
+<span id="L656" class="l">(approximately-30 Hz-12 KHz) is accomplished with a</span>
+<span id="L657" class="l">value of 2200 pF for C1 and C2. Polystyrene capacitors</span>
+<span id="L658" class="l">are preferred. In complex polyphonic systems, where</span>
+<span id="L659" class="l">many SID chips must track each other, matched</span>
+<span id="L660" class="l">capacitors are recommended. The frequency range of the</span>
+<span id="L661" class="l">Filter can be tailored to specific applications by the</span>
+<span id="L662" class="l">choice of capacitor values. For example, a low-cost game</span>
+<span id="L663" class="l">may not require full high-frequency response. In this</span>
+<span id="L664" class="l">case, larger values for C1 and C2 could be chosen to</span>
+<span id="L665" class="l">provide more control over the bass frequencies of the</span>
+<span id="L666" class="l">Filter. The approximate maximum Cutoff Frequency of the</span>
+<span id="L667" class="l">Filter is given by:</span>
+<span id="L668" class="l">FCmax = 2.6E-5/C</span>
+<span id="L669" class="l">Where C is the capacitor value. The range of the Filter</span>
+<span id="L670" class="l">extends approximately 9 octaves below the maximum</span>
+<span id="L671" class="l">Cutoff Frequency.</span>
+<span id="L672" class="l">RES (Pin 5) — This TTL-level input is the reset control for</span>
+<span id="L673" class="l">SID. When brought low for at least ten 02 cycles, all</span>
+<span id="L674" class="l">internal registers are reset to zero and the audio output is</span>
+<span id="L675" class="l">silenced. This pin is normally connected to the reset line</span>
+<span id="L676" class="l">of the microprocessor or a power-on-clear circuit.</span>
+<span id="L677" class="l">02 (Pin 6) — This TTL-level input is the master clock for</span>
+<span id="L678" class="l">SID. All oscillator frequencies and envelope rates are</span>
+<span id="L679" class="l">referenced to this clock. 02 also controls data transfers</span>
+<span id="L680" class="l">between SID and the microprocessor. Data can only be</span>
+<span id="L681" class="l">transferred when 02 is high. Essentially, 02 acts as a</span>
+<span id="L682" class="l">high-active chip select as far as data transfers are</span>
+<span id="L683" class="l">concerned. This pin is normally connected to the system</span>
+<span id="L684" class="l">clock, with a nominal operating frequency of 1.0 MHz.</span>
+<span id="L685" class="l">R/W (Pin 7) — This TTL-level input controls the direction</span>
+<span id="L686" class="l">of data transfers between SID and the microprocessor. If</span>
+<span id="L687" class="l">the chip select conditions have been met, a high on this</span>
+<span id="L688" class="l">line allows the microprocessor to Read data from the</span>
+<span id="L689" class="l">selected SID register and a low allows the</span>
+<span id="L690" class="l">microprocessor to Write data into the selected SID</span>
+<span id="L691" class="l">register. This pin is normally connected to the system</span>
+<span id="L692" class="l">Read/Write line.</span>
+<span id="L693" class="l">CS (Pin 8) — This TTL-level input is a low active chip</span>
+<span id="L694" class="l">select which controls data transfers between SID and the</span>
+<span id="L695" class="l">microprocessor. CS must be low for any transfer. A Read</span>
+<span id="L696" class="l">from the selected_SID register can only occur if CS is low,</span>
+<span id="L697" class="l">02 is high and R/W is high. A Write to the selected SID_</span>
+<span id="L698" class="l">register can only occur if CS is low, 02 is high and R/W</span>
+<span id="L699" class="l">is low. This pin is normally connected to address</span>
+<span id="L700" class="l">decoding circuitry, allowing SID to reside in the memory</span>
+<span id="L701" class="l">map of a system.</span>
+<span id="L702" class="l">A0-A4 (Pins 9-13) — These TTL-level inputs are used to</span>
+<span id="L703" class="l">select one of the 29 SID registers. Although enough</span>
+<span id="L704" class="l">addresses are provided to select 1 of 32 registers, the</span>
+<span id="L705" class="l">remaining three register locations are not used. A Write to</span>
+<span id="L706" class="l">any of these three locations is ignored and a Read</span>
+<span id="L707" class="l">returns invalid data. These pins are normally connected</span>
+<span id="L708" class="l">to the corresponding address lines of the microprocessor</span>
+<span id="L709" class="l">so that SID may be addressed in the same manner as</span>
+<span id="L710" class="l">memory.</span>
+<span id="L711" class="l">GND (Pin 14) — For best results, the ground line</span>
+<span id="L712" class="l">between SID and the power supply should be separate</span>
+<span id="L713" class="l">from ground lines to other digital circuitry. This will</span>
+<span id="L714" class="l">minimize digital noise at the audio output.</span>
+<span id="L715" class="l">D0-D7 (Pins 15-22) — These bidirectional lines are used</span>
+<span id="L716" class="l">to transfer data between SID and the microprocessor.</span>
+<span id="L717" class="l">They are TTL compatible in the output mode and capable</span>
+<span id="L718" class="l">of driving 2 TTL loads in the output mode. The data</span>
+<span id="L719" class="l">buffers are usually in the high-impedance off state.</span>
+<span id="L720" class="l">During a Write operation, the data buffers remain in the</span>
+<span id="L721" class="l">off (input) state and the microprocessor supplies data to</span>
+<span id="L722" class="l">SID over these lines. During a Read operation, the data</span>
+<span id="L723" class="l">buffers turn on and SID supplies data to the</span>
+<span id="L724" class="l">microprocessor over these lines. The pins are normally</span>
+<span id="L725" class="l">connected to the corresponding data lines of the</span>
+<span id="L726" class="l">microprocessor.</span>
+<span id="L727" class="l">POTX-, POTY (Pins 24,23) — These pins are inputs to</span>
+<span id="L728" class="l">the A/D converters used to digitize the position of</span>
+<span id="L729" class="l">potentiometers. The conversion process is based on the</span>
+<span id="L730" class="l">time constant of a capacitor tied from the POT pin to</span>
+<span id="L731" class="l">ground, charged by a potentiometer tied from the POT</span>
+<span id="L732" class="l">pin to +5 volts. The component values are determined</span>
+<span id="L733" class="l">by:</span>
+<span id="L734" class="l">RC = 4.7 E-4</span>
+<span id="L735" class="l">Where R is the maximum resistance of the pot and C is</span>
+<span id="L736" class="l">the capacitor.</span>
+<span id="L737" class="l">The larger the capacitor, the smaller the POT value jitter.</span>
+<span id="L738" class="l">The recommended values for R and C are 470 KOhms</span>
+<span id="L739" class="l">and 1000 pF.</span>
+<span id="L740" class="l">Note that a separate pot and cap are required for each</span>
+<span id="L741" class="l">POT pin.</span>
+<span id="L742" class="l">Vcc (Pin 25) — As with the GND line, a separate +5</span>
+<span id="L743" class="l">VDC line should be run between SID Vcc and the power</span>
+<span id="L744" class="l">supply in order to minimize noise. A bypass capacitior</span>
+<span id="L745" class="l">s,hould be located close to the pin.</span>
+<span id="L746" class="l">7</span>
+<span id="L747" class="l">===== page 8 =====</span>
+<span id="L748" class="l">Ext In (Pin 26) — This analog input allows external</span>
+<span id="L749" class="l">audio signals to be mixed with the audio output of SID or</span>
+<span id="L750" class="l">processed through the Filter. Typical sources include</span>
+<span id="L751" class="l">voice, guitar and organ. The input impedence of this pin</span>
+<span id="L752" class="l">is in the order of 100 KOhms. Any signal applied directly</span>
+<span id="L753" class="l">to the pin should ride at DC level of 6 volts and should</span>
+<span id="L754" class="l">not exceed 3 volts p-p. In order to prevent any</span>
+<span id="L755" class="l">interference caused by DC level differences, external</span>
+<span id="L756" class="l">signals should be AC-coupled to EXT IN by an</span>
+<span id="L757" class="l">electrolytic capacitor in the 1 -10 juF range. As the direct</span>
+<span id="L758" class="l">audio path (FILTEX = 0) has unity gain, EXT IN can be</span>
+<span id="L759" class="l">used to mix outputs of many SID chips by daisy-chaining.</span>
+<span id="L760" class="l">The number of chips that can be chained in this manner</span>
+<span id="L761" class="l">is determined by the amount of noise and distortion</span>
+<span id="L762" class="l">allowable at the final output. Note that the output Volume</span>
+<span id="L763" class="l">control will affect not only the three SID voices, but also</span>
+<span id="L764" class="l">any external inputs.</span>
+<span id="L765" class="l">Audio Out (Pin 27) — This open-source buffer is the</span>
+<span id="L766" class="l">final audio output of SID, comprised of the three SID</span>
+<span id="L767" class="l">voices, the Filter and any external input. The output level</span>
+<span id="L768" class="l">is set by the output Volume control and reaches a</span>
+<span id="L769" class="l">maximum of approximately 3 volts p-p at a 6 volt DC</span>
+<span id="L770" class="l">level. A source resistor from AUDIO OUT to ground is</span>
+<span id="L771" class="l">required for proper operation. The recommended</span>
+<span id="L772" class="l">resistance is 1 KOhm for a standard output impedance.</span>
+<span id="L773" class="l">As the output of SID rides at a 6 volt DC level, it should</span>
+<span id="L774" class="l">be AC-coupled to any audio amplifier with an electrolytic</span>
+<span id="L775" class="l">capacitor in the 1-10/jF range.</span>
+<span id="L776" class="l">Vdd (Pin 28) — As with Vcc, a separate +12 VDC line</span>
+<span id="L777" class="l">should be run to SID Vdd and a bypass capacitor should</span>
+<span id="L778" class="l">be used.</span>
+<span id="L779" class="l">See appendix C for typical SID application.</span>
+<span id="L780" class="l">6581 SID CHARACTERISTICS</span>
+<span id="L781" class="l">ABSOLUTE MAXIMUM RATINGS</span>
+<span id="L782" class="l">Supply Voltage, Vdd -0.3VDCto+1 7VDC</span>
+<span id="L783" class="l">Supply Voltage, Vcc -0.3 VDC to +7 VDC</span>
+<span id="L784" class="l">Input Voltage (analog), Vjna -0.3VDCto+1 7 VDC</span>
+<span id="L785" class="l">Input Voltage (digital), Vjnd -0.3 VDC to +7 VDC</span>
+<span id="L786" class="l">Operating Temperature, Ta 0° C to +70° C</span>
+<span id="L787" class="l">Storage Temperature, Tstg -55° C to +150° C</span>
+<span id="L788" class="l">All inputs contain protection circuitry to prevent damage</span>
+<span id="L789" class="l">due to high static discharges. Care should be exercised</span>
+<span id="L790" class="l">to prevent unnecessary application of voltages in excess</span>
+<span id="L791" class="l">of the allowable limits.</span>
+<span id="L792" class="l">COMMENT</span>
+<span id="L793" class="l">Stresses above those listed under “Absolute Maximum</span>
+<span id="L794" class="l">Ratings” may cause permanent damage to the device.</span>
+<span id="L795" class="l">These are stress ratings only. Functional operation of this</span>
+<span id="L796" class="l">device at these or any other conditions above those</span>
+<span id="L797" class="l">indicated in the operational sections of this specification</span>
+<span id="L798" class="l">is not implied and exposure to absolute maximum rating</span>
+<span id="L799" class="l">conditions for extended periods may affect device</span>
+<span id="L800" class="l">reliability.</span>
+<span id="L801" class="l">ELECTRICAL CHARACTERISTICS (Vdd=12±5% VDC / Vcc=5±5% VDC. Ta=0 to 70°C)</span>
+<span id="L802" class="l">Characteristic Symbol Min Typ Max Units</span>
+<span id="L803" class="l">Input High Voltage (RES, 02, R/W, CS,</span>
+<span id="L804" class="l">Vih 2 — Vcc VDC</span>
+<span id="L805" class="l">A0-A4, D0-D7)</span>
+<span id="L806" class="l">Input Low Voltage Vil -0.3 — 0.8 VDC</span>
+<span id="L807" class="l">Input Leakage Current (RES, 02, R/W, CS,</span>
+<span id="L808" class="l">A0-A4; Vin=0-5 VDC) •in — — 2.5 jUA</span>
+<span id="L809" class="l">Three-State (Off)</span>
+<span id="L810" class="l">(D0-D7; Vcc=max,</span>
+<span id="L811" class="l">Input Leakage Current</span>
+<span id="L812" class="l">Vin=0.4-2.4 VDC) •tsi — — 10 fjA</span>
+<span id="L813" class="l">Output High Voltage D0-D7; Vcc=min,</span>
+<span id="L814" class="l">v oh 2.4 — Vcc-0.7 VDC</span>
+<span id="L815" class="l">I load=200/uA)</span>
+<span id="L816" class="l">Output Low Voltage (D0-D7; Vcc=max,</span>
+<span id="L817" class="l">Vol GND — 0.4 VDC</span>
+<span id="L818" class="l">I load=3.2 mA)</span>
+<span id="L819" class="l">Output High Current (D0-D7; Sourcing,</span>
+<span id="L820" class="l">Voh=2.4 VDC) •oh 200 — — juA</span>
+<span id="L821" class="l">Output Low Current (D0-D7; Sinking,</span>
+<span id="L822" class="l">Vol=0.4 VDC) •ol 3.2 — — mA</span>
+<span id="L823" class="l">Input Capacitance (RES, 02, R/W CS,</span>
+<span id="L824" class="l">Cin — — 10 PF</span>
+<span id="L825" class="l">A0-A4, D0-D7)</span>
+<span id="L826" class="l">Pot Trigger Voltage (POTX, POTY) Vpot — Vcc/2 — VDC</span>
+<span id="L827" class="l">Pot Sink Current (POTX, POTY) •pot 500 — — pjA</span>
+<span id="L828" class="l">Input Impedance (EXT IN) Rin 100 150 — KOhms</span>
+<span id="L829" class="l">Audio Input Voltage (EXT IN) Vin 5.0 6.0</span>
+<span id="L830" class="l">7.5</span>
+<span id="L831" class="l">VDC</span>
+<span id="L832" class="l">0.3</span>
+<span id="L833" class="l">3</span>
+<span id="L834" class="l">VAC</span>
+<span id="L835" class="l">Audio Output Voltage (AUDIO OUT; 1 KOhm</span>
+<span id="L836" class="l">5.0</span>
+<span id="L837" class="l">6.5</span>
+<span id="L838" class="l">8.0</span>
+<span id="L839" class="l">load, volume=max)</span>
+<span id="L840" class="l">Vout</span>
+<span id="L841" class="l">5.0</span>
+<span id="L842" class="l">6.5</span>
+<span id="L843" class="l">8.0</span>
+<span id="L844" class="l">VDC</span>
+<span id="L845" class="l">One Voice on:</span>
+<span id="L846" class="l">.25</span>
+<span id="L847" class="l">.8</span>
+<span id="L848" class="l">1.2</span>
+<span id="L849" class="l">VACp-p</span>
+<span id="L850" class="l">All Voices on:</span>
+<span id="L851" class="l">.75</span>
+<span id="L852" class="l">3</span>
+<span id="L853" class="l">.4</span>
+<span id="L854" class="l">VACp-p</span>
+<span id="L855" class="l">Power Supply Current (Vdd) Idd — 25 40 mA</span>
+<span id="L856" class="l">Power Supply Current (Vcc) Icc — 70 100 mA</span>
+<span id="L857" class="l">Power Dissipation (Total) Pd — 600 1000 mW</span>
+<span id="L858" class="l">Subject to change without notice.</span>
+<span id="L859" class="l">===== page 9 =====</span>
+<span id="L860" class="l">6581 (SID) TIMING</span>
+<span id="L861" class="l">READ CYCLE</span>
+<span id="L862" class="l">t c y c-</span>
+<span id="L863" class="l">Tr-</span>
+<span id="L864" class="l">t</span>
+<span id="L865" class="l">•TC-</span>
+<span id="L866" class="l">Tf</span>
+<span id="L867" class="l">02</span>
+<span id="L868" class="l">\</span>
+<span id="L869" class="l">t RS &#x27;</span>
+<span id="L870" class="l">&quot; t RH</span>
+<span id="L871" class="l">R/W</span>
+<span id="L872" class="l">y</span>
+<span id="L873" class="l">Ta CC*</span>
+<span id="L874" class="l">t AH</span>
+<span id="L875" class="l">A0-A4</span>
+<span id="L876" class="l">X</span>
+<span id="L877" class="l">tch</span>
+<span id="L878" class="l">CS</span>
+<span id="L879" class="l">*t ACC !S</span>
+<span id="L880" class="l">MEASURED</span>
+<span id="L881" class="l">FROM THE</span>
+<span id="L882" class="l">LATEST</span>
+<span id="L883" class="l">OCCURRING OF</span>
+<span id="L884" class="l">02. CS. A0-A4</span>
+<span id="L885" class="l">y</span>
+<span id="L886" class="l">D0-D7</span>
+<span id="L887" class="l">■a; x</span>
+<span id="L888" class="l">i -</span>
+<span id="L889" class="l">- t dh</span>
+<span id="L890" class="l">&gt;</span>
+<span id="L891" class="l">Symbol Name Min Typ Max Units</span>
+<span id="L892" class="l">tc yc Clock Cycle Time 1— 20 uS</span>
+<span id="L893" class="l">TC Clock High Pulse Width 450 500 10,000 nS</span>
+<span id="L894" class="l">Tr , Tf Clock Rise/Fall Time— — 25 nS</span>
+<span id="L895" class="l">trs Read Set-up Time 0— — nS</span>
+<span id="L896" class="l">tr h Read Hold Time 0— — nS</span>
+<span id="L897" class="l">t a c c Access Time— — 350 nS</span>
+<span id="L898" class="l">Tah Address Hold Time 10— — nS</span>
+<span id="L899" class="l">tch Chip Select Hold Time 0— nS</span>
+<span id="L900" class="l">t d h Data Hold Time 20 — nS</span>
+<span id="L901" class="l">WRITE CYCLE</span>
+<span id="L902" class="l">02</span>
+<span id="L903" class="l">R/W</span>
+<span id="L904" class="l">\ /c</span>
+<span id="L905" class="l">j*------ - Tw *------- *■</span>
+<span id="L906" class="l">w w w x s ! /</span>
+<span id="L907" class="l">1</span>
+<span id="L908" class="l">—*\ K ~ t aw s</span>
+<span id="L909" class="l">tw h</span>
+<span id="L910" class="l">------- tah</span>
+<span id="L911" class="l">\</span>
+<span id="L912" class="l">*Tw IS</span>
+<span id="L913" class="l">MEASURED-FROM THE</span>
+<span id="L914" class="l">LATEST</span>
+<span id="L915" class="l">OCCURRING OF</span>
+<span id="L916" class="l">f2, CS, R/W</span>
+<span id="L917" class="l">A0-A4</span>
+<span id="L918" class="l">CS</span>
+<span id="L919" class="l">&lt;.............................</span>
+<span id="L920" class="l">TCH</span>
+<span id="L921" class="l">I ....... ............</span>
+<span id="L922" class="l">1</span>
+<span id="L923" class="l">Tun -----H--------</span>
+<span id="L924" class="l">*__</span>
+<span id="L925" class="l">------- t dh</span>
+<span id="L926" class="l">D0-D7</span>
+<span id="L927" class="l">....................... ~ &#x27; .......... X T - ....... ...</span>
+<span id="L928" class="l">Symbol Name Min Typ Max Units</span>
+<span id="L929" class="l">TW Write Pulse Width 350— — nS</span>
+<span id="L930" class="l">tw h Write Hold Time 0— — nS</span>
+<span id="L931" class="l">Ta w s Address Set-up Time 0—</span>
+<span id="L932" class="l">— nS</span>
+<span id="L933" class="l">tah Address Hold Time 10— — nS</span>
+<span id="L934" class="l">tc h Chip Select Hold Time 0— — nS</span>
+<span id="L935" class="l">tvd Valid Data 80 nS</span>
+<span id="L936" class="l">td h Data Hold Time 10 nS</span>
+<span id="L937" class="l">Subject to change without notice.</span>
+<span id="L938" class="l">9</span>
+<span id="L939" class="l">===== page 10 =====</span>
+<span id="L940" class="l">APPENDIX A - EQUAL-TEMPERED MUSICAL SCALE VALUES</span>
+<span id="L941" class="l">The following table lists the numerical values which must be stored in the SID Oscillator frequency control registers to</span>
+<span id="L942" class="l">produce the notes of the equal-tempered musical scale. The equal-tempered scale consists of an octave containing 12</span>
+<span id="L943" class="l">semitones (notes): C, D, E, F, G, A, B and C#, D#, F#, G#,A#. The frequency of each semitone is exactly the 12th root of 2</span>
+<span id="L944" class="l">(12 \/~2.) times the frequency of the previous semitone. The table is based on a 02 = clock of 1.0 Mhz. Refer to the equation</span>
+<span id="L945" class="l">given in the Register Description for use of other master clock frequencies. The scale selected is concert pitch, in which A4</span>
+<span id="L946" class="l">= 440 Hz. Transpositions of this scale and scales other than the equal-tempered scale are also possible.</span>
+<span id="L947" class="l">Musical Freq Osc Fn Osc Fn Musical Freq Osc Fn Osc Fn</span>
+<span id="L948" class="l">Note (Hz) (Decimal) (Hex) Note (Hz) (Decimal) (Hex)</span>
+<span id="L949" class="l">0 CO 16.35 274 0112 48 C4 261.63 4389 1125</span>
+<span id="L950" class="l">1 cos 17.32 291 0123 49 C4$ 277.18 4650 122A</span>
+<span id="L951" class="l">2 DO 18.35 308 0134 50 D4 293.66 4927 133F</span>
+<span id="L952" class="l">3 DOS 19.44 326 0146 51 D4$ 311.13 5220 1464</span>
+<span id="L953" class="l">4 E0 20.60 346 015A 52 E4 329.63 5530 159A</span>
+<span id="L954" class="l">5 F0 21.83 366 016E 53 F4 349.23 5859 16E3</span>
+<span id="L955" class="l">6 F0$ 23.12 388 0184 54 F4$ 370.00 6207 183F</span>
+<span id="L956" class="l">7 GO 24.50 411 018B 55 G4 392.00 6577 1981</span>
+<span id="L957" class="l">8 G0$ 25.96 435 01 B3 56 G4$ 415.30 6968 1B38</span>
+<span id="L958" class="l">9 AO 27.50 461 01 CD 57 A4 440.00 7382 1CD6</span>
+<span id="L959" class="l">10 AOS 29.14 489 01 E9 58 A4$ 466.16 7821 1E80</span>
+<span id="L960" class="l">11 BO 30.87 518 0206 59 B4 493.88 8286 &#x27;205 E</span>
+<span id="L961" class="l">12 C1 32.70 549 0225 60 C5 523.25 8779 224B</span>
+<span id="L962" class="l">13 C1$ 34.65 581 0245 61 C5$ 554.37 9301 2455</span>
+<span id="L963" class="l">14 D1 36.71 616 0268 62 D5 587.33 9854 267E</span>
+<span id="L964" class="l">15 D1 $ 38.89 652 028C 63 D5$ 622.25 10440 28C8</span>
+<span id="L965" class="l">16 E1 41.20 691 02B3 64 E5 659.25 11060 2B34</span>
+<span id="L966" class="l">17 F1 43.65 732 02DC 65 F5 698.46 11718 2DC6</span>
+<span id="L967" class="l">18 F1$ 46.25 776 0308 66 F5$ 740.00 12415 307F</span>
+<span id="L968" class="l">19 G1 49.00 822 0336 67 G5 783.99 13153 3361</span>
+<span id="L969" class="l">20 G1 $ 51.91 871 0367 68 G5$ 830.61 13935 366F</span>
+<span id="L970" class="l">21 A1 55.00 923 039B 69 A5 880.00 14764 39AC</span>
+<span id="L971" class="l">22 A1 $ 58.27 978 03D2 70 A5$ 932.33 15642 3D1A</span>
+<span id="L972" class="l">23 B1 61.74 1036 040C 71 B5 987.77 16572 40BC</span>
+<span id="L973" class="l">24 C2 65.41 1097 0449 72 C6 1046.50 17557 4495</span>
+<span id="L974" class="l">25 C2$ 69.30 1163 048B 73 C6$ 1108.73 18601 48A9</span>
+<span id="L975" class="l">26 D2 73.42 1232 04D0 74 D6 11 74.66 19709 4CFC</span>
+<span id="L976" class="l">27 D2$ 77.78 1305 0519 75 D6$ 1244.51 20897 518F</span>
+<span id="L977" class="l">28 E2 82.41 1383 0567 76 E6 1318.51 22121 5669</span>
+<span id="L978" class="l">29 F2 87.31 1465 05B9 77 F6 1396.91 23436 5B8C</span>
+<span id="L979" class="l">30 F2$ 92.50 1552 0610 78 F6$ 1479.98 24830 60FE</span>
+<span id="L980" class="l">31 G2 98.00 1644 066C 79 G6 1567.98 26306 6602</span>
+<span id="L981" class="l">32 G2$ 103.83 1742 06CE 80 G6$ 1661.22 27871 6CDF</span>
+<span id="L982" class="l">33 A2 110.00 1845 0735 81 A6 1760.00 29528 7358</span>
+<span id="L983" class="l">34 A2$ 116.54 1955 07A3 82 A6$ 1864.65 31234 7A34</span>
+<span id="L984" class="l">35 B2 123.47 2071 0817 83 B6 1975.53 33144 8178</span>
+<span id="L985" class="l">36 C3 130.81 2195 0893 84 C7 2093.00 35115 892B</span>
+<span id="L986" class="l">37 C3$ 138.59 2325 0915 85 C7$ 2217.46 37203 9153</span>
+<span id="L987" class="l">38 D3 146.83 2463 099F 86 D7 2349.32 39415 99 F7</span>
+<span id="L988" class="l">39 D3$ 155.56 2610 0A32 87 D7$ 2489.01 41759 A31F</span>
+<span id="L989" class="l">40 E3 164.81 2765 0ACD 88 E7 2637.02 44242 ACD2</span>
+<span id="L990" class="l">41 F3 174.61 2930 0B72 89 F7 2793.83 46873 B719</span>
+<span id="L991" class="l">42 F3$ 185.00 3104 0C20 90 F7$ 2959.95 49660 C1FC</span>
+<span id="L992" class="l">43 G3 196.00 3288 0C08 91 G7 3135.96 52613 C085</span>
+<span id="L993" class="l">44 G3$ 207.65 3484 0D9C 92 G7$ 3322.44 55741 0980</span>
+<span id="L994" class="l">45 A3 220.00 3691 0E6B 93 A7 3520.00 59056 E6B0</span>
+<span id="L995" class="l">46 A3$ 233.08 3910 0F46 94 A7$ 3729.31 62567 F467</span>
+<span id="L996" class="l">47 B3 246.94 4143 102F 95 B7 3951.06 *66288 *1 F2F0</span>
+<span id="L997" class="l">Although the table above provides a simple and quick</span>
+<span id="L998" class="l">method for generating the equal-tempered scale, it is very</span>
+<span id="L999" class="l">memory inefficient as it requires 192 bytes for the table</span>
+<span id="L1000" class="l">alone. Memory efficiency can be improved by</span>
+<span id="L1001" class="l">determining the note value algorithmically. Using the fact</span>
+<span id="L1002" class="l">that each note in an octave is exactly half the frequency</span>
+<span id="L1003" class="l">of that note in the next octave, the note look-up table can</span>
+<span id="L1004" class="l">be reduced from 96 entries to 12 entries, as there are 12</span>
+<span id="L1005" class="l">notes per octave. If the 12 entries (24 bytes) consist of</span>
+<span id="L1006" class="l">the 16-bit values for the eighth octave (C7 through B7),</span>
+<span id="L1007" class="l">then notes in lower octaves can be derived by choosing</span>
+<span id="L1008" class="l">the appropriate note in the eighth octave and dividing the</span>
+<span id="L1009" class="l">16-bit value by two for each octave of difference. As</span>
+<span id="L1010" class="l">division by two is nothing more than a right-shift of the</span>
+<span id="L1011" class="l">value, the calculation can easily be accomplished by a</span>
+<span id="L1012" class="l">simple software routine. Although note B7 is beyond the</span>
+<span id="L1013" class="l">range of the Oscillators, this value should still be</span>
+<span id="L1014" class="l">included in the table for calculation purposes (the MSB</span>
+<span id="L1015" class="l">10</span>
+<span id="L1016" class="l">===== page 11 =====</span>
+<span id="L1017" class="l">of B7 would require a special software case, such as</span>
+<span id="L1018" class="l">generating this bit in the CARRY before shifting). Each</span>
+<span id="L1019" class="l">note must be specified in a form which indicates which</span>
+<span id="L1020" class="l">of the 12 semitones is desired, and which of the eight</span>
+<span id="L1021" class="l">octaves the semitone is in. Since four bits are necessary</span>
+<span id="L1022" class="l">to select 1 of 12 semitones and three bits are necessary</span>
+<span id="L1023" class="l">to select 1 of 8 octaves, the information can fit in one</span>
+<span id="L1024" class="l">byte, with the lower nybble selecting the semitone (by</span>
+<span id="L1025" class="l">addressing the look-up table) and the upper nybble</span>
+<span id="L1026" class="l">being used by the division routine to determine how</span>
+<span id="L1027" class="l">many times the table value must be right-shifted.</span>
+<span id="L1028" class="l">APPENDIX B — SID ENVELOPE GENERATORS</span>
+<span id="L1029" class="l">The four-part ADSR (ATTACK, DECAY, SUSTAIN,</span>
+<span id="L1030" class="l">RELEASE) envelope generator has been proven in</span>
+<span id="L1031" class="l">electronic music to provide the optimum trade-off</span>
+<span id="L1032" class="l">between flexibility and ease of amplitude control.</span>
+<span id="L1033" class="l">Appropriate selection of envelope parameters allows the</span>
+<span id="L1034" class="l">simulation of a wide range of percussion and sustained</span>
+<span id="L1035" class="l">instruments. The violin is a good example of a sustained</span>
+<span id="L1036" class="l">instrument. The violinist controls the volume by bowing</span>
+<span id="L1037" class="l">the instrument. Typically, the volume builds slowly,</span>
+<span id="L1038" class="l">reaches a peak, then drops to an intermediate level. The</span>
+<span id="L1039" class="l">violinist can maintain this level for as long as desired,</span>
+<span id="L1040" class="l">then the volume is allowed to slowly die away. A</span>
+<span id="L1041" class="l">“snapshot” of this envelope is shown below:</span>
+<span id="L1042" class="l">typical cymbal envelope is shown below:</span>
+<span id="L1043" class="l">ATTACK: 0 2 mS</span>
+<span id="L1044" class="l">DECAY: 9 750 mS</span>
+<span id="L1045" class="l">SUSTAIN: 0</span>
+<span id="L1046" class="l">RELEASE: 9 750 mS</span>
+<span id="L1047" class="l">Note that the tone immediately begins to decay to zero</span>
+<span id="L1048" class="l">amplitude after the peak is reached, regardless of when</span>
+<span id="L1049" class="l">GATE is cleared. The amplitude envelope of pianos and</span>
+<span id="L1050" class="l">harpsichords is somewhat more complicated, but can be</span>
+<span id="L1051" class="l">generated quite easily with the ADSR. These instruments</span>
+<span id="L1052" class="l">reach full volume when a key is first struck. The</span>
+<span id="L1053" class="l">amplitude immediately begins to die away slowly as long</span>
+<span id="L1054" class="l">as the key remains depressed. If the key is released</span>
+<span id="L1055" class="l">before the sound has fully died away, the amplitude will</span>
+<span id="L1056" class="l">immediately drop to zero. This envelope is shown below:</span>
+<span id="L1057" class="l">ATTACK: 0 2 mS</span>
+<span id="L1058" class="l">DECAY: 9 750 mS</span>
+<span id="L1059" class="l">SUSTAIN: 0</span>
+<span id="L1060" class="l">RELEASE: 0 6 mS</span>
+<span id="L1061" class="l">- D</span>
+<span id="L1062" class="l">GATE Tj _ n</span>
+<span id="L1063" class="l">Note that the tone decays slowly until GATE is cleared, at</span>
+<span id="L1064" class="l">which point the amplitude drops rapidly to zero.</span>
+<span id="L1065" class="l">The most simple envelope is that of the organ. When a</span>
+<span id="L1066" class="l">key is pressed, the tone immediately reaches full volume</span>
+<span id="L1067" class="l">and remains there. When the key is released, the tone</span>
+<span id="L1068" class="l">drops immediately to zero volume. This envelope is</span>
+<span id="L1069" class="l">shown below:</span>
+<span id="L1070" class="l">ATTACK: 0 0 2 mS</span>
+<span id="L1071" class="l">DECAY: 0 6 mS</span>
+<span id="L1072" class="l">SUSTAIN: 15 ($F)</span>
+<span id="L1073" class="l">RELEASE: 0 6 mS</span>
+<span id="L1074" class="l">This volume envelope can be easily reproduced by the</span>
+<span id="L1075" class="l">ADSR as shown below, with typical envelope rates:</span>
+<span id="L1076" class="l">ATTACK:</span>
+<span id="L1077" class="l">DECAY:</span>
+<span id="L1078" class="l">SUSTAIN:</span>
+<span id="L1079" class="l">RELEASE:</span>
+<span id="L1080" class="l">10 ($A) 500 mS</span>
+<span id="L1081" class="l">8 300 mS</span>
+<span id="L1082" class="l">10 ($A)</span>
+<span id="L1083" class="l">9 750 mS</span>
+<span id="L1084" class="l">&#x27; A -</span>
+<span id="L1085" class="l">GATE</span>
+<span id="L1086" class="l">Note that the tone can be held at the intermediate</span>
+<span id="L1087" class="l">SUSTAIN level for as long as desired. The tone will not</span>
+<span id="L1088" class="l">begin to die away until GATE is cleared. With minor</span>
+<span id="L1089" class="l">alterations, this basic envelope can be used for brass</span>
+<span id="L1090" class="l">and woodwinds as well as strings.</span>
+<span id="L1091" class="l">An entirely different form of envelope is produced by</span>
+<span id="L1092" class="l">percussion instruments such as drums, cymbals and</span>
+<span id="L1093" class="l">gongs, as well as certain keyboards such as pianos and</span>
+<span id="L1094" class="l">harpsichords. The percussion envelope is characterized</span>
+<span id="L1095" class="l">by a nearly instantaneous attack, immediately followed by</span>
+<span id="L1096" class="l">a decay to zero volume. Percussion instruments cannot</span>
+<span id="L1097" class="l">be sustained at a constant amplitude. For example, the</span>
+<span id="L1098" class="l">instant a drum is struck, the sound reaches full volume</span>
+<span id="L1099" class="l">and decays rapidly regardless of how it was struck. A</span>
+<span id="L1100" class="l">The real power of SID lies in the ability to create original</span>
+<span id="L1101" class="l">sounds rather than simulations of acoustic instruments.</span>
+<span id="L1102" class="l">The ADSR is capable of creating envelopes which do not</span>
+<span id="L1103" class="l">correspond to any “real” instruments. A good example</span>
+<span id="L1104" class="l">would be the “backwards” envelope. This envelope is</span>
+<span id="L1105" class="l">characterized by a slow attack and rapid decay which</span>
+<span id="L1106" class="l">sounds very much like an instrument that has been</span>
+<span id="L1107" class="l">recorded on tape then played backwards. This envelope</span>
+<span id="L1108" class="l">is shown below:</span>
+<span id="L1109" class="l">ATTACK:</span>
+<span id="L1110" class="l">DECAY:</span>
+<span id="L1111" class="l">SUSTAIN:</span>
+<span id="L1112" class="l">RELEASE:</span>
+<span id="L1113" class="l">10 ($A) 500 mS</span>
+<span id="L1114" class="l">0 6mS</span>
+<span id="L1115" class="l">15 ($F)</span>
+<span id="L1116" class="l">3 72 mS</span>
+<span id="L1117" class="l">Many unique sounds can be created by applying the</span>
+<span id="L1118" class="l">amplitude envelope of one instrument to the harmonic</span>
+<span id="L1119" class="l">structure of another. This produces sounds similar to</span>
+<span id="L1120" class="l">familiar acoustic instruments, yet notably different. In</span>
+<span id="L1121" class="l">general, sound is quite subjective and experimentation</span>
+<span id="L1122" class="l">with various envelope rates and harmonic contents will</span>
+<span id="L1123" class="l">be necessary in order to achieve the desired sound.</span>
+<span id="L1124" class="l">11</span>
+<span id="L1125" class="l">===== page 12 =====</span>
+<span id="L1126" class="l">O</span>
+<span id="L1127" class="l">q z 3) —</span>
+<span id="L1128" class="l">&lt;</span>
+<span id="L1129" class="l">Cs&gt;—|l* ($ H |i</span>
+<span id="L1130" class="l">LO</span>
+<span id="L1131" class="l">+</span>
+<span id="L1132" class="l">o</span>
+<span id="L1133" class="l">£ _l</span>
+<span id="L1134" class="l">o</span>
+<span id="L1135" class="l">CC I—</span>
+<span id="L1136" class="l">o</span>
+<span id="L1137" class="l">LU</span>
+<span id="L1138" class="l">O</span>
+<span id="L1139" class="l">£ —!</span>
+<span id="L1140" class="l">o</span>
+<span id="L1141" class="l">tr</span>
+<span id="L1142" class="l">&lt;3</span>
+<span id="L1143" class="l">_J Q</span>
+<span id="L1144" class="l">PCO LU</span>
+<span id="L1145" class="l">Q</span>
+<span id="L1146" class="l">&lt;</span>
+<span id="L1147" class="l">CL</span>
+<span id="L1148" class="l">LL</span>
+<span id="L1149" class="l">=L</span>
+<span id="L1150" class="l">O</span>
+<span id="L1151" class="l">o</span>
+<span id="L1152" class="l">o</span>
+<span id="L1153" class="l">o</span>
+<span id="L1154" class="l">o</span>
+<span id="L1155" class="l">o</span>
+<span id="L1156" class="l">+</span>
+<span id="L1157" class="l">- H &#x27; H H i &#x27;</span>
+<span id="L1158" class="l">TTT</span>
+<span id="L1159" class="l">o</span>
+<span id="L1160" class="l">o</span>
+<span id="L1161" class="l">&gt;</span>
+<span id="L1162" class="l">X</span>
+<span id="L1163" class="l">□ =&gt; 5 °</span>
+<span id="L1164" class="l">X LU</span>
+<span id="L1165" class="l">H I t j .</span>
+<span id="L1166" class="l">1_X</span>
+<span id="L1167" class="l">O t — CM W ^ lo CD N</span>
+<span id="L1168" class="l">q q q q d q q q</span>
+<span id="L1169" class="l">o Q-</span>
+<span id="L1170" class="l">&gt;</span>
+<span id="L1171" class="l">I—</span>
+<span id="L1172" class="l">o Q_</span>
+<span id="L1173" class="l">Q</span>
+<span id="L1174" class="l">Q</span>
+<span id="L1175" class="l">&gt;</span>
+<span id="L1176" class="l">Q</span>
+<span id="L1177" class="l">(/&gt;</span>
+<span id="L1178" class="l">5 lO</span>
+<span id="L1179" class="l">ID</span>
+<span id="L1180" class="l">&lt; CD &lt; CO</span>
+<span id="L1181" class="l">i— C\J CM</span>
+<span id="L1182" class="l">SI Q_ CL CL ICO Q</span>
+<span id="L1183" class="l">&lt; &lt; &lt; &lt; UJ CVJ ICO CO CM T- O Z</span>
+<span id="L1184" class="l">o o O o CC SJ DC lo &lt; &lt; &lt; &lt; &lt; CD</span>
+<span id="L1185" class="l">Jl</span>
+<span id="L1186" class="l">A A A A A</span>
+<span id="L1187" class="l">LU</span>
+<span id="L1188" class="l">Z</span>
+<span id="L1189" class="l">LL LU CL CC</span>
+<span id="L1190" class="l">° £</span>
+<span id="L1191" class="l">CM £ CM &gt;</span>
+<span id="L1192" class="l">O Q_</span>
+<span id="L1193" class="l">LU</span>
+<span id="L1194" class="l">§1 CM q</span>
+<span id="L1195" class="l">CL</span>
+<span id="L1196" class="l">H</span>
+<span id="L1197" class="l">UJ 3</span>
+<span id="L1198" class="l">CO ( )</span>
+<span id="L1199" class="l">UJ CL</span>
+<span id="L1200" class="l">LL</span>
+<span id="L1201" class="l">7* LU</span>
+<span id="L1202" class="l">z</span>
+<span id="L1203" class="l">Q</span>
+<span id="L1204" class="l">O _J</span>
+<span id="L1205" class="l">O CO</span>
+<span id="L1206" class="l">LU CO</span>
+<span id="L1207" class="l">o LU</span>
+<span id="L1208" class="l">CC</span>
+<span id="L1209" class="l">CO Q</span>
+<span id="L1210" class="l">CO UJ</span>
+<span id="L1211" class="l">O</span>
+<span id="L1212" class="l">CC</span>
+<span id="L1213" class="l">&lt;</span>
+<span id="L1214" class="l">Q CC</span>
+<span id="L1215" class="l">Q O</span>
+<span id="L1216" class="l">&lt;</span>
+<span id="L1217" class="l">O</span>
+<span id="L1218" class="l">Z2</span>
+<span id="L1219" class="l">100 h- &gt; LU la: O H</span>
+<span id="L1220" class="l">C\1 *S&gt;</span>
+<span id="L1221" class="l">LO</span>
+<span id="L1222" class="l">&lt;</span>
+<span id="L1223" class="l">^ CO CM T - O</span>
+<span id="L1224" class="l">&lt; &lt; &lt; &lt; &lt;</span>
+<span id="L1225" class="l">D</span>
+<span id="L1226" class="l">0.</span>
+<span id="L1227" class="l">O _J</span>
+<span id="L1228" class="l">S</span>
+<span id="L1229" class="l">O ( )</span>
+<span id="L1230" class="l">_J LL</span>
+<span id="L1231" class="l">o O</span>
+<span id="L1232" class="l">S 10 &lt;0</span>
+<span id="L1233" class="l">z</span>
+<span id="L1234" class="l">o</span>
+<span id="L1235" class="l">o</span>
+<span id="L1236" class="l">I a</span>
+<span id="L1237" class="l">° &lt;</span>
+<span id="L1238" class="l">S e</span>
+<span id="L1239" class="l">z w</span>
+<span id="L1240" class="l">LU r-</span>
+<span id="L1241" class="l">0. CO a io</span>
+<span id="L1242" class="l">&lt; (0</span>
+<span id="L1243" class="l">_ i</span>
+<span id="L1244" class="l">&lt;</span>
+<span id="L1245" class="l">o</span>
+<span id="L1246" class="l">a</span>
+<span id="L1247" class="l">£</span>
+<span id="L1248" class="l">A</span>
+<span id="L1249" class="l">N C D l O ^ C O C M t - O</span>
+<span id="L1250" class="l">Q Q Q Q Q Q Q Q</span>
+<span id="L1251" class="l">LO</span>
+<span id="L1252" class="l">+</span>
+<span id="L1253" class="l">co</span>
+<span id="L1254" class="l">CO &gt; HI*</span>
+<span id="L1255" class="l">COMMODORE SEMICONDUCTOR GROUP reserves the right to make changes to any products herein to</span>
+<span id="L1256" class="l">improve reliability, function or design. COMMODORE SEMICONDUCTOR GROUP does not assume any</span>
+<span id="L1257" class="l">liability arising out of the application or use of any product or circuit described herein; neither does it convey</span>
+<span id="L1258" class="l">any license under its patent rights nor the rights of others.</span>
+<span id="L1259" class="l">a CO M M O D O H 6 C O M PA N Y</span>
+<span id="L1260" class="l">10/82</span>
+<span id="L1261" class="l"> </span></pre>
+<footer class="pf"></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-mos-6581-datasheet.html">MOS 6581 Sound Interface Device (SID) datasheet — the text behind Appendix O</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, TraxWeekly articles…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:technique</code> <code>type:concept</code> <code>type:entity</code> <code>type:summary</code> <code>type:tw</code> · <code>kind:tool</code> <code>kind:person</code> … · <code>platform:c64</code> <code>platform:gameboy</code> <code>platform:pc-tracker</code> · <code>tag:sid</code> · hex and tracker notation search as typed (<code>$0E</code>, <code>Gxx</code>, <code>C-4</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-08-30 · 476 pages · 9084 links · 2 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

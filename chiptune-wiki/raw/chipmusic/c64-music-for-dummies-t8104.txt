@@ -1,0 +1,381 @@
+C64 Music for Dummies (c64 tutorial) — ChipMusic.org forums, Tutorials, Mods & How-To's, topic 8104 (3 pages, 40 posts), started by ant1 on 2012-08-14.
+Source: https://chipmusic.org/forums/topic/8104/c64-music-for-dummies-c64-tutorial/ (+ /page/2/, /page/3/); fetched 2026-08-30 with a browser user agent; post text extracted from the HTML with post number, date and author; quotes marked with '>'; images, signatures and avatars not included.
+
+
+----- post 1 · Aug 14, 2012 12:02 am · ant1 -----
+C64 Music for Dummies!
+Welcome to my C64 for Dummies tutorial. It is designed to get you to a point where you can make basic songs on a C64 or C64 emulator. From that point onwards you shall have to read manuals and use trial and error, but starting tends to be the most difficult part and the tutorial is designed to assist you with that.
+For this tutorial we shall use the tracker "SID-Wizard". I chose it because it runs on a real C64, which some people will like (for everyone else there is VICE), and because I think it has the right mix of ease-of-use and power that an aspiring noob like yourself will want in a tracker. It's also brand new, released in 2012, which is maybe an advantage. If you have used a tracker before, such as LSDJ or Famitracker, you won't find this too hard. If you haven't used a tracker before, you will find this quite an odd experience at first, but I assure you it is a very powerful method of making chiptunes.
+What you will need:
+-- Some understanding of the hexadecimal number system (look at wikipedia, maybe)
+-- Some knowledge of basic synthesizer terminology (or the internet)
+-- A C64 and means of getting software onto it, or a C64 emulator (I recommend VICE for GNU+linux, Windows, and MS-DOS)
+-- The tracker, SID-Wizard 1.0, which can be downloaded in the code/trunk/binary folder found here: http://sourceforge.net/projects/sid-wizard/files/ - I use the .d64 file of SID-Wizard-extra, but it may be easier to choose a .prg file and use that (You will also need to download the corresponding prg of SID-Maker if you do this). If you use a prg file, the bits of the tutorial that refer to c1541.exe and extracting files from d64 images can be ignored. Files will be saved to disk as .P00 files in the folder which the prg file is in instead. If you are using prg files, you will also need SWMconvert.exe (or on GNU+linux, SWMconvert), which converts P00 files to swm files and S00 files to SID files. This runs on Windows or GNU+linux, so if you are not using one of these operating systems, I recommend using the d64 image and following the d64 instructions, or you will not be able to convert your songs to SID!
+-- Once you have finished reading this tutorial, you will want the SID-Wizard manual, which can be downloaded here: http://noname.c64.org/csdb/release/down … ?id=137027
+Let's get started!
+It's time to get started. Run the SID-Wizard program from the d64 image or prg file. With VICE, this is as simple as opening VICE, and choosing File > Autostart Disk Image for d64, or , and then choosing the d64 image and opening it. Your operating system should also be able to associate d64 images with VICE, so you can just double click the d64 to run it. If you have a real C64, I will not be teaching you in this tutorial how to load and run files, that is up to you to figure out. If you are using VICE, the section at the end called "VICE configuration" will be useful to you.
+SID-Wizard takes a short while to load. Wait, and then you should see the tracker screen. Everything you need to write a song is visible on this one screen. In the middle of the screen are three columns. This is the pattern editor, and each column represents one channel of the C64's SID chip. You can access this screen by pressing F5. You can move around it with the directional keys (on a C64 these say "CRSR" on them, and are used in conjunction with the shift key), and you can use tab (in VICE) or CONTROL (on the C64) to jump between columns.
+On the right hand side of a screen is another column, which is the instrument editor. You can access this area by pressing F7, navigate through the different sections of this area with tab (CONTROL), and move around within the sections using the directional keys.
+At the bottom of the screen are three rows of numbers. This is the orderlist. Each row represents one channel of the C64's SID chip. You can access this area by pressing F6 (Shift + F5), and move around within it using the directional keys.
+These are the three main areas, and are all you need to make a simple song. I will introduce the other areas later. Familiarise yourself with navigating around the screen using the keys until you can remember it all, or just continue and learn that later.
+Creating simple instruments
+Before we can make sounds, we need to make an instrument. Switch to the instrument editor with F7. I'll briefly explain the most important sections of the instrument editor now. The first section at the top contains general parameters for an instrument, including an ADSR volume envelope, vibrato settings, hard-restart settings, and more. The next section (switch sections with tab/CONTROL, remember?), labelled "WFARP", contains commands to set the waveform (WF) of the instrument, and the pitch (ARP). All instruments must have something in this table to make sound. The next section, labelled "PULSE", contains commands to change the pulsewidth of instruments that use the pulse waveform. Instruments that use the pulse waveform must have something in this table. The final section I will introduce to you, labelled "FILT.", contains commands to operate the filter of the C64. I will briefly introduce this section at the end. All values in these tables are in hexadecimal.
+So, let's create an instrument. Switch to the first section. As you can see, the ADSR envelope is set by default to 00F0. This means the envelope will have 0 attack, 0 decay, F sustain, and 0 release time. You may have already encountered ADSR envelopes, but if not, I will briefly explain them. "Attack" means the time it takes the volume to swell from zero to its maximum level. "Decay" means the time it takes for the volume to settle from its maximum level to its "sustain" level. "Sustain" means the level the volume will then stay at until the note is released, and "Release" means the time it takes for the volume to fall back to zero after the note is released. 
+You may be able to figure out then, that with the ADSR set to 00F0, the instrument is going to instantly reach maximum volume, and stay at maximum volume until it is released, at which point it will instantly cut out. This kind of envelope has no "dynamics", but is fine for a basic envelope.
+(If you are using an older version of SID-Wizard, I think there is one more setting you must set in this section. In the column labelled "HRTY", put the cursor over the number 2 and press return. A picture of a square wave should appear next to the number 2. This setting means that the gate bit is reset between each note, which is important because otherwise notes will not sound if they come after another note rather than a note off. Every instrument you make for now should have this setting. Download the new version and you do not have to!)
+You can leave the rest of the settings in this section alone, the defaults are fine, and if you wonder what they do, you can look in the manual. Switch now to the WFARP section with tab/CONTROL. This section is quite complicated, and will take a bit of explaining. As you can see, there are a series of rows, with ".. .." in them. The ".. .." in grey can be replaced by two two-digit numbers, which are what you control the waveform with. Ignore the ".." in green (the column labelled DT) for now. On the C64, you can add and remove rows with DEL and Shift-DEL. In VICE, use insert and backspace to add and remove rows.
+Add a row at the start of the table with insert (Shift-DEL on a C64). Now, type "21" into that row. The row will look like "21 .." now. I'll explain what this means shortly. Switch to the pattern editor and press any of the keys "zsxdcvgbhnmq2w3er5t6yu" on your keyboard. You should hear a saw wave. Great, you have made sound!
+Let me explain what that "21 .." means, now. The first digit of the first number is the waveform. This can be 1 for triangle, 2 for saw, 4 for pulse, or 8 for noise. You can also combine the first three waveforms by adding the numbers together, 1+2 = 3, so 3 will create a combination of the triangle and saw, 1+2+4 will create a combination of the triangle, the saw, and the pulse. Change the first digit to 1 now (the row will look like "11 ..") and then come back to the pattern editor and play some more notes. You should hear a triangle wave sound. If you try changing the first digit to 4, you will not hear a pulse wave though. I will explain why later, for now, you are trying to run before you can walk. 
+The second digit of the first number (the 1 in 21) can be used to set various things. For now it is set to 1, which means "gate bit on". This tells the channel the instrument is played on to make noise. If you set it to 0, your instrument will not make a noise any more. Try it if you like. I will explain other things you can do with this digit later on, but the most important thing of all is 1, the gate bit. All instruments should have the gate bit set to make sound (although, as I will explain later, that doesn't necessarily mean setting that digit to 1).
+So, what of the second column, which we left blank ("..")? This column is responsible for the arp, or pitch-shifting. A number here represents a pitch shift in semitones (well, this is an oversimplification but it will do for now). So, try putting 0C in this column (0C in hex is 12 in decimal), so the first row looks like "21 0C", and then go back to the pattern editor and test your instrument. You should hear that it is now an octave higher in pitch. Go back to the waveform table and add another row. Set the first row to "21 0C", and the second row to "21 ..". Test your instrument now. You should hear that the instrument starts an octave up, and then quickly flicks back down to the octave you played. Each row of the tables in a C64 tracker lasts for a 50th of a second (or a 60th in NTSC-land). By using multiple rows in the tables, we can make complex instruments. 
+Let's make another, more complex, instrument now. The keys + and - are used to select instruments (in VICE, this is the + and - on the main keyboard, not on the numpad. Also, by default in VICE, PC + is C64 - and PC - is C64 +, because these keys are the other way round on a C64 to on a QWERTY keyboard). Press + to choose the next instrument. Set the ADSR to 0800. This envelope means the volume will rise to its maximum level instantly (the attack is 0), and then fairly quickly fall to 0 (the decay is 8), without sustaining (the sustain is 0). Envelopes like this, with a fast attack and short decay, are great for percussive sounds - which is what we will be making now!
+In the WFARP table, add the rows "41 30", "41 20", "41 10", "41 0C" and "41 ..". If you have been paying attention, you may be able to figure out that this will create a pulse waveform instrument that falls rapidly in pitch from 48 semitones above, to 0 semitones above what is played. You will also know, however, that we didn't yet learn how to make instruments with pulse waveforms work. Try this instrument now and it will not work for you. The reason it doesn't work is because pulse instruments on the C64 can have a variety of pulse widths. There is no default pulse width in this tracker, and we haven't told it what pulse width to use yet, so it doesn't know what to do. 
+We set pulse widths in the PULSE table. Setting the first digit of a row to 8 indicates that the next three digits of the row are what we want to set the pulse width to. Ignore the purple "KT" digits after that for now. So, putting "80 10" in the PULSE table will give us a very thin pulse width. Try it - this is a very thin sound. You can gradually increase the pulse width until "88 ..", which is a square wave, and then on past that, getting thinner again. Set this to "88 .." and try out the instrument. You may have noticed that this sound has the potential to sound somewhat like a kick drum, but is far too high in pitch. Switch back to the pattern editor and change the octave using Ctrl + a number from 1 to 8 (C= + a number from 1 to 8) - octave 1 will be good for a kick. Try it now, does this sound more like a kick?
+Another useful percussion sound you can make is a hi-hat. What is a hi-hat? A short blast of white noise. How could we do that? Choose a blank instrument with + and -. Set the ADSR to something appropriately percussive. For a closed hat maybe 0400 and for an open hat maybe 0800. In the WFARP table, we want a noise instrument. Can you remember how to do that? Set the first two digits to 81 - this means the noise waveform with the gate bit on, as you may remember. Noise on a C64 can be slightly tonal, so if you like you could use the third and fourth digits of this column to select a pitch for the noise. Switch to the pattern editor and try this out (remember to put the octave back up after you put it down for your kick drum). Does it sound like a hi-hat? Well, not a lot, but a bit I hope.
+So, you have learned how to make triangle, saw, and pulse instruments, with simple pitch shifts and ADSR envelopes. That's more than enough for the "Creating Simple Instruments" section, I feel. On to the next section!
+Creating simple melodies - the pattern editor
+Let's write a simple tune. Switch to the pattern editor with F5, and choose a tonal, non-drum instrument. First, use backspace (DEL) to remove all the notes you accidentally added while you were testing instruments. In future, if you want to avoid adding all these notes while you are testing instruments, press space to turn off edit mode. If you play notes now they won't be added to the song. You can press space again to turn it back on.
+Now, use the directional keys to select the very first sub-column of the first column, on the first row, and press one of the keys "zsxdcvgbhnmq2w3er5t6yu" on the keyboard. If you try all of these keys you will see they are arranged somewhat like two piano keyboards, one above the other. Add a note of your choice (if you can't choose, I'll choose for you. Press z to add the note C). Now you can move up and down this column and add more notes. As you will already know if you were paying attention, you can change the octave with Ctrl (C=) and a number from 1 to 8. You can press return to add a note-off or note-cut as it is sometimes known, which sets the gate bit to 0 (ADSR will enter the release phase).
+There's one more thing you need to do now. Move to the second sub-column of the first column on the first row, which at the moment is completely blank, and type in the number of the instrument you want to use. You don't have to put this on every row, only when you want to change it. 
+If you want to hear what you have written, press F1 to play your song from the beginning.Does it sound good? Press F4 (shift-F3) to stop playback. 
+Now, use tab (CONTROL) or the directional keys to move to the second (big) column, which says something like "P.02 Size 20" above it. Repeat what you did above, but in the instrument column (the completely blank one), use the numbers to alternate between the kick and the hi-hat you made, to add drums to your song. If you want you could make a new instrument and add a bass sound in the third column.
+You may find it quite tedious to add all these notes by hand, so now is a good time for me to tell you how to copy and paste. First, you choose the place where you want to copy or cut from, by pressing Ctrl-c (C= and c) or Ctrl-x (C= and x). Now you choose the end of your selection with Shift-C. The area copied or cut will be from wherever the cursor is when you used the copy/cut shortcut, to the place you marked as the end of the selection (or the end of the pattern if you didn't). Now you can use Ctrl-v (C= and v) to paste.
+Now you should be able to create a few bars of music. A song is many bars of music. To the next section!
+Sequencing - the orderlist
+The orderlist is where you put patterns end-to-end to make a full song. Quite a long time ago, I told you that you could access the orderlist by pressing F6 (Shift + F5). Do that now. As you can see, the order list at the moment contains in the first row ".1 FE", in the second row ".2 FE" and in the third row ".3 FE". If you look at the top of the pattern editor, you will see that the current pattern on the first channel is 01 ("P.01"), on the second channel 02 ("P.02"), and on the third channel 03 ("P.03"). So this matches up with the 01 (".1" means 01 in the orderlist), 02 and 03 that are in the orderlist. What about the "FE"s? FE means stop, so the song ends at FE. 
+To create a pattern, you first add it to the orderlist, and then you select it with the cursor and press return. So, move the cursor to the column that contains the "FE"s, and use insert to add a column between the 01,02,03 column and the FE columns that are already there. In this new column, add 04 on the first row, 05 on the second row, and 06 on the third row. You have created three new patterns (one for each channel). Now, select 04 and press return. You will be transported to the pattern editor, where the new empty pattern 04 is waiting to be edited. You can do that, but first it would be better to go back to the orderlist and do the same for 05 and 06, so you are viewing the three new patterns simultaneously.
+Add music to these patterns, and then press F1 to play your song from the beginning (F4 or shift-F3 to stop, remember). The first patterns you made will be played, and then the new ones 04, 05 and 06. Your song is now twice as long. Of course you can make your song as long as you want (almost) like this, and you can also re-use patterns.
+If you just want to hear the patterns you are currently editing, press F3 to play through whatever patterns are currently displayed in the pattern editor.
+That's the basics of the orderlist covered. You are now able to make songs of basic or medium complexity using the instrument editor, the pattern editor and the orderlist. If you want, you can give up on my tutorial here (although it'd be helpful to jump to the end where you can learn how to save and load songs), and practise yourself, referring to the manual when you want to learn more. But I will explain a few more things if you want to stay.
+More about instruments
+A feature I didn't tell you about of instrument tables in general is that you can use FE in the first two digits to loop a table. The third and fourth digit set the row of the table to jump to. This can jump to itself too, but why would you want to do that?
+Useful tips for the WFARP table:
+Where you have set the gate bit to 1, there are other values you can set. You could put 0 here if you want to turn the gate bit off and make your instrument stop sounding, but there is more. A value of 2 here will activate an effect called "Hard-sync". But you need to keep the gate bit turned on, so 1+2 is 3. Use 3 to turn on Hard-sync. A value of 4 will turn on the Ring Modulator, but again you need the gate bit on, so use 5. You can also combine Hard-sync with the Ring Modulator by putting 7 here (1+2+4).
+In the arp column (the third and fourth digits), as well as setting pitch shift offsets, you can also force the pitch to stay fixed, no matter what note is being played. This might be used for a kick drum attack which stays the same always (using absolute pitch), followed by a bass sound which can change in pitch (using relative pitch shifts or nothing in the arp column). The absolute pitches are set with values from 81 to DF (remember, it's all in hex) in this column.
+Also in the arp column, you can have relative pitch shifts downwards, as well as up. Values E0 to FF do this, and the pitch shift is calculated by 100 - the value (in hex!), e.g. FF will produce a 100-FF=1 downwards pitch shift, 1 semitone.
+Finally, the green DT column, which earlier I told you to ignore, is used to detune instruments. This is a great feature. 00 ("..") here means no detune, and then detune ranges from slight detune at 01 to a lot of detune at FF.
+Useful tips for the PULSE table:
+As well as setting pulse widths with 8x xx in the pulse table, you can sweep smoothly through pulse widths. A value from 01 to 7F in the first two digits sets the amount of time to sweep for, and the third and fourth digits set the speed to sweep at - downward sweeps can be achieved in the same way as I described for downward pitch shifts, FF being a slow downward sweep, and 81 being a very fast downward sweep, with anything in between working too.
+The purple "KT" column of the PULSE table is key tracking. If you have used synthesizers you may have come across key tracking before. By setting a value here (set the pulse width as normal too), the pulse width follows the pitch of the note being played. The larger the number you put in here, the stronger this effect is.
+The filter
+You may have noticed I haven't said anything about the filter table yet. It is quite complex, so I left it until (almost) last. To use the filter, you would put something like "9F 30" in a row in the filter table. The first digit of this is the mode the filter should use. It can be 8 (filter deactivated), 9 (low pass), A (band pass), B (low pass and band pass simultaneously), C (high pass), D (low pass and high pass simultaneously), E (band pass and high pass simultaneously) or F (all modes simultaneously). The second digit sets the resonance of the filter, which can range from 0 to F, with 0 being no resonance and F being the most resonance. The third and fourth digits set the cutoff, which ranges from 00 to FF (lowest to highest).
+SID-Wizard automatically decides which channels to filter based on whether there is anything in the filter table of the instrument currently playing on that channel. But, there is only one filter, so the filter tables of multiple instruments may come into conflict. If you want an instrument to be filtered, but not to control the filter, you can add a blank row (".. ..") into the filter table.
+You can sweep the filter in exactly the same way as sweeping the pulse width. A value from 01 to 7F sets the sweep time, and digits three and four set the sweep amount and direction. See above for more. 
+The keyboard tracking ("KT") column also works in the same way as the pulse table.
+Effects
+SID-Wizard has a range of effects which can be put in the pattern editor and different effects which can be put in the order list. I am not going to cover most of them here as there are too many of them. They can all be found in the manual. I recommend you look at them there as they are useful and can bring a song to life. 
+One effect I will tell you about is the orderlist effect FF. FF tells the orderlist to loop, so your song can play indefinitely. You can either just put FF, in which case the song loops back to the start, or you can put a number after FF, which specifies the point in the orderlist to loop back to. This effect works per channel, so you must put FF on all channels to make the whole song loop. 
+You have also already encountered the orderlist effect FE, which stops playback.
+Another effect worth mentioning is the pattern effect 10xx, which sets the tempo. This is a "big" pattern effect, and it goes in the last four digits (by default they say ".. ..") of a column. The default tempo is 08 (10 08). Lower values are faster and higher values are slower, since the tempo denotes the amount of 50Hz (or 60Hz) frames per row of the pattern. The tempo will not effect the speed of instrument tables. You can also set tempo (for individual channels) by placing numbers from B0 to FD in the orderlist.
+Saving and loading songs
+Press F8 to bring up a menu. It's really self-explanatory. Use the directional keys to move around and return to select an entry. Tab (CONTROL) navigates around the save song dialogue, and return saves the song. Press F8 to close it again.
+VERY IMPORTANT: You cannot overwrite files when saving from SID-Wizard. You will lose any changes you have made if you try to do this. If you have edited your song, create a new version with a new name. You can delete all the old versions later with a d64 editor such as c1541.exe (or if you are using the prg version, by deleting them from your filesystem). This issue may be fixed in forthcoming versions of SID-Wizard.
+Making a SID
+Load and run the program SID-MAKER from the d64 (in VICE, do File>Reset>Hard, and then use LOAD"SID-MAKER",8 (or LOAD"SID-MAKER-EXTRA",8 if you are using SID-Wizard-extra.d64) and then RUN to run the program), or by running the SID-Maker prg file. Use the directional keys to move around and return to select an file. Use the directional keys to select "SID/SEQ", and then press return, and return again to leave the relocation address as it is. Now select the SID model your C64 is equipped with (or your emulator is set to use). Then type a filename and press return again. You can reset your C64 or reset VICE when this is done. If using a d64 disk image, use LOAD"$",8 and then LIST in C64 BASIC to list the files and check your SID exists. If using a prg file, you can just check using the file browser of your operating system. 
+If you are using a C64, it's up to you to get the SID off the disk. If you are using VICE with a d64 image, it's up to you to get the SID out of the d64. I use a program that came with VICE called "c1541", the manual for it should have come with VICE too. Run on the command line:
+c1541.exe "C:\path\to\d64\SID-Wizard.d64"
+and then type "extract" to extract all files from the disk.
+If you are using a prg file, the SID should just be saved as a .S00 file in the same folder as SID-Maker. You can convert this to a SID file with SWMconvert.
+VICE Configuration
+There are some settings in VICE you may want to set for the best sound (or preferred) sound. In Settings>SID Settings, there is a dropdown called "SID Engine/Model". You can select here the engine VICE will use for the SID emulation, and the chip model it emulates.
+There are two main types of SID chip, the 6581 from the original "breadbox" C64s, and early versions of the C64C, and the 8580 chip from the later C64Cs. The 6581 is notable for each chip behaving in a unique way, whereas all 8580s will sound almost the same. The 6581 tends to have a filter curve with lower cutoffs in the bottom of the range, compared to the 8580, and the 6581 filter has a bit more distortion than the 8580. It's up to you which chip you pick, although most people seem to prefer the 6581 (myself included).
+You'll also see that some of the options are labelled "FastSID", some "ReSID", while others are labelled "reSID-fp". FastSID is the fastest but least accurate emulation, ReSID is more accurate but not as fast, and reSID-fp is the most accurate but most CPU-intensive option. I would recommend starting with one of the reSID-fp options and changing down if your computer can't handle it.
+If you have a HardSID or Catweasel, you can choose to use that, as well, but if you have a HardSID or Catweasel, you probably already knew that.
+If you want to work fullscreen, I recommend going to Settings>Video Settings, and ticking the "Keep aspect ratio" box. 
+There shouldn't be anything else you have to configure in VICE.
+The end
+That's the end of my tutorial, I hope it helps you get into C64 composing. 
+ant1
+xxx
+
+						Last edited by ant1 (Aug 24, 2012 4:12 am)
+
+----- post 2 · Aug 14, 2012 2:47 am · an0va -----
+Holy hell, this should be stickied. Thank you so much.
+
+----- post 3 · Aug 14, 2012 3:49 am · Cartoon Bomb -----
+This is great, thank you ant1
+
+----- post 4 · Aug 14, 2012 4:55 am · celsius -----
+an0va wrote:
+> Holy hell, this should be stickied. Thank you so much.
+I agree. Let it be so!
+
+----- post 5 · Aug 14, 2012 7:47 am · ant1 -----
+Thanks guys, I'm glad you appreciate it.
+I'll be continuously updating this a little bit as I find things I want to add or re-phrase, so keep checking back. If you have anything you think I should add, or anything I didn't explain clearly enough, tell me and I will fix it, please!
+Thanks !!
+
+----- post 6 · Aug 14, 2012 8:14 am · Jellica -----
+lots of good info that can be applied to almost any c64 tracker. cool.
+
+----- post 7 · Aug 14, 2012 9:08 am · Pase -----
+Thank you sir, I really need to get into C64...
+
+----- post 8 · Aug 14, 2012 9:14 am · cheapshot -----
+Erm, amazing!! Totally getting into this.
+
+----- post 9 · Aug 14, 2012 9:56 am · ant1 -----
+glad you like it guys [image: smile] 
+IMPORTANT UPDATE: I forgot to mention that you can't overwrite files with SID-Wizard. If you try to do this you will lose your work. So you must save new versions with new names. I updated the "Saving and loading songs" section to mention this now. Sorry if you already lost some work. [image: sad]
+
+----- post 10 · Aug 14, 2012 10:24 am · 4mat -----
+Great stuff.  One thing you might want to add if you're using Vice: under SID settings pick one of the 'reSID-fp' ones for the best emulation quality. (filter distortion, compression, general ADSR accuracy)  It does take a bit more CPU power though.  I guess also putting in a bit about the two different types of SID might be useful?  (the old 6581 with the many variations and the newer stable 8580)
+
+----- post 11 · Aug 14, 2012 10:48 am · ant1 -----
+thanks 4mat! I added a section "VICE configuration". [image: smile]
+
+----- post 12 · Aug 14, 2012 7:31 pm · Aeros -----
+oh god finally an actual explanation on how to use sidwizard
+[image: heart] [image: heart] [image: heart]
+
+----- post 13 · Aug 14, 2012 8:03 pm · PULSELOOPER -----
+I remember when 4mat posted about this tracker, I thought it was pretty cool but got lazy about learning it. Now there are no excuses anymore.
+
+----- post 14 · Aug 14, 2012 8:09 pm · ant1 -----
+it is a pretty phenomenal tracker
+abandoned gt2 since i found this (although gt2 is really powerful in some ways) and hopefully with new updates it will get even better
+enjoy the tutorial guys
+
+----- post 15 · Aug 15, 2012 2:40 am · MegaMantra -----
+ant1 wrote:
+> GNU+linux
+
+the Stallman approves.
+Awesome tutorial.
+
+----- post 16 · Aug 15, 2012 3:05 am · The Silph Scope -----
+stallman_upon_discovering_the_cave_of_freedom.jpg is my favorite rms picture.
+
+                
+
+                
+			
+
+	
+		
+	
+
+	
+		Posts: 1-16 of 40
+
+	
+	
+	Pages 1 2 3 Next
+
+	You must login or sign up to post a reply
+
+	
+	ChipMusic.org  / Forums  / Tutorials, Mods & How-To's  / C64 Music for Dummies (c64 tutorial) 
+
+	
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
+
+      $(document).ready(function() {$("a#forum_image_23597653").fancybox();
+      });
+
+$(function() {
+    $('.main-item').click(function(e) {
+        e.stopPropagation();
+        var tar = $(this).find('a').first();
+        if(tar.attr('onclick')) {
+            var j=tar.attr('onclick');
+            var f=new Function (j);
+            return f();
+        } else if (tar.attr('href')) {
+            window.location = tar.attr('href');
+        }
+    });
+});
+
+(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a333988cadf39322',t:'MTc4ODA5MDgxNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+
+----- post 17 · Aug 15, 2012 9:29 am · ant1 -----
+oh, what i would really love would be if people showed me sids or music that they made using this tutorial (to really PROVE it works !)
+so if any of you get that far please PM me or post them here
+
+edit: fixed a mistake in the bit about copy pasting
+
+						Last edited by ant1 (Aug 15, 2012 9:57 am)
+
+----- post 18 · Aug 15, 2012 8:04 pm · ant1 -----
+Big Update
+Updated the tutorial a lot, with corrections and suggestions from Hermit (creator of SID-Wizard, and a very friendly guy) himself! The tutorial is much better now.
+Thanks!
+
+----- post 19 · Aug 15, 2012 9:48 pm · Theta_Frost -----
+Wow, this is really great!  I'll give this a try in VICE later.
+
+----- post 20 · Aug 15, 2012 10:16 pm · ant1 -----
+another update! mentions SWMconvert.exe now for those of you using the prg version
+if you are not on windows and you started using the prg version but you now want to use d64, ask me and i will convert your stuff to d64.
+thanks theta_frost, i hope you find it helpful. show me your sids when you're done!
+
+						Last edited by ant1 (Aug 15, 2012 10:18 pm)
+
+----- post 21 · Aug 15, 2012 11:21 pm · geekbeatradio -----
+Time to bust out the C64 and try this soon!  Thanks so much for posting this.
+
+----- post 22 · Aug 16, 2012 9:57 am · ant1 -----
+Minor update: you can use SWMconvert on linux !
+
+geekbeatradio, thanks - hope you find it helpful.
+
+----- post 23 · Aug 16, 2012 10:27 am · xylo -----
+Cool tut ant1!
+
+----- post 24 · Aug 21, 2012 1:45 am · ant1 -----
+updated slightly, thanks svetlana for pointing out the mistake !
+
+----- post 25 · Aug 21, 2012 9:13 pm · Vellain -----
+Wow... thanks so much! After somebody posted something about SID-Wizard I kept trying to figure it out, but got really confused and gave up. I will give it another try though.
+
+----- post 26 · Aug 21, 2012 9:25 pm · ant1 -----
+hope you have better luck this time!
+xxx
+
+----- post 27 · Aug 24, 2012 4:12 am · ant1 -----
+updated with new download link [image: smile]
+
+----- post 28 · Nov 13, 2012 11:57 pm · iLKke -----
+This is relevant:
+http://noname.c64.org/csdb/release/?id=112754
+http://noname.c64.org/csdb/release/?id=112755
+
+----- post 29 · Jan 11, 2014 5:29 pm · rumpelfilter -----
+Thanks a lot! since I now got a way to bypass the lack of floppies on my C64, I tried to figure out SidWizard... but it scared me a bit. Though reading the tutorial I see that it's really a lot easier than what it looks like! Thanks a lot.
+
+----- post 30 · Jan 16, 2014 10:29 pm · rumpelfilter -----
+Though somebody should make a cheat sheet of some sorts for all the commands and codes... though the manual has a nice list of all the stuff.
+
+----- post 31 · Jan 16, 2014 10:38 pm · iLKke -----
+rumpelfilter wrote:
+> Though somebody should make a cheat sheet of some sorts for all the commands and codes
+Go for it
+
+----- post 32 · Jan 17, 2014 7:51 am · rumpelfilter -----
+iLKke wrote:
+> rumpelfilter wrote:Though somebody should make a cheat sheet of some sorts for all the commands and codes
+Go for it
+haha yeah, as soon as I'll have some time I'll do it!
+
+                
+
+                
+			
+
+	
+		
+	
+
+	
+		Posts: 17-32 of 40
+
+	
+	
+	Pages Previous 1 2 3 Next
+
+	You must login or sign up to post a reply
+
+	
+	ChipMusic.org  / Forums  / Tutorials, Mods & How-To's  / C64 Music for Dummies (c64 tutorial) 
+
+	
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
+
+$(function() {
+    $('.main-item').click(function(e) {
+        e.stopPropagation();
+        var tar = $(this).find('a').first();
+        if(tar.attr('onclick')) {
+            var j=tar.attr('onclick');
+            var f=new Function (j);
+            return f();
+        } else if (tar.attr('href')) {
+            window.location = tar.attr('href');
+        }
+    });
+});
+
+(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3339952a97cf562',t:'MTc4ODA5MDg0Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+
+----- post 33 · Jan 20, 2014 10:20 am · gotoandplay -----
+Thanks ant1 for the tutorial! I've tried it out, and I've got a song out of it which I'll probably use on BotB as soon as I have a couple of issues ironed out with it.
+ I've found a strange error that detunes some of the arps I use in the song when I convert to song into a .sid. Also, know any good ways to delete swm files? i'm looking to sort out the arp issue but I've run out of save space on the .d64 I'm using to make a new save [image: hmm]
+
+----- post 34 · Jan 20, 2014 2:27 pm · sandneil -----
+vice comes with a utility called c1541.exe that lets you manage d64 images
+run it and type "help" or look in the vice docs
+
+----- post 35 · Jan 20, 2014 6:23 pm · gotoandplay -----
+Thanks, I just sorted out the noob arp error and now thanks to c1541 I have space to save, and exported the corrected file to sid, hooray!
+
+----- post 36 · Jan 20, 2014 10:49 pm · sandneil -----
+nice one buddy! hope to see your song in winter chip!
+
+----- post 37 · Jan 21, 2014 4:46 pm · dc6v -----
+damn, thank you!
+
+----- post 38 · May 20, 2014 1:04 am · iLKke -----
+Why is this still not a sticky?
+
+----- post 39 · Dec 23, 2014 7:05 am · netsirk75 -----
+This tutorial is great, it helped me get started in SID Wizard...just thought I'd ask here If you have used Sid wizard in Vice, save the tunes to an SD card, and then use an S2diec to read the tunes on a real commodore 64? Just wondering if there are any issues with creating on the emulator, and using a C64 with the tunes? I'm about to buy an S2DIEC and would like to know if anyone else is doing this with SID wizard tunes (swm files)? thanks!
+
+----- post 40 · Nov 18, 2016 10:35 am · ilter3o -----
+Hi everybofy, I've found lots of problems for saving tunes in Sid Wizard 1.7. I have a SD2IEC on my C64C with a SwinSid Inside. Well... the first track and progressive versions of it are saved but during the creation of a second idea I've noticed that it was impossible to store any progression of the work in terms of patterns mainly ( the sounds are well saved ) but no notes or other kind of datas and when I try to load the last saving what I get is just file with no new parts ( new patterns ) do You have any suggestions for this issue ? Thanx !!!
+
+                
+
+                
+			
+
+	
+		
+	
+
+	
+		Posts: 33-40 of 40
+
+	
+	
+	Pages Previous 1 2 3
+
+	You must login or sign up to post a reply
+
+	
+	ChipMusic.org  / Forums  / Tutorials, Mods & How-To's  / C64 Music for Dummies (c64 tutorial) 
+
+	
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
+
+$(function() {
+    $('.main-item').click(function(e) {
+        e.stopPropagation();
+        var tar = $(this).find('a').first();
+        if(tar.attr('onclick')) {
+            var j=tar.attr('onclick');
+            var f=new Function (j);
+            return f();
+        } else if (tar.attr('href')) {
+            window.location = tar.attr('href');
+        }
+    });
+});
+
+(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3339958af3023b5',t:'MTc4ODA5MDg0OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();

@@ -1,0 +1,1582 @@
+FastTracker 
+
+v2.08 
+
+”In a dream we are connected Siamese twins at the wrist ” 
+
+Manual 
+
+
+© 1996 Triton Productions and Under World Digital Publishing 
+
+
+
+Chapter one: Introduction 
+
+
+Chapter two: Setup 
+
+2.1. Setting up your devices 
+
+2.2 Layout 
+
+2.3 When running under DPMI 
+
+
+Chapter three: Effects 
+
+3.1 Appregio 
+
+3.2 Portamento up 
+
+3.3 Portamento down 
+
+3.4 Tone portamento 
+
+3.5 Vibrato 
+
+3.6 Portamento + Volume slide 
+
+3.7 Vibrato + Volume slide 
+
+3.8 Tremolo 
+
+3.9 Set panning position 
+
+3.10 Sample offset 
+
+3.11 Volume slide 
+
+3.12 Position jump 
+
+3.13 Set volume 
+
+3.14 Pattern break 
+
+3.15 E commands 
+
+3.15.1 Filter on/off (Amiga only!) 
+
+3.15.2 Fine portamento up 
+
+3.15.3 Fine portamento down 
+
+3.15.4 Set glissando control 
+
+3.15.5 Set vibrato control 
+
+3.15.6 Set fine-tune 
+
+3.15.7 Jump loop 
+
+3.15.8 Set tremolo control 
+
+3.15.9 Retrig note 
+
+3.15.10 Fine volume slide 
+
+3.15.11 Note cut 
+
+3.15.12 Note delay 
+
+3.15.13 Pattern delay 
+
+3.15.14 Funk it! (Not implemented) 
+
+3.16 Set speed 
+
+3.17 Set global volume 
+
+3.18 Global volume slide 
+
+3.19 Set envelope position 
+
+3.20 Panning slide 
+
+3.21 Multi retrig note 
+
+3.22 Tremor 
+
+3 23 Extra fine portamento 
+3.24 Volume column 
+
+3.24.1 Set volume 
+
+3.24.2 Volume slide 
+
+3.24.3 Fine volume slide 
+
+3.24.4 Set vibrato speed 
+
+3.24.5 Vibrato 
+
+3.24. 6 Set panning position 
+3.24 .7 Panning slide 
+3.24.8 Tone portamento 
+
+
+Chapter four: Utilities 
+
+
+
+4.1 Main screen: 
+
+4.1.1 BPM 
+
+4.1.2 Spd 
+
+4.1.3 Add 
+
+4.1.4 Ptn 
+
+4.1.5 Ln 
+
+4.1.6 Expd 
+
+4.1.7 Shnk 
+
+4.1.8 The instrament/sample selector 
+
+4.1.9 Scopes 
+
+4.2 Instrument Editor 
+
+4.2.1 What is an instrument / sample? 
+
+4.2.2 The volume envelope 
+
+4.2.3 The panning envelope 
+
+4.2.4 Tune 
+
+4.2.5 Fadeout 
+
+4.2.6 Vibrato sweep 
+
+4.2.7 The piano keyboard 
+
+4.3 Instrument Editor Extension (I.E.Ext.) 
+
+4.3.1 MIDI 
+
+4.3.2 Pitchbender range 
+
+4.4 Sample Editor 
+
+4.4.1 Play (Waveform, range, display) 
+
+4.4.2 Save range 
+
+4.4.3 Paste 
+
+4.4.4 Crop 
+
+4.4.5 Volume 
+
+4.4.6 X-Fade 
+
+4.4.7 8-Bit/16-bit 
+
+4.4.8 Minimise 
+
+4.5 Sample Editor Extension (S.E.Ext.) 
+
+4.5.1 Copy/Xchg Sample/Instrument 
+
+4.5.2 Backwards 
+
+4.5.3 Convert 
+
+4.5.4 Convert W 
+
+4.5.5 Echo 
+
+4.5.6 Morph 
+
+4.5.7 Resample 
+
+4.5.8 Mix sample 
+
+4.5.9 Draw mode 
+
+4.6 Advanced edit functions 
+
+4.7 CD-ROM Dumper 
+
+
+Chapter five: Keyboard 
+
+5.1 Cursor moves 
+
+5.2 Cut/Copy/Paste 
+
+5.3 Miscellaneous 
+
+5.4 Window switching 
+
+5.5 Instrument select 
+
+5.6 Command/Volume macro 
+
+5.7 Transpose 
+
+5.8 Keys in the CD-Dumper 
+
+
+Chapter six: Troubleshooting 
+
+6.1. Starting up problems 
+
+6.2. True sound problems. 
+
+6.3. File related questions 
+
+6.4. Effects and utilities 
+
+6.5. Soundcard problems 
+
+6.6. Other problems and questions 
+
+
+
+(Chapter one: Introduction 
+
+’’See the devil may do as the devil may care... ” 
+
+
+We started working on FastTracker 2.0 in June-93. Our ambition was to write a music 
+program that could set a new standard in the confused PC-scene. Right now there's too many 
+programs out there, all with a new module format. We wrote FT2 so that it could last for a 
+few years, except from hardware updates. 
+
+What we've tried to do is not multiplying all figures by 256, we've tried to make composing 
+easier. Some other tracker designers have tried to revolt the music scene by allowing you put 2 
+or 3 times more effects into your song. Who want to do more effects? We made instruments 
+instead of a bunch of effect columns. We hope we've succeeded to reach our ambitions and we 
+hope you'll find Fasttracker 2 useful. 
+
+
+Fredrik Fluss and 
+
+Magnus Hogdahl, the programmers 
+
+This manual is an extension of the help file available in FT2 with examples included for all the 
+functions. I started writing this manual in June -95 but due to factors as summer holidays and 
+school the project has been down until now, January -96. I hope this manual will give the 
+beginners some guidance. 
+
+The quotes after every chapter headline are by Smashing Pumpkins. 
+
+
+You can contact me at: 
+
+
+Urban Jonsson, February, 1996 
+
+
+E-mail: 
+
+gy93urjo@timra.se (until summer -96) 
+BBS: 
+
+Little Savage +46-(0)60-415 82 (node 1) 
++46-(0)60-417 85 (node 2) 
+(drop a message to UBE) 
+
+
+Snail mail: 
+
+UWP 
+Box 52 
+
+860 33 Bergeforsen 
+Sweden 
+
+
+
+
+HAPTER TWO: 
+
+
+Setup 
+
+
+”Despite all my hate I’m just a rat in a cage” 
+
+
+2.1. Setting up your devices 
+
+First thing you must do is to enter the configuration screen. This is easiest done by pressing 
+the button at the main screen called ’’Configuration” or pressing Left-Ctrl-C or pressing Left- 
+Ctrl-1. 
+
+Now it’s time to choose your output and sample devices. You simply do this by pressing the 
+button besides your soundcard (If the key deselects please read the trouble shooting chapter). 
+Do the same with you sample device (Note that you can use different output and sample 
+devices). 
+
+If you use Soundblaster or Soundplayer you might want to change the mixing frequency or 
+else your tunes will sound very bad. If your computer is a 486+ with a Soundblaster (Classic, 
+Pro or 16) or a Soundplayer you can use interpolation to get better sound quality. To improve 
+your soundquality you can enable the 16-bit mixing, this enhances the precision in the mixing 
+routine but it requires more CPU time. You can also enable stereo, but then your Soundblaster 
+Pro cannot play at more than 22050Hz. And while we’re at the frequency, the frequency table 
+works like this: the linear frequency table makes all pitch bends to run in constant speed, 
+independent of the current frequency. If you switch this one, on a finished song, it might 
+sound strange if the sound uses portamentoes. 
+
+There is currently no support for Pro Audio Spectrum cards. 
+
+2.2 Layout 
+
+Press Ctrl-2 or ’’Layout” at the left side of the screen. 
+
+2.2.1 Pattern layout 
+
+Patterstrech, to insert five pixels between every pattern row. 
+
+Hexnumbering, to alter between Hexadecimal and Decimal counting on the pattern 
+numbering lines. If you use patterns that are longer than 99 lines, you should use hex 
+counting since there are only 2 digits in the line number column. 
+
+Accedential, to choose between # and b in your tune. 
+
+Show zeroes, shows/hides all zeroes not in use in pattern. 
+
+Frameworks, enables/disables frameworks around pattern. 
+
+Line number colours, makes every fourth line number highlit. 
+
+Channel numbering, enables/disables channel number at the top of every track. 
+
+
+
+2.2.2 Mouse shape 
+
+
+You simply choose pointer by pressing down the button of your choice. You can choose 
+between a sand-glass (Vogue) and a clock (Mr. H) as your busy mousepointer. 
+
+2.2.3 Pattern modes 
+
+Show volume column, shows/hides the volume column, this is of use when your 
+composing a .MOD module. 
+
+Maximum visible chn., number of channels to visible at the same time. Note that when 
+you’ve got the volume column visible you can only have eight channels visible. 
+
+2.2.4 Keyb. Layout 
+
+Changes the results in text edit boxes. All other keyboard functions will remain the same in all 
+layouts. 
+
+2.3 When running under DPMI (Win3.x, Win95, WinNT or OS/2) 
+
+If the program is not working properly, you should run the program from plain DOS. You 
+should also disable background execution, for avoiding problems when switching between 
+tasks. Screen savers also might cause problems. 
+
+2.3.1 Setting up DPMI mode 
+
+In config screen #1 there’s a drag box named ’’Maximum DPMI memory”. This is the 
+maximum amount of memory FT2 allocates from the system. It is used for limiting the 
+memory allocated when sampling or reading data from CD-ROM. Also note that the measured 
+amount of free memory is not working under DPMI. Instead, it shows the memory allocated 
+from the system, but not actually used. 
+
+
+
+
+HAPTER THREE: 
+
+
+^Effects 
+
+
+"We’ll make things right, we’ll feel it all tonight!” 
+
+
+The effect column is the row located to the right ex: C-5 — 000 
+
+This one 
+
+The first number is what effect to use and the two following is the data for the first one. All 
+effects are entered in hexadecimal. The word tick goes back to the Amiga and means number of 
+VBL’s to wait until playing next row. When using a command FT2 will use the first tick to 
+play the note and the following ticks for effect. 
+
+Ex: 
+
+— — F03 <- Sets speed to three ticks per row 
+
+C-5 1 - AOF 
+
+
+Tick 1: Plays sample at C-5 
+Tick 2: Slides the volume down $F 
+Tick 3: Slides the volume down $F 
+
+If effect is stated as fine FT2 will use speed per row instead of per tick. 
+Things written inside brackets are optional. 
+
+3.1 Apperigo 
+
+Syntax: 0 + 1st halftone + 2nd halftone 
+
+
+Ex.: C-l 1-037 
+
+At tick 1: Plays C-l tick #1. 
+
+At tick 2: Plays C-l + 3 Notes = D#1 tick #2. 
+
+At tick 3: Plays C-l + 7 Notes = G-l tick #3. 
+
+3.2 Portamento up 
+
+Portamento is used to slide the sample pitch up or down. This is done using the period value. 
+If Amiga frequency table is used, the sliding will be non-linear (the speed depends on the 
+frequency). 
+
+Syntax: 1 + speed 
+
+
+Ex: C-5 1 — 103 -> Bends the sample down three halftones per tick 
+
+
+
+— — 103 -> Bends the sample down three halftones per tick 
+
+3.3 Portamento down 
+
+Bends the sample down as stated above 
+Syntax: 2 + speed 
+
+Ex: C-5 1 — 203 -> Bends the sample down 
+
+— — 203 -> Bends the sample even more down 
+
+3.4 Portamento to note 
+
+This command is used together with a note, and will slide to its frequency. If glissando (E3) is 
+used, the frequency will be rounded to the nearest halftone. Portamento will not bend further 
+than the first last says. 
+
+Syntax: Note + 3 + Speed to bend the sample. 
+
+Or 3 + Speed to bend the sample if the command been used before in this channel. 
+
+Ex: D-6 1 — 000 -> Plays the sample at D-6 
+C-5 1 — 303 -> Bends the sample down 
+
+— — 3F0 -> Bends the sample down to C-5 
+
+3.5 Vibrato 
+
+Adds vibrato to the channel with a rate and speed. Set vibrato control (E4) can be used to 
+change the vibrato waveform (se 3.15.4). 
+
+Syntax: 4 + Rate + Depth 
+
+3.6 Tone portamento + Volumeslide 
+
+This command will execute both tone portamento and volume slide. The speed is used for the 
+volume slide. 
+
+Syntax: 5 + Speed 
+
+3.7 Vibrato + Volumeslide 
+
+Syntax: 6 + Speed 
+
+This command will execute both vibrato and volume slide. The speed is used for the volume 
+slide. 
+
+
+3.8 Tremolo 
+
+
+
+Syntax: 7 + Rate + Depth 
+
+
+Tremolo adds vibrato to the current volume. The syntax is exactly as for the vibrato command. 
+
+3.9 Set panning position 
+
+Sets the panning position for a track until a new note is played 
+Syntax: [Note] 8 + Panning Position 
+
+Ex: C-5 1 — 800 -> Sets the panning position to the left 
+
+— 8FF -> Sets the panning position to the right 
+C-5 1 — 000 -> Resets the panning position to defined 
+
+in the instrument editor (see x.xxx) 
+
+NOTE: GUS can only handle 16 different panning positions so the last digit has no effect on a 
+GUS. 
+
+3.10 Sample offset 
+
+Syntax: Note + 9 + Sample offset 
+
+Ex: C-5 1 — 908 -> Starts playing the sample 2kb later if the smp is 8-bit. 
+
+— 9FF-> Nothing! 
+
+NOTE: The sample offset data will be multiplied with $100 (256). That limits this command 
+to samples <64kb. 
+
+3.11 Volumeslide 
+
+3.11.1 Volumeslide up 
+
+Syntax: [Note] A + Slide speed + 0 
+
+Ex: C-5 1 —[C20]-> Plays the sample at volume $20 (See x.13) 
+
+— A10-> Slides the volume up. 
+
+3.11.2 Volumeslide down 
+
+Syntax: [Note] A + 0 + Slide speed 
+
+Ex: C-5 1 —[C20]-> Plays the sample at volume $20 (See x.13) 
+
+— A01 -> Slides the volume down. 
+
+
+
+NOTE: One of the data fields must be 0 or this command won't work. If no volume is 
+specified the sample will be played at defined volume in the instrument editor (see 4.xxx) 
+
+3.12 Jump songposition 
+
+Syntax: B + Songposition 
+
+Jumps to the specified song position and play the pattern from the beginning. 
+
+3.13 Set volume 
+Syntax C + Volume 
+Sets the sample volume. 
+
+Ex: C-5 1 — [C40]-> Plays the sample at volume $40 
+— CIO-> Changes the volume to $10 
+
+NOTE: The volume can't be greater than $40 If no volume is specified the sample will be 
+played at defined volume in the instrument editor (see 4.xxx) 
+
+3.14 Pattern break 
+
+Syntax: D + Pattern position 
+
+Breaks the current pattern, jumps to next pattern and start playing at specified position. 
+
+Ex: — — D16 -> Breaks the pattern and starts then next pattern at 
+position $16 
+
+3.15 E Commands 
+
+3.15.1 Filter on / off 
+
+Syntax: E + 0 + 1 to make your .MOD file sound terrible on an Amiga. 
+
+This effect is not implemented in FT2 due to the fact that it's totally useless. 
+
+3.15.2.1 Fine portamento up 
+
+Syntax: El + Speed 
+
+This command works as portamento up/down, but is only slides up once. 
+
+
+3.15.2.2 Fine portamento down 
+
+
+
+Syntax: E2 + Speed 
+
+
+This command works as portamento up/down, but is only slides up once. 
+
+3.15.3 Set glissando control 
+
+Syntax: E3 + Status 
+
+If Status is =1, the frequency when using tone portamento will be rounded to the nearest 
+halftone. 
+
+3.15.4 Set vibrato control 
+
+Syntax: E4 + Type 
+
+This command controls the vibrato waveform. 
+
+Type: 0 = Sine 
+
+1 = Ramp down 
+
+2 = Square 
+
+If you add 4 to the type, the waveform will not be retrigged when a new instrument is played. 
+
+3.15.6 Set fine-tune 
+
+Syntax: E5 + Tune 
+
+This command should be used together with a note. It will cause another fine-tune value to be 
+used. 
+
+3.15.7 Pattern loop 
+
+Syntax: E6 + Count 
+
+If count is zero, the beginning of the loop will be specified. When a non-zero value is used, the 
+pattern will be looped from the loop start. 
+
+3.15.8 Set tremolo control 
+
+Syntax: E7 + Type 
+
+This command works exactly as set vibrato control, but the tremolo waveform will be changed 
+instead. 
+
+
+3.15.9 Retrig note 
+
+
+
+Syntax: E9 + Interval 
+
+
+Retriggs the note with the specified interval. 
+
+3.15.10 Fine volumeslide 
+
+3.15.10.1 Fine volumeslide up 
+
+Syntax: EA + Speed 
+
+This command works as the usual volume slide, but it will only slide once. 
+
+3.15.10.2 Fine volume slide down 
+
+Syntax: EB + Speed 
+
+This command works as the usual volume slide, but it will only slide once. 
+
+3.15.11 Note cut 
+
+Syntax: EC + Tick 
+
+Cuts the note at the specified tick. Note that it will only set the volume to zero, and the 
+sample will still be played. 
+
+3.15.12 Note delay 
+
+Syntax: ED + Ticks 
+
+This command will delay the note the selected number of ticks. 
+
+3.15.12 Pattern delay 
+
+Syntax: EE + Notes 
+
+This command will delay the pattern the selected number of notes. 
+
+3.16 Set speed / tempo 
+Syntax: F + speed / tempo 
+
+This command sets the speed between $1 and $1F. $20 -> $FF sets the tempo (BPM). The 
+BPM is correct at speed 06. 
+
+
+Ex: — — F03 -> Sets the speed to 03 
+
+
+
+— — F40 -> Sets the tempo to 54 BPM 
+
+3.17 Set global volume 
+
+Syntax: G + volume 
+
+Sets the global volume. The volume should not be greater than $40. 
+
+3.18 Global volume slide 
+
+Syntax: H + Up speed + Down speed 
+
+This command works exactly as volume slide, but it slides the global volume instead. 
+
+3.19 Set envelope position 
+Syntax: L + Position 
+Changes the envelope position. 
+
+3.20 Panning slide 
+
+Syntax: P + Right speed + left speed 
+
+This command slides the panning position. It works like the volume slide. 
+
+3.21 Multi retrig 
+
+Syntax: R + Interval + Volume change 
+
+This is an extended version of the retrig command. 
+
+Volume change: 
+
+0 = None 8 = Unused 
+
+1=-1 9 = +1 
+
+2 = -2 A = +2 
+
+3 = -4 B = +4 
+
+4 = -8 C = +8 
+
+5 = -16 D = +16 
+
+6 = *2/3 E = *3/2 
+
+7 = *1/2 F = *2 
+
+3.22 Tremor 
+
+
+Syntax: T + On time + Off time 
+
+
+
+This weird command will set the volume to zero during off time number of ticks. It is included 
+for STM compatibility. 
+
+
+3.23 X commands 
+
+3.23.1 Extra fine portamento up 
+
+Syntax: XI + Speed 
+
+This command works as fine portamento up/down, but the speed will be divided by four. 
+
+3.23.2 Extra fine portamento down 
+
+Syntax: X2 + Speed 
+
+This command works as fine portamento up/down, but the speed will be divided by four. 
+
+3.24 Volume column 
+
+3.24.1 Set volume 
+
+Syntax: 00..40 
+See: 3.13 
+
+3.24.2 Volumeslide 
+
+3.24.2.1 Volumeslide up 
+
+Syntax: + and Speed 
+See: 3.11.1 
+
+3.24.2.2 Volumeslide down 
+
+Syntax: - + Speed 
+See: 3.11.2 
+
+3.24.3 Fine volumeslide 
+
+3.24.3.1 Fine volumeslide up 
+
+Syntax: U + Speed 
+See: 3.15.10.1 
+
+3.24.3.2 Fine volumeslide down 
+
+Syntax: D + Speed 
+
+
+
+See: 3.15.10.2 
+
+
+3.24.4 Set vibrato speed 
+Syntax: S + Speed 
+
+3.24.5 Vibrato 
+
+Syntax: V + Speed 
+See: 3.5 
+
+3.24.6 Set panning position 
+
+Syntax: P + Panning Position 
+See: 3.9 
+
+3.24.7 Panning slide 
+
+3.24.7.1 Panning slide right 
+
+Syntax: R + Speed 
+See: 3.20 
+
+3.24.7.2 Panning slide left 
+
+Syntax: L + Speed 
+See: 3.20 
+
+3.24.8 Tone portamento 
+
+Syntax: M + Speed 
+See: 3.4 
+
+
+
+
+HAPTER FOUR: 
+
+
+
+”Love is suicide! ” 
+
+
+TILITIES 
+
+
+4.1 Main screen: 
+
+
+4.1.1 BPM (Beats per minute): 
+
+The BPM setting defines how fast (ticks/second) the music player will run. 125 BPM 
+<-> 50 Hz. Number of player ticks/second = BPM*2/5 
+
+4.1.2 Spd, Speed: 
+
+Speed = number of player ticks/pattern line. 
+
+4.1.3 Add: 
+
+"Add" is the number of pattern lines the cursor jumps when you edit a note. 
+
+4.1.4 Ptn: 
+
+The current pattern number. 
+
+4.1.5 Ln: 
+
+The number of lines for the current pattern. Up to $100 lines. Note that FT2 won't 
+warn you if you decrease this value. The notes at the bottom line will be thrown out to 
+the binary space. 
+
+4.1.6 Expd: 
+
+Expand pattern. Inserts a blank line after each pattern line. Useful if you want to 
+convert a pattern that runs in speed 2*x to a pattern that runs in speed x. 
+
+4.1.7 Shnk: 
+
+Shrink pattern. Deletes all odd pattern lines. 
+
+4.1.8 The instrument/sample selector: 
+
+
+The instrument that has a mark on it's name string, is the destination instrument. 
+
+
+
+The instrument that has a mark on it's number, is the source instrument. The same goes 
+for the samples. You change the name on an instrument/sample by clicking the right 
+button. 
+
+4.1.9 Scopes: 
+
+Left button: Turn channel on/off. 
+
+Right button: Turn channel multi-record/edit on/off. 
+
+Left + right button: Solo on/off. 
+
+4.2 Instrument Editor: 
+
+
+4.2.1 What is an instrument / sample?: 
+
+A Fasttracker 2 instrument is: 
+
+1 Volume envelope 
+1 Panning envelope 
+1 Auto-vibrato definition 
+1..16 Sample(s) 
+
+1 Keyboard split definition 
+1 MIDI definition 
+
+A Fasttracker 2 sample is: 
+
+1 Volume/Panning/Fine-tune definition 
+1 Relative tone. 
+
+1 Waveform. 
+
+The volume, panning, tune and relative tone is defined for EACH SAMPLE in an 
+instrument. All other information is defined for the entire instrument. 
+
+4.2.2 The volume envelope: 
+
+An instrument's volume is defined by it's envelope curve. If the instrument has a sustain 
+point, the envelope will stop at the that point until a key-off note has been played. 
+When a key-off note is played, the "fadeout" begins. One pixel in the envelope window 
+corresponds to one player-tick. If the BPM is 125, you'll consume 50 pixel/second. The 
+window's "size" is about 6 seconds. If you press the right button at some of the 
+predefine buttons, you'll store the current envelope into that predefine cell. The 
+predefines are stored in the configuration file. Predefine number 1 is the default 
+envelope. This means that if you load a sample, it will get all envelope information from 
+predefine number 1, including the vibrato. Note that if you turn the volume-envelope 
+off, you don't turn the vibrato off. 
+
+4.2.3 The panning envelope: 
+
+
+Same as above, except from that the vibrato is not connected to the panning envelope. 
+
+
+
+4.2.4 Tune: 
+
+
+The fine-tune resolution has been changed from a signed nibble (-8..+7) to a signed byte 
+(-128..+127). 
+
+4.2.5 Fadeout: 
+
+This is the fadeout speed. 
+
+4.2.6 Vibrato sweep: 
+
+This is the time (in player ticks) that will bypass until the auto-vibrato will reach it's 
+final amplitude. 
+
+4.2.7 The piano keyboard: 
+
+The piano keyboard defines the key split for an instrument. To change the key split, 
+choose a sample within the instrument and then "draw" on the keyboard. The notes 
+played with the current instrument are indicated on the keyboard. 
+
+4.3 Instrument Editor Extension: (I.E.Ext.1 
+
+4.3.1 MIDI: 
+
+'p.' stands for "program" (instrument). Several instruments can have the same transmit 
+channel but with different programs. FT2 changes the programs on the MIDI-channels 
+instantly during play if different programs are used. Different programs cannot be 
+played at the same channel at the same time though. If you change this value, the 
+program number will be transmitted to the synthesiser immediately. Some synthesisers 
+transmit program change information. If the current instrument in FT2 is a MIDI-instr. 
+with the same channel as the received program change, it's MIDI-program will be 
+changed. If your synthesiser doesn't transmit program change, there's no point in 
+changing it on the synthesiser, do it in FT2 instead. 
+
+4.3.2 Pitchbender range: 
+
+This value defines how many notes the instrument on the synthesiser can be 
+pitchbended. FT2 uses this value for transmitting the portamento up/down and tone- 
+portamento commands correctly. The MIDI-pitchbend works correctly only with linear 
+frequency table. 
+
+4.4 Sample Editor: 
+
+
+4.4.1 Play (Waveform, range, display): 
+
+
+
+Plays the current sample with tone display above the "stop" button. Note that respect 
+is taken to the particular sample's relative tone. 
+
+4.4.2 Save range: 
+
+Stores the range specified in the current sample directory. 
+
+4.4.3 Paste: 
+
+The sample data in the copy buffer is stored INTO the specified range. 
+
+4.4.4 Crop: 
+
+Cuts everything but the range. Nothing is changed in the copy buffer by this operation. 
+
+4.4.5 Volume: 
+
+Changes volume on the range. 
+
+4.4.6 X-Fade: 
+
+This is a tool for making smooth loops. Specify a range that covers the first loop point. 
+Make sure that there is as much space after the second loop point as the range bypasses 
+the first loop point. Press the X-fade button. 
+
+4.4.7 8-Bit/16-bit: 
+
+If you load a 16-bit sample without header, FT2 assumes that it's an 8-bit sample. When 
+pressing the 16-bit button, do not press "convert" when the request is made. 
+
+4.4.8 Minimise: 
+
+This function cuts the part of the sample that is beyond the second loop point. 
+
+4.5 Sample Editor Extension: (S.E.Ext.) 
+
+4.5.1 Copy/Xchg Sample/Instrument: 
+
+The source is specified in the line numbering column of the instr./sample lists in the 
+upper-right comer of the screen. The destination is the current instr./sample. 
+
+4.5.2 Backwards: 
+
+Operates on the range. 
+
+
+4.5.3 Convert: 
+
+
+
+Converts the entire sample fro m/to signed/unsigned. 
+
+
+4.5.4 Convert W: 
+
+Swaps the byte order to/from Intel from/to Motorola standard on the entire sample. 
+You'll need this function if you import 16-bit samples with Motorola byte-ordering (ex. 
+Kerzweil K2000 samples.) 
+
+4.5.5 Echo: 
+
+Operates on the entire sample. 
+
+4.5.6 Morph: 
+
+Creates a series of samples from the destination sample to a another sample in the same 
+instrument. 
+
+4.5.7 Resample: 
+
+Operates on the entire sample. The sample's relative tone is changed with respect to the 
+resampling rate. 
+
+4.5.8 Mix sample: 
+
+Mixes the source with the destination to the source. 
+
+4.5.9 Draw mode: 
+
+By pressing the right mouse button in the sample window, you can draw your 
+waveforms manually. 
+
+4.6 Advanced edit functions: 
+
+
+4.6.1 Copy/Paste masking: 
+
+The masking is used for copying/pasting only parts of a "note-cell". The different parts 
+of a "note-cell" is Note, Instr. nr., Volume, Effect nr & Effect data. As you can see in the 
+window there are 3 columns of "enable/disable buttons" which has the letters C,P & T 
+above. C means copy, it controls which parts that goes into the copybuffer. P means 
+paste and controls which parts that goes out from the copybuffer. T means 
+transparency. If it's enabled the pasting doesn't overwrite data with nil-information, 
+only with a note or a number <> 0. 
+
+The cut functions works like pasting with zero-data. This means that the cutting is 
+controlled with P-column (or T-column). When you copy data with masking, the 
+
+
+
+disabled parts are not cleared in the copybuffer. (Making it possible to collect data from 
+several locations into the copybuffer.) 
+
+
+4.7 CD-ROM Dumper: 
+
+Recording: 
+
+Raw-data reading is not supported by all CD-ROM drives. If recorder replies "Drive 
+not ready." or something similiar, you might have the wrong type of drive. The "Sync" 
+option enables synchronisation between every read from the CD. Enable this if you get 
+a "clicking" noise in the samples. Disable it if you don't need it, since reading gets much 
+slower. If you still get noise, or it doesn't work at all, you may try another program. We 
+have tested the program on some CD-ROM drives, but as always on the PC it doesn't 
+help much. 
+
+
+
+
+HAPTER FIVE: 
+
+
+
+YBOARD 
+
+
+"Today is the greatest day I’ve ever known, can’t live for tomorrow, I might have that long.. 
+
+
+5.1 Cursor moves: 
+
+F9..F12 
+
+Jump in pattern. 
+
+PageUp 
+
+Jump 16-lines upwards. 
+
+PageDown 
+
+Jump 16-lines downwards. 
+
+Home 
+
+Jump to line 0. 
+
+End 
+
+Jump to last line. 
+
+Tab 
+
+Jump to next track. 
+
+Sh+Tab 
+
+Jump to previous track. 
+
+Alt+Q..I 
+
+Jump to track (0..7) MOD N-Channels. 
+
+Alt+A..K 
+
+Jump to track (8.. 15) MOD N-Channels. 
+
+
+5.2 Cut/Copy/Paste: 
+
+
+Del Delete note or volume column at cursor. 
+
+Sh+Del Delete note, volume and effect at cursor. 
+
+Ctrl+Del Delete volume and effect at cursor. 
+Alt+Delete Delete effect at cursor. 
+
+Ins Insert note at cursor. 
+
+Sh+Ins Insert line at cursor. 
+
+Backsp. Delete previous note. 
+
+Sh+Backsp Delete previous line. 
+
+Alt+CursorMark block. 
+
+Sh+F3 Cut track. 
+
+Sh+F4 Copy track. 
+
+Sh+F5 Paste track. 
+
+Ctrl+F3 Cut pattern. 
+
+Ctrl+F4 Copy pattern. 
+
+Ctrl+F5 Paste pattern. 
+
+Alt+F3 Cut block. 
+
+Alt+F4 Copy block. 
+
+Alt+F5 Paste block. 
+
+5.3 Miscellaneous: 
+
+Right Ctrl. Play song. 
+
+Alt Gr Play pattern. 
+
+Right shift Record pattern. 
+
+
+
+Space Stop/Edit. 
+
+PrintScrn Full screen edit on/off. 
+
+F1..F7 Select octave. 
+
+(1/2) Increase cursoradd. 
+
+Sh+(l/2) Decrease cursoradd. 
+
+CapsLock Enter Keyoff-"note". 
+
+Sh+Left Increase song position. 
+
+Sh+Right Decrease song position. 
+
+Ctrl+Left Increase pattern number. 
+Ctrl+Right Decrease pattern number. 
+Ctrl+(l/2) DOS shell. 
+
+5.4 Window switching: 
+
+Ctrl+ 
+
+A Advanced edit. 
+
+B About. 
+
+C Configuration. 
+
+D Disk operations. 
+
+E Sample editor extension. 
+
+H Help. 
+
+I Instrument editor. 
+
+M Instrument editor extension. (MIDI) 
+
+N Nibbles. 
+
+P Pattern. 
+
+R CD-Dumper. (Reader) 
+
+S Sample editor. 
+
+T Transpose. 
+
+X Main screen, (almost alt+X) 
+
+Z Full screen edit. (Z for siZe?) 
+
+1 Configuration # 1. 
+
+2 Configuration #2. 
+
+3 Configuration #3. 
+
+5.5 Instrument select (Numeric keypad): 
+
+Top 4 keys Select instrument block. 
+
++ and Top 4 keys Select instrument block + 4. 
+Enter Select instrument bank. 
+
+0 Select no instrument. 
+
+1.. 8 Select instrument in block. 
+
+, Clear instrument. 
+
+Sh+, Clear sample. 
+
+Sh+Up Select previous instalment. 
+
+Sh+Down Select next instrument. 
+
+
+
+5.6 Command/Volume macro: 
+
+
+Alt+1.. 0 Write command/volume at cursor. 
+Sh+Alt+1..0 Read command/volume at cursor. 
+
+
+5.7 Transpose: 
+
+
+Sh+F7 
+
+Sh+F8 
+
+Ctrl+F7 
+
+Ctrl+F8 
+
+Alt+F7 
+
+Alt+F8 
+
+Sh+Fl 
+
+Sh+F2 
+
+Ctrl+Fl 
+
+Ctrl+F2 
+
+Alt+Fl 
+
+Alt+F2 
+
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+Transpose 
+
+
+current instrument in track down, 
+current instrument in track up. 
+current instrument in pattern down, 
+current instrument in pattern up. 
+current instrument in block down, 
+current instrument in block up. 
+all instruments in track down, 
+all instalments in track up. 
+all instruments in pattern down, 
+all instruments in pattern up. 
+all instruments in block down, 
+all instruments in block up. 
+
+
+5.8 Keys in the CD-Dumper: 
+
+
+Right Ctrl. 
+
+Play. 
+
+Alt Gr 
+
+Play. 
+
+Right shift 
+
+Record. 
+
+Space 
+
+Stop. 
+
+Ctrl+Left 
+
+Increase track number. 
+
+Ctrl+Right 
+
+Decrease track number. 
+
+Up 
+
+Fast forward. 
+
+Down 
+
+Rewind. 
+
+Left 
+
+Faster forward. 
+
+Right 
+
+Fast rewind. 
+
+Ctrl+X 
+
+Exit. 
+
+
+
+
+HAPTER SIX: TROUBLE SHOOTING 
+
+"The world is a vampire... ’’ 
+
+
+6.1. Starting up problems. 
+
+Q: I can't get FT2 to start. 
+
+A: It could have something to do with your BIOS. If you have the AMI BIOS and got the 
+boot vims check enabled, disable it and you'll have no problems to get it going. 
+
+
+Q: I can't get FT2 to start, I only get the message: This program requires VGA. And I have a 
+VGA card installed. 
+
+A: You have probably got a B/W monitor and as Triton didn’t include support for B/W 
+monitors, the only thing you can do is to buy yourself a colour monitor or pray that they 
+include it in the next version. 
+
+6.2. True sound problems. 
+
+Q: I can’t get FT2 to play in stereo. 
+
+A: Try to enable stereo in Config screen 1. If your problem is that you want to use the Amiga 
+"stereo-type" with the channel position L-R-R-L, then you can do it one way, the hard and 
+_very_ boring way: Use the P command in the volume column and set it to PO at channels 1, 
+4, 5, 8 .. 32. And PF at channels 2, 3, 6, 7 .. 31. That's very boring! The reason why every 
+channel is panned in the middle is that you can use the panning envelope (Instr.Ed. , Ctrl-I) to 
+create the most stunning panning effects on one channel! 
+
+
+Q: How can I control the channel to play the sample at when I'm test playing it? 
+A: You simply disable the key-jazz function in Config screen 3. 
+
+
+Q: How do I get FT2 to play the sample after I've released the key? 
+
+A: You make an envelope that outputs the sample at maximum volume before and after the 
+key release and set the fadeout value to 0. There is another way too: Just press down the left 
+shift button while you're playing the sample release the key and then left shift. 
+
+
+
+Q: I can't find the keyoff key on the keyboard. 
+
+
+A: In FT2.04 keyoff is located at Caps Lock. 
+
+
+Q: Why does my 16bit samples that are greater than 256kb loop at the wrong place on my 
+GUS? 
+
+A: This time Triton are completely without guilt! Due to a very bad construction by the guys 
+at Gravis that makes it impossible to play samples lager that 256kb. 
+
+6.3. File related questions. 
+
+Q: FT2 won't save my module as a .MOD file. 
+
+A: The problem is as follows: 
+
+1. You have used the linear frequency table. Change this in the Config screen 1 (Config, 
+CTRL-1). BUT! If you have used command as 3XX, 6XX or others that pitches the sample 
+up or down, it can sound a bit off key. 
+
+2. You have used envelopes in the instrument editor (Instr.Ed., CTRL-I). To disable the 
+envelopes, just press the button in the upper left corner of the envelope settings. FT2 uses the 
+first envelope setting as default when loading a new sample, to disable auto envelope disable 
+all XI functions (Vibrato, Panning position among others) and press right mouse button on the 
+button marked " 1" in both windows. 
+
+3. You still want to use the old .MOD format. ;) 
+
+6.4. Effects and utilities 
+
+Q: What is an Instrument? 
+
+A: An instrument is one or a group of samples that share the same envelopes. 
+
+
+Q: I can't get FT2 to load Ultrasound MIDI patches. 
+
+A: You must load them as an instrument not as a sample. 
+
+
+Q: Isn’t there a sample booster as in the Amiga ProTracker? 
+
+
+A: Yes, there is! You'll find it in the sample editor (CTRL-S) by pressing the volume button. 
+
+
+
+Q: How can I make FT2 time the samples correctly? 
+
+
+A: By using the EDX or the 9XX commands, you can delay the sample. 
+
+
+Q: I have a string and I want to play it from left to right speaker, there should be a way so you 
+pan one channel to right, one to left, then put the string in one place of the left pattern and 
+then to the right pattern. In FT2, the only way would be to load the instrument twice, and pan 
+it both ways and then use it, it is kind of waste. 
+
+A: You don't have to load the sample twice. You can use the panning slide function (R or L in 
+the volume-column) or you can use the set panning position (PX in the volume-column and 
+8XX in the effect-column). 
+
+6.5. Sound card problems. 
+
+Q: I can't FT2 to work with my SB, I've pressed the Soundblaster button in Config screen 1 
+but it wont work. 
+
+A: If you're an unlucky owner of a regular SB then I'm sorry, because Triton didn't get some 
+support from Creative Labs (shame CL!) to get the SB to work. If you're an owner of a SBP 
+or better (read: SB 16) the problem could be that you have forgotten to set your blaster 
+variable in AUTOEXEC.BAT or you've forgotten to set your 16-bit DMA. 
+
+
+Q: I can't get FT2 to work with my Pro Audio Spectrum card. 
+
+A: As it says in FT2: that function isn't implemented, yet! In a future version it MIGHT be, 
+but I wouldn't count on it, because PAS not that big or somekind of standard. 
+
+
+Q: On my SB FT2 stop after playing half a pattern. 
+
+A: You have the wrong IRQ. Change it in Config Screen 1. 
+
+
+Q: My GUS don’t work. FT2 accepts the GUS in Config but it won't play. 
+
+A: You have forgotten to load ULTRINIT.EXE, check your AUTOEXEC.BAT. 
+
+6.6. Other problems and questions. 
+
+Q: I've scored over five millions in Nibbles but the highscore wasn’t saved, what shall I do? 
+
+
+Al. GET A LIFE! ;) 
+
+
+
+A2. You must enable autosave in config or just save the .CFG file by pressing the "Save 
+config" button in config. 
+
+Q: Nibbles loops at the "The End" level is that the last? 
+
+A: Yes! Why do you think it's called "The End"? (See also answer A1 above) 
+
+Q: What do I get when 1 register FT2? 
+
+A: Basically, your name put in the contribution list. 
+
+Q: 1 can't find the DOS-shell key, where is it? 
+
+A: In FT2.07 the DOS-shell key is located at Ctrl+(l/2) (key below Esc) In versions before 
+2.04 there is none. 
+
+
+— End of file — 
+
+
+

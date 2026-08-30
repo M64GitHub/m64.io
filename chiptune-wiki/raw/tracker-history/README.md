@@ -1,0 +1,3 @@
+# tracker-history notes (provenance note)
+
+Six release-lineage files from Claudio Matsuoka's `tracker-history` repository (https://github.com/cmatsuoka/tracker-history, a dataset behind a tracker family-tree graph), fetched 2026-08-30 from the repository root: `protracker.txt`, `fasttracker.txt`, `screamtracker.txt`, `impulsetracker.txt`, `schism.txt`, `openmpt.txt`. Each entry gives name, author, date (with the evidence in a comment: exit messages, file dates, changelogs) and "Based on / Influenced by" relations. Some dates are marked as estimates in the files themselves; the wiki cites them as such.

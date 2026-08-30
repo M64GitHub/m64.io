@@ -1,0 +1,431 @@
+			     .
+  founded march 12, 1995   _| :            _____  t r a x w e e k l y  # 8 3
+	   ______________ |___|  _ _______/    /\___________________________
+	 /  ____________/ /\__\ _ _______/____/_____________________________
+	/  /  _________   \/__/    ______\    \_____________________________
+       /  /  /          `_  .  .~         \____\/                 _  __ ___
+      /  /  /     _____   . _ \                                __ ___ _/__/\
+     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/
+   _/__/  / ____/    /__\_________________________________  _____      ___ _
+  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /
+ /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/
+ /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\
+   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \
+  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /
+ /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /
+   /                                                 \____\/\____\ /  /  /
+  /  _____     _____     _____     _____     _____     _____      /  /  /
+ /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /
+ __/____/____/____/____/____/____/____/____/____/____/____/________/  /
+ __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/
+    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW
+
+----------------------------------------------------------------------------
+  | TraxWeekly Issue #83 | Release date: 02 Jan. 1997 | Subscribers: 909 |
+----------------------------------------------------------------------------
+
+
+/-[Introduction]------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+  Welcome to TraxWeekly #83.
+
+  We're off to a very small start here in the new year, featuring two
+ articles covering tracking techniques for Impulse Tracker.  Pinion's IT
+ tips continue for the third straight week, and Pulse corrects a few
+ mistakes and elaborates on a previous column.
+
+  We are again searching for dedicated people who have the time to write
+ for this newsletter.  We have recently lost the services of Zinc, who has
+ spent many hours putting many creative ideas and articles into this
+ publication.  Thanks for being with us, Zinc!
+
+  Specifically, some coverage of music competitions worldwide would be
+ appeciated greatly.  Email me at any time.
+
+  Until next week,
+						    Gene Wie (Psibelius)
+						    TraxWeekly Publishing
+						    gwie@csusm.edu
+
+
+/-[Contents]----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ ________  _________________________________________________________________
+ /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_
+<   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__
+ \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_
+ _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\
+
+
+  General Articles
+
+     1. Impulse Tracker Tip of the Week...............Pinion
+     2. More Impulse Tracker Tips.....................Pulse
+
+  Group Columns
+
+     3. Analogue
+
+  Advertisements
+
+     WAVS Needed!
+     Kinetic PC Musicdisk
+  
+  Closing
+
+     Distribution
+     Subscription/Contribution Information
+     TraxWeekly Staff Sheet
+
+
+/-[General Articles]--------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[1. Impulse Tracker Tip of the Week]-------------[by pinion (Ryan Hunt)]--
+
+ ---------------------------------------------------------------------------
+ Tip #3: Random melodies using volume swing
+ ---------------------------------------------------------------------------
+
+ <step one> Pick any melodic sample you like.
+
+ <step two> In the pattern editor do some type of scale, placing a note in
+ each row of the channel. It may be a good idea to give the sample some type
+ of NNA like 'note fade' (see tip2) so that the clipping doesn't make this
+ technique sound bad.  Also, try to give your run a decent amount of varia-
+ tion so that it's not too uniform.  You'll have an entire channel to fill
+ sp I'm sure you can think of something!  If you can't well... go get a good
+ scale out of a book or something.  I don't know!  Think Bach...
+
+ <step three> Set the instruments (you are in instrument mode aren't you!)
+ volume swing to 100%.
+
+ <step four> Sit back and let the laws of chaos do the composing. Well, this
+ is a bit of an exaggeration...I wouldn't try to compose an entire song like
+ this.  This trick is more of a novelty than anything, but if done with
+ discretion it has potentioal to be pretty cool.
+
+ If you need further information on this trick or have an idea for a Tip of
+ the Week email pinion@netcom.com
+
+ -pinion (phluid)
+ email: pinion@netcom.com
+ web  : www.acid.org/phluid/newmain.html
+
+----------------------------------------------------------------------------
+
+
+--[2. More Impulse Tracker Tips]-----------------------------------[Pulse]--
+
+ Hey! Thanks a heap for the columns in TW - just a little thing - feel free
+ to EMail me the hints first so that I can check for any mistakes...
+
+ Mostly, you have been very accurate, but this little point here is quite
+ significant:
+
+ 00 C-4 03 .. S74  |   <-- This note will ring out until you do a ^^^
+ 01 A#4 03 .. S73  |   <-- This note will sound out util the note in 
+ 02 ... .. .. ...  |       row 03 is played where as it will be abruptly
+ 03 C-5 03 .. ...  |       and uncerimoniously clipped.
+ 04 ... .. .. ...  |
+
+
+ The C-4 03 due to the S74 will NOT cut out at all... until you do a S70
+ (past note cut)..
+
+ The ^^^ will only affect the latest note playing. You can always check for
+ the number of virtual channels being used by checking the info-pages Tot
+ column
+
+ (maybe want to mention this in next week's IT tip of the week?)
+
+ Anyway....
+
+ I think an AWESOME tip would be an explanation of how to use templates - I
+ never used them myself until recently, but I find them one of the most
+ useful tools. (need any explanation of how to use templates?)
+
+ The best use for templates is for doubling samples or splitting pannings
+ etc.
+
+ Examples of things to template:
+
+ -------------------------------------------
+   C-4 01 .. X30 | C-5 01 .. XC0               <--- gives a nice stereo
+                                                    sorta effect on
+                                                    many samples.
+ -------------------------------------------
+   C-4 01 .. ... | C-4 02 .. ...               <--- sample doubling, which
+                                                    can be very effective
+ -------------------------------------------
+   C-4 01 .. ... | G-4 01 .. ... | C-5 01 .. ... <-- Open '5th' to provide
+                                                     background effect
+
+ The possibilities for templates are almost endless. The MOST useful
+ templates are the single-row templates, as they have extra player code
+ attached and have special conditions, etc.
+
+ Jeffrey Lim
+
+----------------------------------------------------------------------------
+
+
+/-[Group Columns]-----------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[3. Analogue]-------------------------------------------------------------
+
+                  ▄██▄  ▄▄▄▄  ▐██  ▄██▄ ▀█  ▄██▓▄   ▄████▄
+                 ▐█▓ █▓░▓█▀██  █▓▌▐██ █▓░▓▌▐█▀ ▀█▓░██▀  ▀▓█  
+                ░▓█▌ ▐█▌▐█▌ ██ ██ ▓█▌ ▐█▌▐▌ ▌   ▐█▌▐▌  ▄▄▄▄  
+                ▐██▀▀██▌▐██ ▐█▌█▌▐██▀▀██▌▐█  ▄▄▄ █▌▐▌  ▀▀██▌
+               ▄██▌  ▐█▓ ██▌ ▓█▀▄██▌  ▐█▓ ███▓▀▀ ▓ ▀▓▄▄▄██▓▒░
+                ▀▀   ██▌ ▀  ▀█▀  ▀▀   ██▌ ▀   ▀▀    ▀▀▀▀▄█
+                      ▀█▄              ▀█▄ Tsk aCid    ▐█▌     
+                         ▀                             ▀▀                           
+
+
+                       WELCOME TO THE WORLD OF ANALOGUE
+                       --------------------------------
+
+  Analogue is a tracking "society" consisting of members from different
+ parts of the world.  The purpose of Analogue is dissimilar to that of other
+ groups within the tracking scene.  We exist for no other reason than to
+ help each other (and new members) develop their individul style of tracked
+ music.  We are dependent on each other for critique and suggestion.
+        
+
+                                 STRUCTURE
+                                 ---------
+
+  Currently, Analogue is based on a mutual system of agreement.
+ When an issue comes up, the members of the group collectively decide upon
+ the group's actions.  With the exception of annual packs, Analogue members
+ release seperately.  This file can also be found in each release by an
+ Analogue member. In the case of a special release, each member submits what
+ he/she wants in the packaged release.  The pack is compiled by Mind Bender.
+
+  Analogue is now affiliated with Twilight, which produces ANSI, VGA, and
+ RIP on a monthly basis. Together, we hope to acheive a new level of music
+ and art quality. 
+
+
+                              ANALOGUE MEMBERS
+                              ----------------
+
+ Nick;                Email;                          Position;
+
+ Mind Bender     mind@demoscene.org               -co-founder/tracker
+ Marek           jtstor@planetx.bloomu.edu        -co-founder/tracker
+ Xenoc           zafran_f@mediasoft.net           -tracker/senior
+ Nova            fractal@istar.ca                 -tracker/senior
+ Beaner          beaner@op.net                    -tracker/senior
+ Vibrance        flake@istar.ca                   -coder/tracker
+ Zorro           dzawitz@patriot.net              -PR director
+ Cardiac Arrest  mdrom@interport.net              -staff
+ Coplan          coplan@thunder.ocis.temple.edu   -tracker
+ Cryptic Blood   tenorsax@auronline.com           -tracker
+ Arcade          chris.le@juno.com                -tracker
+ Purity Control  purectrl@ptd.net                 -tracker
+ Arclight        arclight_@geocities.com          -tracker 
+ Dataflow        m-34992@mailbox.swipnet.se       -tracker
+ Neuropsychosis  poohbear@webbernet.net           -tracker
+ Lord Pegasus    lpegasus@netcom.com              -tracker/"oldskool guy"
+ Rhythm Greene   rhythm@wpi.edu                   -tracker
+ Shaithis        shaithis@buffnet.net             -tracker
+ Sirrus          rudgep@rpi.edu                   -tracker  
+ CJTrack         cjtrack@student.adelaide.edu.au  -tracker
+
+
+
+                               APPLICATIONS
+                               ------------
+
+ To apply, visit our Analogue webpage at "http://www.twilghtproductions.com
+ /analogue" or try the mirror at "http://www.users.fast.net/~tcarey/analogue
+ if you have any problems. If you do not have access to a graphical web
+ browser, then either email us at the address listed below along with your
+ pertenant info and your application piece.
+
+        Mind Bender     - tcarey@fast.net
+
+ In your letter please include:  tracking experience (in months and in songs
+ written), personal info (real name and phone #, and how we can reach you
+ (email address).  Also include anything that you would like us to know
+ about yourself.  Please understand that we are very busy, and it may take
+ awhile for the application process.
+
+
+                               FINAL NOTES
+                               -----------
+
+  We hope that you like our music.  Each and every member has a
+ different style, and a different method of writing.  If you don't like the
+ style of one of our members, listen to songs by another.  With this many
+ styles in one group, you are bound to find one you like.  
+        
+                Thanks for your support.
+
+                -Analogue
+
+----------------------------------------------------------------------------
+
+
+/-[Advertisements]----------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[WAVs Needed!]------------------------------------------------------------
+
+   I am in need of some original voice samples for a few tunes I will be
+  putting on a CD.  This means that I need good quality, 16 bit samples.
+  .WAV is preferred.  The song I need this most for is an ambient tune,
+  but I have a couple of other songs (a trance and a triphop tune) that
+  need 'em.  If you think you could make up some decent voice samples,
+  please do.
+
+   If I use the sample, I will give you credit in the text. If it is an
+  excellent sample that becomes rather prominent in the song, I will at
+  least send you a free CD when it comes out.
+
+   Here are a few suggestions to give you ideas of what I need:
+
+    "And then, he was gone."
+    "Step to the left; to the right; to the left."
+    "There's something out there waiting for us."
+    "I don't think you understand."
+   
+   Those are only suggestions, feel free to make anything you want. One
+  little thing: Please enunciate.
+
+   Thanks!  You can send those WAVs to me (you can MP3 it if you really
+  have to) at rays@direct.ca or dcc them to me over IRC.
+
+     - zinc  /  rays@direct.ca
+
+----------------------------------------------------------------------------
+
+
+--[Kinetic PC]--------------------------------------------------------------
+ 
+                  K    i    n    e    t    i    c    P    C
+                 -------------------------------------------
+                  O   N   E       M   A   N       D   O   G
+                 -------------------------------------------
+                  N   u   t   c   a   s   e   Q   u   a   d
+ 
+                 · ─ ─── ────── ───────────── ────── ─── ─ ·
+                  One Man Dog                       Boliini
+                  Radiowaves                     Two Worlds
+                  Night Hours           Followed By The Sky
+                  Under The Rose             Out Of Nowhere
+                  Jigsaw Puzzle      The True Road I Travel
+                 · ─ ─── ────── ───────────── ────── ─── ─ ·
+ 
+                  A new musicdisk by Nutcase & Quad/Ktc PC.
+                  I'm a former amiga-musician and have been
+                  composing over 8 years now.  This  is  my
+                  first big project on PC.  Styles  of  the
+                  songs are various: piano, jazz, ambient,
+                  guitar etc. Totally techno-free musicdisk
+                  for the ppl that like melody and harmony.
+                  Full code for PC.  Single files (xm) for
+                  amiga users and other platforms...
+ 
+                   Signed: Nutcase/Ktc PC
+ 
+                 · ─ ─── ────── ───────────── ────── ─── ─ ·
+ 
+                   Available from:
+ 
+                  ftp.cdrom.com/pub/demos/incoming/music
+                   /disks/1mandog.zip
+                  ftp.arosnet.se/demo/musicdisk/1mandog.zip
+                  ftp.fm.org/incoming/1mandog.zip
+                  hagar.arts.kuleuven.ac.be/incoming/demos
+                   /musicdisk/1mandog.zip
+ 
+                  Links from my personal web-page:
+ 
+                   www.helsinki.fi/~saarnio/mymusic.htm
+ 
+                 · ─ ─── ────── ───────────── ────── ─── ─ ·
+ 
+                  From boldyrev@xxx.xxxx.xxx Mon Dec 30
+                  15:20:05 1996
+ 
+                  Hi Sami.. I ran across your new musicdisk
+                  -- 1 MANDOG. I think it is awsome! I am
+                  looking forward to see more products from
+                  you and your group. Keep up good work.
+ 
+                  Author of MacMikMod/DSM Player.
+ 
+                 · ─ ─── ────── ───────────── ────── ─── ─ ·
+
+----------------------------------------------------------------------------
+
+
+/-[Closing]-----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ TraxWeekly is available via FTP from:
+ ftp.cdrom.com /demos/incoming/info (new issues)
+ ftp.cdrom.com /demos/info/traxw/   (back issues)
+
+ To subscribe, send mail to:      listserver@unseen.aztec.co.za
+ and put in the message body:     subscribe trax-weekly [name] (NOT address)
+ To unsubscribe, mail same and:   unsubscribe trax-weekly (in message body)
+
+ Contributions for TraxWeekly must be formatted for *76* columns,
+ must have a space preceding each line, and have some measure of
+ journalistic value.  Please try to avoid the use of high ascii
+ characters, profanity, and above all: use your common sense.
+
+ Contributions should be mailed as plain ascii text or filemailed
+ to: gwie@csusm.edu before 11:00pm PST (North America) every Thursday.
+
+ TraxWeekly is usually released over the listserver and ftp.cdrom.com
+ every Friday at 10:00am PST (North America).
+
+ TraxWeekly does not discriminate based on age, gender, race, political
+ preferences, religious preferences, or eliteness.
+
+ The staff can be reached at the following:
+
+ Editor:   Psibelius (Gene Wie)..............gwie@csusm.edu
+ Staff:    Atlantic (Barry Freeman)..........atlantic@arcos.org
+           Benjamin Krause...................orogork@cs.tu-berlin.de
+           Fred (Fred Fredricks).............fred@paracom.com
+           Kal Zakath (John Townsend)........jtownsen@sescva.esc.edu
+           Kleitus (Seth Katzman)............katzms@rpi.edu
+           Mage (Glen Dwayne Warner).........gdwarner@vinson.navy.mil
+                                             gdwarner@ricochet.net
+
+ Graphic Contributors:
+           Cruel Creator . Stezotehic . Squidgalator2 . White Wizard
+
+ TraxWeekly is a HORNET affiliation.
+ Copyright (c)1995,1996 - TraxWeekly Publishing, All Rights Reserved.
+
+
+/-[END]---------------------------------------------------------------------
+---------------------------------------------------------------------------/
+                                         ::
+                                          :::                  :
+     . ..... ..............................:::.................:....
+                                            :::                :
+                                            ::::               :
+        .::::.      .:::::.:::.     ..::::  ::::               :
+       ::    ::    :::  .::  ::    ::     WW::::               :
+       ::.   ::   :::  .::  ::   .::        ::::               :
+        :::.::.  :::  .:: .::  .:::::...   :: :::..      ... ..: ...
+ ..::::::::::::::::  .:: .:::::::   ::::::::    ::::::.. ::: ::: :::
+                                                               :
+                                              until next week! =)
+           ..  ... .. ....... ............... .................:..... .. .
+                                                               :

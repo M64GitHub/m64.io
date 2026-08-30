@@ -1,0 +1,3 @@
+# FastTracker 2 manual (provenance note)
+
+`FT2-manual-v2.08.txt` — "FastTracker v2.08 Manual", (C) 1996 Triton Productions and Under World Digital Publishing, written by Urban Jonsson (UWP) in June 1995 – February 1996 as "an extension of the help file available in FT2 with examples". OCR text (DjVu text layer) of the scanned manual at https://archive.org/details/FastTrackerIIManual, fetched 2026-08-30 from https://archive.org/download/FastTrackerIIManual/FastTracker%20II%20Manual_djvu.txt (33,690 bytes). OCR errors are present (e.g. "Appregio", "C-l" for "C-1", "AOF" for "A0F", "Fluss" for "Huss"); treat values with care. The original FT2.DOC text file was not located.

@@ -1,0 +1,214 @@
+[[Image:Song Properties.png|thumb|300px|Song Properties window]]
+
+The attributes found in this page are very fundamental to the track, and none of them can be changed during playback using effect commands. On the contrary, some of these settings even affect how certain effect commands work. The module type you use dictates which properties can be enabled. For new modules, you can set anything available, but when you load an existing module, you almost never want to change these attributes unless you are trying to update the module or make it available in another format. 
+
+== Track Type ==
+
+Shows the current track format. Clicking on this field will open a popup menu where you can choose to convert the track to another format. However, in doing so, you may lose features when converting between formats that are too different from each other.
+
+=== Channels ===
+
+Shows the number of pattern channels that are used in this track. Clicking on the field will open a popup menu where you can choose the number of channels. Keep in mind that using [[Manual: Saving and exporting#Compatibility Export|Compatibility Export]] may further limit the amount of available channels.
+
+== Playback Flags ==
+
+=== Linear Frequency Slides ===
+
+On older trackers, frequency slides always slid the same amount of “periods” (an unit that is inverse to frequency). As the note scale is logarithmic, this means in practice that sliding by a given amount of periods becomes less “effective” in the lowest octave (i.e. it will not change the note as much) than in the higher octaves. Linear slides avoid this problem - slide parameters are defined by <sup>1</sup>⁄<sub>64</sub>th note units, so the same slide parameter will always slide the same amount of notes instead of the same amount of frequency. It is recommended to leave this setting enabled for new songs; changing it for existing songs can destroy note slides in those songs. Note that the MOD and S3M format never make use of linear slides.
+
+=== Fast Volume Slides ===
+
+Applicable only when loading S3M tracks, checking this box will apply volume slides on every tick (as opposed to every non-row tick), which was the default behaviour in Scream Tracker 3.0. Normally you should not need to change this setting as it will modify note slide behaviour.
+
+=== Extended Filter Range ===
+
+Normally the Cutoff frequency range is from 130 Hz to about 5 kHz. Checking this box allows for the instrument filtering range to be doubled, to a range of 130 Hz to about 10 kHz. 
+
+=== IT Old Effects ===
+
+When this checkbox is enabled, some effects commands (Vibrato, Tremor, Tremolo, Offset) are played like older versions of Impulse Tracker (and other trackers) would play them. Even if "old" might sound bad, you should not change this setting for existing tracks as some effects might play differently.
+
+=== Compatible Gxx ===
+
+Normally Portamento commands in IT tracks (Exx, Fxx, and Gxx) share their memory; that is, the last value used by one of them will be used by another if calling a 00 value. If you check this box, Gxx memory is '''not''' shared in IT tracks (unless the “Gxx shares memory with Exx and Fxx” compatibility flag is disabled, as may be the case with legacy modules created with older OpenMPT versions). This behaviour is more consistent with other trackers like Fasttracker 2, where tone portamento (3xx) and note slides (1xx and 2xx) do not share memory as well. Another notable difference is that any envelopes are reset when using Gxx next to a note + instrument combo (like in the XM format) and that the effect of a previous Key-Off note is nullified when Compatible Gxx is enabled.
+
+=== ProTracker 1/2 mode ===
+For MODs created with ProTracker 1 and 2, you might need to check this box for proper playback. Most of the settings in this mode are specific to modules created with ProTracker. Further MOD-specific quirks can be enabled and disabled in the [[#Compatibility Settings|Compatibility Settings]] below. OpenMPT automatically tries to detect if it should enable ProTracker 1/2 mode when loading MOD files.
+
+The following “Amiga-only” limitations and other quirks are applied in ProTracker 1/2 mode:
+* Instrument changes are always applied on the first tick, even if the note is delayed.
+* Tremolo and vibrato are not applied on the first tick of a row.
+* Notes that fall outside of the standard range (C-4 to B-6) will be coloured red to warn you that these notes cannot be played on a real Amiga, and they will also be corrected to the Amiga's frequency range.
+* Arpeggios are “wrapped around” if they exceed the Amiga note range — that is, if you play e.g. a B-6 with an arpeggio effect, the arpeggiated notes are wrapped around to octave 4.
+* The quirky behaviour of the 9xx command known from ProTracker 1/2 is emulated in this mode.
+
+=== Amiga Frequency Limits ===
+Only available in S3M and MOD files, this setting ensures that notes cannot exceed the Amiga frequency range. All notes are clamped to the Amiga’s three-octave range. Note slides can also not exceed this range. It is not recommended to enable this option in S3M files, as it just exists for backwards compatibility with old files that require it to be enabled.
+In MOD files, it can be enabled separately from ProTracker 1/2 mode to enforce the Amiga note range without emulating other ProTracker quirks. Amiga Frequency Limits are enabled automatically when loading 4 channel MOD files whose pattern note range does not exceed the Amiga note range.
+
+== Mix Levels ==
+
+Mix Levels dictate the volume ratio between samples, VST plugins and OPL instruments. Most importantly, the mix levels determine how samples are amplified before they are being sent through a plugin. For historical reasons, there are different modes for translating the Sample Volume and Synth Volume sliders in the [[Manual: General#Volume Settings|General Tab]] to the actual levels used by the mixer. OpenMPT chooses the most suitable mix level mode for the current file type when creating a new song, so typically there is no need to change this setting. Some legacy mix level modes may only be available when opening an existing module which makes use of them.
+
+Here is an overview with all the differences. The latest mix level modes are on the right.
+
+{| class="wikitable"
+|-
+! !! '''Original (MPT 1.16)''' !! '''OpenMPT 1.17RC1''' !! '''OpenMPT 1.17RC2''' !! '''OpenMPT 1.17RC3''' !! '''Compatible'''
+|-
+| '''[[Manual: Setup/Mixer#Soft Panning|Soft Panning]]''' || User-defined in setup || User-defined in setup || User-defined in setup || Forced on || Forced off <sup>†</sup>
+|-
+| '''[[Manual: Setup/Mixer#Pre-Amp|Sample Pre-Amp]] || User-defined in setup || User-defined in setup || User-defined in setup || Fixed (no attenuation) || Fixed (half volume)
+|-
+| '''Global Volume''' || Applied to samples || Applied to samples || Applied to master || Applied to master || Applied to master
+|-
+| '''Sample Volume''' || Halved before being sent to plugins<br/>Doubled when sending back || Divided by 16 before being sent to plugins<br/>Multiplied by 16 when sending back || Correct levels (no multiplication) || Correct levels || Correct levels
+|}
+
+As the sample volume is reduced before samples are being sent to the plugin in the two oldest mix modes (1.16 and 1.17RC1), plugins do not receive the correct levels of the samples. To compensate for this, the plugin’s output is multiplied to normal gain again. As VST instruments have no input, this effectively means that VST instruments are twice as loud as intended when using the oldest mix mode, and sixteen times as loud when using the OpenMPT 1.17RC1 mix mode. Hence, '''do not use them'''. When working with plugins, use the latest (OpenMPT 1.17RC3) mix mode.
+
+When applying global volume to samples rather than to the master output, the output of VST plugins is not affected by global volume, which is usually not the wanted behaviour.
+
+The '''Compatible Mix Level''' settings are automatically used when playing MOD and S3M tracks, and should always be used when writing IT and XM tracks. The sample mix levels are identical those of Schism Tracker in this mode, meaning that (almost) identical audio levels can be guaranteed across several trackers.
+When using plugins, it is recommended to not use compatible mix levels, as the exact pre-amplification may change to increase compatibility with other trackers. Use OpenMPT’s mix levels when working with plugins in the MPTM format.
+
+<sup>†</sup> When using '''Compatible''' levels, the Linear Pan Law is being used. '''Compatible (FT2 Pan Law)''' makes use of the Square Root Pan Law instead, which is the pan law that Fasttracker 2 uses. This option is only available for XM files. The Square Root Pan Law emphasises samples played in the center, while samples played more on the left and right are slightly attenuated.
+
+== Compatibility Settings == 
+
+OpenMPT supports many module playback quirks to emulate a wide range of OpenMPT versions and other trackers. This is to retain compatibility with as many trackers as possible, so that any module will sound as good as possible.
+
+The '''Set Defaults''' button allows you to automatically use the recommended compatibility settings for IT and XM modules. Using it may be necessary when upgrading from an old OpenMPT version. More information about this can be found in the chapter on [[Manual: Compatible Playback|Compatible Playback]].
+
+Click '''Edit Compatibility Settings''' button to edit the compatibility details. This button opens the [[Manual: Compatible Playback#Playback Compatibility Settings|Playback Compatibility Settings]] dialog.
+
+== Tempo Mode ==
+
+In the Tempo group, the '''Mode''' drop down box lets you choose the ''tempo mode'': Classic, Alternative, or Modern. Each tempo mode has different advantages and is further explained below. Before comparing the tempo modes, it is helpful to understand the following points.
+
+* The exact meaning of the Tempo value depends on the tempo mode, but increasing the Tempo will always result in a faster note playback speed, and decreasing the Tempo will always produce a slower note playback speed. There are two ways you can change the Tempo.
+
+:*To set the initial Tempo: in the [[Manual: General#Tempo /Restart|General tab]], use the “Initial tempo” slider or box.
+:*To change the Tempo in the middle of a song: in the pattern editor, go to the desired pattern and row and insert a “Set Tempo” [[Manual: Effect Reference|effect]] (for IT: Txx; for XM: Fxx, where xx is 20 to FF).
+
+* The smallest unit you can use for creating notes is a row. When any other value affects the row duration, notes will play faster or slower.
+
+* The smallest unit the player uses is a tick, a subdivision of a row.
+
+* In OpenMPT, “Speed” means “ticks per row”. Changing the Speed affects the number of instrument envelope ticks that are processed per row and the behavior of many pattern effects. In some tempo modes, changing the Speed also affects the note playback speed. There are two ways you can change the Speed.
+
+:*To set the initial Speed: in the General tab, use the box labeled “Ticks/Row”.
+:*To change the Speed in the middle of a song: in the pattern editor, go to the desired pattern and row and insert a “Set Speed” effect (for IT: Axx; for XM: Fxx, where xx is 01 to 1F).
+
+=== Overview ===
+
+In the Classic and Alternative tempo modes, values are built up from ticks to rows to beats. In the Modern tempo mode, values are subdivided from beats to rows to ticks.
+
+When a value affects the rows per minute or the row duration, notes will play faster or slower. In the table below, the bold and highlighted items emphasize this.
+
+{| class="wikitable" style="width: 77em;" <!-- widths chosen so that formulas don't wrap -->
+|-
+!style="width: 9.2em;"| Tempo mode
+!style="width: 23.9em;"| Classic
+!style="width: 22.3em;"| Alternative
+!style="width: 21.6em;"| Modern
+|-
+|colspan="4"|
+|- align="center" valign="center"
+! Main advantage
+| Compatible with other players
+| Before Modern tempo mode was available, let you increase Speed or Rows per Beat further
+| Easy to understand tempo value, always precise
+|-
+|colspan="4"|
+|- align="center" valign="center"
+! Tempo unit
+| 24 ticks per minute
+| 60 ticks per minute<br />(ticks per second)
+| beats per minute
+|-
+|colspan="4"|
+|-
+! Ticks&nbsp;per&nbsp;minute <!-- nbsp here to enforce reasonable size on this column in PDF --> 
+| Tempo × 24
+| Tempo × 60
+| Tempo × Rows per Beat × Speed
+|-
+! Rows per minute
+| '''Tempo''' × 24 / '''Speed'''
+| '''Tempo''' × 60 / '''Speed'''
+| '''Tempo''' × '''Rows per Beat'''
+|-
+! Beats per minute
+| Tempo × 24 / Speed / Rows per Beat
+| Tempo × 60 / Speed / Rows per Beat
+| Tempo
+|-
+|colspan="4"|
+|-
+! Tick duration
+| 2.5 seconds / Tempo
+| 1 second / Tempo
+| 60&nbsp;seconds&nbsp;/&nbsp;Tempo&nbsp;/&nbsp;Rows&nbsp;per&nbsp;Beat&nbsp;/&nbsp;Speed <!-- nbsp on longest formula in column to ensure formulas don't wrap -->
+|-
+! Row duration
+| (2.5 seconds / '''Tempo''') × '''Speed'''
+| (1 second / '''Tempo''') × '''Speed'''
+| 60 seconds / '''Tempo''' / '''Rows per Beat'''
+|-
+! Beat duration
+| (2.5&nbsp;seconds&nbsp;/&nbsp;Tempo)&nbsp;×&nbsp;Speed&nbsp;×&nbsp;Rows&nbsp;per&nbsp;Beat <!-- nbsp on longest formulas in column to ensure formulas don't wrap -->
+| (1&nbsp;second&nbsp;/&nbsp;Tempo)&nbsp;×&nbsp;Speed&nbsp;×&nbsp;Rows&nbsp;per&nbsp;Beat
+| 60 seconds / Tempo
+|-
+|colspan="4"|
+|- align="center" valign="center"
+! If you decrease or increase Tempo...
+|style="background: #FFD;"| notes play slower or faster <!-- decrease: slower, increase: faster -->
+|style="background: #FFD;"| notes play slower or faster
+|style="background: #FFD;"| notes play slower or faster
+|- align="center" valign="center"
+! If you decrease or increase Speed...
+|style="background: #FFD;"| notes play faster or slower <!-- decrease: faster, increase: slower -->
+|style="background: #FFD;"| notes play faster or slower
+| note play speed doesn’t change
+|- align="center" valign="center"
+! If you decrease or increase Rows per Beat...
+| note play speed doesn’t change
+| note play speed doesn’t change
+|style="background: #FFD;"| notes play slower or faster <!-- decrease: slower, increase: faster -->
+|}
+
+=== Classic Tempo Mode ===
+
+This mode uses the classic definition of speed and tempo that is compatible with many other trackers. It is always used in legacy formats (MOD, S3M, XM, IT).
+
+For performance reasons, most older trackers were implemented with very little to no floating point arithmetic. Some rounding errors when calculating the number of samples that should constitute the length of a tick mean that tempos could be inexact. For this reason, tempo may also differ between various playback rates, e.g. playback might be slightly slower at 48 kHz than at 44 kHz.  In OpenMPT, the Classic tempo mode preserves this “old-school” behaviour.
+
+If you need to know the exact BPM a module in Classic tempo mode runs at, use the [[Manual: Menus#Player|Approximate Real BPM]] functionality from the Player menu.
+
+=== Alternative Tempo Mode ===
+
+This was thought as a slightly easier to understand variant of the Classic Tempo Mode devised by Ericus for the mathematically minded. The ratio between ''tempo x'' and ''speed y'' can be memorized easily as “''x'' rows will last ''y'' seconds.” The same rounding error restrictions as in Classic tempo mode apply.
+
+If you need to know the exact BPM a module in Alternative tempo mode runs at, use the [[Manual: Menus#Player|Approximate Real BPM]] functionality from the Player menu.
+
+=== Modern Tempo Mode ===
+
+This tempo mode compensates for the rounding errors described above, so the real BPM always corresponds to the exact value you specify. Thus, tempo is always identical at all playback rates. This is the most intuitive mode for new users and closest to other modern music software packages. It is recommended to use this mode in MPTM tracks.
+
+To make use of temporarily increased (or decreased) tracking precision (while staying at the same tempo) in this tempo mode, you will have to change the Rows per Beat of a specific pattern, so this is only possible in the MPTM format.
+
+== Time Signature ==
+
+In the Tempo group, the '''Rows per beat''' and '''Rows per measure''' values are used to highlight appropriate rows in the pattern editor and to calculate the time signature that is sent to plugins and written to stream export metadata and exported MIDI files. In MPTM modules, patterns can also have a custom time signature which overrides this global time signature. It can be changed in the [[Manual: Pattern Properties|Pattern Properties]] dialog.
+
+In Modern tempo mode, the duration of the rows contributing to a beat can be configured by clicking the '''Configure Swing''' button, which will open the [[Manual: Tempo Swing Settings|Tempo Swing Settings]] dialog. This way, swinging rhythms can be created automatically without the help of pattern commands.
+
+== Version Info ==
+
+Shows which software was used to create and save the current track.
+
+[[Category:Manual|Song Properties]]
+[[Category:Windows|Song Properties]]
+[[de:Handbuch: Song Properties]]

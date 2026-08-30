@@ -1,0 +1,88 @@
+[How does one learn SID sound design these days? — Lemon64 forum thread, https://www.lemon64.com/forum/viewtopic.php?t=75723 — fetched 2026-08-30, post text extracted from HTML; 13 posts]
+
+--- hyperbolist — 2020-08-17T02:35:22+00:00
+Returning to the C64, with an Ultimate64, and want to compose some music.  I stumbled upon SID Wizard which reminds me of ScreamTreacker/ImpulseTracker in terms of composition, so I'm pretty excited.
+
+But the real head-scratcher for me is sound design.  I understand a few broad strokes about SID synthesis, but not how that translates into values that are meaningful inside of a SID Wizard instrument definition.  It _seems_ like any other subtractive synth, but doesn't behave as I expect when I twiddle parameters.
+
+Are there books I should look for or SID-toys I should download that are particularly instructive and intuitive when it comes to grokking SID sound design?
+
+--- MeneerJansen — 2020-08-17T11:06:40+00:00
+I take it that you mean SID Wizard 1.8 form CSDb? I just went down the Rabbit Hole and that program might be one of the most complicated ones for the C64 I've ever seen. It's like a DAW.
+
+There is a (free) book on it by WitchMaster (he's involved in the project I believe) (link CSDb) and a tutorial by someboy else here.
+
+Anyway if you mean by your question how does the SID and applications for it work here's my 2 cents. How the SID actually works is, in my opinion, described quite well in the "official manual" (link, click on "Files" and then "[SID 6582] PDF, 1496kB") from back in the day. You need to know how synthesizers work (i.e. what is an oscillator, filter, ADSR, etc.). You may also read my "quick 'n dirty" personal notes on it for a quick introduction the SID registers etc.: https://pastebin.com/MZvuRWw5
+
+I have noticed that most Synth progs for the C64 support the hardware features from the SID (e.g. its 3 osc's) as well ad added features by software (more than 1 LFO). This makes using most progs not very straight forward.
+
+Good luck in composing!
+
+--- Tobias — 2020-08-17T12:18:14+00:00
+Yes, work through the examples in the C64 manual, that gives you a good understanding of the core features of the SID. Once you know these, the numbers in those trackers start making sense :=)
+
+--- Lasse — 2020-08-17T12:26:06+00:00
+And once you've done that, you could also start analyzing others' songs how they have done.
+
+Long time ago I used to play back songs slowed down so that I understood how drum sounds (e.g. Hubbard) were pieced together from frames of noise, triangle, pulse etc.
+
+Today you can also use the SidDump utility for that https://csdb.dk/release/?id=192079 which shows the values the tune is writing to the SID registers per each frame.
+
+--- wizball6502 — 2020-08-17T12:37:37+00:00
+> hyperbolist wrote:
+> But the real head-scratcher for me is sound design
+
+Yes, that is still pure magic for me what Hubbard & co. made (or are still making) out of the 29 parameters available. But: To make intriguing sounds there is a lot happening and consistenly changing every 50th of a second.
+
+The SIDViz by tamat is a great tool to get some insights about this:
+
+https://tamats.com/apps/sid/
+
+You can see live what channel used what waveform or ADSR settings to produce the sound you hear.
+
+Edit: Here is also a comprehensive overview/comparison of SID trackers (including the CPU time in rasterlines that each player requires):
+
+http://chordian.net/c64editors.htm
+
+--- NM156 — 2020-08-17T14:03:53+00:00
+> wizball6502 wrote:
+
+> hyperbolist wrote:
+> But the real head-scratcher for me is sound design
+
+>
+Yes, that is still pure magic for me what Hubbard & co. made (or are still making) out of the 29 parameters available. But: To make intriguing sounds there is a lot happening and consistenly changing every 50th of a second.
+
+There isn't really that much to it, there are only 4 waveforms, and typically waveforms only change a couple of times per instrument (if at all) It's in the overall composition.
+
+--- commodorejohn — 2020-08-17T14:16:12+00:00
+> MeneerJansen wrote:
+> How the SID actually works is, in my opinion, described quite well in the "official manual" (link, click on "Files" and then "[SID 6582] PDF, 1496kB") from back in the day.
+
+This is mostly true - but two things that really aren't well-described are ring-mod and oscillator sync. However, if you're familiar with conventional synthesizers, those are probably things you're already familiar with; the remaining caveat being that ring-mod effectively only works between the triangle output of the channel with the ring-mod bit set and the square output of the previous channel.
+
+--- wizball6502 — 2020-08-17T14:35:47+00:00
+> commodorejohn wrote:
+> two things that really aren't well-described are ring-mod and oscillator sync.
+
+Any SID tune that demonstrates these two effects? Is this something essential to create great sounds? Are top SID tunes making use of these?
+
+--- NM156 — 2020-08-17T14:47:33+00:00
+Not many, and those that do mostly use them for effects. In my tune for International Karate Ultimate Competition you can find a couple of examples. The most well known tune that does it I guess is the Sanxion loader (also one of the first that did it).
+
+--- commodorejohn — 2020-08-17T15:36:55+00:00
+Oh, they're around, although the fact that they effectively require two out of three channels limits the usefulness a bit - but they make it possible to get some less conventional timbres than the basic oscillator waveforms (or even the combined-noise ones.) The main tune for The Lord of the Rings uses ring-mod for the "bell" tone; an example of sync would be the Crazy Comets theme (although this is more on the wild effects side; a more musical example would be the synthesizer riff in "Let's Go" by the Cars.)
+
+--- malcontent — 2020-08-17T18:19:56+00:00
+I'm not a musician, but Ring mod and Sync are very useful for making interesting sound effects. Ring mod does what it says on the tin, it makes sounds have a metallic ringing quality. Some interesting distortion also happens at lower frequencies, and I think this is how some people get louder bass sounds out of the SID? I might be wrong about that.
+
+--- Tobias — 2020-08-17T18:25:02+00:00
+for making "regular" sounds for sid tunes, you will most likely never use either ringmod nor sync. don't even bother with those unless you understand everything else
+
+--- Lasse — 2020-08-17T20:47:23+00:00
+An easy way to get started with using sync is to have the bassline voice as the sync source, and turn on the sync bit in the lead voice. This adds a distortion or "screaming" quality, somewhat like an electric guitar.
+
+But sure, get all the basics down first.
+
+Basic waveforms, ADSR, pulse width + modulating it, vibrato and pitch slides, "wavetable" programming (can get started for example by adding a frame of noise waveform into the beginning of notes to get a bit more rhythm to them)
+

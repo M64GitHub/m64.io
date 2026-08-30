@@ -1,0 +1,192 @@
+[Wavetable Sounds Tutorial #1 — uCApps.de MIDIbox SID, https://www.ucapps.de/howto_sid_wavetables_1.html — Thorsten Klose — fetched 2026-08-30; page text extracted from HTML; figures/audio not included]
+
+English Version
+ Spanish Version
+ French Version
+
+Wavetable Sounds Tutorial #1
+
+This tutorial describes, how to analyse and recreate wavetable sounds from SID tunes with the MIDIbox SID.
+
+WARNING: This tutorial describes features of MIDIbox SID V1 - they are partly handled on a different way in MIDIbox SID V2. More details can be found in the MBSID V2 User Manual.
+
+The term "wavetable" is used by the C64 community for a synthesis method, where the waveform and frequency of a SID voice is modulated so fast, that the resulting output sounds like a new waveform, which is originally not provided by the soundchip itself. The parameter changes are stored in a table - that's the reason for this name - the technique is not related to "wavetable synthesis", which is based on audio samples.
+
+MIDIbox SID provides a very generic wavetable sequencer, which can not only control the waveform and frequency, but any CC parameter (see also the list of all CC parameters). Three tracks of up to 32 steps are available, which can control 3 different CCs. For common wavetable sounds, it's enough to control the waveform (OSC1 waveform: CC#33) and the transpose value (OSC1 transpose: CC#17) of a single voice. It's also possible to control the waveform/transpose value of all oscillators at the same time (CC#32 and CC#16), or to modulate the CC of a second oscillator in parallel to the first one. Another interesting usage of the remaining third track is the modulation of a LFO or envelope parameter; it should also be mentioned, that the wavetable sequencer can be used to play notes and arpeggiator phrases - the appr. methods are discussed in the next tutorial sessions!
+
+Ripping typical C64 drum sounds by viewing waveforms
+
+The creation of wavetables might look like high alchemy, but the usage is very easy and opens a high potential for new sounds once you know the basics. They can be learned from existing SID tunes. In this tutorial, I will take the bass drum of "Auf Wiedersehen Monty" from Rob Hubbard as an example (this tune impressed me so much in the 80s, that I was never be able to forget those groove drums). So, why not having a look into the audio sample of this tune played by a original SID? Well, it's difficult to extract the bass drum itself, since other sounds are played at the same time. This makes it difficult to locate the waveform and to differ it from the audio sum.
+
+But there is help: today SID tunes can be played with emulators on the PC. SIDPLAY is an older one, but in distance to sidplay2 it allows to mute voice channels of the SID (View->Mixer). The soloed channel can either be played with an emulated SID, or with the MIDIbox. But the easiest method is just to write the emulated SID output into a .wav file ("File->Save as", select filetype ".wav")
+
+Here finally a view on the emulated bass drum, which starts at 0:38, channel #2:
+
+We notice following parts:
+
+it begins with a triangle wave, which is active for 20 mS
+
+thereafter there is a short noise part for 20 mS
+
+it ends with a pulse wave, the frequency and amplitude gets lower
+
+In SID tunes, wavetable sequences are mostly divided into frames of 20 mS, which is related to the way how trackers are embedded into games (they are called from a rasterline interrupt, the calling frequency depends on the screen refresh rate, which is 50Hz in PAL systems (50Hz -> 20 mS period)).
+
+In order to reconstruate this waveform, first you have to select the same wavetable rate. Since MIDIbox SID clocks the sound engine much faster than a C64 (0.819 mS update cycle), the wavetable has to be slowed down. The wavetable update period can be calculated with following formula: period = 2 * (127-rate) * 0.819mS. In order to get a period of 20 mS, the appr. rate is 115
+
+Now you can assign track 1 to CC#33 (OSC1 waveform) and track 2 to CC#17 (OSC1 transpose). Try following sequence (you can either use the JSynthLib editor, or edit this sequence directly from the SID control surface):
+
+STEP CMD    #1  #2  #3
+00   Play   01  40 +00   # Plays triangle, transposed by +0 (40 is the middle)
+01   Play   08 +00 +00   # Plays noise, transpose value untouched
+02   Play   04 +00 +00   # Plays a pulse, transpose value untouched
+03   Play   14 -07 +00   # release gate bit, transpose value decremented by -7
+03   Play  +00 -07 +00   # transpose value decremented by -7
+03   Play  +00 -07 +00   # transpose value decremented by -7
+06   End   +00 +00 +00   # stop wavetable
+
+In order to fade out the waveform after the gate bit has been released, you need to increase the release rate of the OSC DCA envelope. Play some notes on the keyboard to try out the sound.
+
+Ripping by tracing SID register changes
+
+The method described above is not ideal to copy a wavetable sound 1:1, because the frequencies (transpose values) have to be determined by ear (e.g. by comparing frequencies). Wouldn't it be better to extract the values which are written into the SID sound registers directly from the .sid file? Yes - this is possible by using a trace tool. I found SIDDump V1.0 from covertbitops.c64.org very useful for such an analysis. It processes the .sid file by emulating the C64 CPU, and dumps SID register changes to STDOUT.
+
+Back to the bassdrum - these are the register changes which SIDdump has traced:
+
+| Frame | Freq Note/Abs WF ADSR Pul | Freq Note/Abs WF ADSR Pul | Freq Note/Abs..
++-------+---------------------------+---------------------------+--------------..
+...
+|  1937 | ....  ... ..  08 0000 ... | 0EA3  A-3 AD  11 08F8 ... | 057B  E-2 9C ..
+|  1938 | ....  ... ..  .. .... ... | 40A3 (B-5 C7) 81 .... ... | 684C (G-6 CF)..
+|  1939 | ....  ... ..  .. .... ... | 0B23 (E-3 A8) 41 .... ... | ....  ... .. ..
+|  1940 | ....  ... ..  .. .... ... | 0923 (C#3 A5) 40 .... ... | 057B (E-2 9C)..
+|  1941 | ....  ... ..  .. .... ... | 03CE (A#1 96) .. .... ... | ....  ... .. ..
+|  1942 | 2BD6  ... ..  .. .... ... | ....  ... ..  .. .... ... | ....  ... .. ..
+
+(The beginning of the file, and the rightmost "channel 3" and "filter" column are cutted out to improve the layout of this page)
+
+For those who are interested, here an explanation of the value changes at channel #2. If you feel confused, just go further to the next chapter, where a simplified method is described.
+
+In the first row you can see:
+
+note A-3 with triangle waveform, ADSR values: A=0, D=8, S=F, R=8
+
+note B-5 with noise waveform
+
+note E-3 with pulse waveform
+
+note C#3, pulse, gate released
+
+note A#1 (pulse, gate still released)
+
+For the "translation" to the MIDIbox SID parameter format, following things have to be considered:
+
+a frame is processed each 20 mS (50 Hz), the appr. wavetable rate of MIDIbox SID is 115 (see above).
+If you know the time where the sound is played, the appr. frame number can be calculated with: frame = 50 * seconds
+
+semitone "A-3" of SID-Dump is equivalent to semitone "A-2" of MIDIbox SID (the same octave is displayed by MIDI-Ox)
+
+When using the transpose parameter (CC#16..CC#19), it's easier to calculate the differences between the numbers in the "Abs" column:
+
+we are starting with transpose value 40 (transpose is a biased parameter, 40 is the middle value) - note: for MIDIbox SID-D it is required to adjust this initialization value, so that the sound always starts with the desired frequency. MBSID-D plays "C-3", which means that the note has to be transposed by -3 to start with A-2
+
+      The resulting initial transpose value is 40-03 = 3C
+
+transpose between 1. and 2. frame: C7-AD = +1A
+
+transpose between 2. and 3. frame: A8-C7 = -1F
+
+transpose between 3. and 4. frame: A5-A8 = -03
+
+transpose between 4. and 5. frame: 96-A5 = -0F
+
+   All numbers are in hexadecimal format - it's useful to have a calculator which supports this (I'm using my beloved HP48GX)
+
+the two digits of the WF parameter are swapped in MIDIbox SID CC#32..CC#35 (see sid_cc_implementation_chart.txt)
+
+the ADSR values have to be multiplied by 8
+
+Converting SID traces
+
+Automating the re-calculation of SID register values to MIDIbox SID CC parameters can save a lot of time, therefore I wrote a perl script which reads the dump file, and converts it to a format, which can be directly entered into the wavetable. The script can be downloaded from this location.
+
+After the SIDdump trace output has been written into an immediate file:
+
+   siddump.exe Auf_Wiedersehen_Monty.sid > dump
+
+the converter can be started with (example):
+
+   perl siddump_convert.pl dump -track 2 -time 0:38 -lines 100
+
+or just write the whole converted dump into a new file with:
+
+   perl siddump_convert.pl dump -track 2 -frame 0 > converted
+
+Here the converted output:
+
+| Frame | Time  | Freq Note/Abs WF ADSR Pul | MBSID Wave Transpose Att Dec Sus Rel |
++-------+-------+---------------------------+--------------------------------------+
+...
+|  1937 |  0:38 | 0EA3  A-3 AD  11 08F8 ... |         01  49 ( 49)   0  64 120  64 |
+|  1938 |  0:38 | 40A3 (B-5 C7) 81 .... ... |         08 +1A ( 63) ... ... ... ... |
+|  1939 |  0:38 | 0B23 (E-3 A8) 41 .... ... |         04 -1F ( 44) ... ... ... ... |
+|  1940 |  0:38 | 0923 (C#3 A5) 40 .... ... |         14 -03 ( 41) ... ... ... ... |
+|  1941 |  0:38 | 03CE (A#1 96) .. .... ... |        +00 -0F ( 32) ... ... ... ... |
+|  1942 |  0:38 | ....  ... ..  .. .... ... |        +00 +00 (+00) ... ... ... ... |
+
+The ADSR values at the right side can be directly entered into the MIDIbox SID patch editor (or control surface...) - also the wavetable values can be directly copied:
+
+STEP CMD    #1  #2
+00   Play   01  49
+01   Play   08 +1A
+02   Play   04 -1F
+03   Play   14 -03
+03   Play  +00 -0F
+03   Play  +00 +00  # (1) see notes below
+03   Play  +00 +00
+03   Play  +00 +00
+06   End    7F +00  # (2) stop wavetable and reset ADSR
+
+See also this JSynthLib snapshot.
+
+Play C-3 (the "middle note") on the keyboard - you should hear exactly the bassdrum of the .sid file! :-)
+
+(1) in order to allow the note to fade out properly, some empty rows have been inserted
+
+(2) "End 7F" has been introduced with MIDIbox SID-D, and will also be supported by the common MIDIbox SID firmware > v1.7 - this commands resets the envelope registers in order to avoid "ADSR hick-ups", which can happen due to a silicon bug in the SID soundchip.
+
+And this is how the waveform, played by a hardware-SID, finally looks like:
+
+Are you missing something? Yes, the triangle waveform is not visible! This is due to anoying ADSR delay bug of the SID. The bug has several effects, which have been reverse engineered by Dag Lem, and documented in the source code of reSID. sidplay2 uses this new(er) engine and therefore emulates the SID much more accurate than SIDPLAY (unfortunately sidplay2 doesn't allow to mute channels...). The gate is delayed by up to ca. 30mS!
+
+This delay can be completely eliminated by setting the ADSR release rate to 0. But in this case, the sound is not faded anymore (-> less dynamic):
+
+This is also the explanation, why most preset sounds of the "common" MIDIbox SID don't use release - it adds an unexaptable latency, which can only be compensated by playing the MIDI notes 30 mS earlier (no problem with todays host sequencers, but difficult if played live), or by cutting the initial delay from the recorded sample.
+
+In the MIDIbox SID-D presets, this delay is accepted (drums are played by a sequencer anyhow, and not live). Either the drum track has to be played with a delay of -30mS, or the drums have to be playbacked by a sampler, once they are properly tuned and matching with the rest of the instruments used in the song
+
+Playing wavetable drums
+
+With the common MIDIbox SID firmware, only one patch can be played per core/SID pair. There is only one 3-track wavetable per patch, and switching between patches takes some time, which is not wanted when playing a sequence of different drum sounds. In other words: the common firmware is nice if you want to create single C64ish drum sounds, record and playback them with a sampler, but it is not adequate for playing a drum sequence directly from a single SID. Such a limitation is suboptimal if a whole drumset should be tuned for the song, therefore I've implemented an alternative firmware which is optimized for drums: MIDIbox SID-D.
+
+Some more informations about MIDIbox SID-D can only be found in this forum article. I will create a separate webpage once the firmware is final.
+
+In this sound demo I've used the ripped drum sounds of Rob Hubbard's "Auf Wiedersehen Monty". The patches are also part of the MBSID-D preset library (TK folder, first drumkit)
+
+mbsid-d_demo2.mp3
+
+Related Links
+
+The High Voltage SID Collection (HVSC)
+
+SIDPLAY and SIDPLAY 2
+
+SIDdump
+
+siddump_convert
+
+Perl, Active Perl (Windows)
+
+Last update: 2026-05-17
+
+Copyright � 1998-2026, Thorsten Klose. All rights reserved.

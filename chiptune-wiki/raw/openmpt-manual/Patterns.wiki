@@ -1,0 +1,246 @@
+[[Image:Pattern Tab.png|thumb|300px|Pattern Tab]]
+
+{{todo|This article is incomplete. There are still many treasures to be found in the pattern editor that are not documented here.}}
+
+The pattern editor is used to assemble your musical compositions. Every module consists of a set of '''patterns''', which hold the note data, and one or multiple '''sequences''', which are a collection of references to patterns and dictate the playback order of those patterns. The current sequence is always displayed in the '''Order List'''.
+
+Every pattern is represented by a table, consisting of rows (time) and columns (simultaneously playing channels). All patterns have the same amount of channels that is configurable from the [[Manual: Song Properties#Channels|Song Properties dialog]], and depending on the module format, the number of rows can also be changed for each pattern in the [[Manual: Pattern Properties|Pattern Properties]].
+
+Patterns contain note data for triggering samples and instrument plugins, but they can also contain effect commands that change global parameters such as tempo or volume, [[Manual: Parameter Control Events|plugin automation]], pitch-altering effects and many other things. A list of effect commands that can be entered into patterns is available in the [[Manual: Effect Reference|effect reference]].
+
+== Toolbar ==
+
+[[Image:Pattern Toolbar.png]]
+
+* '''New Pattern''': Creates a new empty pattern, using the same number of rows as the current pattern, and adds it to the Order List. From the dropdown menu, you can also choose to duplicate the current pattern instead.
+* '''Play Pattern''': Starts playback of the current pattern from the current row and loops the pattern.
+* '''Replay Pattern''': Restarts playback of the current pattern from the first row and loops the pattern.
+* '''Stop''': Stops playback altogether.
+* '''Play Row''': Only plays the currently focussed row of the pattern and steps to the next row.
+* '''Record''': Toggles the recording status of the pattern. If recording is disabled, previewed notes can still be heard but will not be entered into the pattern data.
+* '''Metronome''': Toggles the metronome. From the dropdown menu, you can also open the [[Manual: Metronome Settings|Metronome Settings]] window.
+* '''VU Meters''': Toggles display of the channel VU meters. The VU meters do not show the actual volume on the channels, but rather the calculated note volume, i.e. the volume level at which the sample or plugin is played.
+* '''Show Plugins''': Toggles display of the channel plugin names below the channel name. Plugins can be assigned to every pattern channel from the [[Manual: General|General Tab]] or by right-clicking this plugin name.
+* '''Channel Manager''': Toggles display of the [[Manual: Channel Manager|Channel Manager window]].
+* '''Zxx Macros''': Opens then [[Manual: Macro Configuration|Macro Configuration dialog]].
+* '''Chord Editor''': Opens the [[Manual: Chord Editor|Chord Editor dialog]].
+* '''Undo''': Undoes the last modification to the pattern(s). Changes to the Order List are not covered by this action.
+* '''Pattern Properties''': Opens the [[Manual: Pattern Properties|Pattern Properties dialog]], if supported by the current module format.
+* '''Expand Pattern''': Doubles the length of the current pattern by adding an additional empty row after every row.
+* '''Shrink Pattern''': Halves the length of the current pattern by removing every other row.
+* '''Change Pattern Detail Level''': Clicking this icon cycles through all possible pattern detail configurations. From the dropdown menu, you can quickly toggle individual pattern columns instead.
+* '''Toggle Overflow Paste''': When enabled, pasting will continue to the next pattern if the data overflows the current pattern.
+
+Next to the toolbar is the '''sequence selector''' which is used to switch to another sequence or change the name of the current sequence.
+
+== Edit Controls ==
+
+[[Image:Pattern Edit Controls.png]]
+
+* '''Main Instrument''': Shows the instrument (or sample) that is used to input notes. If [[Manual: Keyboard Split|Keyboard Split]] is used, the main instrument is used to play the upper part of the keyboard.
+* '''Plugin''': If the main instrument is associated with a plugin, the plugin’s editor can be opened from here. <kbd>Shift</kbd>-clicking the button closes all other open plugin editors.
+* '''Edit Step''': The amount of rows that is skipped after entering a note into the pattern. If Row Spacing is set to 0, the cursor stays in the same row, if it is set to 1, it advances to the next row, etc.
+* '''Loop Pattern''': If checked, pattern playback will restart from the top of the pattern if the end of the pattern is reached.
+* '''Follow Song''': If checked, the cursor position moves with the currently played row as the pattern plays.
+* '''Pattern Name''': Here you can change the name of the current pattern.
+
+== Order List ==
+
+[[Image:Order List.png]]
+
+The Order List is a playlist containing the pattern references of the current sequence. It determines in which order the patterns are played. There are several types of Order List entries:
+
+* '''Pattern reference''': Represented by '''numbers'''. A pattern can be played several times if its reference number is used in multiple order list slots.
+* '''Separator pattern''': Represented by '''+++'''. Separator patterns are simply skipped, i.e. they have no content. They can be used to keep your Order List tidy and structured. You could, for example, add a separator pattern after each group of four patterns, or after each transition from verses to the chorus, etc...
+* '''Stop pattern''': Represented by '''---'''. If a stop pattern is encountered, playback is continued at the [[Manual: General#Restart / Loop|Restart Position]] if [[Manual: General#Restart / Loop|Loop Song]] is enabled or stopped otherwise.
+
+Even if the edited module format does not support more than one sequence, it is possible to put several “songs” into the same Order List by separating them through stop patterns (and / or by putting a position jump effect at the end of the last pattern of each “song”). This technique is commonly used in game music, where the same set of instruments and samples is used for several related songs.
+
+The pattern play order can be modified by ''position jump'' [[Manual: Effect Reference|effect commands]].
+
+=== Usage ===
+
+* '''Currently edited patterns''' (shown in the pattern editor below the Order List) are marked with a '''dashed border'''.
+* '''Currently played patterns''' have a line above the pattern reference number.
+* '''Queued patterns''' are underlined. A pattern can be queued and de-queued by middle-clicking or <kbd>Ctrl</kbd>-clicking its pattern reference. Queued patterns are played as soon as the currently played pattern has finished playing, i.e. when the play cursor has reached the last line of that pattern or when a position jump / pattern break command is encountered in that pattern.
+* '''Locked patterns''' are shown with a grey background. Patterns can be locked from the context menu.
+* '''Non-existent Patterns''' are greyed out. That is, if there is a pattern 8 in the order list, but the module only has 4 patterns, pattern 8 would be greyed out.
+* '''Order selections''' can be made by clicking on the first order and Select-clicking (by default, the selection key is <kbd>Shift</kbd>) on the last order that should be selected. If only one order should be selected, the second step can of course be omitted. It is also possible to create order selections using the keyboard by holding down the selection key (<kbd>Shift</kbd>) and using the cursor / home / end keys.
+* Orders can be '''moved''' and '''copied''' by dragging the order selection around using the mouse. By default, the order selection is moved, but it can also be copied to the new selection if the selection key is held down when dropping the order selection (releasing the mouse button).
+* Order items can be entered using the '''keyboard'''. To add or edit a pattern reference, simply enter the number of the pattern in one of the Order List slots. Separator patterns can be added by pressing <kbd>S</kbd> and stop patterns by pressing <kbd>Space</kbd>.
+* Patterns can be dragged from the current module’s song folder in the [[Manual: Tree View#Song Folders|Tree View]] to the order list. The pattern reference is then inserted at the drop position.
+
+=== Order List Context Menu ===
+
+Right-clicking the Order List offers these options:
+
+* '''Insert Pattern''': Inserts the selected pattern reference numbers after the current selection.
+* '''Insert Separator''': Inserts a separator pattern (+++) at the selection position, if it is available in the current module format.
+* '''Remove Pattern''': Removes the selected patterns from the Order List. Note that the actual patterns are ''not'' deleted; only the references to those patterns are removed.
+* '''Create New Pattern''': Places a new blank pattern in the Order List where you clicked. The new pattern will have the same number of rows as the selected pattern.
+* '''Duplicate Pattern''': Copies the contents of the selected patterns into new patterns, and inserts the numbers of those new patterns after the selected patterns.
+* '''Copy Pattern(s)''': Copies the pattern data of all selected patterns into the clipboard. If there is more than one selected pattern, the order list selection is also copied.
+* '''Copy Orders''': Copies the selected order items, i.e. only the pattern ''numbers'', '''not''' the pattern ''contents'', for example for reusing them in another sequence.
+* '''Cut Patterns''': Copies the selected Orders and their pattern data into the clipboard and removes the selection from the Order List. This option appears only if multiple orders are selected.
+* '''Paste Pattern(s)''': Places the pattern data in the clipboard into the selected pattern, replacing any data in the pattern. If there is more than one pattern in the clipboard, the current pattern is not modified, but new patterns are inserted.
+* '''Merge Patterns''': Creates one or more new patterns containing a combination of the selected patterns, and replaces the Orders of the selected patterns with ones referring to the new patterns. By default, the new pattern length is equal to the total length of the selected patterns, limited by the module format’s maximum pattern length. You can choose a different value to rearrange the pattern editor, e.g. for the purpose of working with different time signatures.
+* '''Pattern Properties''': Opens the [[Manual: Pattern Properties|Pattern Properties dialog]], if supported by the current module format.
+* '''Restart Position''': Sets the restart position of this sequence to the selected pattern.
+* '''Sequences''': This sub menu is only available in MPTM files, and you can choose from the following items:
+** '''Sequence List:''' The first items are a list of all the Sequences in the module. Selecting one switches to that Sequence.
+** '''Duplicate Current Sequence:''' Creates a new Sequence at the end of the Sequence List, and copies the Orders of the current Sequence into it.
+** '''Create Empty Sequence:''' Creates a new Sequence at the end of the Sequence List without any Orders.
+** '''Delete Current Sequence:''' Deletes the current Sequence, but not any Patterns that it may contain. There is no Undo for this action, so you are prompted for confirmation after selecting this option.
+* '''Lock Playback to Selection:''' Song playback is locked to the patterns in the current order selection. Locked playback positions are greyed out. If “Follow Song” is enabled, manually selecting a different pattern for playback will remove the lock.
+* '''Unlock Playback:''' If playback has been limited to an order selection before, the playback lock can be removed here.
+* '''Queue Pattern''': Queues the selected pattern for playback. There are four options when to play the queued pattern:
+** '''Transition at end of current pattern''': The current pattern finishes playing. Playback continues at the start of the queued pattern.
+** '''Transition at end of current measure''': The current measure finishes playing. Playback continues at the next measure in the queued pattern, or the start if it would exceed the length of that pattern.
+** '''Transition at end of current beat''': The current beat finishes playing. Playback continues at the start of the next beat in the queued pattern, or the start if it would exceed the length of that pattern.
+** '''Transition at end of current row''': The current row finishes playing. Playback continues at the start of the next row in the queued pattern, or the start if it would exceed the length of that pattern.
+* '''Stream Export''': Opens the [[Manual: Saving and exporting#Stream Export|Wave Export dialog]] for the selected patterns.
+
+== Pattern Editor ==
+
+=== Overview ===
+
+[[Image:Pattern Layout.png|right]]
+
+Every pattern consists of a number of rows and channels. Channels are divided into several columns: Note Column, Instrument Column, Volume Column, Effect Column. By default, the currently edited cell of the pattern is highlighted in black, and the respective row is highlighted in dark grey. If follow song is disabled and you have a song playing, the currently played row is highlighted in bright yellow. By default, the song’s time signature is indicated by light grey row highlights; the first row of each beat and measure is displayed in a darker colour.
+
+At the top of the editor, you see the '''channel headers''', which display the channel name and, optionally, note volume. Several edit options are [[Manual: Patterns#Channel Header Context Menu|available]]. Click the pattern number in the upper-left corner (reading ''#0'' or similar) to open the [[Manual: Pattern Properties|Pattern Properties dialog]] if supported by the current module format.
+
+==== Note Column ====
+
+The '''Note Column''' is used to trigger notes and to stop them in one way or another. Note events consist of a key and an octave, for example "C-5" (which is the Middle-C). By default, the "QWERTY" keyboard row triggers the fourth octave, the "ASDF" row triggers the fifth octave and the "ZXCV" row triggers the sixth octave. There are also more “traditional” keymaps in Fasttracker 2 and Impulse Tracker style available from the [[Manual: Setup/Keyboard|Keyboard Settings Dialog]] if you want to try a different layout. You can use the numeric keys to access other octaves or use <kbd>Ctrl</kbd>+(<kbd>Shift</kbd>)+<kbd>A</kbd>/<kbd>Q</kbd> to transpose a note up or down by a tone or a full octave. The available note range depends on the format used. By default, every octave consists of twelve notes: C C♯ D D♯ E F F♯ G G♯ A A♯ and B when using sharps, or C D♭ D E♭ E F G♭ G A♭ A and B when enabling [[Manual: Setup/Display#Accidentals|flat accidentals]]. By using [[Manual: Tunings|custom tunings]] it is possible to have different note names and different amount of notes per octave.
+
+Depending on the song format, several ways are available to stop a playing note from the note column. These actions affect sample playback, instrument envelope playback and VSTi playback in various ways described in the following table.
+
+{| class="wikitable"
+|-
+! Action !! [[Manual: Samples|Sample]] Properties !! [[Manual: Instruments|Instrument]] Properties !! VSTi Properties
+|-
+| <tt>^^</tt> ('''Note Cut''') || Instantly cuts playing sample || Instantly stops instrument’s envelopes || Stops all notes of the playing VSTi, send MIDI All Notes Off (CC#123) / All Sounds Off (CC#120) (use with care, this can congest some plugins’ MIDI buffer!)
+|-
+| <tt>==</tt> ('''Note Off, IT / MPTM''') || Releases the sample’s sustain loop, continues in normal loop if enabled || Releases the instrument envelopes’ sustain loops, continues in normal loops if enabled || Sends MIDI Note Off
+|-
+| <tt>==</tt> ('''Note Off, XM''') || Instantly cuts playing sample iff associated instrument has no volume envelope || Releases all envelopes’ sustains points and fades the sample out || Sends MIDI Note Off
+|-
+| <tt>~~</tt> ('''Note Fade''') || — || Fades out sample || Sends MIDI Note Off
+|}
+
+Instrument properties are only applied if the song has any instruments. This means that for example <tt>~~</tt> does nothing in sample mode, because Fade-Out is an instrument property.
+
+As the MOD format supports none of the actions described in the table, the only ways to cut a playing sample in this format is to use a volume effect (<tt>C00</tt>) or note cut effect (<tt>EC0</tt>). Trying to enter any of the note-off commands automatically converts them to a <tt>C00</tt> effect.
+
+==== Instrument Column ====
+
+A note alone will of course not produce any sound, so in order to tell the program which instrument or sample should be played with the note, the instrument’s (if there are instruments) or sample’s (if there are only samples) index must be entered next to a note. For example, <tt>C-5 01</tt> will play the Middle-C of the first sample or instrument. If there is no instrument number next to a note, the previously used sample or instrument is recalled using the previous volume and panning settings. Lone instrument numbers (without a note) will reset the instrument’s or sample’s properties like volume (this is often used together with the volume slide effect to create a gated sound) and default panning. In the IT / MPTM format and the MOD format (if the “On-the-fly sample swapping” [[Manual:_Compatible_Playback#MOD_compatibility_settings|compatibility option]] is enabled), you can switch to a different instrument this way without having to enter the same note again. This is often used in chiptunes to create pulse width modulation effects.
+
+==== Volume Column ====
+
+This column is generally used to enter volume changes, but it can also be used for a couple of other effects in some formats. Not all formats support this column. Most notably, you cannot enter anything here in the MOD format. The [[Manual: Effect Reference|Effect Reference]] lists all supported commands for each format.
+
+If the [[Manual: Setup/General#Show default volume commands|Show default volume commands]] option is enabled, volume commands may show in this column in a faded-out colour if there is also a note and instrument present, to indicate at which volume the note would play. These faded-out commands are not actually part of the pattern data, and thus cannot be deleted or copied, but they can take part in fading or interpolating a pattern selection. If either the note or the instrument number is missing, this information cannot be inferred and no volume command is shown.
+
+==== Effect Column ====
+
+This is the most versatile column and can be used to enter a variety of commands that either affect the current note (such as pitch or volume changes), all notes on the channel (e.g. channel volume) or all channels (like tempo or global volume changes). This column is supported by all formats, but the number of supported commands varies between module formats. The [[Manual: Effect Reference|Effect Reference]] lists all supported commands for each format.
+
+Entering a digit into the instrument, volume or effect column puts this digit in the rightmost digit of the column, pushing the already existing digits to the left. If you want to enter a single-digit value, enter it with a leading zero. For example, if the volume column already contains the command <tt>v32</tt> and you want to replace it by command <tt>v04</tt>, enter the digits <tt>0</tt> and <tt>4</tt> one after another.
+
+=== Editing ===
+
+Navigation in the pattern happens by using the mouse or the appropriate cursor keys. Combinations of <kbd>Ctrl</kbd>, <kbd>Alt</kbd> and Cursor / <kbd>Home</kbd> / <kbd>End</kbd> keys can be used to navigate by beats and measures in the default key configurations.
+
+By default, you can use <kbd>Shift</kbd> to draw pattern selections. Selections can be moved, copied, amplified, transposed, interpolated, doubled or halved in size. Most editing actions are available either from the context menu or through shortcuts.
+
+Double-clicking a pattern cell or hitting the <kbd>▤ Application</kbd> key brings up the [[Manual: Note Properties|Note Properties dialog]], which shows you all possible commands and parameters that can be entered into the pattern cell.
+
+=== Paste Modes ===
+
+The default paste mode overwrites the paste area completely, so if the copied pattern data contains empty cells, they will overwrite any existing pattern data. However, there are several other ways to paste data, available from the '''Paste Special''' context menu:
+
+[[Image:Mix Paste.png|right]]
+
+* '''Mix Paste''': Transfers a copy of the clipboard contents where the cursor is located, overwriting any fields within the bounds of the pasted data '''only if''' there is no data in the correlating fields. The difference between '''Mix Paste''' and '''Mix Paste (IT Style)''' is that the former overwrites effect parameters if they are 00, while the latter leaves effect commands untouched, even if they have a 00 parameter. Also, the first three columns (note, instrument and volume) are seen as one entity when using IT Style, so if any of the three contains some data in the source channel, none of the two other columns are ever overwritten. <br/> Have a look at the graphic on the right for a better understanding of the two Mix Paste modes: <br/> The first channel is the target channel in which we will be mix-pasting the clipboard data (second channel). In the third channel, you can see the result of a '''Mix Paste''' action, and in the fourth channel, we have used '''Mix Paste (IT Style)''' instead. See rows 4, 8, 13 and 14 for the differences.
+* '''Paste Flood''': The same as standard paste, except that the pasted data is continually pasted until the end of the pattern is reached (ignoring Overflow mode).
+* '''Push-Forward Paste''': '''Inserts''' the data into the pattern rather than overwriting it, pushing all data it affects farther down the pattern. Any data at the end of the affected channels is lost.
+
+When pasting more than one pattern, new patterns are created for the pasted content by default. If you would like to paste into existing patterns instead, execute a '''Mix Paste'''. To continue the paste operation past the end of the current pattern, '''Overflow Paste''' must be enabled.
+
+=== Quick Cursor Copy and Paste ===
+
+In the Pattern Editor, OpenMPT also makes use of its “Quick” clipboard, which can hold a copy of a single pattern event. For example, 
+{| class="wikitable"
+|-
+| C-5 || 01 || v32 || A04
+|}
+shows the four columns of a pattern event that are stored in the Quick clipboard.
+You can quick-copy every column by placing the cursor appropriately and using the Quick Copy keyboard shortcut (by default, this is <kbd>Enter</kbd>). Entering an effect command will also automatically update the Quick clipboard for that column.
+To re-use the data, place the cursor in any of an event’s four columns and use the shortcut key for Quick Paste (<kbd>Space</kbd>); the data in the Quick clipboard will be pasted in that field only (except if the cursor is in the note column, in which case the note and '''also''' its instrument will be pasted). You can only copy and paste in one field at a time.
+
+Note that using Quick Copy on the instrument column also has a special secondary meaning: It will set the copied instrument as the current main instrument.
+
+=== Channel Header Context Menu ===
+
+* '''Mute Channel''': Disables all audio output from this channel. In the S3M format, this also prevents any global effects (e.g. tempo changes) from this channel to be executed. The mute status of a channel can also be toggled by clicking on the '''channel name''' area.
+* '''Solo Channel''': Mutes all channels except this one. The solo status of a channel can also be toggled by holding the <kbd>Alt</kbd> key and clicking on the '''channel name''' area.
+* '''Unmute All''': Enables audio output from all channels.
+* '''Transition Actions''': Will apply one of these actions the next time the playback position reaches another order item. The actions are Mute (disable audio from the selected channel), Unmute All (enable audio from every channel), or Solo (disable audio from all except the selected channel).
+* '''Reset Channel''': Stops the processing of all notes in this channel, as well as reverts to the initial channel settings, such as those for pan position, volume, etc.
+* '''Record Select''': Toggles this channel for the first pattern record group. The record status of a channel can also be toggled by holding the '''<kbd>Shift</kbd>''' key and clicking on the '''channel name''' area.
+* '''Channel Settings''': Opens the [[Manual: Quick Channel Settings|Quick Channel Settings dialog]].
+* '''Split Record Select''': Toggles this channel for the second pattern record group.
+* '''Transpose Channel''': Changes the pitch of all notes on the selected channel in ''all'' patterns by a selectable amount of semitones.
+* '''Duplicate Channel''': Adds a new channel to the module and carries over all note data from the selected channel to this new channel.
+* '''Add Channel''': Adds an empty channel before or after the selected channel.
+* '''Remove Channel''': Removes the selected channel or opens a dialog from which you can select the channels to remove.
+* '''Reset Channel Colours''': Changes the colours of all channels back to the default colour scheme set up in the [[Manual: Setup/Display#Default Channel Colours|Display Settings]]. If you would like to only change the colour of some channels, you can pick a new colour from the [[Manual: Quick Channel Settings|Quick Channel Settings dialog]] or [[Manual: General#Channel Setup|General Tab]].
+
+Middle-clicking or <kbd>Ctrl</kbd>-right-clicking a channel header brings up the [[Manual: Quick Channel Settings|Quick Channel Settings dialog]], which can be used to adjust the channel’s initial volume and panning properties as well as updating its name. Channels can be moved around by dragging their channel header. Holding <kbd>Shift</kbd> after starting the dragging will duplicate the channel at the drop position.
+
+=== Pattern Context Menu ===
+
+Many of the menu items in this context menu may not be available / visible based on what the selection contains. To show all menu items, even if they do not apply, check the “Old-style Pattern Context Menu” option in the [[Manual: Setup/General|General]] page of the [[Manual: Setup|Setup dialog]]; the unavailable items will be greyed out.
+
+* '''Select Channel''': Select all data within the selected channel.
+* '''Select Pattern''': Select all data within the current pattern.
+* '''Cut''': Executes a Copy action on the selected region, then erases all data from it.
+* '''Copy''': Copies the pattern selection to the clipboard. OpenMPT uses the operating system’s regular text clipboard for pattern data, so you can easily paste pattern contents into a different application (e.g. a website).
+* '''Paste''': Transfers a copy of the clipboard contents where the cursor is located, overwriting any data within the bounds of the pasted data. This will begin in the same event as the cursor location, even if the cursor is not in the first column of the event.
+* '''Paste Special''': Various other paste modes are available from this sub menu. They are described [[#Paste Modes|above]].
+* '''Undo''': Repeals the last action taken. Navigation cannot be un-done.
+* '''Clear Selection''': Erases all data in the selected region.
+* '''Interpolate Effect''': Interpolates the effect data between the first and last row in the effect column of the selection if they contain the same effect, filling in any blank fields in the affected cells. If there is no effect on either the first or last row, the effect value on the last or first row respectively is repeated throughout the whole selection.
+* '''Interpolate Volume Column''': Interpolates the effect data between the first and last row in the volume column of the selection in the same fashion as “Interpolate Effect”.
+* '''Interpolate Instrument''': Interpolates between the instrument numbers in the first and last row of the selection in the same fashion as “Interpolate Effect”.
+* '''Interpolate Note''': Interpolates between the notes in the first and last row in the volume column of the selection in the same fashion as “Interpolate Effect”, with the difference that existing notes are overwritten.
+* '''Transpose''': Changes the pitch of all notes within the selection up or down by one octave, one semitone, or a custom amount.
+* '''Change Instrument''': Assigns a chosen instrument to '''all''' notes within the selection. “Current Instrument” uses the instrument shown in the Main Instrument field), “Current Instrument (only overwrite existing)” applies the main instrument only to instrument cells where an instrument number has already been placed.<br>This menu item will appear only if the right-click is on a note event.
+* '''Amplify''': Opens the [[Manual: Amplify|Amplify dialog]], which can be used to amplify and fade the current cell or a whole selection by inserting the appropriate volume commands.
+* '''Visualize Effect''': Opens the [[Manual: Parameter Editor|Parameter Editor window]] for visualizing either the effect column data or the Parameter Control Event data in the current selection (so will not work if no selection has been made).
+* '''Change Plugin:''' From this menu, you can select the plugin for a [[Manual: Parameter Control Events|Parameter Control Event]] to control. This menu item is only available if the cursor is placed on a Parameter Control Event.
+* '''Change Plugin Parameter:''' From this menu, you can select a plugin parameter that should be automated. This menu item is also only available if the cursor is placed on a Parameter Control Event.
+* '''Toggle Plugin Editor:''' Opens the [[Manual: Plugin Window|Plugin Window]] of the plugin that is associated to the selected Parameter Control Event or instrument.
+* '''Grow Selection''': Extends the selection by inserting a blank row after every row in the selection, so the length of the selection is doubled. This will overwrite any rows in those channels below the selection.
+* '''Shrink Selection''': Shrinks the selection by merging row pairs into a single row in the selection, effectively halving the length of the selection.
+* '''Show Row Play Time''': Displays an estimate of the time from the song start to the selected row.
+* '''Split Pattern at Row <tt>x</tt>''': Splits the current pattern in two halves, the first containing every row leading up to row '''<tt>x</tt>''', and the second containing row '''<tt>x</tt>''' and all subsequent rows. The first half of the split replaces the current pattern (overwriting the contents), while the second half is placed into a new pattern and added directly after the current Order in the Order List (if the pattern being split is in the Order List).
+* '''Lock Playback to Selection''': Restricts pattern playback to the rows of the current selection.
+* '''Reset Playback Lock''': If no selection was made, this option is available to reset playback locks created by the previous menu item.
+* '''Insert Row''': Offers several ways of inserting one or more rows:
+** '''Insert Row (Selection)''': Moves event data in the current and following rows in the selected channel down by the amount of selected rows. Event data in the last row of those channels is deleted.
+** '''Insert Row (All Channels)''': Moves event data in the current and following rows in all channels down by the amount of selected rows. Event data in the last row of all channels is deleted.
+** '''Insert Row (Selection, Global)''': Moves event data in the current and following rows in the selected channel down by the amount of selected rows. Event data in the last rows is pushed to the next pattern(s), where the same action is repeated.
+** '''Insert Row (All Channels, Global)''': Moves event data in the current and following rows in all channels down by the amount of selected rows. Event data in the last rows is pushed to the next pattern(s), where the same action is repeated.
+* '''Delete Row''': Offers several ways of deleting one or more rows:
+** '''Delete Row (Selection)''': Deletes the same number of rows as the selection, affecting the same number of channels where the selection extends; the data is moved up to replace the cleared data, and empty rows are added at the end of the affected channels.
+** '''Delete Row (All Channels)''': Deletes the same amount of rows as the selection, on all channels; the data is moved up to replace the cleared data, and empty rows are added at the end of the pattern.
+** '''Delete Row (Selection, Global)''': Deletes the same number of rows as the selection, affecting the same number of channels where the selection extends; this also affects all following patterns as no empty rows are inserted.
+** '''Delete Row (All Channels, Global)''': Deletes the same amount of rows as the selection, on all channels; this also affects all following patterns as no empty rows are inserted.
+* '''Quantize Settings''': Opens a dialog to set up live record quantization. If this value is zero, no quantization is applied; any other value shifts recorded notes up or down to the closest row that is a multiple of the quantize value. This applies to both live recording through MIDI as well as when using the computer keyboard. If quantization is applied, [[Manual: Setup/General#Automatic delay commands|automatic delay commands]] are not inserted. Quantize settings are remembered when OpenMPT is closed.
+
+[[Category:Manual|Pattern Tab]]
+[[Category:Tabs|Pattern Tab]]
+[[de:Handbuch: Patterns]]

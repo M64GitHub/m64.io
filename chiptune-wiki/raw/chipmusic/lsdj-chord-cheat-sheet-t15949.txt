@@ -1,0 +1,244 @@
+RAW: chipmusic.org forum thread "LSDJ Chord Cheat Sheet" | https://chipmusic.org/forums/topic/15949/ | fetched 2026-08-30 with a browser user agent | post text extracted from the HTML (post number, author, timestamp; quotes marked [quote author]); signatures, avatars and images not included
+
+--- #1 | LazierGunz | Jan 20, 2015 8:13 pm
+Hey, I was putting together a little chord cheat sheet to use for arpeggio / chord tables. Maybe you guys would find it useful.
+
+[img: http://i.imgur.com/5gPyNA4.png] <http://i.imgur.com/5gPyNA4.png>
+
+--- #2 | JodyBigfoot | Jan 20, 2015 8:17 pm
+yeah really useful thank you
+
+--- #3 | kitsch | Jan 20, 2015 9:02 pm
+indeed useful, thanks!
+
+--- #4 | TEOMAWKI | Jan 20, 2015 9:08 pm
+Arp Arp Arp!
+
+Thanks!
+
+Last edited by TEOMAWKI (Jan 20, 2015 9:08 pm)
+
+--- #5 | Mrwimmer | Jan 20, 2015 9:40 pm
+This is also pretty useful http://aanaaanaaanaaana.net/page.php?di … =arpmaster <http://aanaaanaaanaaana.net/page.php?dir=things&page=arpmaster>
+
+--- #6 | JodyBigfoot | Jan 20, 2015 9:46 pm
+Can I just ask what the scale notes column means? I'm not a musical theorist, i understand the last column cos its in LSDJ language, but that one is a little confusticating
+
+--- #7 | Imaginary | Jan 20, 2015 9:48 pm
+Many thanks! [img: big_smile]
+
+--- #8 | Knife Crimes | Jan 20, 2015 11:42 pm
+[quote JodyBigfoot wrote:]
+
+Can I just ask what the scale notes column means? I'm not a musical theorist, i understand the last column cos its in LSDJ language, but that one is a little confusticating
+
+The numbers in the scale notes column refer to which notes of the major scale make up a chord. So a 1 is the 1st note of the scale, 3 is the 3rd and so on. If the note number is preceded by a 'b', it's flattened, or shifted down one semitone. If the note number is preceded by a '#' it's sharpened, or shifted up one semitone.
+
+For the C major scale it would be
+1=C
+2=D
+3=E
+4=F
+5=G
+6=A
+7=B
+8=C
+and so on.
+
+--- #9 | Skycstls | Jan 20, 2015 11:48 pm
+Love it, thanks
+
+--- #10 | Knife Crimes | Jan 21, 2015 12:05 am
+On closer inspection, the note numbers are explained in the cheat sheet. Check out the yellow table on the left.
+
+--- #11 | LazierGunz | Jan 21, 2015 11:57 am
+I'm glad you guys find this useful! I might make another chart for scales. I'll include some wacky ones.
+
+[quote Mrwimmer wrote:]
+
+This is also pretty useful http://aanaaanaaanaaana.net/page.php?di … =arpmaster <http://aanaaanaaanaaana.net/page.php?dir=things&page=arpmaster>
+
+This is a nice reference tool!
+
+--- #12 | Sesska | Jan 21, 2015 2:08 pm
+hi guys,
+
+how do you manage a 4 notes chords ?
+table, but how ?
+
+(RTFM ?)
+
+--- #13 | LazierGunz | Jan 21, 2015 8:13 pm
+[quote Sesska wrote:]
+
+hi guys,
+
+how do you manage a 4 notes chords ?
+table, but how ?
+
+(RTFM ?)
+
+Here's an example of a Major 7th table.
+
+[img: http://i.imgur.com/xnq5MdP.png] <http://i.imgur.com/xnq5MdP.png>
+
+(i put a hop in there because it sounded nice looped at that point in context, so this actually just loops 0 - 4 - 7 - B - C )
+
+so this table plays Hex sequence 00 - 04 - 07 - 0B - 0C - 07 - 04 - 00 ( 0C being the root note + 1 octave), or notes 1 - 3 - 5 - 7 of the major scale (a Major 7th!)
+
+put this on a C note and it plays C E G B [C] B G E....
+
+tables are nice to make chords more interesting than just the C command, like you could also put
+00
+00
+04
+04
+07
+07
+0B
+0B
+0C
+0C
+
+for a slower chord arp, or
+
+00
+04
+00
+07
+00
+0B
+00
+0C
+
+for some nice texture.
+
+--- #14 | cosmicosmo | Jan 22, 2015 12:19 am
+thanks a ton dude!
+
+--- #15 | LazierGunz | Jan 22, 2015 4:08 am
+[quote cosmicosmo wrote:]
+
+thanks a ton dude!
+
+No problem, guys!
+
+I was thinking, maybe I'm not giving the C command enough credit.
+
+[img: http://i.imgur.com/jOSLAAn.png] <http://i.imgur.com/jOSLAAn.png>
+
+who needs tables anyway?
+
+--- #16 | Sesska | Jan 22, 2015 8:58 am
+thanks lazier gunz
+
+I have not really explored this side of LSDJ, being focused on getting some decent bass lines and fat sounding kicks... but this does open new horizons
+
+LSDJ is definitely a wide world to discover (with so little time to spend on it : / )
+
+--- #17 | Mrwimmer | Jan 22, 2015 5:44 pm
+[quote LazierGunz wrote:]
+
+tables are nice to make chords more interesting than just the C command, like you could also put
+00
+00
+04
+04
+07
+07
+0B
+0B
+0C
+0C
+
+for a slower chord arp
+
+No need for all that. You can use a G command in a table to call a different groove to alter the speed the table runs at. for instance, you could slap a G01 on the first line of a table, and then go to G01 and set it to 2/2 to accomplish the same thing (and SO MUCH MORE)
+
+yeah, the speed of the C command is static (and therefore kinda useless imo) tables are where it's at.
+
+--- #18 | LazierGunz | Jan 22, 2015 7:31 pm
+[quote Mrwimmer wrote:]
+
+No need for all that. You can use a G command in a table to call a different groove to alter the speed the table runs at. for instance, you could slap a G01 on the first line of a table, and then go to G01 and set it to 2/2 to accomplish the same thing (and SO MUCH MORE)
+
+yeah, the speed of the C command is static (and therefore kinda useless imo) tables are where it's at.
+
+Oh yeah! I keep forgetting that the G command isn't global. Very powerful technique to explore!
+
+--- #19 | danimal cannon | Jan 22, 2015 7:46 pm
+Also consider making your arpeggios go downward. Or perhaps out of order. Or with octave notes in between, at 16ths, 8ths, triplets, 32nd whatever. Maybe do a 5 note pattern over more than one octave.
+
+Just don't go up the chord every time the same way. V
+
+--- #20 | JodyBigfoot | Jan 22, 2015 8:29 pm
+[quote danimal cannon wrote:]
+
+out of order
+
+exactly that^
+
+play with em innit
+
+Last edited by JodyBigfoot (Jan 22, 2015 8:29 pm)
+
+--- #21 | SketchMan3 | Jan 22, 2015 8:48 pm
+[quote Mrwimmer wrote:]
+
+yeah, the speed of the C command is static (and therefore kinda useless imo) tables are where it's at.
+
+Useless if you're not attempting to accomplish what the C command can provide, at least. And it's fun for lots of things.
+
+I Do arps out of order depending on the note i want emphasized and what-not. Really useful for tracking destiny's child type lead+harmony stuffs.. >.>
+
+--- #22 | DataFix | Jan 23, 2015 5:53 am
+this is soso great, thank you ~
+
+--- #23 | Sesska | Jan 23, 2015 8:22 am
+[quote]
+
+you could slap a G01 on the first line of a table, and then go to G01 and set it to 2/2 to accomplish the same thing (and SO MUCH MORE)
+
+sounds wicked, do you have an audio example to give an idea of what it sounds like ?
+
+--- #24 | SketchMan3 | Jan 23, 2015 3:45 pm
+[quote Sesska wrote:]
+
+[quote]
+
+you could slap a G01 on the first line of a table, and then go to G01 and set it to 2/2 to accomplish the same thing (and SO MUCH MORE)
+
+sounds wicked, do you have an audio example to give an idea of what it sounds like ?
+
+It sounds like every table arp you've ever heard that uses this technique of slowing down the arps by doubling each TSP command with the default groove:
+00
+00
+04
+04
+07
+07
+0B
+0B
+0C
+0C
+
+but only takes up half the table space:
+00
+04
+07
+0B
+0C
+
+[img: wink]
+
+--- #25 | Jansaw | Jan 23, 2015 4:48 pm
+Two good resources here:)
+As Danimal mentions, tasteful variation is always more interesting to the ear.
+
+--- #26 | Lack of Sound | Jan 24, 2015 6:35 pm
+Hope this link helps as well:
+
+http://littlesounddj.wikia.com/wiki/Chords_using_Tables <http://littlesounddj.wikia.com/wiki/Chords_using_Tables>
+
+--- #27 | Popsicle Theory | Jan 29, 2015 11:50 am
+thank you! very handy

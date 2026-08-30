@@ -1,0 +1,101 @@
+[[Image:General Tab.png|thumb|300px|General Tab]]
+
+The General tab holds the general global settings of each song and is also used to set up the plugins that are used in a song. Many of these settings can be changed using a coarse slider, a text box to enter a precise value or the spin button next to the text boxes to increase or decrease a value. Some options are not available in all module formats; if that is the case, their controls are simply greyed out and cannot be accessed.
+
+The General tab is divided into two halves. They are divided by a splitter bar, which can be dragged vertically to change the size of both views.
+
+== Song Setup ==
+
+=== Miscellaneous ===
+
+* '''Track Name''': In the first text box, you can enter the name of your song. Depending on the module format used, the length of this text field is limited.
+* '''Artist''': Contains the name of the track artist.
+* '''Song Properties''': Next to the track name, you can see which module format the current song is in, as well as the number of pattern channels. To change either of them (plus some further global settings), click the button to open the [[Manual: Song Properties|Song Properties]] dialog.
+* '''Resampling''': In the MPTM format, a default resampling mode can be enforced. If '''Default''' is chosen, the default resampling method as configured in the [[Manual: Setup/Mixer#Resampling|Mixer Settings]] is used. This setting can be further overridden by [[Manual: Instruments#Sample Quality|instruments]]. In other formats, this dropdown list can be used to temporarily override the global resampling method, but its setting is not stored in files.
+* '''VU Meters''': The VU Meters show the level of the left and right master output channel during playback. Their colour can be configured in the [[Manual: Setup/Display|Display Setup]].
+
+=== Tempo ===
+
+* '''Initial Tempo''': The current sequence′s initial Tempo value. The effect of this setting is determined by the [[Manual: Song Properties#Tempo Mode|Tempo Mode]], which can be set in the [[Manual: Song Properties|Song Properties]] dialog. This setting can also be changed during playback using the Txx command in MPTM / IT / S3M and the Fxx command (with xx ≥ 20h) in XM / MOD tracks. In the MPTM format, the tempo may be fractional (e.g. 136.46 BPM) and can be incremented / decremented in 0.1 steps by holding <kbd>Shift</kbd> when clicking the spinner buttons, or 0.01 steps by holding <kbd>Ctrl</kbd>.
+* '''Ticks / Row''' ('''Initial Speed'''): The current sequence′s initial ticks per row (Speed) value. The effect of this setting is determined by the [[Manual: Song Properties#Tempo Mode|Tempo Mode]], which can be set in the [[Manual: Song Properties|Song Properties]] dialog. This setting can also be changed during playback using the Axx command in MPTM / IT / S3M and the Fxx command (with xx < 20h) in XM / MOD tracks.
+* '''Tempo Tap''': Use the '''Tap''' button to tap in the beats per minute. Click the button or hit enter while the button is focussed to signal a beat. The more beats you tap in, the more precise the tempo is estimated. Wait for about two seconds to reset the estimation.
+
+=== Restart / Loop ===
+
+* '''Restart''': If '''Loop Song''' is enabled, playback will resume at this [[Manual: Patterns#Order List|order list]] position when the song end is reached. If there is more than one sequence (order list), this value represents the restart position of the currently selected sequence.
+* '''Loop Song''': If this box is checked, your song will restart from the restart position and loop if the end is reached. This is a global setting rather than a per-song setting and is applied to all tracks you play in OpenMPT.
+
+=== Volume Settings ===
+
+* '''Initial Global Volume''': The track′s initial Global Volume value, which is the global amplification of a song. The exact effect of this setting depends on the [[Manual: Song Properties#Mix Levels|Mix Levels]], which can be set in the [[Manual: Song Properties|Song Properties]] dialog. Global volume can be changed during playback using the Vxx command in MPTM / IT / S3M (with xx ranging from 00h to 80h in MPTM / IT and from 00h to 40h in S3M) or Gxx in the XM format (with xx ranging from 00h to 40h).
+* '''Synth Volume''': This setting determines the overall amplification of the output of all VST instruments and FM synthesis. This setting cannot be changed using pattern effects.
+* '''Sample Volume''': This setting determines the overall amplification of samples. Too high amplification will saturate or overdrive sample output. This setting cannot be changed using pattern effects. It is the only volume slider available for ProTracker MOD files, but the value is actually not stored in such files.
+
+When using [[Manual:_Song_Properties#Mix_Levels|modern or compatible mix levels]], hovering the volume sliders reveals a tooltip that translates the current attenuation setting into dB units. For the VSTi volume, this means how much every single instrument plugin is attenuated, and for the sample volume, it means how much every single sample voice is attenuated.
+
+== Channel Setup ==
+
+In the middle of the page is the Channel Setup section, which displays four channels at a time, and allows for editing each channel’s initial settings. To browse through all available channels, use the tab control.
+The track format determines what settings can be modified both initially and during output. The following properties can be set for each channel:
+
+* '''Colour''': Clicking on the coloured button next to the channel number allows you to pick the colour of this channel, which is shown at the top of the pattern editor.
+* '''Channel Name''': You can assign a name to your channels which is shown in the [[Manual: Patterns|Pattern Editor]] and the [[Manual: Channel Manager|Channel Manager]], to keep your module tidy and help distinguish channels.
+* '''Initial Channel Volume''': The global volume of a channel. All note volumes are multiplied with this. Channel volume is only applied to samples, not to VST instruments, but since it is applied to samples, it can affect the input of an effect plugin. XM and MOD files do not have a channel volume setting. S3M files can make use of channel volume, but they have no initial channel volume, so this control is greyed out. You can use the Mxx command (with xx ranging from 00h to 40h) in patterns to set the channel volume.
+* '''Initial Panning''': The channel’s initial stereo panning. Unlike the channel volume, this setting is not “global”; panning commands, sample panning and instrument ''override'' the initial panning. In MOD files, the initial panning is fixed to a Left/Right/Right/Left scheme; XM files do not support initial channel panning due to the fact that every sample in XM files has a forced default panning. Panning can be changed in the patterns by using the 8xx or E8x command in XM and MOD files and the Xxx or S8x command in MPTM / IT / S3M files.
+* '''Mute''': Clicking on this button enables / disables all audio output from this channel.<br /> Notes played in a channel are always processed, but if “Ignore Muted Channels” is set in the [[Manual: Setup/General|General Options]] page, unmuting a channel will not play a currently running note, instead picking up when a new note is called. Keep in mind that no effects are processed on muted channels in S3M files, so e.g. tempo changes or pattern breaks are not handled on muted channels in S3M files. Also, the channel mute status is only saved in MPTM / IT / S3M files.
+* '''Surround''': This button toggles the surround panning setting for the current channel. Surround and initial panning are mutually exclusive; if surround is enabled, the initial panning is forced to center. Surround can be reset in the pattern using a panning command (unless quad surround panning is enabled). In MPTM and IT files, surround can be enabled using the command S91; in the S3M format, the command XA4 shall be used.
+* '''Channel Effect''': Here you can assign an effect plugin to the current channel. All sample output on this channel is then routed through the effect plugin. To apply more than one plugin to the channel, you can use the plugin’s “Output To” property to route its output to another plugin. Note: While instrument plugins override channel plugins (i.e. if an instrument has a plugin assigned, the sample output of this instrument is '''not''' routed through the channel′s effect plugin), channel plugins are always preferred over instrument plugins when using [[Manual: Zxx Macros#Plugin Parameter Control|MIDI Macros]].
+
+The channel properties can also be edited directly from the pattern editor by using the [[Manual: Quick Channel Settings|Quick Channel Settings dialog]].
+
+== Plugin Setup ==
+
+The bottom part of this tab is dedicated to the plugin setup. Here, you can load plugins into your song, configure them, move them, and so on.
+
+=== General ===
+
+* '''Plugin Slot''': Shows the currently edited plugin; all parameters shown in this section apply to this plugin. Clicking in the field opens a list where you can switch to a different plugin. Clicking on the left / right arrows next to the field changes the current plugin to the previous / next one in the Plugin List. There are 250 available slots where plugins can be placed, and they do not need to be placed sequentially. However, if an output chain is set up, a VST can only output to one farther down the list (with a higher slot number). So for example, a chain can route its audio from slots 1 to 3 to 5, but not 1 to 5 to 3.
+* '''Move Plugin''': This allows you to move the current plugin to another slot. When moving, you will be shown a dialog box which will allow you to choose an empty slot to move the plugin to. References to this plugin (for example from instruments or channel setup) are updated automatically when moving. If the moved plugin is part of a chain, and the plugin is moved to a slot ''after'' its output plugin, the “move plugin chain” must remain enabled, or otherwise the chain will be broken and the Output field (see below) will revert to Default.
+* '''Clone Plugin''': Creates a new instance of the same plugin in another slot. If the plugin is part of the chain, it is possible to clone the entire chain starting from this plugin by enabling the “move plugin chain” option.
+* '''Insert Slot''': Creates an empty slot ''before'' the current plugin’s place in the list. This will effectively push the current plugin and all those after it in the list down one slot. If a plugin occupies the last slot (with the highest number), it is deleted; '''this cannot be undone''', but you are prompted to confirm the insertion in that case.
+* '''Remove''': Removes this plugin instance from the module.
+* '''Select Plugin''': Opens the [[Manual: Plugin Manager|Plugin Manager]], where you can select a plugin to put into the current slot, replacing the current plugin if there is one. You can also '''remove''' the current plugin by choosing “No Plugin” in the Plugin Manager.
+* '''Editor''': This button opens the [[Manual: Plugin Window|Plugin Window]] where you can edit the plugin′s properties. <kbd>Shift</kbd>-clicking the button closes all other open plugin editors.
+* '''Display Name''': An text field where you can provide a custom name for the plugin. This label will appear in the Channel Header if the plugin is assigned to a channel, or the Plugin Select field in the Instruments page if it is assigned to an instrument, so it can be useful to choose a custom name here if you are using several instances of the same plugin.
+* '''Input / Output Type''': A description of the type of audio signal going in and out of the plugin (none, mono, or stereo).
+
+=== Factory Preset ===
+
+Here you can quickly change some parameters. Usually, the more comfortable way to do this is using the [[Manual: Plugin Window|Plugin Window]], but some plugins might not expose all parameters through their window. So in that case, you can still edit them here.
+
+* '''Preset''': The currently loaded plugin preset, or “patch”. The number of available preset slots varies from plugin to plugin; some do not have any presets at all.
+* '''Load Preset''': Use this to load an existing plugin preset or bank (.fxp or .fxb file).
+* '''Save Preset''': Use this to save the current plugin parameters to a plugin preset or bank file.
+* '''Parameter''': Pick a parameter from this list to edit it using the slider below. You can either drag the slider to adjust the value, or input a parameter using the text box next to it. Use the '''Set''' button to apply the value you typed into the text box.
+
+[[Image: Plugin Dry Wet Ratio.png|thumb|300px|The “Expand” option changes the behaviour of the Dry / Wet ratio setting.]]
+
+=== Mix Settings ===
+
+This option group is used to set up the inputs and outputs of the plugin.
+
+* '''Master''': When enabled, this plugin is applied to the master audio output.
+* '''Bypass''': If checked, the plugin is not processed anymore. An instrument plugin will cease to make sound and effect plugins will stop having an effect on the audio that is routed through them.<br> By holding <kbd>Shift</kbd> when pressing the Bypass checkbox, all other plugins are (un-)bypassed. Holding <kbd>Ctrl</kbd> instead, only Master plugins are affected.
+* '''Expand''': This option affects the Dry / Wet setting. Normally, the Dry / Wet ratio ranges from 100% Wet / 0% Dry to 0% Wet / 100% Dry, but with this setting, it ranges from 100% Wet / -100% Dry to -100% Wet / 100% Dry. A negative value means that the phase of the signal is inverted. So if the slider is full left, you get to hear the wet signal as well as an inverted copy of the dry signal, at the middle you get no output at all (0% Wet / 0% Dry) and if the slider is full right, you get the original signal plus an inverted copy of the wet signal. While being potentially interesting conceptually, this setting is unlikely to be useful musically.
+* '''Dry Mix''': If enabled, the dry (incoming) signal is added to the output signal of a plugin, in addition to the dry amount of the Dry / Wet slider. This is most commonly used for plugins that have no Dry / Wet mix settings built in. For example, in a delay plugin with no dry signal, all you get is the later echoes with no original sound, which is not what you normally want. In that case, you can enable Dry Mix to add the original signal.
+* '''Auto-Suspend''': If enabled, the plugin will be suspended temporarily if it has not received any input (MIDI or audio) and also not produced any output for several seconds. If a plugin gets confused by the observed discontinuity in time, or if its output contains long intentional passages of silences that do not correlate with any input, this option can be turned off.
+* '''Mix Mode''': This determines how the Wet / Dry ratio affects the output signal. Several options are available:
+** '''Default''': No special processing.
+** '''Wet Subtract''': The Dry signal is added to the mix, the Wet signal (multiplied by the Wet ratio) is subtracted from the mix.
+** '''Dry Subtract''': The Wet signal is added to the mix, the Dry signal (multiplied by the Dry ratio) is subtracted from the mix.
+** '''Mix Subtract''': The Wet signal is subtracted from the mix, the Dry signal (multiplied by the Wet ratio) is added to the mix.
+** '''Middle Subtract''': The Middle channel is subtracted from the mix, then the dry and wet signal are added normally.
+** '''LR Balance''': The Wet / Dry ratio is treated as a panning ratio for the signal.
+** '''Instrument''': This is a legacy mix mode, used automatically for instrument plugins when loading modules made with OpenMPT 1.31 and older. It is similar to the '''Default''' mix mode, with the only difference being that the dry signal always plays at 100%, no matter what the Dry / Wet ratio is set to. This mix mode should not be used, except when importing legacy modules.
+* '''Gain''': This adjusts the volume of the plugin from 0.1 - 8.0 in increments of 0.1. This is used to reduce or boost the volume of plugins that are quieter or louder than desired. The default gain is 1.0 (no change in volume).
+* '''Output To''': Specifies where the plugin′s audio and MIDI output is routed to. By default it is combined into the Master Audio route, but you can create a plugin chain by routing it to another plugin as long as its slot number is higher than the current plugin′s slot. Note that MIDI events are only routed if an output plugin is specified, i.e. they are not routed to the master.
+* '''Dry / Wet Slider''': Controls the Dry / Wet ratio of the plugin. The exact meaning of the ratio is determined by the “Expand”, “Dry Mix” and “Mix Mode” options described above.
+
+[[Category:Manual|General Tab]]
+[[Category:Tabs|General Tab]]
+[[de:Handbuch: General]]

@@ -1,0 +1,105 @@
+RAW: chipmusic.org forum thread "LSDJ Complete Drum Kit on Noise Channel" | https://chipmusic.org/forums/topic/15681/ | fetched 2026-08-30 with a browser user agent | post text extracted from the HTML (post number, author, timestamp; quotes marked [quote author]); signatures, avatars and images not included
+
+--- #1 | Robin | Nov 29, 2014 3:49 pm
+I'd like to keep all the other channels for melody and harmony. Has anyone managed to get an acceptable drum kit just on the noise channel? If so, could you give me some instructions?
+
+More generally, are there any .sav files around with basic instrument blueprints that can be tweaked? I've found a few containing finished masterpieces, but I'd like to have a basic set of pre-programmed instruments to work with, or maybe just a chart of hex parameters as starting points for common instruments.
+
+--- #2 | Mrwimmer | Nov 29, 2014 4:43 pm
+You can totally do all of your drums in the noise channel! You can make cymbal sounds pretty basically with just the envelope. Snares are easy too, I usually do an envelope with a decay of 1 or 2, and a shape of like FE or FD.
+
+Kick drums are where things get more whacky. The biggest thing is that you have to do a sweep down, to make it sound different than what that snare patch might sound like. To be honest, I didn't ever figure it out on my own, and had to have a friend show me like a year ago. The basic idea is an envelope with a decay of 1, a shape of FC and then a table that looks like this:
+
+1 00--00
+2 00-SF0
+3 00-SF0
+4 00-SE0
+5 00--00
+6 00-H05
+
+It makes it so that the noise sweeps down in pitch pretty quick, and sounds like a kick drum.
+
+--- #3 | herr_prof | Nov 29, 2014 4:45 pm
+A key is to use the noise channel to accent sounds on other channels. You can make a sweepy sounding bass line on pu 1 and add definition to it using noise without wasting it for melodic instrument
+
+--- #4 | jefftheworld | Nov 29, 2014 9:39 pm
+It all depends on how chippy and lo-fi you want to sound. You can get some really neat sounding noise drums using techniques like Mrwimmer outlined but don't expect to get a realistic snare sound or an 808 kick with just the noise channel.
+
+--- #5 | ForaBrokenEarth | Nov 30, 2014 12:03 am
+You can more or less, but you'll never be able to get more than one percussive sound playing at once if you do. The trick, I find, is to learn to spread parts over multiple channels. Using double time you can make kicks and basses on the wave channel seem to blur together for example.
+
+--- #6 | Category | Dec 1, 2014 1:31 pm
+I had the same idea. I have made a kick, snare, and open+closed hihats on noise channel for a track I'm working on. It ain't perfect, but dirty and crunchy. Works for what I was writing at the time, but not a drop in replacement for everything - I'll post the patches I used later if you're interested.
+
+--- #7 | Vegasdiamond | Dec 1, 2014 1:40 pm
+[quote ForaBrokenEarth wrote:]
+
+You can more or less, but you'll never be able to get more than one percussive sound playing at once if you do. The trick, I find, is to learn to spread parts over multiple channels. Using double time you can make kicks and basses on the wave channel seem to blur together for example.
+
+One really great way to counteract the fact that you can only do one thing per channel (borrowed from beatboxing) is to introduce the instruments one by one. So, begin with hi-hat and snare and then suddenly switch to hi-hat + snare + kick. If the instruments kind-of-sound-alike (and they do in Noise for me) the brain fills in the old things even if they're not there anymore.
+
+And double-time works great as well. I sometimes fill in missing hi-hats by going double time and D commands. I put the missing hi-hat on the step before and then use a D02 or D05 (depending on the channel speed) to make it sound just before the kick or snare hits. This makes it sound kind of wonky but it works for me.
+
+--- #8 | TylerBarnes | Dec 1, 2014 7:44 pm
+I've made a noise kick, snare, pre-snare, and highhat on my ghost channel songfile (availible for download <https://app.box.com/s/dxrylydzu2hrv6jt07ja>). You are free to use those if you wish. They'll at least give you another example to work off of.
+
+I havn't tried Mrwimmer's example yet. I hope to try them once I can access my gameboy at home.
+
+Last edited by TylerBarnes (Dec 1, 2014 7:45 pm)
+
+--- #9 | Sesska | Dec 2, 2014 9:59 am
+[quote]
+
+The trick, I find, is to learn to spread parts over multiple channels.
+
+I'm sure that it's LSDJ key of heaven... but also the trickiest part of it, as it involves to think your instruments/song layout on a very-very different way than the usual ''bass here, beat there, melody on an other channel''
+
+--- #10 | SketchMan3 | Dec 3, 2014 12:41 am
+You can make a noise hihat+kick if you make the attack of the kick really high and hihat-like in the first row of the table before the down sweep. I've done this with "snare+kick" too on a track I'm working on to kind of get an "unce qunce unce qunce" sound. It kind of works. lol.
+
+noisechannel.org has an "LSDJ And You" series of articles written by thebitman and one of them includes a very nice noise kick patch with a clicky attack. Probably the "best" noise kick I've ever heard.
+
+Like... think about it, you could write an entire song using just Tables, using TSP for different notes, effects commands and everything for different "instruments", etc.
+
+You can create multiple instruments in a single table and smoosh them together at high speeds, as the others mentioned doing in the song patterns with Dxx commands. If you really need hihats going on every beat over top of all the other drums put your favorite hihat shape in the first row of your snare and kick tables, then etc etc... Personally I enjoy the limitation of having only one drum at a time playing in the noise channel, as it presents a challenge for creating interesting rhythms.
+
+A noise kick is never going to blow out your subwoofer. I don't think. So keep that in mind.
+
+Edit: Sorry i have no patches to share... >.< I don't memorize these things, lol. Every new creation is an experiment from scratch and trying to half-remember what i did in previous projects [img: tongue]
+
+Last edited by SketchMan3 (Dec 3, 2014 12:50 am)
+
+--- #11 | Sesska | Dec 3, 2014 8:27 am
+[quote]
+
+You can create multiple instruments in a single table and smoosh them together at high speeds,
+
+you forgot ''when you're very good''... cause I personnaly can't : /
+
+this ''noise thread'' gave me a lot of (good?) ideas to test on the next ''trip-hop'' track I have to make (1xLSDJ+vocals+Toy piano+ukulele)... going to sound veryveryvery low-fi, trying to give the noise channel a better chance than I now do...
+
+--- #12 | JodyBigfoot | Dec 3, 2014 9:32 am
+Personally I'm making reggae hip hop, so there is often off beat chords in both pulse channels, I therefore have space for a kick drum in one PU and some melody in the other, and always main bass in wav channel. I have been using a bit of noise channel drums, but I'm starting to take some of them out, i am hoping to seek drums elsewhere, I find for the big soundsystem music im making the noise is a bit invasive and I need cleaner sounds.
+
+ Wav channel kicks and PU kicks are so much nicer than a noise kick so for you, I think i would drop the idea of having ALL the drums in noise channel. you can hide kick drums amongst the melodies in the other channels if needs be. Having all the drums in noise though could provide a nice trademark sound if thats what your going for, just be careful not to over do them, constant noise can really bring a track down and distract from the melody, id advise to keep some space and sometimes have none
+
+--- #13 | Robin | Dec 3, 2014 9:06 pm
+Thanks for your input everyone.
+
+I've done some searching and found these two really good vids on noise drums:
+
+http://www.youtube.com/watch?v=v1CclrAE2lU <https://www.youtube.com/watch?v=v1CclrAE2lU>
+
+http://www.youtube.com/watch?v=fzEmh08Ls8I <https://www.youtube.com/watch?v=fzEmh08Ls8I>
+
+Nice work Defiant Systems!
+
+--- #14 | JodyBigfoot | Dec 3, 2014 9:46 pm
+yeah not so sure on the noise channel kick.... :S thats some supppper lo fi crunch, think i prefer a nice swoop on a sine wave
+
+--- #15 | SketchMan3 | Dec 3, 2014 11:15 pm
+I love that lo-fi classic vgm crunch kick with a little extra love due to not having to make space for the actual game, lol. Doesn't work so well for dance music where you need the club thumping, but it has its place.
+http://chipmusic.org/forums/post/172275/#p172275 <https://chipmusic.org/forums/post/172275/#p172275>
+
+--- #16 | JodyBigfoot | Dec 4, 2014 2:29 pm
+I\m gonna try and find a Space for it, maybe linked With a pulse or wav frum to give it a punchcrunch feel

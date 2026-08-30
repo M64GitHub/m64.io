@@ -1,0 +1,98 @@
+[The creation of the SID chip — The SID Homepage (sidmusic.org, Andreas Varga), http://www.sidmusic.org/sid/sidcreate.html — fetched 2026-08-30; page text extracted from HTML; images not included]
+
+THE CREATION OF THE SID-CHIP
+
+This time we'll discuss the SID - the remarkable soundchip that
+
+gives the C64 that fantastic sound.
+
+When "Project C64" was first discussed at Commodore in Jan 1981,
+
+the intention was to create a game computer. Those plans were
+
+changed during the project and instead Commodore decided to build
+
+a true home computer.
+
+A good game computer must be able to generate good sound. And the
+
+soundchip in the C64 can handle 3 voices at the same time spanning
+
+an unusually wide range of frequencies.
+
+The work on the C64 was to be carried out by two groups. One to
+
+develop the graphics chip and one for the SID. (SID is short for
+
+Sound Interface Device).
+
+The work on the SID was begun in spring 1981 by Robert Yannes, a
+
+young engineer who had been responsible for the design behind
+
+the VIC-20. His team consisted of himself, two technicians and a
+
+CAD-operator.
+
+> - I had worked with synthesizers and I wanted a chip like
+those
+>
+in a synthesizer, Robert Yannes stated.
+
+According to Yannes noone in the project team knew how to carry
+
+out the project.
+
+> - Apart from the basic research, that I'd been doing since
+higschool,
+>
+the actual development of the SID took just 4-5 months.
+
+Yannes high expectations on the SID was the reason why the chip
+
+got unusually high quality compared to those found in videogames.
+
+The SID has a more precise frequency control and the independent
+
+envelope-generator creates a more intense timbre.
+
+The envelope-function enables the SID to imitate an instrument
+
+more correct than other chips. Envelope is a tool for controlling
+
+the volume-level on a voice without using the very volume-control.
+
+Yannes originally incorporated a table in the SID, enabling it to
+
+interpret musical tones into frequency-datas. This feature was
+
+later removed, since it was too expensive.
+
+The real capacity of the SID-chip is not fully known even today -
+
+not even by its constructors! The reason for this is that the
+
+the technical specification written while the chip was developed
+
+accidently got incorrect.
+
+An example of this is that the documentation states that the chip
+
+can perform an logical AND on different waveforms.
+
+Another error is in the filter-function.
+
+> - The filter was the last feature we added in, and there
+was no
+>
+time to make it perfect, Yannes tells us. Computer simulations
+>
+told us the filter wouldn't work out very well. And it didn't.
+>
+I had no chance to correct the errors.
+
+These errors in the documentation has many programmers unable to
+
+use all possibilities of the chip.
+
+Christer Rindeblad

@@ -1,0 +1,192 @@
+[[Image:Instrument Tab.png|thumb|300px|Instrument Tab]]
+
+Instruments are an additional “layer” above samples that is available in some module formats supported by OpenMPT. An instrument can hold one or several samples that are assigned to different keys. This is also called '''multisampling'''. It can be used to create easy-to-use realistic sounding instruments (for example, you can assign a different piano sample to every note for a rather realistic reproduction of a piano) or drum sets (like the General MIDI drum set, where every note represents a different percussion instrument). Instruments also hold volume, panning and pitch / filter [[#Envelope Editor|envelopes]] which can be used to further modify the sound of those samples.
+
+Instruments can also be used to control instrument plugins. You can assign a combination of MIDI channel and MIDI programs of an instrument plugin to a module instrument for easy usage.
+
+By default, IT and MPTM files are created in “sample mode”, which means that instrument properties cannot be accessed. If you wish to use “instrument mode” instead, simply click the '''New Instrument''' button in the toolbar to convert all samples to instruments. After doing so, every sample is represented by an instrument.
+
+In instrument mode, lone samples that are not assigned to an instrument cannot be accessed in a pattern; to be able to access them, they have to be assigned to an instrument using the [[#Sample Map|Sample Map]].
+
+== Toolbar ==
+
+[[Image:Instrument File Toolbar.png]]
+
+* '''New Instrument''': Creates a new instrument and associates it with a free sample slot. <kbd>Shift</kbd>-clicking this button or choosing the dropdown menu duplicates the current instrument.
+* '''Load Instrument''': Loads one or more instruments in one of the following formats: ITI (Impulse Tracker instruments), XI (Fasttracker 2 instruments), SFZ ([[Manual: SFZ Implementation|SFZ instruments]]), PAT (Gravis UltraSound patches) or any of the supported [[Manual: Samples#File Toolbar|sample formats]]. You can load multiple instruments at the same time, which are then loaded into multiple instrument slots. It is also possible to load the first instrument from a soundfont (DLS, SBK, SF2, SF3, SF4).
+* '''Save Instrument''': Saves the current instrument in the ITI, XI or SFZ format. Hold <kbd>Shift</kbd> while clicking the button to mass-export all samples at once. In the save dialog, you can then use the variables %instrument_number%, %instrument_filename% and %instrument_name%.
+* '''Preview Instrument''': Plays the current instrument at middle-C. Clicking the button again fades out the playing note and releases all sustain loops.
+
+Next to the toolbar buttons are a spin button for dialling up a different instrument, the instrument name and the instrument file name.
+
+== Volume and Panning ==
+
+* '''Global Volume''': The overall attenuation of all samples assigned to this instrument. At a global volume of 64, no attenuation is done, at 32 the samples are half as loud, etc. For instrument plugins, global volume works the same way as the default volume of samples, i.e. it sets the note velocity and can be overridden by a volume command next to a note.
+* '''Fade Out''': Determines how fast samples will fade out if the end of the volume is reached, a note fade command is triggered in the pattern or the New Note Action “Note Fade” is used. The higher the value, the faster the samples are faded out. To compute how many ticks the fade out will last, divide 32768 by this value.
+* '''Pan''': The default pan position of this instrument. This setting overrides channel panning, but can be overridden by panning commands and sample panning.
+
+== Pitch / Pan Separation ==
+
+Using Pitch / Pan Separation, you can spread out samples in the stereo space, depending on the note that is played.
+
+* '''Separation''': Determines how much the distance of a note from the Pitch / Pan Centre affects the panning. The higher the value, the more the notes are spread out in the stereo spectrum. A negative value can be used to invert the effect, i.e. higher notes will be placed more on the left rather than the right.
+* '''Centre''': Defines the note at which the panning is not modified. Notes higher than the centre note will be panned to the right (left with negative separation amount) and notes lower than the centre note will be panned to the left (right with negative separation amount).
+
+== Sample Quality ==
+
+These settings are exclusive to the MPTM format.
+
+* '''Ramping''': Specifies the amount of Ramp-In that is done at the start of the instrument samples in microseconds. A higher value will reduce the sharpness of the samples’ attack. If '''default''' is chosen, the Ramp-In amount from the [[Manual: Setup/Mixer#Volume Ramping|Mixer Setup]] is used.
+* '''Resampling''': Defines the resampling algorithm used for playing the instrument samples. The algorithms are identical to those found in the [[Manual: Setup/Mixer#Resampling|Mixer Setup]].
+
+== Filter ==
+
+These settings can be used to setup the resonant filter that can be applied to samples (but not plugins).
+
+* '''Resonance''': Sets the resonance amount of the filter (sometimes called the “Q factor”). The higher the resonance, the more the cutoff frequency is “stressed”.
+* '''Cutoff Frequency''': Defines the frequency at which the filter starts to damp frequencies. If a lowpass filter is used, that means that frequencies above this point are damped, with a highpass filter the frequencies below are reduced.
+* '''Filter Mode''': Sets the type of filter to be used with this instrument. If '''Channel Default''' is used, the previous filter setting of the pattern channel the instrument is used on is re-used. By default, all channels are set to use the lowpass filter, but the filter type can be changed by [[Manual: Zxx Macros#Resonant Filter Control|MIDI Macros]] or preceding instruments on the same channel. This setting is exclusive to the MPTM format.
+
+If no default resonance or cutoff is specified, the filter values from previous notes on the same channel are reused by default. This can be avoided by setting the resonance to minimum and cutoff to maximum, which disables the filter completely.
+
+== Random Variation ==
+
+Random Variation can be used to add a bit of randomness (or “humanisation”) to the instrument playback.
+
+* '''Volume Swing''': A random percentage is subtracted from or added to the sample’s global volume or plugin’s note velocity. The slider can be used to adjust the maximum percentage.
+* '''Pan Swing''': The sample is panned to the left or right by a random amount.
+* '''Cutoff Swing''': The resonant filter’s cutoff frequency is changed by a random amount. This setting is exclusive to the MPTM format.
+* '''Resonance Swing''': The resonant filter’s resonance amount is changed by a random amount. This setting is exclusive to the MPTM format.
+
+== New Note Action ==
+
+By default, only one note can be played on a channel at a time. Using '''New Note Actions''' (or NNAs for short), it is possible to move playing notes to background channels instead when triggering a new note, so that they can be faded out or continue to run indefinitely. New Note Actions are a great way to save pattern channels that would otherwise be used just fading out playing notes. Furthermore, '''Duplicate Note Actions''' (or DNAs for short) can be used to stop playing notes in background channels if the same note, instrument, sample or plugin is played again.
+
+* '''New Note Action''': Determines what is done with the playing note:
+** '''Note Cut''': The old note is instantly cut off and replaced by the new note (default behaviour).
+** '''Continue''': The old note is moved to a background channel. This is mostly useful with short one-shot samples such as percussion instruments. Pay attention when using this option together with looped samples; they will loop indefinitely until you trigger one of the “Past Note” [[Manual: Effect Reference#Effect Column 4|effects]] (S70, S71 or S72).
+** '''Note Off''': Sample and envelope sustain loops of the old note are released.
+** '''Note Fade''': The old note is faded out. If the '''Fade Out''' value is 0, this is practically identical to the '''Continue''' option, so the same precautions apply.
+* '''Duplicate Note Check''': Defines the type of event for which the '''Duplicate Note Action''' is applied:
+** '''Disabled''': By default, the Duplicate Note Action is not executed.
+** '''Note''': If the previously playing note on that channel is the same as the newly triggered note, and they both belong to the same instrument, the Duplicate Note Action is executed.
+** '''Sample''': If the previously playing sample on that channel is the same as the newly triggered sample, and both notes were triggered by the same instrument, the Duplicate Note Action is executed.
+** '''Instrument''': If the previously playing instrument on that channel is the same as the newly triggered instrument, the Duplicate Note Action is executed.
+** '''Plugin''': If the newly triggered note is played by the same instrument plugin as the previously playing note, the Duplicate Note Action is executed. Note that the duplicate check is performed based on the settings of the note in the background channel.
+* '''Duplicate Note Action''': If the Duplicate Note Check condition is fulfilled, one of the Duplicate Note Actions is executed. They are identical to the '''New Note Actions'''.
+
+== Plugin / MIDI ==
+
+In the plugin section, you can assign an effect or instrument plugin to the instrument. Effect plugins can be used to modify the sound of the instrument’s samples, instrument plugins on the other hand are a sound generator by themselves, i.e. you do not need to assign samples to an instrument that is already assigned to an instrument plugin.
+
+* '''Plugin''': In this dropdown list, you can select to which plugin the sample audio is routed or which instrument plugin is triggered. Selecting an empty slot opens the [[Manual: Plugin Manager|Plugin Manager]] where you can load a new plugin.
+* The '''Editor''' button toggles the visibility of the plugin’s [[Manual: Plugin Window|editor]]. <kbd>Shift</kbd>-clicking the button closes all other open plugin editors.
+* '''MIDI Channel''': Configures the MIDI channel on which notes triggered in the pattern are sent to the assigned plugin. This is '''essential''' for instrument plugins — if you do not specify a MIDI channel, you will not hear any sound coming out of your plugin. You can either set the MIDI channel to one of the 16 standard MIDI channels, or choose '''Mapped''' to choose a MIDI channel based on the pattern channel in which the note is triggered. In that case, the MIDI channel is the pattern channel modulo 16, so if a note is triggered on pattern channel 1 (2, 3, 4,… 16), it will be sent to the instrument plugin on MIDI channel 1 (2, 3, 4,… 16); If a note is triggered on pattern channel 17, it will be sent to the instrument plugin MIDI channel 1 again.
+* '''MIDI Program''': Here you can specify a MIDI program that should be sent to instrument plugins. This is especially useful when working with multitimbral plugins, so you can have different sounds on different (or even the same) MIDI channels. By default, no MIDI program change is sent to the plugin.
+* '''MIDI Bank''': Same as above, but specifies the MIDI bank of the MIDI program. By default, no MIDI bank change is sent to the plugin. For MIDI devices that specify MSB and LSB values for MIDI banks in their MIDI Implementation, the effective value to enter in this field can be calculated as MSB × 128 + LSB + 1.
+
+For instrument plugins, further options are available:
+
+* '''Pitch Bend Range''': For portamento and vibrato commands to work with instrument plugins, OpenMPT must know the Pitch Wheel Depth for which the plugin has been configured on the selected MIDI channel. Since there is no standardized way to configure the bend range of a plugin or external MIDI gear, you have to tell OpenMPT to which bend range the plugin is configured. If you set up this value correctly, portamento and vibrato commands sent to plugins should sound identical to their sample counterparts.
+** Please note that not all plugins offer the same pitch bend granularity and may still produce pitch bends that differ slightly from sample portamento. This cannot be fixed by OpenMPT, but it should only be audible when trying to slide exactly to a specific note.
+** Negative range values may also be entered to compensate for a negative Pitch Wheel Depth (so that Portamento Up commands will still slide upwards).
+** Pitch bends affect all notes on the same MIDI channel. In most monotimbral instrument plugins, they affect all notes, no matter which MIDI channel they are played on.
+* '''Volume Command Handling''': Determines how volume commands without notes (or all volume commands, if the checkbox below is not ticked) are handled:
+** '''None''': Volume commands are not sent to plugins.
+** '''MIDI Volume''': Volume commands are sent as MIDI Volume (MIDI CC #7) commands. This affects all playing notes on the same plugin MIDI channel. Not all plugins handle MIDI Volume.
+** '''Dry/Wet Ratio''': Volume commands alter the plugin’s Dry/Wet ratio. This affects all playing notes of the plugin.
+* '''Volume commands with notes are Velocities''': Determines how volume commands next to notes (velocity) are handled; If the checkbox is ticked, such volume commands are only treated as MIDI Note-On velocity (default behaviour). If it is not ticked, volume commands next to notes are handled just like other volume commands (see previous option). In this case, the instrument’s '''Global Volume''' is used as the MIDI Note-On velocity instead.
+
+The last two options are always disabled if the [[Manual: Compatible Playback#Common compatibility settings|Plugin Volume MIDI CC Bug emulation]] compatibility setting is enabled.
+
+== Tuning ==
+
+In the MPTM format, you can select a custom [[Manual: Tunings|tuning]] for the samples that are assigned to this plugin. Choosing '''Control Tunings''' from the dropdown list will open the [[Manual: Tuning Properties|Tuning Properties window]].
+
+== Pitch / Tempo Lock ==
+
+With this setting, you can specify at which tempo the sample loops correctly. This can be useful e.g. when using drum loops of which you know the exact beats per minute. If the Pitch / Tempo Lock is enabled, changing the song tempo will automatically slow down or speed up the samples assigned to this instrument. The entered tempo may be fractional (e.g. 136.46 BPM).
+
+Holding the <kbd>Shift</kbd> key while clicking the check box will enable or disable the feature for all instruments at once.
+
+== Sample Map ==
+
+The Sample Map holds the sample assignments for every note. From left to right you see which note of the instrument (the note is triggered in the pattern) corresponds to which note (the note that is actually heard) of which sample.
+
+The middle column (sample note) is especially useful when creating drum sets, as you will not have to adjust the C-5 frequency of each of the assigned samples then: Simply map all notes to C-5 and you are done. Note that this column is not available in the XM format, where you can only configure the sample assignments. To change a value, enter a note like you would enter it in the pattern editor and use the number keys to modify its octave.
+
+In the sample column, you can type in any sample number to reference an existing sample. You can also type in “0” to not reference any sample. This should for example be done if the instrument is already assigned to an instrument plugin. You should also keep in mind that only 16 samples can be referenced by each instrument in the XM format.
+
+Use <kbd>Enter</kbd> to pick up the currently selected note or sample and <kbd>Space</kbd> to paste it in another place.
+
+=== Context Menu ===
+
+* '''Edit Sample Map''': Opens the [[Manual: Sample Map|Sample Map]] dialog, where you can assign samples to certain notes for input and playback.
+* '''Edit Sample''': Allows you to select one of the associated samples in order to modify it in the [[Manual: Samples|Sample Editor]].
+* '''Map All Notes to Sample''': Assigns all notes to the sample in the current slot.
+* '''Map All Notes to Note''': Assigns all notes to the current note.
+* '''Transpose Map Up''': Moves the note assignments up one semitone.
+* '''Transpose Map Down''': Moves the note assignments down one semitone.
+* '''Reset Note Mapping''': Reverts the note map to the default assignment of C-0 through B-9.
+* '''Transpose Samples / Reset Map''': If at all possible, this option reverts the note map to the default assignment of C-0 through B-9 and also transposes samples accordingly to make up for the change in the note map. If the note map is already the default one, or if a sample would have to be transposed in more than one way, the option is not available. With this option, it is for example possible to have less surprising portamento slides in the IT format when working with multisampled instruments imported from SFZ files, at the expense of losing the original middle-C frequency information.
+* '''Remove All Samples''': Removes all notes' sample assignments.
+* '''Duplicate Instrument''': Creates a new instrument slot and sets all of its attributes to those of the current instrument.
+
+== Envelope Editor ==
+
+[[Image:Envelope Editor.png|thumb|300px|Envelope Editor]]
+
+Envelopes can be used to alter the playback characteristics of samples. Using the '''Volume Envelope''' you can adjust the loudness of the samples, using the '''Panning Envelope''' you can adjust their position in the panning space, and using the '''Pitch / Filter Envelope''' you can adjust their pitch or the resonant filter’s cutoff frequency. Envelopes can also be used on instrument plugins through [[Manual: Zxx Macros|Zxx Macros]].
+
+The Volume Envelope can be used to modulate the amplification of the sample. It ranges from 0% (silence) to 100% (no attenuation). The Panning Envelope moves the sample’s panning relative to its current panning position. If the sample is centered, the highest possible point (+32) will move the sample far right, and the lowest possible point (-32) will move it to the far left. The pitch envelope has a granularity of one quarter tone per step, resulting in a total range of ±16 semitones. If it is being used as a filter envelope, it can control the cutoff filter’s frequency from completely closed to fully open.
+
+The time unit of envelopes is the same as that of pattern effects: Ticks. Envelope points cannot be moved inbetween two ticks, so the shorter the duration of a tick is (see [[Manual: Song Properties#Tempo Mode|tempo modes]]), the more precisely the timing of the envelope can be modified. If row guidelines are enabled, dark vertical lines represent the first tick of every row (according to the current Ticks Per Row setting), while brighter lines represent the start of beats and measures. Due to their tick-based nature, envelopes are always synchronized to the tempo of the song — increasing the song tempo increases the envelope speed, but for example playing a sample associated with the instrument at a higher pitch (which increases its speed) has no effect on the speed of the envelope.
+
+=== Envelope Editor Toolbar ===
+
+The first three buttons are used to switch between the envelope views: the '''Volume Envelope''', the '''Panning Envelope''' and the '''Pitch / Filter Envelope'''.
+
+The next four buttons are used to toggle these envelopes. The third and fourth buttons are mutually exclusive; when either is enabled, the Pitch / Filter Envelope will be enabled, but:
+* The third button (“Ptch”) explicitly configures the Pitch / Filter Envelope to act as a '''pitch''' envelope.
+* The fourth button (“Flt”) explicitly configures the Pitch / Filter Envelope to act as a '''filter''' envelope.
+
+In the MPTM format, you can also turn the pitch envelope into a filter envelope and vice versa using the [[Manual: Effect Reference#Effect Column 5|pattern effects]] S7D and S7E.
+
+The next three buttons are used for configuring the currently displayed envelope:
+
+* '''Envelope Loop''': Enables the envelope loop. Envelope loops cannot be stopped by Note Off events.
+* '''Envelope Sustain''': Enables the envelope sustain loop (or sustain point in the XM format). Sustain loops are exited as soon as a Note Off event occurs.
+* '''Envelope Carry''': When triggering a new note, the envelope is not re-played from the beginning, but rather “carried on”. Since some of Impulse Tracker’s audio drivers ignore envelope carry if the [[#New Note Action|NNA]] is set to “Note Cut” (and some players replicate this behaviour), it is recommended to always choose some other NNA value when using Envelope Carry.
+
+In the XM format, it does not matter if the envelope loop is reached before the sustain point or vice versa; whichever of the two is reached first is used for looping the envelope.
+
+When using IT compatible playback, though, the sustain loop is always considered before the envelope loop, so if the sustain loop is placed beyond the envelope loop, the envelope loop is ignored at first. As soon as the sustain loop is exited (by means of a Note Off event), playback is resumed in the envelope loop.
+
+The rest of the buttons are used for various tasks:
+
+* '''Show Sample Map''': Opens the [[Manual: Sample Map|Sample Map]] dialog.
+* '''Show / Hide Row Guidelines''': Toggles guidelines displayed at every beat (dark grey) and every measure (light grey).
+* '''Zoom In''' / '''Zoom Out''': Increases or decreases envelope zoom. You can also press <kbd>Ctrl</kbd> while scrolling the Mouse Wheel to achieve the same effect.
+* '''Load Envelope''' / '''Save Envelope''': Allows to load an existing envelope file or save an envelope to a file on disk.
+
+=== Envelope Display ===
+
+Below the toolbar, the actual envelopes are displayed. New envelope nodes can be inserted by <kbd>Shift</kbd>-clicking or double-clicking somewhere in the editor. Middle-click or <kbd>Ctrl</kbd>-right-click an envelope nodes to remove it again. Envelope nodes and loop points can be moved around by simply dragging them with the left mouse button pressed, or by using the corresponding [[Manual: Keyboard Actions#Envelope Editor|keyboard shortcuts]]. Press <kbd>Ctrl</kbd> while dragging an envelope node to also move all trailing envelope nodes.
+
+In the status bar, the mouse cursor position is translated into its corresponding envelope tick and value if the mouse hovers over the envelope display. If the mouse points beyond the release node, the envelope value is displayed relatively to the release node’s value.
+
+=== Envelope Editor Context Menu ===
+
+* '''Loop''': Toggles the Envelope Loop.
+* '''Sustain''': Toggles the Envelope Sustain Loop.
+* '''Carry''': Toggles the Envelope Carry.
+* '''Insert Point''': Adds a new point to the envelope at the location of the mouse click.
+* '''Remove Point''': Removes the selected point from the envelope.
+* '''Toggle Release Node''': Toggles the selected point as a Release Node. Envelope playback is resumed from that node if a Note Off event is encountered. In that case, the volume of all following nodes is relative to the volume of the envelope point that was reached at the Note Off event.
+* '''Copy Envelope''': Places the data of the envelope into the Clipboard.
+* '''Paste Envelope''': Replaces the current envelope by an envelope placed in the Clipboard.
+* '''Scale Envelope Points''': Shows the [[Manual: Scale Envelope Points|Scale Envelope Points dialog]] which allows you to stretch or contract the envelope by a given factor and to amplify the envelope.
+
+[[Category:Manual|Instrument Tab]]
+[[Category:Tabs|Instrument Tab]]
+[[de:Handbuch: Instrumente]]

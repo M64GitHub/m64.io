@@ -1,0 +1,87 @@
+== Nomenclature ==
+
+A variety of terms are used in this manual and the application; some basic and often-used terminology shall be explained here:
+
+* '''ModPlug Tracker''' / '''MPT''' / '''OpenMPT''': All of these terms refer to one and the same piece of software. :-)
+* '''Track''' / '''Module''' / '''Song''': One entire song file.
+* '''Channel''': One vertical set of event data in a pattern. This is the equivalent of a sequencer’s “track”.
+* '''Column''': One vertical row of information in a channel. OpenMPT has four columns in a channel: '''Note''' column, '''instrument''' column, '''volume (effect)''' column, '''effect''' column.
+* '''Cell''': One column in one row (the smallest unit in a pattern).
+* '''Event''': One action executed in a channel, including the note and its assigned instrument and (if any) effect. In OpenMPT, only one event per channel can be played at a time. Chords for an instrument must be divided into several events spread over several channels.
+* '''Note column''': This is the first column in a channel and contains note data.
+* '''Instrument column''': This is the second column in a channel and specifies which instrument should be played when a note is triggered. Numbers entered into this column are ''decimal''.
+* '''Volume column''': This is the third column in a channel. Initially only used for setting volume of a playing sample, it can actually also contain other effects such as pitch bend, so the term may be misleading. Numbers entered into this column are ''decimal''.
+* '''Effect column''': This is the fourth column of a channel. A large variety of effects that change the currently playing note, all notes on the current channel or even the whole playing song can be applied in this column. Numbers entered into this column are ''hexadecimal''.
+
+The [[Manual: Effect Reference|effect reference]] provides more insight into the content of the volume and effect columns.
+
+== Modules ==
+
+Song files made with OpenMPT are usually called '''modules'''. They consist of several parts:
+* A set of '''global settings''', which can be configured in the [[Manual: General|General Tab]] and [[Manual: Song Properties|Song Properties]] of each song. Depending on the format, not all global settings may be editable.
+* A set of '''patterns''', which contain all the note data. This is the core of your song. A module usually consists of several patterns containing notes and [[Manual: Effect Reference|effect commands]]. Patterns are edited in the [[Manual: Patterns|Pattern Tab]].
+* One or more '''order lists''' or ('''sequences'''), which dictate in which order the patterns shall be played. A pattern may be played more than once and be part of more than one sequence. Order lists are also edited in the Pattern Tab.
+* A set of '''samples''' (audio data). Samples can contain any imaginable audio data and may use loops to repeat parts of the sample indefinitely. Samples are the most simple building block of the audio that forms a module. Classic module formats only support samples as the only mean to create sound. Samples are edited in the [[Manual: Samples|Sample Tab]].
+* A set of '''instruments'''. Instruments are a layer on top of samples or instrument plugins. They can reference one more samples, apply some basic volume, panning, pitch and filter envelopes to the samples, or they can be used to play an instrument plugin instead. Instruments are edited in the [[Manual: Instruments|Instrument Tab]].
+* A set of '''plugins'''. Modern module formats allow the usage of effect and instrument plugins. Effect plugins can be used to modify the sound of samples or instrument plugins. Instrument plugins are, like samples, an audio source. Plugins are edited in the [[Manual: General|General Tab]].
+
+== Hexadecimal Notation ==
+
+Many numbers in OpenMPT are notated using the [http://en.wikipedia.org/wiki/Hexadecimal hexadecimal] (often abbreviated “hex”) notation. There are various ways to indicate that a number is presented in hexadecimal notation. In this manual, hexadecimal values are notated using the '''h''' suffix, i.e. the number 128 (decimal) is expressed as 80h. If you are not familiar yet with hexadecimal notation, you should read the short introduction on hexadecimal below, since it is important to be familiar with this notation when using OpenMPT.
+
+In decimal numeration, the system based on tens that everyone of us should be familiar with, a two-digit number shows two things:
+how many tens (the first digit) and how many ones (the second digit).
+For example, the decimal number 34 tells you there are three tens and four ones.
+
+In hexadecimal, a two-digit number tells you how many sixteens by the first digit, and how many ones by the second.
+So the hex number 34h means there are 3 sixteens and 4 ones.
+Translating a hex number is easy: multiply the first digit by sixteen and add the second digit; the same thing is done intuitively with decimal — multiply the first digit by ten and add the second.
+So the hex number 34h is 52 in decimal (16 × 3 + 4).
+
+If you know the decimal and you want to translate to hex, simply divide your decimal value by 16 for the first digit and whatever is left over is the second digit.
+So, 52 divided by 16 is 3, with 4 remaining — 34h.
+
+However, in hex notation there are only enough digits to represent 0 though 9, which are borrowed from decimal; what about numbers 10 – 15?
+For those, letters A – F are used, where A = 10, B = 11, and so on.
+So two-digit numbers counting from 9 to 17 goes like this: 09, 0A, 0B, 0C, 0D, 0E, 0F, 10, and 11. 
+
+Translating to decimal with hex letters needs some getting used to, but certain numbers will become automatic with use, such as these:
+* 40h = 64: The highest value of many volume and panning related settings.
+* 7Fh = 127: The highest possible value for [[Manual: Zxx Macros#Parametered Macros|Parametered MIDI Macros]].
+* 80h = 128: Center value for 8-Bit Panning.
+* FFh = 255: The highest possible value for any one-byte value (a two-digit hex number represents a single byte).
+
+== Overview of the tracking interface ==
+
+Shown below is the top part of the opening page. OpenMPT’s window is resizable and movable, and you can expand it to full-screen viewing. OpenMPT uses a Multiple Document Interface, so if a file is open, it has its own window within OpenMPT’s main window that can be minimized, restored, maximized to OpenMPT’s window, or closed without quitting OpenMPT. Several files with their own windows can be open simultaneously, but only one is active, receiving the input focus.
+
+[[Image:Tracking Interface.png|800px|Overview of the tracking interface]]
+
+=== Title Bar ===
+The window title bar shows the OpenMPT version number and the file that is currently active. If there is an asterisk (*) next to the file name, the track has been altered and changes will need to be saved to disk.
+
+=== Main Menu ===
+OpenMPT’s menu is accessible from any part of the program, although some of its features may not be.
+Like in most Windows applications, the menu is openable by keystrokes; just press the <kbd>Alt</kbd> key, then the letter that is underlined to choose the menu or a menu item. A [[Manual: Menus|detailed description of all menu entries]] is available.
+
+=== Main Toolbar ===
+Below the menu is the [[Manual: Main Toolbar|Main Toolbar]], which is visible and accessible from anywhere in the application. The toolbar also contains the global VU meters which show the current output volume. If the output clips (i.e. distorts), the rightmost volume indicators remain lit until you restart playback or click the VU meters.
+You can pull the toolbar out of its slot and place it anywhere on the screen, by left-clicking on an empty space within the toolbar, holding the mouse down, and dragging it. You can also click-and-drag one of the borders to reshape the toolbar.
+Since each of the items in the toolbar can be assigned a keystroke, it doesn't have to be visible.
+You can hide (or show) the Main toolbar by right-clicking on any open spot in OpenMPT’s main menu or toolbar, and toggling “Show Main Toolbar” from the context menu.
+
+=== Tree View ===
+On the left is the [[Manual: Tree View|Tree View]] (or Folder Tree), which shows a list of all open modules, offers quick access to the MIDI instrument library, sound fonts and can be used to browse your instrument library.
+This way you can easily locate samples, instruments, and other files to help you in assembling your tracks.
+To hide this panel, either click on the pane divider between the panel and the tabs, and slide it all the way to the left, or right-click on any open spot of OpenMPT’s window, and select “Show Tree View” from the context menu that appears.
+
+=== MDI Area ===
+OpenMPT uses the MDI (multi documents interface) paradigm to edit multiple modules at once. This means that when multiple modules are opened for editing, they are all hosted within the same “parent” window, OpenMPT’s main window. The majority of the main window is filled with a grey workspace area. When no modules are loaded, this area hosts the [[Manual: Quick Start / Project Assistant|Project Assistant]] to quickly open relevant files. When one or more modules are loaded, the Project Assistant disappears and is replaced by the window(s) of the open modules, which can be freely arranged in the workspace area.
+
+A module can also be represented by more than one window in the workspace area, so you can for example open both a pattern editor and a sample editor belonging to the same module. This can be achieved through the [[Manual: Menus#Window|Window menu]].
+
+=== Tabs ===
+The interface of the module editor is divided into five sections, placed within window tabs, which can be accessed from anywhere within the application.
+These tabs are labeled [[Manual: General|General]], [[Manual: Patterns|Patterns]], [[Manual: Samples|Samples]], [[Manual: Instruments|Instruments]] and [[Manual: Comments|Comments]].
+
+[[Category:Manual|Basics]]

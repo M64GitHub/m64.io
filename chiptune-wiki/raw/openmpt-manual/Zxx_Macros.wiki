@@ -1,0 +1,69 @@
+Zxx Macros are MIDI messages that can be sent to plugins or used to control internal parameters, such as the built-in resonant filter for samples or plugin parameter automation (“turning a knob” of a plugin). Macros are executed in patterns using the Zxx (MIDI Macro) or \xx (Smooth MIDI Macro) commands, hence the name. Macros can be used in the XM, IT and MPTM formats and are set up from the [[Manual: Macro Configuration|Macro Configuration dialog]]. For plugin parameter automation, the MPTM format also offers special [[Manual: Parameter Control Events|Parameter Control Events]] with higher granularity than MIDI macros. Depending on the parameter of the Z command, a different macro is processed. Every macro can comprise one or more MIDI messages.
+
+Every macro may contain one or more MIDI messages. Multiple messages can be joined simply by writing them one after another (e.g. <code>Bc0Az Bc0Bz</code> to execute MIDI CC 10 and 11 using the same macro). There is no need to separate the messages with a space character (but it improves readability), however it is important to properly finish MIDI messages: <code>Bc0A0</code> (set MIDI CC 10 to value 0) works if it is the only MIDI message in a macro (as it is automatically finalised by the program), but if another MIDI message follows, you would have to add another 0 at the end, as the example message contains only 5 nibbles.
+
+OpenMPT employs two types of macros: '''parametered''' and '''fixed''' macros. While fixed macros always transmit the same MIDI message, parametered macros depend on the parameter of the Zxx command. Fixed macros, however, are not necessarily completely static. They can for example depend on the current instrument’s volume and panning settings.
+
+== Parametered Macros ==
+
+[[Image:Macro Switching Example.png|thumb|102px|Example of switching macros on a channel]]
+There are 16 parametered macros. Only one of those 16 parametered macros can be active on a channel at a time, and it is controlled using the commands Z00 through Z7F. Parametered macros can be switched by using the SFx command in IT-type tracks and EFx in XM tracks. SF0 / EF0 activates the first parametered macro, SF1 / EF1 the second and so on. By default, the first macro is active, but if you want to switch to a different parametered macro on a channel, you first have to put the appropriate SFx / EFx effect on a row above the first usage of the macro.
+
+In the example on the right, the third macro is recalled on the first row, and some Zxx and \xx commands on the subsequent rows execute this parametered macro. Row 6 switches back to the first macro, which is then applied on row 7.
+
+== Fixed Macros ==
+
+There are 128 fixed macros which can be called by the commands Z80 through ZFF (and \80 through \FF respectively). By default, The macros Z80 through Z8F control the resonant filter′s resonance amount and Z90 through ZFF do nothing. In theory, all of the 128 fixed macros can do something completely different, while all 128 instances (Z00 through Z7F) of the same parametered macros do the same thing, just with a different parameter. For example, you could configure the fixed macros Z80 through Z8F to control the resonance of the resonant filter, Z90 to activate the lowpass filter (<code>F0F00200</code>), Z91 to activate the highpass filter (<code>F0F00210</code>), Z92 to set the Dry/Wet ratio of the current plugin to 100% Dry (<code>F0F00300</code>), Z93 to set it to 100% Wet (<code>F0F0037F</code>), and so on. You can even configure a single macro to change a number of parameters at once. For example, you could set a plugin’s first parameter to 0 and its Dry/Wet ratio to 50% (<code>F0F08000 F0F00340</code>).
+
+== Macro Types ==
+
+Some of the MIDI messages that can be generated through a macro are handled internally by OpenMPT, others are directly sent to plugins. Here is an overview of all macro types.
+
+[[Image:Sample Filtering.png|thumb|250px|Spectrum analysis of a saw wave. First, the unfiltered saw sample, then the same sample with a lowpass filter applied and the same sample with a highpass filter applied.]]
+
+=== Resonant Filter Control ===
+
+OpenMPT′s resonant filter can be controlled through internal macros. They can be used for setting the cutoff frequency, resonance amount and filter type. The resonant filter is only applied to samples — it does not affect the output of plugins. If you want to filter the output of a plugin, you will have to route its output to a filter or equalizer plugin.
+
+The following MIDI messages modify OpenMPT′s resonant filter:
+
+* '''F0 F0 00 xx''': Set cutoff frequency, where xx is a hexadecimal number between 00h (lowest cutoff frequency) and 7Fh (highest cutoff frequency). The highest cutoff frequency is determined by the [[Manual: Song Properties#Extended Filter Range|Extended Filter Range]] option, which can be found in the Song Properties. For AdLib / OPL3 instruments, this macro sets the modulator intensity, which effectively works like a lowpass filter on most instruments.
+* '''F0 F0 01 xx''': Set filter resonance, where xx is a hexadecimal number between 00h (no resonance) and 7Fh (full resonance). The higher the resonance, the more the cutoff frequency is “stressed” or “accented” — it resonates.
+* '''F0 F0 02 00''': Activate lowpass filter. Frequencies above the cutoff frequency are reduced, and frequencies below the cutoff frequency are not affected. A low cutoff frequency makes the sample sound muffled, and a higher cutoff frequency reduces the effect. Look at the second spectrum graph on the right for an example.
+* '''F0 F0 02 10''': Activate highpass filter. Frequencies below the cutoff frequency are reduced, and frequencies above the cutoff frequency are not affected. A high cutoff frequency makes the sample sound thinner, and a lower cutoff frequency reduces the effect. Look at the third spectrum graph on the right for an example.
+
+The filter type settings (lowpass / highpass) are mutually exclusive, i.e. you can only '''either''' cut off high frequencies '''or''' low frequencies.
+
+The default parametered macro controls cutoff frequency and the default fixed macros control the resonance amount. Note that all these filter settings can also be set up for each [[Manual: Instruments#Filter|instrument]].
+
+By default, no sample needs to be playing to apply filter macros; they will be applied to whatever sample is playing next, unless the instrument settings would override the macro′s functionality. However, if [[Manual: Effect Reference#Sound Control|Local Filters]] are enabled, the filter is disabled on every new note. The filter can also be disabled manually for the next note by setting the cutoff to 7Fh and the resonance to 00h.
+
+=== Plugin Dry/Wet Ratio ===
+
+This is another internal macro that is handled by OpenMPT. It adjusts a plugin′s Dry/Wet ratio (which can otherwise be set from the [[Manual: General|plugin setup]] on the General Tab) of the currently active plugin on the channel the macro is executed. The MIDI message for this macro type is '''F0 F0 03 xx''', where xx is a hexadecimal number between 00h (0% Wet / 100% Dry) and 7Fh (100% Wet / 0% Dry).
+
+Only the first plugin in a plugin chain is affected by this macro, and channel plugins are generally preferred over instrument plugins.
+
+=== Plugin Parameter Control ===
+
+Plugin Parameter Control is another internal macro type that is handled by OpenMPT. It sets a given parameter of a plugin to a given value. However, this parameter control is limited to the first 384 parameters and is very coarse. Parameter control is not bound to a specific plugin, but rather changes the given parameter of whatever plugins is currently active on the channel the macro is executed.
+
+The first 128 plugin parameters (0 through 127) can be controlled by the MIDI message '''F0 F0 xx yy''', where xx is the parameter number + 80h and yy is the parameter value, ranging from 00h to 7Fh. Parameters 128 through 383 can be controlled by the MIDI message '''F0 F1 xx yy''', where xx is the parameter - 80h and yy is the parameter value.
+
+In the MPTM format, this macro type is superseded by [[Manual: Parameter Control Events|Parameter Control Events]], which provide finer control of more parameters (the first 1,000 parameters of any plugin can be controlled).
+
+Only the first plugin in a plugin chain is affected by this macro, and channel plugins are generally preferred over instrument plugins.
+
+=== External Messages ===
+
+Any macro that is not covered by the above macro types is an '''external''' message, i.e. it is not handled or interpreted by OpenMPT itself but is rather sent to plugins. External messages include MIDI CCs, Channel and Polyphonic Aftertouch, note events and generally any kind of MIDI event.
+
+Since OpenMPT can neither know the meaning of such external messages, nor their previous parameter state (which is necessary for interpolation), '''\xx only has limited support''' for those messages. When using \xx commands to execute external messages, it interpolates from the previous Zxx or \xx parameter used on the same channel.
+
+The MIDI message is only sent to the first plugin in a plugin chain, and channel plugins are generally preferred over instrument plugins. In return, that means that a channel plugin needs to be assigned to the channel on which the Zxx or \xx command is used, or the last note played on that channel must be from an instrument that is assigned with the plugin; otherwise the MIDI message will not be sent.
+
+{{todo|More content from the OHM}}
+
+[[Category:Manual|Zxx Macros]]
+[[Category:Plugins|Zxx Macros]]
+[[Category:MIDI|Zxx Macros]]

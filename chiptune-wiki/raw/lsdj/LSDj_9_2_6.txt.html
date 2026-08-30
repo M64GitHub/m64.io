@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LSDj_9_2_6.txt · Chiptune Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>window.ROOT="../../";</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">CHIPTUNE WIKI</span><span class="sub">llm wiki · 476 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/traxweekly-toc.html" class="">TraxWeekly</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="technique"><summary>Techniques <span class="n">32</span></summary><ul><li><a data-slug="channel-interleaving" class="t-technique" href="../../wiki/channel-interleaving.html">Channel interleaving (one channel, two jobs)</a></li><li><a data-slug="chip-samples" class="t-technique" href="../../wiki/chip-samples.html">Chip samples — tiny looped waveforms</a></li><li><a data-slug="chord-arpeggio" class="t-technique" href="../../wiki/chord-arpeggio.html">Chord arpeggio (the 0 3 7 trick)</a></li><li><a data-slug="detune" class="t-technique" href="../../wiki/detune.html">Detune</a></li><li><a data-slug="fake-echo" class="t-technique" href="../../wiki/fake-echo.html">Fake echo / delay</a></li><li><a data-slug="filter-programming" class="t-technique" href="../../wiki/filter-programming.html">Filter programming on the SID</a></li><li><a data-slug="hard-restart" class="t-technique" href="../../wiki/hard-restart.html">Hard restart</a></li><li><a data-slug="instrument-design" class="t-technique" href="../../wiki/instrument-design.html">Instrument design beats note count</a></li><li><a data-slug="instrument-envelopes" class="t-technique" href="../../wiki/instrument-envelopes.html">Instrument envelopes (volume, panning, pitch)</a></li><li><a data-slug="lead-articulation" class="t-technique" href="../../wiki/lead-articulation.html">Lead articulation (velocity, legato, late vibrato, drop-off)</a></li><li><a data-slug="midi-in-trackers" class="t-technique" href="../../wiki/midi-in-trackers.html">MIDI output from trackers (Impulse Tracker macros)</a></li><li><a data-slug="multisampling" class="t-technique" href="../../wiki/multisampling.html">Multisampling and drum-kit instruments</a></li><li><a data-slug="multispeed" class="t-technique" href="../../wiki/multispeed.html">Multispeed (framespeed)</a></li><li><a data-slug="new-note-actions" class="t-technique" href="../../wiki/new-note-actions.html">New Note Actions (NNA)</a></li><li><a data-slug="octave-bass" class="t-technique" href="../../wiki/octave-bass.html">Octave bass</a></li><li><a data-slug="opl-fm-instruments" class="t-technique" href="../../wiki/opl-fm-instruments.html">OPL / AdLib FM instruments in trackers</a></li><li><a data-slug="pitch-slide-and-portamento" class="t-technique" href="../../wiki/pitch-slide-and-portamento.html">Pitch slides and tone portamento</a></li><li><a data-slug="pulse-width-modulation" class="t-technique" href="../../wiki/pulse-width-modulation.html">Pulse width modulation (PWM)</a></li><li><a data-slug="randomization-and-probability" class="t-technique" href="../../wiki/randomization-and-probability.html">Randomization and probability (MayBe, RandomiZe)</a></li><li><a data-slug="recording-samples" class="t-technique" href="../../wiki/recording-samples.html">Recording samples (sources, cabling, sound cards, rates)</a></li><li><a data-slug="retrigger" class="t-technique" href="../../wiki/retrigger.html">Retrigger and resync</a></li><li><a data-slug="reverb-and-compression" class="t-technique" href="../../wiki/reverb-and-compression.html">Reverb and compression (offline, in the sample editor)</a></li><li><a data-slug="ring-modulation-and-sync" class="t-technique" href="../../wiki/ring-modulation-and-sync.html">Ring modulation and oscillator sync</a></li><li><a data-slug="sample-looping" class="t-technique" href="../../wiki/sample-looping.html">Sample looping (perfect loops, sustain loops, long loops)</a></li><li><a data-slug="sample-offset" class="t-technique" href="../../wiki/sample-offset.html">Sample offset tricks</a></li><li><a data-slug="shuffle-funktempo" class="t-technique" href="../../wiki/shuffle-funktempo.html">Shuffle, swing and FunkTempo</a></li><li><a data-slug="sidechain-pump" class="t-technique" href="../../wiki/sidechain-pump.html">Sidechain pump</a></li><li><a data-slug="song-init-and-looping" class="t-technique" href="../../wiki/song-init-and-looping.html">Song initialisation and looping</a></li><li><a data-slug="stereo-panning" class="t-technique" href="../../wiki/stereo-panning.html">Stereo panning</a></li><li><a data-slug="vibrato" class="t-technique" href="../../wiki/vibrato.html">Vibrato and delayed vibrato</a></li><li><a data-slug="volume-slides" class="t-technique" href="../../wiki/volume-slides.html">Volume slides, fades and effect memory</a></li><li><a data-slug="wavetable-programming" class="t-technique" href="../../wiki/wavetable-programming.html">Wavetable programming (waveform / arp tables)</a></li></ul></details><details class="grp" data-grp="concept"><summary>Concepts <span class="n">24</span></summary><ul><li><a data-slug="adsr-envelope" class="t-concept" href="../../wiki/adsr-envelope.html">ADSR envelope</a></li><li><a data-slug="arrangement" class="t-concept" href="../../wiki/arrangement.html">Arrangement — think in 4s and 8s</a></li><li><a data-slug="chiptune" class="t-concept" href="../../wiki/chiptune.html">Chiptune — what the word means</a></li><li><a data-slug="chord-inversions" class="t-concept" href="../../wiki/chord-inversions.html">Chord inversions and voice leading</a></li><li><a data-slug="chord-progressions" class="t-concept" href="../../wiki/chord-progressions.html">Chord progressions</a></li><li><a data-slug="commercial-tracking" class="t-concept" href="../../wiki/commercial-tracking.html">Commercial tracking — selling and producing tracked music</a></li><li><a data-slug="compos" class="t-concept" href="../../wiki/compos.html">Compos — music competitions in the tracker scene</a></li><li><a data-slug="diatonic-chords" class="t-concept" href="../../wiki/diatonic-chords.html">Diatonic chords — why it is not always 0 3 7</a></li><li><a data-slug="effect-command-crosswalk" class="t-concept" href="../../wiki/effect-command-crosswalk.html">Effect command crosswalk (MOD / XM ↔ S3M / IT)</a></li><li><a data-slug="instrument-tables" class="t-concept" href="../../wiki/instrument-tables.html">Instrument tables (wave / pulse / filter)</a></li><li><a data-slug="live-tracking" class="t-concept" href="../../wiki/live-tracking.html">Live tracking — performing with a tracker</a></li><li><a data-slug="orderlist" class="t-concept" href="../../wiki/orderlist.html">Orderlist (sequence)</a></li><li><a data-slug="realism-in-tracked-music" class="t-concept" href="../../wiki/realism-in-tracked-music.html">Realism in tracked music</a></li><li><a data-slug="rhythm-and-groove" class="t-concept" href="../../wiki/rhythm-and-groove.html">Rhythm and groove in 16 rows</a></li><li><a data-slug="sample-ripping" class="t-concept" href="../../wiki/sample-ripping.html">Sample ripping</a></li><li><a data-slug="scales-and-modes" class="t-concept" href="../../wiki/scales-and-modes.html">Scales and modes — your palette of notes</a></li><li><a data-slug="semitone-math" class="t-concept" href="../../wiki/semitone-math.html">Semitones — the only unit you need</a></li><li><a data-slug="serial-composition" class="t-concept" href="../../wiki/serial-composition.html">Serial composition — rows, retrograde, inversion</a></li><li><a data-slug="sid-player-routine" class="t-concept" href="../../wiki/sid-player-routine.html">SID player routine, rastertime and player types</a></li><li><a data-slug="sync" class="t-concept" href="../../wiki/sync.html">Synchronisation with other gear</a></li><li><a data-slug="tracker-scene-history" class="t-concept" href="../../wiki/tracker-scene-history.html">The PC tracker scene 1995–98, as it saw itself</a></li><li><a data-slug="tracker" class="t-concept" href="../../wiki/tracker.html">Tracker</a></li><li><a data-slug="tracking-workflow" class="t-concept" href="../../wiki/tracking-workflow.html">Tracking workflow — advice from the scene</a></li><li><a data-slug="melody-writing" class="t-concept" href="../../wiki/melody-writing.html">Writing melodies that work</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">26</span></summary><ul><li><a data-slug="037-lab" class="t-entity" href="../../wiki/037-lab.html">0 3 7 lab</a></li><li><a data-slug="duet" class="t-entity" href="../../wiki/duet.html">DUET</a></li><li><a data-slug="fasttracker-2" class="t-entity" href="../../wiki/fasttracker-2.html">FastTracker 2</a></li><li><a data-slug="furnace" class="t-entity" href="../../wiki/furnace.html">Furnace</a></li><li><a data-slug="future-composer" class="t-entity" href="../../wiki/future-composer.html">Future Composer (C64)</a></li><li><a data-slug="goattracker" class="t-entity" href="../../wiki/goattracker.html">GoatTracker</a></li><li><a data-slug="impulse-tracker" class="t-entity" href="../../wiki/impulse-tracker.html">Impulse Tracker</a></li><li><a data-slug="liblsdj" class="t-entity" href="../../wiki/liblsdj.html">libLSDj</a></li><li><a data-slug="lsdj" class="t-entity" href="../../wiki/lsdj.html">LSDj (Little Sound Dj)</a></li><li><a data-slug="lsdj-wave-cruncher" class="t-entity" href="../../wiki/lsdj-wave-cruncher.html">LSDj Wave Cruncher</a></li><li><a data-slug="lsdpatch" class="t-entity" href="../../wiki/lsdpatch.html">LSDPatch (LSDPatcher)</a></li><li><a data-slug="matt-gray-player" class="t-entity" href="../../wiki/matt-gray-player.html">Matt Gray&#x27;s player (Driller / Dominator engine)</a></li><li><a data-slug="musicfile" class="t-entity" href="../../wiki/musicfile.html">MUSICFILE — the Maniacs of Noise driver</a></li><li><a data-slug="openmpt" class="t-entity" href="../../wiki/openmpt.html">OpenMPT</a></li><li><a data-slug="protracker" class="t-entity" href="../../wiki/protracker.html">ProTracker</a></li><li><a data-slug="rockmonitor" class="t-entity" href="../../wiki/rockmonitor.html">Rockmonitor</a></li><li><a data-slug="schism-tracker" class="t-entity" href="../../wiki/schism-tracker.html">Schism Tracker</a></li><li><a data-slug="scream-tracker-3" class="t-entity" href="../../wiki/scream-tracker-3.html">Scream Tracker 3</a></li><li><a data-slug="sid-factory-ii" class="t-entity" href="../../wiki/sid-factory-ii.html">SID Factory II</a></li><li><a data-slug="sid-wizard" class="t-entity" href="../../wiki/sid-wizard.html">SID-Wizard</a></li><li><a data-slug="siddump" class="t-entity" href="../../wiki/siddump.html">siddump</a></li><li><a data-slug="sidid" class="t-entity" href="../../wiki/sidid.html">SIDId</a></li><li><a data-slug="soundmonitor" class="t-entity" href="../../wiki/soundmonitor.html">Soundmonitor</a></li><li><a data-slug="tfmx" class="t-entity" href="../../wiki/tfmx.html">TFMX</a></li><li><a data-slug="turbo-assembler" class="t-entity" href="../../wiki/turbo-assembler.html">Turbo Assembler (C64)</a></li><li><a data-slug="vice" class="t-entity" href="../../wiki/vice.html">VICE</a></li></ul></details><details class="grp" data-grp="kind-chip"><summary>Chips <span class="n">2</span></summary><ul><li><a data-slug="game-boy-apu" class="t-entity" href="../../wiki/game-boy-apu.html">Game Boy sound hardware (APU)</a></li><li><a data-slug="sid" class="t-entity" href="../../wiki/sid.html">SID (MOS 6581 / 8580)</a></li></ul></details><details class="grp" data-grp="kind-platform"><summary>Platforms <span class="n">3</span></summary><ul><li><a data-slug="commodore-64" class="t-entity" href="../../wiki/commodore-64.html">Commodore 64</a></li><li><a data-slug="game-boy" class="t-entity" href="../../wiki/game-boy.html">Game Boy</a></li><li><a data-slug="gravis-ultrasound" class="t-entity" href="../../wiki/gravis-ultrasound.html">Gravis UltraSound (GUS)</a></li></ul></details><details class="grp" data-grp="kind-format"><summary>Formats <span class="n">5</span></summary><ul><li><a data-slug="it-format" class="t-entity" href="../../wiki/it-format.html">IT module format (.it)</a></li><li><a data-slug="mod-format" class="t-entity" href="../../wiki/mod-format.html">MOD module format (.mod)</a></li><li><a data-slug="s3m-format" class="t-entity" href="../../wiki/s3m-format.html">S3M module format (.s3m)</a></li><li><a data-slug="sid-format" class="t-entity" href="../../wiki/sid-format.html">SID file format (.sid)</a></li><li><a data-slug="xm-format" class="t-entity" href="../../wiki/xm-format.html">XM module format (.xm)</a></li></ul></details><details class="grp" data-grp="kind-person"><summary>People <span class="n">103</span></summary><ul><li><a data-slug="4ntler" class="t-entity" href="../../wiki/4ntler.html">4ntler</a></li><li><a data-slug="acidfrog" class="t-entity" href="../../wiki/acidfrog.html">Acidfrog (Cam Goodman)</a></li><li><a data-slug="amusic" class="t-entity" href="../../wiki/amusic.html">AmusiC (Sotiris Varotsis)</a></li><li><a data-slug="andreas-varga" class="t-entity" href="../../wiki/andreas-varga.html">Andreas Varga</a></li><li><a data-slug="asger-alstrup" class="t-entity" href="../../wiki/asger-alstrup.html">Asger Alstrup</a></li><li><a data-slug="atlantic" class="t-entity" href="../../wiki/atlantic.html">Atlantic (Barry Freeman)</a></li><li><a data-slug="balrog" class="t-entity" href="../../wiki/balrog.html">Balrog (Samuel Cote)</a></li><li><a data-slug="basehead" class="t-entity" href="../../wiki/basehead.html">Basehead (Dan Grandpre)</a></li><li><a data-slug="beaner" class="t-entity" href="../../wiki/beaner.html">Beaner (Sean Cummins)</a></li><li><a data-slug="behemoth" class="t-entity" href="../../wiki/behemoth.html">Behemoth (David Menkes)</a></li><li><a data-slug="big-jim" class="t-entity" href="../../wiki/big-jim.html">Big Jim (James Storer)</a></li><li><a data-slug="blackwolf" class="t-entity" href="../../wiki/blackwolf.html">Blackwolf (Bobby Tamburrino)</a></li><li><a data-slug="blaze-runner" class="t-entity" href="../../wiki/blaze-runner.html">Blaze Runner (Christian Desnoyers)</a></li><li><a data-slug="bob-yannes" class="t-entity" href="../../wiki/bob-yannes.html">Bob Yannes</a></li><li><a data-slug="catspaw" class="t-entity" href="../../wiki/catspaw.html">Catspaw (Brandon Bannerman)</a></li><li><a data-slug="charles-deenen" class="t-entity" href="../../wiki/charles-deenen.html">Charles Deenen</a></li><li><a data-slug="chordian" class="t-entity" href="../../wiki/chordian.html">Chordian (Jens)</a></li><li><a data-slug="chris-huelsbeck" class="t-entity" href="../../wiki/chris-huelsbeck.html">Chris Hülsbeck</a></li><li><a data-slug="claim" class="t-entity" href="../../wiki/claim.html">Claim</a></li><li><a data-slug="clef" class="t-entity" href="../../wiki/clef.html">Clef (Phil Sweeney)</a></li><li><a data-slug="cosmic" class="t-entity" href="../../wiki/cosmic.html">Cosmic (Matthias Ksoll)</a></li><li><a data-slug="daedalus" class="t-entity" href="../../wiki/daedalus.html">Daedalus (Brian Bennetts)</a></li><li><a data-slug="defense-mechanism" class="t-entity" href="../../wiki/defense-mechanism.html">Defense Mechanism</a></li><li><a data-slug="dennisc" class="t-entity" href="../../wiki/dennisc.html">DennisC (Dennis Courtney)</a></li><li><a data-slug="deus-ex" class="t-entity" href="../../wiki/deus-ex.html">Deus Ex (Chill Productions)</a></li><li><a data-slug="ender" class="t-entity" href="../../wiki/ender.html">Ender (Andrew Burke)</a></li><li><a data-slug="fisherman" class="t-entity" href="../../wiki/fisherman.html">fisherman (Matt Overington)</a></li><li><a data-slug="fred-ink" class="t-entity" href="../../wiki/fred-ink.html">Fred (Ink)</a></li><li><a data-slug="ganja-man" class="t-entity" href="../../wiki/ganja-man.html">Ganja Man (Sam Bashton)</a></li><li><a data-slug="greg-heo" class="t-entity" href="../../wiki/greg-heo.html">Greg Heo</a></li><li><a data-slug="hermit" class="t-entity" href="../../wiki/hermit.html">Hermit (Mihaly Horvath)</a></li><li><a data-slug="hypnogram" class="t-entity" href="../../wiki/hypnogram.html">Hypnogram</a></li><li><a data-slug="infu" class="t-entity" href="../../wiki/infu.html">Infu</a></li><li><a data-slug="injekted" class="t-entity" href="../../wiki/injekted.html">Injekted (Brandon Balliett)</a></li><li><a data-slug="island-of-reil" class="t-entity" href="../../wiki/island-of-reil.html">Island of Reil (Jesse Rothenberg)</a></li><li><a data-slug="jase" class="t-entity" href="../../wiki/jase.html">Jase (Jason Chong)</a></li><li><a data-slug="jeffrey-lim" class="t-entity" href="../../wiki/jeffrey-lim.html">Jeffrey Lim (Pulse)</a></li><li><a data-slug="jeroen-tel" class="t-entity" href="../../wiki/jeroen-tel.html">Jeroen Tel</a></li><li><a data-slug="johan-kotlinski" class="t-entity" href="../../wiki/johan-kotlinski.html">Johan Kotlinski</a></li><li><a data-slug="johannes-bjerregaard" class="t-entity" href="../../wiki/johannes-bjerregaard.html">Johannes Bjerregaard</a></li><li><a data-slug="jugi" class="t-entity" href="../../wiki/jugi.html">Jugi (Jukka Kaartinen)</a></li><li><a data-slug="kal-zakath" class="t-entity" href="../../wiki/kal-zakath.html">Kal Zakath (John Townsend)</a></li><li><a data-slug="khyron" class="t-entity" href="../../wiki/khyron.html">Khyron (Paul Schultz)</a></li><li><a data-slug="lars-hamre" class="t-entity" href="../../wiki/lars-hamre.html">Lars &quot;ZAP&quot; Hamre</a></li><li><a data-slug="lasse-oorni" class="t-entity" href="../../wiki/lasse-oorni.html">Lasse Öörni (Cadaver)</a></li><li><a data-slug="laxity" class="t-entity" href="../../wiki/laxity.html">Laxity (Thomas E. Petersen)</a></li><li><a data-slug="leinad" class="t-entity" href="../../wiki/leinad.html">Leinad (Daniel Falk)</a></li><li><a data-slug="leviathan" class="t-entity" href="../../wiki/leviathan.html">Leviathan</a></li><li><a data-slug="liam-the-lemming" class="t-entity" href="../../wiki/liam-the-lemming.html">Liam the Lemming (Liam Hesse)</a></li><li><a data-slug="linus-walleij" class="t-entity" href="../../wiki/linus-walleij.html">Linus Walleij</a></li><li><a data-slug="loki" class="t-entity" href="../../wiki/loki.html">Loki (Charles Odom)</a></li><li><a data-slug="lord-pegasus" class="t-entity" href="../../wiki/lord-pegasus.html">Lord Pegasus (Zack Smith)</a></li><li><a data-slug="luv-kohli" class="t-entity" href="../../wiki/luv-kohli.html">Luv Kohli</a></li><li><a data-slug="maelcum" class="t-entity" href="../../wiki/maelcum.html">Maelcum</a></li><li><a data-slug="martin-galway" class="t-entity" href="../../wiki/martin-galway.html">Martin Galway</a></li><li><a data-slug="master-of-darkness" class="t-entity" href="../../wiki/master-of-darkness.html">Master of Darkness (Todd Andlar)</a></li><li><a data-slug="matt-gray" class="t-entity" href="../../wiki/matt-gray.html">Matt Gray</a></li><li><a data-slug="mellow-d" class="t-entity" href="../../wiki/mellow-d.html">Mellow-D (Jaakko Manninen)</a></li><li><a data-slug="mental-floss" class="t-entity" href="../../wiki/mental-floss.html">Mental Floss (Andrew McCallum)</a></li><li><a data-slug="mesonyx" class="t-entity" href="../../wiki/mesonyx.html">Mesonyx (Jon Dal Kristbjornsson)</a></li><li><a data-slug="mick-rippon" class="t-entity" href="../../wiki/mick-rippon.html">Mick Rippon</a></li><li><a data-slug="mikmak" class="t-entity" href="../../wiki/mikmak.html">Mikmak (Jean-Paul Mikkers)</a></li><li><a data-slug="mosaic" class="t-entity" href="../../wiki/mosaic.html">Mosaic (Renaissance)</a></li><li><a data-slug="necros" class="t-entity" href="../../wiki/necros.html">Necros (Andy Sega)</a></li><li><a data-slug="nemesis" class="t-entity" href="../../wiki/nemesis.html">Nemesis (Andrew Wise)</a></li><li><a data-slug="olivier-lapicque" class="t-entity" href="../../wiki/olivier-lapicque.html">Olivier Lapicque</a></li><li><a data-slug="paganus" class="t-entity" href="../../wiki/paganus.html">Paganus</a></li><li><a data-slug="pariah" class="t-entity" href="../../wiki/pariah.html">Pariah (Edwin de la Vega)</a></li><li><a data-slug="perisoft" class="t-entity" href="../../wiki/perisoft.html">Perisoft (David Wiernicki)</a></li><li><a data-slug="peter-hanning" class="t-entity" href="../../wiki/peter-hanning.html">Peter &quot;Crayon&quot; Hanning</a></li><li><a data-slug="phoenix" class="t-entity" href="../../wiki/phoenix.html">Phoenix (Andrew Voss)</a></li><li><a data-slug="pinion" class="t-entity" href="../../wiki/pinion.html">Pinion (Ryan Hunt)</a></li><li><a data-slug="popcorn" class="t-entity" href="../../wiki/popcorn.html">Popcorn (Chris Campbell)</a></li><li><a data-slug="populus" class="t-entity" href="../../wiki/populus.html">Populus (Nicolas Roberge)</a></li><li><a data-slug="psibelius" class="t-entity" href="../../wiki/psibelius.html">Psibelius (Gene Wie)</a></li><li><a data-slug="purple-motion" class="t-entity" href="../../wiki/purple-motion.html">Purple Motion</a></li><li><a data-slug="quantam-porcupine" class="t-entity" href="../../wiki/quantam-porcupine.html">Quantam Porcupine (Joshua Shagam)</a></li><li><a data-slug="quarex" class="t-entity" href="../../wiki/quarex.html">Quarex (Drew Hunt)</a></li><li><a data-slug="rage" class="t-entity" href="../../wiki/rage.html">Rage (Harri Blom)</a></li><li><a data-slug="reyn-ouwehand" class="t-entity" href="../../wiki/reyn-ouwehand.html">Reyn Ouwehand</a></li><li><a data-slug="rob-hubbard" class="t-entity" href="../../wiki/rob-hubbard.html">Rob Hubbard</a></li><li><a data-slug="ryan-cramer" class="t-entity" href="../../wiki/ryan-cramer.html">Ryan Cramer</a></li><li><a data-slug="ryan-sprott" class="t-entity" href="../../wiki/ryan-sprott.html">Ryan Sprott (Grey)</a></li><li><a data-slug="sabrepulse" class="t-entity" href="../../wiki/sabrepulse.html">Sabrepulse</a></li><li><a data-slug="sami-tammilehto" class="t-entity" href="../../wiki/sami-tammilehto.html">Sami Tammilehto (Psi)</a></li><li><a data-slug="saxy" class="t-entity" href="../../wiki/saxy.html">Saxy (Courtney Risch)</a></li><li><a data-slug="scirocco" class="t-entity" href="../../wiki/scirocco.html">Scirocco (Ian Lyman)</a></li><li><a data-slug="shawnm" class="t-entity" href="../../wiki/shawnm.html">shawnm (Shawn, NOISE)</a></li><li><a data-slug="skaven" class="t-entity" href="../../wiki/skaven.html">Skaven</a></li><li><a data-slug="smeghead" class="t-entity" href="../../wiki/smeghead.html">Smeghead (David Oranchak)</a></li><li><a data-slug="stalker" class="t-entity" href="../../wiki/stalker.html">Stalker (Ariel Gross)</a></li><li><a data-slug="storlek" class="t-entity" href="../../wiki/storlek.html">Storlek</a></li><li><a data-slug="subhuman" class="t-entity" href="../../wiki/subhuman.html">Subhuman (Seth Miller)</a></li><li><a data-slug="the-zapper" class="t-entity" href="../../wiki/the-zapper.html">The Zapper (Marc Girard, Force Ten)</a></li><li><a data-slug="thehacker" class="t-entity" href="../../wiki/thehacker.html">TheHacker (Krisjanis Gale)</a></li><li><a data-slug="trixter" class="t-entity" href="../../wiki/trixter.html">Trixter (Jim Leonard)</a></li><li><a data-slug="u4ia" class="t-entity" href="../../wiki/u4ia.html">U4IA / F8 (James Young)</a></li><li><a data-slug="vadimvs" class="t-entity" href="../../wiki/vadimvs.html">VadimVS (Vadim Shustov)</a></li><li><a data-slug="vegas" class="t-entity" href="../../wiki/vegas.html">Vegas (T.J. Lerner)</a></li><li><a data-slug="vicious" class="t-entity" href="../../wiki/vicious.html">Vicious (VSL)</a></li><li><a data-slug="witchmaster" class="t-entity" href="../../wiki/witchmaster.html">WitchMaster (Mikael Norrgård)</a></li><li><a data-slug="zalt" class="t-entity" href="../../wiki/zalt.html">Zalt (Tobias Garder)</a></li><li><a data-slug="zinc" class="t-entity" href="../../wiki/zinc.html">Zinc (Justin Ray)</a></li></ul></details><details class="grp" data-grp="kind-group"><summary>Groups <span class="n">20</span></summary><ul><li><a data-slug="aim-higher" class="t-entity" href="../../wiki/aim-higher.html">Aim Higher</a></li><li><a data-slug="codemasters" class="t-entity" href="../../wiki/codemasters.html">Codemasters</a></li><li><a data-slug="compunet" class="t-entity" href="../../wiki/compunet.html">Compunet</a></li><li><a data-slug="defiance" class="t-entity" href="../../wiki/defiance.html">Defiance</a></li><li><a data-slug="epinicion" class="t-entity" href="../../wiki/epinicion.html">Epinicion</a></li><li><a data-slug="esper-division" class="t-entity" href="../../wiki/esper-division.html">Esper Division</a></li><li><a data-slug="five-musicians" class="t-entity" href="../../wiki/five-musicians.html">Five Musicians (FM)</a></li><li><a data-slug="future-crew" class="t-entity" href="../../wiki/future-crew.html">Future Crew</a></li><li><a data-slug="hewson" class="t-entity" href="../../wiki/hewson.html">Hewson Consultants</a></li><li><a data-slug="hornet" class="t-entity" href="../../wiki/hornet.html">Hornet</a></li><li><a data-slug="kosmic" class="t-entity" href="../../wiki/kosmic.html">Kosmic (KFMF)</a></li><li><a data-slug="lok" class="t-entity" href="../../wiki/lok.html">LoK</a></li><li><a data-slug="maniacs-of-noise" class="t-entity" href="../../wiki/maniacs-of-noise.html">Maniacs of Noise</a></li><li><a data-slug="noise-group" class="t-entity" href="../../wiki/noise-group.html">NOISE (New Objectives In Sound Exploration)</a></li><li><a data-slug="rainbow-arts" class="t-entity" href="../../wiki/rainbow-arts.html">Rainbow Arts</a></li><li><a data-slug="renaissance" class="t-entity" href="../../wiki/renaissance.html">Renaissance</a></li><li><a data-slug="system-3" class="t-entity" href="../../wiki/system-3.html">System 3</a></li><li><a data-slug="the-modsquad" class="t-entity" href="../../wiki/the-modsquad.html">The Modsquad</a></li><li><a data-slug="triton" class="t-entity" href="../../wiki/triton.html">Triton (Fredrik Huss and Magnus Högdahl)</a></li><li><a data-slug="ultrabeat" class="t-entity" href="../../wiki/ultrabeat.html">Ultrabeat</a></li></ul></details><details class="grp" data-grp="kind-event"><summary>Events <span class="n">1</span></summary><ul><li><a data-slug="20-minute-chip-compo" class="t-entity" href="../../wiki/20-minute-chip-compo.html">20 Minute Chip Compo (20mc)</a></li></ul></details><details class="grp" data-grp="kind-publication"><summary>Publications <span class="n">10</span></summary><ul><li><a data-slug="64er" class="t-entity" href="../../wiki/64er.html">64&#x27;er (magazine)</a></li><li><a data-slug="chipmusic-org" class="t-entity" href="../../wiki/chipmusic-org.html">ChipMusic.org</a></li><li><a data-slug="c64-programmers-reference-guide" class="t-entity" href="../../wiki/c64-programmers-reference-guide.html">Commodore 64 Programmer&#x27;s Reference Guide</a></li><li><a data-slug="commodore-zone" class="t-entity" href="../../wiki/commodore-zone.html">Commodore Zone</a></li><li><a data-slug="hvsc" class="t-entity" href="../../wiki/hvsc.html">HVSC — High Voltage SID Collection</a></li><li><a data-slug="intense-tech" class="t-entity" href="../../wiki/intense-tech.html">Intense Tech with Defense Mech</a></li><li><a data-slug="pan-docs" class="t-entity" href="../../wiki/pan-docs.html">Pan Docs</a></li><li><a data-slug="sidin" class="t-entity" href="../../wiki/sidin.html">SIDin (e-zine)</a></li><li><a data-slug="sid-homepage" class="t-entity" href="../../wiki/sid-homepage.html">The SID Homepage (sidmusic.org)</a></li><li><a data-slug="traxweekly" class="t-entity" href="../../wiki/traxweekly.html">TraxWeekly</a></li></ul></details><details class="grp" data-grp="kind-song"><summary>Songs <span class="n">12</span></summary><ul><li><a data-slug="commando" class="t-entity" href="../../wiki/commando.html">Commando (C64, 1985)</a></li><li><a data-slug="cybernoid" class="t-entity" href="../../wiki/cybernoid.html">Cybernoid (Jeroen Tel, 1988)</a></li><li><a data-slug="cybernoid-ii" class="t-entity" href="../../wiki/cybernoid-ii.html">Cybernoid II (Jeroen Tel, 1988)</a></li><li><a data-slug="dominator" class="t-entity" href="../../wiki/dominator.html">Dominator (Matt Gray, 1989)</a></li><li><a data-slug="driller" class="t-entity" href="../../wiki/driller.html">Driller (Matt Gray, 1987)</a></li><li><a data-slug="helikopter-jagd" class="t-entity" href="../../wiki/helikopter-jagd.html">Helikopter Jagd (C64, 1986)</a></li><li><a data-slug="last-ninja-2" class="t-entity" href="../../wiki/last-ninja-2.html">Last Ninja 2 (Matt Gray, 1988)</a></li><li><a data-slug="monty-on-the-run" class="t-entity" href="../../wiki/monty-on-the-run.html">Monty on the Run (C64, 1985)</a></li><li><a data-slug="sanxion" class="t-entity" href="../../wiki/sanxion.html">Sanxion (C64, 1986)</a></li><li><a data-slug="shades" class="t-entity" href="../../wiki/shades.html">Shades (Chris Hülsbeck, 1986)</a></li><li><a data-slug="great-giana-sisters" class="t-entity" href="../../wiki/great-giana-sisters.html">The Great Giana Sisters (C64, 1987/88)</a></li><li><a data-slug="the-grey-note" class="t-entity" href="../../wiki/the-grey-note.html">The Grey Note (Necros)</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">236</span></summary><ul><li><a data-slug="s-037-lab" class="t-summary" href="../../wiki/s-037-lab.html">0 3 7 lab — techniques &amp; theory (summary)</a></li><li><a data-slug="s-64er-soundmonitor-article" class="t-summary" href="../../wiki/s-64er-soundmonitor-article.html">64&#x27;er 10/1986 — Musik wie noch nie: the Soundmonitor article and manual</a></li><li><a data-slug="s-arcadeattack-matt-gray-interview" class="t-summary" href="../../wiki/s-arcadeattack-matt-gray-interview.html">Arcade Attack — Matt Gray (VGM Maestro) interview (2020/2021)</a></li><li><a data-slug="s-sidmusic-alstrup-waveform-examinations" class="t-summary" href="../../wiki/s-sidmusic-alstrup-waveform-examinations.html">Asger Alstrup — Examination of SID triangle waveform / noise waveform (The SID Homepage, 1995)</a></li><li><a data-slug="s-c64-prg-chapter-4-sound" class="t-summary" href="../../wiki/s-c64-prg-chapter-4-sound.html">C64 Programmer&#x27;s Reference Guide, ch. 4 — Programming Sound and Music on Your Commodore 64 (1982)</a></li><li><a data-slug="s-c64com-matt-gray-interview" class="t-summary" href="../../wiki/s-c64com-matt-gray-interview.html">C64.COM interview #36: Matt Gray (2014)</a></li><li><a data-slug="s-charles-deenen-interviews" class="t-summary" href="../../wiki/s-charles-deenen-interviews.html">Charles Deenen interviews: Domination #11 (1998) and Designing Sound (2010)</a></li><li><a data-slug="s-sid-wizard-charts-and-tables" class="t-summary" href="../../wiki/s-sid-wizard-charts-and-tables.html">Charts and Tables for SID-Wizard 1.6 (document version 1.0, 2014)</a></li><li><a data-slug="s-chipmusic-c64-music-for-dummies" class="t-summary" href="../../wiki/s-chipmusic-c64-music-for-dummies.html">chipmusic.org — C64 Music for Dummies (ant1&#x27;s SID-Wizard 1.0 tutorial, 2012)</a></li><li><a data-slug="s-chipmusic-lsdj-advanced-tricks" class="t-summary" href="../../wiki/s-chipmusic-lsdj-advanced-tricks.html">chipmusic.org — LSDJ Advanced Tricks thread (2012)</a></li><li><a data-slug="s-chipmusic-tables-and-chords-threads" class="t-summary" href="../../wiki/s-chipmusic-tables-and-chords-threads.html">chipmusic.org — LSDJ Chord Cheat Sheet / Advice on Learning Tables threads (2015)</a></li><li><a data-slug="s-chipmusic-lsdj-faq" class="t-summary" href="../../wiki/s-chipmusic-lsdj-faq.html">chipmusic.org — LSDJ FAQ thread (2010–2011)</a></li><li><a data-slug="s-chipmusic-noise-drum-threads" class="t-summary" href="../../wiki/s-chipmusic-noise-drum-threads.html">chipmusic.org — Noise snare / Complete Drum Kit on Noise Channel threads (2014)</a></li><li><a data-slug="s-chipmusic-sid-music-hints-n-tips" class="t-summary" href="../../wiki/s-chipmusic-sid-music-hints-n-tips.html">chipmusic.org — sid music hints&#x27;n&#x27;tips (2013)</a></li><li><a data-slug="s-chipmusic-kotlinski-interviews" class="t-summary" href="../../wiki/s-chipmusic-kotlinski-interviews.html">chipmusic.org — two Johan Kotlinski interviews (2012, 2014)</a></li><li><a data-slug="s-chipmusic-typical-sid-sounds" class="t-summary" href="../../wiki/s-chipmusic-typical-sid-sounds.html">chipmusic.org — What are the typical C64/SID sounds/instruments? (2015)</a></li><li><a data-slug="s-chordian-sid-musicians" class="t-summary" href="../../wiki/s-chordian-sid-musicians.html">Chordian — SID Musicians (JCH&#x27;s verdicts on the game composers, 2018)</a></li><li><a data-slug="s-commodore-64-eu-sid-chip" class="t-summary" href="../../wiki/s-commodore-64-eu-sid-chip.html">commodore-64.eu — The C64 SID Chip (6581 vs 8580 overview)</a></li><li><a data-slug="s-chordian-sf2-instruments" class="t-summary" href="../../wiki/s-chordian-sf2-instruments.html">Composing in SID Factory II, Part 4 — Instruments (Chordian)</a></li><li><a data-slug="s-witchmaster-creating-chiptunes-with-sid-wizard" class="t-summary" href="../../wiki/s-witchmaster-creating-chiptunes-with-sid-wizard.html">Creating Chiptunes with SID-Wizard, Second Edition (summary)</a></li><li><a data-slug="s-csdb-huelsbeck-tfmx-thread" class="t-summary" href="../../wiki/s-csdb-huelsbeck-tfmx-thread.html">CSDb forum: Huelsbeck TFMX? (2006)</a></li><li><a data-slug="s-csdb-soundmonitor-and-shades" class="t-summary" href="../../wiki/s-csdb-soundmonitor-and-shades.html">CSDb release pages: Soundmonitor V1.0 (1986) and Shades (1986)</a></li><li><a data-slug="s-cybernoid-behind-the-notes" class="t-summary" href="../../wiki/s-cybernoid-behind-the-notes.html">Cybernoid I / Cybernoid II &#x27;behind the notes&#x27; videos (2014) and the Lemon64 thread</a></li><li><a data-slug="s-duet-readme" class="t-summary" href="../../wiki/s-duet-readme.html">DUET README (summary)</a></li><li><a data-slug="s-ft2-manual" class="t-summary" href="../../wiki/s-ft2-manual.html">FastTracker v2.08 Manual (Urban Jonsson, 1996)</a></li><li><a data-slug="s-furnace-c64-docs" class="t-summary" href="../../wiki/s-furnace-c64-docs.html">Furnace tracker — C64 (SID) system and instrument documentation</a></li><li><a data-slug="s-audiogang-huelsbeck-interview" class="t-summary" href="../../wiki/s-audiogang-huelsbeck-interview.html">Game Audio Network Guild — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-infu-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-infu-getting-started-with-lsdj.html">Getting started with LSDj with Infu (course)</a></li><li><a data-slug="s-realdmx-sid-players" class="t-summary" href="../../wiki/s-realdmx-sid-players.html">GitHub realdmx/c64_6581_sid_players — Cybernoid II in Deenen&#x27;s MUSICFILE, the MoN SFX player, the Driller listing</a></li><li><a data-slug="s-goattracker-readme" class="t-summary" href="../../wiki/s-goattracker-readme.html">GoatTracker v2.72 readme (summary)</a></li><li><a data-slug="s-hugi38-interview-jeroen-tel" class="t-summary" href="../../wiki/s-hugi38-interview-jeroen-tel.html">Hugi #38 — Up Close &amp; Personal: Jeroen Tel of Maniacs of Noise (2014)</a></li><li><a data-slug="s-hvsc-sid-file-format" class="t-summary" href="../../wiki/s-hvsc-sid-file-format.html">HVSC — SID file format description (PSID v1–v4, RSID)</a></li><li><a data-slug="s-it-hints" class="t-summary" href="../../wiki/s-it-hints.html">Impulse Tracker HINTS.TXT — Hints for Composers (summary)</a></li><li><a data-slug="s-ittech" class="t-summary" href="../../wiki/s-ittech.html">Impulse Tracker ITTECH.TXT — technical reference (summary)</a></li><li><a data-slug="s-it-manual" class="t-summary" href="../../wiki/s-it-manual.html">Impulse Tracker User&#x27;s Manual — IT.TXT (summary)</a></li><li><a data-slug="s-intense-tech-01-wave-synth-deep-dive-part-1" class="t-summary" href="../../wiki/s-intense-tech-01-wave-synth-deep-dive-part-1.html">Intense Tech #01 — LSDj Wave Synth Deep Dive, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-02-wave-synth-deep-dive-part-2" class="t-summary" href="../../wiki/s-intense-tech-02-wave-synth-deep-dive-part-2.html">Intense Tech #02 — LSDj Wave Synth Deep Dive, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-03-dont-sleep-on-z" class="t-summary" href="../../wiki/s-intense-tech-03-dont-sleep-on-z.html">Intense Tech #03 — Don&#x27;t Sleep on Z (Defense Mechanism, after Hypnogram)</a></li><li><a data-slug="s-intense-tech-04-liblsdj" class="t-summary" href="../../wiki/s-intense-tech-04-liblsdj.html">Intense Tech #04 — Manage your LSDj save files with libLSDj (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-05-wave-cruncher-instrument-library" class="t-summary" href="../../wiki/s-intense-tech-05-wave-cruncher-instrument-library.html">Intense Tech #05 — LSDj Wave Cruncher Instrument Library (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-06-groove-and-tick-tricks-part-1" class="t-summary" href="../../wiki/s-intense-tech-06-groove-and-tick-tricks-part-1.html">Intense Tech #06 — Groovy Groove and Tick Tricks, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-07-groove-and-tick-tricks-part-2" class="t-summary" href="../../wiki/s-intense-tech-07-groove-and-tick-tricks-part-2.html">Intense Tech #07 — Groovy Groove and Tick Tricks, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-08-dotcnts-wave-cruncher" class="t-summary" href="../../wiki/s-intense-tech-08-dotcnts-wave-cruncher.html">Intense Tech #08 — DOTCNT&#x27;s LSDj Wave Cruncher (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-09-lets-table-this-discussion" class="t-summary" href="../../wiki/s-intense-tech-09-lets-table-this-discussion.html">Intense Tech #09 — Let&#x27;s Table This Discussion! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-10-kicks-part-1" class="t-summary" href="../../wiki/s-intense-tech-10-kicks-part-1.html">Intense Tech #10 — Get your Kicks with Version 6, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-11-kicks-part-2" class="t-summary" href="../../wiki/s-intense-tech-11-kicks-part-2.html">Intense Tech #11 — Kicks Part 2: Kick Heaven in Version 7 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-12-scoping-out-new-features" class="t-summary" href="../../wiki/s-intense-tech-12-scoping-out-new-features.html">Intense Tech #12 — Scoping Out New Features (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-13-kotlinski-interview" class="t-summary" href="../../wiki/s-intense-tech-13-kotlinski-interview.html">Intense Tech #13 — Interview with LSDj Developer Johan Kotlinski (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-14-lets-appreciate-version-8" class="t-summary" href="../../wiki/s-intense-tech-14-lets-appreciate-version-8.html">Intense Tech #14 — Let&#x27;s Appreciate Version 8 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-15-lets-mix-it-up-and-down" class="t-summary" href="../../wiki/s-intense-tech-15-lets-mix-it-up-and-down.html">Intense Tech #15 — Let&#x27;s Mix It Up (and Down) (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-16-cartridge-family" class="t-summary" href="../../wiki/s-intense-tech-16-cartridge-family.html">Intense Tech #16 — So You Want a Cartridge Family? (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-17-the-joys-of-noise" class="t-summary" href="../../wiki/s-intense-tech-17-the-joys-of-noise.html">Intense Tech #17 — The Joys of Noise (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-18-adsr-makes-life-easier" class="t-summary" href="../../wiki/s-intense-tech-18-adsr-makes-life-easier.html">Intense Tech #18 — ADSR Makes Life Easier! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-19-new-noise-and-910-news" class="t-summary" href="../../wiki/s-intense-tech-19-new-noise-and-910-news.html">Intense Tech #19 — New Noise and 9.1.0 News (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-20-lsdpatch" class="t-summary" href="../../wiki/s-intense-tech-20-lsdpatch.html">Intense Tech #20 — Customize LSDj From Scratch with LSDPatch (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-21-whats-new-in-lsdj-92" class="t-summary" href="../../wiki/s-intense-tech-21-whats-new-in-lsdj-92.html">Intense Tech #21 — What&#x27;s New in LSDj v9.2 (Defense Mechanism)</a></li><li><a data-slug="s-lemon64-hard-restart-threads" class="t-summary" href="../../wiki/s-lemon64-hard-restart-threads.html">Lemon64 threads: SID and ADSR re-triggering? (2008) / Hard restart – what&#x27;s the story? (2015)</a></li><li><a data-slug="s-lemon64-learning-sid-sound-design" class="t-summary" href="../../wiki/s-lemon64-learning-sid-sound-design.html">Lemon64: How does one learn SID sound design these days? (2020)</a></li><li><a data-slug="s-lemon64-sid-wizard-instrument-recommendations" class="t-summary" href="../../wiki/s-lemon64-sid-wizard-instrument-recommendations.html">Lemon64: SID-Wizard instrument recommendations? (2021)</a></li><li><a data-slug="s-lsdj-manual" class="t-summary" href="../../wiki/s-lsdj-manual.html">Little Sound Dj v9.2.6 Operating Manual (summary)</a></li><li><a data-slug="s-matt-gray-dominator-source" class="t-summary" href="../../wiki/s-matt-gray-dominator-source.html">Matt Gray&#x27;s Dominator subtune 6 source (PLAYER V4.2, 1987) and the Reformation driver competition</a></li><li><a data-slug="s-mos-6581-datasheet" class="t-summary" href="../../wiki/s-mos-6581-datasheet.html">MOS 6581 Sound Interface Device (SID) datasheet — the text behind Appendix O</a></li><li><a data-slug="s-newman-driving-the-sid-chip" class="t-summary" href="../../wiki/s-newman-driving-the-sid-chip.html">Newman — Driving the SID chip: Assembly Language, Composition, and Sound Design for the C64 (2017)</a></li><li><a data-slug="s-openmpt-manual-about-openmpt" class="t-summary" href="../../wiki/s-openmpt-manual-about-openmpt.html">OpenMPT manual — About OpenMPT</a></li><li><a data-slug="s-openmpt-manual-compatible-playback" class="t-summary" href="../../wiki/s-openmpt-manual-compatible-playback.html">OpenMPT manual — Compatible Playback</a></li><li><a data-slug="s-openmpt-manual-effect-reference" class="t-summary" href="../../wiki/s-openmpt-manual-effect-reference.html">OpenMPT manual — Effect Reference</a></li><li><a data-slug="s-openmpt-manual-instruments" class="t-summary" href="../../wiki/s-openmpt-manual-instruments.html">OpenMPT manual — Instruments</a></li><li><a data-slug="s-openmpt-manual-module-formats" class="t-summary" href="../../wiki/s-openmpt-manual-module-formats.html">OpenMPT manual — Module formats</a></li><li><a data-slug="s-openmpt-manual-samples" class="t-summary" href="../../wiki/s-openmpt-manual-samples.html">OpenMPT manual — Samples</a></li><li><a data-slug="s-openmpt-manual-song-properties" class="t-summary" href="../../wiki/s-openmpt-manual-song-properties.html">OpenMPT manual — Song Properties (and Tempo Swing)</a></li><li><a data-slug="s-openmpt-manual-zxx-macros" class="t-summary" href="../../wiki/s-openmpt-manual-zxx-macros.html">OpenMPT manual — Zxx Macros</a></li><li><a data-slug="s-pandocs-audio-details" class="t-summary" href="../../wiki/s-pandocs-audio-details.html">Pan Docs — Audio Details</a></li><li><a data-slug="s-pandocs-audio-overview" class="t-summary" href="../../wiki/s-pandocs-audio-overview.html">Pan Docs — Audio Overview</a></li><li><a data-slug="s-pandocs-audio-registers" class="t-summary" href="../../wiki/s-pandocs-audio-registers.html">Pan Docs — Audio Registers</a></li><li><a data-slug="s-protracker-23-readme-and-docs" class="t-summary" href="../../wiki/s-protracker-23-readme-and-docs.html">ProTracker 2.3A ReadMe, 2.0A effect and format docs, version table</a></li><li><a data-slug="s-protracker-23d-help" class="t-summary" href="../../wiki/s-protracker-23d-help.html">ProTracker 2.3d help file (edited by echolevel)</a></li><li><a data-slug="s-remix64-huelsbeck-interview" class="t-summary" href="../../wiki/s-remix64-huelsbeck-interview.html">Remix64 — An Interview with Chris Huelsbeck (2001)</a></li><li><a data-slug="s-remix64-galway-interview" class="t-summary" href="../../wiki/s-remix64-galway-interview.html">Remix64 — An Interview with Martin Galway (Neil Carr, 2001)</a></li><li><a data-slug="s-remix64-ninja-remix" class="t-summary" href="../../wiki/s-remix64-ninja-remix.html">Remix64 — Last Ninja 2 vs Ninja Remix: what&#x27;s the deal? (Chris Abbott)</a></li><li><a data-slug="s-retrogamesmaster-matt-gray-interview" class="t-summary" href="../../wiki/s-retrogamesmaster-matt-gray-interview.html">Retro Gamesmaster — Matt Gray Interview (Peter Ward)</a></li><li><a data-slug="s-emuwiki-huelsbeck-interview" class="t-summary" href="../../wiki/s-emuwiki-huelsbeck-interview.html">Retrogaming Planet / EmuWiki — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-rvg-matt-gray-interview" class="t-summary" href="../../wiki/s-rvg-matt-gray-interview.html">RVG Interviews: Matt Gray (2016)</a></li><li><a data-slug="s-sabrepulse-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-sabrepulse-getting-started-with-lsdj.html">Sabrepulse — Getting started with LSDJ tutorial (mirror at Adventure Kid)</a></li><li><a data-slug="s-schism-tracker-wiki" class="t-summary" href="../../wiki/s-schism-tracker-wiki.html">Schism Tracker wiki and README</a></li><li><a data-slug="s-st3-manual" class="t-summary" href="../../wiki/s-st3-manual.html">Scream Tracker 3.2 User&#x27;s Manual (ST3.DOC)</a></li><li><a data-slug="s-st3-tech-doc" class="t-summary" href="../../wiki/s-st3-tech-doc.html">Scream Tracker 3.20 File Formats And Mixing Info (TECH.DOC)</a></li><li><a data-slug="s-sid-wizard-manual" class="t-summary" href="../../wiki/s-sid-wizard-manual.html">SID-Wizard 1.8 User Manual (summary)</a></li><li><a data-slug="s-sidid-player-list" class="t-summary" href="../../wiki/s-sidid-player-list.html">SIDId (cadaver/sidid): the player-signature list and its notes</a></li><li><a data-slug="s-sidin02-matt-gray-driller" class="t-summary" href="../../wiki/s-sidin02-matt-gray-driller.html">SIDin #2 — Matt Gray&#x27;s Driller music routine (Stefano Tognon, 2002)</a></li><li><a data-slug="s-soundmonitor-lineage-wikis" class="t-summary" href="../../wiki/s-soundmonitor-lineage-wikis.html">Soundmonitor lineage and wiki pages: tracker-history/soundmonitor.txt, C64-Wiki.de, de.wikipedia</a></li><li><a data-slug="s-recollection-brief-history-of-sid" class="t-summary" href="../../wiki/s-recollection-brief-history-of-sid.html">The Brief History of SID — Jan Harries (SIDwave), Vandalism News #64 (2015)</a></li><li><a data-slug="s-sidmusic-yannes-interview" class="t-summary" href="../../wiki/s-sidmusic-yannes-interview.html">The SID Homepage — Interview with Bob Yannes (Andreas Varga, August 1996)</a></li><li><a data-slug="s-sidmusic-jeroen-tel-interviews" class="t-summary" href="../../wiki/s-sidmusic-jeroen-tel-interviews.html">The SID Homepage — Interviews with Jeroen Tel (Commodore Zone 1997, 64&#x27;er 3/91)</a></li><li><a data-slug="s-sidmusic-galway-interviews" class="t-summary" href="../../wiki/s-sidmusic-galway-interviews.html">The SID Homepage — Interviews with Martin Galway (Commodore Zone 6–7, Happy Computer 11/86)</a></li><li><a data-slug="s-sidmusic-hubbard-interviews" class="t-summary" href="../../wiki/s-sidmusic-hubbard-interviews.html">The SID Homepage — Interviews with Rob Hubbard (Commodore Zone, Happy Computer 7/86)</a></li><li><a data-slug="s-sidmusic-creation-of-the-sid-chip" class="t-summary" href="../../wiki/s-sidmusic-creation-of-the-sid-chip.html">The SID Homepage — The creation of the SID chip (Christer Rindeblad)</a></li><li><a data-slug="s-tracker-history-notes" class="t-summary" href="../../wiki/s-tracker-history-notes.html">tracker-history release notes (ProTracker, FastTracker, Scream Tracker, Impulse Tracker, Schism, OpenMPT)</a></li><li><a data-slug="s-traxweekly-archive" class="t-summary" href="../../wiki/s-traxweekly-archive.html">TraxWeekly archive at OpenMPT.org (summary)</a></li><li><a data-slug="s-tw001-interview-basehead" class="t-summary" href="../../wiki/s-tw001-interview-basehead.html">TW #1 — Interview with Basehead (Populus)</a></li><li><a data-slug="s-tw001-interview-phoenix" class="t-summary" href="../../wiki/s-tw001-interview-phoenix.html">TW #1 — Interview with Phoenix (Populus)</a></li><li><a data-slug="s-tw001-modal-and-chord-theory" class="t-summary" href="../../wiki/s-tw001-modal-and-chord-theory.html">TW #1 — Modal and Chord Theory (Leviathan)</a></li><li><a data-slug="s-tw010-interview-jugi" class="t-summary" href="../../wiki/s-tw010-interview-jugi.html">TW #10 — Interview with Jugi (White Wizard)</a></li><li><a data-slug="s-tw100-tracking-on-impulse" class="t-summary" href="../../wiki/s-tw100-tracking-on-impulse.html">TW #100 — Tracking on Impulse (Pulse)</a></li><li><a data-slug="s-tw103-interview-mikmak" class="t-summary" href="../../wiki/s-tw103-interview-mikmak.html">TW #103 — Interview with Mikmak (Behemoth)</a></li><li><a data-slug="s-tw105-newbie-interviews" class="t-summary" href="../../wiki/s-tw105-newbie-interviews.html">TW #105 — Interview With A Couple Of Newbies (Behemoth)</a></li><li><a data-slug="s-tw106-a-little-panning" class="t-summary" href="../../wiki/s-tw106-a-little-panning.html">TW #106 — A Little Panning (Airon)</a></li><li><a data-slug="s-tw107-laymans-music-theory" class="t-summary" href="../../wiki/s-tw107-laymans-music-theory.html">TW #107 — Layman&#x27;s Music Theory, part one (Zinc)</a></li><li><a data-slug="s-tw109-interview-skaven" class="t-summary" href="../../wiki/s-tw109-interview-skaven.html">TW #109 — Interview: Skaven (Zinc)</a></li><li><a data-slug="s-tw011-how-to-enhance-your-music-collection" class="t-summary" href="../../wiki/s-tw011-how-to-enhance-your-music-collection.html">TW #11 — How to enhance your music collection (Popcorn)</a></li><li><a data-slug="s-tw011-interview-beaner" class="t-summary" href="../../wiki/s-tw011-interview-beaner.html">TW #11 — Interview with Beaner (Popcorn)</a></li><li><a data-slug="s-tw011-interview-perisoft" class="t-summary" href="../../wiki/s-tw011-interview-perisoft.html">TW #11 — Interview with Perisoft (Popcorn)</a></li><li><a data-slug="s-tw111-interview-khyron" class="t-summary" href="../../wiki/s-tw111-interview-khyron.html">TW #111 — Interview with Khyron (again =) (Jeremy Rice)</a></li><li><a data-slug="s-tw114-commercial-tracking-debate" class="t-summary" href="../../wiki/s-tw114-commercial-tracking-debate.html">TW #113–#118 — The Scene and the Commercial Market: the commercial-tracking debate</a></li><li><a data-slug="s-tw114-live-tracking" class="t-summary" href="../../wiki/s-tw114-live-tracking.html">TW #114 — Live Tracking (xiagox)</a></li><li><a data-slug="s-tw115-tracking-semantics" class="t-summary" href="../../wiki/s-tw115-tracking-semantics.html">TW #115 — Tracking Semantics (Exxon)</a></li><li><a data-slug="s-tw118-reverb-and-compression" class="t-summary" href="../../wiki/s-tw118-reverb-and-compression.html">TW #118 — Reverb and Compression (Airon)</a></li><li><a data-slug="s-tw118-tracking-the-format" class="t-summary" href="../../wiki/s-tw118-tracking-the-format.html">TW #118 — Tracking the Format (Jesper Pedersen)</a></li><li><a data-slug="s-tw119-interview-mental-floss" class="t-summary" href="../../wiki/s-tw119-interview-mental-floss.html">TW #119 — Interview with Mental Floss (Zinc)</a></li><li><a data-slug="s-tw119-reverb-and-audio-gear" class="t-summary" href="../../wiki/s-tw119-reverb-and-audio-gear.html">TW #119 — Reverb and Audio Gear (Rimbo)</a></li><li><a data-slug="s-tw012-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw012-advanced-tracking-tips.html">TW #12 — Advanced Tracking Tips (Necros)</a></li><li><a data-slug="s-tw013-interview-big-jim" class="t-summary" href="../../wiki/s-tw013-interview-big-jim.html">TW #13 — Interview with Big Jim (Popcorn)</a></li><li><a data-slug="s-tw014-interview-pinion" class="t-summary" href="../../wiki/s-tw014-interview-pinion.html">TW #14 — Interview with Pinion (Flood)</a></li><li><a data-slug="s-tw015-advanced-tracking-tips-ii" class="t-summary" href="../../wiki/s-tw015-advanced-tracking-tips-ii.html">TW #15 — Advanced Tracking Tips II (Necros)</a></li><li><a data-slug="s-tw015-interview-claim" class="t-summary" href="../../wiki/s-tw015-interview-claim.html">TW #15 — Interview with Claim (Gator)</a></li><li><a data-slug="s-tw015-interview-sv" class="t-summary" href="../../wiki/s-tw015-interview-sv.html">TW #15 — Interview with SV (GraveDigger)</a></li><li><a data-slug="s-tw016-interview-populus" class="t-summary" href="../../wiki/s-tw016-interview-populus.html">TW #16 — Interview with Populus (Psibelius)</a></li><li><a data-slug="s-tw017-interview-amusic" class="t-summary" href="../../wiki/s-tw017-interview-amusic.html">TW #17 — Interview with AmusiC (Popcorn)</a></li><li><a data-slug="s-tw018-advanced-tracking-tips-iii" class="t-summary" href="../../wiki/s-tw018-advanced-tracking-tips-iii.html">TW #18 — Advanced Tracking Tips III: voicings (Necros)</a></li><li><a data-slug="s-tw018-interview-basehead" class="t-summary" href="../../wiki/s-tw018-interview-basehead.html">TW #18 — Interview With Basehead (again) (Psibelius)</a></li><li><a data-slug="s-tw018-interview-lord-pegasus" class="t-summary" href="../../wiki/s-tw018-interview-lord-pegasus.html">TW #18 — Interview with Lord Pegasus (Psibelius)</a></li><li><a data-slug="s-tw019-interview-quarex" class="t-summary" href="../../wiki/s-tw019-interview-quarex.html">TW #19 — Interview with Quarex (Maelcum)</a></li><li><a data-slug="s-tw002-interview-leinad" class="t-summary" href="../../wiki/s-tw002-interview-leinad.html">TW #2 — Interview with Leinad (Populus)</a></li><li><a data-slug="s-tw021-tracking-tips" class="t-summary" href="../../wiki/s-tw021-tracking-tips.html">TW #21 — Tracking Tips (Dan Hartrell)</a></li><li><a data-slug="s-tw022-interview-jase" class="t-summary" href="../../wiki/s-tw022-interview-jase.html">TW #22 — Interview with Jase (Clef)</a></li><li><a data-slug="s-tw024-in-review-asm95" class="t-summary" href="../../wiki/s-tw024-in-review-asm95.html">TW #24 — In Review: the ASM95 music entries (Necros)</a></li><li><a data-slug="s-tw024-sample-ripping-debate" class="t-summary" href="../../wiki/s-tw024-sample-ripping-debate.html">TW #24, #25, #64, #65 — the sample-ripping debate (Mhoram, Psibelius, Kristian Eriksen, Beacon)</a></li><li><a data-slug="s-tw025-loops-and-extended-samples" class="t-summary" href="../../wiki/s-tw025-loops-and-extended-samples.html">TW #25 — Loops and Extended Samples (The Zapper)</a></li><li><a data-slug="s-tw026-faces-in-the-crowd-intro" class="t-summary" href="../../wiki/s-tw026-faces-in-the-crowd-intro.html">TW #26 — Faces in the Crowd: the column&#x27;s manifesto (Kal Zakath)</a></li><li><a data-slug="s-tw032-20-minute-chip-compo" class="t-summary" href="../../wiki/s-tw032-20-minute-chip-compo.html">TW #26–#33, #50 — the 20 MeEnUhTz Chip Compo column (AmusiC)</a></li><li><a data-slug="s-tw027-interview-basehead-lotus-position" class="t-summary" href="../../wiki/s-tw027-interview-basehead-lotus-position.html">TW #27 — Basehead on Lotus Position (Cyberdmon)</a></li><li><a data-slug="s-tw027-faces-in-the-crowd-master-of-darkness" class="t-summary" href="../../wiki/s-tw027-faces-in-the-crowd-master-of-darkness.html">TW #27 — Faces in the Crowd #1: Master of Darkness (Kal Zakath)</a></li><li><a data-slug="s-tw027-interview-zapper" class="t-summary" href="../../wiki/s-tw027-interview-zapper.html">TW #27 — Interview with Zapper (The Finn)</a></li><li><a data-slug="s-tw028-faces-in-the-crowd-mesonyx" class="t-summary" href="../../wiki/s-tw028-faces-in-the-crowd-mesonyx.html">TW #28 — Faces in the Crowd #2: Mesonyx (Kal Zakath)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-smeghead" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-smeghead.html">TW #29 — Faces in the Crowd #4: Smeghead (Master of Darkness)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-esper-division" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-esper-division.html">TW #29 — Faces in the Crowd #5: Esper Division (DennisC)</a></li><li><a data-slug="s-tw003-interview-chuck-biscuits" class="t-summary" href="../../wiki/s-tw003-interview-chuck-biscuits.html">TW #3 — Interview with Chuck Biscuits (Epeius)</a></li><li><a data-slug="s-tw003-interview-five-musicians" class="t-summary" href="../../wiki/s-tw003-interview-five-musicians.html">TW #3 — Interview with the Five Musicians (Populus)</a></li><li><a data-slug="s-tw003-beginning-the-tracking-experience" class="t-summary" href="../../wiki/s-tw003-beginning-the-tracking-experience.html">TW #3 — Music: Beginning the Tracking Experience (Psibelius)</a></li><li><a data-slug="s-tw030-interview-ender" class="t-summary" href="../../wiki/s-tw030-interview-ender.html">TW #30 — Faces in the Crowd: Interview with Ender (Master of Darkness)</a></li><li><a data-slug="s-tw030-interview-paganus" class="t-summary" href="../../wiki/s-tw030-interview-paganus.html">TW #30 — Faces in the Crowd: Interview with Paganus (Atlantic)</a></li><li><a data-slug="s-tw031-interview-fred" class="t-summary" href="../../wiki/s-tw031-interview-fred.html">TW #31 — Faces in the Crowd: Interview with Fred (Dynamic Harmony)</a></li><li><a data-slug="s-tw031-interview-luv-kohli" class="t-summary" href="../../wiki/s-tw031-interview-luv-kohli.html">TW #31 — Faces in the Crowd: Interview with Luv Kohli (DennisC)</a></li><li><a data-slug="s-tw031-interview-vicious" class="t-summary" href="../../wiki/s-tw031-interview-vicious.html">TW #31 — Faces in the Crowd: Interview with Vicious (Master of Darkness)</a></li><li><a data-slug="s-tw032-fitc-complaints" class="t-summary" href="../../wiki/s-tw032-fitc-complaints.html">TW #32 — Faces in the Crowd: Complaints (Master of Darkness)</a></li><li><a data-slug="s-tw032-interview-zinc" class="t-summary" href="../../wiki/s-tw032-interview-zinc.html">TW #32 — Faces in the Crowd: Interview with Zinc (DennisC)</a></li><li><a data-slug="s-tw032-not-so-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw032-not-so-advanced-tracking-tips.html">TW #32 — Not So Advanced Tracking Tips (Atlantic)</a></li><li><a data-slug="s-tw032-tracker-survey" class="t-summary" href="../../wiki/s-tw032-tracker-survey.html">TW #32–#34 — Tracker Survey / New Tracker (Psibelius, Jason Diamond)</a></li><li><a data-slug="s-tw033-4channel-lives-on" class="t-summary" href="../../wiki/s-tw033-4channel-lives-on.html">TW #33 — 4Channel Lives On (Trixter)</a></li><li><a data-slug="s-tw034-interview-deus-ex" class="t-summary" href="../../wiki/s-tw034-interview-deus-ex.html">TW #34 — Faces in the Crowd: Interview with Deus Ex (Master of Darkness)</a></li><li><a data-slug="s-tw035-interview-loki" class="t-summary" href="../../wiki/s-tw035-interview-loki.html">TW #35 — Interview with Loki (Trifixion)</a></li><li><a data-slug="s-tw037-death-of-the-chiptune-debate" class="t-summary" href="../../wiki/s-tw037-death-of-the-chiptune-debate.html">TW #37–38 — The Death of the Chiptune / Chiptunes Aren&#x27;t Dead!</a></li><li><a data-slug="s-tw039-chord-theory-debate" class="t-summary" href="../../wiki/s-tw039-chord-theory-debate.html">TW #39–40 — Chord Theory? / Chord What? (Maelcum, Trixter, Basehead)</a></li><li><a data-slug="s-tw004-interview-nemesis" class="t-summary" href="../../wiki/s-tw004-interview-nemesis.html">TW #4 — Interview with Nemesis (Populus)</a></li><li><a data-slug="s-tw004-interview-stalker" class="t-summary" href="../../wiki/s-tw004-interview-stalker.html">TW #4 — Interview with Stalker (Zer0)</a></li><li><a data-slug="s-tw040-interview-blackwolf" class="t-summary" href="../../wiki/s-tw040-interview-blackwolf.html">TW #40 — Interview with Blackwolf (Psibelius)</a></li><li><a data-slug="s-tw040-interview-zalt" class="t-summary" href="../../wiki/s-tw040-interview-zalt.html">TW #40 — Interview with Zalt (Psibelius)</a></li><li><a data-slug="s-tw041-interview-mick-rippon" class="t-summary" href="../../wiki/s-tw041-interview-mick-rippon.html">TW #41 — Faces in the Crowd: Interview with Mick Rippon (DennisC)</a></li><li><a data-slug="s-tw041-interview-shawnm" class="t-summary" href="../../wiki/s-tw041-interview-shawnm.html">TW #41 — Interview with Shawn (shawnm / NOISE)</a></li><li><a data-slug="s-tw041-interview-zinc" class="t-summary" href="../../wiki/s-tw041-interview-zinc.html">TW #41 — Interview with Zinc on the Impromptu Compo (DennisC)</a></li><li><a data-slug="s-tw042-impulse-tracker-v1-01" class="t-summary" href="../../wiki/s-tw042-impulse-tracker-v1-01.html">TW #42 — Impulse Tracker v1.01 (Pulse)</a></li><li><a data-slug="s-tw042-interview-balrog" class="t-summary" href="../../wiki/s-tw042-interview-balrog.html">TW #42 — Interview with Balrog (Kosmic)</a></li><li><a data-slug="s-tw043-interview-pariah" class="t-summary" href="../../wiki/s-tw043-interview-pariah.html">TW #43 — Interview with Pariah (V.S.L)</a></li><li><a data-slug="s-tw044-hornet-ratings" class="t-summary" href="../../wiki/s-tw044-hornet-ratings.html">TW #43–#45 — the Demonews ratings argument (Light, Trixter / Hornet)</a></li><li><a data-slug="s-tw044-impulse-tracker-trivia" class="t-summary" href="../../wiki/s-tw044-impulse-tracker-trivia.html">TW #44 — Impulse Tracker Trivia (Random)</a></li><li><a data-slug="s-tw044-interview-acidfrog" class="t-summary" href="../../wiki/s-tw044-interview-acidfrog.html">TW #44 — Interview with Acidfrog (Radiance / Spice)</a></li><li><a data-slug="s-tw046-serial-composition" class="t-summary" href="../../wiki/s-tw046-serial-composition.html">TW #46 — Serial Composition (shawnm / NOISE)</a></li><li><a data-slug="s-tw005-interview-thehacker" class="t-summary" href="../../wiki/s-tw005-interview-thehacker.html">TW #5 — Interview with TheHacker (Popcorn)</a></li><li><a data-slug="s-tw005-what-its-like-to-be-a-pc-musician" class="t-summary" href="../../wiki/s-tw005-what-its-like-to-be-a-pc-musician.html">TW #5 — What it&#x27;s like to be a PC Musician (Necros)</a></li><li><a data-slug="s-tw050-aesthetics-of-composition" class="t-summary" href="../../wiki/s-tw050-aesthetics-of-composition.html">TW #50 — Aesthetics of Composition and Music Groups (Spyder / NOISE)</a></li><li><a data-slug="s-tw050-interview-vadimvs" class="t-summary" href="../../wiki/s-tw050-interview-vadimvs.html">TW #50 — Interview with VadimVS (NOISE)</a></li><li><a data-slug="s-tw051-how-to-listen-to-tracked-music" class="t-summary" href="../../wiki/s-tw051-how-to-listen-to-tracked-music.html">TW #51 — How to listen to tracked music (mrdata)</a></li><li><a data-slug="s-tw052-interview-daedalus" class="t-summary" href="../../wiki/s-tw052-interview-daedalus.html">TW #52 — Interview with Daedalus (Neophyte / Epinicion)</a></li><li><a data-slug="s-tw052-interview-ganja-man" class="t-summary" href="../../wiki/s-tw052-interview-ganja-man.html">TW #52 — Interview with Ganja Man (LoK)</a></li><li><a data-slug="s-tw054-interview-injekted-and-subhuman" class="t-summary" href="../../wiki/s-tw054-interview-injekted-and-subhuman.html">TW #54 — Interview with Injekted &amp; Subhuman (Ultrabeat)</a></li><li><a data-slug="s-tw054-interview-quantam-porcupine" class="t-summary" href="../../wiki/s-tw054-interview-quantam-porcupine.html">TW #54 — Interview with Quantam Porcupine</a></li><li><a data-slug="s-tw054-interview-saxy" class="t-summary" href="../../wiki/s-tw054-interview-saxy.html">TW #54 — Interview with Saxy (XX)</a></li><li><a data-slug="s-tw054-interview-scirocco" class="t-summary" href="../../wiki/s-tw054-interview-scirocco.html">TW #54 — Interview with Scirocco</a></li><li><a data-slug="s-tw055-interview-clef" class="t-summary" href="../../wiki/s-tw055-interview-clef.html">TW #55 — Interview with Clef (Catch 22, ex-Epinicion)</a></li><li><a data-slug="s-tw055-panning-debate" class="t-summary" href="../../wiki/s-tw055-panning-debate.html">TW #55–56 — Panning (GBlues) / Panning? Hello? (Trixter)</a></li><li><a data-slug="s-tw057-interview-catspaw" class="t-summary" href="../../wiki/s-tw057-interview-catspaw.html">TW #57 — Interview with Catspaw (Zinc)</a></li><li><a data-slug="s-tw058-the-finishing-touches" class="t-summary" href="../../wiki/s-tw058-the-finishing-touches.html">TW #58–59 — The Finishing Touches (Catspaw)</a></li><li><a data-slug="s-tw059-tracking-hints" class="t-summary" href="../../wiki/s-tw059-tracking-hints.html">TW #59 — Tracking Hints (Vivid)</a></li><li><a data-slug="s-tw006-naid-opinion-interviews" class="t-summary" href="../../wiki/s-tw006-naid-opinion-interviews.html">TW #6 — The NAID Music Compo: Opinion Interviews (Psibelius)</a></li><li><a data-slug="s-tw060-interview-fisherman" class="t-summary" href="../../wiki/s-tw060-interview-fisherman.html">TW #60 — Faces in the Crowd: fisherman (Zinc)</a></li><li><a data-slug="s-tw060-interview-rage" class="t-summary" href="../../wiki/s-tw060-interview-rage.html">TW #60 — Interview with Rage (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw062-interview-vegas" class="t-summary" href="../../wiki/s-tw062-interview-vegas.html">TW #62 — Interview with Vegas (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw063-interview-ryan-sprott" class="t-summary" href="../../wiki/s-tw063-interview-ryan-sprott.html">TW #63 — Interview with Ryan (Kleitus)</a></li><li><a data-slug="s-tw064-potted-tracking-history" class="t-summary" href="../../wiki/s-tw064-potted-tracking-history.html">TW #64 — Potted Tracking History (Ganja Man)</a></li><li><a data-slug="s-tw065-tracking-as-an-olympic-sport" class="t-summary" href="../../wiki/s-tw065-tracking-as-an-olympic-sport.html">TW #65–#66 — Tracking as an Olympic Sport, parts I–II (Blackwolf)</a></li><li><a data-slug="s-tw066-interview-liam-the-lemming" class="t-summary" href="../../wiki/s-tw066-interview-liam-the-lemming.html">TW #66 — Interview with Liam the Lemming (Kal Zakath)</a></li><li><a data-slug="s-tw066-sound-recording" class="t-summary" href="../../wiki/s-tw066-sound-recording.html">TW #66 — Sound Recording (Cowboy)</a></li><li><a data-slug="s-tw067-interview-u4ia" class="t-summary" href="../../wiki/s-tw067-interview-u4ia.html">TW #67 — Interview with U4IA (Mage)</a></li><li><a data-slug="s-tw007-interview-ryan-cramer" class="t-summary" href="../../wiki/s-tw007-interview-ryan-cramer.html">TW #7 — Interview with Ryan Cramer (Popcorn)</a></li><li><a data-slug="s-tw007-the-importance-of-music-theory" class="t-summary" href="../../wiki/s-tw007-the-importance-of-music-theory.html">TW #7 — The Importance of Music Theory (Future Assassin)</a></li><li><a data-slug="s-tw070-realism-debate" class="t-summary" href="../../wiki/s-tw070-realism-debate.html">TW #70–73 — the realism debate (#trax log, Behemoth, GBlues, Alan Robinson, Raphael, Sturm, brn, It-Alien, Purple Haze, Necros)</a></li><li><a data-slug="s-tw072-composing-whole-modules" class="t-summary" href="../../wiki/s-tw072-composing-whole-modules.html">TW #72 — Composing Whole Modules (Sir Nick / Deck Blasters)</a></li><li><a data-slug="s-tw074-motherboard-sampling" class="t-summary" href="../../wiki/s-tw074-motherboard-sampling.html">TW #74 — Motherboard Sampling (Spieg)</a></li><li><a data-slug="s-tw074-intro-to-musical-theory" class="t-summary" href="../../wiki/s-tw074-intro-to-musical-theory.html">TW #74–86 — Introduction to Musical Theory, vols 1–5 (Greg Heo)</a></li><li><a data-slug="s-tw075-it-percussion-tips" class="t-summary" href="../../wiki/s-tw075-it-percussion-tips.html">TW #75 — IT Percussion Tips (Zinc)</a></li><li><a data-slug="s-tw076-realism-in-mods" class="t-summary" href="../../wiki/s-tw076-realism-in-mods.html">TW #76 — Realism in MODs (Behemoth)</a></li><li><a data-slug="s-tw077-general-tracking-tips" class="t-summary" href="../../wiki/s-tw077-general-tracking-tips.html">TW #77 — General Tracking Tips (Generic Blues)</a></li><li><a data-slug="s-tw077-chip-off-the-block" class="t-summary" href="../../wiki/s-tw077-chip-off-the-block.html">TW #77–81 — A Chip Off the Block / Chiptune Seminar, parts 1–4 (The Modsquad)</a></li><li><a data-slug="s-tw008-interview-blaze-runner" class="t-summary" href="../../wiki/s-tw008-interview-blaze-runner.html">TW #8 — Interview with Blaze Runner (Populus)</a></li><li><a data-slug="s-tw080-trax-mass-interview" class="t-summary" href="../../wiki/s-tw080-trax-mass-interview.html">TW #80 — #trax Mass Interview (Zinc)</a></li><li><a data-slug="s-tw081-it-tip-of-the-week" class="t-summary" href="../../wiki/s-tw081-it-tip-of-the-week.html">TW #81–89 — Impulse Tracker Tip of the Week #1–8 (Pinion) and More Impulse Tracker Tips (Pulse)</a></li><li><a data-slug="s-tw084-perfect-samples-the-piano" class="t-summary" href="../../wiki/s-tw084-perfect-samples-the-piano.html">TW #84 — Perfect Samples: The Piano (Sklathill)</a></li><li><a data-slug="s-tw086-hexadecimal-101" class="t-summary" href="../../wiki/s-tw086-hexadecimal-101.html">TW #86 — Hexadecimal 101 (chinaski)</a></li><li><a data-slug="s-tw086-wrecking-samples-with-impulse-tracker" class="t-summary" href="../../wiki/s-tw086-wrecking-samples-with-impulse-tracker.html">TW #86 — Wrecking Samples with Impulse Tracker (Graham the Happy Scum)</a></li><li><a data-slug="s-tw087-interview-perisoft" class="t-summary" href="../../wiki/s-tw087-interview-perisoft.html">TW #87 — Interview with Perisoft (Pizza Head)</a></li><li><a data-slug="s-tw087-music-theory-a-modern-approach" class="t-summary" href="../../wiki/s-tw087-music-theory-a-modern-approach.html">TW #87–#97 — Music Theory: A Modern Approach (The Modsquad, seven parts)</a></li><li><a data-slug="s-tw009-interview-maelcum" class="t-summary" href="../../wiki/s-tw009-interview-maelcum.html">TW #9 — Interview with Maelcum (k8to)</a></li><li><a data-slug="s-tw009-samples-lameness-preconceptions" class="t-summary" href="../../wiki/s-tw009-samples-lameness-preconceptions.html">TW #9 — Samples, Lameness, Preconceptions, and Fluffy Bunnies (Necros)</a></li><li><a data-slug="s-tw090-interview-cosmic" class="t-summary" href="../../wiki/s-tw090-interview-cosmic.html">TW #90 — Interview with Cosmic/RR (Pizza Head)</a></li><li><a data-slug="s-tw094-stereo-samples-in-impulse-tracker" class="t-summary" href="../../wiki/s-tw094-stereo-samples-in-impulse-tracker.html">TW #94 — Stereo Samples with Impulse Tracker (Zinc)</a></li><li><a data-slug="s-tw096-studio-tracking-tips" class="t-summary" href="../../wiki/s-tw096-studio-tracking-tips.html">TW #96 — Studio Tracking Tips (Zinc)</a></li><li><a data-slug="s-tw098-impulse-tracker-investment" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-investment.html">TW #98 — Impulse Tracker Investment (Pulse)</a></li><li><a data-slug="s-tw098-impulse-tracker-midi" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-midi.html">TW #98 — Impulse Tracker MIDI (Airon)</a></li><li><a data-slug="s-tw099-why-tracking-is-the-perfect-artform" class="t-summary" href="../../wiki/s-tw099-why-tracking-is-the-perfect-artform.html">TW #99 — Why Tracking Is The Perfect Artform (anonymous)</a></li><li><a data-slug="s-ucapps-wavetable-sounds-tutorial-1" class="t-summary" href="../../wiki/s-ucapps-wavetable-sounds-tutorial-1.html">uCApps MIDIbox SID — Wavetable Sounds Tutorial #1 (Thorsten Klose)</a></li><li><a data-slug="s-vandalism63-matt-gray-interview" class="t-summary" href="../../wiki/s-vandalism63-matt-gray-interview.html">Vandalism News #63 — Interview with Matt Gray (Jazzcat, 2014)</a></li><li><a data-slug="s-vgmpf-chris-huelsbeck" class="t-summary" href="../../wiki/s-vgmpf-chris-huelsbeck.html">VGMPF wiki: Chris Hülsbeck</a></li><li><a data-slug="s-vgmpf-maniacs-of-noise" class="t-summary" href="../../wiki/s-vgmpf-maniacs-of-noise.html">VGMPF wiki: Maniacs of Noise, Jeroen Tel, Charles Deenen (+ the C64-Wiki roster)</a></li><li><a data-slug="s-vgmpf-matt-gray" class="t-summary" href="../../wiki/s-vgmpf-matt-gray.html">VGMPF wiki: Matt Gray</a></li><li><a data-slug="s-vgmpf-soundmonitor-tfmx" class="t-summary" href="../../wiki/s-vgmpf-soundmonitor-tfmx.html">VGMPF wiki: Soundmonitor, TFMX Editor (C64) and The Great Giana Sisters (C64)</a></li><li><a data-slug="s-walleij-sid-player-routine" class="t-summary" href="../../wiki/s-walleij-sid-player-routine.html">Walleij — A SID player routine (MIDI-driven player design, note tables, hard restart)</a></li><li><a data-slug="s-wikipedia-chris-huelsbeck" class="t-summary" href="../../wiki/s-wikipedia-chris-huelsbeck.html">Wikipedia (en): Chris Huelsbeck</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by tag / platform</a></li><li><a href="../../inbox/traxweekly-toc.html">TraxWeekly articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › lsdj</div>
+<h1>LSDj_9_2_6.txt</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#lsdj">LSDj manual</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://www.littlesounddj.com/lsd/latest/documentation/LSDj_9_2_6.pdf">https://www.littlesounddj.com/lsd/latest/documentation/LSDj_9_2_6.pdf</a> (Johan Kotlinski, 2021-05-09, v9.2.6)</div><div class="mrow"><span class="mk">file</span> <code>raw/lsdj/LSDj_9_2_6.txt</code> · 1626 lines · 65 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/lsdj/LSDj_9_2_6.txt" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-lsdj-manual.html">Little Sound Dj v9.2.6 Operating Manual (summary)</a></div></div></header>
+<pre class="raw"><span id="L1" class="l"> </span>
+<span id="L2" class="l"> </span>
+<span id="L3" class="l">===== page 1 =====</span>
+<span id="L4" class="l">Little Sound Dj v9.2.6</span>
+<span id="L5" class="l">Operating Manual</span>
+<span id="L6" class="l">Copyright © Johan Kotlinski</span>
+<span id="L7" class="l">May 9, 2021</span>
+<span id="L8" class="l"> </span>
+<span id="L9" class="l">===== page 2 =====</span>
+<span id="L10" class="l">2</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">===== page 3 =====</span>
+<span id="L13" class="l">Hi!</span>
+<span id="L14" class="l">First of all, thanks for trying out Little Sound Dj!</span>
+<span id="L15" class="l">Years of effort has been put into making this program as powerful and</span>
+<span id="L16" class="l">fast-worked as possible. I hope you will enjoy.</span>
+<span id="L17" class="l">If you don’t have previous experience from similar “tracker”-like music</span>
+<span id="L18" class="l">editors, the amount of new concepts may seem a bit overwhelming at first. Try</span>
+<span id="L19" class="l">not to stress about it. Learn step by step, keep it fun and progress at your own</span>
+<span id="L20" class="l">pace. Within days, you should know enough about the program to make your</span>
+<span id="L21" class="l">own first songs.</span>
+<span id="L22" class="l">About the structure of this manual: Chapter 1 helps you get started with the</span>
+<span id="L23" class="l">basics, while chapter 2 gives a high-level walkthrough of the entire program.</span>
+<span id="L24" class="l">These first two chapters should be enough to successfully use Little Sound Dj.</span>
+<span id="L25" class="l">Remaining chapters are advanced topics or reference material, and can be read</span>
+<span id="L26" class="l">at your own leisure, or skipped entirely if you so wish.</span>
+<span id="L27" class="l">There is a lot of information that will not fit into a manual like this. For</span>
+<span id="L28" class="l">links to further resources, check out the user-maintained Wiki site at https:</span>
+<span id="L29" class="l">//wiki.littlesounddj.com - it contains material like tutorials, tips and</span>
+<span id="L30" class="l">tricks, and hardware related DIY projects. Also, the Facebook group at https:</span>
+<span id="L31" class="l">//www.facebook.com/groups/LittleSoundDJ/ is useful for getting in</span>
+<span id="L32" class="l">touch with other users.</span>
+<span id="L33" class="l">If you have questions, ideas or bug reports related to Little Sound Dj or this</span>
+<span id="L34" class="l">manual, I would be delighted if you reach out by e-mailing info@littlesounddj.com.</span>
+<span id="L35" class="l">Happy tracking!</span>
+<span id="L36" class="l">/Johan</span>
+<span id="L37" class="l">3</span>
+<span id="L38" class="l"> </span>
+<span id="L39" class="l">===== page 4 =====</span>
+<span id="L40" class="l">4</span>
+<span id="L41" class="l"> </span>
+<span id="L42" class="l">===== page 5 =====</span>
+<span id="L43" class="l">Contents</span>
+<span id="L44" class="l">1 Getting Started 9</span>
+<span id="L45" class="l">1.1 1.2 1.3 1.4 1.5 1.6 1.7 Game Boy Sound . . . . . . . . . . . . . . . . . . . . . . . . . . . 9</span>
+<span id="L46" class="l">Key Presses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9</span>
+<span id="L47" class="l">Navigating the Program . . . . . . . . . . . . . . . . . . . . . . . 10</span>
+<span id="L48" class="l">Online Help . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11</span>
+<span id="L49" class="l">Making Your First Sounds . . . . . . . . . . . . . . . . . . . . . . 11</span>
+<span id="L50" class="l">Hexadecimal Number System . . . . . . . . . . . . . . . . . . . . 13</span>
+<span id="L51" class="l">Initial Troubleshooting . . . . . . . . . . . . . . . . . . . . . . . . 14</span>
+<span id="L52" class="l">2 The Screens 15</span>
+<span id="L53" class="l">2.1 2.2 2.3 2.4 2.5 2.6 Screen Map . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Starting and Stopping . . . . . . . . . . . . . . . . . . . . . . . . Song Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Chain Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Phrase Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Instrument Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . 2.6.1 Instrument Parameters . . . . . . . . . . . . . . . . . . . . 2.6.2 Pulse Instrument Parameters . . . . . . . . . . . . . . . . 2.6.3 Wave Instrument Parameters . . . . . . . . . . . . . . . . 2.6.4 Kit Instrument Parameters . . . . . . . . . . . . . . . . . 2.6.5 Noise Instrument Parameters . . . . . . . . . . . . . . . . 2.6.6 Speech Instrument . . . . . . . . . . . . . . . . . . . . . . 2.7 Table Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2.7.1 Envelope Example . . . . . . . . . . . . . . . . . . . . . . 2.7.2 Arpeggio Example . . . . . . . . . . . . . . . . . . . . . . 2.8 2.9 Groove Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Synth Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15</span>
+<span id="L54" class="l">16</span>
+<span id="L55" class="l">16</span>
+<span id="L56" class="l">17</span>
+<span id="L57" class="l">17</span>
+<span id="L58" class="l">18</span>
+<span id="L59" class="l">19</span>
+<span id="L60" class="l">20</span>
+<span id="L61" class="l">21</span>
+<span id="L62" class="l">22</span>
+<span id="L63" class="l">24</span>
+<span id="L64" class="l">24</span>
+<span id="L65" class="l">26</span>
+<span id="L66" class="l">26</span>
+<span id="L67" class="l">26</span>
+<span id="L68" class="l">26</span>
+<span id="L69" class="l">29</span>
+<span id="L70" class="l">5</span>
+<span id="L71" class="l"> </span>
+<span id="L72" class="l">===== page 6 =====</span>
+<span id="L73" class="l">6 CONTENTS</span>
+<span id="L74" class="l">2.9.1 Fixed Synth Settings . . . . . . . . . . . . . . . . . . . . . 2.9.2 Variable Synth Settings . . . . . . . . . . . . . . . . . . . . 2.10 Wave Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2.11 Project Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2.11.1 Total Memory Reset . . . . . . . . . . . . . . . . . . . . . 2.12 File Screen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2.12.1 Song List . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2.13 Border Information . . . . . . . . . . . . . . . . . . . . . . . . . . 30</span>
+<span id="L75" class="l">30</span>
+<span id="L76" class="l">30</span>
+<span id="L77" class="l">33</span>
+<span id="L78" class="l">34</span>
+<span id="L79" class="l">34</span>
+<span id="L80" class="l">36</span>
+<span id="L81" class="l">36</span>
+<span id="L82" class="l">3 Advanced Techniques 39</span>
+<span id="L83" class="l">3.1 3.2 Copy and Paste . . . . . . . . . . . . . . . . . . . . . . . . . . . . Cloning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3.2.1 Deep vs. Slim-Cloning . . . . . . . . . . . . . . . . . . . . 3.3 3.4 3.5 3.6 The Importance of Backups . . . . . . . . . . . . . . . . . . . . . Muting, Soloing and Panning . . . . . . . . . . . . . . . . . . . . Live Mode . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Synthetic Drum Instruments . . . . . . . . . . . . . . . . . . . . . 3.6.1 Pulse Bass Drum . . . . . . . . . . . . . . . . . . . . . . . 3.6.2 Snare Drum . . . . . . . . . . . . . . . . . . . . . . . . . . 3.6.3 Hi-Hats and Cymbals . . . . . . . . . . . . . . . . . . . . 3.6.4 Wave Bass Drum . . . . . . . . . . . . . . . . . . . . . . . 39</span>
+<span id="L84" class="l">39</span>
+<span id="L85" class="l">40</span>
+<span id="L86" class="l">40</span>
+<span id="L87" class="l">40</span>
+<span id="L88" class="l">41</span>
+<span id="L89" class="l">41</span>
+<span id="L90" class="l">41</span>
+<span id="L91" class="l">43</span>
+<span id="L92" class="l">43</span>
+<span id="L93" class="l">43</span>
+<span id="L94" class="l">4 Commands 45</span>
+<span id="L95" class="l">4.1 4.2 A: Table Start/Stop . . . . . . . . . . . . . . . . . . . . . . . . . . B: MayBe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.2.1 In Phrases (MayBe Play Note) . . . . . . . . . . . . . . . . 4.2.2 In Tables (MayBe Hop) . . . . . . . . . . . . . . . . . . . . 4.3 4.4 4.5 C: Chord . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . D: Delay . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . E: Amplitude Envelope . . . . . . . . . . . . . . . . . . . . . . . . 4.5.1 For Pulse and Noise Instruments . . . . . . . . . . . . . . 4.5.2 For Wave Instruments . . . . . . . . . . . . . . . . . . . . 4.6 F: Wave Frame/Finetune . . . . . . . . . . . . . . . . . . . . . . . 4.6.1 For Pulse Instruments: . . . . . . . . . . . . . . . . . . . . 4.6.2 For Kit Instruments: . . . . . . . . . . . . . . . . . . . . . 4.6.3 For Wave Instruments: . . . . . . . . . . . . . . . . . . . . 4.7 4.8 G: Groove Select . . . . . . . . . . . . . . . . . . . . . . . . . . . . H: Hop . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.8.1 H in Phrases . . . . . . . . . . . . . . . . . . . . . . . . . . 45</span>
+<span id="L96" class="l">46</span>
+<span id="L97" class="l">46</span>
+<span id="L98" class="l">46</span>
+<span id="L99" class="l">46</span>
+<span id="L100" class="l">47</span>
+<span id="L101" class="l">47</span>
+<span id="L102" class="l">47</span>
+<span id="L103" class="l">47</span>
+<span id="L104" class="l">47</span>
+<span id="L105" class="l">47</span>
+<span id="L106" class="l">47</span>
+<span id="L107" class="l">47</span>
+<span id="L108" class="l">48</span>
+<span id="L109" class="l">48</span>
+<span id="L110" class="l">48</span>
+<span id="L111" class="l"> </span>
+<span id="L112" class="l">===== page 7 =====</span>
+<span id="L113" class="l">CONTENTS 7</span>
+<span id="L114" class="l">4.8.2 H in Tables . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.9 K: Kill Note . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.10 L: Slide . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.10.1 L in Tables . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.11 M: Master Volume . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.12 O: Set Output . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.13 P: Pitch Bend . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.13.1 For Pulse, Wave and Kit Instruments: . . . . . . . . . . . 51</span>
+<span id="L115" class="l">4.13.2 For Noise Instruments: . . . . . . . . . . . . . . . . . . . . 4.14 R: Retrig/Resync . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.15 S: Sweep/Shape . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.15.1 Pulse Instruments . . . . . . . . . . . . . . . . . . . . . . 4.15.2 Kit Instruments . . . . . . . . . . . . . . . . . . . . . . . . 4.15.3 Noise Instruments . . . . . . . . . . . . . . . . . . . . . . 4.16 T: Tempo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.17 V: Vibrato . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.18 W: Wave . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4.18.1 For Pulse Instruments: . . . . . . . . . . . . . . . . . . . . 4.18.2 For Wave Instruments: . . . . . . . . . . . . . . . . . . . . 4.19 Z: RandomiZe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49</span>
+<span id="L116" class="l">49</span>
+<span id="L117" class="l">49</span>
+<span id="L118" class="l">50</span>
+<span id="L119" class="l">50</span>
+<span id="L120" class="l">51</span>
+<span id="L121" class="l">51</span>
+<span id="L122" class="l">51</span>
+<span id="L123" class="l">51</span>
+<span id="L124" class="l">52</span>
+<span id="L125" class="l">52</span>
+<span id="L126" class="l">52</span>
+<span id="L127" class="l">52</span>
+<span id="L128" class="l">53</span>
+<span id="L129" class="l">53</span>
+<span id="L130" class="l">53</span>
+<span id="L131" class="l">53</span>
+<span id="L132" class="l">54</span>
+<span id="L133" class="l">54</span>
+<span id="L134" class="l">5 Synchronization 55</span>
+<span id="L135" class="l">5.1 Game Boy to Game Boy Sync . . . . . . . . . . . . . . . . . . . . 5.1.1 Activating LSDj Sync . . . . . . . . . . . . . . . . . . . . . 5.1.2 Song Play . . . . . . . . . . . . . . . . . . . . . . . . . . . 5.1.3 Live Play . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5.1.4 Clipboard Transfer . . . . . . . . . . . . . . . . . . . . . . 5.1.5 Switching Lead while Playing . . . . . . . . . . . . . . . . 5.2 5.3 5.4 5.5 5.6 MIDI Sync . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Analog In . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Analog Out . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Troubleshooting Cables . . . . . . . . . . . . . . . . . . . . . . . . Keyboard Control . . . . . . . . . . . . . . . . . . . . . . . . . . . 5.6.1 Keyboard Note Layout . . . . . . . . . . . . . . . . . . . . 55</span>
+<span id="L136" class="l">55</span>
+<span id="L137" class="l">55</span>
+<span id="L138" class="l">56</span>
+<span id="L139" class="l">56</span>
+<span id="L140" class="l">56</span>
+<span id="L141" class="l">56</span>
+<span id="L142" class="l">57</span>
+<span id="L143" class="l">58</span>
+<span id="L144" class="l">58</span>
+<span id="L145" class="l">58</span>
+<span id="L146" class="l">59</span>
+<span id="L147" class="l">A Sample Kits 61</span>
+<span id="L148" class="l">B Allophones 69</span>
+<span id="L149" class="l"> </span>
+<span id="L150" class="l">===== page 8 =====</span>
+<span id="L151" class="l">8 CONTENTS</span>
+<span id="L152" class="l">C SRAM Memory Map 73</span>
+<span id="L153" class="l">C.1 Bank Layouts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . C.1.1 Bank 0 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . C.1.2 Bank 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . C.1.3 Bank 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . C.1.4 Bank 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . C.2 Instrument Layouts . . . . . . . . . . . . . . . . . . . . . . . . . . 73</span>
+<span id="L154" class="l">73</span>
+<span id="L155" class="l">74</span>
+<span id="L156" class="l">75</span>
+<span id="L157" class="l">75</span>
+<span id="L158" class="l">76</span>
+<span id="L159" class="l"> </span>
+<span id="L160" class="l">===== page 9 =====</span>
+<span id="L161" class="l">Chapter 1</span>
+<span id="L162" class="l">Getting Started</span>
+<span id="L163" class="l">1.1 Game Boy Sound</span>
+<span id="L164" class="l">The Game Boy sound chip has four channels, each with 4-bit resolution.</span>
+<span id="L165" class="l">Pulse Channel 1 Square wave with envelope and sweep functions.</span>
+<span id="L166" class="l">Pulse Channel 2 Square wave with envelope function.</span>
+<span id="L167" class="l">Wave Channel Soft synthesizer, sample playback and speech synthesis.</span>
+<span id="L168" class="l">Noise Channel Noise with envelope and shape functions.</span>
+<span id="L169" class="l">1.2 Key Presses</span>
+<span id="L170" class="l">In this documentation, key presses are marked up in this fashion:</span>
+<span id="L171" class="l">A A button</span>
+<span id="L172" class="l">B B button</span>
+<span id="L173" class="l">START start button</span>
+<span id="L174" class="l">SELECT select button</span>
+<span id="L175" class="l">CURSOR any direction of the plus-shaped D-pad</span>
+<span id="L176" class="l">9</span>
+<span id="L177" class="l"> </span>
+<span id="L178" class="l">===== page 10 =====</span>
+<span id="L179" class="l">10 CHAPTER 1. GETTING STARTED</span>
+<span id="L180" class="l">LEFT D-pad left</span>
+<span id="L181" class="l">RIGHT D-pad right</span>
+<span id="L182" class="l">UP D-pad up</span>
+<span id="L183" class="l">DOWN D-pad down</span>
+<span id="L184" class="l">LEFT/RIGHT D-pad left or right</span>
+<span id="L185" class="l">UP/DOWN D-pad up or down</span>
+<span id="L186" class="l">SELECT+A pressing A while holding SELECT</span>
+<span id="L187" class="l">SELECT+(B,B) pressing B twice, while holding SELECT</span>
+<span id="L188" class="l">1.3 Navigating the Program</span>
+<span id="L189" class="l">Figure 1.1: Song Screen</span>
+<span id="L190" class="l">Little Sound Dj starts up in the song screen. The four columns PU1, PU2,</span>
+<span id="L191" class="l">WAV and NOI represent the four Game Boy sound channels. There are two</span>
+<span id="L192" class="l">pulse wave channels, one custom wave channel and one noise channel. Use the</span>
+<span id="L193" class="l">D-pad to move the cursor from channel to channel.</span>
+<span id="L194" class="l">Little Sound Dj has nine screens, arranged in a map shown in the bottom</span>
+<span id="L195" class="l">right of the screen (figure 1.2).</span>
+<span id="L196" class="l">The most useful screens are placed in the middle row, ordered by level</span>
+<span id="L197" class="l">of detail. The song, chain and phrase screens are used for sequencing, and</span>
+<span id="L198" class="l"> </span>
+<span id="L199" class="l">===== page 11 =====</span>
+<span id="L200" class="l">1.4. ONLINE HELP 11</span>
+<span id="L201" class="l">Figure 1.2: Screen Map</span>
+<span id="L202" class="l">work together in a tree-structure fashion. The song contains chains, each chain</span>
+<span id="L203" class="l">contains phrases, and each phrase contains notes. They are followed by the</span>
+<span id="L204" class="l">instrument and table screens, which are used to create sounds.</span>
+<span id="L205" class="l">To move between the screens, press SELECT+CURSOR.</span>
+<span id="L206" class="l">1.4 Online Help</span>
+<span id="L207" class="l">Figure 1.3: Project Screen Help</span>
+<span id="L208" class="l">To find the in-built help, move to project screen (above song screen) and tap</span>
+<span id="L209" class="l">A on HELP. The help screen lists button presses for the different screens, as well</span>
+<span id="L210" class="l">as a command list.</span>
+<span id="L211" class="l">1.5 Making Your First Sounds</span>
+<span id="L212" class="l">Navigate to the song screen, and move the cursor to the PU1 column. Tap</span>
+<span id="L213" class="l">the A button, and a new chain “00” will appear. Edit the chain by pressing</span>
+<span id="L214" class="l"> </span>
+<span id="L215" class="l">===== page 12 =====</span>
+<span id="L216" class="l">12 CHAPTER 1. GETTING STARTED</span>
+<span id="L217" class="l">SELECT+RIGHT to enter the chain screen. There, tap A to insert a new phrase,</span>
+<span id="L218" class="l">then press SELECT+RIGHT to go to the phrase screen.</span>
+<span id="L219" class="l">Figure 1.4: Phrase Screen</span>
+<span id="L220" class="l">In the phrase screen, you can enter notes to be played back. Move the cursor</span>
+<span id="L221" class="l">to the note column and press A to enter a note. The text C-2 will appear: C</span>
+<span id="L222" class="l">being the note, and 2 the octave. Press START to play the phrase. Notice how the</span>
+<span id="L223" class="l">phrase is played back from top to bottom. You can change the note by holding</span>
+<span id="L224" class="l">A and pressing the D-pad. A+LEFT/RIGHT changes the note, and A+UP/DOWN</span>
+<span id="L225" class="l">changes octave.</span>
+<span id="L226" class="l">Now, try to move the cursor and insert notes on other steps. To delete a note,</span>
+<span id="L227" class="l">press A while holding B. When you have finished listening, press START again</span>
+<span id="L228" class="l">to stop the phrase.</span>
+<span id="L229" class="l">The clean pulse sound might get dull after while. Let’s move on to the</span>
+<span id="L230" class="l">instrument screen by pressing SELECT+RIGHT.</span>
+<span id="L231" class="l">In the instrument screen, we can make the sound a little bit more interesting.</span>
+<span id="L232" class="l">Try changing the ENV. and WAVE fields by moving the cursor there and pressing</span>
+<span id="L233" class="l">A+LEFT/RIGHT. As an example, changing the ENV. setting to 83 should make</span>
+<span id="L234" class="l">the sound shorter. Press START again to hear the changes as you make them!</span>
+<span id="L235" class="l">The TYPE field sets the instrument type. Instrument types are specific for</span>
+<span id="L236" class="l">channels – PULSE instruments should only be played back in the pulse channels,</span>
+<span id="L237" class="l">WAVE and KIT instruments in the wave channel, and NOISE instruments in the</span>
+<span id="L238" class="l">noise channel.</span>
+<span id="L239" class="l">Let’s try out the sampled drum kits. Now, we have to change channel to</span>
+<span id="L240" class="l">the wave channel. Go back to the song screen, move the cursor over to the</span>
+<span id="L241" class="l">wave channel, and create a new chain and a new phrase by tapping A. Enter</span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l">===== page 13 =====</span>
+<span id="L244" class="l">1.6. HEXADECIMAL NUMBER SYSTEM 13</span>
+<span id="L245" class="l">Figure 1.5: Instrument Screen</span>
+<span id="L246" class="l">a note by tapping A, then SELECT+RIGHT to edit the instrument. Change the</span>
+<span id="L247" class="l">instrument type to KIT by pressing A+RIGHT on the type field, then go back to</span>
+<span id="L248" class="l">the phrase screen. Now, you should be able to enter drum sounds the same way</span>
+<span id="L249" class="l">you entered notes before.</span>
+<span id="L250" class="l">To create new chains and phrases, move the cursor to an empty step in song</span>
+<span id="L251" class="l">or chain screen and tap A twice.</span>
+<span id="L252" class="l">1.6 Hexadecimal Number System</span>
+<span id="L253" class="l">Little Sound Dj uses hexadecimal numbers. While the usual decimal number</span>
+<span id="L254" class="l">system uses ten digits, 0-9, hexadecimal has 16 unique symbols: the digits 0 to</span>
+<span id="L255" class="l">9, followed by the letters A to F. As an example, let’s print a table of numbers –</span>
+<span id="L256" class="l">first with decimal digits, then with hexadecimal digits. . .</span>
+<span id="L257" class="l">Decimal 1 2 3 4 5 6 7 8 9 10</span>
+<span id="L258" class="l">Hexadecimal Decimal 11 1 2 12 13 3 4 14 5 6 15 16 7 8 17 18 9 A</span>
+<span id="L259" class="l">19 20</span>
+<span id="L260" class="l">Hexadecimal B C D E F 10 11 12 13 14</span>
+<span id="L261" class="l">Note that the hexadecimal and decimal values are really equal; just the</span>
+<span id="L262" class="l">representations differ. The main reason to use hexadecimal is to save screen</span>
+<span id="L263" class="l">space; with hexadecimal numbers, it is possible to represent every byte value</span>
+<span id="L264" class="l">using no more than two digits. (The byte value range is 0 to 255 – that is, 0 to</span>
+<span id="L265" class="l">FF.)</span>
+<span id="L266" class="l"> </span>
+<span id="L267" class="l">===== page 14 =====</span>
+<span id="L268" class="l">14 CHAPTER 1. GETTING STARTED</span>
+<span id="L269" class="l">Representing negative numbers with two digits only can be tricky. In Little</span>
+<span id="L270" class="l">Sound Dj, the numbers are wrapping. That means, when subtracting one from</span>
+<span id="L271" class="l">the smallest possible number (0), it will jump to the highest possible value (FF).</span>
+<span id="L272" class="l">So FF can represent -1 as well as 255, depending on the situation.</span>
+<span id="L273" class="l">If this does not make sense – please don’t worry too much – it will become</span>
+<span id="L274" class="l">clear as you spend time with the program.</span>
+<span id="L275" class="l">1.7 Initial Troubleshooting</span>
+<span id="L276" class="l">Does your cartridge not start, crash, or act strange in other ways? Here are some</span>
+<span id="L277" class="l">things to try.</span>
+<span id="L278" class="l">• To avoid losing songs, always use fresh batteries. Replace as soon as the</span>
+<span id="L279" class="l">red light on your Game Boy gets faint, or the screen gets dim.</span>
+<span id="L280" class="l">• Clean cartridge pins using a cotton swab and alcohol.</span>
+<span id="L281" class="l">• Re-insert the cartridge a couple of times to remove oxide.</span>
+<span id="L282" class="l">• Make sure that the cartridge is firmly plugged in. Sometimes it can help</span>
+<span id="L283" class="l">to put a piece of tape on the cartridge to give it a snug fit.</span>
+<span id="L284" class="l">• Do a full reset of the cartridge memory. This is done by pressing SE-</span>
+<span id="L285" class="l">LECT+A+B on the LOAD/SAVE FILE button in project screen.</span>
+<span id="L286" class="l">• Certain Game Boy Advance/Nintendo DS cartridges do not work with</span>
+<span id="L287" class="l">Little Sound Dj. If you have problems with such a cartridge, try one of the</span>
+<span id="L288" class="l">Little Sound Dj builds named “Goomba”.</span>
+<span id="L289" class="l">• Search for help on the Little Sound Dj Wiki (https://wiki.littlesounddj.</span>
+<span id="L290" class="l">com) or ask in the Facebook group.</span>
+<span id="L291" class="l"> </span>
+<span id="L292" class="l">===== page 15 =====</span>
+<span id="L293" class="l">Chapter 2</span>
+<span id="L294" class="l">The Screens</span>
+<span id="L295" class="l">Little Sound Dj has nine screens, laid out in a 5 × 3 screen map.</span>
+<span id="L296" class="l">2.1 Screen Map</span>
+<span id="L297" class="l">Project Synth Wave</span>
+<span id="L298" class="l">Song Chain Phrase Instr. Table</span>
+<span id="L299" class="l">Groove</span>
+<span id="L300" class="l">The song, chain and phrase screens are used for composing music. The</span>
+<span id="L301" class="l">wave, synth, instrument and table screens are used for making sounds. Project</span>
+<span id="L302" class="l">screen contains project settings, and groove screen controls sequencer timing. 1</span>
+<span id="L303" class="l">Most time is usually spent in the middle row, as that is where the composing</span>
+<span id="L304" class="l">is done.</span>
+<span id="L305" class="l">1There are also three hidden screens, not shown on the map: The file, word and help screens. We</span>
+<span id="L306" class="l">will get back to these later.</span>
+<span id="L307" class="l">15</span>
+<span id="L308" class="l"> </span>
+<span id="L309" class="l">===== page 16 =====</span>
+<span id="L310" class="l">16 CHAPTER 2. THE SCREENS</span>
+<span id="L311" class="l">Move between the screens using SELECT+CURSOR. Synth and wave screens</span>
+<span id="L312" class="l">are overlaid; switch between them by pressing SELECT+RIGHT.</span>
+<span id="L313" class="l">2.2 Starting and Stopping</span>
+<span id="L314" class="l">When pressing START in the song screen, Little Sound Dj plays all four channels.</span>
+<span id="L315" class="l">When pressing START in other screens, Little Sound Dj plays the channel that is</span>
+<span id="L316" class="l">being edited. To start all four channels from some other screen than the song</span>
+<span id="L317" class="l">screen, press SELECT+START.</span>
+<span id="L318" class="l">2.3 Song Screen</span>
+<span id="L319" class="l">Figure 2.1: Song Screen</span>
+<span id="L320" class="l">The song screen is the highest level of the sequencer. This is where songs are</span>
+<span id="L321" class="l">arranged. It has four columns, one for each channel. The columns contain lists</span>
+<span id="L322" class="l">of chains to be played top-down.</span>
+<span id="L323" class="l">A list of button presses can be found in the help screen.</span>
+<span id="L324" class="l">TIP!</span>
+<span id="L325" class="l">• Press B+A on an empty step to pull up down-below chains.</span>
+<span id="L326" class="l">• To quickly jump between rows, mark them with B,B,B then jump with B+UP/DOWN.</span>
+<span id="L327" class="l"> </span>
+<span id="L328" class="l">===== page 17 =====</span>
+<span id="L329" class="l">2.4. CHAIN SCREEN 17</span>
+<span id="L330" class="l">2.4 Chain Screen</span>
+<span id="L331" class="l">A chain holds a list of phrases to be played back. It can represent for example a</span>
+<span id="L332" class="l">melody or a bass line. Each phrase has an optional transpose.</span>
+<span id="L333" class="l">Chains can be reused freely between channels. It is particularly useful to</span>
+<span id="L334" class="l">play a chain in both pulse channels.</span>
+<span id="L335" class="l">A list of button presses can be found in the help screen.</span>
+<span id="L336" class="l">Figure 2.2: This chain plays phrase 3 transposed by 5 semitones, followed by</span>
+<span id="L337" class="l">phrases 4-6 without transpose.</span>
+<span id="L338" class="l">2.5 Phrase Screen</span>
+<span id="L339" class="l">The phrase screen is where you enter notes. It has four columns: note, instru-</span>
+<span id="L340" class="l">ment, command and command value.</span>
+<span id="L341" class="l">Phrases are shared between channels; that is, any phrase may be played back</span>
+<span id="L342" class="l">on any channel. A phrase might however sound very different depending on</span>
+<span id="L343" class="l">which channel it is played back on. As an example, if a phrase plays a melody</span>
+<span id="L344" class="l">using a pulse instrument, it will probably sound good in the pulse channels but</span>
+<span id="L345" class="l">strange in the other channels.</span>
+<span id="L346" class="l">The note column looks different depending on instrument. Usually it shows</span>
+<span id="L347" class="l">note and octave, but instruments that play back samples (KIT, SPEECH) show</span>
+<span id="L348" class="l">sample names instead. Noise instruments show either a byte value (for 15-bit</span>
+<span id="L349" class="l">noise) or note and octave (for 7-bit noise).</span>
+<span id="L350" class="l">The instrument column selects instrument. Press SELECT+RIGHT to edit an</span>
+<span id="L351" class="l">instrument in the instrument screen.</span>
+<span id="L352" class="l"> </span>
+<span id="L353" class="l">===== page 18 =====</span>
+<span id="L354" class="l">18 CHAPTER 2. THE SCREENS</span>
+<span id="L355" class="l">Figure 2.3: Phrase Screen</span>
+<span id="L356" class="l">The command column is used to add commands. Each command has a</span>
+<span id="L357" class="l">special functionality. For example, the H command hops to next phrase. Tap</span>
+<span id="L358" class="l">A,A on any command for quick-help on what it does.</span>
+<span id="L359" class="l">TIP!</span>
+<span id="L360" class="l">• To change note without retrig, cut the instrument with B+A.</span>
+<span id="L361" class="l">• Mute kit note columns by pressing A+RIGHT until OFF appears. (Only works</span>
+<span id="L362" class="l">for kits with fewer than 15 samples.)</span>
+<span id="L363" class="l">2.6 Instrument Screen</span>
+<span id="L364" class="l">There are five instrument types:</span>
+<span id="L365" class="l">PULSE Makes pulse waves. Used in pulse channels 1 and 2.</span>
+<span id="L366" class="l">WAVE Plays waves from the synth and wave screens. Used in the wave channel.</span>
+<span id="L367" class="l">KIT Plays samples from ROM. Used in the wave channel.</span>
+<span id="L368" class="l">NOISE Makes pitched 7-bit or 15-bit noise. Used in the noise channel.</span>
+<span id="L369" class="l">SPEECH Instrument 40 is for speech and is used in the wave channel.</span>
+<span id="L370" class="l"> </span>
+<span id="L371" class="l">===== page 19 =====</span>
+<span id="L372" class="l">2.6. INSTRUMENT SCREEN 19</span>
+<span id="L373" class="l">Figure 2.4: Instrument Screen</span>
+<span id="L374" class="l">Change instrument type by pressing A+CURSOR on the TYPE field.</span>
+<span id="L375" class="l">Instruments don’t automatically play in a matching channel. You have to</span>
+<span id="L376" class="l">make sure the instrument type matches the channel you are using. For example,</span>
+<span id="L377" class="l">to use the kit instrument, first make sure that you are in the wave channel.</span>
+<span id="L378" class="l">2.6.1 Instrument Parameters</span>
+<span id="L379" class="l">These parameters are used in most instrument types:</span>
+<span id="L380" class="l">NAME Tap A to name the instrument. Useful for keeping instruments organized.</span>
+<span id="L381" class="l">When selecting instrument in phrase screen, this name is shown in the</span>
+<span id="L382" class="l">border.</span>
+<span id="L383" class="l">TYPE Instrument type.</span>
+<span id="L384" class="l">LENGTH Sound length.</span>
+<span id="L385" class="l">OUTPUT Send the sound to left/right/both/none speakers. (Use the head-</span>
+<span id="L386" class="l">phone output to hear the difference!)</span>
+<span id="L387" class="l">PITCH Controls the behavior of P, L and V commands. A+U/D switches pitch</span>
+<span id="L388" class="l">update speed: FAST updates pitch at 360 Hz; TICK updates pitch every tick;</span>
+<span id="L389" class="l">STEP is like FAST except that P does pitch change instead of pitch bend;</span>
+<span id="L390" class="l">DRUM is like FAST with logarithmic fall-off, useful for P kicks. A+L/R</span>
+<span id="L391" class="l">changes vibrato shape between downwards triangle, saw and square, and</span>
+<span id="L392" class="l">upwards triangle, saw and square.</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l">===== page 20 =====</span>
+<span id="L395" class="l">20 CHAPTER 2. THE SCREENS</span>
+<span id="L396" class="l">TRANSP. When ON, the pitch may be affected by project and chain transposes.</span>
+<span id="L397" class="l">CMD/RATE Slows down C and R commands. Also affects P and V commands</span>
+<span id="L398" class="l">when PITCH is set to TICK. 0=fastest, F=slowest.</span>
+<span id="L399" class="l">TABLE Selects a table to run when playing notes. To edit the table, press SE-</span>
+<span id="L400" class="l">LECT+RIGHT. To create a new table, press A,A. To clone the table, press</span>
+<span id="L401" class="l">SELECT+(B,A). Changing TICK to STEP makes Little Sound Dj step through</span>
+<span id="L402" class="l">the table, advancing one step every time the instrument is triggered.</span>
+<span id="L403" class="l">TIP!</span>
+<span id="L404" class="l">• In the instrument screen, tap A,A on any parameter for quick-help on what it</span>
+<span id="L405" class="l">does.</span>
+<span id="L406" class="l">2.6.2 Pulse Instrument Parameters</span>
+<span id="L407" class="l">Figure 2.5: Pulse Instrument Screen</span>
+<span id="L408" class="l">ENV. Three amplitude envelope control values. For each value, first digit sets</span>
+<span id="L409" class="l">amplitude, and second digit sets the speed to rise or fall to the next</span>
+<span id="L410" class="l">amplitude. Speed 1 is fastest, F is slowest, 0 means hold. As an example,</span>
+<span id="L411" class="l">ENV. 32/AD/10 creates an envelope with fast attack from amplitude 3 to</span>
+<span id="L412" class="l">A, slow decay to amplitude 1, then infinite sustain, as shown in figure 2.6.</span>
+<span id="L413" class="l"> </span>
+<span id="L414" class="l">===== page 21 =====</span>
+<span id="L415" class="l">2.6. INSTRUMENT SCREEN 21</span>
+<span id="L416" class="l">WAVE Wave type.</span>
+<span id="L417" class="l">SWEEP Frequency sweep, useful for bass drum and percussion. The first digit</span>
+<span id="L418" class="l">sets time, the second sets pitch increase/decrease. Only works on the first</span>
+<span id="L419" class="l">pulse channel.</span>
+<span id="L420" class="l">Amplitude</span>
+<span id="L421" class="l">Amplitude=A</span>
+<span id="L422" class="l">Speed=D</span>
+<span id="L423" class="l">Amplitude=3</span>
+<span id="L424" class="l">Speed=2 Amplitude=1</span>
+<span id="L425" class="l">Speed=0</span>
+<span id="L426" class="l">Time</span>
+<span id="L427" class="l">Figure 2.6: Amplitude envelope example. ENV.=32/AD/10.</span>
+<span id="L428" class="l">The detune settings create interesting phase effects when the same phrase is</span>
+<span id="L429" class="l">played on both pulse channels:</span>
+<span id="L430" class="l">PU2 TSP. Transpose pulse channel 2.</span>
+<span id="L431" class="l">FINETUNE Detune pulse channel 1 downwards, channel 2 upwards.</span>
+<span id="L432" class="l">2.6.3 Wave Instrument Parameters</span>
+<span id="L433" class="l">The wave instrument plays back synth sounds generated in the SYNTH screen.</span>
+<span id="L434" class="l">VOLUME Set amplitude (0=0%, 1=25%, 2=50%, 3=100%) and left/right output.</span>
+<span id="L435" class="l">FINETUNE Detune the sound.</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">===== page 22 =====</span>
+<span id="L438" class="l">22 CHAPTER 2. THE SCREENS</span>
+<span id="L439" class="l">Figure 2.7: Wave Instrument Screen</span>
+<span id="L440" class="l">WAVE Select the wave to play back. Waves are edited in the WAVE screen. When</span>
+<span id="L441" class="l">PLAY is set to some other value than MANUAL, this parameter is replaced</span>
+<span id="L442" class="l">by SYNTH.</span>
+<span id="L443" class="l">SYNTH Select the synth sound to play back. To edit the synth sound being used,</span>
+<span id="L444" class="l">press SELECT+UP to go to the SYNTH screen. To use a new synth, tap A</span>
+<span id="L445" class="l">twice. To clone the synth, press SELECT+(B,A).</span>
+<span id="L446" class="l">PLAY How to play back synth sounds: MANUAL, ONCE, LOOP, or PINGPONG.</span>
+<span id="L447" class="l">With MANUAL, only a single wave is played. To play through a synth</span>
+<span id="L448" class="l">sound in MANUAL mode, use the F command to step through its waves.</span>
+<span id="L449" class="l">SPEED How fast the synth sound should be played back.</span>
+<span id="L450" class="l">LENGTH Controls the length of the synth sound.</span>
+<span id="L451" class="l">LOOP POS Sets the loop point of the synth sound.</span>
+<span id="L452" class="l">2.6.4 Kit Instrument Parameters</span>
+<span id="L453" class="l">KIT Choose the sample kits to use. The first kit will be used in the left note</span>
+<span id="L454" class="l">column in the phrase screen; the second kit will be used in the right note</span>
+<span id="L455" class="l">column in the phrase screen.</span>
+<span id="L456" class="l">VOLUME Set amplitude (0=0%, 1=25%, 2=50%, 3=100%) and output (left/right/both/off).</span>
+<span id="L457" class="l"> </span>
+<span id="L458" class="l">===== page 23 =====</span>
+<span id="L459" class="l">2.6. INSTRUMENT SCREEN 23</span>
+<span id="L460" class="l">Figure 2.8: Kit Instrument Screen</span>
+<span id="L461" class="l">FINETUNE Pitch shift.</span>
+<span id="L462" class="l">OFFSET Set the start loop point. If LOOP is OFF, this value can be used for</span>
+<span id="L463" class="l">skipping the initial part of a sound.</span>
+<span id="L464" class="l">LEN Sound length. ALL plays the sample to its end.</span>
+<span id="L465" class="l">LOOP Loop control. OFF=don’t loop, ON=loop sound and start playing from</span>
+<span id="L466" class="l">OFFSET, ATK=loop sample and start playing from the beginning.</span>
+<span id="L467" class="l">SPEED Full speed or half speed.</span>
+<span id="L468" class="l">CLIP Selects what to do when the signal overshoots while mixing two kits.</span>
+<span id="L469" class="l">HARD is the default: Hard clamp the signal to the allowed 0-F range.</span>
+<span id="L470" class="l">SOFT attenuates the signal to reduce distortion, giving a tape-like effect.</span>
+<span id="L471" class="l">FOLD and WRAP add digital distortion by folding or wrapping the signal</span>
+<span id="L472" class="l">around the 0 and F limits. Press A+(LEFT, LEFT) while HARD is selected to</span>
+<span id="L473" class="l">mix the kits using raw memory contents.</span>
+<span id="L474" class="l">TIP!</span>
+<span id="L475" class="l">• To replace the default sample kits, use the lsdpatcher program. https://</span>
+<span id="L476" class="l">littlesounddj.com/lsd/latest/lsd-patcher/</span>
+<span id="L477" class="l"> </span>
+<span id="L478" class="l">===== page 24 =====</span>
+<span id="L479" class="l">24 CHAPTER 2. THE SCREENS</span>
+<span id="L480" class="l">2.6.5 Noise Instrument Parameters</span>
+<span id="L481" class="l">Figure 2.9: Noise Instrument Screen</span>
+<span id="L482" class="l">ENV. See description of pulse envelope (2.6.2).</span>
+<span id="L483" class="l">PITCH When set to FREE, pitch changes can randomly mute the sound. SAFE</span>
+<span id="L484" class="l">avoids random mutes by restarting sound after any pitch change.</span>
+<span id="L485" class="l">2.6.6 Speech Instrument</span>
+<span id="L486" class="l">LSDj has 59 speech sounds called allophones. By combining these sounds, it is</span>
+<span id="L487" class="l">possible to create any English word or phrase. 2</span>
+<span id="L488" class="l">The speech instrument is locked to instrument number 40 and can only be</span>
+<span id="L489" class="l">used in the wave channel. It contains 14 word slots, by default named W-0 to</span>
+<span id="L490" class="l">W-D.</span>
+<span id="L491" class="l">To edit a word, press SELECT+RIGHT to get to the word screen. The left col-</span>
+<span id="L492" class="l">umn contains the allophones to be played, the right column sets their duration.</span>
+<span id="L493" class="l">The word in figure 2.11 is supposed to say “Little Sound Dj.”</span>
+<span id="L494" class="l">To make the words easy to remember, rename them by tapping A in the</span>
+<span id="L495" class="l">speech instrument screen.</span>
+<span id="L496" class="l">2A full list of allophones can be found in appendix B.</span>
+<span id="L497" class="l"> </span>
+<span id="L498" class="l">===== page 25 =====</span>
+<span id="L499" class="l">2.6. INSTRUMENT SCREEN 25</span>
+<span id="L500" class="l">Figure 2.10: Speech Instrument Screen</span>
+<span id="L501" class="l">Figure 2.11: Example Word</span>
+<span id="L502" class="l">TIP!</span>
+<span id="L503" class="l">• When selecting allophones, care about how they sound, not how they are</span>
+<span id="L504" class="l">spelled.</span>
+<span id="L505" class="l">• A sound may be different depending on its position within a word. For</span>
+<span id="L506" class="l">example, the K in “coop” will sound different from the K’s in “keep” and</span>
+<span id="L507" class="l">“speak”.</span>
+<span id="L508" class="l"> </span>
+<span id="L509" class="l">===== page 26 =====</span>
+<span id="L510" class="l">26 CHAPTER 2. THE SCREENS</span>
+<span id="L511" class="l">2.7 Table Screen</span>
+<span id="L512" class="l">Tables are sequences of transposes, commands and amplitude changes which</span>
+<span id="L513" class="l">can be run at any speed and applied to any channel. By setting a table in the</span>
+<span id="L514" class="l">instrument screen, the table will start every time you play the instrument. This</span>
+<span id="L515" class="l">allows you to create more interesting sounds than would be possible using the</span>
+<span id="L516" class="l">instrument screen alone.</span>
+<span id="L517" class="l">Tables contain six columns. The first column is the envelope column, used</span>
+<span id="L518" class="l">to create custom amplitude envelopes. Next is the transpose column, used to</span>
+<span id="L519" class="l">transpose the played note by a number of semitones. The other columns are</span>
+<span id="L520" class="l">command columns like the one in the phrase screen.</span>
+<span id="L521" class="l">The default table speed of one tick per step can be changed using the G</span>
+<span id="L522" class="l">command. To view different tables, press B+CURSOR.</span>
+<span id="L523" class="l">TIP!</span>
+<span id="L524" class="l">• Press SELECT+RIGHT on an A command in the phrase screen to edit that table.</span>
+<span id="L525" class="l">To jump back, press SELECT+LEFT.</span>
+<span id="L526" class="l">2.7.1 Envelope Example</span>
+<span id="L527" class="l">The first digit in the envelope column sets the amplitude; the second digit sets</span>
+<span id="L528" class="l">for how many ticks the amplitude lasts. To create an loop, set the first digit to</span>
+<span id="L529" class="l">the step you want to hop to, and the second digit to H.</span>
+<span id="L530" class="l">The table in figure 2.12 creates a tremolo effect.</span>
+<span id="L531" class="l">2.7.2 Arpeggio Example</span>
+<span id="L532" class="l">A typical use for tables is to make arpeggios, which is a musical term for playing</span>
+<span id="L533" class="l">notes fast enough to sound like a chord. The table in figure 2.13 would form</span>
+<span id="L534" class="l">a major chord. Shorter arpeggios can also be made using the C command (see</span>
+<span id="L535" class="l">4.3).</span>
+<span id="L536" class="l">2.8 Groove Screen</span>
+<span id="L537" class="l">Grooves control the speed by which your phrases and tables are played back.</span>
+<span id="L538" class="l">When used well, grooves can make your music more lively.</span>
+<span id="L539" class="l"> </span>
+<span id="L540" class="l">===== page 27 =====</span>
+<span id="L541" class="l">2.8. GROOVE SCREEN 27</span>
+<span id="L542" class="l">Figure 2.12: Table Envelope with Tremolo Effect</span>
+<span id="L543" class="l">Figure 2.13: Table Transpose with Major Arpeggio</span>
+<span id="L544" class="l"> </span>
+<span id="L545" class="l">===== page 28 =====</span>
+<span id="L546" class="l">28 CHAPTER 2. THE SCREENS</span>
+<span id="L547" class="l">Figure 2.14: Groove Screen</span>
+<span id="L548" class="l">The sequencer is based on a time period called tick, which is controlled by</span>
+<span id="L549" class="l">song tempo. Ticks are very short: at 125 BPM, there are 50 ticks per second.</span>
+<span id="L550" class="l">Higher tempo means faster ticks, and the other way around. In the groove</span>
+<span id="L551" class="l">screen, you can control for how many ticks phrase or table steps should last.</span>
+<span id="L552" class="l">The groove in figure 2.14 would make the sequencer spend 6 ticks on every step.</span>
+<span id="L553" class="l">Figure 2.15: Swing Example</span>
+<span id="L554" class="l">You can also use grooves to create custom rhythms. The groove in figure 2.15</span>
+<span id="L555" class="l">would make even note steps last 8 ticks, and odd note steps last 5 ticks, creating</span>
+<span id="L556" class="l">a swing effect. Grooves can also be used to create triplets and other complex</span>
+<span id="L557" class="l"> </span>
+<span id="L558" class="l">===== page 29 =====</span>
+<span id="L559" class="l">2.9. SYNTH SCREEN 29</span>
+<span id="L560" class="l">rhythms.</span>
+<span id="L561" class="l">Groove 0 is the default groove for all phrases, but it is possible to switch to</span>
+<span id="L562" class="l">another groove using the G command. This command also works in tables.</span>
+<span id="L563" class="l">In the groove screen, select the groove you wish to edit by pressing B+CURSOR.</span>
+<span id="L564" class="l">TIP!</span>
+<span id="L565" class="l">• A+UP/DOWN changes the swing percentage, while keeping the total number of</span>
+<span id="L566" class="l">ticks – and thus, the resulting song speed – constant. (Example: Original value</span>
+<span id="L567" class="l">is 6/6 = 50%. Press A+UP. Now the value changes to 7/5 = 58%!)</span>
+<span id="L568" class="l">• Press SELECT+DOWN on G commands to edit that groove.</span>
+<span id="L569" class="l">2.9 Synth Screen</span>
+<span id="L570" class="l">The synth screen features a soft synthesizer that generates sounds to be played</span>
+<span id="L571" class="l">back by the wave instruments. Each synth sound uses 10 waves. Synth sound 0</span>
+<span id="L572" class="l">uses waves 00-0F, synth sound 1 uses waves 10-1F, and so on. The generated</span>
+<span id="L573" class="l">synth sounds can be viewed in the wave screen (Section 2.10).</span>
+<span id="L574" class="l">In total, there are 16 synth sounds. Choose which one to edit by pressing</span>
+<span id="L575" class="l">B+CURSOR.</span>
+<span id="L576" class="l">Figure 2.16: Synth Screen</span>
+<span id="L577" class="l"> </span>
+<span id="L578" class="l">===== page 30 =====</span>
+<span id="L579" class="l">30 CHAPTER 2. THE SCREENS</span>
+<span id="L580" class="l">2.9.1 Fixed Synth Settings</span>
+<span id="L581" class="l">SIGNAL Square, saw tooth, triangle or custom wave. W.FX uses a wave in range</span>
+<span id="L582" class="l">F0-FF as signal.</span>
+<span id="L583" class="l">FILTER Low-pass, high-pass, band-pass or all-pass.</span>
+<span id="L584" class="l">DIST Distortion mode. CLIP truncates the wave to LIMIT, FOLD mirrors the</span>
+<span id="L585" class="l">wave around LIMIT, WRAP wraps around vertically.</span>
+<span id="L586" class="l">PHASE Compress the waveform horizontally. See figure 2.17 for examples.</span>
+<span id="L587" class="l">2.9.2 Variable Synth Settings</span>
+<span id="L588" class="l">These settings control the first and last wave of the sound, with a smooth</span>
+<span id="L589" class="l">in-between fade.</span>
+<span id="L590" class="l">VOLUME Signal volume.</span>
+<span id="L591" class="l">CUTOFF Filter cutoff frequency.</span>
+<span id="L592" class="l">Q Resonance control. Boosts the signal around the cutoff frequency, to change</span>
+<span id="L593" class="l">how bright or dull the wave sounds.</span>
+<span id="L594" class="l">VSHIFT Shifts the signal vertically. See figure 2.18 for examples.</span>
+<span id="L595" class="l">LIMIT Limits the signal vertically using the DIST mode. 0-F lowers the volume,</span>
+<span id="L596" class="l">10-FF allows wrapping and adds interesting overtones to loud signals.</span>
+<span id="L597" class="l">PHASE Compresses the signal horizontally. See figure 2.17 for examples.</span>
+<span id="L598" class="l">2.10 Wave Screen</span>
+<span id="L599" class="l">In the wave screen, you can view and edit the individual waveforms of the</span>
+<span id="L600" class="l">synth sounds. There are 16 synth sounds with 16 waves each. This means that</span>
+<span id="L601" class="l">synth sound 0 uses waves 0-F, synth sound 1 uses waves 10-1F, and so on.</span>
+<span id="L602" class="l">A list of button presses can be found in the help screen.</span>
+<span id="L603" class="l"> </span>
+<span id="L604" class="l">===== page 31 =====</span>
+<span id="L605" class="l">2.10. WAVE SCREEN 31</span>
+<span id="L606" class="l">(a) Phase example. Original wave. (b) PINCH phasing.</span>
+<span id="L607" class="l">(c) WARP phasing. (d) RESYNC phasing. RESYN2 is same, but</span>
+<span id="L608" class="l">without anti-aliasing.</span>
+<span id="L609" class="l">Figure 2.17: Phase Examples</span>
+<span id="L610" class="l"> </span>
+<span id="L611" class="l">===== page 32 =====</span>
+<span id="L612" class="l">32 CHAPTER 2. THE SCREENS</span>
+<span id="L613" class="l">(a) Vshift example. Original wave.</span>
+<span id="L614" class="l">(b) Vshifted signal. Vshift = 40, clip = wrap.</span>
+<span id="L615" class="l">(c) Vshifted signal. Vshift = 80, clip = wrap.</span>
+<span id="L616" class="l">Figure 2.18: Vshift Examples</span>
+<span id="L617" class="l"> </span>
+<span id="L618" class="l">===== page 33 =====</span>
+<span id="L619" class="l">2.11. PROJECT SCREEN 33</span>
+<span id="L620" class="l">Figure 2.19: Project Screen</span>
+<span id="L621" class="l">2.11 Project Screen</span>
+<span id="L622" class="l">The project screen (figure 2.19) contains settings that affect the entire program.</span>
+<span id="L623" class="l">TEMPO Song tempo in BPM. It is possible to change the tempo either by press-</span>
+<span id="L624" class="l">ing A+CURSOR, or by tapping the A button in pace with the desired tempo.</span>
+<span id="L625" class="l">When being a follower in sync mode, you can nudge the tempo by press-</span>
+<span id="L626" class="l">ing A+LEFT/RIGHT, something which can be useful if devices have drifted</span>
+<span id="L627" class="l">out of sync.</span>
+<span id="L628" class="l">TRANSPOSE Adjust the pitch of the pulse and wave instruments by the given</span>
+<span id="L629" class="l">number of semitones.</span>
+<span id="L630" class="l">SYNC Connects to other devices using the link port. Read all about sync settings</span>
+<span id="L631" class="l">in chapter 5!</span>
+<span id="L632" class="l">CLONE Deep or slim chain cloning. Deep chain cloning will clone a chain’s</span>
+<span id="L633" class="l">phrases, whereas slim cloning will re-use the old phrases. Read all about</span>
+<span id="L634" class="l">cloning in section 3.2!</span>
+<span id="L635" class="l">LOOK Change the font and color set.</span>
+<span id="L636" class="l">KEY DELAY/REPEAT Set repeat delay and repeat rate of the Game Boy buttons.</span>
+<span id="L637" class="l">PRELISTEN Play notes and instruments while entering them.</span>
+<span id="L638" class="l"> </span>
+<span id="L639" class="l">===== page 34 =====</span>
+<span id="L640" class="l">34 CHAPTER 2. THE SCREENS</span>
+<span id="L641" class="l">HELP Enter help screen. The help screen contains a reference for button presses</span>
+<span id="L642" class="l">and a command list.</span>
+<span id="L643" class="l">CLEAN SONG DATA Merge duplicate chains and phrases and clear unused ones.</span>
+<span id="L644" class="l">CLEAN INSTR DATA Merge duplicate tables and clear unused instruments, ta-</span>
+<span id="L645" class="l">bles, synths and waves.</span>
+<span id="L646" class="l">LOAD/SAVE SONG Enter file screen. 3</span>
+<span id="L647" class="l">The project screen also has two clocks. The WORKED clock displays the</span>
+<span id="L648" class="l">time spent making the current song, in hours and minutes. When playing, it</span>
+<span id="L649" class="l">is replaced by the PLAY clock, which shows for how long the song has been</span>
+<span id="L650" class="l">playing. The TOTAL clock shows how long the cartridge has been used in total,</span>
+<span id="L651" class="l">in days, hours and minutes.</span>
+<span id="L652" class="l">TIP!</span>
+<span id="L653" class="l">• To replace the default fonts and palettes, use the lsdpatcher program. https:</span>
+<span id="L654" class="l">//littlesounddj.com/lsd/latest/lsd-patcher/</span>
+<span id="L655" class="l">2.11.1 Total Memory Reset</span>
+<span id="L656" class="l">Press SELECT+A+B on LOAD/SAVE FILE to erase all songs and bring back the</span>
+<span id="L657" class="l">cartridge to its default state. Generally, this is only useful if the cartridge got</span>
+<span id="L658" class="l">scrambled.</span>
+<span id="L659" class="l">2.12 File Screen</span>
+<span id="L660" class="l">The file screen (figure 2.20) is entered by pressing the LOAD/SAVE FILE button</span>
+<span id="L661" class="l">in the project screen. It is used for saving the song you are working on to the</span>
+<span id="L662" class="l">storage memory. It can also be used to load songs from the storage memory</span>
+<span id="L663" class="l">to the work memory. The file screen allows you to keep up to 32 songs on one</span>
+<span id="L664" class="l">cartridge.</span>
+<span id="L665" class="l">The file screen is only available for cartridges that have 64 kb SRAM or more.</span>
+<span id="L666" class="l">3The file screen is only available for cartridges that have 1 Mbit SRAM or more. In case your</span>
+<span id="L667" class="l">cartridge doesn’t have 1 Mbit SRAM, this button will be replaced with a RESET MEMORY button.</span>
+<span id="L668" class="l"> </span>
+<span id="L669" class="l">===== page 35 =====</span>
+<span id="L670" class="l">2.12. FILE SCREEN 35</span>
+<span id="L671" class="l">Figure 2.20: File Screen</span>
+<span id="L672" class="l">FILE Shows the file name of the song you are working on. The exclamation</span>
+<span id="L673" class="l">mark (!) indicates when changes have been made to a song.</span>
+<span id="L674" class="l">LOAD Load a song. Press A, select the file to load and press A again.</span>
+<span id="L675" class="l">SAVE Save song. Press A, select the slot to save to and enter the file name.</span>
+<span id="L676" class="l">ERASE Erase a song. Press A, select the file to erase and press A again.</span>
+<span id="L677" class="l">BLOCKS USED Shows how much of the storage memory that is used. One block</span>
+<span id="L678" class="l">equals 512 bytes. The digits on the bottom are hexadecimal, meaning there</span>
+<span id="L679" class="l">is a total of BF * 512 = 97,792 available bytes.</span>
+<span id="L680" class="l">Press B to return to the project screen.</span>
+<span id="L681" class="l">TIP!</span>
+<span id="L682" class="l">• To manage songs, use the lsdpatcher program. https://littlesounddj.</span>
+<span id="L683" class="l">com/lsd/latest/lsd-patcher/</span>
+<span id="L684" class="l"> </span>
+<span id="L685" class="l">===== page 36 =====</span>
+<span id="L686" class="l">36 CHAPTER 2. THE SCREENS</span>
+<span id="L687" class="l">2.12.1 Song List</span>
+<span id="L688" class="l">The song list presents song name, version number and file size. When saving,</span>
+<span id="L689" class="l">the song is compressed, so the resulting file size will vary with different songs.</span>
+<span id="L690" class="l">To start working on a new song, load from the (EMPTY) slot.</span>
+<span id="L691" class="l">TIP!</span>
+<span id="L692" class="l">• While in the song list, press SELECT+A to load a song without switching to</span>
+<span id="L693" class="l">the song screen, and START to start/stop songs. In this way, you can load</span>
+<span id="L694" class="l">and play songs without jumping back and forth between screens. This can</span>
+<span id="L695" class="l">be handy if you are playing a live show with prepared tracks and want</span>
+<span id="L696" class="l">fewer things to think about.</span>
+<span id="L697" class="l">2.13 Border Information</span>
+<span id="L698" class="l">Various useful information is displayed in the screen border.</span>
+<span id="L699" class="l">1. Screen title. Shows what is being edited.</span>
+<span id="L700" class="l">2. The channel being edited, that is, the selected song screen column.</span>
+<span id="L701" class="l">3. Chain position being edited.</span>
+<span id="L702" class="l">4. Current tempo in beats per minute (BPM).</span>
+<span id="L703" class="l">5. Shows what is being played on the channels. MUTE appears when press-</span>
+<span id="L704" class="l">ing B+SELECT or B+START.</span>
+<span id="L705" class="l">6. The waveform being played on the wave channel.</span>
+<span id="L706" class="l">7. The name of the instrument being selected in the phrase screen.</span>
+<span id="L707" class="l">8. Sync status.</span>
+<span id="L708" class="l">9. Screen map.</span>
+<span id="L709" class="l"> </span>
+<span id="L710" class="l">===== page 37 =====</span>
+<span id="L711" class="l">2.13. BORDER INFORMATION 37</span>
+<span id="L712" class="l">1. Screen Title</span>
+<span id="L713" class="l">2. Edit Channel</span>
+<span id="L714" class="l">3. Chain Position</span>
+<span id="L715" class="l">4. Tempo</span>
+<span id="L716" class="l">5. Channel Status</span>
+<span id="L717" class="l">6. Oscilloscope</span>
+<span id="L718" class="l">7. Instrument</span>
+<span id="L719" class="l">8. Sync</span>
+<span id="L720" class="l">9. Screen Map</span>
+<span id="L721" class="l">Figure 2.21: Border Information</span>
+<span id="L722" class="l"> </span>
+<span id="L723" class="l">===== page 38 =====</span>
+<span id="L724" class="l">38 CHAPTER 2. THE SCREENS</span>
+<span id="L725" class="l"> </span>
+<span id="L726" class="l">===== page 39 =====</span>
+<span id="L727" class="l">Chapter 3</span>
+<span id="L728" class="l">Advanced Techniques</span>
+<span id="L729" class="l">3.1 Copy and Paste</span>
+<span id="L730" class="l">Little Sound Dj has a clipboard for temporary data storage. Pressing B+A will</span>
+<span id="L731" class="l">cut the value under the cursor and store it on the clipboard. The value can then</span>
+<span id="L732" class="l">be pasted by pressing SELECT+A.</span>
+<span id="L733" class="l">In most screens, it is possible to mark up blocks by pressing SELECT+B and</span>
+<span id="L734" class="l">moving around the cursor. When having marked up a block, it can be copied to</span>
+<span id="L735" class="l">the clipboard by pressing B, or cut to the clipboard by pressing SELECT+A. The</span>
+<span id="L736" class="l">clipboard contents can then be pasted by pressing SELECT+A.</span>
+<span id="L737" class="l">Some quick-mark button presses are implemented:</span>
+<span id="L738" class="l">• SELECT+(B, B) = quick-mark a column or row.</span>
+<span id="L739" class="l">• SELECT+(B, B, B) = quick-mark an entire screen.</span>
+<span id="L740" class="l">When having marked a block, you can change all data inside that block by</span>
+<span id="L741" class="l">pressing A+CURSOR. This can be used, for example, to transpose several notes</span>
+<span id="L742" class="l">quickly.</span>
+<span id="L743" class="l">3.2 Cloning</span>
+<span id="L744" class="l">Cloning is a shortcut that can save you much unnecessary copy and paste work.</span>
+<span id="L745" class="l">It allows you to create copies of chains, phrases, instruments and tables directly</span>
+<span id="L746" class="l">from the song, chain, phrase and instrument screens.</span>
+<span id="L747" class="l">39</span>
+<span id="L748" class="l"> </span>
+<span id="L749" class="l">===== page 40 =====</span>
+<span id="L750" class="l">40 CHAPTER 3. ADVANCED TECHNIQUES</span>
+<span id="L751" class="l">Let’s imagine you want to make a slightly altered version of the melody in</span>
+<span id="L752" class="l">chain 0. Go to the song screen, tap A on 00 to pick the number, then tap A again</span>
+<span id="L753" class="l">on a down-below empty step so that you get:</span>
+<span id="L754" class="l">00</span>
+<span id="L755" class="l">00</span>
+<span id="L756" class="l">Now, move the cursor to the second 00 and press SELECT+(B, A) to make a</span>
+<span id="L757" class="l">copy of chain 0.</span>
+<span id="L758" class="l">3.2.1 Deep vs. Slim-Cloning</span>
+<span id="L759" class="l">There are two different cloning modes: deep and slim cloning, selectable from</span>
+<span id="L760" class="l">the project screen.</span>
+<span id="L761" class="l">When slim-cloning a chain, a new chain appears that contains the same</span>
+<span id="L762" class="l">phrases as the original.</span>
+<span id="L763" class="l">When deep-cloning a chain, a new chain appears with copies of the original</span>
+<span id="L764" class="l">phrases.</span>
+<span id="L765" class="l">The advantage of deep-cloning is that you lessen the risk of modifying old</span>
+<span id="L766" class="l">phrases by accident. The drawback is that will run out of phrases faster. Also,</span>
+<span id="L767" class="l">your songs might take up more space when saved in the file screen.</span>
+<span id="L768" class="l">If you run out of phrases, use CLEAN SONG DATA in project screen. (Section</span>
+<span id="L769" class="l">2.11.)</span>
+<span id="L770" class="l">3.3 The Importance of Backups</span>
+<span id="L771" class="l">Some words of caution from many peoples hard-earned experience: When</span>
+<span id="L772" class="l">using a Game Boy cartridge, backup your songs! Most Game Boy cartridges</span>
+<span id="L773" class="l">depend on an internal battery that will run out, losing your songs in the process.</span>
+<span id="L774" class="l">If you care about your music, do regular backups, or at least record your songs</span>
+<span id="L775" class="l">to prevent them from being lost forever.</span>
+<span id="L776" class="l">3.4 Muting, Soloing and Panning</span>
+<span id="L777" class="l">• Press B+SELECT in any screen to mute the channel. If the B button is</span>
+<span id="L778" class="l">released before SELECT, the channel stays muted until B is pressed again.</span>
+<span id="L779" class="l"> </span>
+<span id="L780" class="l">===== page 41 =====</span>
+<span id="L781" class="l">3.5. LIVE MODE 41</span>
+<span id="L782" class="l">• Press B+START in any screen to solo the channel. If the B button is released</span>
+<span id="L783" class="l">before START, the other channels stay muted. If the START button is</span>
+<span id="L784" class="l">released first, all channels will be turned on again.</span>
+<span id="L785" class="l">• Press B+LEFT/RIGHT in the song screen to pan a channel left or right.</span>
+<span id="L786" class="l">3.5 Live Mode</span>
+<span id="L787" class="l">Live mode is ideal to freely mix and match chains during a live performance.</span>
+<span id="L788" class="l">Song screen controls:</span>
+<span id="L789" class="l">SELECT+LEFT Switch between song and live mode</span>
+<span id="L790" class="l">START Start selected chain(s)</span>
+<span id="L791" class="l">SELECT+START Stop selected chain(s)</span>
+<span id="L792" class="l">LEFT+START Start all chains in the row</span>
+<span id="L793" class="l">If a chain is already playing, starts and stops are queued until the chain</span>
+<span id="L794" class="l">played through. Pressing START twice speeds up the change so that it happens</span>
+<span id="L795" class="l">already when the active phrase played through.</span>
+<span id="L796" class="l">3.6 Synthetic Drum Instruments</span>
+<span id="L797" class="l">Creating drum instruments without using the sampled drum kits can be very</span>
+<span id="L798" class="l">useful, as it gives greater flexibility in how to make use of the channels. Here</span>
+<span id="L799" class="l">are some starting-out ideas.</span>
+<span id="L800" class="l">3.6.1 Pulse Bass Drum</span>
+<span id="L801" class="l">The easiest way to create a bass drum is by using pulse channel 1. ENV. should</span>
+<span id="L802" class="l">have a strong attack and fast decay – try setting it to C3/0/0. WAVE is typically</span>
+<span id="L803" class="l">50-50 high/low, even though other waves can be used for a more distorted</span>
+<span id="L804" class="l">sound. SWEEP should have high initial frequency and fast decay; try setting</span>
+<span id="L805" class="l">it to 63, and play the instrument at note C-6. For a snappier kick, experiment</span>
+<span id="L806" class="l">with ENV. and LENGTH parameters. Set TRANSPOSE to OFF to prevent chain</span>
+<span id="L807" class="l">transposes from changing the pitch.</span>
+<span id="L808" class="l"> </span>
+<span id="L809" class="l">===== page 42 =====</span>
+<span id="L810" class="l">42 CHAPTER 3. ADVANCED TECHNIQUES</span>
+<span id="L811" class="l">(a) Bass Drum (b) Snare Drum</span>
+<span id="L812" class="l">(c) Closed Hi-Hat (d) Open Hi-Hat</span>
+<span id="L813" class="l">(e) Cymbal</span>
+<span id="L814" class="l">Figure 3.1: Synthetic Drum Instruments</span>
+<span id="L815" class="l"> </span>
+<span id="L816" class="l">===== page 43 =====</span>
+<span id="L817" class="l">3.6. SYNTHETIC DRUM INSTRUMENTS 43</span>
+<span id="L818" class="l">3.6.2 Snare Drum</span>
+<span id="L819" class="l">Use the noise channel for snare drum sounds. The ENV. setting should have a</span>
+<span id="L820" class="l">strong attack and fast decay – try setting it to F1/D3/0. Adjust the timbre by</span>
+<span id="L821" class="l">changing note value in phrase screen. Note values around 30 should be useful</span>
+<span id="L822" class="l">for snares. P and V commands can help making the sound more lively.</span>
+<span id="L823" class="l">3.6.3 Hi-Hats and Cymbals</span>
+<span id="L824" class="l">Use the noise channel for hi-hats and cymbals. Use a phrase note value around</span>
+<span id="L825" class="l">38 for a timbre with high frequency content. Change instrument ENV. to get the</span>
+<span id="L826" class="l">desired amplitude envelope. For cymbals, lower the notes a bit for a rougher</span>
+<span id="L827" class="l">timbre.</span>
+<span id="L828" class="l">3.6.4 Wave Bass Drum</span>
+<span id="L829" class="l">For the best sounding bass drum, use the synthesizer in the wave channel. Set</span>
+<span id="L830" class="l">the PITCH to DRUM by pressing A+UP, and set TRANSP. to OFF. On the synth</span>
+<span id="L831" class="l">screen, choose the triangle signal, and set VOLUME to 30. Set a table for the</span>
+<span id="L832" class="l">instrument. On step 0 of the table, use a fast P command such as C0. On line</span>
+<span id="L833" class="l">1, put 80 in the TSP column and use an L command with a value such as 30.</span>
+<span id="L834" class="l">This will transpose the bass drum to the lowest possible note without wrapping</span>
+<span id="L835" class="l">to a higher pitch. Feel free to experiment with different synth parameters or</span>
+<span id="L836" class="l">different values for the P and L commands to shape the sound of the kick, as</span>
+<span id="L837" class="l">well as playing the instrument at note C-5, C-6, or above. (See figure 3.2.)</span>
+<span id="L838" class="l"> </span>
+<span id="L839" class="l">===== page 44 =====</span>
+<span id="L840" class="l">44 CHAPTER 3. ADVANCED TECHNIQUES</span>
+<span id="L841" class="l">(a) Bass Drum Instrument (b) Bass Drum Synth</span>
+<span id="L842" class="l">(c) Bass Drum Wave (d) Bass Drum Table</span>
+<span id="L843" class="l">Figure 3.2: Wave Channel Bass Drum</span>
+<span id="L844" class="l"> </span>
+<span id="L845" class="l">===== page 45 =====</span>
+<span id="L846" class="l">Chapter 4</span>
+<span id="L847" class="l">Commands</span>
+<span id="L848" class="l">Commands can be used to do all sorts of things in phrases and tables. It is a</span>
+<span id="L849" class="l">good idea to skim through this chapter at least once, to get an idea of what they</span>
+<span id="L850" class="l">can do.</span>
+<span id="L851" class="l">TIP!</span>
+<span id="L852" class="l">• Tapping A,A on a command shows a scrolling help text in the top of the screen.</span>
+<span id="L853" class="l">A+L/R can then be used to browse through the commands. Pause the scrolling</span>
+<span id="L854" class="l">text by holding SELECT.</span>
+<span id="L855" class="l">4.1 A: Table Start/Stop</span>
+<span id="L856" class="l">Starts or stops tables in the current channel. Use the table number you want to</span>
+<span id="L857" class="l">start, or 20 for stopping.</span>
+<span id="L858" class="l">A03 start table 3</span>
+<span id="L859" class="l">A20 stop table</span>
+<span id="L860" class="l">45</span>
+<span id="L861" class="l"> </span>
+<span id="L862" class="l">===== page 46 =====</span>
+<span id="L863" class="l">46 CHAPTER 4. COMMANDS</span>
+<span id="L864" class="l">4.2 B: MayBe</span>
+<span id="L865" class="l">4.2.1 In Phrases (MayBe Play Note)</span>
+<span id="L866" class="l">Controls how likely it is that the note or sample(s) to the left will be played.</span>
+<span id="L867" class="l">First digit sets probability for left kit, second digit sets probability for notes and</span>
+<span id="L868" class="l">right kit.</span>
+<span id="L869" class="l">B00 Never play note</span>
+<span id="L870" class="l">B0F Always play note/right kit sample</span>
+<span id="L871" class="l">BF0 Always play note/left kit sample</span>
+<span id="L872" class="l">B08 Play note/right kit sample about 50% of the time</span>
+<span id="L873" class="l">4.2.2 In Tables (MayBe Hop)</span>
+<span id="L874" class="l">A hop that only happens sometimes. First digit sets probability, second digit</span>
+<span id="L875" class="l">sets destination row.</span>
+<span id="L876" class="l">BF5 Hop to row 5, 15 times out of 16</span>
+<span id="L877" class="l">B84 Hop to row 4, about 50% of the time</span>
+<span id="L878" class="l">B03 Never hop to row 3</span>
+<span id="L879" class="l">4.3 C: Chord</span>
+<span id="L880" class="l">Runs an arpeggio that extends the base note with the given semitones. The</span>
+<span id="L881" class="l">speed may be slowed down using CMD/RATE in instrument screen.</span>
+<span id="L882" class="l">C37 plays a minor chord: 0, 3, 7, 0, 3, 7, 0, 3, 7, . . .</span>
+<span id="L883" class="l">C47 plays a major chord: 0, 4, 7, 0, 4, 7, 0, 4, 7, . . .</span>
+<span id="L884" class="l">C0C plays 0, 0, C, 0, 0, C, 0, 0, C, . . .</span>
+<span id="L885" class="l">CC0 plays 0, C, 0, C, 0, C, . . .</span>
+<span id="L886" class="l">CCC plays 0, C, C, 0, C, C, 0, C, C, . . .</span>
+<span id="L887" class="l">C00 resets chord</span>
+<span id="L888" class="l"> </span>
+<span id="L889" class="l">===== page 47 =====</span>
+<span id="L890" class="l">4.4. D: DELAY 47</span>
+<span id="L891" class="l">4.4 D: Delay</span>
+<span id="L892" class="l">Delay the triggering of a note with the given number of ticks.</span>
+<span id="L893" class="l">4.5 E: Amplitude Envelope</span>
+<span id="L894" class="l">4.5.1 For Pulse and Noise Instruments</span>
+<span id="L895" class="l">The first value digit sets the initial amplitude (0=min, F=max); the second digit</span>
+<span id="L896" class="l">sets the release (0,8: no change, 1-7: decrease, 9-F: increase).</span>
+<span id="L897" class="l">4.5.2 For Wave Instruments</span>
+<span id="L898" class="l">E00 volume 0%</span>
+<span id="L899" class="l">E01 volume 25%</span>
+<span id="L900" class="l">E02 volume 50%</span>
+<span id="L901" class="l">E03 volume 100%</span>
+<span id="L902" class="l">4.6 F: Wave Frame/Finetune</span>
+<span id="L903" class="l">4.6.1 For Pulse Instruments:</span>
+<span id="L904" class="l">The first digit sets PU2 TSP., the second FINETUNE by 1/32 semitones/step. See</span>
+<span id="L905" class="l">section 2.6.2.</span>
+<span id="L906" class="l">4.6.2 For Kit Instruments:</span>
+<span id="L907" class="l">Modifies the sample position. 00-7F steps forward, 80-FF steps back.</span>
+<span id="L908" class="l">4.6.3 For Wave Instruments:</span>
+<span id="L909" class="l">Change the wave frame being played on the wave channel. This command is</span>
+<span id="L910" class="l">relative, meaning that the value is added to the current frame number. It can be</span>
+<span id="L911" class="l">used for playing through synth sounds manually.</span>
+<span id="L912" class="l"> </span>
+<span id="L913" class="l">===== page 48 =====</span>
+<span id="L914" class="l">48 CHAPTER 4. COMMANDS</span>
+<span id="L915" class="l">TIP!</span>
+<span id="L916" class="l">• Since a synth sound contains 16 (10) waves, issuing the command F10 jumps to</span>
+<span id="L917" class="l">the next synth sound.</span>
+<span id="L918" class="l">Example:</span>
+<span id="L919" class="l">F01 If wave frame 3 is being played, advance 1 frame and start playing frame</span>
+<span id="L920" class="l">number 4.</span>
+<span id="L921" class="l">4.7 G: Groove Select</span>
+<span id="L922" class="l">Select the groove to use when playing phrases or tables.</span>
+<span id="L923" class="l">Example:</span>
+<span id="L924" class="l">G04 select groove 4</span>
+<span id="L925" class="l">4.8 H: Hop</span>
+<span id="L926" class="l">H hops to a new play position. It can also be used to stop playing.</span>
+<span id="L927" class="l">4.8.1 H in Phrases</span>
+<span id="L928" class="l">H00-H0F Hop to next phrase. The digit sets destination phrase step.</span>
+<span id="L929" class="l">H10-HFE Hop back within the phrase. The first digit sets number of times to</span>
+<span id="L930" class="l">hop back, the second digit sets destination step.</span>
+<span id="L931" class="l">HFF Stop playing song (or channel, if in live mode).</span>
+<span id="L932" class="l">TIP!</span>
+<span id="L933" class="l">• To compose in waltz time (3/4), put H00 commands on step C in every phrase.</span>
+<span id="L934" class="l"> </span>
+<span id="L935" class="l">===== page 49 =====</span>
+<span id="L936" class="l">4.9. K: KILL NOTE 49</span>
+<span id="L937" class="l">4.8.2 H in Tables</span>
+<span id="L938" class="l">In the table screen, H is used for creating table loops. The first digit sets how</span>
+<span id="L939" class="l">many times the hop should be done before moving on; 0 means “forever.” The</span>
+<span id="L940" class="l">second digit sets the table step to jump to. Loops can be nested; that is, you can</span>
+<span id="L941" class="l">have smaller loops inside bigger ones.</span>
+<span id="L942" class="l">Example:</span>
+<span id="L943" class="l">H21 hop twice to table position 1.</span>
+<span id="L944" class="l">H04 hop to table position 4 forever.</span>
+<span id="L945" class="l">4.9 K: Kill Note</span>
+<span id="L946" class="l">K instantly stops the sound, causing an audible click. If the click is not desired,</span>
+<span id="L947" class="l">better options might be E00 for wave channel and E11 for pulse and noise</span>
+<span id="L948" class="l">channels.</span>
+<span id="L949" class="l">Example:</span>
+<span id="L950" class="l">K00 kill note instantly</span>
+<span id="L951" class="l">K03 kill note after 3 ticks</span>
+<span id="L952" class="l">4.10 L: Slide</span>
+<span id="L953" class="l">Slides to the target note in the given duration. If the instrument’s PITCH setting</span>
+<span id="L954" class="l">is TICK, the duration is given in ticks, otherwise in n/360 seconds.</span>
+<span id="L955" class="l">Example:</span>
+<span id="L956" class="l">C-4 ---</span>
+<span id="L957" class="l">F-4 L40</span>
+<span id="L958" class="l">--- ---</span>
+<span id="L959" class="l">C-4 L10</span>
+<span id="L960" class="l">This will result in a slide that starts with C-4, bends to F-4, and then quickly</span>
+<span id="L961" class="l">bends back to C-4.</span>
+<span id="L962" class="l"> </span>
+<span id="L963" class="l">===== page 50 =====</span>
+<span id="L964" class="l">50 CHAPTER 4. COMMANDS</span>
+<span id="L965" class="l">4.10.1 L in Tables</span>
+<span id="L966" class="l">The L command may be used in the left table command column. The transpose</span>
+<span id="L967" class="l">column will then set target note relative to the base note.</span>
+<span id="L968" class="l">Figure 4.1: Table Slide</span>
+<span id="L969" class="l">Transposes and slides are added together independently. In the above</span>
+<span id="L970" class="l">example, step 0 transposes one octave up. In step 1, the L command starts</span>
+<span id="L971" class="l">sliding one octave down while keeping the transpose from step 0 unchanged.</span>
+<span id="L972" class="l">In step 2, the L command is allowed to continue while the transpose stays one</span>
+<span id="L973" class="l">octave up. After some time, L will stop one octave down, canceling out the</span>
+<span id="L974" class="l">transpose and returning to the base note.</span>
+<span id="L975" class="l">4.11 M: Master Volume</span>
+<span id="L976" class="l">Changes the master output volume. The first digit modifies the left output, the</span>
+<span id="L977" class="l">second digit the right. The volume can either be set with an absolute value, or</span>
+<span id="L978" class="l">changed by a relative value.</span>
+<span id="L979" class="l">Values 0-7 are used to specify absolute volumes. Values 8-F give the volume</span>
+<span id="L980" class="l">a relative change; 8 is no change, 9-B increase, D-F decrease.</span>
+<span id="L981" class="l">Examples:</span>
+<span id="L982" class="l">M77 maximize volume</span>
+<span id="L983" class="l">M08 minimize left volume, leave right volume unchanged</span>
+<span id="L984" class="l"> </span>
+<span id="L985" class="l">===== page 51 =====</span>
+<span id="L986" class="l">4.12. O: SET OUTPUT 51</span>
+<span id="L987" class="l">M99 increase volume with 1 step</span>
+<span id="L988" class="l">MFE decrease left volume with 1 step, right volume with 2 steps</span>
+<span id="L989" class="l">4.12 O: Set Output</span>
+<span id="L990" class="l">Pan channel to left, right, none or both outputs.</span>
+<span id="L991" class="l">4.13 P: Pitch Bend</span>
+<span id="L992" class="l">4.13.1 For Pulse, Wave and Kit Instruments:</span>
+<span id="L993" class="l">Does a pitch change with the given speed. The behavior depends on the instru-</span>
+<span id="L994" class="l">ment’s PITCH setting:</span>
+<span id="L995" class="l">DRUM Logarithmic pitch bend that updates at 360 Hz.</span>
+<span id="L996" class="l">FAST Linear pitch bend that updates at 360 Hz.</span>
+<span id="L997" class="l">TICK Pitch bend that updates every tick.</span>
+<span id="L998" class="l">STEP Immediate pitch change without bend.</span>
+<span id="L999" class="l">Example:</span>
+<span id="L1000" class="l">P02 Pitch change up with speed 2.</span>
+<span id="L1001" class="l">PFE Pitch change down with speed 2. (FE=-2)</span>
+<span id="L1002" class="l">4.13.2 For Noise Instruments:</span>
+<span id="L1003" class="l">Applies S command with the given value every tick.</span>
+<span id="L1004" class="l">4.14 R: Retrig/Resync</span>
+<span id="L1005" class="l">Retrig plays the latest played note again. The first digit modulates the pulse</span>
+<span id="L1006" class="l">and noise volume (0=no change, 1-7=increase, 9-F=decrease). The second digit</span>
+<span id="L1007" class="l">sets retrig rate, 1 being the fastest and F the slowest, and 0 meaning only retrig</span>
+<span id="L1008" class="l">once.</span>
+<span id="L1009" class="l"> </span>
+<span id="L1010" class="l">===== page 52 =====</span>
+<span id="L1011" class="l">52 CHAPTER 4. COMMANDS</span>
+<span id="L1012" class="l">R8x means resync: With this option, the sound generator restarts at a very</span>
+<span id="L1013" class="l">high rate. The pulse channels have a special quirk which makes resync slow</span>
+<span id="L1014" class="l">down the sound, allowing it to go half an octave deeper.</span>
+<span id="L1015" class="l">Example:</span>
+<span id="L1016" class="l">R00 retrig once</span>
+<span id="L1017" class="l">R01 retrig the sound every tick</span>
+<span id="L1018" class="l">R80 resync the sound generator at 360 Hz</span>
+<span id="L1019" class="l">R8F stop resync</span>
+<span id="L1020" class="l">RF4 retrig the sound every fourth tick, decreasing amplitude (echo effect)</span>
+<span id="L1021" class="l">4.15 S: Sweep/Shape</span>
+<span id="L1022" class="l">This command has different effects for different instrument types.</span>
+<span id="L1023" class="l">4.15.1 Pulse Instruments</span>
+<span id="L1024" class="l">Frequency sweep, useful for bass drums and percussion. The first digit sets</span>
+<span id="L1025" class="l">time, the second sets pitch increase/decrease. Only works on the first pulse</span>
+<span id="L1026" class="l">channel.</span>
+<span id="L1027" class="l">4.15.2 Kit Instruments</span>
+<span id="L1028" class="l">S changes the loop points. The first digit modulates the offset value; the second</span>
+<span id="L1029" class="l">digit modulates the loop length. (1-7=increase, 9-F=decrease.) Used creatively,</span>
+<span id="L1030" class="l">this command can be very useful for creating a wide range of percussive and</span>
+<span id="L1031" class="l">timbral effects.</span>
+<span id="L1032" class="l">4.15.3 Noise Instruments</span>
+<span id="L1033" class="l">Alters noise shape (see section 2.6.5). The command is relative, meaning that</span>
+<span id="L1034" class="l">the digits are independently added to the active noise shape.</span>
+<span id="L1035" class="l"> </span>
+<span id="L1036" class="l">===== page 53 =====</span>
+<span id="L1037" class="l">4.16. T: TEMPO 53</span>
+<span id="L1038" class="l">4.16 T: Tempo</span>
+<span id="L1039" class="l">Changes the tick rate to match the given beats per minute (BPM) value. The</span>
+<span id="L1040" class="l">BPM is accurate only if the active groove has 6 ticks per note step. If the groove</span>
+<span id="L1041" class="l">has some other number of ticks per note step, the BPM value should be adjusted</span>
+<span id="L1042" class="l">according to the formula lsdj bpm = (desired bpm × ticks per step)/6. T28-TFF</span>
+<span id="L1043" class="l">selects 40-255 BPM, T00-T27 selects 256-295 BPM.</span>
+<span id="L1044" class="l">Example:</span>
+<span id="L1045" class="l">T80 set tempo to 128 BPM</span>
+<span id="L1046" class="l">TFF set tempo to 255 BPM</span>
+<span id="L1047" class="l">T27 set tempo to 295 BPM</span>
+<span id="L1048" class="l">4.17 V: Vibrato</span>
+<span id="L1049" class="l">Adds vibrato. The first digit sets speed, second sets depth.</span>
+<span id="L1050" class="l">The vibrato speed and shape depends on the instrument’s PITCH setting.</span>
+<span id="L1051" class="l">When PITCH is set to TICK, the vibrato is synced to the music (assuming a groove</span>
+<span id="L1052" class="l">with on average 6 ticks/step).</span>
+<span id="L1053" class="l">Depth 0 1 2 3 4 5 6 7</span>
+<span id="L1054" class="l">Semitones Depth 0.125 8 9 0.25 0.375 A B 0.5 C D 0.75 E F</span>
+<span id="L1055" class="l">1 1.5 2</span>
+<span id="L1056" class="l">Semitones 2.5 3 3.5 4 5 6 7 8</span>
+<span id="L1057" class="l">Example:</span>
+<span id="L1058" class="l">V42 speed=4, depth=0.375 semitones</span>
+<span id="L1059" class="l">V00 reset vibrato</span>
+<span id="L1060" class="l">4.18 W: Wave</span>
+<span id="L1061" class="l">4.18.1 For Pulse Instruments:</span>
+<span id="L1062" class="l">Changes waveform. Due to a hardware oddity, the instrument LENGTH timer is</span>
+<span id="L1063" class="l">reset, possibly extending the duration of the sound.</span>
+<span id="L1064" class="l"> </span>
+<span id="L1065" class="l">===== page 54 =====</span>
+<span id="L1066" class="l">54 CHAPTER 4. COMMANDS</span>
+<span id="L1067" class="l">4.18.2 For Wave Instruments:</span>
+<span id="L1068" class="l">The first digit sets synth sound speed, the second sets synth sound length. 0 =</span>
+<span id="L1069" class="l">no change. The synth restarts if length is changed.</span>
+<span id="L1070" class="l">4.19 Z: RandomiZe</span>
+<span id="L1071" class="l">The Z command repeats the last command that is not Z or H, adding a random</span>
+<span id="L1072" class="l">number to the original command value. The Z value controls the maximum</span>
+<span id="L1073" class="l">value of each digit to be added.</span>
+<span id="L1074" class="l">Example:</span>
+<span id="L1075" class="l">Z02 adds one of 0, 1, 2 to the original value.</span>
+<span id="L1076" class="l">Z20 adds one of 0, 10, 20 to the original value.</span>
+<span id="L1077" class="l">Z22 adds one of 0, 1, 2, 10, 11, 12, 20, 21, 22 to the original value.</span>
+<span id="L1078" class="l"> </span>
+<span id="L1079" class="l">===== page 55 =====</span>
+<span id="L1080" class="l">Chapter 5</span>
+<span id="L1081" class="l">Synchronization</span>
+<span id="L1082" class="l">LSDj can synchronize with other devices through the link port, so that it is</span>
+<span id="L1083" class="l">possible to run both in exactly the same tempo. Enable synchronization by</span>
+<span id="L1084" class="l">changing the SYNC mode in the project screen.</span>
+<span id="L1085" class="l">IMPORTANT: When running synchronized, use a groove based on 6 ticks/step.</span>
+<span id="L1086" class="l">Otherwise, the resulting speed might be wrong.</span>
+<span id="L1087" class="l">5.1 Game Boy to Game Boy Sync</span>
+<span id="L1088" class="l">It is possible to sync two Game Boys running LSDj using a Nintendo Game Link</span>
+<span id="L1089" class="l">cable.</span>
+<span id="L1090" class="l">5.1.1 Activating LSDj Sync</span>
+<span id="L1091" class="l">Make sure that both Game Boys are turned off. Connect the Game Boys using</span>
+<span id="L1092" class="l">the link cable. Now, turn on the Game Boys, and go to the project screens. Set</span>
+<span id="L1093" class="l">the SYNC mode to LSDJ on both Game Boys.</span>
+<span id="L1094" class="l">5.1.2 Song Play</span>
+<span id="L1095" class="l">When in song mode, pressing START starts both Game Boys from the same song</span>
+<span id="L1096" class="l">position. The Game Boy on which you pressed START is the one that sends sync</span>
+<span id="L1097" class="l">signals; this is indicated by the text LEAD appearing in the right margin. The</span>
+<span id="L1098" class="l">other Game Boy shows the text SYNC, indicating that it is receiving sync signals.</span>
+<span id="L1099" class="l">55</span>
+<span id="L1100" class="l"> </span>
+<span id="L1101" class="l">===== page 56 =====</span>
+<span id="L1102" class="l">56 CHAPTER 5. SYNCHRONIZATION</span>
+<span id="L1103" class="l">5.1.3 Live Play</span>
+<span id="L1104" class="l">Pressing START in live mode makes the Game Boy start like usual; also LEAD/SYNC</span>
+<span id="L1105" class="l">texts indicate that sync signals are sent between the Game Boys. When pressing</span>
+<span id="L1106" class="l">START on the following Game Boy, the text WAIT appears while it is waiting for</span>
+<span id="L1107" class="l">a phrase start.</span>
+<span id="L1108" class="l">5.1.4 Clipboard Transfer</span>
+<span id="L1109" class="l">When two Game Boys are linked and not playing, copying groove, chain, phrase,</span>
+<span id="L1110" class="l">instr, table, wave or synth data on one Game Boy will transfer the copied data</span>
+<span id="L1111" class="l">so it can be pasted on the other Game Boy.</span>
+<span id="L1112" class="l">5.1.5 Switching Lead while Playing</span>
+<span id="L1113" class="l">In some cases, it can be useful to switch which Game Boy is the lead while</span>
+<span id="L1114" class="l">playing. Do this by following steps:</span>
+<span id="L1115" class="l">1. Set Game Boys to LSDJ sync.</span>
+<span id="L1116" class="l">2. Start playing.</span>
+<span id="L1117" class="l">3. Set the following Game Boy to sync OFF.</span>
+<span id="L1118" class="l">4. Stop lead Game Boy.</span>
+<span id="L1119" class="l">5. Set the following Game Boy to sync LSDJ. It now becomes the lead.</span>
+<span id="L1120" class="l">5.2 MIDI Sync</span>
+<span id="L1121" class="l">MIDI sync requires a special MIDI sync cable for Game Boy. For information</span>
+<span id="L1122" class="l">on how to build a MIDI to Game Boy adapter, please refer to the website at</span>
+<span id="L1123" class="l">https://www.littlesounddj.com.</span>
+<span id="L1124" class="l">Usage: Plug in the sync device before turning on your Game Boy. Then, set</span>
+<span id="L1125" class="l">LSDj to MIDI sync mode. Pressing START will now make LSDj wait for and sync</span>
+<span id="L1126" class="l">with any incoming MIDI clock signals. LSDj should use grooves based on 6</span>
+<span id="L1127" class="l">ticks.</span>
+<span id="L1128" class="l"> </span>
+<span id="L1129" class="l">===== page 57 =====</span>
+<span id="L1130" class="l">5.3. ANALOG IN 57</span>
+<span id="L1131" class="l">TIP!</span>
+<span id="L1132" class="l">• When LSDj is following, it is possible to temporarily play slower or faster by</span>
+<span id="L1133" class="l">pressing A+LEFT/RIGHT on tempo in project screen. This can be very useful</span>
+<span id="L1134" class="l">when being hooked up to some external hardware that has drifted slightly out of</span>
+<span id="L1135" class="l">sync.</span>
+<span id="L1136" class="l">5.3 Analog In</span>
+<span id="L1137" class="l">LSDj can sync to music equipment that sends analog sync signals. This sync</span>
+<span id="L1138" class="l">mode has been tested with the Korg Volca series, but works with other gear</span>
+<span id="L1139" class="l">too; you can find a list at https://littlesounddj.wikia.com/wiki/</span>
+<span id="L1140" class="l">Analog_Sync_Compatibility.</span>
+<span id="L1141" class="l">A cable should be easy to make, since no particular electronics are needed:</span>
+<span id="L1142" class="l">all it takes is to splice a Nintendo Game Link Cable and a 3.5 mm mini plug</span>
+<span id="L1143" class="l">cable together. The wires should be connected as shown in the below diagram:</span>
+<span id="L1144" class="l">GND goes to GND, CLK goes to CLK.</span>
+<span id="L1145" class="l">CLK</span>
+<span id="L1146" class="l">CLK</span>
+<span id="L1147" class="l">GND</span>
+<span id="L1148" class="l">are GND</span>
+<span id="L1149" class="l">As a clarification, the above diagram is looking at the cable, and the wires</span>
+<span id="L1150" class="l">probably not red and blue in reality.</span>
+<span id="L1151" class="l">Once the cable is built, connect it to the Game Boy serial port and the SYNC</span>
+<span id="L1152" class="l">OUT of your synthesizer. In project screen, set LSDj to ANALOG sync mode. The</span>
+<span id="L1153" class="l">TICKS/STEP setting controls how many LSDj ticks should be generated for each</span>
+<span id="L1154" class="l">incoming sync signal. Depending on the synthesizer, it may be necessary to</span>
+<span id="L1155" class="l">change this setting to make LSDj run at the right speed. For Korg Monotribe, it</span>
+<span id="L1156" class="l">should typically be set to 6, whereas for Korg Volca, it should be C.</span>
+<span id="L1157" class="l"> </span>
+<span id="L1158" class="l">===== page 58 =====</span>
+<span id="L1159" class="l">58 CHAPTER 5. SYNCHRONIZATION</span>
+<span id="L1160" class="l">5.4 Analog Out</span>
+<span id="L1161" class="l">Analog Out works similar to Analog In, except that in this mode, LSDj is</span>
+<span id="L1162" class="l">responsible for sending the sync signal. The cable is different from the one used</span>
+<span id="L1163" class="l">for Analog In. Build it by connecting the wires as follows:</span>
+<span id="L1164" class="l">CLK</span>
+<span id="L1165" class="l">GND</span>
+<span id="L1166" class="l">CLK</span>
+<span id="L1167" class="l">GND</span>
+<span id="L1168" class="l">As a clarification, the above diagram is looking at the cable, and the wires</span>
+<span id="L1169" class="l">are probably not red and blue in reality. This cable should be connected to SYNC</span>
+<span id="L1170" class="l">IN of your synthesizer.</span>
+<span id="L1171" class="l">5.5 Troubleshooting Cables</span>
+<span id="L1172" class="l">When making cables, double and triple check that the wires are connected to</span>
+<span id="L1173" class="l">the right pins. You will need a multimeter for probing the pins. If they are not</span>
+<span id="L1174" class="l">connected exactly like they should, you can get cables that nearly work, but the</span>
+<span id="L1175" class="l">sync is a little off. The most common problem is flipped pins; remember that</span>
+<span id="L1176" class="l">the diagrams are looking at the cable, not from it!</span>
+<span id="L1177" class="l">5.6 Keyboard Control</span>
+<span id="L1178" class="l">The KEYBD sync mode allows connecting a PS/2 keyboard to the Game Boy and</span>
+<span id="L1179" class="l">playing it like a piano. This can be fun for live shows and improvisation. For</span>
+<span id="L1180" class="l">information on how to build a PS/2 keyboard to Game Boy adapter, please refer</span>
+<span id="L1181" class="l">to the Wiki site: https://wiki.littlesounddj.com</span>
+<span id="L1182" class="l">The keyboard must be calibrated once is plugged in. To do this, go to the</span>
+<span id="L1183" class="l">project screen, set sync mode to KEYBD, and press A on the PS/2 DELAY setting.</span>
+<span id="L1184" class="l">Then, press the down arrow key on your PS/2 keyboard repeatedly until LSDj</span>
+<span id="L1185" class="l">says OK!</span>
+<span id="L1186" class="l">To get sound when playing the keyboard, first go to phrase screen and move</span>
+<span id="L1187" class="l">cursor to note column, or press START to play the keyboard while the song is</span>
+<span id="L1188" class="l">running.</span>
+<span id="L1189" class="l"> </span>
+<span id="L1190" class="l">===== page 59 =====</span>
+<span id="L1191" class="l">5.6. KEYBOARD CONTROL 59</span>
+<span id="L1192" class="l">5.6.1 Keyboard Note Layout</span>
+<span id="L1193" class="l">Figure 5.1: PC Keyboard Map</span>
+<span id="L1194" class="l">SPACE play using custom table</span>
+<span id="L1195" class="l">F1/F2 octave down/up</span>
+<span id="L1196" class="l">F3/F4 instrument down/up</span>
+<span id="L1197" class="l">F5/F6 select custom table to assign to SPACE</span>
+<span id="L1198" class="l">F8 change pulse instrument playback channels (PU1, PU2, PU1+2)</span>
+<span id="L1199" class="l">F9-F12 toggle channel mute (switches on key press)</span>
+<span id="L1200" class="l">CTRL+(F9-F12) tap channel mute (switches on key press and release)</span>
+<span id="L1201" class="l">CURSOR MOVEMENT KEYS move around cursor</span>
+<span id="L1202" class="l">ENTER play chain</span>
+<span id="L1203" class="l">CTRL+ENTER stop chain</span>
+<span id="L1204" class="l">PAGE UP/DOWN B+UP/DOWN</span>
+<span id="L1205" class="l"> </span>
+<span id="L1206" class="l">===== page 60 =====</span>
+<span id="L1207" class="l">60 CHAPTER 5. SYNCHRONIZATION</span>
+<span id="L1208" class="l"> </span>
+<span id="L1209" class="l">===== page 61 =====</span>
+<span id="L1210" class="l">Appendix A</span>
+<span id="L1211" class="l">Sample Kits</span>
+<span id="L1212" class="l">Machine Year Info</span>
+<span id="L1213" class="l">SP0256-AL2</span>
+<span id="L1214" class="l">General</span>
+<span id="L1215" class="l">Instruments</span>
+<span id="L1216" class="l">1981</span>
+<span id="L1217" class="l">The SP0256-AL2 Speech Processor IC contains a</span>
+<span id="L1218" class="l">programmable digital filter that can be made to</span>
+<span id="L1219" class="l">model a vocal tract. The 16k ROM stores both data</span>
+<span id="L1220" class="l">and instructions. The pulse width modulated out-</span>
+<span id="L1221" class="l">put can produce speech with a frequency range of</span>
+<span id="L1222" class="l">5kHz and a dynamic range of 42 dB.</span>
+<span id="L1223" class="l">61</span>
+<span id="L1224" class="l"> </span>
+<span id="L1225" class="l">===== page 62 =====</span>
+<span id="L1226" class="l">62 APPENDIX A. SAMPLE KITS</span>
+<span id="L1227" class="l">Machine Year Info</span>
+<span id="L1228" class="l">TR-606</span>
+<span id="L1229" class="l">Roland</span>
+<span id="L1230" class="l">1981</span>
+<span id="L1231" class="l">The Roland TR-606 Drumatix is a programmable</span>
+<span id="L1232" class="l">analogue drum machine. It was designed to couple</span>
+<span id="L1233" class="l">with the TB-303 Bassline. The TR-606 has a very</span>
+<span id="L1234" class="l">original sound and remains popular today.</span>
+<span id="L1235" class="l">TR-707</span>
+<span id="L1236" class="l">Roland</span>
+<span id="L1237" class="l">1984</span>
+<span id="L1238" class="l">The Roland TR-707 has the same functions as the</span>
+<span id="L1239" class="l">TR-909 with all PCM sounds. Starting with this</span>
+<span id="L1240" class="l">model, Roland began using an LCD display to show</span>
+<span id="L1241" class="l">the rhythm matrix and tempo.</span>
+<span id="L1242" class="l">TR-727</span>
+<span id="L1243" class="l">Roland</span>
+<span id="L1244" class="l">1985</span>
+<span id="L1245" class="l">The Roland TR-727 is identical to the TR-707, with</span>
+<span id="L1246" class="l">the exception that its sounds are Ethnic/Latin per-</span>
+<span id="L1247" class="l">cussion. It is meant to complement a rhythm sec-</span>
+<span id="L1248" class="l">tion, rather than be a main unit.</span>
+<span id="L1249" class="l"> </span>
+<span id="L1250" class="l">===== page 63 =====</span>
+<span id="L1251" class="l">63</span>
+<span id="L1252" class="l">Machine Year Info</span>
+<span id="L1253" class="l">TR-808</span>
+<span id="L1254" class="l">Roland</span>
+<span id="L1255" class="l">1980</span>
+<span id="L1256" class="l">The Roland TR-808 has played a defining role for</span>
+<span id="L1257" class="l">the 80’s Hip Hop and Electro movement. It is still</span>
+<span id="L1258" class="l">highly popular, thanks to its unmistakably original</span>
+<span id="L1259" class="l">sounds.</span>
+<span id="L1260" class="l">TR-909</span>
+<span id="L1261" class="l">Roland</span>
+<span id="L1262" class="l">1983</span>
+<span id="L1263" class="l">The Roland TR-909 is one of the most popular drum</span>
+<span id="L1264" class="l">machines ever. It has PCM sounds for cymbal and</span>
+<span id="L1265" class="l">hi-hat, but all other instruments still come from</span>
+<span id="L1266" class="l">analogue circuitry. The sounds are very useful for</span>
+<span id="L1267" class="l">House and Techno music.</span>
+<span id="L1268" class="l">CR-78</span>
+<span id="L1269" class="l">Roland</span>
+<span id="L1270" class="l">1978</span>
+<span id="L1271" class="l">The Roland CR-78 is perhaps the most luxurious</span>
+<span id="L1272" class="l">rhythm machine ever made. The guiro and tam-</span>
+<span id="L1273" class="l">bourine are still unique as of today, and bass, snare</span>
+<span id="L1274" class="l">and bongos sound very soft and rich.</span>
+<span id="L1275" class="l"> </span>
+<span id="L1276" class="l">===== page 64 =====</span>
+<span id="L1277" class="l">64 APPENDIX A. SAMPLE KITS</span>
+<span id="L1278" class="l">Machine Year Info</span>
+<span id="L1279" class="l">CR-8000</span>
+<span id="L1280" class="l">Roland</span>
+<span id="L1281" class="l">1981</span>
+<span id="L1282" class="l">The Roland CR-8000 was introduced after the TR-</span>
+<span id="L1283" class="l">808 – it has the same analog engine. The hi-hat</span>
+<span id="L1284" class="l">sounds more realistic than older rhythm machines,</span>
+<span id="L1285" class="l">but the hand clap sounds like an electric snare.</span>
+<span id="L1286" class="l">DR-55</span>
+<span id="L1287" class="l">Boss</span>
+<span id="L1288" class="l">1979</span>
+<span id="L1289" class="l">The Boss Dr. Rhythm range of drum machines is</span>
+<span id="L1290" class="l">especially designed for guitar players who need a</span>
+<span id="L1291" class="l">mobile drummer. The DR-55 is a simple analogue</span>
+<span id="L1292" class="l">drum machine with a very rough and direct sound.</span>
+<span id="L1293" class="l">DR-110</span>
+<span id="L1294" class="l">Boss</span>
+<span id="L1295" class="l">1983</span>
+<span id="L1296" class="l">The DR-110, the successor of the DR-55, has ana-</span>
+<span id="L1297" class="l">logue sound but is programmed digitally using a</span>
+<span id="L1298" class="l">LCD rhythm matrix. It quite possibly has the best</span>
+<span id="L1299" class="l">analogue handclap ever.</span>
+<span id="L1300" class="l"> </span>
+<span id="L1301" class="l">===== page 65 =====</span>
+<span id="L1302" class="l">65</span>
+<span id="L1303" class="l">Machine Year Info</span>
+<span id="L1304" class="l">Drumulator</span>
+<span id="L1305" class="l">E-mu</span>
+<span id="L1306" class="l">1983</span>
+<span id="L1307" class="l">The Drumulator was the first programmable drum</span>
+<span id="L1308" class="l">machine with built-in samples for under $1,000. It</span>
+<span id="L1309" class="l">was the predecessor of the E-mu SP-12.</span>
+<span id="L1310" class="l">DMX</span>
+<span id="L1311" class="l">Oberheim</span>
+<span id="L1312" class="l">1980</span>
+<span id="L1313" class="l">One of the first digital drum machines. Its popular-</span>
+<span id="L1314" class="l">ity contributed to the sound and evolution of 1980s</span>
+<span id="L1315" class="l">new wave, synthpop and hip hop music.</span>
+<span id="L1316" class="l">KR-55</span>
+<span id="L1317" class="l">Korg</span>
+<span id="L1318" class="l">1979</span>
+<span id="L1319" class="l">An advanced preset rhythm drum machine, cov-</span>
+<span id="L1320" class="l">ering genres such as Waltz, Samba, Rumba, Bossa</span>
+<span id="L1321" class="l">Nova, Disco and Rock.</span>
+<span id="L1322" class="l"> </span>
+<span id="L1323" class="l">===== page 66 =====</span>
+<span id="L1324" class="l">66 APPENDIX A. SAMPLE KITS</span>
+<span id="L1325" class="l">Machine Year Info</span>
+<span id="L1326" class="l">LinnDrum 1982</span>
+<span id="L1327" class="l">The LinnDrum originally sold for $3,000 and about</span>
+<span id="L1328" class="l">5.000 units were produced. It provided the rhythm</span>
+<span id="L1329" class="l">tracks of many 1980’s hit records.</span>
+<span id="L1330" class="l">Rhythm Ace</span>
+<span id="L1331" class="l">FR-1</span>
+<span id="L1332" class="l">Ace Tone</span>
+<span id="L1333" class="l">1965</span>
+<span id="L1334" class="l">Ace Tone was the first company to produce electric</span>
+<span id="L1335" class="l">rhythm boxes in Japan. It can be considered an</span>
+<span id="L1336" class="l">early incarnation of the Roland Corporation.</span>
+<span id="L1337" class="l">Tom</span>
+<span id="L1338" class="l">Sequential</span>
+<span id="L1339" class="l">Circuits</span>
+<span id="L1340" class="l">1984</span>
+<span id="L1341" class="l">The sounds are a bit dirty and harsh sounding, es-</span>
+<span id="L1342" class="l">pecially next to its older brother Drumtraks, but</span>
+<span id="L1343" class="l">that also gives Tom its character. The snare sounds</span>
+<span id="L1344" class="l">like nothing else on this planet - it’s electric!</span>
+<span id="L1345" class="l"> </span>
+<span id="L1346" class="l">===== page 67 =====</span>
+<span id="L1347" class="l">67</span>
+<span id="L1348" class="l">Machine Year Info</span>
+<span id="L1349" class="l">Acieed</span>
+<span id="L1350" class="l">House</span>
+<span id="L1351" class="l">1990’s</span>
+<span id="L1352" class="l">This set of vocal samples was derived from a bunch</span>
+<span id="L1353" class="l">of popular Acid House tracks. Can you dig it?</span>
+<span id="L1354" class="l">Animals</span>
+<span id="L1355" class="l">Bud Melvin</span>
+<span id="L1356" class="l">2004</span>
+<span id="L1357" class="l">The winner of the 2004 Animal Sample Compo. A</span>
+<span id="L1358" class="l">great selection of domestic animals.</span>
+<span id="L1359" class="l"> </span>
+<span id="L1360" class="l">===== page 68 =====</span>
+<span id="L1361" class="l">68 APPENDIX A. SAMPLE KITS</span>
+<span id="L1362" class="l"> </span>
+<span id="L1363" class="l">===== page 69 =====</span>
+<span id="L1364" class="l">Appendix B</span>
+<span id="L1365" class="l">Allophones</span>
+<span id="L1366" class="l">Allophones marked with * loop indefinitely.</span>
+<span id="L1367" class="l">Short vowels</span>
+<span id="L1368" class="l">*IH sitting, stranded</span>
+<span id="L1369" class="l">*EH extent, gentlemen</span>
+<span id="L1370" class="l">*AE extract, acting</span>
+<span id="L1371" class="l">*UH cookie, full</span>
+<span id="L1372" class="l">*AD talking, song</span>
+<span id="L1373" class="l">*AX lapel, instruct</span>
+<span id="L1374" class="l">Long vowels</span>
+<span id="L1375" class="l">IY treat, people, penny</span>
+<span id="L1376" class="l">EY great, statement, tray</span>
+<span id="L1377" class="l">AY kite, sky, mighty</span>
+<span id="L1378" class="l">OI noise, toy, voice</span>
+<span id="L1379" class="l">UW1 after clusters with YY: computer</span>
+<span id="L1380" class="l">UW2 in monosyllabic words: two, food</span>
+<span id="L1381" class="l">69</span>
+<span id="L1382" class="l"> </span>
+<span id="L1383" class="l">===== page 70 =====</span>
+<span id="L1384" class="l">70 APPENDIX B. ALLOPHONES</span>
+<span id="L1385" class="l">OW zone, close, snow</span>
+<span id="L1386" class="l">AW sound, mouse, down</span>
+<span id="L1387" class="l">EL little, angle, gentlemen</span>
+<span id="L1388" class="l">R-colored vowels</span>
+<span id="L1389" class="l">ER1 letter, furniture, interrupt</span>
+<span id="L1390" class="l">ER2 monosyllables: bird, fern, burn</span>
+<span id="L1391" class="l">OR fortune, adorn, store</span>
+<span id="L1392" class="l">AR farm, alarm, garment</span>
+<span id="L1393" class="l">YR hear, earring, irresponsible</span>
+<span id="L1394" class="l">XR hair, declare, stare</span>
+<span id="L1395" class="l">Resonants</span>
+<span id="L1396" class="l">WW we, warrant, linguist</span>
+<span id="L1397" class="l">RR1 initial position: read, write, x-ray</span>
+<span id="L1398" class="l">RR2 initial clusters: brown, crane, grease</span>
+<span id="L1399" class="l">LL like, hello, steel</span>
+<span id="L1400" class="l">YY1 clusters: cute, beauty, computer</span>
+<span id="L1401" class="l">YY2 initial position: yes, yarn, yo-yo</span>
+<span id="L1402" class="l">Voiced fricatives</span>
+<span id="L1403" class="l">VV vest, prove, even</span>
+<span id="L1404" class="l">DH1 word-initial position: this, then, they</span>
+<span id="L1405" class="l">DH2 word-final and between vowels: bathe, bathing</span>
+<span id="L1406" class="l">ZZ zoo, phase</span>
+<span id="L1407" class="l">ZH beige, pleasure</span>
+<span id="L1408" class="l"> </span>
+<span id="L1409" class="l">===== page 71 =====</span>
+<span id="L1410" class="l">71</span>
+<span id="L1411" class="l">Voiceless fricatives</span>
+<span id="L1412" class="l">*FF fire, fox</span>
+<span id="L1413" class="l">*TH this, they</span>
+<span id="L1414" class="l">*SS sit, smile</span>
+<span id="L1415" class="l">SH shirt, leash, nation</span>
+<span id="L1416" class="l">HH1 before front vowels: YR, IY, IH, EY, EH, XR, AE</span>
+<span id="L1417" class="l">HH2 before back vowels: UW, UH, OW, OY, AO, OR, AR</span>
+<span id="L1418" class="l">WH white, whim, twenty</span>
+<span id="L1419" class="l">Voiced stops</span>
+<span id="L1420" class="l">BB1 final position: rib; between vowels: fibber, in clusters: bleed, brown</span>
+<span id="L1421" class="l">BB2 initial position before a vowel: beast</span>
+<span id="L1422" class="l">DD1 final position: played, end</span>
+<span id="L1423" class="l">DD2 initial position: down; clusters: drain</span>
+<span id="L1424" class="l">GG1 before high front vowels: YR, IY, IH, EY, EH, XR</span>
+<span id="L1425" class="l">GG2 before high back vowels: UW, UH, OW, OY, AX; and clusters: green, glue</span>
+<span id="L1426" class="l">GG3 before low vowels: AE, AW, AY, AR, AA, AO, OR, ER; and medial clusters:</span>
+<span id="L1427" class="l">anger; and final position: peg</span>
+<span id="L1428" class="l">Voiceless stops</span>
+<span id="L1429" class="l">PP pleasure, ample, trip</span>
+<span id="L1430" class="l">TT1 final clusters before SS: tests, its</span>
+<span id="L1431" class="l">TT2 all other positions: test, street</span>
+<span id="L1432" class="l">KK1 before front vowels: YR, IY, IH, EY, EH, XR, AY, AE, ER, AX; initial clusters:</span>
+<span id="L1433" class="l">cute, clown, scream</span>
+<span id="L1434" class="l">KK2 final position: speak; final clusters: task</span>
+<span id="L1435" class="l"> </span>
+<span id="L1436" class="l">===== page 72 =====</span>
+<span id="L1437" class="l">72 APPENDIX B. ALLOPHONES</span>
+<span id="L1438" class="l">KK3 before back vowels: UW, UH, OW, OY, OR, AR, AO; initial clusters: crane,</span>
+<span id="L1439" class="l">quick, clown, scream</span>
+<span id="L1440" class="l">Affricates</span>
+<span id="L1441" class="l">CH church, feature</span>
+<span id="L1442" class="l">JH judge, injure</span>
+<span id="L1443" class="l">Nasal</span>
+<span id="L1444" class="l">MM milk, alarm, example</span>
+<span id="L1445" class="l">NN1 before front and central vowels: YR, IY, IH, EY, EH, XR, AE, ER, AX, AW,</span>
+<span id="L1446" class="l">AY, UW; final clusters: earn</span>
+<span id="L1447" class="l">NN2 before back vowels: UH, OW, OY, OR, AR, AA</span>
+<span id="L1448" class="l"> </span>
+<span id="L1449" class="l">===== page 73 =====</span>
+<span id="L1450" class="l">Appendix C</span>
+<span id="L1451" class="l">SRAM Memory Map</span>
+<span id="L1452" class="l">This chapter is intended for programmers. It contains information about how</span>
+<span id="L1453" class="l">song data is stored in SRAM. If you use an emulator, SRAM contents are usually</span>
+<span id="L1454" class="l">stored in a .sav file.</span>
+<span id="L1455" class="l">C.1 Bank Layouts</span>
+<span id="L1456" class="l">C.1.1 Bank 0</span>
+<span id="L1457" class="l">A000-AFEF phrase notes</span>
+<span id="L1458" class="l">AFF0-AFFF bookmarks</span>
+<span id="L1459" class="l">B000-B08F empty</span>
+<span id="L1460" class="l">B090-B28F grooves</span>
+<span id="L1461" class="l">B290-B58F song chains</span>
+<span id="L1462" class="l">B590-B68F empty</span>
+<span id="L1463" class="l">B690-B88F table envelopes</span>
+<span id="L1464" class="l">B890-BA4F speech instrument words</span>
+<span id="L1465" class="l">BA50-BDCF empty</span>
+<span id="L1466" class="l">BDD0-BDF9 speech instrument wordnames</span>
+<span id="L1467" class="l">73</span>
+<span id="L1468" class="l"> </span>
+<span id="L1469" class="l">===== page 74 =====</span>
+<span id="L1470" class="l">74 APPENDIX C. SRAM MEMORY MAP</span>
+<span id="L1471" class="l">BDFA-BE77 empty</span>
+<span id="L1472" class="l">BE78-BE79 mem initialized flag (set to ”rb” on init)</span>
+<span id="L1473" class="l">BE7A-BFB9 instrument names</span>
+<span id="L1474" class="l">C.1.2 Bank 1</span>
+<span id="L1475" class="l">A000-A01F empty</span>
+<span id="L1476" class="l">A020-A03F table allocation table</span>
+<span id="L1477" class="l">A040-A07F instr alloc table</span>
+<span id="L1478" class="l">A080-A87F chain phrases</span>
+<span id="L1479" class="l">A880-B07F chain transposes</span>
+<span id="L1480" class="l">B080-B47F instrument parameters</span>
+<span id="L1481" class="l">B480-B67F table transposes</span>
+<span id="L1482" class="l">B680-B87F table commands, left column</span>
+<span id="L1483" class="l">B880-BA7F table command values, left column</span>
+<span id="L1484" class="l">BA80-BC7F table commands, right column</span>
+<span id="L1485" class="l">BC80-BE7F table command values, right column</span>
+<span id="L1486" class="l">BE80-BE81 mem initialized flag (set to ”rb” on init)</span>
+<span id="L1487" class="l">BE82-BEA1 phrase allocation table</span>
+<span id="L1488" class="l">BEA2-BEB1 chain allocation table</span>
+<span id="L1489" class="l">BEB2-BFB1 softsynth params</span>
+<span id="L1490" class="l">BFB2-BFB2 clock, hours</span>
+<span id="L1491" class="l">BFB3-BFB3 clock, minutes</span>
+<span id="L1492" class="l">BFB4-BFB4 tempo</span>
+<span id="L1493" class="l">BFB5-BFB5 tune setting</span>
+<span id="L1494" class="l"> </span>
+<span id="L1495" class="l">===== page 75 =====</span>
+<span id="L1496" class="l">C.1. BANK LAYOUTS 75</span>
+<span id="L1497" class="l">BFB6-BFB6 total clock, days</span>
+<span id="L1498" class="l">BFB7-BFB7 total clock, hours</span>
+<span id="L1499" class="l">BFB8-BFB8 total clock, minutes</span>
+<span id="L1500" class="l">BFB9-BFB9 total clock</span>
+<span id="L1501" class="l">BFBA-BFBA key delay</span>
+<span id="L1502" class="l">BFBB-BFBB key repeat</span>
+<span id="L1503" class="l">BFBC-BFBC font (for cgb)</span>
+<span id="L1504" class="l">BFBD-BFBD sync mode (off/lsdj/midi/...)</span>
+<span id="L1505" class="l">BFBE-BFBE colorset</span>
+<span id="L1506" class="l">BFBF-BFBF sync parameter (e.g. analog in ticks/step)</span>
+<span id="L1507" class="l">BFC0-BFC0 clone (0=deep, 1=slim)</span>
+<span id="L1508" class="l">BFC1-BFC1 file changed?</span>
+<span id="L1509" class="l">BFC2-BFC2 power save</span>
+<span id="L1510" class="l">BFC3-BFC3 prelisten</span>
+<span id="L1511" class="l">BFC4-BFC5 synths locked?</span>
+<span id="L1512" class="l">BFC6-BFC9 last used instrument/channel</span>
+<span id="L1513" class="l">C.1.3 Bank 2</span>
+<span id="L1514" class="l">A000-AFEF phrase commands</span>
+<span id="L1515" class="l">AFF0-BFDF phrase command values</span>
+<span id="L1516" class="l">C.1.4 Bank 3</span>
+<span id="L1517" class="l">A000-AFFF waves</span>
+<span id="L1518" class="l">B000-BFEF phrase instruments</span>
+<span id="L1519" class="l">BFF0-BFF1 mem initialized flag (set to ”rb” on init)</span>
+<span id="L1520" class="l">BFF2-BFFE empty</span>
+<span id="L1521" class="l">BFFF-BFFF version byte</span>
+<span id="L1522" class="l"> </span>
+<span id="L1523" class="l">===== page 76 =====</span>
+<span id="L1524" class="l">76 APPENDIX C. SRAM MEMORY MAP</span>
+<span id="L1525" class="l">Table C.1: Pulse Instrument SRAM Layout.</span>
+<span id="L1526" class="l">Byte Bits Content Value</span>
+<span id="L1527" class="l">0 7-0 0</span>
+<span id="L1528" class="l">1 7-0 ENV. 1</span>
+<span id="L1529" class="l">2 7-0 PU2 TSP.</span>
+<span id="L1530" class="l">3 6 LENGTH=UNLIM 5-0 LENGTH</span>
+<span id="L1531" class="l">4 6-0 SWEEP</span>
+<span id="L1532" class="l">5 7 PITCH=STEP 6 PITCH=DRUM 5 TRANSPOSE 4 PITCH speed 3 TABLE speed 2-1 Vibrato shape 0 Vibrato direction 6 5 Table off/on 4-0 Table</span>
+<span id="L1533" class="l">7 7-6 WAVE</span>
+<span id="L1534" class="l">1-0 OUTPUT</span>
+<span id="L1535" class="l">8 3-0 CMD/RATE</span>
+<span id="L1536" class="l">9 7-0 ENV. 2</span>
+<span id="L1537" class="l">10 7-0 ENV. 3</span>
+<span id="L1538" class="l">11 7-0 FINETUNE</span>
+<span id="L1539" class="l">0=yes, 1=no</span>
+<span id="L1540" class="l">0=no, 1=yes</span>
+<span id="L1541" class="l">0=no, 1=yes</span>
+<span id="L1542" class="l">0=on, 1=off</span>
+<span id="L1543" class="l">0=fast, 1=tick</span>
+<span id="L1544" class="l">0=tick, 1=step</span>
+<span id="L1545" class="l">0=sin, 1=saw, 2=sqr</span>
+<span id="L1546" class="l">0=down, 1=up</span>
+<span id="L1547" class="l">0=off, 1=on</span>
+<span id="L1548" class="l">C.2 Instrument Layouts</span>
+<span id="L1549" class="l">Tables C.1 to C.4 show the SRAM layout of the different instrument types. Each</span>
+<span id="L1550" class="l">instrument takes up 16 bytes of the instrument parameter area in Bank 1.</span>
+<span id="L1551" class="l"> </span>
+<span id="L1552" class="l">===== page 77 =====</span>
+<span id="L1553" class="l">C.2. INSTRUMENT LAYOUTS 77</span>
+<span id="L1554" class="l">Table C.2: Wave Instrument SRAM Layout.</span>
+<span id="L1555" class="l">Byte Bits Content Value</span>
+<span id="L1556" class="l">0 7-0 1</span>
+<span id="L1557" class="l">1 6-5 2 3-0 3 7-0 7-4 VOLUME</span>
+<span id="L1558" class="l">LOOP POS</span>
+<span id="L1559" class="l">WAVE</span>
+<span id="L1560" class="l">SYNTH</span>
+<span id="L1561" class="l">4 - -</span>
+<span id="L1562" class="l">5 7 PITCH=STEP 6 PITCH=DRUM 5 TRANSPOSE 4 PITCH speed 3 TABLE speed 2-1 Vibrato shape 0 Vibrato direction 6 5 Table off/on 4-0 Table</span>
+<span id="L1563" class="l">7 1-0 OUTPUT</span>
+<span id="L1564" class="l">8 3-0 CMD/RATE</span>
+<span id="L1565" class="l">9 1-0 PLAYTYPE 10 3-0 LENGTH</span>
+<span id="L1566" class="l">11 7-0 SPEED</span>
+<span id="L1567" class="l">12 7-0 FINETUNE</span>
+<span id="L1568" class="l">0=no, 1=yes</span>
+<span id="L1569" class="l">0=no, 1=yes</span>
+<span id="L1570" class="l">0=on, 1=off</span>
+<span id="L1571" class="l">0=fast, 1=tick</span>
+<span id="L1572" class="l">0=tick, 1=step</span>
+<span id="L1573" class="l">0=sin, 1=saw, 2=sqr</span>
+<span id="L1574" class="l">0=down, 1=up</span>
+<span id="L1575" class="l">0=off, 1=on</span>
+<span id="L1576" class="l">0=off, 1=once, 2=loop, 3=pingpong</span>
+<span id="L1577" class="l"> </span>
+<span id="L1578" class="l">===== page 78 =====</span>
+<span id="L1579" class="l">78 APPENDIX C. SRAM MEMORY MAP</span>
+<span id="L1580" class="l">Table C.3: Kit Instrument SRAM Layout.</span>
+<span id="L1581" class="l">Byte Bits Content Value</span>
+<span id="L1582" class="l">0 7-0 2</span>
+<span id="L1583" class="l">1 6-5 VOLUME</span>
+<span id="L1584" class="l">2 7 LOOP 1=ATK 6 SPEED=0.5X 5-0 KIT</span>
+<span id="L1585" class="l">3 7-0 LENGTH 1 4 - -</span>
+<span id="L1586" class="l">5 7 PITCH=STEP 6 LOOP 1 5 LOOP 2 4 PITCH speed 3 TABLE speed 2-1 Vibrato shape 0 Vibrato direction 6 5 Table off/on 4-0 Table</span>
+<span id="L1587" class="l">7 1-0 OUTPUT</span>
+<span id="L1588" class="l">8 7-0 FINETUNE</span>
+<span id="L1589" class="l">9 7 LOOP 2=ATK 5-0 KIT</span>
+<span id="L1590" class="l">10 11 12 13 7-0 DIST 7-0 LENGTH 2 7-0 OFFSET 1</span>
+<span id="L1591" class="l">7-0 OFFSET 2</span>
+<span id="L1592" class="l">0=no, 1=yes</span>
+<span id="L1593" class="l">0=no, 1=yes</span>
+<span id="L1594" class="l">0=AUTO</span>
+<span id="L1595" class="l">0=no, 1=yes</span>
+<span id="L1596" class="l">0=off, 1=on</span>
+<span id="L1597" class="l">0=off, 1=on</span>
+<span id="L1598" class="l">0=fast, 1=tick</span>
+<span id="L1599" class="l">0=tick, 1=step</span>
+<span id="L1600" class="l">0=sin, 1=saw, 2=sqr</span>
+<span id="L1601" class="l">0=down, 1=up</span>
+<span id="L1602" class="l">0=off, 1=on</span>
+<span id="L1603" class="l">0=no, 1=yes</span>
+<span id="L1604" class="l">d0-d3=CLIP, SHAPE, SHAP2, WRAP</span>
+<span id="L1605" class="l">0=AUTO</span>
+<span id="L1606" class="l"> </span>
+<span id="L1607" class="l">===== page 79 =====</span>
+<span id="L1608" class="l">C.2. INSTRUMENT LAYOUTS 79</span>
+<span id="L1609" class="l">Table C.4: Noise Instrument SRAM Layout.</span>
+<span id="L1610" class="l">Byte Bits Content Value</span>
+<span id="L1611" class="l">0 7-0 3</span>
+<span id="L1612" class="l">1 7-0 2 0 3 6 5-0 4 7-0 5 5 2-1 6 5 4-0 7 1-0 8 3-0 9 7-0 10 7-0 ENV. 1</span>
+<span id="L1613" class="l">PITCH LENGTH=UNLIM LENGTH</span>
+<span id="L1614" class="l">Last entered note</span>
+<span id="L1615" class="l">TRANSPOSE 3 TABLE speed Vibrato shape 0 Vibrato direction Table off/on Table</span>
+<span id="L1616" class="l">OUTPUT</span>
+<span id="L1617" class="l">CMD/RATE</span>
+<span id="L1618" class="l">ENV. 2</span>
+<span id="L1619" class="l">ENV. 3</span>
+<span id="L1620" class="l">0=free, 1=safe</span>
+<span id="L1621" class="l">0=yes, 1=no</span>
+<span id="L1622" class="l">0=on, 1=off</span>
+<span id="L1623" class="l">0=tick, 1=step</span>
+<span id="L1624" class="l">0=sin, 1=saw, 2=sqr</span>
+<span id="L1625" class="l">0=down, 1=up</span>
+<span id="L1626" class="l">0=off, 1=on</span></pre>
+<footer class="pf"></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-lsdj-manual.html">Little Sound Dj v9.2.6 Operating Manual (summary)</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, TraxWeekly articles…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:technique</code> <code>type:concept</code> <code>type:entity</code> <code>type:summary</code> <code>type:tw</code> · <code>kind:tool</code> <code>kind:person</code> … · <code>platform:c64</code> <code>platform:gameboy</code> <code>platform:pc-tracker</code> · <code>tag:sid</code> · hex and tracker notation search as typed (<code>$0E</code>, <code>Gxx</code>, <code>C-4</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-08-30 · 476 pages · 9084 links · 2 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

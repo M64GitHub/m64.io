@@ -1,0 +1,1140 @@
+===== page 1 =====
+
+===== page 2 =====
+USER INTERFACE OVERVIEW (DOCUMENT VERSION 1.0)
+INFO AREA
+The info area contains the logo, information
+about selected patterns, jamming octave,
+raster time, playback time, auto-advance
+mode / amount, pulse width meter, filter cut-
+off frequency meter and oscilloscope.
+main area, waveforms-arpeggio table
+(WFARP), pulse table (PULSE) and filter table
+(FILT.)
+PATTERN EDITOR
+SHORTCUT KEY: F5
+This is where you write the actual music. You
+can edit three different patterns at one time,
+one for each of the three channels of the SID
+chip.
+CHORD TABLE
+SHORTCUT KEY: C=+F5 (CTRL+F5)
+In this table you can edit and store chords,
+you can choose which chord is default for an
+instrument, the chord used can be changed in
+the pattern editor. Storing the chords
+separately from the instruments gives you
+more flexibility (you don't have to create
+different instruments for different chords).
+ORDER LIST
+SHORTCUT KEY: F6
+This is where you control the whole
+arrangement of your tune, i.e. the order of the
+patterns etc.
+TEMPO-PROGRAM TABLE
+SHORTCUT KEY: C=+F7 (CTRL+F7)
+This table is only used if you need complex
+tempos, see the section about tempos for
+more information.
+INSTRUMENT EDITOR
+SHORTCUT KEY: F7
+Here you create the instruments for your
+tunes. This area consists of four sections; the
+SUBTUNE AND TEMPO
+This area shows the active sub tune and the
+default tune-tempo / funktempo.
+===== page 3 =====
+WAVEFORM-ARPEGGIO-DETUNE TABLE (DOCUMENT VERSION 1.0)
+WF-COLUMN
+$00..$0F Repeat only arpeggio/detune-
+columns for 1..16 frames (no
+Waveform-change).
+$10..$FD Simple WAVEFORM/CONTROL
+register value setting.
+$FE Jump to a table-position (position
+in 2nd (ARP) column, if >=$40, it
+jumps to itself).
+$FF End of the table, table execution
+ends here. This value can't be
+typed, it's shown as END at end of
+table.
+WAVEFORM / CONTROL FIRST NIBBLE
+The first nibble of this value sets the
+waveform (or combination of waveforms). To
+combine waveforms, you add the value for
+one waveform to the other, so to combine Saw
+tooth and Pulse, the value would be $2 + $4 =
+$6. Remember that that noise waveform can't
+be combined with other waveforms. The
+values for the waveforms are:
+$1 TRIANGLE
+$2 SAW TOOTH
+$4 PULSE
+For the pulse waveform to be
+audible you need to insert at least
+one row in the PULSE table to set
+the pulse width.
+$8 NOISE
+WAVEFORM / CONTROL SECOND NIBBLE
+The second nibble (control register) sets
+different options for the waveform. These
+values can again be combined by adding the
+ones you want together, so to put gate on
+(like you would normally do) and enable ring
+modulation, the result would be $1 + $4 = $5.
+To produce “Hard Sync” effects,
+explained in the introduction.
+$4 RING MODULATION
+This is explained in the
+introduction.
+$8 TEST
+This resets and lock the oscillator
+at zero until this value is cleared.
+ARP-COLUMN
+$00 Zero pitch-shifting (prime, '0'
+interval) - regain original note-
+pitch
+$01..$5F Relative pitch-shift upwards in
+halftones (positive interval)
+$7F Jump to default or pattern-FX set
+Chord.
+Depending on the chord, the
+execution of the waveform table
+may continue after the chord.
+With this command you can also
+override the default chord speed
+by setting the speed value in the
+(WF) column (values can be
+$00..$0F). If you do this, you
+should leave the default chord
+speed setting to $00.
+$80 No process (useful when don’t
+want to touch pitch and detune,
+just waveform).
+$81..$DF Set absolute pitch (frequencies
+are identical to C-1..A-8 notes,
+see table in the end of this
+manual).
+$FF..$E0 Relative pitch-shift downwards in
+negative direction (negative
+interval).
+$1 GATE ON
+$2 SYNC
+The gate needs to be on for the
+waveform to be heard.
+DT-COLUMN (DETUNE)
+$00..$FE Set fine-detuning amount. The
+higher the value the sharper the
+pitch will be.
+$FF No process in detune-table (the
+previously set detune-value is
+retained).
+===== page 4 =====
+PULSE WIDTH AND FILTER TABLES
+PULSE WIDTH TABLE
+$8x..$Fx xx set pulse-waveform's pulse
+width hi-nibble and low-byte. A
+value of $000 or $FFF will
+produce a constant DC output
+(silent), a value of $800 will
+produce a square wave. The
+value of the first nibble doesn't
+affect the pulse width, but it has
+to be $8..$F.
+$00..$7F xx Adds / subtracts signed xx
+(0...$7F / $80...$ff) to the pulse
+width 0-127 ($00-7F) times, in
+other words, this will animate
+the pulse width. Use '=' key to
+negate a positive value or see
+the conversion table in the end
+of this manual for signed
+decimal values (-128 - 127).
+$FE Jump to a position in the table
+(position in 2nd column, can
+jump to itself)
+$FF End of the table, table execution
+ends here. This value can't be
+typed, it's show as END at end
+of table.
+FILTER TABLE
+$8r..$Fr xx The first nibble sets the filter
+band, the possible values are $8
+=> filter deactivated, $9 =>
+low-pass, $B => low-pass +
+band pass, $C => high-pass, $D
+=> low-pass + high pass, $E
+=> band-pass + high-pass, $F
+=> all modes together.
+The second nibble (r) sets the
+resonance, this can be any
+value from $0 to $F, $F giving
+the strongest resonance of
+course. If band is set to $F (all
+modes together) then r can't be
+set to $F (this is due to the
+reserved end of table value
+$FF).
+The third and fourth nibbles (xx)
+sets the cut-off frequency. Valid
+values are $00 - $FF. The
+approximate cut-off frequency
+ranges between 30Hz and
+10KHz.
+$00..$7F xx Adds / subtracts signed xx
+(0...$7F / $80...$ff) to the cut-
+off frequency 0-127 ($00-7F)
+times, in other words, this will
+generate a filter sweep. Use '='
+key to negate a positive value
+or see the conversion table in
+the end of this manual for
+signed decimal values (-128 -
+127).
+$FE Jump to a position in the table
+(position in 2nd column, can
+jump to itself)
+$FF End of the table, table execution
+ends here. This value can't be
+typed; it's shown as END at end
+of table.
+===== page 5 =====
+PATTERN EDITOR
+NOTE-COLUMN EFFECTS
+Note 2 3 5 6 7 9 0
+Q W E R T Y U I O P
+(Upper octave)
+S D G H J L
+Z X C V B N M , .
+(Lower octave)
+Note OFF RETURN
+Ring Modulation ON SHIFT + R
+Ring Modulation OFF C= + R (CTRL + R)
+Auto-portamento SHIFT + P
+Sync ON SHIFT + S
+Sync OFF C= + S (CTRL + S)
+INSTRUMENT-COLUMN EFFECTS
+$01..$3E Select an instrument for the
+current note, which stays selected
+until another instrument is
+selected with this command. This
+also resets the tables which re-
+start was switched off with C=+P
+(CTRL+P) or C=+F (CTRL+F).
+$3F Tied note (true legato, the
+instrument doesn't restart just
+note-pitch changes)
+$40..$4F Waveform (reg.4) nibble
+adjusting - any subsequent WF-
+table waveform change overrides
+it.
+$50..$5F Sustain nibble adjusting of ADSR
+(Small-FX)
+$60..$6F Release (reg.6) nibble adjusting
+of ADSR (Small-FX)
+$70..$7F Select Chord (overriding the
+default) for the instrument. (No
+need to create an instrument for
+every chord. Instead, create an
+instrument, call chord-table with
+$7F from ARP-table, then select
+the chord with this pattern-FX.)
+EFFECT-COLUMN SMALL EFFECTS
+The Small effects' 1st nibble is their type of
+operation, the 2nd nibble is the corresponding
+effect-value / amount. Unless you are using
+the 'extra' player version, only one Small-FX
+ADSR setting is allowed per note.
+$20..$2F Attack nibble adjusting of ADSR
+(Small-FX)
+$30..$3F Decay nibble adjusting of ADSR
+(Small-FX)
+$40..$4F Waveform (reg.4) nibble
+adjusting - any subsequent WF-
+table waveform change overrides
+it.
+$50..$5F Sustain nibble adjusting of ADSR
+(Small-FX)
+$60..$6F Release (SID reg.6) nibble
+adjusting of ADSR (Small-FX)
+$70..$7F Select Chord (overriding the
+default) for the instrument. (No
+need to create an instrument for
+every chord. Instead, create an
+instrument, call a chord with $7f
+from ARP-table, then select
+chord.)
+$80..$8F Vibrato Amplitude adjustment -
+The frequency stays intact.
+$90..$9F Vibrato Frequency adjustment -
+Amplitude stays intact.
+$A0..$AF Adjust Main volume (low nibble
+of $d418)
+$B0..$BF Filter Band (LOW/MID/HI/3OFF)
+(Filter band can be overwritten
+with filter-table execution)
+$C0..$CF Chord-speed adjustment
+(arpeggio-speed in case of explicit
+arpeggio)
+$D0..$DF Detune current note with given
+amount
+$E0..$EF Enable/disable Test-bit/Ring-
+bit/Sync-bit/Gate-bit
+(Waveform-table can override)
+$F0..$FF Filter Resonance (strength)
+nibble setting (Subsequent filter-
+table command can override it.)
+===== page 6 =====
+PATTERN EDITOR (CONTINUED)
+EFFECT-COLUMN BIG EFFECTS
+The Big effects has their effect-type in effect-
+column and their 1 byte ($0..$FF or -$7f..+
+$80) value is in the last column of a pattern.
+($4...$7 effects are identical to Small effect-
+types of the same range to aid human
+memorization.)
+$01 Pitch Slide UP (same FX-number
+as Goattracker's)
+$02 Pitch Slide DOWN (same FX-
+number as Goattracker's)
+$03 Tone-portamento (with given
+speed) (same FX-number as
+Goattracker's)
+$04 Waveform-Control ($d404, etc.)
+register setting (or above $f0:
+goes to WF-ARP table-position)
+$05 ATTACK/DECAY (SID-register 5)
+byte adjustment
+$06 SUSTAIN/RELEASE (SID-
+register 6) byte adjustment
+$07 Select Chord (overriding the
+default) for the instrument.
+$08 Vibrato amplitude and
+frequency adjustment (overrides
+instrument's default vibrato)
+$09 Select vibrato-type (possible
+values: $00, $10, $20, $30)
+$0A Adjust Pulse width program
+table-index for current
+instrument (go to table-position)
+$0B Branch to Filter-program table-
+index for the current instrument
+$0C Chord-speed adjustment
+(arpeggio-speed in case of explicit
+arpeggio)
+$0D Detune current note with given
+amount
+$0E Simple pulse width setting for
+pulse-waveform (instr.PW-table
+changes can override it)
+$0F Filter-cutoff frequency hi-byte
+shift (added to filter frequency).
+Now notes don’t reset it!
+$10 Set Main (sub tune’s basic)
+single-tempo
+$11 Set Main (sub tune’s)
+funktempo. 1st (even rows) and
+2nd (odd rows) tempo, in
+left/right nibbles.
+$12 Set Main tempo-program for
+whole sub tune (any speeds can
+be given for each rows)
+$13 Set track's individual single-
+tempo
+$14 Set the track's funktempo
+(even and odd rows' in left/right
+nibbles)
+$15 Set the track's individual tempo-
+program
+$16 Select vibrato-type (possible
+values: $00, $10, $20, $30)
+$1C Shift cutoff hi-byte (permanent)
+$1D Delay track by $00..$ff (20ms)
+frames
+$1E Delay only the current note by
+$00..$ff frames.
+$1F Set value of filterswitch /
+resonance register of SID
+(including bit for external source's
+filter)
+TEMPO -> BPM FORMULA
+PAL MACHINE
+BPM = (17734475*60) / (312*63*18*song
+tempo*lines per beat)
+BPM ≈ 3007.4744 / (song tempo*lines per
+beat)
+NTSC MACHINE
+BPM = (14318180*60) / (263*65*14*song
+tempo*lines per beat)
+BPM ≈ 3589.5659 / (song tempo*lines per
+beat)
+(See also the tempo tables at the end)
+===== page 7 =====
+GENERAL PURPOSE AND GLOBALLY USABLE KEYS
+Keys on C64 US int. Keys in VICE
+Category Functions of the pressed keys
+emulator
+F5 F5 Navigation Go to Pattern-editor window.
+Shift+F5 F6 Navigation Go to Orderlist.
+F7 F7 Navigation Go to Instrument-editor panel.
+C= + F5 CTRL+F5 or F6 Navigation Go to Chord-table.
+C= + F7 CTRL+F7 or F8 Navigation Go to Tempoprogram-table.
+Shift+F7 F8 Navigation Go to Main Menu.
+CURSOR-down/right and
+Shift
+Cursor up/down/left/right Navigation Move cursor step-by-step up/down/left/right where
+possible.
+CONTROL or
+Shift+CONTROL
+TAB or Shift+TAB Navigation Cycle through tracks or instrument-tables.
+/ or Shift+/ , UP-arrow* or
+RESTORE
+/ or Shift+ / , Page-
+Down*/Page-Up
+Navigation Move cursor in 4 or 8 steps up/down /left/right
+depending on window (pattern/orderlist/etc.)
+HOME Home Navigation Move cursor to start-position on screen, then
+absolute start-position in table/pattern.
+RETURN Enter Navigation Car return to beginning of row, or go to pattern(s),
+instrument or chord under cursor.
+F1 or C= + F1 F1 or CTRL+F1 Playback Play the tune from start / follow-play tune from start.
+Shift+F1 or C=+Shift+F1 F2 or CTRL+F2 Playback Play the tune from marker position(s) / follow-play
+tune from marker position(s).
+F3 or C= + F3 F3 or CTRL+F3 Playback Play the selected patterns / follow-play the selected
+patterns.
+Shift + F3 or STOP F4 or ESC Playback Toggle pause/continue the playback of
+tune/patterns.
+Shift + SPACE Shift + SPACE Playback Play the selected patterns from cursor-position.
+Left-Arrow ‘ (above TAB) Playback Fast-forward play (4x the speed of normal)
+Shift + Left-Arrow
+C= + Left-Arrow
+Shift + ‘ (above TAB)
+Control + ‘
+Playback,
+Setting
+Toggle follow-play mode / normal playback. Set
+follow-play mode as default on/off.
+Shift + 1...6 Shift + 1...6 Play./Setting Toggle Mute / Unmute on channels 1..3 (1…6 with
+two SID chips)
+Shift + 0 Shift + 0 Play./Setting Solo / Unsolo active track
+Shift + A/Z Shift + A/Z Setting Increase/Decrease auto-advance (stepping)
+amount after typing notes.
+Shift + I Shift + I Setting Toggle instrument auto-typing with notes.
+Shift + D Shift + D Setting Toggle dovetailing.
+C= + D CTRL + D Setting Toggle MIDI monophonic+legato or polyphonic
+jamming mode.
+Shift + F/G Shift + F/G Setting Decrease/increase framespeed (1x
+singlespeed...8x multispeed).
+Shift + H/J Shift+H/J Setting Decrease/increase step-highlighting aid
+frequency in pattern-editor window.
+C= + B CTRL + B Setting Toggle pattern/ track-binding on/off . Patterns can
+be scrolled together/independently.
+C= + T CTRL + T Setting Toggle global normal tempo / funktempo mode
+for subtune.
+< or >, Shift + , / .
+Shift + : or ;
+Shift + comma / dot
+Shift + ; or '
+Setting Increase/decrease global normal tempo /
+2nd funktempo for sub tune.
+PLUS / MINUS PLUS / MINUS Selection Select instrument or select chord / tempo in
+chord/tempo tables.
+C= + , / . CTRL + comma / dot Selection Select sub tune (Orderlist). Patterns are shared
+between sub tunes.
+C= + 1...8 CTRL + 1...8 Selection Select octave 1...8 to edit or jam musical notes. (In
+‘DMC’ mode no need for C=)
+C= + PLUS/MINUS CTRL + +/- Selection Octave up / down
+Shift+PLUS or
+Shift+MINUS
+Shift+PLUS or Shift+MINUS Selection Select instrument for jamming / editing or select
+pattern for editing in pattern window.
+Shift + T/Y Shift + T/Y Selection Select (decrease/increase number of) tempo-
+program.
+Shift + K/L Shift + K/L Selection Select (decrease/increase number of) Chord to edit.
+SPACE SPACE Editing Toggle Keyboard note-jamming or note-editing in
+pattern-editor window.
+Shift + N Shift + N Editing Rename selected instrument. Max. 8 characters,
+Esc/Stop aborts the renaming.
+DEL/Pound or Shift+DEL Delete/Backspace or Insert Editing Delete/insert in cursor position or
+increase/decrease pattern/table size in end-
+positions.
+*In Linux the VICE build seems to have up-arrow key associated to Page-Down, while the default would be 'Del'-key (which is good,
+because therefore in Linux the Page-Down (up-arrow) is in correct place, below Page-Up, which is associated to Restore C64 key.) In
+Linux the 'Del'-key works as Backspace which is better selection IMO.
+*Note that in follow-play modes the pattern-editor keys are inactive to prevent accidental editing while playing the tune.
+===== page 8 =====
+PATTERN EDITOR RELATED KEYS
+Keys on C64 US int. Keys in VICE
+Category Functions of pressed keys
+emulator
+CONTROL or
+Shift+CONTROL
+TAB or Shift+TAB Navigation Cycle through tracks forward/backward.
+C= + CONTROL CTRL + TAB Fast switch SID1 / SID2
+RETURN or
+Shift+RETURN
+Enter or Shift+Enter Navigation Go to next row, place Note-on/off , or
+select instrument/chord under cursor.
+Shift + Space Shift + Space Edit/jam Play pattern from cursor.
+Z X C V B N M , .
+(A...L in DMC
+mode)
+Z X C V B N M , . (A...L
+in DMC mode)
+Edit/Jam Lower octave white piano-keys (C major
+diatonic whole-tones). Legato jamming
+possible.
+Q,W,E,R,T,Y,U,I,O,P
+(not in DMC mode)
+Q,W,E,R,T,Y,U,I,O,P (not
+in DMC mode)
+Edit/Jam Upper octave white piano-keys (C major
+diatonic scale whole-tones).
+S,D, G,H,J, L , 2,3,
+5,6,7, 9,0 (non-
+DMC)
+S,D, G,H,J, L , 2,3, 5,6,7,
+9,0 (non-DMC)
+Edit/Jam Lower and upper octave black piano
+keys (halftones). In DMC-mode it’s in
+QWERTY row!
+C= + 1...8 (1...8 in
+DMC-mode)
+CTRL + 1...8 (1...8 in
+DMC-mode)
+Edit/Jam Select octave 1...8 where editing or
+jamming musical notes happens.
+C= + RETURN CTRL + Enter Editing Select played patterns.
+Shift + +/- Shift + +/- Editing Select pattern on track
+A, 1, C=+Del (Q in
+‘DMC’ mode)
+A, 1, Cotrol+Del (Q in
+‘DMC’ mode)
+Editing Empty-note (Delete note in note-column
+pattern-position without moving the rest.)
+1...9, A...F hexa
+keys
+1...9, A...F hexa keys Editing In instrument/effect columns type value, in
+note-column set note or vibrato-
+amplitude.
+DEL/Pound or
+Shift+DEL
+Delete/Backspace or
+Insert
+Editing Delete/insert in cursor position or
+increase/decrease pattern-size in
+pattern-end position.
+C= + DEL CTRL +
+Delete/Backspace
+Editing Delete note or instrument+effect
+columns in current pattern-row, depending
+on cursor-position.
+C= + Shift + DEL CTRL + Shift +
+Del./Backspace
+Editing Delete the entire pattern-row (note and
+instrument and effect) in the current track.
+Shift + Q/W Shift + Q/W Editing Transpose notes up/down by half-notes
+in current pattern after cursor-position.
+C= + Q/W CTRL + Q/W Editing Transpose notes up/down by octaves in
+current pattern after cursor-position.
+Shift + R or C= + R Shift + R or CTRL + R Editing Place ring-modulation effect on/off into
+note column at current cursor position.
+Shift + P Shift + P Editing Place auto-portamento effect into note
+column at current cursor position.
+Shift + S or C= + S Shift + S or CTRL + S Editing Place sync-bit on/off effect into note
+column at current cursor position.
+Shift + V Shift + V Editing Place vibrato-effect into note column at
+current cursor position. Amplitude editable.
+C= + Z CTRL + Z Editing Undo
+C= + X CTRL + X Editing Cut/delete pattern content from cursor
+position to end of pattern and copy to
+pattern-buffer/clipboard.
+C= + C CTRL + C Editing Copy pattern content from cursor position
+to end of pattern to pattern-
+buffer/clipboard.
+Shift + C Shift + C Editing Limit the range of data copied (or cut)
+into buffer to cursor position. Define end of
+buffer.
+C= + V CTRL + V Editing Paste pattern-buffer content from cursor
+position till end of pattern.
+===== page 9 =====
+ORDERLIST RELATED KEYS
+Keys on C64 US int. Keys in VICE
+Category Functions of pressed keys
+emulator
+RETURN or
+Shift+RETURN
+Enter or Shift+Enter Navigation C= + RETURN CTRL + Enter Navigation Shift+SPACE Shift + Space Playback C= + SPACE CTRL + SPACE Playback 1...9, A...F hexa
+keys
+1...9, A...F hexa keys Editing DEL/Pound or
+Shift+DEL
+Delete/Backspace or
+Insert
+Editing C= + Z CTRL + Z Editing C= + C CTRL + C Editing Shift + C Shift + C Editing C= + V CTRL + V Editing C= + E CTRL + E Editing Selects the pattern(s) under the cursor
+position in Orderlist and jumps to current
+track in Pattern-editor.
+Selects the patterns that are currently
+played and jumps to current track in the
+Pattern-editor.
+Sets Orderlist playstart-marker (for F2-
+playing) to cursor-position for all tracks.
+Position number gets inverted.
+Sets Orderlist playstart-markers to
+individual played position for all tracks.
+Position number of 1st track gets inverted.
+To type hexa pattern-numbers and
+effect/jump numbers into Orderlist
+sequences of tracks.
+Delete/insert in cursor position or
+increase/decrease Orderlist sequence-
+size if cursor is in sequence-end/loop
+position.
+Undo
+Copy orderlist-sequence from cursor to
+buffer.
+Set the end of copied data in buffer. (limit
+buffer)
+Paste buffer to cursor-pos ., appends
+existing data
+Type and the first Empty (unused)
+pattern number. Increased if pressed more
+times, works on end signal.
+===== page 10 =====
+INSTRUMENT EDITOR RELATED KEYS
+Keys on C64 US int. Keys in VICE
+Category Functions of pressed keys
+emulator
+CONTROL or
+Shift+CONTROL
+TAB or Shift+TAB Navigation RETURN or
+Shift+RETURN
+Enter or Shift+Enter Navigation Shift + S Shift + S Navigation Shift + W Shift + W Navigation Shift + P Shift + P Navigation + / - + / - Selection RETURN Enter Selection 1...9, A...F hexa
+keys and F..Z
+1...9, A...F hexa keys Editing = = Editing Shift + N Shift + N Editing DEL/Pound or
+Shift+DEL
+Shift + Space Shift+Space Editing C= + Z CTRL + Z Editing C= + C CTRL + C Editing C= + X CTRL + X Editing C= + V CTRL + V Editing C= + P or C= + F Keys on C64 Cycle through main instrument-setting
+panel and instrument-tables.
+Car return' to beginning of next row in
+tables (or toggle/cycle some main
+instrument-parameters.)
+Go to main instrument settings
+Go to WF-ARP table
+Go to PUlseWidth table
+Select instrument. The same in
+pattern/orderlist/instrument windows, while
+Shift is needed in Chord/Tempo tables.
+Toggle/cycle some of the instrument's
+main parameters like HR-type, Vibrato-
+type, octave-shift sign.. Or goes to default-
+chord if it’s number is under the cursor.
+To type hexa values into instrument-data
+fields, or type the name of the instrument
+(some signals allowed too.)
+Negate value (e.g. $40 will be $C0 = -$40)
+Rename selected instrument . Max. 8
+characters, Esc/Stop aborts the renaming.
+Delete/insert in cursor position.
+Increases/decreases table-size.
+Set/clear gate-off index to current table-
+row under the cursor (WFARP/PULSE/FILT)
+Undo
+Copy the entire selected instrument to
+instrument-buffer.
+Cut the entire selected instrument to
+instrument-buffer
+Paste instrument -clipboard content to the
+selected instrument. The entire instrument
+will be overwritten.
+Toggle pulsewidth-/filter-table reset on
+note-start. (Selecting instrument resets it.)
+CHORD TABLE / TEMPO TABLE RELATED KEYS
+Category Delete/Backspace or
+Insert
+Editing CTRL + P / F Editing US int. Keys in VICE
+Functions of pressed keys
+emulator
+CONTROL or
+Shift+CONTROL
+TAB or Shift+TAB Navigation RETURN or
+Shift+RETURN
+Enter or Shift+Enter Navigation + / - + / - Selection Shift+PLUS or
+Shift+MINUS
+Shift+PLUS or
+Shift+MINUS
+Selection C= + N CTRL + N Editing 1...9, A...F hexa
+keys
+1...9, A...F hexa keys Editing = = Editing DEL/Pound or
+Shift+DEL
+Delete/Backspace or
+Insert
+Editing Go to pattern editor or go to
+instrument-editor.
+Car return' to beginning of next row in
+tables (or toggle/cycle some main
+instrument-parameters.)
+Select chord / tempo-program.
+Shift+K/L or Shift+T/Y is needed in other
+windows.
+Select instrument for jamming / editing.
+Note-mode / number-mode
+To type hexa values and chord
+loop/return numbers into
+chordtable/tempoprogram-table.
+Negate value (e.g. $04 will be $fb -4 2s’
+compl.)
+Delete/insert in cursor position.
+Increases/decreases table-size.
+===== page 11 =====
+FILE SELECTOR KEYS
+Keys on C64 US int. Keys in VICE
+Functions of pressed keys
+emulator
+F1 F1 Re-read disk-directory
+F3 / Up-arrow F3 / Up-arrow Page-down in directory
+Control TAB Filename/info/selector
+Return Enter Approve / Perform task
+F7 / STOP Escape Quit file-dialog
+SDI KEYBOARD LAYOUT DIFFERENCES AND ADD-ONS
+Keys on C64 US int. Keys in VICE emulator Functions of pressed keys
+Shift + L Shift + L Load music (bring up MENU too)
+Shift + S Shift + S Save Music (bring up MENU too)
+F1 F1 Play from orderlist mark(s)
+F2 F2 Set play-mark in orderlist
+F3 F3 Stop/Continue playback
+Z Z Play pattern from current line
+Return Enter Play pattern from top
+F4 F4 Edit/Synth mode (toggle)
+F7 /F8 F7 /F8 Select octave (incr./decr.)
+STOP, / Escape, / Toggle instrum./pattern-editor
+Shift + F Shift + F Filter program table
+Shift + T Shift + T Tempo program table
+C= + +/- CTRL + +/- Next/Previous song (subtune)
+C= + 1…3 CTRL + 1…3 Track on/off (mute/unmute)
+S / K, L S / K, L Tab jump left/right (tracks)
+, / . , / . Jump up/down 8/4 lines
+Space Space Delete down (in pattern)
+G, Shift + G G, Shift + G Gate on/off (--/++ in pattern)
+> / < > / < Transpose in pattern / Chord+-
+M, C= + M M, CTRL + M Copy, Paste (at cursor-position)
+Shift + M Shift + M Set end of copy-mark/selection
+C= + F CTRL + F Clear pattern (From cursorpos)
+Shift + Home Shift + Home To start of song (orderlist)
+H H Hunt next unused in Orderlist
+N N Name sound/instrument
+? ? Set speed calls (framesp.1..8)
+DECIMAL TO HEXADECIMAL CONVERSION TABLE
+(Next Page) ...
+===== page 12 =====
+DECIMAL TO HEXADECIMAL CONVERSION TABLE Mikael Norrgård 2012
+(http://www.witchmastercreations.com)
+UNSIG. SIG. HEX
+0 0 00
+1 1 01
+2 2 02
+3 3 03
+4 4 04
+5 5 05
+6 6 06
+7 7 07
+8 8 08
+9 9 09
+10 10 0A
+11 11 0B
+12 12 0C
+13 13 0D
+14 14 0E
+15 15 0F
+16 16 10
+17 17 11
+18 18 12
+19 19 13
+20 20 14
+21 21 15
+22 22 16
+23 23 17
+24 24 18
+25 25 19
+26 26 1A
+27 27 1B
+28 28 1C
+29 29 1D
+30 30 1E
+31 31 1F
+32 32 20
+33 33 21
+34 34 22
+35 35 23
+36 36 24
+37 37 25
+38 38 26
+39 39 27
+40 40 28
+41 41 29
+42 42 2A
+43 43 2B
+44 44 2C
+45 45 2D
+46 46 2E
+47 47 2F
+48 48 30
+49 49 31
+50 50 32
+51 51 33
+52 52 34
+53 53 35
+54 54 36
+55 55 37
+56 56 38
+57 57 39
+58 58 3A
+59 59 3B
+60 60 3C
+61 61 3D
+62 62 3E
+63 63 3F
+UNSIG. SIG. HEX
+64 64 40
+65 65 41
+66 66 42
+67 67 43
+68 68 44
+69 69 45
+70 70 46
+71 71 47
+72 72 48
+73 73 49
+74 74 4A
+75 75 4B
+76 76 4C
+77 77 4D
+78 78 4E
+79 79 4F
+80 80 50
+81 81 51
+82 82 52
+83 83 53
+84 84 54
+85 85 55
+86 86 56
+87 87 57
+88 88 58
+89 89 59
+90 90 5A
+91 91 5B
+92 92 5C
+93 93 5D
+94 94 5E
+95 95 5F
+96 96 60
+97 97 61
+98 98 62
+99 99 63
+100 100 64
+101 101 65
+102 102 66
+103 103 67
+104 104 68
+105 105 69
+106 106 6A
+107 107 6B
+108 108 6C
+109 109 6D
+110 110 6E
+111 111 6F
+112 112 70
+113 113 71
+114 114 72
+115 115 73
+116 116 74
+117 117 75
+118 118 76
+119 119 77
+120 120 78
+121 121 79
+122 122 7A
+123 123 7B
+124 124 7C
+125 125 7D
+126 126 7E
+127 127 7F
+UNSIG. SIG. HEX
+128 -128 80
+129 -127 81
+130 -126 82
+131 -125 83
+132 -124 84
+133 -123 85
+134 -122 86
+135 -121 87
+136 -120 88
+137 -119 89
+138 -118 8A
+139 -117 8B
+140 -116 8C
+141 -115 8D
+142 -114 8E
+143 -113 8F
+144 -112 90
+145 -111 91
+146 -110 92
+147 -109 93
+148 -108 94
+149 -107 95
+150 -106 96
+151 -105 97
+152 -104 98
+153 -103 99
+154 -102 9A
+155 -101 9B
+156 -100 9C
+157 -99 9D
+158 -98 9E
+159 -97 9F
+160 -96 A0
+161 -95 A1
+162 -94 A2
+163 -93 A3
+164 -92 A4
+165 -91 A5
+166 -90 A6
+167 -89 A7
+168 -88 A8
+169 -87 A9
+170 -86 AA
+171 -85 AB
+172 -84 AC
+173 -83 AD
+174 -82 AE
+175 -81 AF
+176 -80 B0
+177 -79 B1
+178 -78 B2
+179 -77 B3
+180 -76 B4
+181 -75 B5
+182 -74 B6
+183 -73 B7
+184 -72 B8
+185 -71 B9
+186 -70 BA
+187 -69 BB
+188 -68 BC
+189 -67 BD
+190 -66 BE
+191 -65 BF
+UNSIG. SIG. HEX
+192 -64 C0
+193 -63 C1
+194 -62 C2
+195 -61 C3
+196 -60 C4
+197 -59 C5
+198 -58 C6
+199 -57 C7
+200 -56 C8
+201 -55 C9
+202 -54 CA
+203 -53 CB
+204 -52 CC
+205 -51 CD
+206 -50 CE
+207 -49 CF
+208 -48 D0
+209 -47 D1
+210 -46 D2
+211 -45 D3
+212 -44 D4
+213 -43 D5
+214 -42 D6
+215 -41 D7
+216 -40 D8
+217 -39 D9
+218 -38 DA
+219 -37 DB
+220 -36 DC
+221 -35 DD
+222 -34 DE
+223 -33 DF
+224 -32 E0
+225 -31 E1
+226 -30 E2
+227 -29 E3
+228 -28 E4
+229 -27 E5
+230 -26 E6
+231 -25 E7
+232 -24 E8
+233 -23 E9
+234 -22 EA
+235 -21 EB
+236 -20 EC
+237 -19 ED
+238 -18 EE
+239 -17 EF
+240 -16 F0
+241 -15 F1
+242 -14 F2
+243 -13 F3
+244 -12 F4
+245 -11 F5
+246 -10 F6
+247 -9 F7
+248 -8 F8
+249 -7 F9
+250 -6 FA
+251 -5 FB
+252 -4 FC
+253 -3 FD
+254 -2 FE
+255 -1 FF
+===== page 13 =====
+EXACT NOTES FOR ARP-COLUMN
+Value Note Value Note Value Note Value Note
+81 C-1 99 C-3 B1 C-5 C9 C-7
+9A C# B2 CA C#
+82 C# C# 83 D 9B D B3 D CB D
+84 Eb 9C Eb B4 Eb CC Eb
+E B5 85 E 9D E CD E
+86 F 9E F B6 F CE F
+87 F# 9F F# B7 F# CF F#
+G B8 88 G A0 G D0 G
+89 G# A1 G# B9 G# D1 G#
+8A A A2 A BA A D2 A
+A3 Bb BB D3 Bb
+8B Bb Bb 8C B A4 B BC B D4 B
+8D C-2 A5 C-4 BD C-6 D5 C-8
+C# A6 BE C# D6 8E C# C#
+8F D A7 D BF D D7 D
+90 Eb A8 Eb C0 Eb D8 Eb
+E A9 91 E C1 E D9 E
+92 F AA F C2 F DA F
+93 F# AB F# C3 F# DB F#
+G AC 94 G C4 G DC G
+95 G# AD G# C5 G# DD G#
+96 A AE A C6 A DE A
+Bb AF C7 Bb DF 97 Bb Bb
+98 B B0 B C8 B
+ATTACK / DECAY / RELEASE TIMINGS
+HEX Attack
+Rate
+Decay /
+Release
+Rate
+0 2 ms 6 ms
+1 8 ms 24 ms
+2 16 ms 48 ms
+3 24 ms 72 ms
+4 38 ms 114 ms
+5 56 ms 168 ms
+6 68 ms 204 ms
+7 80 ms 240 ms
+8 100 ms 300 ms
+9 250 ms 750 ms
+A 500 ms 1.5 s
+B 800 ms 2.4 s
+C 1 s 3 s
+D 3 s 9 s
+E 5 s 15 s
+F 8 s 24 s
+===== page 14 =====
+NUMBER OF LINES PER BEAT
+NUMBER OF LINES PER BEAT
+TEMPO > BPM TABLE FOR PAL C64
+Yellow marks the tempo closest to 120BPM for every column.
+TEMPO SETTING IN SID-WIZARD
+01 02 03 04 05 06 07 08 09 0A
+1 3007,47 1503,74 1002,49 751,87 601,49 501,25 429,64 375,93 334,16 300,75
+2 1503,74 751,87 501,25 375,93 300,75 250,62 214,82 187,97 167,08 150,37
+3 1002,49 501,25 334,16 250,62 200,50 167,08 143,21 125,31 111,39 100,25
+4 751,87 375,93 250,62 187,97 150,37 125,31 107,41 93,98 83,54 75,19
+5 601,49 300,75 200,50 150,37 120,30 100,25 85,93 75,19 66,83 60,15
+6 501,25 250,62 167,08 125,31 100,25 83,54 71,61 62,66 55,69 50,12
+7 429,64 214,82 143,21 107,41 85,93 71,61 61,38 53,70 47,74 42,96
+8 375,93 187,97 125,31 93,98 75,19 62,66 53,70 46,99 41,77 37,59
+9 334,16 167,08 111,39 83,54 66,83 55,69 47,74 41,77 37,13 33,42
+10 300,75 150,37 100,25 75,19 60,15 50,12 42,96 37,59 33,42 30,07
+11 273,41 136,70 91,14 68,35 54,68 45,57 39,06 34,18 30,38 27,34
+12 250,62 125,31 83,54 62,66 50,12 41,77 35,80 31,33 27,85 25,06
+13 231,34 115,67 77,11 57,84 46,27 38,56 33,05 28,92 25,70 23,13
+14 214,82 107,41 71,61 53,70 42,96 35,80 30,69 26,85 23,87 21,48
+15 200,50 100,25 66,83 50,12 40,10 33,42 28,64 25,06 22,28 20,05
+16 187,97 93,98 62,66 46,99 37,59 31,33 26,85 23,50 20,89 18,80
+17 176,91 88,46 58,97 44,23 35,38 29,49 25,27 22,11 19,66 17,69
+18 167,08 83,54 55,69 41,77 33,42 27,85 23,87 20,89 18,56 16,71
+19 158,29 79,14 52,76 39,57 31,66 26,38 22,61 19,79 17,59 15,83
+20 150,37 75,19 50,12 37,59 30,07 25,06 21,48 18,80 16,71 15,04
+21 143,21 71,61 47,74 35,80 28,64 23,87 20,46 17,90 15,91 14,32
+22 136,70 68,35 45,57 34,18 27,34 22,78 19,53 17,09 15,19 13,67
+23 130,76 65,38 43,59 32,69 26,15 21,79 18,68 16,34 14,53 13,08
+24 125,31 62,66 41,77 31,33 25,06 20,89 17,90 15,66 13,92 12,53
+25 120,30 60,15 40,10 30,07 24,06 20,05 17,19 15,04 13,37 12,03
+26 115,67 57,84 38,56 28,92 23,13 19,28 16,52 14,46 12,85 11,57
+27 111,39 55,69 37,13 27,85 22,28 18,56 15,91 13,92 12,38 11,14
+28 107,41 53,70 35,80 26,85 21,48 17,90 15,34 13,43 11,93 10,74
+29 103,71 51,85 34,57 25,93 20,74 17,28 14,82 12,96 11,52 10,37
+30 100,25 50,12 33,42 25,06 20,05 16,71 14,32 12,53 11,14 10,02
+31 97,02 48,51 32,34 24,25 19,40 16,17 13,86 12,13 10,78 9,70
+32 93,98 46,99 31,33 23,50 18,80 15,66 13,43 11,75 10,44 9,40
+TEMPO SETTING IN SID-WIZARD (CONTINUED)
+0B 0C 0D 0E 0F 10 11 12 13 14
+1 273,41 250,62 231,34 214,82 200,50 187,97 176,91 167,08 158,29 150,37
+2 136,70 125,31 115,67 107,41 100,25 93,98 88,46 83,54 79,14 75,19
+3 91,14 83,54 77,11 71,61 66,83 62,66 58,97 55,69 52,76 50,12
+4 68,35 62,66 57,84 53,70 50,12 46,99 44,23 41,77 39,57 37,59
+5 54,68 50,12 46,27 42,96 40,10 37,59 35,38 33,42 31,66 30,07
+6 45,57 41,77 38,56 35,80 33,42 31,33 29,49 27,85 26,38 25,06
+7 39,06 35,80 33,05 30,69 28,64 26,85 25,27 23,87 22,61 21,48
+8 34,18 31,33 28,92 26,85 25,06 23,50 22,11 20,89 19,79 18,80
+9 30,38 27,85 25,70 23,87 22,28 20,89 19,66 18,56 17,59 16,71
+10 27,34 25,06 23,13 21,48 20,05 18,80 17,69 16,71 15,83 15,04
+===== page 15 =====
+NUMBER OF LINES PER BEAT
+NUMBER OF LINES PER BEAT
+TEMPO > BPM TABLE FOR NTSC C64
+Yellow marks the tempo closest to 120BPM for every column.
+TEMPO SETTING IN SID-WIZARD
+01 02 03 04 05 06 07 08 09 0A
+1 3589,57 1794,78 1196,52 897,39 717,91 598,26 512,80 448,70 398,84 358,96
+2 1794,78 897,39 598,26 448,70 358,96 299,13 256,40 224,35 199,42 179,48
+3 1196,52 598,26 398,84 299,13 239,30 199,42 170,93 149,57 132,95 119,65
+4 897,39 448,70 299,13 224,35 179,48 149,57 128,20 112,17 99,71 89,74
+5 717,91 358,96 239,30 179,48 143,58 119,65 102,56 89,74 79,77 71,79
+6 598,26 299,13 199,42 149,57 119,65 99,71 85,47 74,78 66,47 59,83
+7 512,80 256,40 170,93 128,20 102,56 85,47 73,26 64,10 56,98 51,28
+8 448,70 224,35 149,57 112,17 89,74 74,78 64,10 56,09 49,86 44,87
+9 398,84 199,42 132,95 99,71 79,77 66,47 56,98 49,86 44,32 39,88
+10 358,96 179,48 119,65 89,74 71,79 59,83 51,28 44,87 39,88 35,90
+11 326,32 163,16 108,77 81,58 65,26 54,39 46,62 40,79 36,26 32,63
+12 299,13 149,57 99,71 74,78 59,83 49,86 42,73 37,39 33,24 29,91
+13 276,12 138,06 92,04 69,03 55,22 46,02 39,45 34,52 30,68 27,61
+14 256,40 128,20 85,47 64,10 51,28 42,73 36,63 32,05 28,49 25,64
+15 239,30 119,65 79,77 59,83 47,86 39,88 34,19 29,91 26,59 23,93
+16 224,35 112,17 74,78 56,09 44,87 37,39 32,05 28,04 24,93 22,43
+17 211,15 105,58 70,38 52,79 42,23 35,19 30,16 26,39 23,46 21,12
+18 199,42 99,71 66,47 49,86 39,88 33,24 28,49 24,93 22,16 19,94
+19 188,92 94,46 62,97 47,23 37,78 31,49 26,99 23,62 20,99 18,89
+20 179,48 89,74 59,83 44,87 35,90 29,91 25,64 22,43 19,94 17,95
+21 170,93 85,47 56,98 42,73 34,19 28,49 24,42 21,37 18,99 17,09
+22 163,16 81,58 54,39 40,79 32,63 27,19 23,31 20,40 18,13 16,32
+23 156,07 78,03 52,02 39,02 31,21 26,01 22,30 19,51 17,34 15,61
+24 149,57 74,78 49,86 37,39 29,91 24,93 21,37 18,70 16,62 14,96
+25 143,58 71,79 47,86 35,90 28,72 23,93 20,51 17,95 15,95 14,36
+26 138,06 69,03 46,02 34,52 27,61 23,01 19,72 17,26 15,34 13,81
+27 132,95 66,47 44,32 33,24 26,59 22,16 18,99 16,62 14,77 13,29
+28 128,20 64,10 42,73 32,05 25,64 21,37 18,31 16,02 14,24 12,82
+29 123,78 61,89 41,26 30,94 24,76 20,63 17,68 15,47 13,75 12,38
+30 119,65 59,83 39,88 29,91 23,93 19,94 17,09 14,96 13,29 11,97
+31 115,79 57,90 38,60 28,95 23,16 19,30 16,54 14,47 12,87 11,58
+32 112,17 56,09 37,39 28,04 22,43 18,70 16,02 14,02 12,46 11,22
+TEMPO SETTING IN SID-WIZARD (CONTINUED)
+0B 0C 0D 0E 0F 10 11 12 13 14
+1 326,32 299,13 276,12 256,40 239,30 224,35 211,15 199,42 188,92 179,48
+2 163,16 149,57 138,06 128,20 119,65 112,17 105,58 99,71 94,46 89,74
+3 108,77 99,71 92,04 85,47 79,77 74,78 70,38 66,47 62,97 59,83
+4 81,58 74,78 69,03 64,10 59,83 56,09 52,79 49,86 47,23 44,87
+5 65,26 59,83 55,22 51,28 47,86 44,87 42,23 39,88 37,78 35,90
+6 54,39 49,86 46,02 42,73 39,88 37,39 35,19 33,24 31,49 29,91
+7 46,62 42,73 39,45 36,63 34,19 32,05 30,16 28,49 26,99 25,64
+8 40,79 37,39 34,52 32,05 29,91 28,04 26,39 24,93 23,62 22,43
+9 36,26 33,24 30,68 28,49 26,59 24,93 23,46 22,16 20,99 19,94
+10 32,63 29,91 27,61 25,64 23,93 22,43 21,12 19,94 18,89 17,95

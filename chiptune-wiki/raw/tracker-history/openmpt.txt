@@ -1,0 +1,278 @@
+# Many gaps to be filled here
+
+mpt_a5
+	Name: Modplug Tracker Alpha 5
+	Author: Olivier Lapicque
+	Date: 1998-01-13		# from the file date
+	Influenced by ft_208
+	Influenced by it_214v3
+
+mpt_b1
+	Name: Modplug Tracker Beta 1
+	Author: Olivier Lapicque
+	Date: 1998-06-17		# from the file date
+	Based on mpt_a5 1000
+
+mpt_109
+	Name: Modplug Tracker 1.09
+	Author: Olivier Lapicque
+	Date: 2000-01-30		# from the file date
+	Based on mpt_b1	1000		# based on 1.00, but where is it?
+
+mpt_116
+	Name: Modplug Tracker 1.16.0185
+	Author: Olivier Lapicque
+	Date: 2001-11-21		# from About info
+	Based on mpt_109 1000 [
+		ASIO support, DSP updates, XM stereo samples
+	]
+
+# skip some releases
+
+# from http://sourceforge.net/forum/forum.php?forum_id=355974
+#
+# Posted By: plastik_s
+# Date: 2004-02-28 12:25
+# Summary: Modplug 'Wild' first release
+#
+# Modplug 'Wild' is the experimental branch. We developer new features
+# that are potentially risky. This is the first release: 2.00.0001 
+# In this version you can find ehanced VST support, mix paste, visualization
+# of effects and other goodies from Rewbs. And 255 channel mode, you need
+# a fast machine if you attempt all 255 channels. 
+
+mpt_200
+	Name: Modplug 'Wild' 2.00.0001
+	Author: plastik_s
+	Date: 2004-02-28
+	Based on mpt_116 1000
+
+openmpt_117rc2
+	Name: OpenMPT 1.17RC2
+	Author: plastik_s
+	Date: 2005-08-20		# date of files in package
+	Based on mpt_200 1000
+
+# This one is in sourceforge downloads
+# also in http://modplug.sourceforge.net/builds/
+# OpenMPT dev build v1.17.02.48 (Sun, 27 May 2007 18:02:21 GMT)
+# Released at Sun, 27 May 2007 18:02:21 GMT by rewbs
+
+openmpt_117_02_48
+	Name: OpenMPT 1.17.02.48
+	Author: rewbs & relabs
+	Date: 2007-05-27		# Sourceforge
+	Based on openmpt_117rc2 1000
+
+openmpt_117_02_54
+	Name: OpenMPT 1.17.02.54
+	Author: Saga Musix & relabs
+	Date: 2009-06-23		# Sourceforge
+	Based on openmpt_117_02_48 1000
+
+openmpt_117_03_02
+	Name: OpenMPT 1.17.03.02
+	Author: Saga Musix & relabs
+	Date: 2009-09-22		# Johannes Schultz
+	Based on openmpt_117_02_54 1000 [
+		Plugin parameter control events
+		IT \"note fade\" notes
+	]
+
+openmpt_118_02_00
+	Name: OpenMPT 1.18.02.00
+	Author: Saga Musix
+	Date: 2010-06-19		# Johannes Schultz
+	Based on openmpt_117_03_02 1000
+
+openmpt_118_03_00
+	Name: OpenMPT 1.18.03.00
+	Author: Saga Musix
+	Date: 2010-08-13		# announcement
+	Based on openmpt_118_02_00 1000
+
+# OpenMPT 1.19.00.00 was actually not very wide spread, since it was a test
+# build. I'd remove it from the timeline. -- Johannes Schultz
+#
+#openmpt_119_00_00
+#	Name: OpenMPT 1.19.00.00
+#	Author: Saga Musix
+#	Date: 2010-10-29		# changelog
+#	Based on openmpt_118_03_00 1000
+
+openmpt_119_01_00
+	Name: OpenMPT 1.19.01.00
+	Author: Saga Musix
+	Date: 2011-04-04		# changelog, 2011-04-01 announcement
+	Based on openmpt_118_03_00 1000 [
+		Per-pattern time signatures
+		Cues in WAV export
+		Edit history in IT / MPTM files
+	]
+
+openmpt_119_02_00
+	Name: OpenMPT 1.19.02.00
+	Author: Saga Musix
+	Date: 2011-05-26		# changelog
+	Based on openmpt_119_01_00 1000
+
+openmpt_119_03_00
+	Name: OpenMPT 1.19.03.00
+	Author: Saga Musix
+	Date: 2011-07-22		# Johannes Schultz
+	Based on openmpt_119_02_00 1000
+
+openmpt_119_04_00
+	Name: OpenMPT 1.19.04.00
+	Author: Saga Musix
+	Date: 2011-09-09		# changelog
+	Based on openmpt_119_03_00 1000
+
+openmpt_120_01_00
+	Name: OpenMPT 1.20.01.00
+	Author: Saga Musix
+	Date: 2012-05-05		# Johannes Schultz
+	Based on openmpt_119_04_00 [
+		Template system
+		Crash recovery
+		Rewritten resonant filter
+		Sample tuner
+	]
+
+openmpt_120_02_00
+	Name: OpenMPT 1.20.02.00
+	Author: Saga Musix
+	Date: 2012-07-07		# History.txt
+	Based on openmpt_120_01_00
+
+openmpt_120_03_00
+	Name: OpenMPT 1.20.03.00
+	Author: Saga Musix
+	Date: 2012-07-22		# History.txt
+	Based on openmpt_120_02_00
+
+openmpt_120_04_00
+	Name: OpenMPT 1.20.04.00
+	Author: Saga Musix
+	Date: 2012-10-24		# History.txt
+	Based on openmpt_120_03_00
+
+openmpt_121_01_00
+	Name: OpenMPT 1.21.01.00
+	Author: Saga Musix
+	Date: 2012-12-22		# History.txt
+	Based on openmpt_120_04_00 [
+		FLAC samples
+		Record quantization
+	]
+
+openmpt_122_01_00
+	Name: OpenMPT 1.22.01.00
+	Author: Saga Musix & manx
+	Date: 2013-04-06		# History.txt
+	Based on openmpt_121_01_00 [
+		IT-compressed samples
+		Clipboard manager
+		Rewritten audio output engine
+		Plugin preset bank (FXB) support
+		MP3 import
+	]
+
+openmpt_122_02_00
+	Name: OpenMPT 1.22.02.00
+	Author: Saga Musix & manx
+	Date: 2013-04-20		# History.txt
+	Based on openmpt_122_01_00
+
+openmpt_122_06_00
+	Name: OpenMPT 1.22.06.00
+	Author: Saga Musix & manx
+	Date: 2013-11-02
+	Based on openmpt_122_02_00
+
+openmpt_123_01_00
+	Name: OpenMPT 1.23.01.00
+	Author: Saga Musix & manx
+	Date: 2014-03-29
+	Based on openmpt_122_06_00 [
+		64-bit version
+		Plugin bridge
+		Up to 250 plugins per song
+	]
+
+openmpt_124_01_00
+	Name: OpenMPT 1.24.01.00
+	Author: Saga Musix & manx
+	Date: 2015-04-19
+	Based on openmpt_123_01_00 [
+		External samples in MPTM format
+		Song window positions are saved
+		Subtune detection in length calculation
+		Improved resampler in sample editor
+		SoundTracker 2.6 / Ice Tracker module import
+		Rewritten MT2 support
+	]
+
+openmpt_125_01_00
+	Name: OpenMPT 1.25.01.00
+	Author: Saga Musix & manx
+	Date: 2015-08-16		# Announcement
+	Based on openmpt_124_01_00 [
+		Song artist stored in IT / XM / MPTM files
+		File-specific resampling option in MPTM
+		Decimal tempos in MPTM
+		Tempo shuffle in MPTM
+		Media Foundation sample decoding
+		Smooth pattern scrolling
+		Tremor for instrument plugins
+	]
+
+openmpt_126_01_00
+	Name: OpenMPT 1.26.01.00
+	Author: Saga Musix & manx
+	Date: 2016-05-21		# Announcement
+	Based on openmpt_125_01_00 [
+		More fine-grained legacy compatibility settings
+		Find & Replace value ranges
+		Improved song cleanup
+		DigiBooster Pro Echo DSP emulation
+		Per-sequence restart position in MPTM
+		SoundFX / MultiMedia Sound and ProTracker 3.6 module import
+		Built-in MO3 decoder
+		Improved MT2 support
+	]
+
+openmpt_127_01_00
+	Name: OpenMPT 1.27.01.00
+	Author: Saga Musix & manx
+	Date: 2017-09-27		# Announcement
+	Based on openmpt_126_01_00 [
+		Support for Windows 98 / ME / 2000 dropped
+		Rewritten MIDI import
+		SFZ instrument import
+		Undo / Redo for instruments
+		VU meters for instrument plugins
+		Amiga BLEP resampler
+		Increased precision of sample playback position
+		SoundTracker Pro II and Digital Tracker / Digital Home Studio module import
+		Built-in emulation of DMO effects
+		Improved tuning editor
+		Lock playback to pattern selection
+	]
+
+openmpt_128_01_00
+	Name: OpenMPT 1.28.01.00
+	Author: Saga Musix & manx
+	Date: 2018-12-23		# Announcement
+	Based on openmpt_127_01_00 [
+		Support for AdLib instruments in S3M and MPTM
+		LAME encoder shipped with application
+		New icon art
+		C67 module import
+		CAF, W64 and SBI sample import
+		S3I and SFZ instrument export
+		Sample length optimizer
+		Support for undocumented IT MIDI macros
+		Improved release node behaviour
+		Improved MIDI export
+	]

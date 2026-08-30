@@ -1,0 +1,100 @@
+What are the typical C64/SID sounds/instruments? — ChipMusic.org forums, topic 16010 (1 page, 12 posts), started by Murenius on 2015-02-04.
+Source: https://chipmusic.org/forums/topic/16010/what-are-the-typical-c64sid-soundsinstruments/; fetched 2026-08-30 with a browser user agent; post text extracted from the HTML with post number, date and author; quotes marked with '>'; images, signatures and avatars not included.
+
+
+----- post 1 · Feb 4, 2015 2:03 pm · Murenius -----
+Hi guys,
+
+I was recently talked into joining a hobby band and playing the keys again after 10 years or so of guitar only. The band wants to play cover versions of video game music - inspired by bands like Press Play on Tape or Machinae Supremacy.
+
+For starters I do not need faithful recreations of the SID sound since we'll just jam along to decide which songs to play and how to cover/arrange them. For this I need to play chiptune-ish sounds on one of my synths that I bring to the rehearsal room. At the moment I have access to a MOXF6, a M50 and a nice old SY85.
+
+I started to get into the topic and found the following "typical" things:
+
+- Fast LFO (square wave) controlled pitch changes to fifths and octaves. This works fine already and sounds good enough to use it.
+- The same, but done with an arpeggiator. This somehow still sounds too "sterile".
+- Filter sweeps (still working on this, goes into the right direction, but isn't close enough yet)
+- Pulse width modulation with bass sounds. I'm not sure I can do this on a rompler at all since this means changing the osc's waveform.
+
+Now my question is: do you guys have any idea what I am still missing? For example I am still missing the ringing lead sound like in the Gianna Sister title track.
+
+I tried finding something in the net which explains what exactly makes the SID instruments so typical, but I haven't found anything comprehensive.
+
+Thanks and regards,
+Murenius
+
+----- post 2 · Feb 4, 2015 2:57 pm · n00bstar -----
+These three synths are complete crap for what you're trying to do unfortunately. Well... two of them are just crap in any situation really
+
+If you have access to a laptop or something, you'd be better off using a proper synth VST (or whatever else really) with all the oscillators your need. PWM is a *huge* part of the C64 sound and you won't be pulling off realistic SID leads without it.
+
+Also keep in mind though that you're in a band so other people will be playing. Your sound doesn't need to be a perfect copy since it will get buried behind angry guitars, angsty vocals and a sub-par bassist who still somehow managed to get all the damn chicks after the show. More often that not, a perfect recreation of the feel/groove/melody goes a much longer way that having the right stereotypical sound.
+
+----- post 3 · Feb 4, 2015 3:42 pm · Murenius -----
+I know that romplers are not really the thing for recreating chiptune sounds. However, I'll not only provide chiptune sounds in that band but also anything not covered by an existing intrument, e.g. the occasional woodwind, brass or non-chiptune synth pad etc. And I simply can't carry a whole studio to the rehearsals, but want to use e.g. the MOXF during rehearsals.
+
+As you said, it's not really necessary to have a realistic sound, anyway. So my question is only about two thing: which are the typical sounds and what makes them sound like that (read: which approach is needed to create those sound, like in my examples) and how to have a makeshift solution that is chiptune-ish enough to give a sufficient feel in a song - e.g in an intro, a solo or when playing the characteristic hook line of a song.
+
+Btw, I do have quite some band experience, so I know what I'm up for  I also love chiptunes since the 80ies. I just haven't dealt with creating them as a musician so far and have some problems getting into it at the moment
+
+----- post 4 · Feb 4, 2015 4:22 pm · chunter -----
+You only need one synth to cover SID tones, it just needs to have a way to manually sweep the pulse width and one hell of an arpeggiator, something like an old Nord Lead ought to do.
+
+----- post 5 · Feb 4, 2015 4:47 pm · Murenius -----
+Please define "hell of an arpeggiator", what exactly does it need to achieve?
+
+The point is, with some sounds it is no problem to create them in a rompler synth from fixed waveforms - e.g. with the square LFO controlling pitch. I'd like to identify all sounds that can be simulated like this.
+
+Getting the others is the second step, if necessary I will create them with a VA synth (or real analogue synth, suggestions welcome) or VST plugin and sample that exact sound and put it into my MOXF. The options are there, I'm merely asking for help with understanding the goal better.
+
+----- post 6 · Feb 4, 2015 5:08 pm · n00bstar -----
+In the context of a band that's just adding chiptune touches to an otherwise 'band' sound, you really just need the basic oscillators. Any piece of hardware/software that can do standard pulse/saw/tri/sine will do just fine. "Chord Arps" will be out of reach because you can't play them by hand  and I don't think I know of a single traditional arpegiator that is fast enough for the purpose. But everything else in the palette of chip sounds shouldn't be too hard to get.
+
+Some general tips...
+
+1) Don't go for analog, or virtual analogs that try too hard to simulate tubes and warmth and other bullshit like that. Hash, brittle digital synths will give you better results for chiptune sounds since that's pretty much what the original hardware was.
+
+2) Leave that fucking Effect section alone. Once you put a square wave through a chorus, reverb, phaser, crusher, compressor, distortion, chorus again, reverb again, waveshaper and chorus again.... well, you just sound like any other electronic/synth sound out there. A big thing about the sound is that is mostly used dry with the only effects being those you can make by hand in a tracker...and these are:
+
+3) Chorus/Flange/Phase if you waste 2 channels on a single sound. This is usually best recreated with a bog standard chorus unit with little to no feedback put back in the chain. Usually done by detuning one of the two sounds by a tiny bit. If you keep the two mono, you get a flanger/phaser like effect. If you hard pan them on each side, you get a kind of chorus. Rarely used in 'heavy' sections because of the wasted channel.
+
+4) Delay. Again, by wasting another channel for the delay taps. The classic chiptune delay is a single tap delay either 3 or 4 quarter notes behind the original signal. Again, it's used in parts where a channel is freed up, usually in 'calm' sections of a song. When you need all your channels to input actual music in it, the faux-effects are the first to get sacrificed in most cases.
+
+5) Classic C64 lead: Start with a pulse oscillator at about 10% width, and increase the width up to a 50/50 square wave and add vibrato to it all. A *lot* of synth leads start loud and sustains at about 80% of the volume. This gives a nice guitar/piano like attack and keeps melodies from sounding too stale.
+
+----- post 7 · Feb 4, 2015 5:15 pm · n00bstar -----
+Hmmm.... also, if you can just sample shit and shove it into the synth, why don't you just get a SID player, a couple of SID songs, solo whatever channel you want the sound from and sample that?
+
+----- post 8 · Feb 4, 2015 6:50 pm · Murenius -----
+Thanks a lot, those general tips are really helpful for me! Some comments/questions:
+
+- How fast would such an arp have to be? With the MOXF I can go up to 300 bpm with thirty-second notes, so that would be 160 notes per second.
+2) Good hint, how about bitcrusher/lo fi effects, though? I'd think that this is an appropriate effect.
+3) I'm not sure I got what you are aiming at. To simulate that basic chorus I usually use two OSCs with the same wave on different octaves and detune them slightly. Would that be the effect you're referring to?
+4) Got that, though I think that's important when you're trying to follow the original restrictions of the machine, right? Simulating the typical delay shouldn't be a problem with modern resources, should it?
+5) Thanks, worked like a charm. Such tips were what I originally had in mind when I asked!
+
+About sampling whole channels from sid songs: that would feel like cheating to me, I generally do not like using whole parts from other musician's songs. When I refer to sampling I mean creating a multisample waveform/voice to be played live by keyboard. Just a personal thing I guess.
+
+----- post 9 · Feb 4, 2015 8:29 pm · Jellica -----
+awesome buzzy ring modulator
+
+flabby distorted filter
+
+weird adsr
+
+Pulse width modulation on your leads too!
+
+----- post 10 · Feb 4, 2015 9:05 pm · chunter -----
+160 notes a second is more than enough. The thing that makes a chip different from a synth with its filter wide open besides the roughness is that most can bend and switch their pitches and tones at will. It isn't easy to emulate that as a live synth player, but if you watch groups like PPOT you'll realize that if your rearrangement carries the tune well enough, you won't need to. Noobstar has the right idea.
+
+----- post 11 · Feb 4, 2015 10:38 pm · n00bstar -----
+Alright alright.... I'll give you TEH SECRET.
+
+----- post 12 · Feb 5, 2015 3:49 pm · Murenius -----
+I found a great way to create something close to the original arpeggio sound. The MOXF's common LFO has the option to parametrize a waveform manually. I created a waveform with 4 steps, with values that result in modulating the pitch in the cycle "prime-fifth-octave-fifth" and so on. I can even adjust if it jumps to the values or transitions smoothly, which kinda simulates the pitch bend instructions that were used I think to get this effect on the C64.
+
+Also this allows to control the filter sweeps so it sounds very similar, I tried it with a noise waveform, worked fine. I got to test it with other oscs tonight, probably starting with a bass.
+
+I think with this approach I will try to use the tips you guys gave me so far. And I'll try to create a waveform with PWM in some C64 emulator (or get a real one from ebay maybe... planning this since years) and make a multisample from it.
+

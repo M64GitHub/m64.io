@@ -1,0 +1,149 @@
+RAW: chipmusic.org forum thread "Any Specific Advice On Learning Tables (LSDJ)?" | https://chipmusic.org/forums/topic/16432/ | fetched 2026-08-30 with a browser user agent | post text extracted from the HTML (post number, author, timestamp; quotes marked [quote author]); signatures, avatars and images not included
+
+--- #1 | bitpusher2600 | Apr 17, 2015 4:59 pm
+Hey all.
+I know there's a few pros around here (like Dire Hit) that I want to ask;
+Is there any insights or advice anyone can offer on how to actually learn to take control of tables?
+
+I fully understand that the core of getting everything you want from LSDJ requires fully utilizing the tables, but dig this. I can look at stuff like online "tutorials" (which I have), and use that infamous "patch book" (which I definitely have), and just find myself asking how the heck people came up with these formulas. Someone or something saying "just plug in this command and this value here and here" doesn't help, being just a do and not a how, unless it's otherwise random guessing that's the actual formula for all this and people are just instructing you to do that specific soundset only.
+
+Seriously, how does someone know to plug a certain command onto the second, or fifth (or whatever) line on the first or second column of the table. Even with LSDJ's built in instructions for what each command means, I can't seem to craft a table on my own that sounds like anything decent.
+
+So basically, how does anyone suggest learning, is there a set of standard practices or formulas or rules of thumb, or is it really complete experimentation and guesswork in the end?
+
+Last edited by bitpusher2600 (Apr 17, 2015 5:02 pm)
+
+--- #2 | powersupply | Apr 17, 2015 5:05 pm
+I just try things until it sounds cool. Trial and error. But really I only use 3 or 4 commands on tables. W, O, P, H, and K mostly, and the transposing, so I might not be qualified to answer this [img: tongue]
+
+--- #3 | herr_prof | Apr 17, 2015 6:27 pm
+By default everything in lsdj is 16 steps of six ticks. You can use a groove command to change how many ticks are used per step and hops can change how long or short the sixteen steps are. How it works in the phrase screen and in a table are a little different.
+
+In a phrase its used as a pattern break, where it will stop the phrase and jump to the next phrase at X step
+
+```
+1 C# G01
+2 --
+3 --   H01
+4
+etc
+```
+
+On this one it will play to step 3, and then hop to the first beat on the next phrase. You can use this to create interesting musical subdivisions, or play with the groove to get odd time signatures.
+
+In a table , I'll quote the manual
+
+[quote]
+
+In the table screen, H is used for creating table loops. The first digit sets
+how many times the hop should be done before moving on; 0 means
+“forever.” The second digit sets the table step to jump to. Loops can be
+nested; that is, you can have smaller loops inside bigger ones.
+Example:
+H21
+hop twice to table position 1.
+H04
+hop to table position 4 forever.
+
+So you can use this to allow time for your command to work itself out, like a ADSR works on a synth if your familiar. Since most commands have a time element, you can use a hop to do something like
+
+Play a note a3
+increase the pitch to c3 over the course of four steps
+Decrease back to a3 over the next four steps
+
+If you have this table embedded in the synths instrument settings, then now you can basically forget about it, and save the commands in the phrase to do something else. Everytime this note is played, it will run its table and make its sound.
+
+--- #4 | VCMG | Apr 17, 2015 9:39 pm
+There's no real "formula" for quick results as far as I know. Most people I know gradually learned how to use tables through a combination of trial-and-error and dissecting other people's song files. (and of course reading the manual carefully [img: tongue])
+
+Looking through other people's song files, copying some of their ideas, and then messing around with them is a good way to learn lots of techniques though, and most people will be happy to share their techniques and .savs if you ask.
+
+Last edited by VCMG (Apr 17, 2015 9:39 pm)
+
+--- #5 | Dire Hit | Apr 18, 2015 4:10 am
+The big thing to do is to really think about the phrase step sequencer in terms of ticks instead of the actual music timing terms. Each step is 6 ticks. If you know what the commands do and how to time them you can make pretty much any sound you want. Keep playing around with things, maybe try to recreate some other LSDJ user's instruments from just hearing them, or even a real physical instrument.
+
+I've been playing a teacher a lot today so here's your tables and sound design 102 homework:
+
+Figure out the chord instrument at the beginning of "Dreaming"
+https://soundcloud.com/treyfrey/dreaming <https://soundcloud.com/treyfrey/dreaming>
+
+Figure out the intro to Fighter X's Massive Damage remix (hint: try using two channels)
+https://soundcloud.com/fighterx/08-sabr … ive-damage <https://soundcloud.com/fighterx/08-sabrepulse-massive-damage>
+
+Figure out Monodeer's pulse channel cymbals (they start at 1:10 but I highly recommend listening to the whole thing)(hint: they use a single command to emulate frequency modulation)
+https://soundcloud.com/monodeer/derp <https://soundcloud.com/monodeer/derp>
+
+--- #6 | bitpusher2600 | Apr 18, 2015 4:52 am
+Thank you folks.
+Indeed, I've been working with the sequencer as a matter of how I hear things, I'm a little lost on how to think in ticks. I'll pick it up eventually, I've just had bad luck with trial and error thus far.
+
+Mr. Dire Hit, thank you. Either you've played teacher alot lately because you are better at that art than you might think, or simply because your music is awesome and you are the type that has an occasional soft spot for newbies. None of the above? Well, at any rate, Challenge accepted [img: smile]
+
+--- #7 | bitpusher2600 | Apr 18, 2015 12:04 pm
+Jesus, that's brutal. Been at this the last couple hours, the frackin' LSDJ screen is burned into my eyes and my head hurts to boot.
+I just cannot reproduce those sounds. I don't understand how to count in ticks and use the H command. The C command, I just scanned the values and can get a bit of vibrato, and trying to really use transpose throws me off too because since it's possible to change a note so drastically, I'm never sure which note to begin with before tsp. W is not making sense either because what is the goal unless maybe you use lots of W's in the list, that would sound like some serious glitch noise.
+
+Anyway, I'm taking a break, this is wildly depressing. I bet I should be using Nanoloop, but dammit I want LSDJ.
+I will probably end up sticking to the simple techno stuff. Actually, I have friends in a couple local bands and was offered the chance a couple times to open for them. I promptly said nope because I don't know how and don't want to be in front of people anyway.
+Sorry, frustration has me rambling.
+
+Last edited by bitpusher2600 (Apr 18, 2015 12:08 pm)
+
+--- #8 | herr_prof | Apr 18, 2015 3:04 pm
+There is nothing you can do in nanoloop that cant be done in lsdj, except you actually have to know what you are doing in the later.
+
+--- #9 | bitpusher2600 | Apr 18, 2015 3:36 pm
+[quote herr_prof wrote:]
+
+There is nothing you can do in nanoloop that cant be done in lsdj, except you actually have to know what you are doing in the later.
+
+I know. I did a bass CD in Nanoloop on iOS. With it's capability to both create instruments and import high resolution sound samples and then manipulate those sounds, I completed almost the entire project in just that. I've looked at the Gameboy version online, and its a slightly different beast, but I meant to say I probably have better chances of getting where I would like to be a heck of alot faster since I have a very familiar and comfortable knowledge of Nanoloop's work environment.
+
+LSDJ is cheaper, more flexible (in that it doesn't require special hardware, it can be flashed very easily), and the very fine control nature of it appeals to me somehow, I'm just stuck at a wall im not getting past. For now.
+
+Forgot to say that I love the vertical sequencing of the tracker (which is something that is very new to me.) It's awesome if not sensible. Don't get me wrong either, I love the 1xlsdj sound and I'm quite satisfied with my present Gameboy tunes, even if they weren't too popular on CMO, I still like to listen to myself on occasion in my car. I just know from listening there are sounds and possibilities I have heard and know exist but can't seem to achieve because of the complexity of formulating thick tables, I don't want to keep relying on the infamous patch book.
+
+Last edited by bitpusher2600 (Apr 18, 2015 3:42 pm)
+
+--- #10 | Dire Hit | Apr 18, 2015 3:37 pm
+Don't worry about it too hard, I picked some tough stuff. It'd probably be helpful to reread the lsdj manual bits about commands, and to take it a bit further you could probably look for Danimal Cannon's YouTube lsdj tutorial.
+
+--- #11 | bitpusher2600 | Apr 18, 2015 3:46 pm
+I promise I did in fact read the manual, I didn't hop in totally blind. I will however take your advice and do it again, some of the wording I confess goes over my head at times. As for that tutorial, I may have seen it, I know I looked at a few, even the two parter by pandastar. Maybe you ought to do one [img: wink]
+Thank you for trying to help me good sir.
+
+--- #12 | Dire Hit | Apr 18, 2015 3:54 pm
+Don't worry about struggling, LSDJ is rather hard to learn and struggling is how we improve. I've been going at this for maybe 5 years and I still struggle with things. Just the other day I learned that the first number of an R command is an envelope.
+
+--- #13 | nora | Apr 18, 2015 4:06 pm
+Zef has several fantastic video tutorials that explain tables, ticks and commands. You can find them here <https://www.youtube.com/user/ZefChipmusic/videos>. I highly recommend them myself.
+
+Take it easy! You'll get to where you want to be. [img: heart]
+
+--- #14 | Biere Gratuite | Apr 18, 2015 11:11 pm
+Nanoloop can do at least two things LSDJ cannot: hardsync and softpulse
+Dire hit, if you have any how the exemples you posted were done, please tell us.
+I've been listening to Monodeer ans Shitbird a lot, tried to recreate it on lsdj but failed miserably.
+For exemple, Panceparty is a great mistery to me:
+https://soundcloud.com/shitbird/panceparty <https://soundcloud.com/shitbird/panceparty>
+
+--- #15 | Dire Hit | Apr 19, 2015 6:53 am
+I'm going to go over the bit from dreaming a little right now before I go pass out.
+
+The important thing for this one is you think of it in stages. There's the beginning and end half. So let's separate how to do it (this is all of the top of my head so it's just a rough starting point)
+
+Beginning: So the sound fades in and then stays at a steady volume while staying generally the same as far as pulse width goes, until later when he starts messing with that but we can ignore that for now. So, volume is going to be the main factor here apparently, time to bust out the E commands. The first command we want is something to fade the sound in fairly quickly, we're not trying to emulate a theremin here, something like E09 or E0A is probably a good starting point. But that gets loud fast, so count down steps until it seems like a reasonable volume and then add an EX8 command (X is the volume you figured works for your song) at the point that makes the fade seem most seamless. Maybe mess around with V commands, I'm not entirely convinced they were used here but it's always a fun way to add something to simple instruments.
+
+End: So when the sound begins to fade out we notice a texture change. The pulse is changing in width very quickly and predictably while the volume fades out. Use an H command to make sure the table keeps going over the same 2 steps and then in those steps place some commands to mess with the pulse width. In the other column add a E command (something like EX6, X is the same volume you picked earlier) so the sound starts to release as the pulsewidth begins to cycle. Slap a H0E on the last step of that table to make sure the volume commands don't keep repeating. Mess with L commands on your notes until it sounds cool.
+
+The monodeer one is super easy once you know how to do it, but it requires some knowledge of how V commands work. As some review, LSDJ commands are formatted in the form (EFFECT)(VALUE)(VALUE). When the effect in question is a V command the second value controls the vibrato depth. small numbers will create subtle changes, large values will sound like cartoon spring sound effects. When using the V command only for vibrato in the normal musical sense you don't really need to mess with the first value all that much, but when you really want to get new use out of it you need to know what it does. The first value in a V command controls the modulation speed; 0 is slow, 1 is a little faster, 5 is a fair bit faster etc. F is the highest possible value you can assign here, and it makes the vibrato speed so fast it almost becomes audible as a tone instead of as a pitch changing effect. In more powerful synths this is called FM synthesis and is a major part of every single electronic song written between the bankruptcy of moog and the other american synth companies until the advent of the sampler. But that's besides the point. What I'm getting at is that VFF is some pretty intense shit and if you ever need noise percussion out of a pulse channel our friend the vibrato command can help get you there.
+
+--- #16 | bitpusher2600 | Apr 19, 2015 8:01 am
+I'm at work at present, but when I get home today I'm going to take another crack at that, thanks to Dire Hit [img: smile]
+I need to re-watch Zef's videos a couple times because I'm a slow learner (if I were a smart man I wouldn't be doing what I do for a living.) At any rate, I never knew how to really use H commands, that like the A command and a couple others, I couldn't honestly figure out a sensible use for. Using H to steadily repeat a sequence of other commands, I would've never figured that one out.
+
+For once my mood is good [img: smile]
+
+--- #17 | Dire Hit | Apr 19, 2015 8:07 am
+Don't make it a chore. If you get frustrated feel free to walk away from it for a bit. Writing music should be fun, or at least cathartic.

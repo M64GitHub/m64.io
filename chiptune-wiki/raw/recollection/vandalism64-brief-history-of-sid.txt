@@ -1,0 +1,173 @@
+## The Brief History of SID
+
+by SIDwave
+
+Originally published in Vandalism News #64 - June 2015
+
+It was 1982, and Commodore released the C64 on the market.
+
+This was quickly followed by the book "Programmers Reference Manual", which is a complete guide to program all aspects of the C64. The first SID music ever is in that book, some sound effects, and music, done by Jim Butterfield (unconfirmed) - at least it's confirmed he did some or all of the music examples on the Commodore demo disk.
+
+The first games had only few bleeps and blops, many games had no music, just simple sfx. Then music began to appear, and it was often classical works converted, or famous pop songs.
+
+The first "composers" were not really composers, but very often the programmer of the game, who had converted some classic/pop music into code+data. It is known that some used midi, which they converted to C64 data. Mostly, the head programmer or a designated sound programmer, would convert something, or compose it on midi (Atari has been used), and then write a crude player, just playing back the notes, with simple waveforms, nothing advanced.
+
+1984, along came some composers who had a stronger grip on a music routine, to use little RAM and rastertime, for games.
+
+David Dunn was a pioneer in early players, who used advanced filter sweeps. Whilst most only used 8 bits of filter, David Dunn used all 11 bits of the SID for this. Also here we must mention Russell Lieblich, who is a similar tech, and who creates the wonderful music of Magic Carpet! It's very special, actually using a special filter routine, not actually part of the music player, so it was hard to perform a rip of the tune.
+
+1984 was also the year, another superstar came to light, Martin Galway.
+
+He was seeking a job as a game programmer at Ocean Software, UK. And got the job. After he worked on the first game, just because Martin's uncle, James, is a world famous flutenist, Martin was asked to do the sound. He said yes, but he didn't have any experience at all...
+
+The programmers at Ocean fixed this for Galway, they gave him a midi setup with an Atari, and a converter who turned all his compositions of 3 voice midi, into raw data. Then, and that's why Martin Galway's player is so large/extensive, with macro-language, Martin coded a bunch of routines, to manipulate this raw data, to poke the SID chip more efficiently, to have a good modern sound. In the process, Martin invented the chord, aka arpeggio - to play 3 or more notes in the same voice, very fast, one after another, so that it sounds like a chord. People from the UK called it the arpeggio, it was also known as wibble, or wibbles. :)
+
+###### Martin Galway in 1984
+
+In 1985, the big SID business still had not happened, but in this year the future mega star of all SID composers, who later came to be regarded as the father of game music, came into the scene, with some released demos where you could press keys F1-F7 for different music. This guy also had his very own sound, and especially some very advanced ones, which are made with ring modulation and sync, some sound even says WAOWAOOAAA like a human talking.
+
+This coder/composer, was of course, Mr. Rob Hubbard!
+
+###### Rob Hubbard
+
+Rob Hubbard had instant success upon entering the game business, because his music was top quality, and his player was so cleverly coded, that it needs little RAM and raster consumption (compared to Galway).
+
+There is many composers around, but what they have in common is to convert classic/pop, and not really being musicians, but coders. Usually the coder of the game.
+
+With Galway and Hubbard, David Dunn... the era of real musicians making music on the C64 had begun.
+
+1986 is the big break for everybody.
+
+Soon to become absolutely legendary for their many captivating tunes, the games have music from well-known people such as: Rob Hubbard, Martin Galway, Ben Daglish, Antony Crowther, Fred Gray, Mark Cooksey, Tim Follin, David Whittaker, David Dunn, and many others.
+
+Common is, however, they all do the music with their own method+code, so nothing sounds alike, they all have different sounds, and also different musical styles. Whereas the old stuff from 82-84 was typically bling blong with classical covers. :)
+
+None of these use a real music editor, well Galway does, but they custom code every game music, with a crude monitor, while the music runs, they edit bytes, to make it into music. I asked Rob Hubbard what exactly his work process was, and he told me, that he loads up a previously used tune, the most recent, and then swaps the patches. Sounds. So that's how Rob did it, he swapped out the sounds, and created new sounds, and then upgraded the player a little bit to handle those changes. Rob's "Monty on the Run" player, has been used in almost 30 games. Just small things changed.
+
+The demo scene was born in 1985, where the first real demos appeared, but only very few people from the scene had the capability to make music. One of the first demo scene composers was Yip of Purebyte. He made his tunes in SIDPLAYER, of which there is also a stereo version. It can make pretty good sounds, but there is no wavetable, to make strong drums and tricks, but Yip coded his own editor for it, instead the SIDPLAYER (Compute Gazette product).
+
+In 1986, let's see... scene composers with own player? Johannes Bjerregaard... and... well... nobody else! :) In the UK a guy called BOGG released the first music disk ever. He is the first composer to release a whole music disk, they are called BOGG Album 1, and 2. And BOGG makes his music in MASTER-COMPOSER. A classical note sheet editor, music goes from left to right, and the gfx is notes. Apparently not many sceners know how to do this, so not really anybody else used it (sceners). Like the rest, BOGG creates his own sounds, and has his own niche. Nothing else really sounds like BOGG, except THE MIGHTY BOGG!
+
+Then in late 1986, the scene is given the greatest gift of all, which results in the creation of the demo scene composer. Somebody releases what is called a TRACKER, music editor, and this concept is so easy to learn, that now everybody can make music!
+
+The guy releasing the tracker, is a German named Chris H�lsbeck. Chris has made 1-2 game tunes in a simple player, but he creates his own tracker and enters a German 64'er magazine competition, music. And he wins! Chris' first music sounds fantastic to everybody, because it has a new style, not heard before. It's pop/rock/chris, it don't sound like Hubbard or Galway, it sounds new and fresh!
+
+###### Chris H�lsbeck in 1986
+
+The whole scene jumps onto Soundmonitor, as it's called, the actual name of the program is Music Master v1.0 - already before 1986 ends, there is a huge music collection released by The Parade International, Germany, it's called "Crack's Best" - 2 demos, with 25-30 Soundmonitor tunes in each. That's how fast the scene works!
+
+We must mention in 1986, a world's first happens, that makes everybody go crazy and worship a new SID GOD! Down in Holland is a group called The Judges, they're famous for their demos, which in 1987 rule the scene. The Judges member, Red (Jeroen Kimmel), becomes the first scener to create his own music, in Rob Hubbard's player. He sends out one hit after another. The first demo from Red, with the Hubbard routine used is "Red Hubbard" in HVSC. 2 tunes.
+
+Enter 1987, a Danish guy named eventually, Laxity, does the same. But Laxity is a little smart kid, he turns Hubbard's player into assembler source, and after having hacked some tunes in it, he starts to change the player to meet his own needs, eventually, turning the player into his own, and at some point throws it out completely, and writes his own from scratch. When Laxity makes music in Hubbard, he is only 14! :) Me... Rambones. I am 18 at that time, hehe...
+
+Johannes Bjerregaard, Laxity, and Kim Jensen, all 3 Danes, are the first who write their own routines. Although, maybe Johannes is not to be considered a real scener... anyway... well, he was member of Upfront! But he made commercial music for games, with his own company: Danish Music Company! And JB's handle was Jozz/Upfront.
+
+Everything moves fast in the scene, within 3 months all kinda records are broken.
+
+We have to mention an editor which comes out in 1987, UBIK's Music. It's a tracker, but there is no free space between the notes, instead some codes what to do. Like DUR 04 - this is the first of what we called a DUR editor. D-2 DUR 02 D-3 DUR 04, play D-2, with length 2, then play D-2 with length 4. This is the same as we know from the '90s editor, DMC, Demo Music Creator.
+
+Another commercial product in 1987, is Ariston editor. A scener who uses it is Demon (Neil Baldwin). He also used Electrosound.
+
+Now, one of the founders of the demo scene, who made some of the first real demos, is TMC/Scoop. TMC has maybe the fastest brain of all... in 1987, from having never done any music at all, he makes his first little player, and release a demo called "Give a Try!", it's a demo with protected music. You need to be a smart ripper, to rip this tune. It's a competition he makes. It gives some people trouble, but it's ripped!
+
+All the while, there is a friend of TMC, who makes music. His name is Jeroen Tel. He makes music in BASIC (none of that is released), and in 1986 Jeroen does various tunes in Soundmonitor, like the rest of C64 scene. To be honest, it's not very good. :) TMC sits down and thinks, and very fast after his first music demo, he codes the first MON (Maniacs of Noise) player. It's a clone of Rob Hubbard's players. Let's make it clear, most later used players are. It's no direct rip, but they all have the same structure. Whatever you do, if you try to code the most efficient way and the player will be able to do all effects of the SID, what you end up with is more or less the same as the Hubbard/MON way to do things.
+
+When TMC and Jeroen Tel entered the world of music in games, they take it by storm. The scene goes nuts and proclaims them as the best musicians ever! That's how the scene is. :) True, they are good! :) The scene judges all and call it "the best". It has always been this way.
+
+Still, nothing is the best, just different.
+
+So the status in the middle to end of 1987 is that the old guys Rob, Galway, Ben etc. are still ruling the games scene and Maniacs of Noise is coming to the top and most of the scene are stuck with Soundmonitor/Rockmonitor as their tool to create music.
+
+A short introduction on "multi-speed".
+
+It is most common to call the music player 1 time per frame. But the German Michael Winterberg becomes known in 1986 for his special music, he uses the CIA timer and plays the sounds much faster, so his sounds are unlike others. The real "multi-speed" way is created by Antony Crowther, with Zig Zag and Centurions X, his player starts a sound, and on half a frame, it does the sound again, but only updating some of the parameters. To create what we call 2x speed. Not many copy his trick, it becomes a thing to do in the '90s (PRI and PVCF are famous for it). 2X and 4x are widely used in the '90s and deliver a characteristic sound. I personally chose to do 6x on purpose, to stand out soundwise from that, and it worked (sorry for a little future timeline stuff here, but it has roots here and doesn't fit in later).
+
+Rockmonitor? What is this?
+
+Before we mention that widespread tool, we have to go to the roots.
+
+Mid-1987, both Chris H�lsbeck and Martin Galway add sampled drums to their music. But it's Galway who runs with the glory, because his game is released first. But there is a difference: Galway's digi drum routine, is real-time, and does some poking and fiddling with very few numbers, to create small scratches and drums, using the SID volume register, D418.
+
+Chris H�lsbeck does it another way, his routine plays sample data from RAM, as a streaming of data to D418, using NMI.
+
+The race is on! The scene is taken by this and proclaims Galway the GOD of SID! :) And some take his routine apart and put the drums in their own music and even remix it.
+
+Again the scene is a bunch of rippers and start by stealing from industry professionals. :)
+
+Well, now, a German, The Banana of The Electronic Knights, he has an idea. So, The Banana takes the drums from a drum-only program, Funky Drummer, and he create some beats with it and then he put them in his own music. This is IBM Music 17. But The Banana has an idea and he codes his routine, so it can play 2 drums at the same time. His code mixes the 2 samples together and now he has 2-voice drums, on top of the 3 voice SID tune. In the end, Banana goes to 3-voice drums, but that craps up the sound so much, he is not able to add SID register music under it.
+
+In Holland is a group called The Dutch USA-Team. As soon as they see IBM Music 17, with funky drummer samples, they create Rockmonitor! Create? No, again the scene is a bunch of rippers. :)
+
+Dutch USA-Team take Soundmonitor from Chris H�lsbeck, same as The Banana is using and adds a digi-drum routine to it, so you can edit a drum track to your music. 5 versions are made, and then some other group takes over, and makes it into 6 versions in the end. But it never goes polyphonic, like The Banana's hack.
+
+Many good tunes are made with Rockmonitor, to mention some we could say Cavi/Commando Frontier, who made stunning versions of heavy metal tunes and Future Freak of Dexion, who makes such unforgettable classics such as the Dexion Demo, and Rocky Star. Of course, Dutch USA-Team, OPM he make the legendary Rockmonitor 2 demo tune, it starts with "this is the Rockmonitor twooooo!". Hehe - it's just so damn beautiful!
+
+Some important composers to mention, who came on air with Hubbard-clone players, with their own sound and a new fresh style: 20 Century Composers, Falco Paul, Dutch USA-Team with Music Assembler, which Reyn Ouwehand starts out with, and Soedesoft, Fire-Eagle.
+
+Soedesoft came on air in 1988, with his own editor, which is spread only to the elite and is very hard to get. And the few who get it, don't even use it... they don't know how or can't make any music... except one... Knatter/XAKK, who used it a bit... Knatter started with Soundmonitor like most the scene.
+
+Despite what HVSC says, it has credits as 1986 on some Soedesoft tunes, which is just wrong! It was demanded by Soedesoft. "We made it in 1986, but never released it", well, I (me, Jan Harries), I know this is a lie. I was there! In 1988, I got the first Soedesoft editor and that was what they used. The tunes they claim to have made in 1986, are made with a more advanced version! Soedesoft is just so lame, they try to steal the place from MON, being the first "MON" sound makers. Of course they are not! The MON sound is from TMC and JT. Stupid story... I have asked Soedesoft three times to change the story, but he refuses... LOL, I have to say.
+
+That was how sceners were... 15 years old, claiming to have made it all themselves... stealing other people's code etc... I even did it myself... That's just what a 15 year old boy does, because he desperately want to be famous! Nothing unnatural at all here...
+
+Should we tell the little story, how kids need to cheat, to get the magic tool?
+
+Yes, it's only fun...
+
+My friend, who I talk to everyday because we are both music producers, is Knatter... now Knatter told me this story, and it's ok to tell to the world now: Knatter he wanted that magic MON sound editor, the Soedesoft editor, but could not get it... so Knatter fooled them! He joined Soedesoft! And as soon as he had a copy of the editor, he quit! LOLOLOLLLLL!!!! This is true, he told me some months ago... because I asked what routine he actually used after Soundmonitor, and if I could see his editor.
+
+HAHA!!
+
+Also, 1988... Another player cracked: Future Composer! It's released by Finnish Gold. It's the first TMC/MON player, but Finnish Gold had made an editor for it. Many start using this and I guess, the largest share of unknown composer tunes are made with this. There would arrive entire disks, just with music files on them and no info on who actually made them.
+
+Finnish Gold also made an editor for WEMUSIC, Ben Daglish, but nobody really seemed to be able to use that, so I can't remember a single WEMUSIC player music, done by a scener, except from Finnish Gold themselves.
+
+It was always the same with SID business... "THE EDITOR!!!", everybody is screaming for a magical tool that will make cool music, but it never arrives. You have to learn and code it yourself.
+
+There are few capable editors on the market and only a few use those who are. One guy is Choroid (Jonatan Dunn), he starts with an editor called "Electrosound". It's somewhat usable and can do good sounds, but no heavy drums. Electrosound has 3 rows of notes, C-D-E-F.... one row for each SID voice and all you have to do, is place a dot in the note you wanna play, so it becomes a grid of dots. Then it plays sideways and you can construct a melody by placing dots, going to the right. Jonatan Dunn has done some really memorable tunes in that. And some day he makes some tunes with Soundmonitor and in late 1988 he gets a job at Ocean as a music guy. Electrosound and Soundmonitor are both very heavy with raster usage, around 45-75% CPU! So Dunn has to code his own player and he manages to do that and one of the first games from him is PLATOON.
+
+###### JCH sitting in front of his C64, September 1988 with a list of 6510 machine code instructions
+
+In 1990's it was very widespread to have your own editor. 1989 saw the light of day, JCH coming to top quality, Drax don't exist without JCH editor, Dane, many more. A clone was made, called SYNC, used by PRI. In the '90s many used JCH's editor, he was the gift to '90s, what H�lsbeck was to '80s.
+
+JCH is the inventor of what we call a hard-restart. It's a little pause-trick code, so that a sound never fails and the oscillator starts from point 0 of the waveform of the SID, not somewhere in middle where it was running before. This has been developed by GRG to also a soft-restart, so that sounds go from very hard start, to softer hit on key, when starting.
+
+A few people have the knowledge, or patience to make their own, such like Jeff (Soren Lund). And release them for others to use. But they were not created to be released, they were coded as personal tools, to fit the workflow and wishes of the composer. So often, manuals for these editors are self written by guys who found out all, like a Dane document for the JCH editor.
+
+To get to the final steps here...
+
+JCH inspired GRG to the SID DUZZ IT editor. Same system with tracker, just a different sound editor. SDI is an editor designed for Geir Tjelta's player. As most know, the SID-rip business for PlaySID, SIDPLAY (PC) began already in 1991 with the release of PlaySID for the Amiga. This results somewhere in 2002 with a PC SID tracker emulated SID engine on the PC to make music in - GOATTRACKER.
+
+It creates a new kind of composer. Like Linus, Jammer... many, many more. Music becomes more varied in styles and as some people say, "real music" is entered to SID.
+
+SID music all sounded very much C64 in the old days and in modern times, much of it sounds like "just music", not typically a C64 style. The composer has broken free from the heritage of Hubbard, Galway, "typical computer music", into, his own style. His own way. Music is a personal expression and if you take someone like Jammer, it certainly don't sound like any "typical 64 music".
+
+The latest revolution to mention is that also a brand new native platform (real C64) editor came to light. SID-Wizard, by Hermit from Poland. It offers midi and a different way to edit things. Music is very dependent on the way the editor works, I can sign for that! The way stuff is organised and how you have to work, has an effect on how your music eventuates. Anyway, I've felt that... I tried some different things, just for curiosity, and was able to make my usual style using those.
+
+What have we forgotten... yeah... the sample business...
+
+At some point, guys learned to play 8 bit samples, at high frequencies...
+
+SID-Vicious demos and Mahoney, and old scener who left in '88 and became an Amiga superstar, then return to the C64 scene, and one of the first things he did was to make a demo that plays vocal acapella song, mp3 crunched. And he improved that routine 3 times.
+
+The Human Code Machine and SounDemoN also improved the 8-bit playback a few times, and the latest was the series of Free-Running-Oscillator samples, which are played back, using all the SID registers, to hit a certain waveforms close enough as it can, to playback sample data - this was created by Naveed "Algorithm" Khugiani from the UK. His demos containing this routine are called FRO-DIGI.
+
+All the while, the "scene" has developed its tools, the various trackers and editors and methods, then the commercial game world died out in 1993, or perhaps even in 1990... It all became Amiga. Another Commodore computer. :)
+
+To say something common about it would be that the superstar's generation, Hubbard, Galway, and Daglish et all, they stopped around 1990... The music creators for games all had something in common, this was a personal routine and most of the music was entered using a machine code monitor. Whereas, the scene, the demo makers, they invented countless editors and new sound tricks.
+
+2009, Geir Tjelta did some code in his player, so it "samples itself", on voice 3, creating a fake reverb on all voices.
+
+I know that the depths of the SID have not been dug out yet. You can do many crazy sounds, when poking SID in untraditional ways. If you have any doubt... listen to GOTO80 or Jammer. :)
+
+Some "non-SID" music by Jeroen Tel, in fact uses SID. JT has some tunes that use all 3 voices and running at 8x. This creates some synth leads, which sounds like they actually came from a "standard" analogue synth. He uses those in his tunes, those he play on sets, like Assembly party in Finland and elsewhere.
+
+So... get back to your editor and enter some insane values you never used before, to make unheard sounds and then change the player so it does things none of them ever did before, then I'm sure that all new sounds can come out of it!! :) The little SID chip seems endlessly full of sounds, an 8580 model, can even make subwoofer bass.
+
+In my 28 years of ripping music from games and demos, I have seen many players, 5600+ to be exact. Spaghetti code, jumping around, neat order like Rob Hubbard, simple ones, 1 rasterline... even self-modifying ones (David Dunn) - always as a ripper, on the hunt for the init code, that will make the tune start properly and loop it when it's finished. Some set up ADSR first, then play a note, then effect, some do it differently. Some write all SID registers into a buffer and write it all at once, and a very few I've seen only update a few registers, who are changed, just modifying 3 sounds. Custom code for changing something, instead to read data from the tables. Some music data is packed, or efficient in that way, that the raw values is what the SID needs (Hubbard method). Others read data, and "convert" it to SID values (Galway). Electrosound...
+
+Jan Harries.
+
+(SIDwave)
+
+#### [back]

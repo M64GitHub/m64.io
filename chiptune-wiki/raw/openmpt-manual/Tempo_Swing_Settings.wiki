@@ -1,0 +1,20 @@
+[[Image:Tempo Swing Settings.png|thumb|409px|Tempo Swing Settings dialog]]
+
+Tempo Swing allows to change the duration of each individual row of a beat in [[Manual: Song Properties#Tempo Mode|modern tempo mode]]. Tempo Swing can be configured globally for the whole module (in the [[Manual: Song Properties#Tempo Mode|Song Properties]] dialog) or per pattern (in the [[Manual: Pattern Properties|Pattern Properties]] dialog).
+
+Tempo Swing makes it easy to add swing (or shuffle) to a track without having to manually enter lots of tempo change commands or note delays in the pattern. The main advantages are:
+* Independence of the current tempo and speed settings; Tempo Swing still works after a tempo change.
+* The duration of all rows ''always'' adding up to the intended tempo.
+* VST plugins receiving a steady tempo instead of constant tempo changes which sometimes confuse the internal delay lines of plugins.
+* Always being synced to the start of a beat in the pattern.
+* No need to fill patterns with tempo change commands which can be moved around accidentally, etc.
+* Finer control than tempo change commands.
+
+This dialog shows as many sliders as there are rows in a beat. The number of rows is configured in either the Song Properties (global) or Pattern Properties (per pattern) dialog. Move sliders to the right to extend the length of a row and to the left to shorten it.
+
+Enabling the '''edit group''' will divide the sliders into two groups of the specified size. All sliders belonging to the same group are moved at once. So if the edit group size is set to 1, every other row is moved together, if it is 2, every other group of two sliders is moved, etc.
+
+When editing the swing settings of a single pattern, the '''Use Global Settings''' button can be used to copy the global swing settings to this pattern.
+
+[[Category:Manual|Tempo Swing Settings]]
+[[Category:Windows|Tempo Swing Settings]]

@@ -1,0 +1,903 @@
+			     .
+  founded march 12, 1995   _| :            _____  t r a x w e e k l y  # 94
+	   ______________ |___|  _ _______/    /\___________________________
+	 /  ____________/ /\__\ _ _______/____/_____________________________
+	/  /  _________   \/__/    ______\    \_____________________________
+       /  /  /          `_  .  .~         \____\/                 _  __ ___
+      /  /  /     _____   . _ \                                __ ___ _/__/\
+     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/
+   _/__/  / ____/    /__\_________________________________  _____      ___ _
+  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /
+ /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/
+ /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\
+   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \
+  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /
+ /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /
+   /                                                 \____\/\____\ /  /  /
+  /  _____     _____     _____     _____     _____     _____      /  /  /
+ /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /
+ __/____/____/____/____/____/____/____/____/____/____/____/________/  /
+ __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/
+    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW
+
+----------------------------------------------------------------------------
+  | TraxWeekly Issue #94 | Release date: 09 Apr 1997 | Subscribers: 941 |
+----------------------------------------------------------------------------
+
+
+/-[Introduction]------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+  Welcome to TraxWeekly #94, an very rushed issue I managed to prepare
+ after yet another week of stalling and cramming to finish homework.
+ Getting on track after spring break has been...uhh..interesting, to say
+ the least. =)
+
+  TW veteran Zinc presents us with a discussion on using stereo samples in
+ Impulse Tracker, and he is followed by yet another huge section by the
+ ModSquad, covering more music theory.  Aim Higher and SkyJump Team continue
+ their group columns, and TW would like to invite any and all groups to send
+ in a column for themselves!
+
+  Enjoy the issue!
+						    Gene Wie (Psibelius)
+						    TraxWeekly Publishing
+						    gwie@csusm.edu
+
+
+/-[Contents]----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ ________  _________________________________________________________________
+ /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_
+<   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__
+ \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_
+ _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\
+
+
+  Letters and Feedback
+
+     1. Finding the Right People II...................Random Lamer
+
+  General Articles
+
+     2. Stereo Samples in Impulse Tracker.............Zinc
+     3. Music Theory: A Modern Approach...............The Modsquad
+
+  Group Columns
+
+     4. Aim Higher
+     5. SkyJump Team
+
+  Closing
+
+     Distribution
+     Subscription/Contribution Information
+     TraxWeekly Staff Sheet
+
+
+/-[Letters and Feedback]----------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[1. Find the Right People II]-----------------------------[Random Lamer]--
+
+ Date: Sun, 16 Mar 1997 00:19:22 +0400
+ From: Barney the Purple Dinosaur <barney@aol.com>
+ To: smil@embe.fi
+ Cc: mah196@easynet.co.uk, skie@wrath.berk.net, shawnm@citenet.net,
+     gwie@mailhost2.csusm.edu, langebrd@fys.ruu.nl, pinion@netcom.com,
+     petador@ketchup.rave.org, marco72@unive.it, fimarkus@online.no,
+     mclifton@pheonix.csc.calpoly.edu, panther@global.co.za,
+     perseus@xs4all.nl
+ Subject: join us!
+
+ hi. my name is barney. i'm a far-composer and plan to organize
+ new musicgroup named "pink mist side". i wish you to join our group.
+
+ descriptions for "pink mist side":
+
+ 1.format for music: far, 12khz, 4bit.
+ 2.maximum zipped module size: 12,500 bytes.
+ 3.appearance: in gopher.
+ 4.competitions NOT allowed.
+ 5.***** ratings for modules.
+ 6.music style: country, bluegrass, and cajun.
+ 7.your soul belongs to me.
+ if your music doesnt agree with upper rules, you must leave group.
+ however, while in "pms", you can also join or leave other musicgroups,
+ but you must write [macarena-mix] at least twice a month.
+
+ promotion and distribution of music:
+ gopher. bbs server. your own news on bbs networks. your personal
+ profile and photo on my bedroom wall.  uruguay headquarter bbs.
+ foreign headquarter bbses (in future). audiocassettes with ordering.
+ no parties.  no fun allowed.
+
+ cya. barney/wet dreams.
+
+ e-mail : barney@aol.com
+ voice: (666) 773-4999
+
+----------------------------------------------------------------------------
+
+
+/-[General Articles]--------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[2. Stereo Samples with Impulse Tracker]--------------------------[zinc]--
+
+  "Why use stereo samples when you can use panning?" I was asked one night
+ after I rejoiced over my first successful true stereo .IT song.  Well,
+ this article is designed to show you why you should and HOW you can use
+ stereo samples in your music.
+
+
+  WHAT?
+
+  What is the difference between a stereo sample and a panned sample? 
+ Well, basically the difference is this: a panned sample makes one sample
+ come from somewhere between the two speakers, while a stereo sample uses
+ two samples two create one sound, but coming from two directions, resulting
+ in a much more realistic, and depthful sound. 
+
+
+  WHY?
+ Let me tackle this question with some simple logic: You have at least
+ two speakers (hopefully), and you have two ears, so your brain is able
+ to pinpoint from where a sound is coming from. 
+
+  Let's say you are using a mono sample panned at 32 (halfway for 
+ simplicity sake). The tracker will play the sample half volume through 
+ the left speaker, and half volume through the right speaker, to give the 
+ effect of the sample coming from halfway between them. The problem here 
+ is that the end result sounds shallow and fake. Yes, it's still MONO 
+ regardless of where the sample is. On the other hand, if you use two 
+ samples, you can make two DIFFERENT sounds come from each speaker, to 
+ create a very rich, full sound. Even using offset delays and other
+ methods, nothing passes the stereo carbon test (your ears) like an actual
+ stereo sample!
+
+  To test this, try it when you can using just two samples.. try a stereo
+ beatloop or bass drum. I'll explain how to do this next. After all,
+ hearing is believing (where have i heard that before? :> ).
+
+
+  HOW?
+
+  Unfortunately, I can bet that more than 99.95% of your samples are in
+ MONO!  So are most sample packs, and just about every sample available on
+ the web.  What is the solution?  Make your own samples!  Percussion is
+ pretty easy to find clean on CDs, as well as any other sample you would
+ normally sample in mono to begin with.  If you can't do that, just
+ hope you'll find some stereo mods to rip from! :)
+
+  Impulse Tracker is the only tracker I know of that can load stereo
+ samples, but to actually make your songs stereo, there's something you
+ must do. First, go to the sample screen, and hit ENTER, ready to load
+ a stereo sample. Find one, and try loading it. It asks you to load LEFT
+ or RIGHT sample. Well, one at a time, load both of them! Then, turn
+ default panning to hard LEFT and RIGHT for each sample. Now you have
+ a stereo sample.. or rather two seperate mono samples that equal stereo
+ samples when used together. Unfortunately, you have to use two channels
+ for just one stereo sample. In the example of a kick drum, put your kick
+ on every 4th bar (or whatever) in one channel with your LEFT sample, and
+ do the same in the next channel with your RIGHT sample. Then hit F6 and
+ listen to a true stereo beat! Wow.. neato. You will instantly tell the
+ difference if you have done this right.
+  
+
+  WHY NOT?
+
+  Why don't some people like stereo samples? Well for one thing, it
+ doubles the size of your samples. Also, it doubles the number of channels
+ needed. And, it's a lot more trouble to pan stereo samples (this involves
+ playing with the volumes of seperate channels rather than tracking-type
+ panning).
+
+  The best compromise is just to use both mono and stereo samples. I like
+ to use stereo samples for heavy percussion or bass or other small samples
+ which you ordinarily would only use one channel for. Samples like strings
+ can sound okay when panned out over several channels.
+
+
+  CONCLUSION
+
+  In my opinion, the mono/stereo thing is one of the main reasons why
+ tracked music still doesn't sound as real as studio work. If we can use
+ true stereo samples more often, we will make that step towards reality..
+ Trust me :)  heheheheh...
+
+       Advise me of any songs done with stereo samples!
+
+                                              zinc / rays@direct.ca
+
+----------------------------------------------------------------------------
+
+
+--[3. Music Theory: A Modern Approach]----------------------[The Modsquad]--
+
+                      Music Theory: A Modern Approach
+                  To Perfecting An Old Art, and Learning
+                How To Better Yourself, and What You Track.
+                                   by
+            Finrez, Radio Shock, Neon Hunter, and NOT Bottlehead
+
+                           modsquad@juno.com
+
+ We kicked Bottlehead out of the group cause he took over our channel on
+ undernet after we banned his lame ass for insulting Radio Shock. He is a
+ looser anyways, he wasn't writing anything for the advancement of music
+ theory. We have won this battle against the losers of the music theory
+ scene, but we are still fighting the war. Find out how you can help us
+ by writing to us!
+
+ This is the sixth article in our second theory series. We expect the series
+ to have an approximate length of 8 parts.
+
+           --------[ AN ANALYSIS OF INSIDE OUT.S3M ]-------
+
+        "AAGHH THE BIG CHILL!!"
+                     ---Rhino Rape,
+                      _The_Big_Chill_
+
+ Hi there. I just started taking theory lessons this new school semester, so
+ I wanted to try them out in analyzing one of my favorite mods: inside out
+ by the late Purple Motion. Its more of an exercise for me than for your
+ good, but I figured since it has never been done before, we can all benefit
+ from it.
+
+ The tune starts out with a descending three note riff and the classic
+ purple motion noise track. A quiet hihat riff is then played over it, a
+ precursor to the beat to come. the chords come in, with it a few
+ syncopated base drums. The chords play a few riffs, and it repeats in the
+ next pattern. Finally the drumbeat kicks in and we're in the verse. The
+ melody here is austere, similar to the descending pattern of the opening
+ three note riff. It repeats the next verse and builds up into a crescendo.
+ The drumbeat stops, there are two low base notes, and then the chorus kicks
+ in. The chords, which up til now have been mostly minor, go major. The
+ highly catchy melody (made with a chip sample, believe it or not) is the
+ most memorable piece of the chorus. When we leave the chorus after two
+ repeats of the melody, we enter what at first seems to be a verse, but is
+ fundamentally different. It is simply a place holder until we can repeat
+ the wonderful chorus again. The chorus is repeated, and then repeated
+ again in a higher key. When it is finished again, we enter a highly
+ repetetive yet nice sounding bridge made mostly of chords. A melody is
+ played over this, completely different from  yet just as good as the
+ chorus. Then the repetetive section repeats again. Finally, we loop back
+ to the beginning again.
+
+ It is a very nice tune, don't let my autopsy of it fool you. The melodies
+ are wonderful and the drumbeat is catchy too.
+
+       ---[ IMPORTANT THINGS TO REMEMBER IN PAWNSHOPS ]---
+
+  "I was walking down the street to do my laundry and I saw two epileptics
+   swimming. Suddenly they broke out and had an epileptic fit in the pool,
+   so I just threw my laundry in there."
+                                         ---Martin Landau,
+                                     _The_Long_Kiss_Goodnight_
+   
+   With Neon Hunters article about the Korganorgan, he said some important
+ shit, and I will try to expand it beyond the Korg world.
+
+  Resist the temptation to buy underwear (I'm still scratching).
+
+  If theres a phone number scratched on something, its an invitation
+  to call. Say your name is Mr. McGoo.
+
+  In the crowd waiting for the stores opening, yell "Hey, its Bob Ross!"
+  and point at something bushy. You'll have the store to yourself.
+
+  Don't make eye contact with anybody in the bathroom.
+
+  Wear tight leathers and shove all those 303s down your pants. Noone
+  will ask for them back.
+
+  If you find a 303 and have neither cash nor tight pants, stash it in
+  the quilt section. Noone ever looks there.
+
+  If you see another synth collector, buy all the preset drum machines
+  and make him think you know something he doesn't.
+
+  When noones looking, shuffle across the carpet to build a static charge,
+  then zap that TR-808 that you can't afford.
+
+  They throw out Fairlight CMIs because they think they're broken TVs.
+
+  If the synth costs 61 bucks, present it to the clerk upside down.
+
+  Check the quilt section for stashed 303s.
+
+  If you drool a lot, sometimes you get a discount.
+
+  If you see CMI patch tapes but no CMI, check the dumpsters out back,
+  but don't eat the Big Macs.
+
+  Someone's dead grandma knitted that afghan you're buying for your dog.
+
+  See how many peoples heads you can get "Pac Man Fever" stuck in.
+
+  The mop heads will make a great addition to your performance costume
+  when colored properly.
+
+           ----[ CHORDS, THEY'RE YOUR FRIENDS.. OR ARE THEY? ]-----
+
+  "This is my friend, spud"
+            ---Dana, _Step_By_Step_ "Help Line"
+
+ Lets say you just wrote a melody for a jazzy type tune, and you're
+ afraid you'll have to add chords... Look at it this way, if you just
+ drew a picture that had 2 people in it, and you wanted to add a back-
+ round to it. No way! Who would want to do that? This is the same
+ thing for chords. The only reason you want chords, is if you are
+ writing a Necros or Basehead type tune. But who wants those when you
+ can write WAVE tunes???
+
+ C-E-G  Majour         Those are all the chords you'll ever goddamn
+ C-D#-G Minour         need. Necros uses em, maybe you want to too.
+ C-F-G  Suspended 4th
+ C-D-G  Suspended 2nd
+
+     ----------[ MORE STUFF TO DO WITH MEXICAN 909'S]-----------
+
+  "I'll get it... Hello? Hello? Damn you! Stop calling us!"
+                                 ---Khyron
+
+ This was way back in the days of theory #2 or #3 or something, where Finrez
+ wrote about his orthodontist (what was that about oral work? heh heh heh).
+ He wrote the three steps to do for making a good song:
+
+                            1. try it
+                            2. apply it
+                            3. test it
+                            4. up it
+
+ Ok, so sue me, it was four. I've found out that there are more to do.
+ Here is my new list:
+
+                            1. try it
+                            2. apply it
+                            3. deny it
+                            4. supply it
+                            5. funkdefy it
+                            6. test it
+                            7. rest it
+                            8. protest it
+                            9. demand it
+                           10. up it
+
+ These are at least as important as the first four known, if not more.
+ The reasons are thusfold:
+
+   Deny it - When your friend wants to listen, don't let him, he'll spoil
+             the surprise
+   Supply it - Finally let him listen when you've built it enough in his
+               mind that he has to like it or he'll think you're a real
+               piece of shit
+   Funkdefy it - How could you release a non funkdefied song??
+   Rest it - What the fuck? A song without rest notes?
+   Protest it - Protest against all the mistakes you made tracking it, and
+                fix them
+   Demand it - Noone else is gonna ask you for your new song, ask for it
+               yourself on c.s.i.p.d, and when you up it, more people will
+               download it wondering why the guy wanted it.
+
+        ----------------[ FINISHING TOUCHES ]------------------
+
+ "You know, each day is like a dirty road from the middle ages. Eww!"
+                    ---Sherry and the Crows
+
+ I was messing around with various patches on my Arp 2500, plugging those
+ patch cords from oscillator to oscillator to filter to ring modulator
+ (of course, ring modulator!), and I came up with the coolest sounding
+ thing. I hooked up my sampler to it and sampled the sound so I wouldn't
+ lose it, and saved it on a disk. Then I ripped out all the patch cords
+ and tried to synth up another good sound, but I wasn't able to come up
+ with any as good as that other one. So I went back to the sampler, and
+ messed around with my rad sound effect.
+
+ But something struck a wrong note in my funny bone. Something here was
+ terribly, terribly wrong. I funked up a base line in Cakewalk and set
+ it to repeat over and over so I could listen to tell what the problem
+ was.
+
+ It took me several minutes to hear it, but when I did, it creeped further
+ and further into my brain until I couldn't stand it anymore. The amount
+ of LFO on the resonant lowpass filter was just a smidgen too small!
+
+ Augh! To have such a rad sound utterly ruined by such a small mistake!
+ I kicked my Arp and something inside it snapped. It hasn't worked since,
+ and it's been at repairs for the past week. I shudder to think of what
+ the bill will be for such a classic machine, but I have learned something
+ very important by all this:
+
+ ALWAYS put finishing touches on your sounds and songs! If you don't,
+ you'll kick yourself in the ass about it later. I mean, say you forgot
+ to put the finishing touches on your tune and you sent it in to MCA
+ records. Then you listen to your tune one night and realize that the
+ baseline was just not funky enough, or that the open hihat was a little
+ bit too accented, or you forgot to run the song through a ring modulator!
+ You would kick yourself in the ass so many times for blowing a kickass
+ record deal that you wouldn't be able to sit down for a week.
+
+     -------=-=-=-= [ music and blocks ] =-=--------=====-
+
+           "..New technology in sound blockage!!!"
+                      ---Ford Motor Vehicles
+
+        "I am expert with breaking blocks using sound"
+                                ---Jackie Chan
+
+     did you know that before music was invented, by henry farnsworth,
+     in 1753 or whenver/whoever it was, people just threw stones
+     on the ground?.. yeah, this was really they're inner children
+  trying to get they're funky souls out.. they threw the stones
+  with a certain funky rhythm.. makin sure not to loose the beat..
+  catch the rhythm. keep the funk and injekt the venom.. hey, hey
+  yer jammin now, but too bad you gotta milk your cow!.. anyways,
+  this was right before music was invented. and i thought you should no,
+  becuase, like, lemm cant write drums for shit (actually i think he can
+  but my peers tell me the later), and like.. he should just listen
+  to his inner funky soul for the answer.. cuz you know, thats where it is.
+
+          ----------[ RULES OF YOUR THUMB ]----------
+
+      "Those people in the IRA have green thumbs with the plant of fear"
+                                    ---J. Edgar Hoover
+
+ Lemme give you a hint about many things in life: your thumb knows more
+ than your brain. Why else would people say "rules of thumb!"? I mean,
+ its a well known fact! Your thumb rules! If you track good stuff, it
+ rules your thumb up your closed fist!! And then you can break it and
+ the good ideas will leak out!! But you have to have someone on hand to
+ grab then before they escape or your thumb will be stupid forever.
+      
+ Hmm.. actually maybe its not such a good idea to break your thumb, cause
+ then its like killing the Golden Goose (you know, the one that laid the
+ golden eggs?), cause then it couldn't come up with more ideas, and you'd
+ just get one or two. So don't break your thumb, or all the ideas will
+ leak out.
+
+ This can be a real problem, considering that your thumb is one of the most
+ used digits on either hand. Its the old opposable thumb plight -- how do
+ we protect our opposable thumb, the most important finger, from danger when
+ its the mosted used finger? One thing you can do is to exercise your
+ thumbs, like if you're forced to use those inverted hand "ergonomic"
+ keyboards, you're in special danger because your thumb has to reach further
+ to get to the space bar.
+
+ A good thumb exercise is known as "twiddling".. that is, you interlace your
+ fingers together and roll your thumbs.. well.. look at these asciigrams:
+      _______        _____             _______
+    /~~~~\---\      /     \____       /---/~~~~\       ____/~~~~\
+   /  ~~~~==  \      /==\~~    \     / /--`~~~~\      / ___`~~~~ \
+    \~~~~~~~~~/    \ =====~~~~~/      \------  /      \ === =====/
+     ~~~~~~~~~      ~~~~~~~~~~~        ~~~~~~~~~       ~~~~~~~~~~
+    [ step 1 ]       [ step 2 ]       [ step 3 ]       [ step 4 ]
+
+ Another good exercise are those chinese thumb trap tubes. The twisting and
+ prying it takes to escape will also provide a full body workout.
+
+ Playing a console game with those cross paddles (not the lame ass
+ joysticks, but the cross controllers that use your thumbs to control)
+ also aids in exercise, but be careful if you haven't played for a while,
+ you can blister easily, especially doing Mortal Kombat style rolls.
+
+               --------[ BUYING A PIANO ]----------
+
+    "Have you ever gotten a sudden urge to kill Wilford Brimley?
+     It's the right thing to do."
+                                          ---My dad
+
+ I saw an episode of Fred Flintstone where Fred wanted to buy a piano for
+ Wilma's anniversary, so he went to the piano store with Barney.
+
+ Fred: I'd like to buy a piano.
+
+ Clerk: We have a nice one here, it's a Stoneway.
+
+ Fred: But how does it sound?
+
+ Clerk: Would you like to try an arpeggio?
+
+ Fred: No, I want a piano!
+
+ Clerk: Oh, I see. [plays a scale, a few simple chords, and then a
+        masterful improvisation with trills and pounding base]
+
+ Fred: I like that one. How much?
+
+ Clark: We have this one on sale. It's only $15000.
+
+ Fred: $15000!?! I only brought $50!
+
+ It was funny. Anyways, I got the idea of going to the piano store myself,
+ just to see what it was like. I went over to Neon Hunters house with
+ Zerocool, and Neon Hunters mom took us to the store. I played a few
+ notes on them and never realized how crappy those $5000 pianos are compared
+ to the $10000 ones. I looked inside and was shocked to see that there
+ were three strings for each key!! Except for the base which were two, and
+ the massively low base was only one. But it was cool. We saw a digital
+ piano, it had a midi out on it, plus a bunch of non piano sounds.
+
+ The old owners looked at us like we were freaks, but they were too polite
+ to actually kick our asses out. So we went into the next room where there
+ were pianos with sequencers attached. I put a disk in the drive and
+ pressed the play button. It played the notes itself, it even pressed the
+ keys, and it was an acoustic too. It was rad. Then they came up to us
+ and said "thats enough, boys" so we left to be nice. I still think they
+ would've let us stay longer if I hadn't said that those $4000 pianos were
+ "crappy assed".
+
+         -----------[ THE ABSTIMMBARER ANZEIGERVERSTARKER ]--------
+    
+     "I want to die in my sleep like my grandfather, not screaming and
+      yelling like his passengers."
+                                      ---Mike Lee
+
+ You would not believe what I got my hands on this week. I was in my home
+ "studio" (crappy equipment mostly, but a few nice vintage gadgets) fo the
+ past three days playing with this thing nonstop. I found it in a pawn
+ shop in Tallahassee while visiting my moms parents, it was a good $500,
+ but was worth it.. in the words of a denizen of Analog Heaven, this thing
+ is the manually tuned resonant filter from hell! The Rohde & Schwartz
+ model UBM Astimmbarer Anzeigerverstarker Tunable Indicating Amplifier is
+ probably the best investment I have ever made.
+
+ It was used in communications testing, until a musician got ahold of it
+ and used it to turn the dinkiest base drum into a resounding base boom.
+
+ Its a piece from the 50s, and you will nearly pop your eardrums listening
+ to this filters self oscillation, the resonant frequency is amplified to
+ about 50 times that of the fundamental, ranging from 45 hz to **600khz**
+
+ These things are ultrarare, and I had to go to the anal cavity of humanity
+ (contrary to popular belief, it's not Buffalo) to find it anywhere, at any
+ price. I'll tell you now: the owner had no idea what he had on his hands.
+ Its like stumbling on a barrel of TB-303s at $1250 apiece.
+
+              ---------[ GROUP NAMES AND HANDLES ]---------
+
+    "Ohhhh... for a name, for a name, for a name name name name!"
+            --Mozarts Ghost, the hottest new band on the Internet!
+
+    "It's fun to name things."
+              --Terry,  _The_Delicious_Dish_
+
+ Say you're just starting out in the scene. You need to come up with a
+ good handle, and a name for the group you're starting. The best way to
+ do this is to make fun of someone elses handle.. for example:
+
+ Basehead      - Acidhed
+ Fallacy       - Phallusy
+ Cryptic Blood - Cryptic Crip
+ 
+ Or if you like, you can take a name from a song. Good handles might be:
+
+ The Crossing   -- THE RALERODE XING
+ Uvula Groove   -- VULVA DANCE
+ Claytons       -- PLAYDOH TINS
+ Orchard Street -- ORCHID LANE
+
+ For group names, make fun of people handles or group names:
+
+ Acid                         - Base
+ Analog                       - Digital 
+ Ice                          - Water Vapour
+ Kosmic Free Music Foundation - Kosmic Expensive Music Foundation
+ Radical Rhythms              - Malicious Melodies
+ Gray                         - Light White
+
+            -----------[ BERKLEE MUSIK SCHOOL ]-----------
+
+    "Ten soldiers and Nixon's comin'"
+              ---Emerson Lincoln Palmer
+
+ My brudda got a brochure in the mail about this place called Berklee
+ musik school in L.A. He got all excited and said he wanted to take piano
+ lessons so he could go there. Then he saw that it only lasted a week, and
+ tuition for that week was like $3000. Crocka shit, if you ask me. He'd
+ hafta go to Boston to get his moneys worth.
+
+ But it had some cool stuff there. They were cool people, like the faculty
+ would give concerts and you could jam with other students and shit, and
+ there were "keyboard rooms" and "guitar amp rooms" where you could go
+ plug yer headphones in to play keyboard or plug yer guitar into the amps
+ provided for you.
+
+ I heard they have twelve majors, like music theory, sound synthesis,
+ film scores, improvisation, wood blocks, musical therapy, and vocalization
+ and cool stuff.
+ 
+ Anyways, you oughta go there cause my brudda is actually considering
+ flying out to Berklee to go to college, and then you could meet him.
+
+                    ---------------------------
+
+ That was the sixth installment of our second music theory series of
+ articles. If you want to contact us, our email address is at the top
+ and bottom of the file.
+       Love,
+           Finrez,
+           Radio Shock,
+           and Neon Hunter
+         NOT BOTTLEHEAD HE SUX
+          modsquad@juno.com
+
+ (c) 1997 FuNkY MoDSQuaD iNC
+
+----------------------------------------------------------------------------
+
+
+/-[Group Columns]-----------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[4. Aim Higher]-----------------------------------------------------------
+
+     ###### #### ########   ##  ## #### ###### ##  ## ###### #######
+     ##  ##  ##  ## ## ##   ##  ##  ##  ##     ##  ## ##     ##   ##
+     ##  ##  ##  ## ## ##   ##  ##  ##  ##     ##  ## ##     ##   ##
+     ##  ##  ##  ## ## ##   ##  ##  ##  ##  ## ##  ## ##     ##   ##
+     ######  ##  ## ## ##   ######  ##  ##  ## ###### ####   #######
+     ##  ##  ##  ## ## ##   ##  ##  ##  ##  ## ##  ## ##     #####
+     ##  ##  ##  ## ## ##   ##  ##  ##  ##  ## ##  ## ##     ## ###
+     ##  ## #### ## ## ##   ##  ## #### ###### ##  ## ###### ##  ###
+
+           P    R    O    D    U    C    T    I    O    N    S
+
+ UPDATE
+
+    Well spring is here, which means that alot of people will soon be
+ finishing school, and the music will be coming out fast and furious
+ for the next couple of months. AIM Higher is no exception, as the May
+ 1st deadline, for our comeback disk Re-Unification is rapidly
+ approaching.
+
+    AIM Higher has alot of good news to tell you about including
+ several new members, the progress of our musicdisk, and the introduction
+ of our FTP site and home page.
+
+ MUSICDISK
+
+    The AIM Higher comeback disk is in full flight, and should be out by
+ the previously announced date of May 1st. If you'd like to hand in a
+ guest tune there is still plenty of time to do so. Just email me at the
+ below address.
+
+    The musicdisk will NOT have it's own musical/graphical interface as we
+ currently don't have the coders to program ITs. Since that is the most
+ accepted format these days - especially in AH - we decided to scrap any
+ notion of a music player. Besides we know that most of you out there don't
+ even unzip the packs to conserve space on the ol' harddrive :)
+
+ WEB PAGE
+   
+   It's here! MANY thanks to Raymond of Sound Distribution Channel for
+ allowing us to put our web page up on his site. Since I don't have direct
+ access to the site, upgrades might be slow sometimes, and currently we
+ are still working out some of the kinks. The webpage is dedicated to the
+ musicians in the group who have (most of them) filled out personal info
+ pages that will hopefully interest you, and future groups that they could
+ possibly join. Anyways, here's the site:
+
+        http://sdc.wtm.tudelft.nl/aim-higher
+
+ DISTROS
+
+   Thanks again must go to Raymond of SDC for allowing us to store all
+ AIM Higher releases on his ftp site. This is a big bonus to us, as now
+ you have a few different options from where you grab our music. The main
+ ftp site is as follows:
+
+        sdc.wtm.tudelft.nl/pub/music/groups/AIM
+
+   We still haven't received any confirmation from our previous distro
+ sites, neither have we received word from any potential new ones :) If
+ you'd like to distribute AIM Higher files, by all means please email
+ myself (master of darkness) at the given address below.
+
+ MEMBERS
+
+    Updates from our previous memberlist include the acquisition of
+ Egoteq, Corinthian, Karl Koelbel, Mr. Monkey, Cyrus, and Chinaski.
+
+    Enci has renamed himself Nymph Of Coke.
+
+    Remember, if you'd like to become a member of AIM Higher, it's as
+ simple as emailing me at the address below. There are no obligations to
+ release, no obligations to stay, no particular styles, and generally we
+ release anything that you give us - provided you hear our comments first
+ :).
+
+ MAILING LIST
+
+    AIM Higher is here to help out PC Musicians everywhere that might have
+ questions, and for this reason we are currently working on a mailing list.
+ Right now it's just me forwarding my mail out to all the members, but this
+ has grown quite tiresome, and unreliable.
+
+    If there is anyone out there that could provide AIM Higher with a
+ mailing list hub, it would be greatly appreciated - and benefitial to the
+ rest of the PC music community as well :)
+
+ CLOSING
+
+    You are once again up-to-date on the comings and goings of AIM Higher.
+ If there are ever any questions about the group itself, joining the group
+ or just PC music in general please don't hesitate to mail me or one of
+ the other members :)
+
+ Thanks for your time,
+
+ Master of Darkness (tandlar@jupiter.scs.ryerson.ca)
+ Aka Todd Andlar
+
+ "I'm not only the president, I'm also a client!"
+
+     ######### ### ###########
+     ######### ### ###########  #               #
+     ###   ### ### ### ### ###  #  #            #  #
+     ###   ### ### ### ### ###  # ###  #   ##   # ###
+     ######### ### ### ### ###  ### ## #  ####  ### ## ###### #####
+     ######### ### ### ### ###  #    # # ##  ## #    # ###### #
+     ###   ### ### ### ### ###  #    # # ##   # #    # #####  #
+                                           ####      #
+     P    R     O     D     U     C      T    #  I     O     N     S
+    -------------------------------------  ####  ----------------------
+
+                            (c) AIM Higher 1997
+--
+| Fidonet : Todd Andlar 1:2424/1004
+| Internet: Todd.Andlar@dark.tor250.org
+
+----------------------------------------------------------------------------
+
+
+--[5. SkyJump Team]---------------------------------------------------------
+
+      ,g##g_   gg  ,gg ~gg   pg*   ;ga  gg   pp  [ggc  ggp  [ggggg,
+      M#"4#@   #@ ,@#"  7#a ,#@    l#9  #@   BB  [##@ ]##B  [#44@#@
+     ]#L  E#   #@,@#"    @@ #B     l#9  #@   BB  [#QB [#BB  [#   7#
+      ##ga,    #@W#X     \#y#@     l#9  #@   BB  [#[#_QBBB  [#  _A#
+      `@###g   ###@@      Q#@      l#9  #@   BB  [#]#C#@BB  [#####@
+     __  "@#a  ##"\#G     ]#L   __ l#9  #@   BB  [# #N#CBB  [#""""
+     I#a  )#L  #@  QB,    ]#L  ]#L [#?  #@   W@  [# M##'BB  [#
+     `##ggMB   #@  `#@    ]#L   ##g@M   Y#@g##@  [# f#B BB  [#
+      `@#B@"   #@   Y#*   ]#L   `@#@"    9###"   [# +#@ UB  [#
+                                                                                
+        ggggggg  pgggggg    ,gg    gggc  ggp  (TM)
+        [######  BB####@    6#@    [##@ ,##B   -------------------
+           #@    BB____,   /#"#@   [#I# QBBB   |      Quality    |
+           #@    B#####9   W@ V#_  [#)#8#@BB   |    Since 1994   |
+           #@    BB       j#@g&#G  [# #N#CBB   -------------------
+           #@    BB       &#####@  [# MB#^BB   E-MAIL:
+           #@    BBggggg  #@   Y#, [# Q#B BB   ssetti@inf.unitn.it
+           #@    B#####D I#"   `#@ [# l#@ BB
+                                                                                
+
+  01 April 1997
+
+  Hiya to everyone from D.J. Skyjump :))
+  Sorry for the long delay (two months are passed from the last release),
+  but i'm very busy. (I study alot for my University exams ...)
+
+  These are the new releases straight from SkYjUMP tEAM  (SJT)
+
+  --------------------------[ New Tracks ]------------------------
+
+
+      01/04/97 -  The Dark Side (II)
+                  Composer : Aphex
+                  File     : SKY_DRK2.ZIP
+                  Size     : 866k
+                  Style    : Jungle/Trance
+
+      01/04/97 -  Energy Overflow
+                  Composer : Aphex
+                  File     : SKY_NRGO.ZIP
+                  Size     : 285k
+                  Style    : Goa Trance
+
+      01/04/97 -  Soorya Namaskara
+                  Composer : Aphex
+                  File     : SKY_SOOR.ZIP
+                  Size     : 951k
+                  Style    : Goa Trance
+
+
+  Grab it From our WWW Page :
+
+  http://sdc.wtm.tudelft.nl/skyjump-team/
+
+  or from the ftp sites :
+
+  sdc.wtm.tudelft.nl    /pub/music/groups/SKYJUMP-TEAM
+  ftp.cdrom.com         /pub/incoming/music/....
+
+  --------------------------[ Mailing Service ]-------------------
+ You can receive all new modules by SUBSCRIBING. To do this, simply
+ send  to (postmaster@explizit.org)   an e-mail message with in the
+ message body the keywords 'subscribe <listname>".
+
+ We have seven different internet distro-lists:
+
+  Listname              Description
+  =================================================================
+  sjt.announce          : Skyjump Team announcements, text-only
+  sjt.binary            : New, MIME Skyjump Team releases
+
+ Thanx For Your Attention  ....
+
+ See Ya Later
+  D.J.. Skyjump  (ssetti@inf.unitn.it)
+
+----------------------------------------------------------------------------
+
+
+/-[Closing]-----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ TraxWeekly is available via FTP from:
+ ftp.cdrom.com /demos/incoming/info (new issues)
+ ftp.cdrom.com /demos/info/traxweek/1995/ (back issues)
+               /demos/info/traxweek/1996/ (back issues)
+               /demos/info/traxweek/1997/ (back issues)
+
+ TraxWeekly W3 is under construction indefinitely.
+
+ To subscribe, send mail to:      listserver@unseen.aztec.co.za
+ and put in the message body:     subscribe trax-weekly [name] (NOT address)
+ To unsubscribe, mail same and:   unsubscribe trax-weekly (in message body)
+
+ Contributions for TraxWeekly must be formatted for *76* columns,
+ must have a space preceding each line, and have some measure of
+ journalistic value.  Please try to avoid the use of high ascii
+ characters, profanity, and above all: use your common sense.
+
+ Contributions should be mailed as plain ascii text or filemailed
+ to: gwie@csusm.edu before 11:00pm PST (North America) every Wednesday.
+
+ TraxWeekly is usually released over the listserver and ftp.cdrom.com
+ every Thursday or Friday at 10:00pm PST (North America).
+
+ TraxWeekly does not discriminate based on age, gender, race, political
+ or religious statures and standpoints.
+
+ The staff can be reached at the following:
+
+ Editor:   Psibelius (Gene Wie)..............gwie@csusm.edu
+ Staff:    Atlantic (Barry Freeman)..........atlantic@arcos.org
+           Benjamin Krause...................orogork@cs.tu-berlin.de
+           Fred (Fred Fredricks).............fred@paracom.com
+           Kal Zakath (John Townsend)........jtownsen@sescva.esc.edu
+           Kleitus (Seth Katzman)............katzms@rpi.edu
+           Mage (Glen Dwayne Warner).........gdwarner@vinson.navy.mil
+ Our                                         gdwarner@ricochet.net
+ Buddy:    Justin Ray (Zinc).................rays@direct.ca
+
+ Graphic Contributors:
+           Cruel Creator . Stezotehic . Squidgalator2 . White Wizard
+
+ TraxWeekly is a HORNET affiliation.
+ Copyright (c)1995,1996,1997 - TraxWeekly Publishing, All Rights Reserved.
+
+
+/-[END]---------------------------------------------------------------------
+---------------------------------------------------------------------------/
+                                         ::
+                                          :::                  :
+     . ..... ..............................:::.................:....
+                                            :::                :
+                                            ::::               :
+        .::::.      .:::::.:::.     ..::::  ::::               :
+       ::    ::    :::  .::  ::    ::     WW::::               :
+       ::.   ::   :::  .::  ::   .::        ::::               :
+        :::.::.  :::  .:: .::  .:::::...   :: :::..      ... ..: ...
+ ..::::::::::::::::  .:: .:::::::   ::::::::    ::::::.. ::: ::: :::
+                                                               :
+                                              until next week! =)
+           ..  ... .. ....... ............... .................:..... .. .
+                                                               :

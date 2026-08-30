@@ -1,0 +1,1224 @@
+			     .
+  founded march 12, 1995   _| :            _____  t r a x w e e k l y  # 98
+	   ______________ |___|  _ _______/    /\___________________________
+	 /  ____________/ /\__\ _ _______/____/_____________________________
+	/  /  _________   \/__/    ______\    \_____________________________
+       /  /  /          `_  .  .~         \____\/                 _  __ ___
+      /  /  /     _____   . _ \                                __ ___ _/__/\
+     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/
+   _/__/  / ____/    /__\_________________________________  _____      ___ _
+  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /
+ /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/
+ /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\
+   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \
+  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /
+ /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /
+   /                                                 \____\/\____\ /  /  /
+  /  _____     _____     _____     _____     _____     _____      /  /  /
+ /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /
+ __/____/____/____/____/____/____/____/____/____/____/____/________/  /
+ __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/
+    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW
+
+----------------------------------------------------------------------------
+  | TraxWeekly Issue #98 | Release date: 16 May 1997 | Subscribers: 916 |
+----------------------------------------------------------------------------
+
+
+/-[Introduction]------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+  Welcome to TraxWeekly #98.
+
+  Unfortunately, not a very good week here in the music scene.  Because of
+ problems arising from the copying of his stereo disk writer driver for
+ Impulse Tracker, Jeff Lim (Pulse) is stopping work on improvements for
+ IT.  I figured it was bound to happen; pirating continues non-stop on the
+ network today (hey, we've all done it).  Now, how is this going to affect
+ our music today and tomorrow?
+
+  Our feature article this week comes from Vincent voois, who covers the
+ art of creating new samples using Csound, a waveform creator/editor.  For
+ those of you so inclined, this article really goes in-depth on the nuts and
+ bolts of using this program to generate some decent results.  I hope some
+ of you will get something out of it.  Airon covers some MIDI functions of
+ Impulse Tracker for us, and zinc proudly resurrects the mod "blacklist"
+ from a previous issue.  Your songs sound terrible?  Think again. =)
+
+  Note: Someone sent me an article titled "why tracking is a perfect
+ art form."  Unfortunately, I don't have an author name or address with the
+ article, and since I can't credit the author, I don't feel as if I should
+ run this article until I do have it.  If whoever wrote this piece could
+ email me, I would very much appreciate it.
+
+  See you next week!
+
+						    Gene Wie (Psibelius)
+						    TraxWeekly Publishing
+						    gwie@csusm.edu
+
+
+/-[Contents]----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ ________  _________________________________________________________________
+ /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_
+<   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__
+ \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_
+ _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\
+
+
+  Letters and Feedback
+
+     1. Letter from Shade
+     2. Letter from sls
+
+  General Articles
+
+     3. Impulse Tracker Investment....................Pulse
+     4. Waveforms.....................................Vincent voois
+     5. Impulse Tracker MIDI..........................Airon
+     6. The Blacklist #2..............................zinc
+
+  Closing
+
+     Distribution
+     Subscription/Contribution Information
+     TraxWeekly Staff Sheet
+
+
+/-[Letters and Feedback]----------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[1. Letter from Shade]----------------------------------------------------
+
+ From shade@www.ecmt.comFri May  9 13:25:17 1997
+ Date: Fri, 9 May 1997 13:44:39 -0400
+ From: shade <shade@www.ecmt.com>
+ To: gwie@mailhost1.csusm.edu
+ Subject: Music Trends
+
+ Why would I try to follow the industry? I write what I want to, and if it
+ so happens it's in style, or if it's not in style, it does not matter. I
+ write what I want to write because I am writing for no one but myself!
+
+ -Shade [TMX]
+
+----------------------------------------------------------------------------
+
+
+--[2. Letter from sls]------------------------------------------------------
+
+ From shaslshas@global2000.netFri May  9 13:18:14 1997
+ Date: Thu, 8 May 1997 18:56:03 -0400 (EDT)
+ From: sls <shaslshas@global2000.net>
+ To: gwie@mailhost1.csusm.edu
+ Subject: traxweekly content
+
+ nice mag, just one request...  please kill those columns by the 
+ modsquad.  they're silly and and have no redeeming content.  they just
+ take up space.  their columns have gone on for god-knows-how-long, and
+ they just get stupider each week.  no offense, but these lame articles
+ have no place in an otherwise quality mag...
+
+ let me hear your opinions. 
+
+ laters,
+ - anonymous former tw columnist =)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  Hmmm...well readers, what do you have to say?           -psib.
+  
+----------------------------------------------------------------------------
+
+
+/-[General Articles]--------------------------------------------------------
+---------------------------------------------------------------------------/
+
+
+--[3. Impulse Tracker Investment]----------------------------------[Pulse]--
+
+ Hmmm. It's almost midnight. Time to log on..
+
+ I check my EMail - I like to reply and clear all my EMail by the day (obtw.
+ I lost quite a few EMails over the last week, if you wrote to me and didn't
+ get a reply, please send the EMail again).
+
+ Sometimes, among the EMails, I find the question: "What do you want for the
+ stereo versions of ITWAV?".
+
+ Involuntarily I groan. I reply with the standard US$30 for nonprofit use and
+ sometimes I even remember to include my address or bank account details.
+
+ In the mean time, I wait for a reply. Sometimes there's no reply, sometimes
+ there's a polite reply, affirmative or negative... And then sometimes I get
+ a reply like this:
+
+ > FUCK U MOTHA FUCKA.. GO GET A JOB!!! UR SO POOR, U CAN"T EVEN FEED YOUR
+ > FAMILY!!!!!! PIS OFF, BACK OFF... I GOT OTHER THINGS TO DO THAN
+ > BABYSITTING!!!
+ >
+ > U DON"T GET IT MOTHA FUCKA!!!
+
+ That was several weeks ago. Today, I got this one from daled@shani.net
+ (please feel free to write to this address.)
+
+ > i would like to tell you to Suck my dick.. Cuz...
+ > 30$ my asssss.........
+ >
+ > please contact Zir0 for more information....
+ >
+ > adios motha fucker...
+
+ Well that just makes me feel sooo good. Someone is providing warez versions
+ and has the gall enough to spite me. I can't help but ask myself, why the
+ hell did I even bother releasing Impulse Tracker? IT could have been a
+ PolyTracker (made famous by The Rew/Nostalgia and Vic/ACME) or an Imago
+ Orpheus (Just how many of you have heard of this FT2-featured tracker with
+ a  ST3 interface?). But it wasn't. Well, why the hell DID I *release* IT?
+
+ IT was *created* because *I* track. Not because *YOU* track, not because
+ Necros wanted a ST3 interface with more advanced features, not because
+ the demoscene or musicscene wanted IT to be created, but because *I* track.
+ That I *released* it is something to do with pride.
+
+ When an artist paints something that they are proud of, they don't hide it
+ away! They go and show their work of art to as many people as they can.
+ Impulse Tracker is my work of art. I wanted it to be something that I could
+ share with everyone who would find joy in using it. And so Impulse Tracker
+ was released as a program that you could use freely, without any shareware
+ or crippleware restrictions so that the hours that I had spent chiselling
+ my sculpture could be seen in full, front and back, so that anyone could use
+ Impulse Tracker to it's maximum capabilities at any particular time.. And I
+ was(am) happy for people to use IT as a hobby. The problem comes when the
+ distinction between hobby and *job* becomes blurred. I don't care if you
+ spend 24 hours a day on IT. That you enjoy using my program so much to use
+ it day after day brings satisfaction to me, but what I am concerned about
+ is when someone gets *paid* for using IT.
+
+ Impulse Tracker wasn't a program that just 'appeared.' I slaved at it for
+ hundreds of hours.. easily over 1500 hours, probably closer to 2000. If
+ someone can spend 4 hours, or even 100 hours (for the sake of example) on
+ a song and get paid for it, then I feel that it's surely my right to see
+ some of their earnings.
+
+ How does ITWAV.DRV fit into this? Well, as far as I can see, there are only
+ a few reasons that anyone would want a stereo version of ITWAV.DRV.
+ ITWAV.DRV is used to make high-quality, noiseless WAV file recordings of
+ modules. This is especially suited for burning CD ROMs, since most CDR
+ software accepts audio data in the form of WAV files. This version of ITWAV
+ is not distributed in the general package, as it really does have
+ profit-situation implications. As for those people who do want to burn CDRs
+ of their own music, I figured that they would have spent a number of hours
+ using Impulse Tracker to create their songs and that asking for US$30 to
+ enable them to produce something really tangible (their own audio CD!)
+ wouldn't be asking too much. After all, they'd have to spent somewhere
+ around $10 to pay for a blank CD, let alone the CD-Recorder.
+
+ Obviously, there are many people who do not share my views. US$30 is just
+ too much. To quote some of the Velvet Studio's Help file:
+
+         "...I get your point exactly:
+          You want people like us to work our asses off without
+          getting anything from it. Next time, try to convince
+          a car salesman to give away a Ferrari for free..."
+
+ These are the words of another very pissed off coder who put a lot of time
+ and effort into creating a state-of-the-art piece of software and who never
+ received what he deserved.
+
+ To put it another way:
+    "People want everything but are not willing to give anything."
+
+ Gladly, I know this is not true. There are a good number of people out
+ there  who have a fair judgement. To those of you who have contributed,
+ I thank you. To all these and to the friends I have made, you will
+ receive updates as I make them.
+
+ To all the others, IT213 will be the very final public release that you'll
+ see from me. There will be bugfix releases and probably also new soundcard
+ drivers, but you won't see a single new feature in IT after that.
+
+ I used to envy how Psi so neatly avoided any sort of responsibility for
+ ST3.  Now, I will be able to join him.
+
+ Jeffrey Lim
+ Pulse
+
+ PS. For those of you who have had EMS Stability problems with IT212, grab
+ the IT213 preview from http://www.citenet.net/noise/it
+
+----------------------------------------------------------------------------
+
+
+--[4. Waveforms]-------------------------------------------[Vincent voois]--
+
+ Since I've been working with a lot of waveform editors and processors to
+ be able to process my or other's samples in order to create some nifty
+ effect or just to cover it's originality so that no one can hear it's
+ ripped, there allways was a need to create samples completely by myself. 
+
+ Not sampled NOR ripped.
+
+ Composing was what I started with on the Commodore 64 around '88
+ (Soundmonitor still rules! hehehe :))and since you cannot make music
+ without instruments, it's one of the first things you have to develop
+ your own on that machine.
+
+ It's mainly because of that, that my intrests in creating sounds were
+ only growing.
+ The following prospects in soundgeneration makes it worth creating them:
+
+ -The data wich create the sound exists out of simple formula's or
+ generation-tables
+
+ -The sound can be packed very tensly due to the similarities in the
+ overallshape of the wave.
+
+ -You have no unwanted noise in it wich also determines the packing-rate
+ of the sound.
+
+ -The sound is yours and yours only, you can archive the sources and
+ formula's wich create them in order to proof your responsible for the 
+ development.
+
+ Now I'm talking about formula's and tables while there are different
+ cool tools like Sound-Forge and Cool-edit.
+ Indeed, but still tools like that wich have a very nice GUI keep
+ restricted in possibilities. (?!?!?:!!!!)
+ (I mean Soundforge with only four lousy fm-operators, even fm-synth on
+ amiga is better!)
+
+ Okay, I've found one good sound-formula compiler wich has the most
+ abilities you can think of and more you can't think of.
+
+ Now with this art of creating sound, gaining pain is coming around the
+ corner again if you don't know how to ,,Program'' your waves, therefore
+ you take care you have the complete manual and all the tools needed.
+
+ First let me introduce you to the program and it's primary aspects, I'll
+ show you the starter's details and then an example of wave shaping.
+ Ending with some info where to get what.
+
+ After that you can start exploring yourself into the world of creating
+ wave-art.
+
+ ***********************************************************************
+
+ Creating your own sound with C-sound (MIT).
+
+ C-sound is not really more than a sound-compiler based on C-Language.
+ (?!?)
+ C-sound has been developed by Barry L. Vercoe around the 60's so i'm not
+ discussing about the newest invention here but it's to my opinion still
+ the best available.
+
+ Note for freeloaders =}|-\
+ The most nicest thing around c-sound is that you don't have to purchase
+ it since it's totally free to use (there copyright notices on the
+ development part offcourse.), not only c-sound itselves, a lot of tools
+ created for and around c-sound by other developers are having the same
+ free usage environment.
+
+ What C-sound does is examine your CS-sources and search for structures,
+ formula's wich determines length, amplitudes, frequencies and tables
+ wich will determine the formula's events.
+ While C-sound examines these sources it will then create the wave
+ bit-wise into .WAV, .RAW or .AIF-files.
+
+ Ofcourse you do not need to be a C-programmer in order to be able to
+ make sounds, as a C-programmer him/herself has to learn the symantics
+ and syntaxis' about the C-sound engine too!
+
+ Generally speaking, there are two kinds of source-files wich determine
+ the wave shape:
+
+ The ORChestra source and the SCOre source.
+
+ The .ORC source tells the C-sound compiler how to generate the
+ instrument(s)
+ In this file you determine the complete environment of the instrument,
+ there's ,,no man playing'' this instrument here so you cannot define
+ tables here that can run on their own.
+
+ The .SCO source commands the C-sound compiler to create sound (the
+ arranger tells the violist to play the notes on the score) with the
+ formula's from the .ORC-file following the tables wich contain the
+ amplitude-, duration-, and pitch-rates etc.
+
+ Okay, this is the short, short, short introduction to the general
+ aspects but as they have made up a manual at MIT themselves why should i
+ explain that part what they can do better than me?....
+
+ ***********************************************************************
+
+ A Beginning Tutorial
+
+ The Orchestra File
+
+ Csound runs from two basic files: an orchestra file and a score file.
+ The orchestra file is a set of instruments that tell the
+ computer how to synthesize sound; the score file tells the computer
+ when. An instrument is a collection of modular statements
+ which either generate or modify a signal; signals are represented by
+ symbols, which can be "patched" from one module to
+ another. For example, the following two statements will generate a 440
+ Hz sine tone and send it to an output channel:
+
+     asig oscil     10000, 440, 1
+          out  asig 
+
+ The first line sets up an oscillator whose controlling inputs are an
+ amplitude of 10000, a frequency of 440 Hz, and a waveform
+ number, and whose output is the audio signal asig. The second line takes
+ the signal asig and sends it to an (implicit) output
+ channel. The two may be encased in another pair of statements that
+ identify the instrument as a whole:
+
+          instr     1
+     asig oscil     10000, 440, 1
+          out  asig
+          endin 
+
+ In general, an orchestra statement in Csound consists of an action
+ symbol followed by a set of input variables and preceded by
+ a result symbol. Its action is to process the inputs and deposit the
+ result where told. The meaning of the input variables
+ depends on the action requested. The 10000 above is interpreted as an
+ amplitude value because it occupies the first input slot
+ of an oscil unit; 440 signifies a frequency in Hertz because that is how
+ an oscil unit interprets its second input argument; the
+ waveform number is taken to point indirectly to a stored function table,
+ and before we invoke this instrument in a score we must
+ fill function table #1 with some waveform. 
+
+ The output of Csound computation is not a real audio signal, but a
+ stream of numbers which describe such a signal. When
+ written onto a sound file these can later be converted to sound by an
+ independent program; for now, we will think of variables
+ such as asig as tangible audio signals. 
+
+ Let us now add some extra features to this instrument. First, we will
+ allow the pitch of the tone to be defined as a parameter in
+ the score. Score parameters can be represented by orchestra variables
+ which take on their different values on successive notes.
+ These variables are named sequentially: p1, p2, p3, ... The first three
+ have a fixed meaning (see the Score File), while the
+ remainder are assignable by the user. Those of significance here are: 
+
+ p3 - duration of the current note (always in seconds).
+
+ p5 - pitch of the current note (in units agreed upon by score and
+ orchestra). 
+
+ Thus in 
+
+     asig oscil     10000, p5, 1 
+
+ the oscillator will take its pitch (presumably in cps) from score
+ parameter 5.
+
+ If the score had forwarded pitch values in units other than
+ cycles-per-second (Hertz), then these must first be converted. One
+ convenient score encoding, for instance, combines pitch class
+ representation (00 for C, 01 for C#, 02 for D, ... 11 for B) with
+ octave representation (8. for middle C, 9. for the C above, etc.) to
+ give pitch values such as 8.00, 9.03, 7.11. The expression 
+
+     cpspch(8.09) 
+
+ will convert the pitch A (above middle C) to its cps equivalent (440
+ Hz). Likewise, the expression 
+
+     cpspch(p5) 
+
+ will first read a value from p5, then convert it from octave.pitch-class
+ units to cps. This expression could be imbedded in our
+ orchestra statement as 
+
+     asig oscil     10000, cpspch(p5), 1 
+
+ to give the score-controlled frequency we sought. 
+
+ Next, suppose we want to shape the amplitude of our tone with a linear
+ rise from 0 to 10000. This can be done with a new
+ orchestra statement 
+
+     amp  line 0, p3, 10000 
+
+ Here, amp will take on values that move from 0 to 10000 over time p3
+ (the duration of the note in seconds). The instrument
+ will then become 
+
+          instr     1
+     amp  line 0, p3, 10000
+     asig oscil     amp, cpspch(p5), 1
+          out  asig
+          endin 
+
+ The signal amp is not something we would expect to listen to directly.
+ It is really a variable whose purpose is to control the
+ amplitude of the audio oscillator. Although audio output requires fine
+ resolution in time for good fidelity, a controlling signal
+ often does not need that much resolution. We could use another kind of
+ signal for this amplitude control
+
+     kamp line 0, p3, 10000 
+
+ in which the result is a new kind of signal kamp. Signal names up to
+ this point have always begun with the letter a (signifying an
+ audio signal); this one begins with k (for control). Control signals are
+ identical to audio signals, differing only in their resolution
+ in time. A control signal changes its value less often than an audio
+ signal, and is thus faster to generate. Using one of these, our
+ instrument would then become 
+
+          instr     1
+     kamp line 0, p3, 10000
+     asig oscil     kamp, cpspch(p5), 1
+          out  asig
+          endin 
+
+ This would likely be indistinguishable in sound from the first version,
+ but would run a little faster. In general, instruments take
+ constants and parameter values, and use calculations and signal
+ processing to move first towards the generation of control
+ signals, then finally audio signals. Remembering this flow will help you
+ write efficient instruments with faster execution times. 
+
+ We are now ready to create our first orchestra file. Type in the
+ following orchestra using the system editor, and name it
+ "intro.orc".
+
+          sr = 20000               ; audio sampling rate is 20 kHz
+          kr = 500                 ; control rate is 500 Hz
+          ksmps = 40               ; number of samples in a control
+                                     period (sr/kr)
+          nchnls = 1               ; number of channels of audio output 
+          instr     1
+     kctrl     line 0, p3, 10000             ; amplitude envelope
+     asig oscil     kctrl, cpspch(p5), 1     ; audio oscillator
+          out  asig                ; send signal to channel 1
+          endin 
+
+ It is seen that comments may follow a semi-colon, and extend to the end
+ of a line. There can also be blank lines, or lines with
+ just a comment. Once you have saved your orchestra file on disk, we can
+ next consider the score file that will drive it.
+
+
+ ***********************************************************************
+
+ The Score File
+
+ The purpose of the score is to tell the instruments when to play and
+ with what parameter values. The score has a different
+ syntax from that of the orchestra, but similarly permits one statement
+ per line and comments after a semicolon. The first
+ character of a score statement is an opcode, determining an action
+ request; the remaining data consists of numeric parameter
+ fields (pfields) to be used by that action. 
+
+ Suppose we want a sine-tone generator to play a pentatonic scale
+ starting at C-sharp above middle-C, with notes of 1/2
+ second duration. We would create the following score:
+
+     ;  a sine wave function table
+     f1 0 256 10 1
+     ;  a pentatonic scale
+     i1   0    .5   0.   8.01
+     i1  .5    .    .    8.03
+     i1 1.0    .    .    8.06
+     i1 1.5    .    .    8.08
+     i1 2.0    .    .    8.10
+     e
+
+ The first statement creates a stored sine table. The protocol for
+ generating wave tables is simple but powerful. Lines with
+ opcode f interpret their parameter fields as follows:
+
+     p1 - function table number being created
+     p2 - creation time, or time at which the table becomes readable
+     p3 - table size (number of points), which must be a power of two or
+          one greater
+     p4 - generating subroutine, chosen from a prescribed list. 
+
+ Here the value 10 in p4 indicates a request for subroutine GEN10 to fill
+ the table. GEN10 mixes harmonic sinusoids in phase,
+ with relative strengths of consecutive partials given by the succeeding
+ parameter fields. Our score requests just a single sinusoid.
+ An alternative statement:
+
+     f1 0 256 10 1 0 3 
+
+ would produce one cycle of a waveform with a third harmonic three times
+ as strong as the first. 
+
+ The i statements, or note statements, will invoke the p1 instrument at
+ time p2, then turn it off after p3 seconds; it will pass all of
+ its p-fields to that instrument. Individual score parameters are
+ separated by any number of spaces or tabs; neat formatting of
+ parameters in columns is nice but unnecessary. The dots in p-fields 3
+ and 4 of the last four notes invoke a carry feature, in
+ which values are simply copied from the immediately preceding note of
+ the same instrument. A score normally ends with an e
+ statement. 
+
+ The unit of time in a Csound score is the beat. In the absence of a
+ Tempo statement, one beat takes one second. To double
+ the speed of the pentatonic scale in the above score, we could either
+ modify p2 and p3 for all the notes in the score, or simply
+ insert the line
+
+     t 0 120 
+
+ to specify a tempo of 120 beats per minute from beat 0. 
+
+ Two more points should be noted. First, neither the f-statements nor the
+ i-statements need be typed in time order; Csound
+ will sort the score automatically before use. Second, it is permissible
+ to play more than one note at a time with a single
+ instrument. To play the same notes as a three-second pentatonic chord we
+ would create the following:
+
+     ;    a sine wave function
+     f1   0  256   10    1
+     ;    five notes at once
+     i1   0    3    0    8.01
+     i1   0    .    .    8.03
+     i1   0    .    .    8.06
+     i1   0    .    .    8.08
+     i1   0    .    .    8.10
+     e
+
+ Now go into the editor once more and create your own score file. Name it
+ "intro.sco".
+
+ ***********************************************************************
+
+ So if we have got the catch, the files and we have Csound we can compile
+ it to a standard 16-bit mono wave-file with the following command:
+
+ csound -v intro.orc intro.sco
+
+ and an intro.aif will be created.
+
+ if you want to have it as 8-bit ad a -8 parameter, chagning the
+ output-filename can be done by adding the -o parameter followed by the
+ desired filename.
+
+ Remember that 8-bit sounds can be saved as a .WAV file when you use the
+ -o parameter instead of the -W parameter wich enables saving as .WAV,
+ with -W it will be saved as 16-bit ONLY even with the -8 parameter
+ given!
+
+
+ Now the last example, creating a simple instrument with waveshaping
+ technique.
+
+ ***********************************************************************
+
+ Overview of Waveshaping
+
+ An input signal is rotated by 90 degrees counter clockwise so
+ that its time axis is parallel to the ordinate of the transfer
+ function. The ordinate of the transfer function represents the
+ OUT values and its abscissa stands for the IN values. In this
+ manner all amplitude values of an incoming signal are mapped to
+ new amplitude values, in strict correspondence with the transfer
+ function.
+
+ A diagonal transfer function (x=y) gives no distortion at all.
+ The larger the deviations in the slope of a transfer function,
+ the more radical the spectral changes. An even transfer function
+ will produce only even harmonics in the output, while odd
+ transfer functions yield odd harmonics in the distorted signal.
+ Discontinuities like abrupt jumps or sharp points lead to
+ harmonically richer spectra than smooth transfer functions.
+
+ To calculate specific spectra, the transfer function is
+ represented as a polynomial of the general form:
+           F(x) = d0 + d1x + d2x2 + ... + dNxN
+ For an input sinus at amplitude 1, amplitude values for the
+ harmonics belonging to each algebraic term of the polynomial are
+ obtained by multiplying the divisor with the table value(s) for
+ hj. Summing these coefficients for the corresponding power of x
+ will compute the value of dj. 
+
+ ***********************************************************************
+
+ Shaping the wave of a clarinet-like instrument:
+
+ This instrument uses the duration of a note to choose between two
+ different envelopes. For notes exceeding .75 sec in duration, the
+ right-hand envelope in the figure is applied.
+
+ The amount of distortion, i.e. the harmonicity of the spectrum is
+ dependent on the maximum amplitude value specified for LINEN: for
+ 56 or less there is no distortion, and the transfer function will
+ simply return a sinus. 
+
+ Here the odd linear transfer function produces odd harmonics,
+ increasing in strength and number as the LINEN value exceeds 56.
+
+
+ The Source code:
+
+ ;
+ ************************************************************************
+ ; ACCCI:      Clarinet.ORC
+ ; timbre:     clarinet-like
+ ; synthesis:  waveshaping(40)
+ ;             basic instrument with duration dependent envelope(02)
+
+ sr = 44100
+ kr  =  441
+ ksmps= 100
+ nchnls = 1
+
+ instr 1;
+ *****************************************************************
+ idur  = p3
+ iamp  = p4
+ ifqc  = cpspch(p5)
+
+ idec  =  .64                             ; idec for idur > .75
+ if idur >.75 igoto start
+ idec  =  idur - .085                     ; idec for idur <= .75
+
+ start:
+        aenv    linen    255, .085, idur, idec      ; envelope
+        a1      oscili   aenv, ifqc, 1              ; sinus
+        a1      tablei   a1  + 256, 31              ; transfer function
+                out      a1 * iamp                  ; scale to amplitude
+ endin;
+ ************************************************************************
+
+ ; ACCCI:   Clarinet.SCO
+ ;          #150 Serial Excerpt with Clarinet-like Sounds by Nonlinearity
+
+
+ ; GEN functions
+ **********************************************************
+ f1   0 2048 10 1                           ; sinus
+
+ f31  0  512  7 -1 200 -.5 112 .5 200 1     ; transfer function
+ waveshaper
+
+
+
+ ; score
+ ******************************************************************
+
+ ;           idur   iamp   ipch
+ i1  0.000   0.750  8000   7.04
+ i1  0.750   0.250  .      7.07
+ i1  1.000   1.000  .      8.00
+ i1  2.000   0.200  .      8.02
+ i1  2.200   0.200  .      8.04
+ i1  2.400   0.200  .      8.05
+ i1  2.600   0.200  .      9.00
+ i1  2.800   0.200  .      9.04
+ i1  3.000   0.250  .      9.05
+ i1  3.250   0.250  .      9.00
+ i1  3.500   0.250  .      8.05
+ i1  3.750   0.250  .      8.00
+ i1  4.000   1.000  .      7.04
+ i1  5.000   0.125  .      7.07
+ i1  5.125   0.125  .      8.00
+ i1  5.250   0.125  .      8.02
+ i1  5.375   0.125  .      8.04
+ i1  5.500   0.125  .      8.05
+ i1  5.625   0.125  .      9.00
+ i1  5.750   0.125  .      9.04
+ i1  5.875   0.125  .      9.05
+
+ e
+
+ ***********************************************************************
+
+ Good, we have now seen the basics of wave-generated programming.
+ This is only a little piece of the whole pie, this tool has some really
+ tremendeous features even processing existing wave-files with
+ filtertechniques and modulation techniques.
+
+ Tools like Soundforge and Cooledit are based on applications like
+ C-sound.
+
+ The most resources can be obtained at the MIT-Labs page itselves (called
+ the C-sound Frontpage)
+
+ http://www.leeds.ac.uk/music/Man/c_front.html
+
+ Here are links to various mirror-sites along the world wich contain
+ copies of the manual, instruments and tools and offcourse the compiler.
+
+ If you are hooked to GUI-like programs I suggest you to look for
+ PatchWork for .... by Keith Lent and Russel Pinkston.
+ It is probably lying around on the university of Texas, Austin.
+ This tool let's you create the instrument(s) with help of object guided
+ devices like oscillators, multiplexers and more.
+ It creates the possibility to maintain the overview of how your
+ instrument will be build wich you can loose when editing your .ORC-file
+ inside a texteditor.
+
+ If you think that C-sound is nice enough for you to compile only, you
+ can have some instrumentsources from the pages of the Amsterdam
+ Catalogue of Csound Computer Instruments:
+
+ http://mars.let.uva.nl/gather/accci/index.html
+
+ I have e-mail but do not contact me about how to generate specific
+ instruments since I'm NOT a wav-shape wizard and still exploring
+ c-sound, but making sound in experimental mood is a good alternative to
+ create some cool instruments.
+ Best way to test your source is to keep the quality of the sound as low
+ as possible since you have no environmental noises generated with the
+ sound, the shape of the wave stays clear.
+ It's not that it's a must to have small instruments, but compiling
+ (rendering sound to give it ,,the'' understandable expression) will be
+ done in less time so you can test and listen more often in less time.
+
+ In the beginning I had trouble rendering sounds and when listening the
+ results were poorly or even NO SOUND at all due to incorrect
+ rate-combinations.
+
+ Working with excessive rates (first extreemly high than extreemly low)
+ will help you exploring the limits and views of each function in
+ C-sound.
+
+ I've done my work, now it's your turn.
+
+ ***********************************************************************
+
+ Pirating software equals disrespecting the developer, to put this in
+ other and more words:
+
+ Pay what they ask (mostly you won't die of cashflow) or search for
+ alternatives wich seem cheeper to you or DON'T use the program at all.
+
+ Acting otherwise makes you not only childish, you spoil progression of
+ further development for yourselves AND MANY OTHERS!
+ Try to imagine what all those MANY OTHERS will do to you when they find
+ out YOU are partly RESPONSIBLE for such development-ceasing.
+
+ Regards to Pulse and many other coders who's good work aren't
+ appreciated in a descent manner,
+
+ Vincent voois.
+ Vv@musician.org
+
+---------------------------------------------------------------------------
+
+
+--[5. Impulse Tracker MIDI]----------------------------------------[Airon]--
+
+ What can ya do with MIDI in IT(Impulsetracker) ???
+ Good question.
+ I found the midi docs in IT a little confusing and made the mistake of
+ using MIDI instruments by flipping the midi channel switch and then going
+ 'uuuuhhm. What's that noise?'
+ My sample based instrument had NNA(NewNoteAction) NoteFade activated and
+ a Volume Fade out(bottom on Volume section of Instrument screen) set
+ to something like 120.As I examined the MIDI Activity LED on my synth
+ it showed me that IT was sending the NOTE OFF messages a bit late.
+ After fiddling about with Z80-ZFF macros I set NNA to NoteCut and brought
+ down the Volume Fade Out to zero.And there it was doing what I thought
+ it should like a good tracker.Note Off delays were gone.
+ Then there's volumes.The volume column actually. That's used as a
+ velocity value for NOTE ON messages.I'd avoid the Volume stuff in the
+ upper box on the 'Midi Output Config'.Create a SFx macro instead.
+ I'll explain why in a later.
+
+ MIDI controllers are a very neat thing.You can use that MODULATION
+ wheel(or joystick-whatever synth or keyboard you're using) to change
+ all sorts of things.You just have to set up the synth to do it.
+
+ The big difference is that all the sound parameters are controlled
+ on the synth and not in the tracker.The controllers are 'outside'
+ knobs and wheels that twist and turn to control stuff like
+ vibrato,volume(very different to velocity),hold(sustain pedal) or
+ perhaps a low pass filter and resonance with the pitch wheel(something
+ for the analog nuts).
+
+ These controllers are just little byte sequences that get pushed through
+ that 31.5 kbps MIDI protocol and they use a terrible amount of bandwidth
+ sometimes(check out Doom E1M2 music for an example).
+ This bandwidth problem is the major weakness of MIDI.It's a serial
+ protocol so, as Windows owners have know for years, multitasking
+ just ain't happening.
+
+ Take a four voice chord, say B-C#-E-G#, a bass drum,hihat,tambourine,
+ bass guitar plus perhaps some backing and you've got a lot of notes
+ wanting to play at the same time.In a MIDI file they ALL have the same
+ timecode but are layed out onto different tracks, usualy by channel.
+ The sequencers will now play the note from the first track, then the
+ next track and so forth.Should you happen to have your drum track right
+ on the last track and it's good bye to timing.What comes first is
+ up to you.Drums are usualy the first with other rythmicaly important
+ stuff next.
+ Impulsetracker handles this the same way(it should:) as sequencers do.
+ The first note to get sent down the MIDI tube will be on the left most
+ track.
+ Professionals and Semi-Pros tend to get MULTI-PORT MIDI interfaces.
+ Opcode produces such feasts, but since IT is a DOS program I guess
+ we'd better forget that.You'll hardly run into timing problems with
+ one or two synths but it's good to know what to avoid.
+
+ Here are some controllers with description and examples on how to use
+ them in Impulsetracker.All upper case characters are HEX.Lower case
+ characters are variables and are explained in detail.
+
+  VOLUME    Midi controller 07
+ --------
+ This is a real volume level for a patch or part in synthesizers.Do not
+ mistake this for VELOCITY, which is represents the speed at which you'd
+ hit the keyboard.VELOCITY is contained in every NOTE ON midi message
+ no matter whether your keyboard(you know, the piano lookin' thing) is
+ capable of sensing different velocities or not(old or very cheap
+ keyboards).
+ Both VOLUME and VELOCITY can take on values from 0-7F(0-127 decimal).
+ The VOLUME controller in most cases allows you to controll the level
+ of the sound while NOT changing it's characteristics.Different VELOCITYs
+ however are used to simulate hitting keys at various strengths which
+ can best be heard with 'real' Pianos(soft play->weaker higher frequency
+ responce, hard play->stronger higher frequency response->brighter sound).
+ Consider this as being a parameter to define the distance to the
+ listener for example.The hard hitting bright piano will still sound
+ the same if someone hits the keys a block away.Only the actual volume
+ will be lower.Crude example and not accurate but I hope it makes my
+ point.
+
+   MIDI Data  :   Bc 07 v
+
+              c - midi channel   07 - actual volume command
+               v - volume (0-7F, 0-127 decimal)
+
+   I haven't figured out yet how to use the Volume line in IT properly.
+   Use this instead to make shure you're getting exactly what you want:
+
+      Write a SFx macro :  Bc 07 z   and use THAT to change the overall
+                                     level of that sound.
+
+     MODULATION  controller 01
+    ------------
+ This is the controller that most keyboards produce when the
+ 'MODULATION WHEEL' or slider is moved.The controller is always the
+ same, no matter what synth but it all depends what the synth does with it.
+ A large part of the instruments in of synths use this controller for
+ vibrato.It's not entirely the same as in trackers, 'cause this controller
+ only controls the vibrato DEPTH and not speed too as in tracker vibratos,
+ but again that depends on what the synth has been told to do.
+
+    MIDI Data :  Bc 01 z      (enter this in IT as a SFx macro)
+
+               c - midi channel , 01 - actual modulation command ,
+                z - modulation data (0-7F, 0-127 decimal)
+
+
+      PANpot  controller 10
+
+  Well , it's just panning.This controller will act a bit like the
+  instrument panning in Impulsetracker.You choose a default panning
+  value in the instrument screen and the panning envelope will work
+  around that preset value.The pan controller works the same way.
+  Again though , it depends on what your synth is programmed to do.
+
+    MIDI Data :  Bc 0A z       ( Bc 0A x for the pan line in IT )
+               c - midi channel  01 - actual panning command
+                z - PAN data value (0-7F, 0-127 decimal)
+                                    (0-left,64-middle,7F-right)
+
+  On my synth this controller IS a relative controller.
+  Note: There's a controller called BALANCE too ( 08 ) that work in a
+        in a similar way but you'll have to try that one out. 
+
+
+    BANK SELECT  controllerS(!)  00 and 32
+
+  This is usefull for selecting a patch bank or anything else that us
+  organized this way.Consult your synths manual if you're not shure
+  whether your synth can do a BANK SELECT via this controller pair.
+  This controller is actually made of TWO controllers,giving it the
+  possibilty to, in theory, give you values from 0-FFFF(0-65365 decimal).
+  There never are that many banks in synths so all that 'value space'
+  isn't used.
+
+     MIDI Data :    Bc 00 a Bc 20 b      
+
+      c - midi channel  00,20 actual Bank select commands
+      a - upper byte of bank number or  Most Significant Byte(MSB)
+      b - lower byte of bank number or  Least Significant Byte(MSB)
+
+   In your synths manual you'll find the correct values to choose the
+   bank you want.
+
+ So now that you've chosen a BANK , how about a actual PATCH(or sound)?
+
+
+    PROGRAM CHANGE
+
+  Change your patch or sound on a midi channel with this controller.
+  It's not your usual controller , 'cause it uses only two bytes.
+
+    MIDI Data :  Cc pp
+  
+           c - midi channel   pp - program number (0-7F , 0-127 decimal)
+
+ Then , some synths and sound cards except manipulation of effects via the
+
+     GENERAL PURPOSE EFFECT controllers 91,92 and 93
+
+  91(5Bh) is used for controlling reverb on some synths and sound cards.
+  93(5Dh) does the same for chorus effects but you'd better go and
+          check that manual of your synth.
+
+ More exotic controllers include the BREATH controller( 11 or 0Bh;0-7F),
+ SOSTUNENTO( 66 or 42h;0-3F OFF,40-7F ON) or SOFT PEDAL( 67 or 43h).
+ What your synth excepts and uses can be found in the MIDI implementation
+ of your synthesizers manual.
+
+    Using all that stuff in IMPULSETRACKER
+   ----------------------------------------
+ IT has a bunch of them implemented already.For the other stuff you'll
+ have to use the macros.
+ 'STATIC' macros (Z80-ZFF)
+ They can be used to do all the great things such as bank select,
+ HOLD on/off(pedal equivalent for piano players,which HOLDs notes after
+ you've let go of the keys for as long as you depress the HOLD pedal)
+ and of course the SYSEX stuff.These are special command for your synth
+ only.You could activate the General MIDI mode(if it has one), switch to
+ different modes(PATCH,PERFORMANCE(multi-timbral stuff) or whatever you
+ want.
+
+ The SF0-SFF macros should used for stuff that isn't implemented in IT
+ yet and have values ranging from 0-7F. MODULATION,EXPRESSION,
+ BREATH,VOLUME(best to have it seperatly, that's why I have the volume
+ field in the upper box empty in ITs MIDI Output config),PAN or
+ combinations(analog nuts will love that).
+ Play around , write a nasty combo with all the variables of IT
+ in one line but remember this :
+
+      MIDI is a serial protocol so don't go wild !
+
+ Your synth manual has all that you need to write all the fx you might
+ need to TRACK a midi song.
+
+ One more thing, the VOLUME FADE value right at the bottom of the volume
+ section on the instrument screen is something which you can use to
+ produce LEGATO effects in MIDI(notes play a little beyond a new note).
+ The NOTE OFF command will be sent as soon as the volume of that note
+ is zero(don't use the VOLUME controller!That's on the synth.This is a
+ tracker internal thing). So the greater the VOLUME FADE, the less
+ LEGATO. Zero VOLUME FADE will give you no LEGATO at all.
+ Remember that when using NNA.You need NNA 'NOTE FADE'for this legato
+ effect.
+
+ Also remember that most synths let you play the same note without
+ killing the last one.
+ Aaand , a note cut (^^^) will send a NOTE OFF message instantly.
+ (Yeah I was wrong Jeff :)
+
+    That's it for now.Let's see what else Jeff comes up with :).
+ ** And btw, anyone caught with a pirated stereo WAV driver for IT is
+ ** on my very personal shit list! The best tracker is FREE and that
+ ** exellent(!) stereo WAV driver costs next to nothing.This is a pro
+ ** product at a non-pro price.Where's your donation ?
+
+    Cheerio from an English guy
+       Tony
+             ( Airon / Phase^D  aronchce@sp.zrz.tu-berlin.de )
+             ( PHD WWW HQ-audio clips-ra;mp3,info,links at )
+             ( http://user.cs.tu-berlin.de/~airou/phd )
+                
+----------------------------------------------------------------------------
+
+
+--[6. The Blacklist #2]---------------------------------------------[zinc]--
+
+   Aren't you sick of all those positive reviews that make every song out
+ there sound great?  Maybe they even make your own stuff look bad in
+ comparison, since it seems like there's only good songs out there. Well,
+ I can assure you in this long awaited follow-up to The Blacklist that
+ there are songs out there that will make you look good no matter how bad
+ you think you are :)  This time they were brought to you by the letters
+ A, T, U, W and the number 1996 (figure it out, Einstein).
+
+   If you are an author of one of the following songs, please don't email
+ me complaining about your review.  Learn something, and don't upload such
+ nonsense to cdrom.com.  Otherwise, sit back and laugh as I poke fun at
+ the songs in this issue of...
+
+                                 The Blacklist:
+
+             (note: i have decided against taking the easy way out
+              and simply reviewing Funky Modsquad songs. I didn't
+              want to cause internal divisions within TW :) - or is
+              it Monkey SodFraud? hahaha...)
+
+ 
+ WINDOWS.S3M     "I Hate MS Windows"
+
+ Haha.. funny git. This isn't actually all that bad musically (well okay,
+ it is, but not compared to the others in this rubbish heap), but I had
+ to review it because it's so side-splittingly funny. It's a definate
+ download.  :)  I'd like to see a remix.  But now on to the really bad.. 
+
+
+ AS_SSMIK.XM      "Shopping, Sunday Morning, In Kmart, For Lingere" (sic)
+
+ Well, the name says it all, really, but I've been known to run off at
+ the mouth. So... :)  This is guitar-frisking lunacy. Three samples -
+ distortion guitar, kick drum, and a synth. Ooo. Too bad, it might have
+ had potential.  Of course, to hear any other instruments, I think he'd
+ have to cut down on the (up to) twelve channels used just for guitar
+ wanking.  PS. I hope the author doesn't read this - he knows me! :O
+
+
+ TECHSPED.XM      "TechSpeed"
+
+ "If you gave a million monkeys a billion years to track a techno tune,
+ one of them eventually would."  Well, I doubt it, but you'd get a lot of
+ songs that sound like this!  At least it TRIES to sound okay (I think).
+ It sort of reminds me of Maelcum's stuff ;D
+
+
+ TERR2.S3M        "Ter-Riff-Ic" (haha)
+
+ This strange distortion guitar song uses twice as many channels as needed
+ as every channel is doubled up. This seems like a common problem among
+ Blacklist songs.  After listening twice or thrice, I decided that it
+ SHOULD have used 0 channels instead. :)  I thought the text was funny:
+ "This probably doesn't live up to it's name."
+
+
+ TRAIL.S3M        "Trailblazers"
+
+ At first I thought that this song had potential.  I thought it sounded a
+ little like my really old stuff.  But then I hit PLAY!  Most of the
+ song is just drumloops being toggled... I have to hand it to the tracker
+ though, the beatmatching is perfect: the loops loop flawlessly.
+
+
+ UN-IKYA.S3M      "No Doz"
+
+ First off, can somebody tell me how the filename relates to the songname?
+ Anyways, this is a very sad song indeed because it's hopelessly bad, and
+ it appears as if the tracker even tried :(  What gives?  Oh, this is
+ another in the set if distortion guitar songs.  Don't people get it?
+ Only Zodiak is allowed to track those...
+
+
+ UROFA.S3M        "United Rave Of America"
+
+ UltraCheeseTunage - (tm) of KFMF :)  This is another song using doubled-
+ up channels.  A lesson for all you trackers out there who have made it
+ into The Blacklist by doubling up your channels: don't!  There's some
+ parts in this song where he uses FOUR channels just for the same kickdrum.
+ Shoot me now!  At least he didn't use TWELVE channels for that :)  Oh
+ well, not the worst of the bunch, I suppose.
+
+
+ NOISECOR.IT      no name given.
+
+ This is the worst of the bunch!  Pure, utter noise.  I couldn't say that
+ with a straighter face!  Eek... Appropriate file name though.  "____ off
+ if you can't listen to it! hahah lamer!"  hmm.  That's nice, especially
+ since I had to convert most of the samples to hear them properly, and
+ it STILL sucked.  It's hard to believe this song could be anything but
+ intentionally bad.
+
+
+ WC.S3M           "W C"
+
+ Woo, there's two authors to blame for this song.  This is yet another in
+ the distortion guitar category.  What's going on?!  Bizarre arrangement.
+
+
+ WELCOME.S3M      "Welcome (Arrival)"
+
+ Hey, we're in luck!  If we hate this crappy song, we will probably hate
+ the next one in the series just as well; this is only second in a
+ 'trilogy'!  Woo.. Oh, and take a wild guess as to what sample this song
+ uses?  The composition is hard... to.. make.. out.. br.ak.ng..p.....nd
+ ..lp!... ack.
+
+
+ WICKED.S3M       "Wicked"
+
+ Load.. Play.. Ahahahahahahahaha!!  This is the biggest misnomre I've
+ seen in tracked music.  The name says "Wicked", but it's a bloody
+ circus tune!  Good for a laugh, but I've seen these samples before. I
+ think this is another monkey out-take.
+
+
+ Well, that concludes this issue's Blacklist. I hope you've enjoyed it. A
+ word to all Blacklist trackers: please please please please please STOP
+ using distortion guitar samples!  There's only so many jokes I can make
+ about them.
+
+----------------------------------------------------------------------------
+
+
+/-[Closing]-----------------------------------------------------------------
+---------------------------------------------------------------------------/
+
+ TraxWeekly is available via FTP from:
+ ftp.hornet.org /incoming/info/ (new issues)
+ ftp.hornet.org /info/traxweek/1995/ (back issues)
+                /info/traxweek/1996/
+                /info/traxweek/1997/
+
+ TraxWeekly is available via WWW from:
+ www.hornet.org, under section "Information" and subsection "TraxWeekly."
+
+ To subscribe, send mail to:    listserver@unseen.aztec.co.za
+ and put in the message body:   subscribe trax-weekly [yourname NOT address]
+ To unsubscribe, mail same and: unsubscribe trax-weekly (in message body)
+
+ Contributions for TraxWeekly must be formatted for *76* columns,
+ must have a space preceding each line, and have some measure of
+ journalistic value.  Please try to avoid the use of high ascii
+ characters, profanity, and above all: use your common sense.
+
+ Contributions should be mailed as plain ascii text or filemailed
+ to: gwie@csusm.edu before 11:00pm PST every Wednesday.
+
+ TraxWeekly is usually released over the listserver and ftp.cdrom.com
+ every Thursday or Friday between 12:00am-11:59pm PST.
+
+ TraxWeekly does not discriminate based on age, gender, race, political
+ or religious statures and standpoints.
+
+ The staff can be reached at the following:
+
+ Editor:   Psibelius (Gene Wie)..............gwie@csusm.edu
+ Writers:  Atlantic (Barry Freeman)..........as566@torfree.net
+           Mage (Glen Dwayne Warner).........gdwarner@ricochet.net
+           Zinc (Justin Ray).................rays@direct.ca
+
+ ascii graphic contributors:
+ Cruel Creator, Stezotehic, Squidgalator2, White Wizard
+
+ TraxWeekly is a HORNET affiliation.
+ Copyright (c)1995,1996,1997 - TraxWeekly Publishing, All Rights Reserved.
+
+
+/-[END]---------------------------------------------------------------------
+---------------------------------------------------------------------------/
+                                         ::
+                                          :::                  :
+     . ..... ..............................:::.................:....
+                                            :::                :
+                                            ::::               :
+        .::::.      .:::::.:::.     ..::::  ::::               :
+       ::    ::    :::  .::  ::    ::     WW::::               :
+       ::.   ::   :::  .::  ::   .::        ::::               :
+        :::.::.  :::  .:: .::  .:::::...   :: :::..      ... ..: ...
+ ..::::::::::::::::  .:: .:::::::   ::::::::    ::::::.. ::: ::: :::
+                                                               :
+                                              until next week! =)
+           ..  ... .. ....... ............... .................:..... .. .
+                                                               :

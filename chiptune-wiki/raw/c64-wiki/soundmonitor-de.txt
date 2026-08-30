@@ -1,0 +1,266 @@
+# Soundmonitor
+
+Aus C64-Wiki
+
+Zur Navigation springenZur Suche springen
+
+| Soundmonitor
+
+| Soundmonitor V1.0
+
+| Entwickler
+
+| Chris Hülsbeck
+
+| Verleger
+
+| 64'er
+
+| Release
+
+| 1986
+
+| Plattform(en)
+
+| C64
+
+| Genre
+
+| Musikbearbeitung
+
+| Steuerung
+
+|
+
+| Medien
+
+|
+
+| Sprache(n)
+
+|
+
+| Information
+
+|
+- Programm hat Kultstatus
+
+- 64'er Listing des Monats 10/1986
+
+- 64'er Extra Nr.13
+
+Der Soundmonitor (auch als MusicMaster bekannt) ist ein Programmiertool zur Programmierung des SID Soundchips des C64. Es wurde 1986 von Chris Hülsbeck entwickelt.
+
+Von anderen Programmierern wurde die ursprüngliche Version 1.0 überarbeitet. Bekannt sind die Version 1.1 (1986) und Version 1.3 (1987). Eine der bekanntesten, inoffiziellen Weiterentwicklungen ist der Rockmonitor (mit ähnlicher Tastaturbedienung), der auch die Verwendung von Sound-Samples gestattet.
+
+Ein ausführlicher Artikel zum Programm und ein Listing zum Abtippen wurde in der Zeitschrift 64'er Magazin (Ausgabe 10/1986 Seiten 53-64) veröffentlicht. Dort wurde das Programm zum Listing des Monats gekürt.
+Den Artikel als Textdatei gibt es bei bei IDOC=.
+
+## Inhaltsverzeichnis
+
+- 1 Bedienung
+
+- 1.1 Keyboard
+
+- 2 Tipps & Tricks
+
+- 3 Weblinks
+
+## Bedienung[Bearbeiten | Quelltext bearbeiten]
+
+Folgende Tastenbelegung gibt es (zur Zeit unvollständig!):
+
+- X : Beendet den Soundmonitor nach BASIC. Neustart mit SYS 4096 ist möglich.
+
+- SHIFT + I : Initalisiert bzw. löscht den Musikdatenspeicher, sollte beim Neustart erstmalig durchgeführt werden.
+
+- N : Startet die Musik von Anfang an mit Initalisierung des SID.
+
+- P : Startet das Abspielen der Musik oder stoppt diese am jetzigen Abspielpunkt.
+
+- SHIFT + L : Laden einer Musikdatei in den Speicher.
+
+- SHIFT + S : Abspeichern des Musikstückes als Datei. Man kann aussuchen zwischen einen oder mehreren Teilstücken (soundnumber; Auswahl der Teilstücke mit Y und U ), das ganze Lied (complete song) oder nur die Lieddaten (steps only)
+
+- SHIFT + @ : Takt löschen.
+
+### Keyboard[Bearbeiten | Quelltext bearbeiten]
+
+Im Soundmonitor kann die Tastatur als Keyboard zum Einspielen von Liedern genutzt werden (die Taste CTRL ist dabei das C, die Taste 1 das C#, usw.).
+
+- O / SHIFT + O : Oktave erhöhen bzw. erniedrigen.
+
+- K : Keytranspose aktivieren.
+
+- , , . , / : Auswahl der entsprechende Stimme
+
+- F7 : Start bzw. Stop des Keyboard-Modus (abbruch auch mit RETURN möglich!)
+
+- R : Einen Track aufnehmen.
+
+- Q : Die Notenlänge für die Aufnahme auswählen (1 = 16tel Note; 2 = 8tel Note; 3. = 4tel Note, usw. 0 = keine Notenlänge)
+
+## Tipps & Tricks[Bearbeiten | Quelltext bearbeiten]
+
+- Wenn man im Programm die Tastenkombination SHIFT + L für LOAD drückt und dann statt des Dateinamens $ eingibt, erscheint das Directory der eingelegten Diskette. Mit RETURN kehrt man wieder zur LOAD-Maske zurück und kann den gewünschten Dateinamen eingeben. Das gleiche funktioniert auch mit SHIFT + S in der SAVE-Maske.
+
+- Ein mit dem Soundmonitor erstelltes Musikstück lässt sich auch mit SYS 49152 starten, wenn dieser mit der Musikroutine abgespeichert wurde. Dies ist der Fall, wenn man einen kompletten Song abgespeichert hat.
+
+## Weblinks[Bearbeiten | Quelltext bearbeiten]
+
+|
+
+| Wikipedia: Soundmonitor
+
+Downloads:
+
+- 64'er 10/86 Disk A bei arnold.c64.org
+
+- CSDb- Release Nr. 59929 SoundMonitor V1.0
+
+- CSDb- Release Nr. 10198 SoundMonitor V1.1
+
+- CSDb Alle Einträge
+
+Artikel:
+
+- 64'er 10/1986: Musik wie noch nie - "Soundmonitor" Listing des Monats - auf archive.org
+
+Abgerufen von „https://www.c64-wiki.de/index.php?title=Soundmonitor&oldid=286579“
+
+Kategorien:
+- Musikbearbeitung
+
+- Tracker
+
+- 1986
+
+## Navigationsmenü
+
+### Seitenaktionen
+
+- Seite
+
+- Diskussion
+
+- Lesen
+
+- Bearbeiten
+
+- Quelltext bearbeiten
+
+- Versionsgeschichte
+
+### Seitenaktionen
+
+- Seite
+
+- Diskussion
+
+- Mehr
+
+- Werkzeuge
+
+### Meine Werkzeuge
+
+- Nicht angemeldet
+
+- Diskussionsseite
+
+- Beiträge
+
+- Benutzerkonto erstellen
+
+- Anmelden
+
+### Navigation
+
+- Hauptseite
+
+- Letzte Änderungen
+
+- Zufällige Seite
+
+- Artikel nach Score
+
+- Kategoriensuche
+
+- Suchassistent
+
+### Suche
+
+### Hilfen/Feedback
+
+- Hilfe/FAQ
+
+- Regelbuch
+
+- Forum
+
+- Admins
+
+- Gästebuch
+
+- Vorlagen
+
+### C64-Spiele
+
+- Spieleportal
+
+- Golden Games
+
+- Highscore-Galerie
+
+### Portale
+
+- Hauptportal
+
+- Anwendungen
+
+- C264
+
+- Emulatoren
+
+- Firmen und Personen
+
+- Glossar
+
+- Grafik und Musik
+
+- Hardware
+
+- Literatur und Medien
+
+- Programmierung
+
+- Links
+
+- Sonstiges
+
+### Werkzeuge
+
+- Links auf diese Seite
+
+- Änderungen an verlinkten Seiten
+
+- Spezialseiten
+
+- Druckversion
+
+- Permanenter Link
+
+- Seiten­­informationen
+
+- Diese Seite wurde zuletzt am 3. April 2024 um 08:41 Uhr bearbeitet.
+
+- Der Inhalt ist verfügbar unter der Lizenz GFDL, sofern nicht anders angegeben.
+
+- Diese Seite wurde bisher 23.957-mal abgerufen.
+
+- Datenschutz
+
+- Über C64-Wiki
+
+- Haftungsausschluss
+
+- Mobile Ansicht

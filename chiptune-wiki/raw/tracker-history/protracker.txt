@@ -1,0 +1,416 @@
+# Dates from PT sources:
+#
+# *  First Update   1.0 : 04/05-1990 First version         *
+# * Middle Update   1.0 : 13/08-1990 -                     *
+# *   Last Update   1.0 : 25/08-1990 -                     *
+# * Final Version   1.0 : 26/08-1990 Released to Crusaders *
+# * Rev. B Update 1 1.0B: 29/08-1990 -                     *
+# * Rev. B Update 2 1.0B: 06/09-1990 Released to Crusaders *
+# * Rev. C Update 1 1.0C: 16/10-1990 -                     *
+# * Rev. C Update 2 1.0C: 18/10-1990 -                     *
+# * Start V1.1A     1.1A: 23/10-1990 Second version        *
+# * Rev. C Update 3 1.0C: 06/11-1990 Released to Crusaders *
+# * Rev. A Update 1 1.1A: 15/11-1990 InputEvent Handler    *
+# * Rev. A Update 2 1.1A: 21/11-1990 RunBack Hunk, KbdBuf. *
+# * Rev. A Update 3 1.1A: 02/12-1990 iffld,loopspr,scopefix*
+# * Rev. A Update 4 1.1A: 05/12-1990 virusattack,dirbrowse *
+# * Rev. A Update 5 1.1A: 20/12-1990 Testversion to Awesome*
+# * Rev. A Update 6 1.1A: 27/12-1990 Party-release (w/bugs)*
+# * Rev. B Update 1 1.1B: 01/01-1991 Bugfixing...          *
+# * Rev. B Update 2 1.1B: 05/01-1991 ---                   *
+# * Rev. B Update 3 1.1B: 08/01-1991 ScopeGfx, loadbug.    *
+# * Start V2.0A     2.0A: 12/02-1991 Wow! a new version... *
+# * Start V1.2A     1.2A: 13/07-1991 Kick 37.175 version   *
+
+
+# From PT.ReadMe!
+#
+# --- Protracker history ---
+# 
+# First Version 1.0 (A) - Full of bugs...
+
+protracker_10
+	Name: Protracker 1.0
+	Author: Lars 'ZAP' Hamre
+	Date: 1990-05-04		# First version
+	Comment: 'Full of bugs'\nHas E effects
+	Based on noisetracker_11 [
+		CIA timing
+		E effects
+	]
+	#Based on soundtracker_25
+
+# Bugs corrected in V1.0 Release B:
+# ---------------------------------
+#  - PatternLoop (It always jumped to the start of the pattern, not the loop)
+#  - Zap had put FineTune AND Glissando-Control in the same command! (E3)
+#  - Fade Up / Down caused shit and even a few gurus!
+#  - Delete Pos inserted pattern 77 (!) at position 127 in the song, causing
+#    it to be longer than 80k!
+#  - Filter All Samples was slow as hell because it tried to filter non-
+#    existant samples.
+#  - If you selected sample 0 from the keypad, it always played the last
+#    sample played as sample 0!
+#  - A590 harddisk owners couldn't use the keyboard because of the way Mahoney
+#    & Kaktus set up the keyboard interrupt (we used their NT1.1 routine).
+#  - Entering the help screen when in the midi screen fucked up the display.
+#  - Escaping from Mix exited from the whole edit op.!
+#  - CutBeg no longer fucks up the Sample length and Pos.
+#  - The help file was FULL of bugs / misspellings.
+
+protracker_10b
+	Name: Protracker 1.0b
+	Author: Lars 'ZAP' Hamre
+	Date: 1990-10-01
+	Based on protracker_10 1000 [
+		Fix pattern loop
+		Fix finetune & glissando
+		Fix keyboard interrupt
+		Other bugfixes
+	]
+
+# Bugs corrected in V1.0 Release C:
+# ---------------------------------
+#  - Error in Finetune-table2 (note B-2)
+#  - Abort Load sometimes caused a guru!
+#  - Toneportamento (cmd 3) didn't work correctly with finetune.
+#  - PLST screen was one pixel off.
+# 
+#  MIDI screen was removed.
+
+protracker_10c
+	Name: Protracker 1.0c
+	Author: Lars 'ZAP' Hamre
+	Date: 1990-10-15
+	Based on protracker_10b 2000 [
+		Fix finetune table
+		Fix guru in abort load
+		Fix tone portamento with finetune
+		Fix PLST screen
+		MIDI screen removed
+	]
+
+protracker_11a
+	Name: Protracker 1.1a
+	Author: Lars 'ZAP' Hamre
+	Date: 1990-12-27
+	Based on protracker_10c 2000 [
+		Inv.loop instead of funkrepeat,
+		Vibrato compatible with NT2.0
+	]
+	Influenced by noisetracker_20 [
+		Drumpad
+		Vibrato adjust
+	]
+
+# Bugfixes and changes from PT1.1A to PT1.1B:
+# -------------------------------------------
+# 
+# - Load gadget no longer hangs the program when trying to load a file that
+#   doesn't exist.
+# - Better filehandling with error messages.
+# - Repeat and replen check installed (Rel. A hanged when replen accidentally
+#   got the value zero).
+# - Repeat and replen were swapped when loading an IFF sample.
+# - Only RepLen values in IFF samples were added in the preset-editor.
+# - Tune memory wasn't always updated when editing samples.
+# - Swap Buffer debugged.
+# - The arpeggio sounded weird because the pitch wasn't set back at the
+#   right time.
+# - Shift speeds up the scrolling in the PLST and preset-editor.
+ 
+# http://bitworld.bitfellas.org/demo.php?id=26374
+protracker_11b
+	Name: Protracker 1.1b
+	Author: Lars 'ZAP' Hamre
+	Date: 1991-01-06		# bitworld says 1991-01
+	# Date: 1991-04			# Exotica
+	Based on protracker_11a 1000 [
+		Fix load gadget
+		Better file handling
+		Fix IFF sample loading
+		Fix arpeggio effect
+	]
+
+# http://bitworld.bitfellas.org/demo.php?id=25703
+protracker_11bplus
+	Name: Protracker 1.1b+
+	Author: Lars 'ZAP' Hamre
+	Date: 1991-04
+	Based on protracker_11b 1000
+
+# Source file:
+#
+# *  Protracker Version 1.2 - Release A                    *
+# *  Amiga Freelancers 1991                                *
+# *                                                        *
+# *  Based on Soundtracker V2.5 / Noisetracker x.x)        *
+# *  Coding by Lars Hamre                                  *
+# *  with some "Resource" help from Anders Hamre           *
+# *  Thanks to Rune, and a hi there to Sven, Morten,       *
+# *  Per and Torgeir.                                      *
+
+protracker_12a
+	Name: Protracker 1.2a
+	Author: Lars 'ZAP' Hamre
+	Date: 1991-07
+	Based on protracker_11bplus 2000
+
+# [CM] No info on this one except:
+# * Protracker 1.2e "same as the old protracker 1.2b"
+# * MyM.lha in Aminet "Protracker 1.2b  module composed by Fermix"
+
+protracker_12b
+	Name: Protracker 1.2b
+	Author: Lars 'ZAP' Hamre
+	Date: 1991-08			# just a guess
+	Comment: (uncertain date)
+	Based on protracker_12a 1000 [ ? ]
+
+protracker_13a
+	Name: Protracker 1.3a
+	Author: Morten Lund
+	Date: 1992
+	Comment: 'only a BETA version'
+	Based on protracker_12b [
+		Not case sensitive on 'MOD.'
+		Inputhandler bugs fixed
+		Fix Single Step forward and backward
+		Fix Sample function with OS2.0
+		No hang when R/W-error in OS2.0
+		No crash when loading non-module
+		MIDI In works as it should!!!
+	]
+
+# "This is the same as the old protracker 1.2b or so
+#  but with the added benefit of doing real 8 channel
+#  modules. What you do is hook up two amigas via a null
+#  cable (serial to serial)  and then when you play/record
+#  on one amiga it instantly (with maximum 20ms delay apart)
+#  does the same on the other one, so just make two modules
+#  which play well together and pressplay on either ONE!"
+
+protracker_12d
+	Name: Protracker 1.2d
+	Author: Raul Sobon
+	Date: 1993-01			# "12 months ago"
+	Comment: 8 channels in 2 Amigas\n(date uncertain)
+	Based on protracker_12b [
+		Dual-host 8 channels
+	]
+
+# "Sorry for the last version being bugged up, that is
+#  because I just grabbed my old disk and sent it up
+#  assuming it worked , at least it did on 2 A500's
+#  12months ago, but now???, so I hooked my A500 up
+#  next to my A1200 to be sure this time, and what do you
+#  know, BANG it crashed , so I went on to fix it and
+#  here it is!"
+
+protracker_12e
+	Name: Protracker 1.2e
+	Author: Raul Sobon
+	Date: 1994-01-09
+	Based on protracker_12d 1000 [
+		Bugfixes
+	]
+
+protracker_18
+	Name: Protracker 1.8
+	Author: Bagitman - Scandal
+	Date: 1994-02			# 1994
+	Comment: Unknown ancestry
+
+protracker_13b
+	Name: Protracker 1.3b
+	Author: Morten Lund
+	Date: 1992-01	# 1992
+	Based on protracker_13a
+
+# Bugfixes and changes from PT1.1A to PT2.0
+# -----------------------------------------
+# 
+# (... list from 1.1A -> 1.1B ...)
+# - Improved requester checking.
+# - No more clicks when a sample has volume $40 and you set a low volume
+#   with the C command.
+# - Volume will not be changed when resampling.
+# 
+# [CM] 2.0a sources says it comes from ST 2.5/NT x.x, we'll have to
+# check if ST 2.5 code is actually in PT 2.0a.
+
+protracker_20a
+	Name: Protracker 2.0a
+	Author: Lars 'ZAP' Hamre
+	# Date: 1991-02-12		# Start in 2.0a sources
+	Date: 1992			# estimated, fixme
+	Based on protracker_12b 1000 [	# forked from 1.1b (source changelog)
+		Fix volume setting clicks
+	]
+
+protracker_21a
+	Name: Protracker 2.1a
+	Author: Peter 'Crayon' Hanning
+	Date: 1992-04-16
+	Based on protracker_20a 1000
+
+protracker_22a
+	Name: Protracker 2.2a
+	Author: Peter 'Crayon' Hanning
+	Date: 1992-06-22
+	Based on protracker_21a 1000
+
+# -------------------------------------------------------------------------
+# Protracker V2.3 Release A - (C) 1993 Mushroom Studios/Noxious   1/1-1993
+# -------------------------------------------------------------------------
+
+protracker_23a
+	Name: Protracker 2.3a
+	Author: Peter 'Crayon' Hanning
+	Date: 1993-01-01
+	Comment: Introduces M!K!
+	Based on protracker_22a 1000 [
+		Modules with 100 patterns
+		
+	]
+
+#                         Protracker V2.95   Jan. '93
+#                         ---------------------------
+#
+#                          2.0+ compatability and bug
+#                        fixes by:  Apogee Technologies
+
+# http://bitworld.bitfellas.org/demo.php?id=23067
+
+protracker_295d
+	Name: Protracker 2.95d
+	Author: Apogee Globalsoft
+	Date: 1993-01
+	Based on protracker_20a [
+		AGA support
+		Kickstart 3.0
+	]
+
+#                         Protracker V3.10   jul. '93
+#                         ---------------------------
+#
+#                          2.0+ compatability and bug
+#                        fixes by:  Apogee Technologies
+
+# http://bitworld.bitfellas.org/demo.php?id=28402
+
+protracker_310apogee
+	Name: Protracker 3.10 (Apogee)
+	Author: Apogee Globalsoft
+	Date: 1993-07
+	Based on protracker_295d 1000
+
+
+# "ProTracker V2.3b - Fixed for AGA by Detron in 1994"
+#
+# http://www.youtube.com/watch?v=nnm-n2wYQzM
+# ProTracker V2.3b
+# Fixed for AGA by Detron
+#
+# http://amp.dascene.net/detail.php?view=5920&detail=interview
+# "And PROtracker 2.3b still is the music program i use mostly." 
+#
+# http://h2g2.com/dna/h2g2/F47271?thread=106287
+# "Protracker's best incarnation was/is version 2.3b which was the
+# definitive one"
+
+protracker_23b
+	Name: Protracker 2.3b
+	Author: Detron
+	Date: 1994			# text in binary
+	Based on protracker_23a 1000 [ AGA fix ]
+
+protracker_23d
+	Name: Protracker 2.3d
+	Author: Detron and Duff
+	Date: 1994-02			# estimate, we know it's 1994
+	Based on protracker_23b 2000
+
+protracker_23e
+	Name: Protracker 2.3e
+	Author: Olav \"8bitbubsy\" Sørensen
+	Date: 2019-02-23
+	Based on protracker_23d 1000
+
+# 3.0 series
+
+protracker_300b
+	Name: Protracker 3.00 Beta
+	Author: CryptoBurners
+	Date: 1993-01-18
+	Based on protracker_13a
+	Based on protracker_20a 100
+
+protracker_301
+	Name: Protracker 3.01
+	Author: CryptoBurners
+	Date: 1993-01-26
+	Based on protracker_300b 1000
+	Influenced by protracker_21a
+
+protracker_310
+	Name: Protracker 3.10
+	Author: CryptoBurners
+	Date: 1993-07-17
+	Based on protracker_301 1000
+                                     
+protracker_315
+	Name: Protracker 3.15
+	Author: CryptoBurners
+	Date: 1993-10-15
+	Based on protracker_310 1000
+
+# We have many more releases in the 3.30 - 3.63 series, I just sampled
+# a few of them
+
+protracker_330
+	Name: Protracker 3.30
+	Author: RD10/Osiris
+	Date: 1996-02-21
+	Based on protracker_315 1000
+
+protracker_353
+	Name: Protracker 3.53
+	Author: RD10/Osiris
+	Date: 1996-05-22
+	Based on protracker_330 1000
+
+protracker_359
+	Name: Protracker 3.59
+	Author: R10/Osiris
+	Date: 1996-07-06
+	Based on protracker_353 1000 [ New file format ]
+
+protracker_361
+	Name: Protracker 3.61
+	Author: RD10/Osiris
+	Date: 1996-08-15		# 22.08.1996 in program
+	Based on protracker_359 1000
+	
+# The 4.00b docs mentions 3.63, but no information about author or date
+
+protracker_400b
+	Name: Protracker 4.0 Beta 2
+	Author: Thomas Beyer
+	Date: 1997-02-17
+	Based on protracker_361		# 363 actually
+
+# Jan Poruba's patched versions
+
+protracker_362_fix1
+	Name: Protracker 3.62 fix 1
+	Author: Jan Poruba
+	Date: 1998-09-06
+	Based on protracker_361 [ XPK fix ]
+
+protracker_362_fix2
+	Name: Protracker 3.62 fix 2
+	Author: Jan Poruba
+	Date: 2000-02-12
+	Based on protracker_362_fix1 [ Y2K fix, IFFMOD change ]
+

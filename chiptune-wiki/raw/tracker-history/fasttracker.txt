@@ -1,0 +1,85 @@
+
+ft_101
+	Name: Fast Tracker 1.01
+	Author: Fredrik Huss
+	Date: 1993-01-23		# From the exit message
+	Comment: 8 channels
+
+ft_200
+	Name: Fast Tracker 2.00
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1994-11			# From wikipedia
+	Based on ft_101 [ 32ch, Multisample, Envelopes, GUS, XM format ]
+	Influenced by st_301 50
+
+# Skip a few releases
+
+ft_203
+	Name: Fast Tracker 2.03
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1994-12-25		# From exit message
+	Based on ft_200 1000
+
+ft_204
+	Name: Fast Tracker 2.04
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1995-07-23		# From exit message
+	Based on ft_203 1000
+
+ft_205
+	Name: Fast Tracker 2.05
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1996-02-04		# From exit message
+	Based on ft_204 1000 [ DPMI support, new SB mixing ]
+
+ft_206
+	Name: Fast Tracker 2.06
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1996-02-17		# From exit message
+	Based on ft_205 1000
+
+# where is 2.07?
+
+ft_208
+	Name: Fast Tracker 2.08
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1997-08-21		# From exit message
+	Based on ft_206 1000 [ SB16 32bit mixer, SB16 MIDI ]
+
+# http://www.soundtrackers.de/trackers_without_frames.html notes:
+#
+# - this version has been brought to the public by Andreas Viklund and has
+#   not been officially released by StarBreeze
+# - IMPORTANT FOR GUS & GUS PnP users: DO NOT DOWNLOAD THIS RELEASE - IT
+#   DOESN'T WORK WITH GUS!
+# - internal revision history tells about AMD Interwave (GUS PnP) support,
+#   in fact the whole GUS handler doesn't work properly, it totally fucks
+#   up GUS memory
+
+ft_209
+	Name: Fast Tracker 2.09
+	Author: Fredrik Huss & Magnus Hogdahl
+	Date: 1998-02-04		# From exit message
+	Comment: (unofficial release)\nBroken GUS support
+	Based on ft_208 1000 [ bugfixes ]
+
+ft_210c
+	Name: Fast Tracker 2.10c
+	Author: Olav \"8bitbubsy\" Sørensen
+	Date: 2019-04-05
+	Comment: Many bugfixes and\nsmaller .EXE
+	Based on ft_209 1000 [
+		Removed GUS InterWave support
+		Improved scrollbars
+		Waveform display fixes
+		44100Hz mixing rate
+		Channel numbers start at 1
+		WAV loader fixes
+		Fix replay crashes
+		Clamp instrument data on load
+		Fix replen on MOD export
+		Fix SB output rate
+		Fix pattern mark bugs
+		Fix Nibbles grid
+	]
+

@@ -1,0 +1,210 @@
+RAW: chipmusic.org forum thread "Noise snare" | https://chipmusic.org/forums/topic/15443/ | fetched 2026-08-30 with a browser user agent | post text extracted from the HTML (post number, author, timestamp; quotes marked [quote author]); signatures, avatars and images not included
+
+--- #1 | Sesska | Oct 21, 2014 7:36 am
+Hi,
+
+I'm starded to be happy with the way of organising instruments among the 4 chans... \o/
+
+I still though have a last smallish issue: I used to layer a 909 sample with a noise clic to get a snare sound that actually pleased me A LOT
+
+but I have to free some space on wav chan for more invading bass drops and get rid of the 909 samples
+
+I've tried to mess up with P commands and transpose in a table on the noise side... but can't find something else than a rather crappy weacky ''mario-like'' clappy sound so far... yerk
+
+not the actual end of the civilized world... but...
+
+any idea of a table to get some real convincing snare on NOI only ?
+there surely is a way... surely it's even rather simple and in front of my eyes... [img: sad]
+
+--- #2 | SketchMan3 | Oct 21, 2014 1:09 pm
+The things that I like to do: Using deeper tones for my snare. Try going from a deep tone to a higher tone. It makes a nice thwack sound. Make it smack you in the face, whip you in the butt. *FW'PAH! *
+
+I personally enjoy noise+pulse snares, a la C64 (but i make mine less sneezy sounding) (my song "Brittle" on here has that). Also if you don't mind a "side-chain" style effect, you can go ahead and keep in the 909 samples sometimes and just have the bass "fade" in and out whenever the snare hits. I hear them gameboy EDM people do that all the time.
+
+Or instead of noise+pulse, you can do noise+wav and make a table for your wav bass that has an attack that layers over your noise snare to give it more body. You can make the attack short enough that the bass note won't be noticeably absent. Check out this very convincing wav+noise kick/bass/snare work, dude :o
+Edit: oops, forgot the youtube link.
+
+ Joe McAlby doing some really cool noise+wav kick/snare/bass stuff on Gameboy Color without it really interfering with the bassline. That snare sounds awesome. Basically sounds like an lsdj kit sample, but since he designed it manually from the ground up he has more freedom to quickly reincorporate the bassline into the sound after the attack without being stuck with switching between either "wav notes" or "kit samples".
+
+Feel free to search the forum for LSDj drum patches. I know we've had a few threads where people posted their settings or screenshots of their instruments.
+
+Last edited by SketchMan3 (Oct 21, 2014 3:44 pm)
+
+--- #3 | Victory Road | Oct 21, 2014 1:12 pm
+assuming this is LSDJ:
+i like to start with a toned noise (something like C3 or C4) and then morph it into whitenoise with a S command really quick, just make sure your noise type is free instead of stable. the big thing for more "edm" chip stuff (and edm in general i guess) is the stereo snare trick, where you put a really quick left to right (or vice versa) pan at the top of the table, then center it straight away.
+
+if you can fit a kinda high-pitched wav kick kinda sound (more like a tom drum really) under the noise snare then you'll get a really big sound going.
+
+--- #4 | SketchMan3 | Oct 21, 2014 1:25 pm
+Oh yeah. Periodic noise is really fun. Cuts through pretty nicely. Incorporate that into your snares for real, yo. I need to finish my lsdj stuff from last year >.<
+
+--- #5 | Sesska | Oct 21, 2014 2:35 pm
+[quote]
+
+Make it smack you in the face, whip you in the butt. *FW'PAH! *
+
+yes! this!
+
+909+NOI used to give me this, but have to find another way now
+
+[quote]
+
+Try going from a deep tone to a higher tone
+
+not sure about what you mean... going from low to high in the TPS column, right ?
+
+[quote]
+
+assuming this is LSDJ
+
+oups, sorry, yes, most definitely is
+
+[quote]
+
+a S command really quick [...] make sure your noise type is free instead of stable [...] where you put a really quick left to right
+
+mm... going to give this a try, thanks
+
+[quote]
+
+then you'll get a really big sound going.
+
+that's the goal... this will go through GMB > bass multi effect (comp+bit of equalisation+lamp amp emulation) > 150WW bass amp
+
+I want the whole neigbourhood to shiveringly remember the next rehearsal for the next 4 generations...
+
+--- #6 | SketchMan3 | Oct 21, 2014 3:26 pm
+It's been awhile since I've used LSDj so i don't remember the exact numbers involved. I use the TSP column instead of S Commands for whatever reason. In my mind basically you have four classes of noise sounds. Deep crunchy ones for kicks, high ones for snare, and even higher ones for cymbals, and the periodic sounds for bzzzzzzzzzzzzt noises and ride bells, lol. And everything in between.
+
+If you sweep from a lower sound to a higher sound it has kind of a *fwap!* whip-like feel to it that can be more powerful than your standard "mario" snare, hehe. Combined with Victory Road's method of putting a periodic click on the attack or something. But Like i said i don't remember the actual numbers for it.
+ (aw... i just realized this mp3 didn't even upload completely)
+
+I probably use too many commands on my noise channel tables for a DMG to handle, haha. I think the snare in that sweeps through most of the four sound categories i named earlier.
+
+Edit:
+Just for the sake of being thorough, here are two examples with my pulse+noise snare
+ http://chipmusic.org/sketchman3/music/brittle <https://chipmusic.org/sketchman3/music/brittle>
+ (it comes in after the break near the end)
+http://chipmusic.org/sketchman3/music/qramd <https://chipmusic.org/sketchman3/music/qramd>
+I know this thread is for noise channel snares only, but you had mentioned you needed to be able to keep your wav channel available so I'm just throwing out other options. Sorry I can't provide you with the actual patch at the moment.
+
+Edit:
+
+Ah! I thought I had linked this in my first post. Joe McAlby doing some crazy noise+wav kick/snare/bass stuff without it really interfering with the bassline.
+
+Last edited by SketchMan3 (Oct 21, 2014 3:40 pm)
+
+--- #7 | Sesska | Oct 22, 2014 7:24 am
+coool
+
+thanks for the extra detailed answer and many links to explore... surely have material for the next few years with this! [img: smile]
+
+--- #8 | freezedream | Oct 22, 2014 12:23 pm
+SketchMan3: Some very nice, clever tricks you mention there - thanks!
+
+--- #9 | jmc1987 | Oct 23, 2014 10:51 pm
+You could always get another Game Boy, cart and a link cable. I realize this isn't the ideal solution, but it worked for me and allows you to have WAV bass and kits. Honestly, kits for tracks I wrote with WAV bass are pretty much all I've been using 2xLSDJ for, other than some extra little touches here and there.
+
+--- #10 | Sesska | Oct 24, 2014 7:23 am
+well to be honnest I first don't have the motivation to get all this gear... and overall
+
+- I have a very little use of the GMB compared to my other instruments
+- can't think about bringing a lot of gear along with me as I mostly play music outside, and game boy is the ''when I have 2mn free'' instrument
+
+If I can't find what I want with this configuration (the ''whip snare'' is not really what I'm searching for) I'll go back on Wave fat-Kick+909snare+shitty bass with some additional noise clap and PU1bass as I do now
+
+I will have a try on this:
+
+[quote]
+
+instead of noise+pulse, you can do noise+wav and make a table for your wav bass that has an attack that layers over your noise snare to give it more body
+
+even if it's looks a bit ''how do I do that?'' to me
+
+thanks anyway for all the cool advices!
+
+Last edited by Sesska (Oct 24, 2014 7:24 am)
+
+--- #11 | metatronaut | Oct 24, 2014 3:52 pm
+I've mainly been using A3 env with AE shape. In the table I have this for the middle column:
+TSP CMD
+F0 OL-
+F0 O-R
+-- OLR
+
+Then on row 8 I have a repeat command set to H03.
+
+Sounds pretty authentic from my end, the shape can be edited to your taste but keep it at the 6th octave (ex C6) to get the best sound.
+
+--- #12 | The One Electronic | Oct 24, 2014 6:04 pm
+If you use WAV kicks, use one with a high tone that will layer them with your snare. They'll work together to give a really full and thick tone.
+
+--- #13 | SketchMan3 | Oct 24, 2014 7:32 pm
+Let us know if you come across an lsdj track that has what you're looking for. also maybe post us an example of the sound you're looking to create
+
+If push comes to shove you can always make everything quieter so your noise stands out more [img: tongue]
+
+Also I dont know if you know how to create a kick/bass, but basically I like to put a Pitchbend with a high TSP on the first few rows of a table and then throw a pitch-bend off and a quick TSP to reset the pitch to get the bass tone.
+
+Last edited by SketchMan3 (Oct 24, 2014 7:44 pm)
+
+--- #14 | metatronaut | Oct 24, 2014 9:28 pm
+[quote The One Electronic wrote:]
+
+If you use WAV kicks, use one with a high tone that will layer them with your snare. They'll work together to give a really full and thick tone.
+
+I can second this. Adding kicks in the wave channel really do bring out the snares.
+
+--- #15 | Sesska | Oct 27, 2014 8:27 am
+[quote]
+
+Also I dont know if you know how to create a kick/bass, but basically I like to put a Pitchbend with a high TSP on the first few rows of a table and then throw a pitch-bend off and a quick TSP to reset the pitch to get the bass tone.
+
+wow... would it be abusing to ask you for a quick table example of this ?
+
+[quote]
+
+I've mainly been using A3 env with AE shape. In the table I have this for the middle column:
+
+cheers mate, noted
+
+[quote]
+
+post us an example of the sound you're looking to create
+
+yep, yep,
+
+sorry guys, I should actually have started with this... will reccord siomething as soon as i get back home (looooong time that is [img: sad] )
+
+Last edited by Sesska (Oct 27, 2014 8:28 am)
+
+--- #16 | SketchMan3 | Oct 27, 2014 10:32 pm
+LSDj wav kick/bass kick bass bass/kick tags for search engine ftw
+
+TSP CMD
+12 PEE
+00 ---
+00 ---
+00 P00
+01 ---
+00 ---
+...
+That's the gist of what i like to do. There are other ways and variations... season to taste for your snaring purposes. Adjust/add/remove TSP and Pxx commands and stuff, ya know. I think you can put the TSP and P00 on the same row and it'll work, but I'm not sure.
+One time I used the synth screen to make a growly bass, then manually drew triangles on the first few frames so the smooth kick would turn into a growly bass at the appropriate time. [img: smile]
+
+Edit: Haha, this topic is a bit derailed, huh?
+
+Bleh, I have nothing else to do, so I thought about a snare companion to that kick...
+TSP CMD
+24 PEE
+12 ---
+12 ---
+00 P00
+01 ---
+00 ---
+...
+
+Or something idk... You get the idea... maybe it'll work, maybe not.
+
+Last edited by SketchMan3 (Jan 22, 2015 9:09 pm)

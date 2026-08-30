@@ -1,0 +1,28 @@
+[[Image: Note Properties.png|thumb|494px|Note Properties Dialog]]
+
+Reachable from the [[Manual: Patterns|pattern editor]] by double-clicking a pattern cell or hitting the <kbd>▤ Application</kbd> key, this dialog offers quick access to all parameters of a pattern cell and can be used to get some basic information about effects that are entered into the pattern editor.
+When editing any parameter, the chosen value is entered immediately into the Pattern Editor.
+
+=== Note / Instrument ===
+
+Shows the current note and the instrument assigned to the selected pattern cell. Clicking on the note field opens a popup menu where you can choose the note or event.
+
+Depending on the file format used, you can only choose “No Note” or a given note, or special commands to cut or otherwise end instrument playback. When working with the MPTM format, you can also choose a [[Manual: Parameter Control Events|Parameter Control Event]].
+
+Clicking on the instrument field shows a popup list of all the loaded samples / instruments from which you can select. When editing a Parameter Control Event, this list contains all plugins instead of instruments.
+
+=== Volume ===
+
+Shows the available commands that can be entered into the volume column (not available in the MOD format). Contrary to the name of this column, there are also panning and pitch-bend commands available, depending on the format used. See the [[Manual: Effect Reference|Effect Reference]] to get a list of supported volume column commands for each format.
+
+When editing a Parameter Control Event, this part of the dialog is not editable.
+
+=== Effect ===
+
+Shows the available commands that can be entered into the effect column. Depending on the chosen effect, you also get an explanation of its parameter next to the parameter slider. See the [[Manual: Effect Reference|Effect Reference]] to get a list of supported effect column commands for each format.
+
+When editing a Parameter Control Event, this part of the dialog is used for selecting the plugin parameter and parameter value.
+
+[[Category:Manual|Note Properties]]
+[[Category:Windows|Note Properties]]
+[[de:Tutorial: Effektparameter bearbeiten]]

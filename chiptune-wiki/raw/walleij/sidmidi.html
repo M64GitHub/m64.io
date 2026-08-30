@@ -1,0 +1,314 @@
+<html>
+<head>
+<title>A SID player routine</title>
+</head>
+<body bgcolor="#ffffff">
+<h1>A SID player routine</h1>
+
+<p>This document should really be an extensive "how do SIDplayers work?" in
+order to be perfect, but you cannot have everything. The following
+pseudo source code does not include the ability to play 4-bit samples
+(which is obviously easy to achieve too).</p>
+
+<p>I learned how SIDplayers worked when I wrote the MIDI program for C64
+called <a href="../triad/ftp/MIDI/">MIDIslave</a>.
+I also learned a lot from the editors I used on C64, which includes:
+soundmonitor (by Chris H&uuml;lsbeck), Future Composer (by Finnish Gold),
+Rockmonitor, Pro-Drum and Music Assembler (all by Dutch USA-team),
+The JCH Editor (by JCH), Soundtracker 64 (by Mechanix), Soedesoft
+Editor (by Jeroen Soede) and many more. I wrote this document on
+request from Michael Kleps, the man that put M.K. into the extended
+Soundtracker module files and also the author of QuadraSID,
+a Cubase VST instrument.</p>
+
+<p>A note on "hard restart": The JCH player on C64 is a very good one. What
+makes this and some other c64 players better than others is that it
+utilizes something called "hard restart". That is: the SID provides quite
+bad accuracy on attack after releasing a note, and one way to solve this
+was hard restart, which is to write 0x00 to all registers at $d400--$d406
+2/50 second (2 frames) before next attack. (The actual minimum time is
+33 ms = 2^15 cycles according to Dag Lem, author of reSID.)
+Some say setting the test bit by putting 0x08 into the voice control 
+register $d412 (etc) is just as good. This
+problem only affects the 6581 version of the SID chip (or so I am told...)
+and not the later 8580 version, so for some MIDI appliances the 8580 is a lot
+better choice. (Even though it doesn't have the same groovy filter as
+the 6581 which is a totally different story.) Hard restart only fixes
+problems with attack, not the ever-present problem with release.</p>
+
+<p>In order to play MIDI sounds "hard restart" requires you to be able to
+"see into the future" and know 1/50 second before the next attack, that it
+is actually going to happen. On MIDI players, this is a catch 22: you
+don't just know what is gonna happen in 1/50 second from now. The SIDstation
+has two ways of solving this: either you "hard restart" every voice on 
+keypress, which delays all notes 1/50 second. Or you "hard restart" on note
+off (key release), which kills the voice effectively, and makes all release
+settings superfluous.</p>
+
+<h2>The Pseudo-Code</h2>
+
+<p>This is a simple demonstration of algorithms and priciples for a MIDI
+controlled SID player.</p>
+
+<pre>
+// Some (not all!) arrays that will be needed
+int note_is_on  [3]
+int has_macro   [3]
+int macro_speed [3]
+int initial_vibrato_delay [3]
+int initial_pw_vibrato_delay [3]
+int has_vibrato [3]
+
+// To be called at instrument change
+instrument_on() {
+	// Set up global registers for this instrument
+	if (instrument_has_filter) {
+		instrument_default_lo_filter -> $d415
+		instrument_default_hi_filter -> $d416
+		instrument_default_resonance & 0xF0 | 0x0F -> $d417
+	}
+	else
+		0x00 -> $d417
+	get_instrument_filter_type() | 0x0F -> $d418
+}
+
+// To be called at keypress
+note_on() {
+	// The allocation assumes 3 channels only. Of course you could
+	// add exotic things like new SID emulation instances being added
+	// at will, or say two or three SIDs by default.
+	if (empty_channel_not_available &&
+	    user_wants_new_notes_to_punch_out_old_ones) {
+		// The note_is_on[] array is good to use for this
+		Deallocate_a_channel_offset_using_FIFO_principle()
+	}
+	if (channel = Allocate_and_fetch_channel_ok()) {
+		note_is_on[channel] = true
+		offset = fetch_channel_offset(channel)
+		fetch_default_values_for_current_instrument
+		lo_frequency_from_MIDI -> $d400 + offset
+		hi_frequency_from_MIDI -> $d401 + offset
+		if (default_waveform_is_pulse (== 0x40)) {
+			lo_default_pulsewidth -> $d402 + offset
+			hi_default_pulsewidth -> $d403 + offset
+		}
+		// Note that this byte also controls ring modulation
+		// and synchronization
+		default_waveform | 0x01 -> $d404 + offset
+		default_attack_and_decay -> $d405 + offset
+		default_sustain_and_release -> $d406 + offset
+		// add_macro_for_channel(offset)
+		if (this_instrument_has_a_waveform_macro) {
+			has_macro[channel] = true
+			// This value is relative to process frequency
+			// Default speed could be 8, see below
+			macro_speed[channel] = this_instrument_default_speed
+		}
+		if (this_instrument_has_vibrato) {
+			// This value is relative to process frequency
+			initial_vibrato_delay[channel] =
+				this_instrument_delay_before_vibrato
+		}
+		if (this_instrument_has_pulse_vibrato) {
+			// This value is relative to process frequency
+			initial_pw_vibrato_delay[channel] =
+				this_instrument_delay_before_pw_vibrato
+		}
+	}
+}
+
+
+// This routine to be called a reasonably high rate, say
+// 400 Hz or so. The macro speed on a C64 is usually 50 Hz
+// so this should be the default "delta" factor. The max
+// macro speed is thus 8 times in a vframe (50 Hz) the
+// highest rate I have seen in a C64 playroutine is 600 Hz.
+note_process() {
+	for (channel=0; channel < 3; channel++) {
+		offset = fetch_channel_offset(channel)
+		if (has_macro[channel]) {
+			// delta--, default delta = 8 for 400 Hz
+			if (!macro_speed[channel]--) {
+				// Reset the divisor
+				macro_speed[channel] = this_instrument_default_speed
+				// Update waveform macro, the routine
+				// get_next_wavebyte() should retrieve a
+				// byte from a user-editable table, which
+				// can either:
+				// 1) Loop from a certain point, or
+				// 2) End with a certain waveformbyte
+				// typically these macros ARE allowed to
+				// alter also the ringmod and sync bits.
+				get_next_wavebyte() & 0xFE |
+					note_is_on[channel] ? 0x01 : 0x00 -> $d404 + offset
+                                // Update arpeggio macro, only interesting
+                                // if you don't use vibrato on this voice
+                                // really.
+                                if(!instrument_has_vibrato) {
+                                        // This table can loop or end.
+                                        // arpeggios are usually bytes which represents
+                                        // the number of halftones to transpose the current
+                                        // note UPWARDS. For example macro 0x00 0x03 0x07
+                                        // creates a minor chord.
+                                        arp = get_next_arpeggio_byte()
+                                        offset_from_base_frequency_lo(arp) -> $d400 + offset
+                                        offset_from_base_frequency_hi(arp) -> $d401 + offset
+                                }
+		                get_next_arpeggio_value()
+				// The pulsewidth is typically included in
+				// the macro, if no pw_vibrato is chosen
+				if (!instrument_has_pw_vibrato) {
+					// This table can also loop or end,
+					// of course you could add a byte
+					// for $d402 also, but most c64
+					// players don't do this.
+					get_next_pw_byte() -> $d403 + offset
+				}
+				// If the filter is not controlled by
+				// wheel, then use a macro table with same
+				// functions for this too. Also here, it
+				// is possible to use 16bit resolution,
+				// but most c64 players use only the
+				// high byte. The resonance byte is also
+				// included in most players, even though
+				// it has dangerous effects like switching
+				// filter off or on for current channel.
+				// Some will mask off the low nybble for
+				// this, which is my choice.
+				if (instrument_has_filter_on && !get_filter_cutoff_from_wheel) {
+					// This table can also loop or
+					// end.
+					get_next_filter_hi_byte() -> $d416 + offset
+					get_next_resonance_byte() & 0xF0 | 0x0F -> $d417 + offset
+				}
+			}
+		}
+		if (this_instrument_has_vibrato && !inital_vibrato_delay[channel]--) {
+			initial_vibrato_delay[channel] = 1
+			// Update vibrato
+			// This is done by adding this instruments
+			// default addititve curve over the
+			// values in $d400/$d401. An amplitude
+			// default for this instrument should
+			// also exist if vibrato is used.
+                        // In case you are not using wheels, a
+                        // LFO (Low Frequency Oscillator) can be used to
+                        // add a certain amplitude and period over the pulsewidth.
+			if (get_vibrato_amplitude_from_wheel)
+				amplitude = get_wheel_value()
+			else
+				amplitude = this_instrument_default_vibrato_amplitude
+			// The period will be relatie to the
+			// processing frequency period = lambda
+			if (get_vibrato_frequency_from_wheel)
+				period = get_wheel_value()
+			else
+				period = this_instrument_default_frequency
+			// update $d400/$d401 in this routine
+			// Make sure this function takes into account
+			// the current pitchweel value, if it is to be
+			// used!
+			vibrate_channel(channel, amplitude, period)
+		}
+		if (this_instrument_has_pw_vibrato && !initial_pw_vibrato_delay[channel]--) {
+			initial_pw_vibrato_delay[channel] = 1
+			// Update pulsewidth vibrato
+			// Similar to usual vibrato, but larger amplitude
+                        // can be used. In case you are not using wheels, a
+                        // LFO (Low Frequency Oscillator) can be used to
+                        // add a certain amplitude and period over the pulsewidth.
+			if (get_pw_vibrato_from_wheel)
+				amplitude = get_wheel_value()
+			else
+				amplitude = this_instrument_default_pw_vibrato_amplitude
+			if (get_pw_vibrato_frequency_from_wheel)
+				period = get_wheel_value()
+			else
+				period = this_instrument_default_pw_vibrato_period
+			// update $d402/$d403 in this routine
+			pw_vibrate_channel(channel, amplitude, period)
+		}
+		if (instrument_has_filter && get_filter_from_wheel) {
+			// Modulate filter with algorithms using sinus
+			// or sawtooth, or square wave, or read the hard
+			// value from the wheel for a TB303-like-effect.
+			get_next_filter_lo_value() -> $d415
+			get_next_filter_hi_value() -> $d416
+			// You can of course have separate modulation
+			// or wheel for the resonance. Remeber that it is
+			// just 4 bits though!
+			get_next_filter_resonance() | 0xF0 | 0x0F -> $d417
+		}
+	}
+}
+
+
+note_off() {
+	// Nothing else should be done. See note above on "hard restart"
+	note_is_on[channel] = false
+	offset = get_offset_from_channel(channel)
+	$d412 + offset & 0xFE -> $d412 + offset
+}
+</pre>
+
+<h2>Note tables</h2>
+
+<p>Unless you calculate the note values by maths (which is preferable,
+especially to modulate the pulsewidth and such), the following table may
+be useful for getting some sounds out of the 6581:</p>
+
+<pre>
+/*
+ * Notetable: these values represents notes on a C64
+ * SID chip. Pick a value from each vector for correct
+ * frequency parameters, note_hi[x] = $d400, note_lo[x] = $d401
+ * The numbers in the C64 hardware reference manual are simply
+ * WRONG. Index 0 = C-0, index 36 = C-3 (flat C), 
+ * index 57 = A-4 (flat A), index 95 = A-7 (last B in octave 8
+ * is not possible to replay with c64)
+ *
+ * Public Domain - Linus Walleij 2001
+ */
+
+unsigned char note_hi[95] = {
+  0x01,0x01,0x01,0x01,0x01,
+  0x01,0x01,0x01,0x01,0x01,0x01
+  0x02,0x02,0x02,0x02,0x02,0x02
+  0x02,0x03,0x03,0x03,0x03,0x03
+  0x04,0x04,0x04,0x04,0x05,0x05
+  0x05,0x06,0x06,0x06,0x07,0x07
+  0x08,0x08,0x09,0x09,0x0a,0x0a
+  0x0b,0x0c,0x0d,0x0d,0x0e,0x0f
+  0x10,0x11,0x12,0x13,0x14,0x15
+  0x17,0x18,0x1a,0x1b,0x1d,0x1f
+  0x20,0x22,0x24,0x27,0x29,0x2b
+  0x2e,0x31,0x34,0x37,0x3a,0x3e
+  0x41,0x45,0x49,0x4e,0x52,0x57
+  0x5c,0x62,0x68,0x6e,0x75,0x7c
+  0x83,0x8b,0x93,0x9c,0xa5,0xaf
+  0xb9,0xc4,0xd0,0xdd,0xea,0xf8
+}
+
+unsigned char note_lo[95] = {
+  0x16,0x27,0x38,0x4b,0x5e
+  0x73,0x89,0xa1,0xba,0xd4,0xf0
+  0x0d,0x2c,0x4e,0x71,0x96,0xbd
+  0xe7,0x13,0x42,0x74,0xa8,0xe0
+  0x1b,0x59,0x9c,0xe2,0x2c,0x7b
+  0xce,0x27,0x84,0xe8,0x51,0xc0
+  0x36,0xb3,0x38,0xc4,0x59,0xf6
+  0x9d,0x4e,0x09,0xd0,0xa2,0x81
+  0x6d,0x67,0x70,0x88,0xb2,0xed
+  0x3a,0x9c,0x13,0xa0,0x44,0x02
+  0xda,0xce,0xe0,0x11,0x64,0xda
+  0x75,0x38,0x26,0x40,0x89,0x04
+  0xb4,0x9c,0xc0,0x22,0xc8,0xb4
+  0xeb,0x71,0x4c,0x80,0x12,0x08
+  0x68,0x38,0x80,0x45,0x90,0x68
+  0xd6,0xe3,0x98,0x00,0x24,0x10
+}
+</pre>
+
+</body>
+</html>
+

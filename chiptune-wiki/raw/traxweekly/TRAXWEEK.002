@@ -1,0 +1,869 @@
+    ._____________________________________________________________________.
+    |   _______________________________________________________________   |
+    |  |                                      /\                       |  |
+ ___|__|__________________ __ ____  _____  _ /  \_______ ___ __  _  __ |  |
+ \\_\_          ______    \  /    \ \    \  /    /                     |  |
+    | \___:     ||   /    / /   |  \ \    \/    /  !! TRAXWEEKLY !!    |  |
+    |  |  |     ||   \    \/    _   \ \        /                       |  |
+    |  |__|     ||    \    \_   /    \/        \_     ISSUE TWO!       |  |
+    |  \_      _||    _\     /  \  __     /\    /___ ______   _ _ _____|__|
+    |  | \__  /  |___ \ \   /_  /\/ /    /  \  / _____       _  _ _        \
+    |  |    \/      /  \ \_//\\/   /    /    \/  \_   \_  _________\___    /
+    |  |           /    \  /  \   /    /___________\_   |/    /\   \  /   /
+    |  |           \__   \/    \_/    /____ \_______ \__/   _/  \   \/   /|
+    |  | fallow da    \              /   _/   \   _/   \    \    \_     / |
+    |  |  for ">" news \    /\      /    \____/   \____/\    \___ /    /  |
+    |  |   'bout        \  /  \    /\    _____\    _/   |\      //    /|  |
+  __|  |__  MuZic! ). .( \/    \  /  \  /      \  / \  _| \__  //   _/ |  |
+  \      /         \   /        \/    \/        \/   \/      \// __/   |  |
+   \    /           )+(                     (N0 StYl3 l0g0 bY: \/ WW   |  |
+    \  /          _ __ __  ____  _______     __________________________|  |
+     \/           _ __ ___   __  _____    ______   _______________________|
+			  
+			  - TraxWeekly Issue #2 -
+			     03/23/95 Release 
+
+-[ Introduction ]------------------------------------------------------------
+
+   Well, already a second issue of our little newsletter. I hope you all
+liked the first one. But, I can guess that since you're reading this ;).
+
+   Now, a lot has happened in the pass week. I can't tell you everything
+since I don't have a big memory. But, I can't tell you this, our issue is
+packed with articles and an interview. I can't do more than one interview
+per week, since I don't have that much time.
+
+   Our issue this week includes some nice articles, and more columns than
+last week. First of all, I was very happy to get, the day after the release
+of TraxWeekly One, a nice message from Snowman (Editor of DemoNews). I posted
+it here, so you can be aware of the situation between the two newsletters.
+Also, Psibelius contributed an article on how the old Renaissance
+Multi-Tracker still works for him. Phoenix did a cute review of the Expoze
+Austrailian musicdisk released by Heretics. Zer0 has done a very provocative
+and opiniated analyse of the European demo scene. I got Leinad in an
+interview and learn what happened to him the past years or so. Karl has done
+his first album review in the mag also. Probably he will continue this every
+week.
+
+   Also, I got a lot of mail about people wanting to help out. Well, you have
+to tell me what you can offer. It helps me a lot. I always need people to
+review Musicdisks and other big releases. Like on the Amiga Scene, the
+Primavera'95 competition has finished and has 12 or so modules that need to
+be listened and reviewed. That kind of thing. Or, articles about music. Not,
+flames against people, just tracking advice and music commenting. You can
+have opiniated arguments, but don't use this mag to give more importance to
+your words.
+
+   I'm always opened to suggestions, so mail me if you find anything to say
+that might be interesting. I could always publish my reply also.
+
+   Well, I guess you can wake up! It's time to begin reading issue 2 of
+TraxWeekly - Newsletter of IRC channel #trax..
+
+						- Populus
+						  populus@llc.org
+-----------------------------------------------------------------------------
+-[ Contents ]----------------------------------------------------------------
+
+   1. Letter from Snowman - Editor of DemoNews
+   2. Renaissance Multitracker v1.01b by Psibelius
+   3. Expoze Musicdisk Review by Phoenix
+   4. Zer0's Perspective of the Demoscene
+   5. Interview (Leinad)
+   6. Weekly Tekno Album Review by Karl
+   7. Epinicion Column
+   8. Defiance Column
+   9. KFMF/Kosmic Column
+  10. PURE (Ex-TRAXX) Column
+  11. Advertisements
+
+-----------------------------------------------------------------------------
+-[ 1. Letter from Snowman - Editor of DemoNews ]-----------------------------
+
+Hello there,
+
+I just downloaded Trax Weekly Issue #1.  My reaction is very different
+than what I expected.
+
+About two weeks ago, I first heard that the crew on #trax was thinking
+about putting together a newsletter.  My first thought was to make it
+part of HORNET's new newsletter.  That was a bit presumptuous.  :)
+
+Then I thought perhaps it would make a good _competitor_ to our new
+newsletter.  Again, this was jumping the gun a bit.
+
+After reading your newsletter, I feel it provides some excellent music
+scene coverage: something our newsletter has not and will probably not
+be able to do in the future.  So in essence, your publication fills a
+much needed role in the scene.
+
+A few helpful comments from someone who has experience doing this:
+	-The table of contents was helpful, be sure to keep it.
+	-The Hadji #trax capture was perhaps a bit too long.  Got the
+	  point though.  :)
+	-You mentioned about having a regular ascii guy on staff to
+	  help with the article banners.  Just watch that the ascii
+	  doesn't get too excessive.  People flamed me up and down
+	  when we had our newsletter full of banners.
+
+I really did not know what to expect from this first issue of Trax
+Weekly.  Whatever it was, I was _very_ impressed.  In fact, I would like
+to help out in some way if possible.
+
+Christopher G. Mann / HORNET
+-----------------------------------------------------------------------------
+-[ 2. Renaissance Multitracker v1.01b ]--------------------------------------
+
+Aarticle by psibelius [acid.epinicion.alotofgroups]
+
+     Wasting a large part of my life everyday hanging in irc channel #trax,
+once in awhile, the same old argument about trackers comes up.  And as
+usual, I'm stuck defending good ol' mmedit from the st3 freaks.  Why?
+
+     Maybe I'm a bit biased because multitracker was the first tracker I
+started on, but I'm still convinced its tops.  First off, I kinda like
+having everything on one screen all at once.  I seem to recall someone
+saying that st3 is "better because is doesn't cram everything together all
+at once."  Well, I get more disoriented by having the better of 3/4 of the
+screen flashing every two seconds to write notes, change patterns, and edit
+fields, etc...(hotkeys?  Like what?  ST3's ctrl-< or whatever?  Give me a
+SINGLE button for cryin' out loud).  Second, the 8 track display rules.
+I have no idea where ST3 got itswhacked 5 track display from, but it's as
+annoying as hell.  I regularly compose 8 track mods, and it's nice to be
+able to see the whole picture.  Also, mmedit doesn't switch screens when it
+plays the mod.
+
+     Multitracker looks cooler.  ST3's puke colored background doesn't
+appeal to me, and there's NO way I'm going to bother learning how to
+configure the colors in that damn thing (go try it).  Finally, Multitracker
+hasn't managed to nuke three of my mods like ST3 has.  Sure, mmedit has a
+lot of limits, especially in memory, several effects, and space to write
+all those k-rad comments in, but...anyways, enough on this.  Use whatever
+you like, I just personally prefer mmedit to ST3.
+
+     Then there's the other trackers...x-tracker wins my award for the
+most k-rad piece of software on the planet (except for the ansi drawing
+progs).  Ultratracker, Farandole, and the rest earn my award for total
+impossibilites not to waste time on (gimme a break, we don't need 9999999
+colors on the screen while tracking!).  And I'll bring up another point,
+those "crippled" tracker progs that can't save...what the f--- is that
+sh--?  No wonder we hardly see any x-tracker, farandole, or ultratracker
+songs out there...the idiots that programmed them just can't get it into
+their heads that we're not going to pay $25 or whatever.  No wonder we're
+all using ST3 (we don't really have a choice).
+
+     Well anyways, there's my two cents. =)  Direct any comments or
+whatever to gwie@coyote.csusm.edu
+
+						-psibelius
+-----------------------------------------------------------------------------
+-[ 3. Expoze Musicdisk Review ]----------------------------------------------
+
+ Phoenix's Rating Scale of Doom(tm?):
+
+ *         A waste of your precious ears.
+ **        I've heard better stuff by the Smart E's.
+ ***       You might like it, you might not.
+ ****      Get it quick so you can brag to your #trax friends.
+ *****     Better than sex!
+
+		      _____ __ __ ____   ___  ____  _____
+		      ||--   >X<  ||--" (( )) ,,-'' ||--
+		      `"""" '' `` '`     """  """"' `""""
+			  Musicdisk Review by Phoenix
+
+   What a better way for Australia to introduce itself to the music scene
+ that with a collaboration of the best artists the country has to offer?
+ The overall effort was coordinated by the demo-group Heretics.  I'm not 
+ sure how the title should be pronounced, whether it is "eks-po-zay"
+ (which I prefer), or "eks-pohz", but either one is catchy as long as the
+ "oz" for the land down under is in it. 
+
+   This is a very nice production.  GUS/Max, SB/Pro/16, PAS16, and even
+ the PC-hooter are supported.  Sound quality is not the best (on my
+ SoundBastard Pro that is) but it's decent.  Things are run by the F-keys, 
+ much like other musicdisks such as Epidemic and EGG 2.  There is a credits/
+ greets screen, instrument list screen, info screen (much more info than 
+ other disks), song select screen (with a nicely drawn background), and 
+ the main player  screen.  No wacky effects, no plasma, no vector-spectrum-
+ analyzers, this musicdisk is straightforward in its aesthetics.  I would 
+ like to have seen a help screen, but the mouse buttons on the main player 
+ screen are self-explanatory.
+
+   The music itself.  The thing I like best about Australian tracked music
+ is that it has no guidelines.  _Expoze_ is not confounded to just techno or
+ light synth-muzak, rather it combines various styles into something any-
+ body can enjoy.  There are 11 songs in this package.  They are in CBA
+ format, which was made just for _Expoze_.  They're very large, and you can't
+ do much with them, but they support stereo panning and 16 channels much
+ like Screamtracker.  Here's a look at the tracks.
+
+ 1. "Journey's Beginning" by Chuck Biscuits/Heretics (3:40, 15 chan)
+  
+  The intro-tune for _Expoze_ is house-style.  It's simple and catchy, 
+  nothing big.
+
+ 2. "Reactivate" by Force Format/Heretics (5:10, 8 chan)
+
+  Being the breakbeat-techno fan that I am, I nearly got up off my chair 
+  when I heard this one.  Highly energetic, this is the kinda stuff that
+  made groups like Kosmic and Traxx famous.  A must-hear for dance-fans.
+
+ 3. "After Sunset" by Jase/Oxygen/Enigma (8:35, 8 chan)
+
+  This demo-techno piece makes great use of string and resonance samples.
+  The mixes of aggro-techno and synth-muzak account for the length.
+  Something good, for everyone.
+
+ 4. "Virtuous Reason" by Firelight (3:22, 6 chan)
+  
+  Hate tracked music, period?  Would you rather just pick up a guitar and
+  jam?  Check out track four.  Firelight has made a great rock tune you
+  can groove to, kind of like Daredevil's "Moonglow Groove".  He's also
+  just released a musicdisk titled "Firestorm ][", something you might 
+  want ot pick up as well.
+
+ 5. "Panoramica" by Chuck Biscuits (9:36, 15 chan)
+
+  This track will no doubt get Chuck Biscuits some more attention in
+  the music scene.  It's of the demo-dance-music genre.  The guitar leads
+  are incredible, and there is some nice piano in there as well.
+
+ 6. "My Child" by Jedi/Oxygen (3:40, 12 chan)
+
+  A rather gothic tune with bizarre, if not enchanting, string chords.
+  Some deep voice samples start it out.  
+
+ 7. "Endless Legacy" by Myzer/Legion (3:15, 8 chan)
+
+  It may be the simplest song on _Expoze_, but it's my favorite.  The use
+  of the guitars and synth-leads is fantastic!  Even the orchestra hits
+  fit in well.  This tune reminded me a lot of Skaven's old work.  It 
+  shall remain in my head for months (thus the name? :) ).
+
+ 8. "Release Me" by Sane/Xtatic (3:30, 16 chan)
+
+  And yet another nice tune.  The piano chords are well done, and there's
+  a good dance beat to it.  Ambient-demo-house would be the best way
+  to describe it.
+
+ 9. "n'trance" by Maral/Kosmic (5:31, 13 chan)
+
+  Being the acid/trance whiz that fellow Kosmic member Maral is, this
+  is the most bizarre track on _Expoze_.  Yes, it's trance all right, but
+  it has a horror-movie sound to it, with bells and choirs.  The bad part
+  about this track is that it's so repetitive, only 2 patterns are needed
+  to get the feel of the whole song.  Still worth checking out.
+
+ 10. "Mirage - Lightspeed ][" by Void/Reality (6:18, 4 chan)
+ 
+  With its four channels and simple synth leads and chords, this song
+  would be perfect for an Imphobia diskmag.  But seriously, although
+  it doesn't compete with the other tracks on _Expoze_, Void put this
+  tune together very well.
+
+ 11. "I Can Feel The Beat" by Hunz/Smash! (4:14, 10 chan)
+
+  As you near the end of _Expoze_, you probably think "What haven't I heard
+  yet.. of course! Disco!"  OK, maybe that isn't what you think, but it's
+  here.  This chirpy pop-techno tune should be taken light-heartedly,
+  because they _never_ would have used it in Epidemic. :)
+ 
+ Total time: 56m 31s
+
+   So while the player itself is fairly simple, the music content easily
+ makes up for it.  Although I had only heard of three of these musicians
+ prior to _Expoze_, I will now make sure to check out all these artists.
+ Mission accomplished.  Oz has made its mark.
+ 
+
+ Rating: **** (4/5)
+
+ Expoze takes up 2 disks compressed, 1.2 meg each.
+ It is found on FTP as:
+   ftp.cdrom.com /pub/demos/incoming/music/EXPOZE-1.ZIP & EXPOZE-2.ZIP
+	      or /pub/demos/music/disks/EXPOZE-1.ZIP & EXPOZE-2.ZIP
+
+-----------------------------------------------------------------------------
+-[ 4. Zer0's Perspective of the Demoscene ]----------------------------------
+
+	Hmmm.. TRAXweekly.  I suppose the name of a mag never stopped me. 
+=)  This, my friends, is my current views on most, not all, of the demo 
+scene.  I'll warn you right now, my views aren't positive.  If you agree 
+with me, and it's only fair, or disagree with me, please mail me at : 
+zero@host.yab.com.  Send flames/comments/criticism.  Flames can be fun 
+mail too, so don't hold back!  =) 
+	I think the demo scene in general is doomed unless a major 
+revolution takes place in the factor of originality.  It seems that ever 
+since demos like Panic, and 2nd Reality (The oldies, but goodies), nobody 
+has thought of anything new.  90% of the demos out there use the same old 
+shit!  Sure, maybe THEY coded it, but did THEY think it up?  No, download 
+a few demos, and see what I mean.  I think I'm going to puke the next 
+demo I see with plasma or vector balls.
+	Another thing I seem to be seeing a lot lately is 'improved' 
+effects that were introduced earlier in the scene.  I don't care how many 
+transparent vectors you can display on the screen at once!  I want to see 
+something new!  Have they all run out of ideas?  Well, I'm sure if I was 
+a 'real coder' (as some of the more obnoxious euros would put it) I could 
+think up quite a bit of new stuff!  
+	Please don't think I'm bias against ALL demos, and all European 
+coders/artists/musicians.  I've seen some great demos before!  One of my 
+all time favorites is the demo Catchup (Maybe Katchup?  Oh well.. :) by 
+GRiF.  The demo with a witty quote, and a horrible sounding VOC/WAV (I 
+don't know if it was that format for sure.. but it was like a long 
+VOC/WAV.. you know what I mean. =) of the music from the Cantina 
+(spelling?) in Starwars.  This was, of course, on purpose.  
+	That's a slice of originality right there!  The whole demo is 
+filled with simple, but strange and ORIGINAL effects.  The art was some 
+of the coolest looking I've ever scene, and the music was BEYOND cool.  
+Not only was it one of the best sounding demos I've ever scene, it was 
+the most original, and it had the best design of any demo I'd ever 
+scene IMO.  
+	The music in demos are usually pretty nice IMO.  I like a lot of 
+the demo/techno music out there, but I do like demos that don't use the 
+normal trend of music.  One demo that comes to mind is NO by Nooon.  
+(Yeah, I probly got the name wrong on that one too)  The music wasn't 
+very good, and the player quality kind of bit clam shit, but the music 
+was different!  I also think most demo coders don't realize how many 
+people don't own GUS soundcards.  I myself am a proud GUS owner, but I 
+think too many demos assume you own a GUS.  I think they should think 
+about a bigger listening audience.. 
+	Welp, I'm done bitching about the demoscene.  REMEMBER, I am not
+bias towards the whole scene in general, but I think it needs a big kick 
+in the butt.  I respect anyone who can code as well as most of the people 
+in the demo scene, but they need to apply there talents in a better 
+form.   If a demo guy sees this and makes an original intro/demo, then I 
+know I've already accomplished something.  Peace out fewlz, 
+
+						 -Zer0 + Defiance 1995
+						  + TraxWeekly Writer
+
+-----------------------------------------------------------------------------
+-[ 5. Interview with Leinad ]------------------------------------------------
+ 
+   Well, where did I dig up Leinad? I meet him on IRC by coincidence. Maybe
+you've forgotten a bit about him, but this interview will probably refresh
+your memory.
+
+   Very active about in the 1990-1991s. But now, all "grown" up, he is doing
+our little past time a mean of living. Well, enough of the introduction,
+let's visit with Leinad!
+
+Conducted by Populus [Epinicion / TraxWeekly] [populus@llc.org]
+Subject was Leinad   [MAGE]                   [bertil.skoglund@s-data.se]
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	    .oOo. Started - Wednesday, March 15 at 14:57 .oOo.
+
+Populus - Please state your real name, group(s), occupation, crime record, etc.
+
+Leinad  - Daniel Falk, MAGE, computer nerd, no crime record as far as I know, 
+	  um...
+
+Populus - What happened to Avalanche?
+
+Leinad  - Most members go too involved with work/school so me and Fabian (Zax)
+	  decided to drop it. Of course we'll use it if we ever release any
+	  more stuff, but I doubt it.
+
+Populus - What's MAGE?
+
+Leinad  - Mage is a um.. erh... some sort of group but at the same time it's
+	  not :) We're more like a couple of friends who are developing games
+	  and maybe we gonna use it as a company name.
+
+Populus - Now, am I right to assume you've been composing for a long time, how
+	  long?
+
+Leinad  - Started when I bought my first Amiga and that was back in -89.
+	  I'm 23 now btw.
+
+Populus - How many songs have you done since you started?
+
+Leinad  - Released about 25 I think. And ofcourse many older which never will
+	  get off my Amiga disks :) I'm rather lazy and my most active time
+	  was during 90-91.
+
+Populus - What's your favorite song, you did?
+
+Leinad  - Probably a song called "Carry My Torch" which was written for a game
+	  which never got around...
+
+Populus - Is it released?
+
+Leinad  - It was released (so I've heard at least) in some music disk
+	  organized by Syntax Error. Have yet to see it.
+
+Populus - Where can we find most of your stuff on the internet?
+
+Leinad  - I'm afraid you can't. I had a directory at wasp/hornet (whatever)
+	  but I'm not sure it's there. As I just recently got access to
+	  internet again after 8 months I haven't had time to get a site to
+	  carry all my stuff.
+
+Populus - What instruments do you play?
+
+Leinad  - I used to play the drums. For maybe 12-13 years something. At the
+	  age of 18 I sold them and bought a synt instead. But I'm no good at
+	  it. So drums is the only thing I really CAN handle :)
+
+Populus - What kind of songs are mostly done by you?
+
+Leinad  - eh. hard one :) As you might have noticed I like to do kinda
+	  different stuff, with song, rap and stuff like that. It's easier for
+	  me to say what I WON'T do :) And that includes: Funk, "pop" and
+	  soul ? I do have a problem with that kind of music :P  And of course
+	  no Ace of Bass covers (one guy actually asked me about that once..
+	  grrr)
+
+Populus - What musical groups or artists do you often listen to?
+
+Leinad  - Dead Can Dance, Front 242, Green Day, old Metallica, Candlemass,
+	  lots of Swedish synth like Mobile Homes, Elegant Machinery and
+	  SPOCK, and um... Bad Religion etc... very varied...,
+	  no euro-techno.. please note that :)
+
+Populus - What's your motivation to begin a nice tune?
+
+Leinad  - My motivation often begins with some kind of weird sample or
+	  something... sometimes I plink on my synth (a Kawai K4 for those
+	  who are interested)... and then ofcourse, a perverted mind with
+	  perverted lyrics in it do help ;)
+
+Populus - What kind of equipement you use to create songs?
+
+Leinad  - Sometimes I use my A500 for sampling but not very often nowadays, I
+	  use my GUS (sponsored by Gravis ofcourse ;), my synth, my Dr-550
+	  drummachine and lots of music CD's. The software is most of the
+	  time AudioMaster III on the Amiga, Extreme's Tracker, FT 2 and
+	  GoldWave for Windows.
+
+Populus - What's your last song?
+
+Leinad  - Vote 4 Me, and The Happy Hamster Hop (both released at Asm -94)
+	  .. I've been busy :)
+
+Populus - Doing what?
+
+Leinad  - Moving, working, looking for a new job and now working again.
+
+Populus - What do you do?
+
+Leinad  - I author multimedia... that includes doing 3d animations, digital
+	  video editing, image editing and ofcourse sampling. I also do some
+	  programming in an athoring tool called Director.
+
+Populus - What's your best 5 songs, you ever did?
+
+Leinad  - + The Happy Hamster Hop (still think it's a shame it didn't even
+		make it to the final at Asm -94)
+	  + Carry My Torch
+	  + Kingdom of the Hedgehogs ? (dunno the spelling there)
+	  + Fear of The Exams
+	  + Do it! Pull the Trigger.
+
+	  That's among the released ones of course.
+
+Populus - Are you working on a song right now?
+
+Leinad  - Not yet. I have plans and lyrics for a couple of ones but I haven't
+	  had time to get down to sampling and such yet.
+
+Populus - Tell me how you start to compose a tune. The full step by step of
+	  the process.
+
+Leinad  - I usually decide which samples to use first. That can take alot of
+	  time. I try to do most of the samples myself. Then I just down and
+	  punch out some simple drums to have a base to build on. I try to get
+	  some chords into action and start fiddling with the effects far too
+	  early :) After that I try to grasp the whole thing and decide where
+	  the refrain should come, do the intro etc and add lead instruments
+	  with all kind of effects needed. Then back to the drums again and
+	  adjust the volume levels of everything so no instruments "drown" the
+	  others and I try to vary the drum patterns so it won't get too
+	  booring. And the the though part, give the whole thing a name :)
+	  Ofcourse I always try to do everything at once though :o
+
+Populus - Are you still using an Amiga to create tunes?
+
+Leinad  - I did before we moved (last November). But now I don't have any
+	  room for it so it's gathering dust in the closet I'm afraid. But I
+	  still think I get alot better sampling quality with my Amiga than
+	  the GUS.
+
+Populus - I wonder why there are still songs coming from the old ProTracker
+	  even if better trackers exist on the PC or Amiga. What's your
+	  opinion on this, why are YOU still on ProTracker 4 channel music?
+
+Leinad  - I don't do much 4 channel now, mostly rap tunes and that kind of
+	  stuff. The reason for that is that I don't need more channels and
+	  that I want to be in all possible compos at the partys ;) I was in
+	  the gfx compo at both Asm 93 and Asm 94 too :)
+
+Populus - Are you happy with the capabilities that ProTracker can offer? (Some PC trackers have the ability to have multiple effets at the same time, separate volume commands, etc.)?
+
+Leinad  - Nah. I don't use ProTracker nowadays. For my last 4 ch (Vote 4 Me)
+	  I used Extreme's tracker from the start and just limited myself to
+	  the Amiga "rules". On the other hand, my multichannel song for
+	  Asm 94 used 3 and in some cases even 4 effects at the same time in
+	  some places. I use Extreme's tracker. There are a couple of reasons
+	  for this. The coders are friends of mine, I live rather local to
+	  them, and I got to beta test it early when FT 2 wasn't released.
+	  Then I get most of the stuff I want into it, it's very easy to use
+	  for us ProTracker nerds, and works well on my computer. I never
+	  liked text-mode based tracker like ScreamTracker. Think it's far too
+	  much pain to learn yet another interface... 
+
+Populus - Which mod-maker have you noticed out there that seems very good?
+
+Leinad  - My fave on the PC is Zodiak / CDA. Except for beeing a great
+	  composer he's a nice guy too (even though a bit on the slow side
+	  when it comes to returning disks hint hint). Then I like Necros
+	  (doesn't everyone ?). CC Catch! (that good old Kenny)
+
+Populus - What are your plans for the immediate and long term future?
+
+Leinad  - I'm hoping to release some kind of musicdisk/pack with songs that
+	  were made for various demos/intro and mainly, game which never got
+	  released. I gonna try to release some more nifty sing-along song at
+	  some future party I guess and this spring, also music for an
+	  actiongame from Mage, called Iron Plague.
+
+Populus - Have you anything to say to all the readers of TraxWeekly?
+
+Leinad  - Try to be original. And if you can't, atleast not booring.
+	  Stay cool - Dont close the fridge (my slogan)
+
+Populus - Thank you for the interview.
+
+	    .oOo. Ended - Wednesday, March 15 at 16:13 .oOo.
+-----------------------------------------------------------------------------
+-[ 6. Weekly Tekno Album Review ]--------------------------------------------
+			  WEEKLY TEKNO ALBUM REVIEW [karl]
+ 
+[PRODIGAL SONS.return]
+[STYLE: acid house] 
+[TRAXX: 11] [TT: 65.11] 
+
+If you laugh at the sound of the words: "CHRISTIAN tekno", then you're
+like most other people who don't understand that Christians are as able
+and talented as the rest of the rave traxx krew.  The Prodigal Sons are one
+of those groups that catches you with it's vibe the instant you listen to it.  
+It's unlike anything you've ever heard.  The Prodigal Sons are a guaranteed 
+fresh journey into acid house.  If you imagine Christian tekno as being a 
+"PREACH TO DEATH ABOUT JESUS" type of music, with blaring "jesus" samples,
+well... then you're partly right... The Prodigal Sons hardly delve into the
+void of using music as a tool to preach, unlike the Raving Loonatics (which
+i'll talk about later... :).  Be forwarned that you won't find any dark moods
+or overtones in this journey.  The music is quite uplifting, but surprisingly,
+it's quite odd.  Maybe i should shut up and start talking about the album 
+itself, hehe... ok, here goes:
+
+The album starts out with yer basic tasty analogue drums and klaps.. good
+stuff. If you dig the old skool sound, then you're quite apt to like this song
+[EXALT], due to it's acidity and style.  Although this isn't one of my favorite
+toonz, it does hold itself up pretty well... whenever i listen to a track, i
+always imagine it on the dancefloor, and what kind of effect this song would
+have on the krowd... this song is the kind that would konfuse you at first,
+then send you into another world. If that's not enough, then 
+you can marvel at the wonderful MC- J.R. Barbee with some live samples. ouch!
+With some really rippin cymbal stylus and krafty drum manipulation, Exalt will
+get yer dancin feet warmed up and ready for our next track, Godhead.  I
+remember the first time i heard this song, it reminded me of a nintendo toon..
+maybe not, but it did sound like a nintendo sample... oh well... anyway,
+nice lead.  I'd recommend tying yerself down to the floor for this one,
+otherwise your going to be dancin it up when the phat drum loop starts pumpin
+in.  Another really nice aspect of this song is the fact that it's
+multi-faceted.. . or something like that... it's got lots of different
+melodies and leads.  Not just yer basic "two melodies per song" type of a deal.
+Guaranteed ka$h. Rip out yer snapple and get tootin on the whistle cuz the next
+two toonz [APRICOT TREE & RAVIVAL] are definite winners for the pardy-hardy
+krowd. ouch. oowaahh.. heh. I think my tweeter just spanked itself to death,
+oh well. In terms of sound, i'd use this setup:  (okee dokee roll em... :)
+krank the bass to middle, and the treble to max.. . analogue soundz mult-waxx
+on treble maxx. so pump it up. "i looked out the window and what did i see?
+popkorn poppin on the apricot tree". Alrightie, 'ravival' is another brilliant
+3O3 slobbery toon, but if it's 3o3 beatbox that yer lookin for, hold up until
+the last few beauties.  Trakk 5, Firebrand, is a scorch and a half with it's
+bewmin [certified hadji bewm!] bass and loud klappage attack. Monotony is
+koolio. The trakk progresses quite quickly, adding in various 808 cymbals, and
+different klaps, and snares, until the the melody comes out by 1.26. then the
+song really kooks up at about 2.00. multi-tymbral polysonix dog chambers start
+flying at about this time.  
+
+oowaahhh... i heard a nawty rumor on the street that pirate copies of 'pastiche'
+were being on the black market (on tape) for $20. The song starts out with an
+extremely wicked 3o3 riff that makes me wish i was squirrel. Oh so good. Kernel's 
+original spices and juices.  Speaking of juices, pastiche lays it up at 1.45 when
+the kikkin cymbal-type samples come in and blaze it up.  I hope you don't have
+arthritis.  Cuz arthritis just plain hurts.  Trakk 6 continues to warp around
+and meld itself with various themes and drum loops. Quite exciting if you really
+dig the acid house vibe.  Pastiche, #7, comes out with prototypes blaring with
+some really lipid lines and bass boomin.  But i must admit that i'ts not my fave
+. "People of Earth, please heed my warning... a terrible accident has occured..
+i am pluton, sanitation captain of the planet pluton.." starts out "ode to johnie"
+, #8. This one is major ripping with some koolio hard samples and "how u feelin"
+krowd response.  Once again, this song is laced with some nice cymbals and drums
+[+o]... "how u feelin"... ok... one little problem that i had with song was it's
+tempo.. just a bit too slow for my regular tekno habit. but the song still kooks
+it up at 5.37 minutes. "the time is now 3:03".. "time and tempo" is one the nicest
+, most clean sounding 3o3 riffs i've heard in a while, add in a phat 909 bass drum,
+and you've got a stylus song that just doens't quit.  Oh, and yer regular 909/808
+krew [snare,cymbi,cymbi2,shaka]... at just 2.00 minutes into the song, you get
+another lethal doseage of pure lovin bewm in yer bottoms. The song sounds so 
+full and lethal with no preservatives added.  With just 20 grams of fat. :)
+Considering that this album came out in about 1993 (or 1992), it holds itself
+up pretty well.. I still listen to it everyday.  And i have yet to get sick of
+cymbals and the tb-303 monstah.  To cap off the album, the second to last track
+is a chill tribal toon.  Hey, everyone has to use their 707 latin beatz don't 
+they? :) hehe... "cross the jordan" is a fat bass/conga laden toon with some 
+phresh innovative squelches and "peeooches"... This toon would really hold itself
+well on the dancefloor, considering it's deep moody feel & un-relenting melodies
+that change at about every 45 seconds or so.  The Psons definetly saved the
+best for last. "3o3 wiseman" rips in quick with some nice 3o3 loops and dj 
+chris white on the wick wicky wickidi wack turntable [1200], and b4 you know it
+, the beatz are in and sending you to mommy cryin for more.. well... i'd say
+this is the fastest and best song on the album [no correlation whatsoever]. 
+You can't beat the "bill clinton has no.... BASS!" samples and the totally 
+wicked tb loop that won't quit.  I'd take a guess and say that this was recorded
+live, due to it's intense mood and feeling.  This mind shattering acid song
+brings you to a better understanding of how plate tektonix really work and how
+you are affected by nucleo-physics.  Or not. "you've just heard one of the most
+remarkable applications in modern electronix."
+
+The klever Prodigal Sons konsists of :
+Greg Hobgood - Keyboards, Programming, Sampling
+
+Chris White - D.J., Samples, Scratching
+
+J.R. Barbee - M.C.
+
+with an acute sense of taste in musical equipment:
+
+Ensoniq ASR-10, EPS-16+,SQ-80
+
+Roland, TR-909,R8,TB-303,JUNO-6,Octapad 2,M-120,SE-50
+
+Alesis D4, Microverb3
+
+Mackie 1604
+
+Tannoy PBM-8
+
+Panasonic SV-3200
+
+Crown Power Base-1
+
+Furman PL-8             [for real?? :)]
+
+OBX 163X
+
+Technics 1200's
+
+wowo.. what a list eh? I hoped i've opened your eyes a little bit to the world
+of CCM (christian contemporary music) and the christian tekno scene.. It's ALIVE
+AND WELL!!! You can rest assured that the CCM market won't be dying away anytime
+soon, so go to your local christian book store, and pick up your copy of Prodigal
+Sons [return].. 
+
+if you have any comments, grunts about my grammer, or complaints, or compliments [??]
+then send me a note: braczyns@esu3.esu3.k12.ne.us  or if your interested in 
+hearing more about christian tekno and some other music, then web it up at:
+http://esu3.esu3.k12.ne.us/~braczyns/home.html
+i'd be delighted to speak to anyone and everyone. till next time ravers, dance it up!
+
+
+
+-"satan is dead!"
+-----------------------------------------------------------------------------
+-[ 7. Epinicion Column ]-----------------------------------------------------
+
+			e  p ░i  n  i  c  i░ o  n ▓▄░
+			 ░   ▒      ▒  ░   ▒    ▄███▒░
+		      ░ ░▒▄███▄▄ ▓ ░▓▄▄▒░  ▓░  ▀░▓█▀▓
+		      ▒▄██▀▓  ▀█▓▒ ▄███▓ ▄███▓▄  ▒▄██
+		      ▓██  ▒░ ▐█▀░▀ ▓███■▀▓  ▀██ ░▓██
+		     ▐██▌  ░ ▄▀░    ▒██▓ ░▒  ░▐█▌ ██▓
+		      ███▄ ▄▀  ▒▄■  ░██▒  ░  ▒█▓  ███
+		       ▀▓███▄▄▄█▀░   ▓█▓fm  ▄▓▀▒░ █▓▀
+			▒░▀▀▓  ▓▒    ▒██▄▄▀▀▒  ░  ▀▒░
+			░   ░  ░     ██▓ ░  ░      ░
+				    ▒███
+				    ░███
+				     ██▓
+				     █▀░
+
+
+  Epinicion Productions is a music group.  Our staff of over fifty represent
+  the people of four nations on two continents.  Starting on March 21st,
+  1994, Epinicion rallied together for the new people.  You know the ones.
+  You may even be one yourself.  You try to make music, and you make sure
+  progress.  Unfortunately, some of the better people around you flame you
+  just because they think they're just so much better.  So you get blocked
+  out by their actions, think the scene sucks, and you quit.  Well there's
+  an easy way around that problem.
+
+  Ignore them.  In fact, tell them to go f--- off.  That's what we did.
+  Why let anyone else tell you that you suck?  Why be in a group where you
+  get harassed by some "senior staff" member?  Make a difference.  Join
+  Epinicion.  Get your work spread.  Get some real criticism for a change.
+  Earn some respect and friends that will stand by you.  Improve.  Be proud
+  of your work.  That is the goal of Epinicion.
+
+  Anyone can improve.  Everyone can get better.  That's how things are.
+  And we need your support.  The longer we stay alive, the better the
+  chances for everyone to get a shot at recognition.  Regardless of whether
+  you are inexperienced or a master, Epinicion always has room for you.
+  Everyone willing to put in some effort is welcome.
+
+  Epinicion is a group for you, the musician.  Our motto comes from P.
+  Cadigan's novel, Synners: "We do what we do, and we do it because we can."
+
+
+				     Psibelius (Gene Wie)
+				     Epinicion Founder
+				     gwie@coyote.csusm.edu
+
+				     Epinicion Productions
+				     4921 Amador Drive
+				     Oceanside CA 92056
+				     United States of America
+
+				     ftp.voima.jkl.fi/pub/mod/epi
+-----------------------------------------------------------------------------
+-[ 8. Defiance Column ]------------------------------------------------------
+  .----..-----.-----.--.-----.-----.-----.-----.    ..defiance music..
+  |  .  |  .  |  .  |  |  .  |  .  |  .  |  .  |   ...productions 95...         
+  |  |  |  |  |  |__|--:  |  |  |  |  |__|  |  |     |              |       
+  |  |  |  |__|   __|  |  .  |  |  |  |  |  |__|_ _  :              :   
+  |_____:_____:__|  |__|__|__:__|  |_____:______ _   .              .     
+_______________________________ :  : ________________________________________
+	   Spiffy Ascii Artwork provided by Cerulean/Defiance            
+
+	I'm sorry to report we have no new releases under Defiance this 
+week. :(  The reason being Zer0's (thats me) hard drive crashed while 
+messing around with Linux.  Once I get my stuff back up and running 100%, 
+I'll be able to recollect all the songs (got a few already!) and package 
+up a brand new Defiance disk.  Sorry, but shit happens.. hope you can 
+understand that.
+	BTW, I made the mistake of posting a few sites we had our files 
+on.  The reason being, they were down for a week because of Spring 
+Break.  Everything should be back up now, so have fun leaching!  
+	
+	Lates alls.. sorry I couldn't write about more.  
+
+						 -Zer0 + Defiance 1995
+						  + TraxWeekly Writer
+
+-----------------------------------------------------------------------------
+-[ 9. Kosmic Column ]--------------------------------------------------------
+	       ____
+	      |    | ___                       /\    ______
+	      |    :/  /___ _____ ____ _____ _|  |_ /      \
+	      |       /    \     \    |     |  \/  |        |
+	      |      |      |  ___|         |      |    \__/
+	      |    . |   o  |__   | .    .  |      |    /  \
+	      |    :  \     |     | :    :  |      |        |
+	       \___|___|___/_____/__|____|__|______|_______/
+
+		     Kosmic News for March 21st, 1995
+		     --------------------------------
+
+Hello friends! This is some of what's been going on with the world's
+goofiest music group lately, in easy-to-read listings format:
+
+* Necros and Jak (Mellow-D) have left the group for a new music group. We
+wish them the best of luck with their future projects!
+
+* Zab has joined the group. He's a coder, also with Hardcode, and a
+long-time (IRC-speakin :) friend of many kosmic members. Drop him a line at
+zab@teleport.com to welcome him!
+
+* latest releases are "Funk Saboteur" by Maelcum (K-FSABO.ZIP) and
+"Synaestatia" by Phoenix (K-SYNAES.ZIP). They're on kosmic.wit.com
+/kosmic/songs/95/
+
+* look for the new kosmic art dir on our ftp site at kosmic.wit.com,
+/kosmic/art coming soon, and the latest art "Interstella" by Maelcum,
+starring Cardiac, Maral, and some chick :)
+
+that's it for now folks, till next time!
+
+- Maelcum
+
+Kosmic sites:
+
+ftp: kosmic.wit.com /kosmic/
+
+World-Wide-Web:
+http://kosmic.wit.com/~kosmic/
+
+-----------------------------------------------------------------------------
+-[ 10. PURE Column ]----------------------------------------------------------
+
+[0[[[[\  [0[   [[ [0[[[[\  [0[[[[[         Z[[[?Z[[[?Z[[[?Z[[[?Z[[[?
+[0[   [[ [0[   [[ [0[   [[ [0[             3 s 33 o 33 u 33 n 33 d 3
+212^[[_  212   22 212^[[_  212^[[          @[[[Y@[[[Y@[[[Y@[[[Y@[[[Y
+121      121  11  121  [[  121           Z[[[?Z[[[?Z[[[?Z[[[?Z[[[?Z[[[?
+0[0       0[000   0[0   [[ 0[00000       3 c 33 o 33 l 33 u 33 m 33 n 3
+					 @[[[Y@[[[Y@[[[Y@[[[Y@[[[Y@[[[Y
+012[[210 012[[210 012[[210 012[[210 012[[210 012[[210 012[[210 012[[210
+ 012[10   012[10   012[10   012[10   012[10   012[10   012[10   012[10
+
+If U don't know yet, the group formerly called TRAXX has changed it's name
+to PURE . This change is the result from a merging of different demo oriented
+groups in BELGIUM! We're now one of the biggest demogroup in Belgium and even
+in Europe. (without forgetting that some of our composers aren't from Belgium,
+we have people from all around the world composing for us.)
+
+The groups actualy composing PURE are TRAXX-HYPERNOVA-DIGITAL HOUSE
+
+But don't worry too much, the music packs that U love will continue to
+be released, only the name will change, and I can assure U that the quality
+will still be there and even raise as we have now herited from the composers
+of the other groups forming PURE and from whole new composer. Some are still
+unknow from the PC scene, but begin to get known in the music underground
+scene as they have released a vinyl and a CD (and other tunes are due to out
+soon, watch for the VITRIOL CDs or VINYLS): these composers are PIET & PHIL
+And another new composer for us that U all know because he is often on #trax
+is our friend karl (karl-nerd, DJKarl) who have contributed with an amazing
+Acid Tune!
+
+At the time U're reading this, the first PURE pack can be found on
+ftp.cdrom.com in the /demos/incoming/music directory!
+
+all future releases will be posted there or on hornet if the site is reopened
+for uploads ;)
+
+In the future, we will try to implement our own player and build an interface
+for our packs, so they will be rather music disks than packs.
+The release rate will be monthly or bi-monthly if possible.
+
+This pack is quite a huge one and is of a really High Quality!
+It's composed of 4 zip files named pure_m1a.zip, pure_m1b.zip, pure_m1c.zip
+and pure_m1d.zip totaling 2.7 megas (uncompressed, nearly 5 megs!!!)
+
+If U like all techno related musics, U'll be amazed! there is tunes for
+everyone from dub to hardcore going to acid and making a little turn over
+hard trance.......
+
+So, download them and tell me what ya think of this.
+
+Cya on #trax, #coders or #rave one day ;)
+
+Blaze Runner (BLR on IRC, blaze.runner@pcb.mpoli.fi, fidonet 2:293/2220.1)
+-----------------------------------------------------------------------------
+-[ 11. Advertisements ]------------------------------------------------------
+		    EXCEEDING GREAT GROOVES WANTS YOU!
+		   WE ARE NOW ACCEPTING SUBMISSIONS FOR
+			      EGG MUSICDISK 3
+			     "Feelin' Groovy"
+
+We want music of all kinds. Retro-groove stuff is especially appreciated
+(ie 60s influenced psychedelic rock, ambient etc). Email submissions to
+moddan@ritz.mordor.com
+submissions can be MIME-attached (file attachments in PINE), or UUENCODED.
+or you can dcc them to me (Maelcum of Kosmic) on IRC.
+
+watch for a new EGG world-wide web site soon.
+
+--------------------------------[ FINE ]-------------------------------------

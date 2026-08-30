@@ -1,0 +1,40 @@
+== What is Open ModPlug Tracker? ==
+
+OpenMPT is a third-generation '''[https://en.wikipedia.org/wiki/Music_tracker tracker]''' — a music application with a focus on a mostly textual note representation with a strong keyboard focus. It comes with a built-in sampler but may also make use of external sound generators, including external MIDI synthesizers and “virtual synthesizers” called VST instruments. Contrary to many other trackers, OpenMPT makes use of the Windows environment, using the operating system’s native look and feel with sliders and buttons for visual-based input.
+
+While the text display may look intimidating and old-fashioned compared to the big well-known '''sequencers''' at first, it allows for a very fast music composition process for the experienced user. The text-based event editing system is aided by a graphical sample editor and built-in sampler, and note data can be input through the computer’s keyboard or any external MIDI gear. With its flexibility, OpenMPT can appeal to all composers from electronic dance music genres to experimentalists to classical composers.
+
+== Feature Overview ==
+
+* It’s totally '''free'''!
+* The workspace is intuitive and efficient, with a simple Windows-oriented interface, plenty of tooltips everywhere, and separate specific sections of work into tabs.
+* It allows for a rich set of options and preferences, including:
+** Ability to customize the [[Manual: Setup/Display|GUI colour]] (but no skins yet), including colour schemes and custom pattern fonts.
+** Optional global [[Manual: Setup/DSP|DSP effects]] including an equalizer.
+** Up to 128 channels for pattern data (each with their own volume, pan, and plugin settings, as well as customizable channel names), and separate volume controls for sample playback, instrument plugins, and overall global volume.
+** Customizable audio playback quality (interpolation quality, sample rate and bit depth), polyphony, and latency settings.
+** Ability to [[Manual: Setup/Paths / Auto Save|automatically save]] the current file at intervals — and to a location — of your choosing.
+** Ability to customize most actions with [[Manual: Setup/Keyboard|keyboard shortcuts]], including navigation, input, and opening dialog boxes.
+* It has a [[Manual: Tree View|side panel]] with expandable directory view to locate relevant files quickly.
+* It can open or import a wide range of [[Manual: Module formats|tracker formats]], including backward compatibility with files saved under previous versions of OpenMPT.
+* It can [[Manual: Saving_and exporting|export]] to a variety of streaming audio formats such as WAV, FLAC and MP3, as well as render individual patterns, channels or instruments.
+* It can extract instruments and samples from soundfonts, like the General MIDI soundfont that comes pre-installed with Windows (GM.DLS).
+* [[Manual: MIDI Input / Output Plugin|MIDI input and output]] to record from and playback on external MIDI devices.
+* It can make use of VST 1.x and VST 2.x plugins, as well as DirectX Media Objects.
+* It can output audio through many different sound drivers, including WASAPI (default), ASIO, WaveRT, and others.
+* It can apply [[Manual: Tunings|alternate tunings]] (including scales and temperaments) to sample playback.
+
+== Limitations ==
+
+* Limited control for editing of sample data.
+* Alternate temperaments cannot be applied to instrument plugins.
+* Can only use a text-based editing system; no piano-roll or musical score editing.
+* Only available as a native Windows program, but can also run in Wine on Mac computers and Linux.
+
+== History ==
+
+The ModPlugin was originally developed in the mid-90s by Olivier Lapicque as a plugin for Internet browsers to listen to tracked music files (such as .mod and .it files). From this plugin, he developed the ModPlug Player and the ModPlug Tracker. ModPlug Player can play a very wide variety of tracked music formats, and offers many different audio effects, such as graphic equalizer, reverb, and Surround Sound. Although it is still available, the Player is not open-source nor is it being developed further.
+
+ModPlug Tracker became completely open-source in 2004, allowing the actual application to be developed and the code altered for the correction of long-standing bugs and the implementation of new features, such as the advanced use of VST plugins and alternate tunings. It has been rated as one of the top five free music trackers by the Computer Music Magazine, and has a vibrant [https://openmpt.org/community community].
+
+[[Category:Manual|About OpenMPT]]

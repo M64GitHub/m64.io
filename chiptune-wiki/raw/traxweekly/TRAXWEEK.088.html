@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TraxWeekly #88 — 14 February 1997 · Chiptune Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>window.ROOT="../../";</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">CHIPTUNE WIKI</span><span class="sub">llm wiki · 476 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/traxweekly-toc.html" class="">TraxWeekly</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="technique"><summary>Techniques <span class="n">32</span></summary><ul><li><a data-slug="channel-interleaving" class="t-technique" href="../../wiki/channel-interleaving.html">Channel interleaving (one channel, two jobs)</a></li><li><a data-slug="chip-samples" class="t-technique" href="../../wiki/chip-samples.html">Chip samples — tiny looped waveforms</a></li><li><a data-slug="chord-arpeggio" class="t-technique" href="../../wiki/chord-arpeggio.html">Chord arpeggio (the 0 3 7 trick)</a></li><li><a data-slug="detune" class="t-technique" href="../../wiki/detune.html">Detune</a></li><li><a data-slug="fake-echo" class="t-technique" href="../../wiki/fake-echo.html">Fake echo / delay</a></li><li><a data-slug="filter-programming" class="t-technique" href="../../wiki/filter-programming.html">Filter programming on the SID</a></li><li><a data-slug="hard-restart" class="t-technique" href="../../wiki/hard-restart.html">Hard restart</a></li><li><a data-slug="instrument-design" class="t-technique" href="../../wiki/instrument-design.html">Instrument design beats note count</a></li><li><a data-slug="instrument-envelopes" class="t-technique" href="../../wiki/instrument-envelopes.html">Instrument envelopes (volume, panning, pitch)</a></li><li><a data-slug="lead-articulation" class="t-technique" href="../../wiki/lead-articulation.html">Lead articulation (velocity, legato, late vibrato, drop-off)</a></li><li><a data-slug="midi-in-trackers" class="t-technique" href="../../wiki/midi-in-trackers.html">MIDI output from trackers (Impulse Tracker macros)</a></li><li><a data-slug="multisampling" class="t-technique" href="../../wiki/multisampling.html">Multisampling and drum-kit instruments</a></li><li><a data-slug="multispeed" class="t-technique" href="../../wiki/multispeed.html">Multispeed (framespeed)</a></li><li><a data-slug="new-note-actions" class="t-technique" href="../../wiki/new-note-actions.html">New Note Actions (NNA)</a></li><li><a data-slug="octave-bass" class="t-technique" href="../../wiki/octave-bass.html">Octave bass</a></li><li><a data-slug="opl-fm-instruments" class="t-technique" href="../../wiki/opl-fm-instruments.html">OPL / AdLib FM instruments in trackers</a></li><li><a data-slug="pitch-slide-and-portamento" class="t-technique" href="../../wiki/pitch-slide-and-portamento.html">Pitch slides and tone portamento</a></li><li><a data-slug="pulse-width-modulation" class="t-technique" href="../../wiki/pulse-width-modulation.html">Pulse width modulation (PWM)</a></li><li><a data-slug="randomization-and-probability" class="t-technique" href="../../wiki/randomization-and-probability.html">Randomization and probability (MayBe, RandomiZe)</a></li><li><a data-slug="recording-samples" class="t-technique" href="../../wiki/recording-samples.html">Recording samples (sources, cabling, sound cards, rates)</a></li><li><a data-slug="retrigger" class="t-technique" href="../../wiki/retrigger.html">Retrigger and resync</a></li><li><a data-slug="reverb-and-compression" class="t-technique" href="../../wiki/reverb-and-compression.html">Reverb and compression (offline, in the sample editor)</a></li><li><a data-slug="ring-modulation-and-sync" class="t-technique" href="../../wiki/ring-modulation-and-sync.html">Ring modulation and oscillator sync</a></li><li><a data-slug="sample-looping" class="t-technique" href="../../wiki/sample-looping.html">Sample looping (perfect loops, sustain loops, long loops)</a></li><li><a data-slug="sample-offset" class="t-technique" href="../../wiki/sample-offset.html">Sample offset tricks</a></li><li><a data-slug="shuffle-funktempo" class="t-technique" href="../../wiki/shuffle-funktempo.html">Shuffle, swing and FunkTempo</a></li><li><a data-slug="sidechain-pump" class="t-technique" href="../../wiki/sidechain-pump.html">Sidechain pump</a></li><li><a data-slug="song-init-and-looping" class="t-technique" href="../../wiki/song-init-and-looping.html">Song initialisation and looping</a></li><li><a data-slug="stereo-panning" class="t-technique" href="../../wiki/stereo-panning.html">Stereo panning</a></li><li><a data-slug="vibrato" class="t-technique" href="../../wiki/vibrato.html">Vibrato and delayed vibrato</a></li><li><a data-slug="volume-slides" class="t-technique" href="../../wiki/volume-slides.html">Volume slides, fades and effect memory</a></li><li><a data-slug="wavetable-programming" class="t-technique" href="../../wiki/wavetable-programming.html">Wavetable programming (waveform / arp tables)</a></li></ul></details><details class="grp" data-grp="concept"><summary>Concepts <span class="n">24</span></summary><ul><li><a data-slug="adsr-envelope" class="t-concept" href="../../wiki/adsr-envelope.html">ADSR envelope</a></li><li><a data-slug="arrangement" class="t-concept" href="../../wiki/arrangement.html">Arrangement — think in 4s and 8s</a></li><li><a data-slug="chiptune" class="t-concept" href="../../wiki/chiptune.html">Chiptune — what the word means</a></li><li><a data-slug="chord-inversions" class="t-concept" href="../../wiki/chord-inversions.html">Chord inversions and voice leading</a></li><li><a data-slug="chord-progressions" class="t-concept" href="../../wiki/chord-progressions.html">Chord progressions</a></li><li><a data-slug="commercial-tracking" class="t-concept" href="../../wiki/commercial-tracking.html">Commercial tracking — selling and producing tracked music</a></li><li><a data-slug="compos" class="t-concept" href="../../wiki/compos.html">Compos — music competitions in the tracker scene</a></li><li><a data-slug="diatonic-chords" class="t-concept" href="../../wiki/diatonic-chords.html">Diatonic chords — why it is not always 0 3 7</a></li><li><a data-slug="effect-command-crosswalk" class="t-concept" href="../../wiki/effect-command-crosswalk.html">Effect command crosswalk (MOD / XM ↔ S3M / IT)</a></li><li><a data-slug="instrument-tables" class="t-concept" href="../../wiki/instrument-tables.html">Instrument tables (wave / pulse / filter)</a></li><li><a data-slug="live-tracking" class="t-concept" href="../../wiki/live-tracking.html">Live tracking — performing with a tracker</a></li><li><a data-slug="orderlist" class="t-concept" href="../../wiki/orderlist.html">Orderlist (sequence)</a></li><li><a data-slug="realism-in-tracked-music" class="t-concept" href="../../wiki/realism-in-tracked-music.html">Realism in tracked music</a></li><li><a data-slug="rhythm-and-groove" class="t-concept" href="../../wiki/rhythm-and-groove.html">Rhythm and groove in 16 rows</a></li><li><a data-slug="sample-ripping" class="t-concept" href="../../wiki/sample-ripping.html">Sample ripping</a></li><li><a data-slug="scales-and-modes" class="t-concept" href="../../wiki/scales-and-modes.html">Scales and modes — your palette of notes</a></li><li><a data-slug="semitone-math" class="t-concept" href="../../wiki/semitone-math.html">Semitones — the only unit you need</a></li><li><a data-slug="serial-composition" class="t-concept" href="../../wiki/serial-composition.html">Serial composition — rows, retrograde, inversion</a></li><li><a data-slug="sid-player-routine" class="t-concept" href="../../wiki/sid-player-routine.html">SID player routine, rastertime and player types</a></li><li><a data-slug="sync" class="t-concept" href="../../wiki/sync.html">Synchronisation with other gear</a></li><li><a data-slug="tracker-scene-history" class="t-concept" href="../../wiki/tracker-scene-history.html">The PC tracker scene 1995–98, as it saw itself</a></li><li><a data-slug="tracker" class="t-concept" href="../../wiki/tracker.html">Tracker</a></li><li><a data-slug="tracking-workflow" class="t-concept" href="../../wiki/tracking-workflow.html">Tracking workflow — advice from the scene</a></li><li><a data-slug="melody-writing" class="t-concept" href="../../wiki/melody-writing.html">Writing melodies that work</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">26</span></summary><ul><li><a data-slug="037-lab" class="t-entity" href="../../wiki/037-lab.html">0 3 7 lab</a></li><li><a data-slug="duet" class="t-entity" href="../../wiki/duet.html">DUET</a></li><li><a data-slug="fasttracker-2" class="t-entity" href="../../wiki/fasttracker-2.html">FastTracker 2</a></li><li><a data-slug="furnace" class="t-entity" href="../../wiki/furnace.html">Furnace</a></li><li><a data-slug="future-composer" class="t-entity" href="../../wiki/future-composer.html">Future Composer (C64)</a></li><li><a data-slug="goattracker" class="t-entity" href="../../wiki/goattracker.html">GoatTracker</a></li><li><a data-slug="impulse-tracker" class="t-entity" href="../../wiki/impulse-tracker.html">Impulse Tracker</a></li><li><a data-slug="liblsdj" class="t-entity" href="../../wiki/liblsdj.html">libLSDj</a></li><li><a data-slug="lsdj" class="t-entity" href="../../wiki/lsdj.html">LSDj (Little Sound Dj)</a></li><li><a data-slug="lsdj-wave-cruncher" class="t-entity" href="../../wiki/lsdj-wave-cruncher.html">LSDj Wave Cruncher</a></li><li><a data-slug="lsdpatch" class="t-entity" href="../../wiki/lsdpatch.html">LSDPatch (LSDPatcher)</a></li><li><a data-slug="matt-gray-player" class="t-entity" href="../../wiki/matt-gray-player.html">Matt Gray&#x27;s player (Driller / Dominator engine)</a></li><li><a data-slug="musicfile" class="t-entity" href="../../wiki/musicfile.html">MUSICFILE — the Maniacs of Noise driver</a></li><li><a data-slug="openmpt" class="t-entity" href="../../wiki/openmpt.html">OpenMPT</a></li><li><a data-slug="protracker" class="t-entity" href="../../wiki/protracker.html">ProTracker</a></li><li><a data-slug="rockmonitor" class="t-entity" href="../../wiki/rockmonitor.html">Rockmonitor</a></li><li><a data-slug="schism-tracker" class="t-entity" href="../../wiki/schism-tracker.html">Schism Tracker</a></li><li><a data-slug="scream-tracker-3" class="t-entity" href="../../wiki/scream-tracker-3.html">Scream Tracker 3</a></li><li><a data-slug="sid-factory-ii" class="t-entity" href="../../wiki/sid-factory-ii.html">SID Factory II</a></li><li><a data-slug="sid-wizard" class="t-entity" href="../../wiki/sid-wizard.html">SID-Wizard</a></li><li><a data-slug="siddump" class="t-entity" href="../../wiki/siddump.html">siddump</a></li><li><a data-slug="sidid" class="t-entity" href="../../wiki/sidid.html">SIDId</a></li><li><a data-slug="soundmonitor" class="t-entity" href="../../wiki/soundmonitor.html">Soundmonitor</a></li><li><a data-slug="tfmx" class="t-entity" href="../../wiki/tfmx.html">TFMX</a></li><li><a data-slug="turbo-assembler" class="t-entity" href="../../wiki/turbo-assembler.html">Turbo Assembler (C64)</a></li><li><a data-slug="vice" class="t-entity" href="../../wiki/vice.html">VICE</a></li></ul></details><details class="grp" data-grp="kind-chip"><summary>Chips <span class="n">2</span></summary><ul><li><a data-slug="game-boy-apu" class="t-entity" href="../../wiki/game-boy-apu.html">Game Boy sound hardware (APU)</a></li><li><a data-slug="sid" class="t-entity" href="../../wiki/sid.html">SID (MOS 6581 / 8580)</a></li></ul></details><details class="grp" data-grp="kind-platform"><summary>Platforms <span class="n">3</span></summary><ul><li><a data-slug="commodore-64" class="t-entity" href="../../wiki/commodore-64.html">Commodore 64</a></li><li><a data-slug="game-boy" class="t-entity" href="../../wiki/game-boy.html">Game Boy</a></li><li><a data-slug="gravis-ultrasound" class="t-entity" href="../../wiki/gravis-ultrasound.html">Gravis UltraSound (GUS)</a></li></ul></details><details class="grp" data-grp="kind-format"><summary>Formats <span class="n">5</span></summary><ul><li><a data-slug="it-format" class="t-entity" href="../../wiki/it-format.html">IT module format (.it)</a></li><li><a data-slug="mod-format" class="t-entity" href="../../wiki/mod-format.html">MOD module format (.mod)</a></li><li><a data-slug="s3m-format" class="t-entity" href="../../wiki/s3m-format.html">S3M module format (.s3m)</a></li><li><a data-slug="sid-format" class="t-entity" href="../../wiki/sid-format.html">SID file format (.sid)</a></li><li><a data-slug="xm-format" class="t-entity" href="../../wiki/xm-format.html">XM module format (.xm)</a></li></ul></details><details class="grp" data-grp="kind-person"><summary>People <span class="n">103</span></summary><ul><li><a data-slug="4ntler" class="t-entity" href="../../wiki/4ntler.html">4ntler</a></li><li><a data-slug="acidfrog" class="t-entity" href="../../wiki/acidfrog.html">Acidfrog (Cam Goodman)</a></li><li><a data-slug="amusic" class="t-entity" href="../../wiki/amusic.html">AmusiC (Sotiris Varotsis)</a></li><li><a data-slug="andreas-varga" class="t-entity" href="../../wiki/andreas-varga.html">Andreas Varga</a></li><li><a data-slug="asger-alstrup" class="t-entity" href="../../wiki/asger-alstrup.html">Asger Alstrup</a></li><li><a data-slug="atlantic" class="t-entity" href="../../wiki/atlantic.html">Atlantic (Barry Freeman)</a></li><li><a data-slug="balrog" class="t-entity" href="../../wiki/balrog.html">Balrog (Samuel Cote)</a></li><li><a data-slug="basehead" class="t-entity" href="../../wiki/basehead.html">Basehead (Dan Grandpre)</a></li><li><a data-slug="beaner" class="t-entity" href="../../wiki/beaner.html">Beaner (Sean Cummins)</a></li><li><a data-slug="behemoth" class="t-entity" href="../../wiki/behemoth.html">Behemoth (David Menkes)</a></li><li><a data-slug="big-jim" class="t-entity" href="../../wiki/big-jim.html">Big Jim (James Storer)</a></li><li><a data-slug="blackwolf" class="t-entity" href="../../wiki/blackwolf.html">Blackwolf (Bobby Tamburrino)</a></li><li><a data-slug="blaze-runner" class="t-entity" href="../../wiki/blaze-runner.html">Blaze Runner (Christian Desnoyers)</a></li><li><a data-slug="bob-yannes" class="t-entity" href="../../wiki/bob-yannes.html">Bob Yannes</a></li><li><a data-slug="catspaw" class="t-entity" href="../../wiki/catspaw.html">Catspaw (Brandon Bannerman)</a></li><li><a data-slug="charles-deenen" class="t-entity" href="../../wiki/charles-deenen.html">Charles Deenen</a></li><li><a data-slug="chordian" class="t-entity" href="../../wiki/chordian.html">Chordian (Jens)</a></li><li><a data-slug="chris-huelsbeck" class="t-entity" href="../../wiki/chris-huelsbeck.html">Chris Hülsbeck</a></li><li><a data-slug="claim" class="t-entity" href="../../wiki/claim.html">Claim</a></li><li><a data-slug="clef" class="t-entity" href="../../wiki/clef.html">Clef (Phil Sweeney)</a></li><li><a data-slug="cosmic" class="t-entity" href="../../wiki/cosmic.html">Cosmic (Matthias Ksoll)</a></li><li><a data-slug="daedalus" class="t-entity" href="../../wiki/daedalus.html">Daedalus (Brian Bennetts)</a></li><li><a data-slug="defense-mechanism" class="t-entity" href="../../wiki/defense-mechanism.html">Defense Mechanism</a></li><li><a data-slug="dennisc" class="t-entity" href="../../wiki/dennisc.html">DennisC (Dennis Courtney)</a></li><li><a data-slug="deus-ex" class="t-entity" href="../../wiki/deus-ex.html">Deus Ex (Chill Productions)</a></li><li><a data-slug="ender" class="t-entity" href="../../wiki/ender.html">Ender (Andrew Burke)</a></li><li><a data-slug="fisherman" class="t-entity" href="../../wiki/fisherman.html">fisherman (Matt Overington)</a></li><li><a data-slug="fred-ink" class="t-entity" href="../../wiki/fred-ink.html">Fred (Ink)</a></li><li><a data-slug="ganja-man" class="t-entity" href="../../wiki/ganja-man.html">Ganja Man (Sam Bashton)</a></li><li><a data-slug="greg-heo" class="t-entity" href="../../wiki/greg-heo.html">Greg Heo</a></li><li><a data-slug="hermit" class="t-entity" href="../../wiki/hermit.html">Hermit (Mihaly Horvath)</a></li><li><a data-slug="hypnogram" class="t-entity" href="../../wiki/hypnogram.html">Hypnogram</a></li><li><a data-slug="infu" class="t-entity" href="../../wiki/infu.html">Infu</a></li><li><a data-slug="injekted" class="t-entity" href="../../wiki/injekted.html">Injekted (Brandon Balliett)</a></li><li><a data-slug="island-of-reil" class="t-entity" href="../../wiki/island-of-reil.html">Island of Reil (Jesse Rothenberg)</a></li><li><a data-slug="jase" class="t-entity" href="../../wiki/jase.html">Jase (Jason Chong)</a></li><li><a data-slug="jeffrey-lim" class="t-entity" href="../../wiki/jeffrey-lim.html">Jeffrey Lim (Pulse)</a></li><li><a data-slug="jeroen-tel" class="t-entity" href="../../wiki/jeroen-tel.html">Jeroen Tel</a></li><li><a data-slug="johan-kotlinski" class="t-entity" href="../../wiki/johan-kotlinski.html">Johan Kotlinski</a></li><li><a data-slug="johannes-bjerregaard" class="t-entity" href="../../wiki/johannes-bjerregaard.html">Johannes Bjerregaard</a></li><li><a data-slug="jugi" class="t-entity" href="../../wiki/jugi.html">Jugi (Jukka Kaartinen)</a></li><li><a data-slug="kal-zakath" class="t-entity" href="../../wiki/kal-zakath.html">Kal Zakath (John Townsend)</a></li><li><a data-slug="khyron" class="t-entity" href="../../wiki/khyron.html">Khyron (Paul Schultz)</a></li><li><a data-slug="lars-hamre" class="t-entity" href="../../wiki/lars-hamre.html">Lars &quot;ZAP&quot; Hamre</a></li><li><a data-slug="lasse-oorni" class="t-entity" href="../../wiki/lasse-oorni.html">Lasse Öörni (Cadaver)</a></li><li><a data-slug="laxity" class="t-entity" href="../../wiki/laxity.html">Laxity (Thomas E. Petersen)</a></li><li><a data-slug="leinad" class="t-entity" href="../../wiki/leinad.html">Leinad (Daniel Falk)</a></li><li><a data-slug="leviathan" class="t-entity" href="../../wiki/leviathan.html">Leviathan</a></li><li><a data-slug="liam-the-lemming" class="t-entity" href="../../wiki/liam-the-lemming.html">Liam the Lemming (Liam Hesse)</a></li><li><a data-slug="linus-walleij" class="t-entity" href="../../wiki/linus-walleij.html">Linus Walleij</a></li><li><a data-slug="loki" class="t-entity" href="../../wiki/loki.html">Loki (Charles Odom)</a></li><li><a data-slug="lord-pegasus" class="t-entity" href="../../wiki/lord-pegasus.html">Lord Pegasus (Zack Smith)</a></li><li><a data-slug="luv-kohli" class="t-entity" href="../../wiki/luv-kohli.html">Luv Kohli</a></li><li><a data-slug="maelcum" class="t-entity" href="../../wiki/maelcum.html">Maelcum</a></li><li><a data-slug="martin-galway" class="t-entity" href="../../wiki/martin-galway.html">Martin Galway</a></li><li><a data-slug="master-of-darkness" class="t-entity" href="../../wiki/master-of-darkness.html">Master of Darkness (Todd Andlar)</a></li><li><a data-slug="matt-gray" class="t-entity" href="../../wiki/matt-gray.html">Matt Gray</a></li><li><a data-slug="mellow-d" class="t-entity" href="../../wiki/mellow-d.html">Mellow-D (Jaakko Manninen)</a></li><li><a data-slug="mental-floss" class="t-entity" href="../../wiki/mental-floss.html">Mental Floss (Andrew McCallum)</a></li><li><a data-slug="mesonyx" class="t-entity" href="../../wiki/mesonyx.html">Mesonyx (Jon Dal Kristbjornsson)</a></li><li><a data-slug="mick-rippon" class="t-entity" href="../../wiki/mick-rippon.html">Mick Rippon</a></li><li><a data-slug="mikmak" class="t-entity" href="../../wiki/mikmak.html">Mikmak (Jean-Paul Mikkers)</a></li><li><a data-slug="mosaic" class="t-entity" href="../../wiki/mosaic.html">Mosaic (Renaissance)</a></li><li><a data-slug="necros" class="t-entity" href="../../wiki/necros.html">Necros (Andy Sega)</a></li><li><a data-slug="nemesis" class="t-entity" href="../../wiki/nemesis.html">Nemesis (Andrew Wise)</a></li><li><a data-slug="olivier-lapicque" class="t-entity" href="../../wiki/olivier-lapicque.html">Olivier Lapicque</a></li><li><a data-slug="paganus" class="t-entity" href="../../wiki/paganus.html">Paganus</a></li><li><a data-slug="pariah" class="t-entity" href="../../wiki/pariah.html">Pariah (Edwin de la Vega)</a></li><li><a data-slug="perisoft" class="t-entity" href="../../wiki/perisoft.html">Perisoft (David Wiernicki)</a></li><li><a data-slug="peter-hanning" class="t-entity" href="../../wiki/peter-hanning.html">Peter &quot;Crayon&quot; Hanning</a></li><li><a data-slug="phoenix" class="t-entity" href="../../wiki/phoenix.html">Phoenix (Andrew Voss)</a></li><li><a data-slug="pinion" class="t-entity" href="../../wiki/pinion.html">Pinion (Ryan Hunt)</a></li><li><a data-slug="popcorn" class="t-entity" href="../../wiki/popcorn.html">Popcorn (Chris Campbell)</a></li><li><a data-slug="populus" class="t-entity" href="../../wiki/populus.html">Populus (Nicolas Roberge)</a></li><li><a data-slug="psibelius" class="t-entity" href="../../wiki/psibelius.html">Psibelius (Gene Wie)</a></li><li><a data-slug="purple-motion" class="t-entity" href="../../wiki/purple-motion.html">Purple Motion</a></li><li><a data-slug="quantam-porcupine" class="t-entity" href="../../wiki/quantam-porcupine.html">Quantam Porcupine (Joshua Shagam)</a></li><li><a data-slug="quarex" class="t-entity" href="../../wiki/quarex.html">Quarex (Drew Hunt)</a></li><li><a data-slug="rage" class="t-entity" href="../../wiki/rage.html">Rage (Harri Blom)</a></li><li><a data-slug="reyn-ouwehand" class="t-entity" href="../../wiki/reyn-ouwehand.html">Reyn Ouwehand</a></li><li><a data-slug="rob-hubbard" class="t-entity" href="../../wiki/rob-hubbard.html">Rob Hubbard</a></li><li><a data-slug="ryan-cramer" class="t-entity" href="../../wiki/ryan-cramer.html">Ryan Cramer</a></li><li><a data-slug="ryan-sprott" class="t-entity" href="../../wiki/ryan-sprott.html">Ryan Sprott (Grey)</a></li><li><a data-slug="sabrepulse" class="t-entity" href="../../wiki/sabrepulse.html">Sabrepulse</a></li><li><a data-slug="sami-tammilehto" class="t-entity" href="../../wiki/sami-tammilehto.html">Sami Tammilehto (Psi)</a></li><li><a data-slug="saxy" class="t-entity" href="../../wiki/saxy.html">Saxy (Courtney Risch)</a></li><li><a data-slug="scirocco" class="t-entity" href="../../wiki/scirocco.html">Scirocco (Ian Lyman)</a></li><li><a data-slug="shawnm" class="t-entity" href="../../wiki/shawnm.html">shawnm (Shawn, NOISE)</a></li><li><a data-slug="skaven" class="t-entity" href="../../wiki/skaven.html">Skaven</a></li><li><a data-slug="smeghead" class="t-entity" href="../../wiki/smeghead.html">Smeghead (David Oranchak)</a></li><li><a data-slug="stalker" class="t-entity" href="../../wiki/stalker.html">Stalker (Ariel Gross)</a></li><li><a data-slug="storlek" class="t-entity" href="../../wiki/storlek.html">Storlek</a></li><li><a data-slug="subhuman" class="t-entity" href="../../wiki/subhuman.html">Subhuman (Seth Miller)</a></li><li><a data-slug="the-zapper" class="t-entity" href="../../wiki/the-zapper.html">The Zapper (Marc Girard, Force Ten)</a></li><li><a data-slug="thehacker" class="t-entity" href="../../wiki/thehacker.html">TheHacker (Krisjanis Gale)</a></li><li><a data-slug="trixter" class="t-entity" href="../../wiki/trixter.html">Trixter (Jim Leonard)</a></li><li><a data-slug="u4ia" class="t-entity" href="../../wiki/u4ia.html">U4IA / F8 (James Young)</a></li><li><a data-slug="vadimvs" class="t-entity" href="../../wiki/vadimvs.html">VadimVS (Vadim Shustov)</a></li><li><a data-slug="vegas" class="t-entity" href="../../wiki/vegas.html">Vegas (T.J. Lerner)</a></li><li><a data-slug="vicious" class="t-entity" href="../../wiki/vicious.html">Vicious (VSL)</a></li><li><a data-slug="witchmaster" class="t-entity" href="../../wiki/witchmaster.html">WitchMaster (Mikael Norrgård)</a></li><li><a data-slug="zalt" class="t-entity" href="../../wiki/zalt.html">Zalt (Tobias Garder)</a></li><li><a data-slug="zinc" class="t-entity" href="../../wiki/zinc.html">Zinc (Justin Ray)</a></li></ul></details><details class="grp" data-grp="kind-group"><summary>Groups <span class="n">20</span></summary><ul><li><a data-slug="aim-higher" class="t-entity" href="../../wiki/aim-higher.html">Aim Higher</a></li><li><a data-slug="codemasters" class="t-entity" href="../../wiki/codemasters.html">Codemasters</a></li><li><a data-slug="compunet" class="t-entity" href="../../wiki/compunet.html">Compunet</a></li><li><a data-slug="defiance" class="t-entity" href="../../wiki/defiance.html">Defiance</a></li><li><a data-slug="epinicion" class="t-entity" href="../../wiki/epinicion.html">Epinicion</a></li><li><a data-slug="esper-division" class="t-entity" href="../../wiki/esper-division.html">Esper Division</a></li><li><a data-slug="five-musicians" class="t-entity" href="../../wiki/five-musicians.html">Five Musicians (FM)</a></li><li><a data-slug="future-crew" class="t-entity" href="../../wiki/future-crew.html">Future Crew</a></li><li><a data-slug="hewson" class="t-entity" href="../../wiki/hewson.html">Hewson Consultants</a></li><li><a data-slug="hornet" class="t-entity" href="../../wiki/hornet.html">Hornet</a></li><li><a data-slug="kosmic" class="t-entity" href="../../wiki/kosmic.html">Kosmic (KFMF)</a></li><li><a data-slug="lok" class="t-entity" href="../../wiki/lok.html">LoK</a></li><li><a data-slug="maniacs-of-noise" class="t-entity" href="../../wiki/maniacs-of-noise.html">Maniacs of Noise</a></li><li><a data-slug="noise-group" class="t-entity" href="../../wiki/noise-group.html">NOISE (New Objectives In Sound Exploration)</a></li><li><a data-slug="rainbow-arts" class="t-entity" href="../../wiki/rainbow-arts.html">Rainbow Arts</a></li><li><a data-slug="renaissance" class="t-entity" href="../../wiki/renaissance.html">Renaissance</a></li><li><a data-slug="system-3" class="t-entity" href="../../wiki/system-3.html">System 3</a></li><li><a data-slug="the-modsquad" class="t-entity" href="../../wiki/the-modsquad.html">The Modsquad</a></li><li><a data-slug="triton" class="t-entity" href="../../wiki/triton.html">Triton (Fredrik Huss and Magnus Högdahl)</a></li><li><a data-slug="ultrabeat" class="t-entity" href="../../wiki/ultrabeat.html">Ultrabeat</a></li></ul></details><details class="grp" data-grp="kind-event"><summary>Events <span class="n">1</span></summary><ul><li><a data-slug="20-minute-chip-compo" class="t-entity" href="../../wiki/20-minute-chip-compo.html">20 Minute Chip Compo (20mc)</a></li></ul></details><details class="grp" data-grp="kind-publication"><summary>Publications <span class="n">10</span></summary><ul><li><a data-slug="64er" class="t-entity" href="../../wiki/64er.html">64&#x27;er (magazine)</a></li><li><a data-slug="chipmusic-org" class="t-entity" href="../../wiki/chipmusic-org.html">ChipMusic.org</a></li><li><a data-slug="c64-programmers-reference-guide" class="t-entity" href="../../wiki/c64-programmers-reference-guide.html">Commodore 64 Programmer&#x27;s Reference Guide</a></li><li><a data-slug="commodore-zone" class="t-entity" href="../../wiki/commodore-zone.html">Commodore Zone</a></li><li><a data-slug="hvsc" class="t-entity" href="../../wiki/hvsc.html">HVSC — High Voltage SID Collection</a></li><li><a data-slug="intense-tech" class="t-entity" href="../../wiki/intense-tech.html">Intense Tech with Defense Mech</a></li><li><a data-slug="pan-docs" class="t-entity" href="../../wiki/pan-docs.html">Pan Docs</a></li><li><a data-slug="sidin" class="t-entity" href="../../wiki/sidin.html">SIDin (e-zine)</a></li><li><a data-slug="sid-homepage" class="t-entity" href="../../wiki/sid-homepage.html">The SID Homepage (sidmusic.org)</a></li><li><a data-slug="traxweekly" class="t-entity" href="../../wiki/traxweekly.html">TraxWeekly</a></li></ul></details><details class="grp" data-grp="kind-song"><summary>Songs <span class="n">12</span></summary><ul><li><a data-slug="commando" class="t-entity" href="../../wiki/commando.html">Commando (C64, 1985)</a></li><li><a data-slug="cybernoid" class="t-entity" href="../../wiki/cybernoid.html">Cybernoid (Jeroen Tel, 1988)</a></li><li><a data-slug="cybernoid-ii" class="t-entity" href="../../wiki/cybernoid-ii.html">Cybernoid II (Jeroen Tel, 1988)</a></li><li><a data-slug="dominator" class="t-entity" href="../../wiki/dominator.html">Dominator (Matt Gray, 1989)</a></li><li><a data-slug="driller" class="t-entity" href="../../wiki/driller.html">Driller (Matt Gray, 1987)</a></li><li><a data-slug="helikopter-jagd" class="t-entity" href="../../wiki/helikopter-jagd.html">Helikopter Jagd (C64, 1986)</a></li><li><a data-slug="last-ninja-2" class="t-entity" href="../../wiki/last-ninja-2.html">Last Ninja 2 (Matt Gray, 1988)</a></li><li><a data-slug="monty-on-the-run" class="t-entity" href="../../wiki/monty-on-the-run.html">Monty on the Run (C64, 1985)</a></li><li><a data-slug="sanxion" class="t-entity" href="../../wiki/sanxion.html">Sanxion (C64, 1986)</a></li><li><a data-slug="shades" class="t-entity" href="../../wiki/shades.html">Shades (Chris Hülsbeck, 1986)</a></li><li><a data-slug="great-giana-sisters" class="t-entity" href="../../wiki/great-giana-sisters.html">The Great Giana Sisters (C64, 1987/88)</a></li><li><a data-slug="the-grey-note" class="t-entity" href="../../wiki/the-grey-note.html">The Grey Note (Necros)</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">236</span></summary><ul><li><a data-slug="s-037-lab" class="t-summary" href="../../wiki/s-037-lab.html">0 3 7 lab — techniques &amp; theory (summary)</a></li><li><a data-slug="s-64er-soundmonitor-article" class="t-summary" href="../../wiki/s-64er-soundmonitor-article.html">64&#x27;er 10/1986 — Musik wie noch nie: the Soundmonitor article and manual</a></li><li><a data-slug="s-arcadeattack-matt-gray-interview" class="t-summary" href="../../wiki/s-arcadeattack-matt-gray-interview.html">Arcade Attack — Matt Gray (VGM Maestro) interview (2020/2021)</a></li><li><a data-slug="s-sidmusic-alstrup-waveform-examinations" class="t-summary" href="../../wiki/s-sidmusic-alstrup-waveform-examinations.html">Asger Alstrup — Examination of SID triangle waveform / noise waveform (The SID Homepage, 1995)</a></li><li><a data-slug="s-c64-prg-chapter-4-sound" class="t-summary" href="../../wiki/s-c64-prg-chapter-4-sound.html">C64 Programmer&#x27;s Reference Guide, ch. 4 — Programming Sound and Music on Your Commodore 64 (1982)</a></li><li><a data-slug="s-c64com-matt-gray-interview" class="t-summary" href="../../wiki/s-c64com-matt-gray-interview.html">C64.COM interview #36: Matt Gray (2014)</a></li><li><a data-slug="s-charles-deenen-interviews" class="t-summary" href="../../wiki/s-charles-deenen-interviews.html">Charles Deenen interviews: Domination #11 (1998) and Designing Sound (2010)</a></li><li><a data-slug="s-sid-wizard-charts-and-tables" class="t-summary" href="../../wiki/s-sid-wizard-charts-and-tables.html">Charts and Tables for SID-Wizard 1.6 (document version 1.0, 2014)</a></li><li><a data-slug="s-chipmusic-c64-music-for-dummies" class="t-summary" href="../../wiki/s-chipmusic-c64-music-for-dummies.html">chipmusic.org — C64 Music for Dummies (ant1&#x27;s SID-Wizard 1.0 tutorial, 2012)</a></li><li><a data-slug="s-chipmusic-lsdj-advanced-tricks" class="t-summary" href="../../wiki/s-chipmusic-lsdj-advanced-tricks.html">chipmusic.org — LSDJ Advanced Tricks thread (2012)</a></li><li><a data-slug="s-chipmusic-tables-and-chords-threads" class="t-summary" href="../../wiki/s-chipmusic-tables-and-chords-threads.html">chipmusic.org — LSDJ Chord Cheat Sheet / Advice on Learning Tables threads (2015)</a></li><li><a data-slug="s-chipmusic-lsdj-faq" class="t-summary" href="../../wiki/s-chipmusic-lsdj-faq.html">chipmusic.org — LSDJ FAQ thread (2010–2011)</a></li><li><a data-slug="s-chipmusic-noise-drum-threads" class="t-summary" href="../../wiki/s-chipmusic-noise-drum-threads.html">chipmusic.org — Noise snare / Complete Drum Kit on Noise Channel threads (2014)</a></li><li><a data-slug="s-chipmusic-sid-music-hints-n-tips" class="t-summary" href="../../wiki/s-chipmusic-sid-music-hints-n-tips.html">chipmusic.org — sid music hints&#x27;n&#x27;tips (2013)</a></li><li><a data-slug="s-chipmusic-kotlinski-interviews" class="t-summary" href="../../wiki/s-chipmusic-kotlinski-interviews.html">chipmusic.org — two Johan Kotlinski interviews (2012, 2014)</a></li><li><a data-slug="s-chipmusic-typical-sid-sounds" class="t-summary" href="../../wiki/s-chipmusic-typical-sid-sounds.html">chipmusic.org — What are the typical C64/SID sounds/instruments? (2015)</a></li><li><a data-slug="s-chordian-sid-musicians" class="t-summary" href="../../wiki/s-chordian-sid-musicians.html">Chordian — SID Musicians (JCH&#x27;s verdicts on the game composers, 2018)</a></li><li><a data-slug="s-commodore-64-eu-sid-chip" class="t-summary" href="../../wiki/s-commodore-64-eu-sid-chip.html">commodore-64.eu — The C64 SID Chip (6581 vs 8580 overview)</a></li><li><a data-slug="s-chordian-sf2-instruments" class="t-summary" href="../../wiki/s-chordian-sf2-instruments.html">Composing in SID Factory II, Part 4 — Instruments (Chordian)</a></li><li><a data-slug="s-witchmaster-creating-chiptunes-with-sid-wizard" class="t-summary" href="../../wiki/s-witchmaster-creating-chiptunes-with-sid-wizard.html">Creating Chiptunes with SID-Wizard, Second Edition (summary)</a></li><li><a data-slug="s-csdb-huelsbeck-tfmx-thread" class="t-summary" href="../../wiki/s-csdb-huelsbeck-tfmx-thread.html">CSDb forum: Huelsbeck TFMX? (2006)</a></li><li><a data-slug="s-csdb-soundmonitor-and-shades" class="t-summary" href="../../wiki/s-csdb-soundmonitor-and-shades.html">CSDb release pages: Soundmonitor V1.0 (1986) and Shades (1986)</a></li><li><a data-slug="s-cybernoid-behind-the-notes" class="t-summary" href="../../wiki/s-cybernoid-behind-the-notes.html">Cybernoid I / Cybernoid II &#x27;behind the notes&#x27; videos (2014) and the Lemon64 thread</a></li><li><a data-slug="s-duet-readme" class="t-summary" href="../../wiki/s-duet-readme.html">DUET README (summary)</a></li><li><a data-slug="s-ft2-manual" class="t-summary" href="../../wiki/s-ft2-manual.html">FastTracker v2.08 Manual (Urban Jonsson, 1996)</a></li><li><a data-slug="s-furnace-c64-docs" class="t-summary" href="../../wiki/s-furnace-c64-docs.html">Furnace tracker — C64 (SID) system and instrument documentation</a></li><li><a data-slug="s-audiogang-huelsbeck-interview" class="t-summary" href="../../wiki/s-audiogang-huelsbeck-interview.html">Game Audio Network Guild — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-infu-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-infu-getting-started-with-lsdj.html">Getting started with LSDj with Infu (course)</a></li><li><a data-slug="s-realdmx-sid-players" class="t-summary" href="../../wiki/s-realdmx-sid-players.html">GitHub realdmx/c64_6581_sid_players — Cybernoid II in Deenen&#x27;s MUSICFILE, the MoN SFX player, the Driller listing</a></li><li><a data-slug="s-goattracker-readme" class="t-summary" href="../../wiki/s-goattracker-readme.html">GoatTracker v2.72 readme (summary)</a></li><li><a data-slug="s-hugi38-interview-jeroen-tel" class="t-summary" href="../../wiki/s-hugi38-interview-jeroen-tel.html">Hugi #38 — Up Close &amp; Personal: Jeroen Tel of Maniacs of Noise (2014)</a></li><li><a data-slug="s-hvsc-sid-file-format" class="t-summary" href="../../wiki/s-hvsc-sid-file-format.html">HVSC — SID file format description (PSID v1–v4, RSID)</a></li><li><a data-slug="s-it-hints" class="t-summary" href="../../wiki/s-it-hints.html">Impulse Tracker HINTS.TXT — Hints for Composers (summary)</a></li><li><a data-slug="s-ittech" class="t-summary" href="../../wiki/s-ittech.html">Impulse Tracker ITTECH.TXT — technical reference (summary)</a></li><li><a data-slug="s-it-manual" class="t-summary" href="../../wiki/s-it-manual.html">Impulse Tracker User&#x27;s Manual — IT.TXT (summary)</a></li><li><a data-slug="s-intense-tech-01-wave-synth-deep-dive-part-1" class="t-summary" href="../../wiki/s-intense-tech-01-wave-synth-deep-dive-part-1.html">Intense Tech #01 — LSDj Wave Synth Deep Dive, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-02-wave-synth-deep-dive-part-2" class="t-summary" href="../../wiki/s-intense-tech-02-wave-synth-deep-dive-part-2.html">Intense Tech #02 — LSDj Wave Synth Deep Dive, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-03-dont-sleep-on-z" class="t-summary" href="../../wiki/s-intense-tech-03-dont-sleep-on-z.html">Intense Tech #03 — Don&#x27;t Sleep on Z (Defense Mechanism, after Hypnogram)</a></li><li><a data-slug="s-intense-tech-04-liblsdj" class="t-summary" href="../../wiki/s-intense-tech-04-liblsdj.html">Intense Tech #04 — Manage your LSDj save files with libLSDj (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-05-wave-cruncher-instrument-library" class="t-summary" href="../../wiki/s-intense-tech-05-wave-cruncher-instrument-library.html">Intense Tech #05 — LSDj Wave Cruncher Instrument Library (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-06-groove-and-tick-tricks-part-1" class="t-summary" href="../../wiki/s-intense-tech-06-groove-and-tick-tricks-part-1.html">Intense Tech #06 — Groovy Groove and Tick Tricks, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-07-groove-and-tick-tricks-part-2" class="t-summary" href="../../wiki/s-intense-tech-07-groove-and-tick-tricks-part-2.html">Intense Tech #07 — Groovy Groove and Tick Tricks, Part 2 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-08-dotcnts-wave-cruncher" class="t-summary" href="../../wiki/s-intense-tech-08-dotcnts-wave-cruncher.html">Intense Tech #08 — DOTCNT&#x27;s LSDj Wave Cruncher (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-09-lets-table-this-discussion" class="t-summary" href="../../wiki/s-intense-tech-09-lets-table-this-discussion.html">Intense Tech #09 — Let&#x27;s Table This Discussion! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-10-kicks-part-1" class="t-summary" href="../../wiki/s-intense-tech-10-kicks-part-1.html">Intense Tech #10 — Get your Kicks with Version 6, Part 1 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-11-kicks-part-2" class="t-summary" href="../../wiki/s-intense-tech-11-kicks-part-2.html">Intense Tech #11 — Kicks Part 2: Kick Heaven in Version 7 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-12-scoping-out-new-features" class="t-summary" href="../../wiki/s-intense-tech-12-scoping-out-new-features.html">Intense Tech #12 — Scoping Out New Features (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-13-kotlinski-interview" class="t-summary" href="../../wiki/s-intense-tech-13-kotlinski-interview.html">Intense Tech #13 — Interview with LSDj Developer Johan Kotlinski (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-14-lets-appreciate-version-8" class="t-summary" href="../../wiki/s-intense-tech-14-lets-appreciate-version-8.html">Intense Tech #14 — Let&#x27;s Appreciate Version 8 (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-15-lets-mix-it-up-and-down" class="t-summary" href="../../wiki/s-intense-tech-15-lets-mix-it-up-and-down.html">Intense Tech #15 — Let&#x27;s Mix It Up (and Down) (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-16-cartridge-family" class="t-summary" href="../../wiki/s-intense-tech-16-cartridge-family.html">Intense Tech #16 — So You Want a Cartridge Family? (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-17-the-joys-of-noise" class="t-summary" href="../../wiki/s-intense-tech-17-the-joys-of-noise.html">Intense Tech #17 — The Joys of Noise (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-18-adsr-makes-life-easier" class="t-summary" href="../../wiki/s-intense-tech-18-adsr-makes-life-easier.html">Intense Tech #18 — ADSR Makes Life Easier! (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-19-new-noise-and-910-news" class="t-summary" href="../../wiki/s-intense-tech-19-new-noise-and-910-news.html">Intense Tech #19 — New Noise and 9.1.0 News (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-20-lsdpatch" class="t-summary" href="../../wiki/s-intense-tech-20-lsdpatch.html">Intense Tech #20 — Customize LSDj From Scratch with LSDPatch (Defense Mechanism)</a></li><li><a data-slug="s-intense-tech-21-whats-new-in-lsdj-92" class="t-summary" href="../../wiki/s-intense-tech-21-whats-new-in-lsdj-92.html">Intense Tech #21 — What&#x27;s New in LSDj v9.2 (Defense Mechanism)</a></li><li><a data-slug="s-lemon64-hard-restart-threads" class="t-summary" href="../../wiki/s-lemon64-hard-restart-threads.html">Lemon64 threads: SID and ADSR re-triggering? (2008) / Hard restart – what&#x27;s the story? (2015)</a></li><li><a data-slug="s-lemon64-learning-sid-sound-design" class="t-summary" href="../../wiki/s-lemon64-learning-sid-sound-design.html">Lemon64: How does one learn SID sound design these days? (2020)</a></li><li><a data-slug="s-lemon64-sid-wizard-instrument-recommendations" class="t-summary" href="../../wiki/s-lemon64-sid-wizard-instrument-recommendations.html">Lemon64: SID-Wizard instrument recommendations? (2021)</a></li><li><a data-slug="s-lsdj-manual" class="t-summary" href="../../wiki/s-lsdj-manual.html">Little Sound Dj v9.2.6 Operating Manual (summary)</a></li><li><a data-slug="s-matt-gray-dominator-source" class="t-summary" href="../../wiki/s-matt-gray-dominator-source.html">Matt Gray&#x27;s Dominator subtune 6 source (PLAYER V4.2, 1987) and the Reformation driver competition</a></li><li><a data-slug="s-mos-6581-datasheet" class="t-summary" href="../../wiki/s-mos-6581-datasheet.html">MOS 6581 Sound Interface Device (SID) datasheet — the text behind Appendix O</a></li><li><a data-slug="s-newman-driving-the-sid-chip" class="t-summary" href="../../wiki/s-newman-driving-the-sid-chip.html">Newman — Driving the SID chip: Assembly Language, Composition, and Sound Design for the C64 (2017)</a></li><li><a data-slug="s-openmpt-manual-about-openmpt" class="t-summary" href="../../wiki/s-openmpt-manual-about-openmpt.html">OpenMPT manual — About OpenMPT</a></li><li><a data-slug="s-openmpt-manual-compatible-playback" class="t-summary" href="../../wiki/s-openmpt-manual-compatible-playback.html">OpenMPT manual — Compatible Playback</a></li><li><a data-slug="s-openmpt-manual-effect-reference" class="t-summary" href="../../wiki/s-openmpt-manual-effect-reference.html">OpenMPT manual — Effect Reference</a></li><li><a data-slug="s-openmpt-manual-instruments" class="t-summary" href="../../wiki/s-openmpt-manual-instruments.html">OpenMPT manual — Instruments</a></li><li><a data-slug="s-openmpt-manual-module-formats" class="t-summary" href="../../wiki/s-openmpt-manual-module-formats.html">OpenMPT manual — Module formats</a></li><li><a data-slug="s-openmpt-manual-samples" class="t-summary" href="../../wiki/s-openmpt-manual-samples.html">OpenMPT manual — Samples</a></li><li><a data-slug="s-openmpt-manual-song-properties" class="t-summary" href="../../wiki/s-openmpt-manual-song-properties.html">OpenMPT manual — Song Properties (and Tempo Swing)</a></li><li><a data-slug="s-openmpt-manual-zxx-macros" class="t-summary" href="../../wiki/s-openmpt-manual-zxx-macros.html">OpenMPT manual — Zxx Macros</a></li><li><a data-slug="s-pandocs-audio-details" class="t-summary" href="../../wiki/s-pandocs-audio-details.html">Pan Docs — Audio Details</a></li><li><a data-slug="s-pandocs-audio-overview" class="t-summary" href="../../wiki/s-pandocs-audio-overview.html">Pan Docs — Audio Overview</a></li><li><a data-slug="s-pandocs-audio-registers" class="t-summary" href="../../wiki/s-pandocs-audio-registers.html">Pan Docs — Audio Registers</a></li><li><a data-slug="s-protracker-23-readme-and-docs" class="t-summary" href="../../wiki/s-protracker-23-readme-and-docs.html">ProTracker 2.3A ReadMe, 2.0A effect and format docs, version table</a></li><li><a data-slug="s-protracker-23d-help" class="t-summary" href="../../wiki/s-protracker-23d-help.html">ProTracker 2.3d help file (edited by echolevel)</a></li><li><a data-slug="s-remix64-huelsbeck-interview" class="t-summary" href="../../wiki/s-remix64-huelsbeck-interview.html">Remix64 — An Interview with Chris Huelsbeck (2001)</a></li><li><a data-slug="s-remix64-galway-interview" class="t-summary" href="../../wiki/s-remix64-galway-interview.html">Remix64 — An Interview with Martin Galway (Neil Carr, 2001)</a></li><li><a data-slug="s-remix64-ninja-remix" class="t-summary" href="../../wiki/s-remix64-ninja-remix.html">Remix64 — Last Ninja 2 vs Ninja Remix: what&#x27;s the deal? (Chris Abbott)</a></li><li><a data-slug="s-retrogamesmaster-matt-gray-interview" class="t-summary" href="../../wiki/s-retrogamesmaster-matt-gray-interview.html">Retro Gamesmaster — Matt Gray Interview (Peter Ward)</a></li><li><a data-slug="s-emuwiki-huelsbeck-interview" class="t-summary" href="../../wiki/s-emuwiki-huelsbeck-interview.html">Retrogaming Planet / EmuWiki — Interview with Chris Huelsbeck (2011)</a></li><li><a data-slug="s-rvg-matt-gray-interview" class="t-summary" href="../../wiki/s-rvg-matt-gray-interview.html">RVG Interviews: Matt Gray (2016)</a></li><li><a data-slug="s-sabrepulse-getting-started-with-lsdj" class="t-summary" href="../../wiki/s-sabrepulse-getting-started-with-lsdj.html">Sabrepulse — Getting started with LSDJ tutorial (mirror at Adventure Kid)</a></li><li><a data-slug="s-schism-tracker-wiki" class="t-summary" href="../../wiki/s-schism-tracker-wiki.html">Schism Tracker wiki and README</a></li><li><a data-slug="s-st3-manual" class="t-summary" href="../../wiki/s-st3-manual.html">Scream Tracker 3.2 User&#x27;s Manual (ST3.DOC)</a></li><li><a data-slug="s-st3-tech-doc" class="t-summary" href="../../wiki/s-st3-tech-doc.html">Scream Tracker 3.20 File Formats And Mixing Info (TECH.DOC)</a></li><li><a data-slug="s-sid-wizard-manual" class="t-summary" href="../../wiki/s-sid-wizard-manual.html">SID-Wizard 1.8 User Manual (summary)</a></li><li><a data-slug="s-sidid-player-list" class="t-summary" href="../../wiki/s-sidid-player-list.html">SIDId (cadaver/sidid): the player-signature list and its notes</a></li><li><a data-slug="s-sidin02-matt-gray-driller" class="t-summary" href="../../wiki/s-sidin02-matt-gray-driller.html">SIDin #2 — Matt Gray&#x27;s Driller music routine (Stefano Tognon, 2002)</a></li><li><a data-slug="s-soundmonitor-lineage-wikis" class="t-summary" href="../../wiki/s-soundmonitor-lineage-wikis.html">Soundmonitor lineage and wiki pages: tracker-history/soundmonitor.txt, C64-Wiki.de, de.wikipedia</a></li><li><a data-slug="s-recollection-brief-history-of-sid" class="t-summary" href="../../wiki/s-recollection-brief-history-of-sid.html">The Brief History of SID — Jan Harries (SIDwave), Vandalism News #64 (2015)</a></li><li><a data-slug="s-sidmusic-yannes-interview" class="t-summary" href="../../wiki/s-sidmusic-yannes-interview.html">The SID Homepage — Interview with Bob Yannes (Andreas Varga, August 1996)</a></li><li><a data-slug="s-sidmusic-jeroen-tel-interviews" class="t-summary" href="../../wiki/s-sidmusic-jeroen-tel-interviews.html">The SID Homepage — Interviews with Jeroen Tel (Commodore Zone 1997, 64&#x27;er 3/91)</a></li><li><a data-slug="s-sidmusic-galway-interviews" class="t-summary" href="../../wiki/s-sidmusic-galway-interviews.html">The SID Homepage — Interviews with Martin Galway (Commodore Zone 6–7, Happy Computer 11/86)</a></li><li><a data-slug="s-sidmusic-hubbard-interviews" class="t-summary" href="../../wiki/s-sidmusic-hubbard-interviews.html">The SID Homepage — Interviews with Rob Hubbard (Commodore Zone, Happy Computer 7/86)</a></li><li><a data-slug="s-sidmusic-creation-of-the-sid-chip" class="t-summary" href="../../wiki/s-sidmusic-creation-of-the-sid-chip.html">The SID Homepage — The creation of the SID chip (Christer Rindeblad)</a></li><li><a data-slug="s-tracker-history-notes" class="t-summary" href="../../wiki/s-tracker-history-notes.html">tracker-history release notes (ProTracker, FastTracker, Scream Tracker, Impulse Tracker, Schism, OpenMPT)</a></li><li><a data-slug="s-traxweekly-archive" class="t-summary" href="../../wiki/s-traxweekly-archive.html">TraxWeekly archive at OpenMPT.org (summary)</a></li><li><a data-slug="s-tw001-interview-basehead" class="t-summary" href="../../wiki/s-tw001-interview-basehead.html">TW #1 — Interview with Basehead (Populus)</a></li><li><a data-slug="s-tw001-interview-phoenix" class="t-summary" href="../../wiki/s-tw001-interview-phoenix.html">TW #1 — Interview with Phoenix (Populus)</a></li><li><a data-slug="s-tw001-modal-and-chord-theory" class="t-summary" href="../../wiki/s-tw001-modal-and-chord-theory.html">TW #1 — Modal and Chord Theory (Leviathan)</a></li><li><a data-slug="s-tw010-interview-jugi" class="t-summary" href="../../wiki/s-tw010-interview-jugi.html">TW #10 — Interview with Jugi (White Wizard)</a></li><li><a data-slug="s-tw100-tracking-on-impulse" class="t-summary" href="../../wiki/s-tw100-tracking-on-impulse.html">TW #100 — Tracking on Impulse (Pulse)</a></li><li><a data-slug="s-tw103-interview-mikmak" class="t-summary" href="../../wiki/s-tw103-interview-mikmak.html">TW #103 — Interview with Mikmak (Behemoth)</a></li><li><a data-slug="s-tw105-newbie-interviews" class="t-summary" href="../../wiki/s-tw105-newbie-interviews.html">TW #105 — Interview With A Couple Of Newbies (Behemoth)</a></li><li><a data-slug="s-tw106-a-little-panning" class="t-summary" href="../../wiki/s-tw106-a-little-panning.html">TW #106 — A Little Panning (Airon)</a></li><li><a data-slug="s-tw107-laymans-music-theory" class="t-summary" href="../../wiki/s-tw107-laymans-music-theory.html">TW #107 — Layman&#x27;s Music Theory, part one (Zinc)</a></li><li><a data-slug="s-tw109-interview-skaven" class="t-summary" href="../../wiki/s-tw109-interview-skaven.html">TW #109 — Interview: Skaven (Zinc)</a></li><li><a data-slug="s-tw011-how-to-enhance-your-music-collection" class="t-summary" href="../../wiki/s-tw011-how-to-enhance-your-music-collection.html">TW #11 — How to enhance your music collection (Popcorn)</a></li><li><a data-slug="s-tw011-interview-beaner" class="t-summary" href="../../wiki/s-tw011-interview-beaner.html">TW #11 — Interview with Beaner (Popcorn)</a></li><li><a data-slug="s-tw011-interview-perisoft" class="t-summary" href="../../wiki/s-tw011-interview-perisoft.html">TW #11 — Interview with Perisoft (Popcorn)</a></li><li><a data-slug="s-tw111-interview-khyron" class="t-summary" href="../../wiki/s-tw111-interview-khyron.html">TW #111 — Interview with Khyron (again =) (Jeremy Rice)</a></li><li><a data-slug="s-tw114-commercial-tracking-debate" class="t-summary" href="../../wiki/s-tw114-commercial-tracking-debate.html">TW #113–#118 — The Scene and the Commercial Market: the commercial-tracking debate</a></li><li><a data-slug="s-tw114-live-tracking" class="t-summary" href="../../wiki/s-tw114-live-tracking.html">TW #114 — Live Tracking (xiagox)</a></li><li><a data-slug="s-tw115-tracking-semantics" class="t-summary" href="../../wiki/s-tw115-tracking-semantics.html">TW #115 — Tracking Semantics (Exxon)</a></li><li><a data-slug="s-tw118-reverb-and-compression" class="t-summary" href="../../wiki/s-tw118-reverb-and-compression.html">TW #118 — Reverb and Compression (Airon)</a></li><li><a data-slug="s-tw118-tracking-the-format" class="t-summary" href="../../wiki/s-tw118-tracking-the-format.html">TW #118 — Tracking the Format (Jesper Pedersen)</a></li><li><a data-slug="s-tw119-interview-mental-floss" class="t-summary" href="../../wiki/s-tw119-interview-mental-floss.html">TW #119 — Interview with Mental Floss (Zinc)</a></li><li><a data-slug="s-tw119-reverb-and-audio-gear" class="t-summary" href="../../wiki/s-tw119-reverb-and-audio-gear.html">TW #119 — Reverb and Audio Gear (Rimbo)</a></li><li><a data-slug="s-tw012-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw012-advanced-tracking-tips.html">TW #12 — Advanced Tracking Tips (Necros)</a></li><li><a data-slug="s-tw013-interview-big-jim" class="t-summary" href="../../wiki/s-tw013-interview-big-jim.html">TW #13 — Interview with Big Jim (Popcorn)</a></li><li><a data-slug="s-tw014-interview-pinion" class="t-summary" href="../../wiki/s-tw014-interview-pinion.html">TW #14 — Interview with Pinion (Flood)</a></li><li><a data-slug="s-tw015-advanced-tracking-tips-ii" class="t-summary" href="../../wiki/s-tw015-advanced-tracking-tips-ii.html">TW #15 — Advanced Tracking Tips II (Necros)</a></li><li><a data-slug="s-tw015-interview-claim" class="t-summary" href="../../wiki/s-tw015-interview-claim.html">TW #15 — Interview with Claim (Gator)</a></li><li><a data-slug="s-tw015-interview-sv" class="t-summary" href="../../wiki/s-tw015-interview-sv.html">TW #15 — Interview with SV (GraveDigger)</a></li><li><a data-slug="s-tw016-interview-populus" class="t-summary" href="../../wiki/s-tw016-interview-populus.html">TW #16 — Interview with Populus (Psibelius)</a></li><li><a data-slug="s-tw017-interview-amusic" class="t-summary" href="../../wiki/s-tw017-interview-amusic.html">TW #17 — Interview with AmusiC (Popcorn)</a></li><li><a data-slug="s-tw018-advanced-tracking-tips-iii" class="t-summary" href="../../wiki/s-tw018-advanced-tracking-tips-iii.html">TW #18 — Advanced Tracking Tips III: voicings (Necros)</a></li><li><a data-slug="s-tw018-interview-basehead" class="t-summary" href="../../wiki/s-tw018-interview-basehead.html">TW #18 — Interview With Basehead (again) (Psibelius)</a></li><li><a data-slug="s-tw018-interview-lord-pegasus" class="t-summary" href="../../wiki/s-tw018-interview-lord-pegasus.html">TW #18 — Interview with Lord Pegasus (Psibelius)</a></li><li><a data-slug="s-tw019-interview-quarex" class="t-summary" href="../../wiki/s-tw019-interview-quarex.html">TW #19 — Interview with Quarex (Maelcum)</a></li><li><a data-slug="s-tw002-interview-leinad" class="t-summary" href="../../wiki/s-tw002-interview-leinad.html">TW #2 — Interview with Leinad (Populus)</a></li><li><a data-slug="s-tw021-tracking-tips" class="t-summary" href="../../wiki/s-tw021-tracking-tips.html">TW #21 — Tracking Tips (Dan Hartrell)</a></li><li><a data-slug="s-tw022-interview-jase" class="t-summary" href="../../wiki/s-tw022-interview-jase.html">TW #22 — Interview with Jase (Clef)</a></li><li><a data-slug="s-tw024-in-review-asm95" class="t-summary" href="../../wiki/s-tw024-in-review-asm95.html">TW #24 — In Review: the ASM95 music entries (Necros)</a></li><li><a data-slug="s-tw024-sample-ripping-debate" class="t-summary" href="../../wiki/s-tw024-sample-ripping-debate.html">TW #24, #25, #64, #65 — the sample-ripping debate (Mhoram, Psibelius, Kristian Eriksen, Beacon)</a></li><li><a data-slug="s-tw025-loops-and-extended-samples" class="t-summary" href="../../wiki/s-tw025-loops-and-extended-samples.html">TW #25 — Loops and Extended Samples (The Zapper)</a></li><li><a data-slug="s-tw026-faces-in-the-crowd-intro" class="t-summary" href="../../wiki/s-tw026-faces-in-the-crowd-intro.html">TW #26 — Faces in the Crowd: the column&#x27;s manifesto (Kal Zakath)</a></li><li><a data-slug="s-tw032-20-minute-chip-compo" class="t-summary" href="../../wiki/s-tw032-20-minute-chip-compo.html">TW #26–#33, #50 — the 20 MeEnUhTz Chip Compo column (AmusiC)</a></li><li><a data-slug="s-tw027-interview-basehead-lotus-position" class="t-summary" href="../../wiki/s-tw027-interview-basehead-lotus-position.html">TW #27 — Basehead on Lotus Position (Cyberdmon)</a></li><li><a data-slug="s-tw027-faces-in-the-crowd-master-of-darkness" class="t-summary" href="../../wiki/s-tw027-faces-in-the-crowd-master-of-darkness.html">TW #27 — Faces in the Crowd #1: Master of Darkness (Kal Zakath)</a></li><li><a data-slug="s-tw027-interview-zapper" class="t-summary" href="../../wiki/s-tw027-interview-zapper.html">TW #27 — Interview with Zapper (The Finn)</a></li><li><a data-slug="s-tw028-faces-in-the-crowd-mesonyx" class="t-summary" href="../../wiki/s-tw028-faces-in-the-crowd-mesonyx.html">TW #28 — Faces in the Crowd #2: Mesonyx (Kal Zakath)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-smeghead" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-smeghead.html">TW #29 — Faces in the Crowd #4: Smeghead (Master of Darkness)</a></li><li><a data-slug="s-tw029-faces-in-the-crowd-esper-division" class="t-summary" href="../../wiki/s-tw029-faces-in-the-crowd-esper-division.html">TW #29 — Faces in the Crowd #5: Esper Division (DennisC)</a></li><li><a data-slug="s-tw003-interview-chuck-biscuits" class="t-summary" href="../../wiki/s-tw003-interview-chuck-biscuits.html">TW #3 — Interview with Chuck Biscuits (Epeius)</a></li><li><a data-slug="s-tw003-interview-five-musicians" class="t-summary" href="../../wiki/s-tw003-interview-five-musicians.html">TW #3 — Interview with the Five Musicians (Populus)</a></li><li><a data-slug="s-tw003-beginning-the-tracking-experience" class="t-summary" href="../../wiki/s-tw003-beginning-the-tracking-experience.html">TW #3 — Music: Beginning the Tracking Experience (Psibelius)</a></li><li><a data-slug="s-tw030-interview-ender" class="t-summary" href="../../wiki/s-tw030-interview-ender.html">TW #30 — Faces in the Crowd: Interview with Ender (Master of Darkness)</a></li><li><a data-slug="s-tw030-interview-paganus" class="t-summary" href="../../wiki/s-tw030-interview-paganus.html">TW #30 — Faces in the Crowd: Interview with Paganus (Atlantic)</a></li><li><a data-slug="s-tw031-interview-fred" class="t-summary" href="../../wiki/s-tw031-interview-fred.html">TW #31 — Faces in the Crowd: Interview with Fred (Dynamic Harmony)</a></li><li><a data-slug="s-tw031-interview-luv-kohli" class="t-summary" href="../../wiki/s-tw031-interview-luv-kohli.html">TW #31 — Faces in the Crowd: Interview with Luv Kohli (DennisC)</a></li><li><a data-slug="s-tw031-interview-vicious" class="t-summary" href="../../wiki/s-tw031-interview-vicious.html">TW #31 — Faces in the Crowd: Interview with Vicious (Master of Darkness)</a></li><li><a data-slug="s-tw032-fitc-complaints" class="t-summary" href="../../wiki/s-tw032-fitc-complaints.html">TW #32 — Faces in the Crowd: Complaints (Master of Darkness)</a></li><li><a data-slug="s-tw032-interview-zinc" class="t-summary" href="../../wiki/s-tw032-interview-zinc.html">TW #32 — Faces in the Crowd: Interview with Zinc (DennisC)</a></li><li><a data-slug="s-tw032-not-so-advanced-tracking-tips" class="t-summary" href="../../wiki/s-tw032-not-so-advanced-tracking-tips.html">TW #32 — Not So Advanced Tracking Tips (Atlantic)</a></li><li><a data-slug="s-tw032-tracker-survey" class="t-summary" href="../../wiki/s-tw032-tracker-survey.html">TW #32–#34 — Tracker Survey / New Tracker (Psibelius, Jason Diamond)</a></li><li><a data-slug="s-tw033-4channel-lives-on" class="t-summary" href="../../wiki/s-tw033-4channel-lives-on.html">TW #33 — 4Channel Lives On (Trixter)</a></li><li><a data-slug="s-tw034-interview-deus-ex" class="t-summary" href="../../wiki/s-tw034-interview-deus-ex.html">TW #34 — Faces in the Crowd: Interview with Deus Ex (Master of Darkness)</a></li><li><a data-slug="s-tw035-interview-loki" class="t-summary" href="../../wiki/s-tw035-interview-loki.html">TW #35 — Interview with Loki (Trifixion)</a></li><li><a data-slug="s-tw037-death-of-the-chiptune-debate" class="t-summary" href="../../wiki/s-tw037-death-of-the-chiptune-debate.html">TW #37–38 — The Death of the Chiptune / Chiptunes Aren&#x27;t Dead!</a></li><li><a data-slug="s-tw039-chord-theory-debate" class="t-summary" href="../../wiki/s-tw039-chord-theory-debate.html">TW #39–40 — Chord Theory? / Chord What? (Maelcum, Trixter, Basehead)</a></li><li><a data-slug="s-tw004-interview-nemesis" class="t-summary" href="../../wiki/s-tw004-interview-nemesis.html">TW #4 — Interview with Nemesis (Populus)</a></li><li><a data-slug="s-tw004-interview-stalker" class="t-summary" href="../../wiki/s-tw004-interview-stalker.html">TW #4 — Interview with Stalker (Zer0)</a></li><li><a data-slug="s-tw040-interview-blackwolf" class="t-summary" href="../../wiki/s-tw040-interview-blackwolf.html">TW #40 — Interview with Blackwolf (Psibelius)</a></li><li><a data-slug="s-tw040-interview-zalt" class="t-summary" href="../../wiki/s-tw040-interview-zalt.html">TW #40 — Interview with Zalt (Psibelius)</a></li><li><a data-slug="s-tw041-interview-mick-rippon" class="t-summary" href="../../wiki/s-tw041-interview-mick-rippon.html">TW #41 — Faces in the Crowd: Interview with Mick Rippon (DennisC)</a></li><li><a data-slug="s-tw041-interview-shawnm" class="t-summary" href="../../wiki/s-tw041-interview-shawnm.html">TW #41 — Interview with Shawn (shawnm / NOISE)</a></li><li><a data-slug="s-tw041-interview-zinc" class="t-summary" href="../../wiki/s-tw041-interview-zinc.html">TW #41 — Interview with Zinc on the Impromptu Compo (DennisC)</a></li><li><a data-slug="s-tw042-impulse-tracker-v1-01" class="t-summary" href="../../wiki/s-tw042-impulse-tracker-v1-01.html">TW #42 — Impulse Tracker v1.01 (Pulse)</a></li><li><a data-slug="s-tw042-interview-balrog" class="t-summary" href="../../wiki/s-tw042-interview-balrog.html">TW #42 — Interview with Balrog (Kosmic)</a></li><li><a data-slug="s-tw043-interview-pariah" class="t-summary" href="../../wiki/s-tw043-interview-pariah.html">TW #43 — Interview with Pariah (V.S.L)</a></li><li><a data-slug="s-tw044-hornet-ratings" class="t-summary" href="../../wiki/s-tw044-hornet-ratings.html">TW #43–#45 — the Demonews ratings argument (Light, Trixter / Hornet)</a></li><li><a data-slug="s-tw044-impulse-tracker-trivia" class="t-summary" href="../../wiki/s-tw044-impulse-tracker-trivia.html">TW #44 — Impulse Tracker Trivia (Random)</a></li><li><a data-slug="s-tw044-interview-acidfrog" class="t-summary" href="../../wiki/s-tw044-interview-acidfrog.html">TW #44 — Interview with Acidfrog (Radiance / Spice)</a></li><li><a data-slug="s-tw046-serial-composition" class="t-summary" href="../../wiki/s-tw046-serial-composition.html">TW #46 — Serial Composition (shawnm / NOISE)</a></li><li><a data-slug="s-tw005-interview-thehacker" class="t-summary" href="../../wiki/s-tw005-interview-thehacker.html">TW #5 — Interview with TheHacker (Popcorn)</a></li><li><a data-slug="s-tw005-what-its-like-to-be-a-pc-musician" class="t-summary" href="../../wiki/s-tw005-what-its-like-to-be-a-pc-musician.html">TW #5 — What it&#x27;s like to be a PC Musician (Necros)</a></li><li><a data-slug="s-tw050-aesthetics-of-composition" class="t-summary" href="../../wiki/s-tw050-aesthetics-of-composition.html">TW #50 — Aesthetics of Composition and Music Groups (Spyder / NOISE)</a></li><li><a data-slug="s-tw050-interview-vadimvs" class="t-summary" href="../../wiki/s-tw050-interview-vadimvs.html">TW #50 — Interview with VadimVS (NOISE)</a></li><li><a data-slug="s-tw051-how-to-listen-to-tracked-music" class="t-summary" href="../../wiki/s-tw051-how-to-listen-to-tracked-music.html">TW #51 — How to listen to tracked music (mrdata)</a></li><li><a data-slug="s-tw052-interview-daedalus" class="t-summary" href="../../wiki/s-tw052-interview-daedalus.html">TW #52 — Interview with Daedalus (Neophyte / Epinicion)</a></li><li><a data-slug="s-tw052-interview-ganja-man" class="t-summary" href="../../wiki/s-tw052-interview-ganja-man.html">TW #52 — Interview with Ganja Man (LoK)</a></li><li><a data-slug="s-tw054-interview-injekted-and-subhuman" class="t-summary" href="../../wiki/s-tw054-interview-injekted-and-subhuman.html">TW #54 — Interview with Injekted &amp; Subhuman (Ultrabeat)</a></li><li><a data-slug="s-tw054-interview-quantam-porcupine" class="t-summary" href="../../wiki/s-tw054-interview-quantam-porcupine.html">TW #54 — Interview with Quantam Porcupine</a></li><li><a data-slug="s-tw054-interview-saxy" class="t-summary" href="../../wiki/s-tw054-interview-saxy.html">TW #54 — Interview with Saxy (XX)</a></li><li><a data-slug="s-tw054-interview-scirocco" class="t-summary" href="../../wiki/s-tw054-interview-scirocco.html">TW #54 — Interview with Scirocco</a></li><li><a data-slug="s-tw055-interview-clef" class="t-summary" href="../../wiki/s-tw055-interview-clef.html">TW #55 — Interview with Clef (Catch 22, ex-Epinicion)</a></li><li><a data-slug="s-tw055-panning-debate" class="t-summary" href="../../wiki/s-tw055-panning-debate.html">TW #55–56 — Panning (GBlues) / Panning? Hello? (Trixter)</a></li><li><a data-slug="s-tw057-interview-catspaw" class="t-summary" href="../../wiki/s-tw057-interview-catspaw.html">TW #57 — Interview with Catspaw (Zinc)</a></li><li><a data-slug="s-tw058-the-finishing-touches" class="t-summary" href="../../wiki/s-tw058-the-finishing-touches.html">TW #58–59 — The Finishing Touches (Catspaw)</a></li><li><a data-slug="s-tw059-tracking-hints" class="t-summary" href="../../wiki/s-tw059-tracking-hints.html">TW #59 — Tracking Hints (Vivid)</a></li><li><a data-slug="s-tw006-naid-opinion-interviews" class="t-summary" href="../../wiki/s-tw006-naid-opinion-interviews.html">TW #6 — The NAID Music Compo: Opinion Interviews (Psibelius)</a></li><li><a data-slug="s-tw060-interview-fisherman" class="t-summary" href="../../wiki/s-tw060-interview-fisherman.html">TW #60 — Faces in the Crowd: fisherman (Zinc)</a></li><li><a data-slug="s-tw060-interview-rage" class="t-summary" href="../../wiki/s-tw060-interview-rage.html">TW #60 — Interview with Rage (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw062-interview-vegas" class="t-summary" href="../../wiki/s-tw062-interview-vegas.html">TW #62 — Interview with Vegas (Kal Zakath and Kleitus)</a></li><li><a data-slug="s-tw063-interview-ryan-sprott" class="t-summary" href="../../wiki/s-tw063-interview-ryan-sprott.html">TW #63 — Interview with Ryan (Kleitus)</a></li><li><a data-slug="s-tw064-potted-tracking-history" class="t-summary" href="../../wiki/s-tw064-potted-tracking-history.html">TW #64 — Potted Tracking History (Ganja Man)</a></li><li><a data-slug="s-tw065-tracking-as-an-olympic-sport" class="t-summary" href="../../wiki/s-tw065-tracking-as-an-olympic-sport.html">TW #65–#66 — Tracking as an Olympic Sport, parts I–II (Blackwolf)</a></li><li><a data-slug="s-tw066-interview-liam-the-lemming" class="t-summary" href="../../wiki/s-tw066-interview-liam-the-lemming.html">TW #66 — Interview with Liam the Lemming (Kal Zakath)</a></li><li><a data-slug="s-tw066-sound-recording" class="t-summary" href="../../wiki/s-tw066-sound-recording.html">TW #66 — Sound Recording (Cowboy)</a></li><li><a data-slug="s-tw067-interview-u4ia" class="t-summary" href="../../wiki/s-tw067-interview-u4ia.html">TW #67 — Interview with U4IA (Mage)</a></li><li><a data-slug="s-tw007-interview-ryan-cramer" class="t-summary" href="../../wiki/s-tw007-interview-ryan-cramer.html">TW #7 — Interview with Ryan Cramer (Popcorn)</a></li><li><a data-slug="s-tw007-the-importance-of-music-theory" class="t-summary" href="../../wiki/s-tw007-the-importance-of-music-theory.html">TW #7 — The Importance of Music Theory (Future Assassin)</a></li><li><a data-slug="s-tw070-realism-debate" class="t-summary" href="../../wiki/s-tw070-realism-debate.html">TW #70–73 — the realism debate (#trax log, Behemoth, GBlues, Alan Robinson, Raphael, Sturm, brn, It-Alien, Purple Haze, Necros)</a></li><li><a data-slug="s-tw072-composing-whole-modules" class="t-summary" href="../../wiki/s-tw072-composing-whole-modules.html">TW #72 — Composing Whole Modules (Sir Nick / Deck Blasters)</a></li><li><a data-slug="s-tw074-motherboard-sampling" class="t-summary" href="../../wiki/s-tw074-motherboard-sampling.html">TW #74 — Motherboard Sampling (Spieg)</a></li><li><a data-slug="s-tw074-intro-to-musical-theory" class="t-summary" href="../../wiki/s-tw074-intro-to-musical-theory.html">TW #74–86 — Introduction to Musical Theory, vols 1–5 (Greg Heo)</a></li><li><a data-slug="s-tw075-it-percussion-tips" class="t-summary" href="../../wiki/s-tw075-it-percussion-tips.html">TW #75 — IT Percussion Tips (Zinc)</a></li><li><a data-slug="s-tw076-realism-in-mods" class="t-summary" href="../../wiki/s-tw076-realism-in-mods.html">TW #76 — Realism in MODs (Behemoth)</a></li><li><a data-slug="s-tw077-general-tracking-tips" class="t-summary" href="../../wiki/s-tw077-general-tracking-tips.html">TW #77 — General Tracking Tips (Generic Blues)</a></li><li><a data-slug="s-tw077-chip-off-the-block" class="t-summary" href="../../wiki/s-tw077-chip-off-the-block.html">TW #77–81 — A Chip Off the Block / Chiptune Seminar, parts 1–4 (The Modsquad)</a></li><li><a data-slug="s-tw008-interview-blaze-runner" class="t-summary" href="../../wiki/s-tw008-interview-blaze-runner.html">TW #8 — Interview with Blaze Runner (Populus)</a></li><li><a data-slug="s-tw080-trax-mass-interview" class="t-summary" href="../../wiki/s-tw080-trax-mass-interview.html">TW #80 — #trax Mass Interview (Zinc)</a></li><li><a data-slug="s-tw081-it-tip-of-the-week" class="t-summary" href="../../wiki/s-tw081-it-tip-of-the-week.html">TW #81–89 — Impulse Tracker Tip of the Week #1–8 (Pinion) and More Impulse Tracker Tips (Pulse)</a></li><li><a data-slug="s-tw084-perfect-samples-the-piano" class="t-summary" href="../../wiki/s-tw084-perfect-samples-the-piano.html">TW #84 — Perfect Samples: The Piano (Sklathill)</a></li><li><a data-slug="s-tw086-hexadecimal-101" class="t-summary" href="../../wiki/s-tw086-hexadecimal-101.html">TW #86 — Hexadecimal 101 (chinaski)</a></li><li><a data-slug="s-tw086-wrecking-samples-with-impulse-tracker" class="t-summary" href="../../wiki/s-tw086-wrecking-samples-with-impulse-tracker.html">TW #86 — Wrecking Samples with Impulse Tracker (Graham the Happy Scum)</a></li><li><a data-slug="s-tw087-interview-perisoft" class="t-summary" href="../../wiki/s-tw087-interview-perisoft.html">TW #87 — Interview with Perisoft (Pizza Head)</a></li><li><a data-slug="s-tw087-music-theory-a-modern-approach" class="t-summary" href="../../wiki/s-tw087-music-theory-a-modern-approach.html">TW #87–#97 — Music Theory: A Modern Approach (The Modsquad, seven parts)</a></li><li><a data-slug="s-tw009-interview-maelcum" class="t-summary" href="../../wiki/s-tw009-interview-maelcum.html">TW #9 — Interview with Maelcum (k8to)</a></li><li><a data-slug="s-tw009-samples-lameness-preconceptions" class="t-summary" href="../../wiki/s-tw009-samples-lameness-preconceptions.html">TW #9 — Samples, Lameness, Preconceptions, and Fluffy Bunnies (Necros)</a></li><li><a data-slug="s-tw090-interview-cosmic" class="t-summary" href="../../wiki/s-tw090-interview-cosmic.html">TW #90 — Interview with Cosmic/RR (Pizza Head)</a></li><li><a data-slug="s-tw094-stereo-samples-in-impulse-tracker" class="t-summary" href="../../wiki/s-tw094-stereo-samples-in-impulse-tracker.html">TW #94 — Stereo Samples with Impulse Tracker (Zinc)</a></li><li><a data-slug="s-tw096-studio-tracking-tips" class="t-summary" href="../../wiki/s-tw096-studio-tracking-tips.html">TW #96 — Studio Tracking Tips (Zinc)</a></li><li><a data-slug="s-tw098-impulse-tracker-investment" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-investment.html">TW #98 — Impulse Tracker Investment (Pulse)</a></li><li><a data-slug="s-tw098-impulse-tracker-midi" class="t-summary" href="../../wiki/s-tw098-impulse-tracker-midi.html">TW #98 — Impulse Tracker MIDI (Airon)</a></li><li><a data-slug="s-tw099-why-tracking-is-the-perfect-artform" class="t-summary" href="../../wiki/s-tw099-why-tracking-is-the-perfect-artform.html">TW #99 — Why Tracking Is The Perfect Artform (anonymous)</a></li><li><a data-slug="s-ucapps-wavetable-sounds-tutorial-1" class="t-summary" href="../../wiki/s-ucapps-wavetable-sounds-tutorial-1.html">uCApps MIDIbox SID — Wavetable Sounds Tutorial #1 (Thorsten Klose)</a></li><li><a data-slug="s-vandalism63-matt-gray-interview" class="t-summary" href="../../wiki/s-vandalism63-matt-gray-interview.html">Vandalism News #63 — Interview with Matt Gray (Jazzcat, 2014)</a></li><li><a data-slug="s-vgmpf-chris-huelsbeck" class="t-summary" href="../../wiki/s-vgmpf-chris-huelsbeck.html">VGMPF wiki: Chris Hülsbeck</a></li><li><a data-slug="s-vgmpf-maniacs-of-noise" class="t-summary" href="../../wiki/s-vgmpf-maniacs-of-noise.html">VGMPF wiki: Maniacs of Noise, Jeroen Tel, Charles Deenen (+ the C64-Wiki roster)</a></li><li><a data-slug="s-vgmpf-matt-gray" class="t-summary" href="../../wiki/s-vgmpf-matt-gray.html">VGMPF wiki: Matt Gray</a></li><li><a data-slug="s-vgmpf-soundmonitor-tfmx" class="t-summary" href="../../wiki/s-vgmpf-soundmonitor-tfmx.html">VGMPF wiki: Soundmonitor, TFMX Editor (C64) and The Great Giana Sisters (C64)</a></li><li><a data-slug="s-walleij-sid-player-routine" class="t-summary" href="../../wiki/s-walleij-sid-player-routine.html">Walleij — A SID player routine (MIDI-driven player design, note tables, hard restart)</a></li><li><a data-slug="s-wikipedia-chris-huelsbeck" class="t-summary" href="../../wiki/s-wikipedia-chris-huelsbeck.html">Wikipedia (en): Chris Huelsbeck</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by tag / platform</a></li><li><a href="../../inbox/traxweekly-toc.html">TraxWeekly articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › traxweekly</div>
+<h1>TraxWeekly #88 — 14 February 1997</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#traxweekly">TraxWeekly archive</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://resources.openmpt.org/traxweekly/">https://resources.openmpt.org/traxweekly/</a> (mirror at OpenMPT.org of the 1995–1998 tracker-scene newsletter)</div><div class="mrow"><span class="mk">file</span> <code>raw/traxweekly/TRAXWEEK.088</code> · 788 lines · 38 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/traxweekly/TRAXWEEK.088" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-tw087-music-theory-a-modern-approach.html">TW #87–#97 — Music Theory: A Modern Approach (The Modsquad, seven parts)</a></div></div><div class="pn"><a href="../../raw/traxweekly/TRAXWEEK.087.html">← TRAXWEEK.087</a> · <a href="../../raw/traxweekly/TRAXWEEK.089.html">TRAXWEEK.089 →</a></div></header>
+<pre class="raw"><span id="L1" class="l">			     .</span>
+<span id="L2" class="l">  founded march 12, 1995   _| :            _____  t r a x w e e k l y  # 8 8</span>
+<span id="L3" class="l">	   ______________ |___|  _ _______/    /\___________________________</span>
+<span id="L4" class="l">	 /  ____________/ /\__\ _ _______/____/_____________________________</span>
+<span id="L5" class="l">	/  /  _________   \/__/    ______\    \_____________________________</span>
+<span id="L6" class="l">       /  /  /          `_  .  .~         \____\/                 _  __ ___</span>
+<span id="L7" class="l">      /  /  /     _____   . _ \                                __ ___ _/__/\</span>
+<span id="L8" class="l">     /  /  /     /    /\ _        The Music Scene Newsletter     __  __\__\/</span>
+<span id="L9" class="l">   _/__/  / ____/    /__\_________________________________  _____      ___ _</span>
+<span id="L10" class="l">  /    /\/ /___     __________  _   ______   _     ___    \/    /\    /    /</span>
+<span id="L11" class="l"> /____/  \ \  /    /\     /      __/\   /         /\  \    \   /  \  /____/</span>
+<span id="L12" class="l"> /  / \  /  \/    /_ \___/___/     \ \_/___/     /  \_/       /   /  \ ___\</span>
+<span id="L13" class="l">   /  /_/   /______/\/   \  /______/\/ \  /_____/   //   \    \  /    /  / \</span>
+<span id="L14" class="l">  /  /      \      \ \    \_\      \ \  \_\     \  //____/\____\/    /  /  /</span>
+<span id="L15" class="l"> /  /        \______\/       \______\/     \_____\/ \    \ \    \   /  /  /</span>
+<span id="L16" class="l">   /                                                 \____\/\____\ /  /  /</span>
+<span id="L17" class="l">  /  _____     _____     _____     _____     _____     _____      /  /  /</span>
+<span id="L18" class="l"> /__/ w  /\___/    /\___/ e  /\___/    /\__ / l  /\___/    /\____/  /  /</span>
+<span id="L19" class="l"> __/____/____/____/____/____/____/____/____/____/____/____/________/  /</span>
+<span id="L20" class="l"> __\    \____\  e \____\    \____\  k \ ___\    \____\  y \__________/</span>
+<span id="L21" class="l">    \____\/   \____\/   \____\/   \____\/   \____\/   \____\/WW</span>
+<span id="L22" class="l"> </span>
+<span id="L23" class="l">----------------------------------------------------------------------------</span>
+<span id="L24" class="l">  | TraxWeekly Issue #88 | Release date: 14 Feb 1997 | Subscribers: 997 |</span>
+<span id="L25" class="l">----------------------------------------------------------------------------</span>
+<span id="L26" class="l"> </span>
+<span id="L27" class="l"> </span>
+<span id="L28" class="l">/-[Introduction]------------------------------------------------------------</span>
+<span id="L29" class="l">---------------------------------------------------------------------------/</span>
+<span id="L30" class="l"> </span>
+<span id="L31" class="l">  Welcome to TraxWeekly #88.  We&#x27;re almost at 1000 subscribers!</span>
+<span id="L32" class="l"> </span>
+<span id="L33" class="l">  Again, my apologies for the break in TraxWeekly releases.  I&#x27;ve been</span>
+<span id="L34" class="l"> plagued with the usual midterms and heavy loads of work.  Thank goodness</span>
+<span id="L35" class="l"> there&#x27;s only a few more months of school left (here in the northern</span>
+<span id="L36" class="l"> hemisphere anyway =).</span>
+<span id="L37" class="l"> </span>
+<span id="L38" class="l">  I am looking for an assistant editor for TraxWeekly.  Before anyone</span>
+<span id="L39" class="l"> asks: this job is almost thankless, produces no income, and generally</span>
+<span id="L40" class="l"> isn&#x27;t a riot to have.  You get to write introductions, make decisions on</span>
+<span id="L41" class="l"> what to print or what not to print, and get friendly emails from me all</span>
+<span id="L42" class="l"> the time. =)  I&#x27;m really looking for someone in high school or out of</span>
+<span id="L43" class="l"> school who has the time to compile the whole issue wednesday and thursday</span>
+<span id="L44" class="l"> evenings...all I can offer is a hearty thanks and your name plastered all</span>
+<span id="L45" class="l"> over every issue. =)  Email me below.</span>
+<span id="L46" class="l"> </span>
+<span id="L47" class="l">  And of course we aren&#x27;t dead.  Check out some of the excellent music</span>
+<span id="L48" class="l"> and tracking articles this issue, and I&#x27;m sure you&#x27;ll be pleasantly</span>
+<span id="L49" class="l"> surprised.  A few large (and very good articles) sent to me aren&#x27;t printed</span>
+<span id="L50" class="l"> this week because I haven&#x27;t the time to format them (yet).  Bibby,</span>
+<span id="L51" class="l"> Behemoth, and others: next week, I hope. =)</span>
+<span id="L52" class="l"> </span>
+<span id="L53" class="l">  Happy Valentines Day, to each and every one of you.  Somewhere, out there,</span>
+<span id="L54" class="l"> someone is thinking of you.</span>
+<span id="L55" class="l"> </span>
+<span id="L56" class="l">  Until next week!</span>
+<span id="L57" class="l"> </span>
+<span id="L58" class="l">						    Gene Wie (Psibelius)</span>
+<span id="L59" class="l">						    TraxWeekly Publishing</span>
+<span id="L60" class="l">						    gwie@csusm.edu</span>
+<span id="L61" class="l"> </span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l">/-[Contents]----------------------------------------------------------------</span>
+<span id="L64" class="l">---------------------------------------------------------------------------/</span>
+<span id="L65" class="l"> </span>
+<span id="L66" class="l"> ________  _________________________________________________________________</span>
+<span id="L67" class="l"> /  ____/_/       __/    \  __/         /  _____/    \  __/      __/   ___/_</span>
+<span id="L68" class="l">&lt;   \____\    \   \\      \ \\____   __/   __/_\      \ \\____   \_____  \__</span>
+<span id="L69" class="l"> \        \    \   \\   \    \ww\     \\       \\   \    \  \     \       \_</span>
+<span id="L70" class="l"> _\________\________\\___\____\  \_____\\_______\\___\____\  \_____\_______\</span>
+<span id="L71" class="l"> </span>
+<span id="L72" class="l">  Letters and Feedback</span>
+<span id="L73" class="l"> </span>
+<span id="L74" class="l">     1. Letter from Snowman</span>
+<span id="L75" class="l"> </span>
+<span id="L76" class="l">  General Articles</span>
+<span id="L77" class="l"> </span>
+<span id="L78" class="l">     2. Music Theory: A Modern Approach...............The Modsquad</span>
+<span id="L79" class="l">     3. Tracker Boringness............................Der Walfisch</span>
+<span id="L80" class="l">     4. Lameness?.....................................Ming</span>
+<span id="L81" class="l">     5. Why Stop at Your Computer?....................Coplan</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l">  Closing</span>
+<span id="L84" class="l"> </span>
+<span id="L85" class="l">     Distribution</span>
+<span id="L86" class="l">     Subscription/Contribution Information</span>
+<span id="L87" class="l">     TraxWeekly Staff Sheet</span>
+<span id="L88" class="l"> </span>
+<span id="L89" class="l"> </span>
+<span id="s-letters-and-feedback" class="an"></span><span id="L90" class="l hd">/-[Letters and Feedback]----------------------------------------------------</span>
+<span id="L91" class="l">---------------------------------------------------------------------------/</span>
+<span id="L92" class="l"> </span>
+<span id="L93" class="l"> </span>
+<span id="a1" class="an"></span><span id="L94" class="l hd">--[1. Letter from Snowman]--------------------------------------------------</span>
+<span id="L95" class="l"> </span>
+<span id="L96" class="l"> From r3cgm@cdrom.comThu Jan 30 21:10:27 1997</span>
+<span id="L97" class="l"> Date: Fri, 31 Jan 97 07:06 SAT</span>
+<span id="L98" class="l"> From: Christopher G Mann &lt;r3cgm@cdrom.com&gt;</span>
+<span id="L99" class="l"> To: gwie@mailhost2.csusm.edu</span>
+<span id="L100" class="l"> </span>
+<span id="L101" class="l"> First let me congratulate you on an exceptional issue of TraxWeekly.  The</span>
+<span id="L102" class="l"> Throbber mail, Shaithis&#x27;s response, your editorial, all excellent.</span>
+<span id="L103" class="l"> </span>
+<span id="L104" class="l"> :</span>
+<span id="L105" class="l"> :   Oh, major congrats to the DN reviewing staff.  For those of you who</span>
+<span id="L106" class="l"> :  subscribe to DemoNews, more detailed comments are starting to appear</span>
+<span id="L107" class="l"> :  with the standard &quot;*&quot; reviews, thanks to Phoenix.</span>
+<span id="L108" class="l"> : </span>
+<span id="L109" class="l"> </span>
+<span id="L110" class="l"> In the SDD data format we use on the Hornet Archive, there is a &quot;description&quot;</span>
+<span id="L111" class="l"> field available for all files.  When the format was first created, this was</span>
+<span id="L112" class="l"> to be used primarily for files in /code (where descriptions would prove</span>
+<span id="L113" class="l"> invaluable... not that they wouldn&#x27;t elsewhere, but it seemed particularly</span>
+<span id="L114" class="l"> useful with /code).</span>
+<span id="L115" class="l"> </span>
+<span id="L116" class="l"> So Kneebiter goes and reviews a whole buch of /code, making excellent use of</span>
+<span id="L117" class="l"> descriptions.  I sat down a week or two later with a directory full of music</span>
+<span id="L118" class="l"> disks to review.  It was then that I realized it wasn&#x27;t really that time</span>
+<span id="L119" class="l"> consuming to jot down a few notes here and there for music.</span>
+<span id="L120" class="l"> </span>
+<span id="L121" class="l"> Now GD had written this nifty little proggy called SDD Edit a while back.</span>
+<span id="L122" class="l"> It took the task of entering error-prone reviewer data and made data entry</span>
+<span id="L123" class="l"> reliable and fun (as working with SDDs should be).  However, at the time GD</span>
+<span id="L124" class="l"> wrote the program his knowledge of dynamic memory management was still a bit</span>
+<span id="L125" class="l"> ripe and so reviewer-entered descriptions could only be 40 characters long.</span>
+<span id="L126" class="l"> This wasn&#x27;t a big deal since we were only using the descriptions for /code.</span>
+<span id="L127" class="l"> Kneebiter can write flawless raw SDDs without the use of SDD Edit.</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l"> People actually took notice and the response was good.  So we realized</span>
+<span id="L130" class="l"> just how nifty descriptions could be and I asked GD for an SDD Edit rewrite.</span>
+<span id="L131" class="l"> A rewrite that would eliminate the 40 character limitation.  He&#x27;s doing this</span>
+<span id="L132" class="l"> now.  Soon the power of SDD descriptions will be in the hands of music</span>
+<span id="L133" class="l"> reviewers, where I am confident they will wield them with style and maturity.</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l"> We are now going to be using descriptions more often on the Hornet Archive.</span>
+<span id="L136" class="l"> </span>
+<span id="L137" class="l"> Christopher G. Mann - r3cgm@hornet.org</span>
+<span id="L138" class="l"> </span>
+<span id="L139" class="l">  (ftp|www).cdrom.com - Webmaster &amp; Technical Support, Walnut Creek CDROM</span>
+<span id="L140" class="l">  (ftp|www).hornet.org/pub/demos - Hornet Archive Maintainer</span>
+<span id="L141" class="l"> </span>
+<span id="L142" class="l">----------------------------------------------------------------------------</span>
+<span id="L143" class="l"> </span>
+<span id="L144" class="l"> </span>
+<span id="s-general-articles" class="an"></span><span id="L145" class="l hd">/-[General Articles]--------------------------------------------------------</span>
+<span id="L146" class="l">---------------------------------------------------------------------------/</span>
+<span id="L147" class="l"> </span>
+<span id="L148" class="l"> </span>
+<span id="a2" class="an"></span><span id="L149" class="l hd">--[2. Music Theory: A Modern Approach]----------------------[The ModSquad]--</span>
+<span id="L150" class="l"> </span>
+<span id="L151" class="l">                      Music Theory: A Modern Approach</span>
+<span id="L152" class="l">                  To Perfecting An Old Art, and Learning</span>
+<span id="L153" class="l">                How To Better Yourself, and What You Track.</span>
+<span id="L154" class="l">                                   by</span>
+<span id="L155" class="l">                    Finrez, Radio Shock, Neon Hunter</span>
+<span id="L156" class="l"> </span>
+<span id="L157" class="l">                           modsquad@juno.com</span>
+<span id="L158" class="l"> </span>
+<span id="L159" class="l"> This is the second article in our second theory series. We don&#x27;t know how</span>
+<span id="L160" class="l"> long series will be, but our quick outline of topics that need to be</span>
+<span id="L161" class="l"> covered shows a length of perhaps 6 parts. This installment, we will</span>
+<span id="L162" class="l"> cover Mexican 909 and Accordion, Musical Scales, Musical DNA, MIDI</span>
+<span id="L163" class="l"> Interfaces, Juggling Raves, What makes Wave and Necros good, and Drums.</span>
+<span id="L164" class="l"> </span>
+<span id="L165" class="l">         vvv- groove                                v v vvv - more groove</span>
+<span id="L166" class="l">        -=-=---=--=-=------[ MY ORTHODONTIST ]------=-=---=-------</span>
+<span id="L167" class="l"> </span>
+<span id="L168" class="l">  &quot;Yeah, yeah, I&#x27;m licking your balls.&quot;</span>
+<span id="L169" class="l">                          _CB4_</span>
+<span id="L170" class="l">                      --Cell Block 4</span>
+<span id="L171" class="l"> </span>
+<span id="L172" class="l">        I realized, that since my orthodontists office is in</span>
+<span id="L173" class="l"> mexico, he always plays mexican music.. actually, it is like mexican</span>
+<span id="L174" class="l"> dance music.. I always notice the 9O9 drum beets playing in the</span>
+<span id="L175" class="l"> backackbackground (groove). I can really hear those CCO CCO CCO</span>
+<span id="L176" class="l"> hihat loops when hes using machinery and I can only hear trebbly sounds</span>
+<span id="L177" class="l"> (you know, that famous techno hihat riff?).. but the FUNNY THING IS,</span>
+<span id="L178" class="l"> when you&#x27;re hearing some lady singing something like, &quot;yo soy yodando</span>
+<span id="L179" class="l"> por ti&quot; or something, and then, it&#x27;ll get maybe 40 bpm faster, and</span>
+<span id="L180" class="l"> it&#x27;ll turn bright.. but then it hits.</span>
+<span id="L181" class="l">        an accordian solo. the accordian solo is playing, it actually</span>
+<span id="L182" class="l">  sounds cool.. but the best thing is, the 9O9 beet starts playing</span>
+<span id="L183" class="l">  along with it! now can you beleive this?.. they also do the same</span>
+<span id="L184" class="l">  thing with those famous trumpet/tuba solos! you know, with all of that</span>
+<span id="L185" class="l">  &quot;gumbah&quot; music or whatever its called, that those gangstahs always</span>
+<span id="L186" class="l">  play? its just like that.. but its a techno version.</span>
+<span id="L187" class="l">        next time you track a tune, think about this. think about songs</span>
+<span id="L188" class="l">  like remixes of &quot;children&quot; by robert miles.. a piano/guitar riff with</span>
+<span id="L189" class="l">  freakin breakbeat loops in it! this sounds rad! why should the mexicans</span>
+<span id="L190" class="l">  do it? they do! it rocks! now next time you track somethign like this,</span>
+<span id="L191" class="l">  do a cover of firestarter, except take the chords and the vocals..</span>
+<span id="L192" class="l">  (&quot;i&#x27;m a firestarter.. if you want fire, goto hell. theres plenty there.&quot;)</span>
+<span id="L193" class="l">  and then add some kickass drumloops.. remember these steps when doing</span>
+<span id="L194" class="l">  so:</span>
+<span id="L195" class="l"> </span>
+<span id="L196" class="l">                        1) try it.</span>
+<span id="L197" class="l">                        2) apply it.</span>
+<span id="L198" class="l">                        3) test it.</span>
+<span id="L199" class="l">                        4) up it (cdrom.com)</span>
+<span id="L200" class="l"> </span>
+<span id="L201" class="l"> go ahead, make some 16 disk all-mixto (mixto being the mix of whatever</span>
+<span id="L202" class="l"> with techno) music pack, and upload it to cdrom.com.. that&#x27;ll give those</span>
+<span id="L203" class="l"> damned hornet raters (i think the only one is jtown), something</span>
+<span id="L204" class="l"> to groove to. write some groovy funk shit!! groove to shitty funk!</span>
+<span id="L205" class="l"> </span>
+<span id="L206" class="l"> </span>
+<span id="L207" class="l">              --------------[ MUSICAL DNA ]----------------</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l">     &quot;Would you like to study Philosophy?&quot;</span>
+<span id="L210" class="l">                        _SAD_BUT_NEW_</span>
+<span id="L211" class="l">                        --The Orb</span>
+<span id="L212" class="l"> </span>
+<span id="L213" class="l"> One day a few years ago in a biology class I saw a tv show where there was</span>
+<span id="L214" class="l"> a band that played notes signifying a strand of DNA. There was a piano,</span>
+<span id="L215" class="l"> with four notes, one for Acetate, one for Guatelamaline, one for Caline,</span>
+<span id="L216" class="l"> and one for Theremine. Or whatever the four molecules were. Anyways,</span>
+<span id="L217" class="l"> the piano would play four notes, then the strings would play a chord</span>
+<span id="L218" class="l"> that was told by the different notes.</span>
+<span id="L219" class="l"> </span>
+<span id="L220" class="l"> Who could&#x27;ve imagined it?</span>
+<span id="L221" class="l"> </span>
+<span id="L222" class="l"> Well, I know I can tell now! But you could even come up with your own</span>
+<span id="L223" class="l"> techniques, just like these people did.</span>
+<span id="L224" class="l"> </span>
+<span id="L225" class="l"> Heres what I would do though:</span>
+<span id="L226" class="l"> </span>
+<span id="L227" class="l"> Get a sample of your own DNA and take it to a lab. When they give you</span>
+<span id="L228" class="l"> back your trillions of DNA strands in ACGT strings, you will have enough</span>
+<span id="L229" class="l"> material to make an original song every time! And it will be completely</span>
+<span id="L230" class="l"> unique! Only you have your DNA!</span>
+<span id="L231" class="l"> </span>
+<span id="L232" class="l"> So take A make it A, C make it C, and G make it G, and T maybe D# or</span>
+<span id="L233" class="l"> something. Then once you&#x27;ve made four notes, put them all together and</span>
+<span id="L234" class="l"> make a chord. Once you&#x27;ve played four chords, put all THOSE together.</span>
+<span id="L235" class="l"> </span>
+<span id="L236" class="l"> Heres an example:</span>
+<span id="L237" class="l"> </span>
+<span id="L238" class="l"> DNA STRAND: ACGTGATCGATGTGCTGATGTTCGCTCGTAGTCCGTAGCTCGTAGCTG</span>
+<span id="L239" class="l"> </span>
+<span id="L240" class="l"> Notes:</span>
+<span id="L241" class="l"> Piano ACGT GATC GATG TGCT GATG TTCG CTCG TAGT CCGT AGCT CGTA GCTG</span>
+<span id="L242" class="l">           A    G    G    T    G    T    C    T    C    A    C    G</span>
+<span id="L243" class="l"> String    C    A    A    G    A    T    T    A    C    G    G    C</span>
+<span id="L244" class="l">  notes    G    T    T    C    T    C    C    G    G    C    T    T</span>
+<span id="L245" class="l">           T    C    G    T    G    G    G    T    T    T    A    G</span>
+<span id="L246" class="l">                           AG                  GG                  CC</span>
+<span id="L247" class="l">  Brass                    CA                  AT                  CT</span>
+<span id="L248" class="l">   chords                  GT                  TC                  GA</span>
+<span id="L249" class="l">                           TC                  GG                  TG</span>
+<span id="L250" class="l">                           GT                  TA                  AC</span>
+<span id="L251" class="l">                           AG                  TG                  GT</span>
+<span id="L252" class="l"> </span>
+<span id="L253" class="l"> that&#x27;s actually a clip from my DNA and a tune I tracked based on it. I</span>
+<span id="L254" class="l"> know it doesn&#x27;t seem to follow the style of lead progressions, but take</span>
+<span id="L255" class="l"> a closer look:</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l">         ACGTGATCGATGTGCTGATGTTCGCTCGTAGTCCGTAGCTCGTAGCTG</span>
+<span id="L258" class="l">        A*    *   *       *           *      *      *</span>
+<span id="L259" class="l"> piano  C *     *      *       * * *     **    * *    *</span>
+<span id="L260" class="l">        G  * *   *  * *  *  *   *   *  *   *  *   *  *  *</span>
+<span id="L261" class="l">        T   *  *   * *  *  * **   *  *  *   *   *  *   * </span>
+<span id="L262" class="l"> </span>
+<span id="L263" class="l"> string A    *    *    *    *    *    *    *    *    *</span>
+<span id="L264" class="l">        C    *    *    *    *    *    *    *    *    *</span>
+<span id="L265" class="l">        G    *    *    *    *    *    *    *    *    *</span>
+<span id="L266" class="l">        T    *    *    *    *    *    *    *    *    *</span>
+<span id="L267" class="l"> </span>
+<span id="L268" class="l"> The pattern of asterisks is obvious. For every one of the below ones there</span>
+<span id="L269" class="l"> is at least one in the previous four in the top chart.</span>
+<span id="L270" class="l"> </span>
+<span id="L271" class="l"> So you can get music from your genes. Who knew?</span>
+<span id="L272" class="l"> </span>
+<span id="L273" class="l">              -------------[ MIDI INTERFACES ]--------------</span>
+<span id="L274" class="l"> </span>
+<span id="L275" class="l">     &quot;Would you like to study Technology?&quot;</span>
+<span id="L276" class="l">                        _SAD_BUT_NEW_</span>
+<span id="L277" class="l">                        --William Orbit</span>
+<span id="L278" class="l"> </span>
+<span id="L279" class="l"> Everyone knows that you can compose any sort of music in a tracker, but</span>
+<span id="L280" class="l"> don&#x27;t you think that if you could plug your keyboard into a tracker it</span>
+<span id="L281" class="l"> would be easy to make masterpieces, especially if you could play the</span>
+<span id="L282" class="l"> piano. Of course, to play the piano takes years of practice. And then</span>
+<span id="L283" class="l"> you can track so much better!</span>
+<span id="L284" class="l"> </span>
+<span id="L285" class="l"> To make the connection between your midi keyboard and tracker program</span>
+<span id="L286" class="l"> takes massive skillz, so its best left to a guru. If you have a guru</span>
+<span id="L287" class="l"> nearby, got to him. Otherwise, I am working on a patch to where I can</span>
+<span id="L288" class="l"> patch your midi cable directly into the soundcard and it works with</span>
+<span id="L289" class="l"> Modedit.</span>
+<span id="L290" class="l"> </span>
+<span id="L291" class="l"> Its something like this:</span>
+<span id="L292" class="l"> 1. Get the midi port</span>
+<span id="L293" class="l"> 2. Read from the midi port</span>
+<span id="L294" class="l"> 3. Translate the number you get into a note</span>
+<span id="L295" class="l"> 4. Put that note in the keyboard buffer as if you typed it.</span>
+<span id="L296" class="l"> 5. Repeat step 2</span>
+<span id="L297" class="l"> </span>
+<span id="L298" class="l"> Then the tracker will think you typed the note when you really played it.</span>
+<span id="L299" class="l"> </span>
+<span id="L300" class="l"> Anyways, once you have it in, try the following:</span>
+<span id="L301" class="l"> </span>
+<span id="L302" class="l"> Press the &quot;tracking&quot; key on your tracker and set up a bunch of blank</span>
+<span id="L303" class="l"> orders. Now press the &quot;record&quot; button and play the keyboard. Guess what:</span>
+<span id="L304" class="l"> the notes show up in the tracker! Isn&#x27;t that the coolest thing you ever</span>
+<span id="L305" class="l"> saw? I know it has revolutionized my tracking style. It can do the same</span>
+<span id="L306" class="l"> for you.</span>
+<span id="L307" class="l"> </span>
+<span id="L308" class="l">              ----[ SCALES, BUT WHERE&#x27;S THE DRAGON? ]------</span>
+<span id="L309" class="l"> </span>
+<span id="L310" class="l">     &quot;WELL!?? YOU BASTERD TELL ME OR I&#x27;LL KICK YOUR ASS!&quot;</span>
+<span id="L311" class="l">                        _SAD_BUT_NEW_</span>
+<span id="L312" class="l">                           --Orbit</span>
+<span id="L313" class="l"> </span>
+<span id="L314" class="l"> c5-f5-g#5-a#5-c6-f6-g#6-a#6 - C Fucked Minor Scale (not majorly fucked)</span>
+<span id="L315" class="l"> d5-e5-f#5-g#5-c6-a6-f#6-g#6 - C Fucked Major Scale (damn this is fucked)</span>
+<span id="L316" class="l"> c5-f5-g#5-c#5-f6-g6-c#7-f#7 - D Grace Major Scale</span>
+<span id="L317" class="l"> c5-d5-e5-g5-g#5-f#6-c#7-e#7 - E Blues scale</span>
+<span id="L318" class="l"> </span>
+<span id="L319" class="l">    -------[ WAVE AND NECROS.. WAT MAKES THEM GOOD? ]---------</span>
+<span id="L320" class="l"> </span>
+<span id="L321" class="l">     &quot;Technology or Philosophy?!? Pick one, God Damn you!&quot;</span>
+<span id="L322" class="l">                        _SAD_BUT_NEW_</span>
+<span id="L323" class="l">                        --Roy Orbison</span>
+<span id="L324" class="l"> </span>
+<span id="L325" class="l"> </span>
+<span id="L326" class="l">        first off, I&#x27;ll have you know that I dont expect my views to</span>
+<span id="L327" class="l"> match those of everyone else out there, so, dont mail us with flames</span>
+<span id="L328" class="l"> :).. I think that necros and wave are both kickass musicwriters,</span>
+<span id="L329" class="l"> and I doubt my opinions will ever change :)</span>
+<span id="L330" class="l"> </span>
+<span id="L331" class="l">        I&#x27;m sure all, if not, many of you have wondered about wave,</span>
+<span id="L332" class="l"> and necros. what differenciates the two? why are they sooo good?..</span>
+<span id="L333" class="l"> i&#x27;d have to say.. groove, and emotion.</span>
+<span id="L334" class="l"> </span>
+<span id="L335" class="l">        if you ever listen to a wave tune, you wanna jump up and down</span>
+<span id="L336" class="l"> and dance and shout and whistle, hollar, groove, and run, and skip</span>
+<span id="L337" class="l"> and wank, err.. well.. you get the point. he writes damn groovy tunes!</span>
+<span id="L338" class="l"> </span>
+<span id="L339" class="l">        then again, you listen to a necros tune,and you remember shit</span>
+<span id="L340" class="l"> like when you were 5, swining on the schools swingset, and riding</span>
+<span id="L341" class="l"> a carosel at some rip-off, socialist driven, commy-pig run park, but</span>
+<span id="L342" class="l"> that doesnt matter. its emotional shit (most of the time).. so,</span>
+<span id="L343" class="l"> how can you do it?.. you probably cant, so dont try.</span>
+<span id="L344" class="l"> </span>
+<span id="L345" class="l">        anyways, I personally dont think that the two are better than</span>
+<span id="L346" class="l"> each other, but, they&#x27;re just on the opposite sides of the spectrum,</span>
+<span id="L347" class="l"> wave isnt cheeze, its just so good you wish you could call your music</span>
+<span id="L348" class="l"> &quot;wave cheeze&quot;, but, you cant, and necros isnt experimental bullshit,</span>
+<span id="L349" class="l"> its good stuff.</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">             -------------[ JUGGLING RAVES ]-----------------</span>
+<span id="L352" class="l"> </span>
+<span id="L353" class="l"> &quot;Oh I like to juggle juggle juggle juggle I like to juggle all day.&quot;</span>
+<span id="L354" class="l">                   _HIGHER_STATE_OF_UNCONCIOUSNESS_</span>
+<span id="L355" class="l">                                     --Josh Wank  </span>
+<span id="L356" class="l"> </span>
+<span id="L357" class="l"> Its the newest rage in the techno seen.</span>
+<span id="L358" class="l"> </span>
+<span id="L359" class="l"> Juggling raves.</span>
+<span id="L360" class="l"> </span>
+<span id="L361" class="l"> The years go by and new forms come and go, but it looks like this one is</span>
+<span id="L362" class="l"> staying. Ever go to a rave and see people juggling oranges instead of</span>
+<span id="L363" class="l"> dancing?</span>
+<span id="L364" class="l"> </span>
+<span id="L365" class="l"> Thats the new thing. People like to juggle to techno.</span>
+<span id="L366" class="l"> </span>
+<span id="L367" class="l"> Its easy to learn; a hell of a lot easier than dancing. Just take some</span>
+<span id="L368" class="l"> fruit out of your drawer. Don&#x27;t trust yourself to be able to juggle</span>
+<span id="L369" class="l"> knives or glass balls right from the start.</span>
+<span id="L370" class="l"> </span>
+<span id="L371" class="l"> Now throw them all up in the air. Let them drop to the ground. This is so</span>
+<span id="L372" class="l"> you can learn to deal with failure. Try it again and again. Resist the</span>
+<span id="L373" class="l"> temptation to grab them. This is to build self control.</span>
+<span id="L374" class="l"> </span>
+<span id="L375" class="l"> Now throw them all up in the air and catch them! Got it! Cool! If not,</span>
+<span id="L376" class="l"> you&#x27;ve got a lot of work ahead of you.</span>
+<span id="L377" class="l"> </span>
+<span id="L378" class="l"> Ok, try throwing one.</span>
+<span id="L379" class="l"> </span>
+<span id="L380" class="l"> Now two.</span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l"> Now three. Can you catch three?</span>
+<span id="L383" class="l"> </span>
+<span id="L384" class="l"> Cool, now you can go on to knives! Try it out!</span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l"> And go to all the juggling raves you can find!</span>
+<span id="L387" class="l"> </span>
+<span id="L388" class="l">              ---------------[ DRUMS ]-------------------</span>
+<span id="L389" class="l"> </span>
+<span id="L390" class="l"> &quot;Bing bang boom bosh te tshhhh.&quot;</span>
+<span id="L391" class="l">                     _Second_Best_Drum_Loop_</span>
+<span id="L392" class="l">                      --Neon Hunter</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l"> I was thinking about the groove interactivity chapter and now I realize</span>
+<span id="L395" class="l"> that it needs more. Like more about drums. Heres how you can do cool</span>
+<span id="L396" class="l"> drums:</span>
+<span id="L397" class="l"> </span>
+<span id="L398" class="l"> First lets look at the three classic drumbeats:</span>
+<span id="L399" class="l"> </span>
+<span id="L400" class="l"> 1. BHHHSHHHBHHHSHHSBHHHSHBHHHBHSHHSBHHHSHHHBHHHSHHSBHHHSHBHHHBHSSSS</span>
+<span id="L401" class="l"> </span>
+<span id="L402" class="l"> 2. BHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRHBHRH</span>
+<span id="L403" class="l"> </span>
+<span id="L404" class="l"> 3. BHHHSHBSBSBHSHSSBHHHSHBSBSBHSHHHBHHHSHBSBSBHSHSSBHHHSHBSBSBHSHSS</span>
+<span id="L405" class="l"> </span>
+<span id="L406" class="l"> With the Bs being bassdrums, S being snaredrums, the H being hihats,</span>
+<span id="L407" class="l"> R being ridecymbals</span>
+<span id="L408" class="l"> </span>
+<span id="L409" class="l"> Of course, it sounds stupid all in one channel, so lets spread them out:</span>
+<span id="L410" class="l"> </span>
+<span id="L411" class="l"> 1. B       B       B     B   B     B       B       B     B   B     </span>
+<span id="L412" class="l">     HHH HHH HHH HH  HHH H HHH H HH  HHH HHH HHH HH  HHH H HHH H</span>
+<span id="L413" class="l">        S       S  S    S       S  S    S       S  S    S       SSSS </span>
+<span id="L414" class="l"> </span>
+<span id="L415" class="l"> 2. B   B   B   B   B   B   B   B   B   B   B   B   B   B   B   B   </span>
+<span id="L416" class="l">     H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H H</span>
+<span id="L417" class="l">      R   R   R   R   R   R   R   R   R   R   R   R   R   R   R   R</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l"> 3. B     B B B     B     B B B     B     B B B     B     B B B     </span>
+<span id="L420" class="l">     HHH H     H H   HHH H     H HHH HHH H     H H   HHH H     H H</span>
+<span id="L421" class="l">        S  S S  S SS    S  S S  S       S  S S  S SS    S  S S  S SS</span>
+<span id="L422" class="l"> </span>
+<span id="L423" class="l"> Now knowing the scene these days, they&#x27;ll never let you get away with</span>
+<span id="L424" class="l"> these beats, so you have to change them around in sneaky ways to use them</span>
+<span id="L425" class="l"> but they are still some of the best beats around.</span>
+<span id="L426" class="l"> </span>
+<span id="L427" class="l"> Try different things. Experiment. Reverse them, change the hihat to</span>
+<span id="L428" class="l"> a crash cymbal or something. Swap the bass and snare. Mix in bits</span>
+<span id="L429" class="l"> of other beats to add spice. Your song will thank you for it.</span>
+<span id="L430" class="l"> </span>
+<span id="L431" class="l">                       ------------------------------</span>
+<span id="L432" class="l"> </span>
+<span id="L433" class="l"> That was the second installment of our second music theory series of</span>
+<span id="L434" class="l"> articles. If you want to contact us, our email address is at the top</span>
+<span id="L435" class="l"> and bottom of the file.</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">       Love,</span>
+<span id="L438" class="l">           Finrez,</span>
+<span id="L439" class="l">           Radio Shock,</span>
+<span id="L440" class="l">           and Neon Hunter</span>
+<span id="L441" class="l">          modsquad@juno.com</span>
+<span id="L442" class="l"> </span>
+<span id="L443" class="l">----------------------------------------------------------------------------</span>
+<span id="L444" class="l"> </span>
+<span id="L445" class="l"> </span>
+<span id="a3" class="an"></span><span id="L446" class="l hd">--[3. Trackers Boringness or DO NOT COPY !!]----------------[Der Walfisch]--</span>
+<span id="L447" class="l"> </span>
+<span id="L448" class="l"> Hi, I&#x27;m a tuner about 4 years and I read traxweekly as I get it.</span>
+<span id="L449" class="l"> One interesting point on the whole tracking world to me is the so-called</span>
+<span id="L450" class="l"> &quot;lack of professionality&quot; by the tracks or the tuners, maybe of the</span>
+<span id="L451" class="l"> compositioning, maybe of the hardware they&#x27;re using, maybe of the samples,</span>
+<span id="L452" class="l"> whether ripped or not, maybe of the style they&#x27;re playing....seems like</span>
+<span id="L453" class="l"> there is always a reason why tracking is not professional. I think the </span>
+<span id="L454" class="l"> main reason for this is the lack of reasons for using tracked music.</span>
+<span id="L455" class="l"> The very best tracked music in my ears is just demo music, because it</span>
+<span id="L456" class="l"> was made for filling a function : make a demo sound. Mostly the demos are</span>
+<span id="L457" class="l"> as good as their soundtrack. If the demo is weird, the sound is weird too.</span>
+<span id="L458" class="l"> And not to compare with anything out of the demo world. If the sound is </span>
+<span id="L459" class="l"> better than the demo - just sounding like direct cd output - it becomes</span>
+<span id="L460" class="l"> suspicious. Every good jazz band becomes boring if they&#x27;re trying to play</span>
+<span id="L461" class="l"> techno. Every rapping MC which is too near at the original is boring too.</span>
+<span id="L462" class="l"> Listen to Warren G&#x27;s &quot;Regulator&quot; - thats boring! Listen to Ice Cube&#x27;s</span>
+<span id="L463" class="l"> &quot;When will they shoot?&quot; - thats c00L !! Ice Cube is a creator, and every</span>
+<span id="L464" class="l"> tracker may better realize himself as a creator too. Quality will come</span>
+<span id="L465" class="l"> over time. Here&#x27;s my opinion on</span>
+<span id="L466" class="l"> </span>
+<span id="L467" class="l"> -what a tracker is:</span>
+<span id="L468" class="l"> </span>
+<span id="L469" class="l"> What can you do if you can&#x27;t play any instrument and think you will never</span>
+<span id="L470" class="l"> learn one? Because you&#x27;re finger-lame or the only instrument you could </span>
+<span id="L471" class="l"> play is the one you DONT WANT to play ? This is the main reason why I&#x27;m</span>
+<span id="L472" class="l"> a tracker, because I always wanted to play ANY instrument, I always wanted </span>
+<span id="L473" class="l"> to compose or maybe to sing, but playing is a very physical thing, and I </span>
+<span id="L474" class="l"> never got much luck in learning such things. I&#x27;ve heard a lot of music, </span>
+<span id="L475" class="l"> and I always did imagine if I could play ANY instrument, what would I do?</span>
+<span id="L476" class="l"> That was what I did when I first got my fingers on a tracker. Once after</span>
+<span id="L477" class="l"> making my very first tunes, I felt big respect to any musician existing, </span>
+<span id="L478" class="l"> because I saw the work behind and now I also could think their way .</span>
+<span id="L479" class="l"> On my opinion, a tracker is something additional to musicians and DJ&#x27;s.</span>
+<span id="L480" class="l"> He&#x27;s both but nothing of both. Like a good DJ catches sounds and mix it to</span>
+<span id="L481" class="l"> something own special, a tracker catches samples and does something </span>
+<span id="L482" class="l"> totally new.</span>
+<span id="L483" class="l"> If he wants to! Unfortunately some tuners specializes theirselves in doing</span>
+<span id="L484" class="l"> </span>
+<span id="L485" class="l"> -&quot;realistic&quot; tunes</span>
+<span id="L486" class="l"> </span>
+<span id="L487" class="l"> which I found mostly BORING! I may except f.e.Necros, because he&#x27;s not only</span>
+<span id="L488" class="l"> a good musician but also a good composer - which is NOT the same. Tracked</span>
+<span id="L489" class="l"> music is always a little bit more weak than the original. Making realistic </span>
+<span id="L490" class="l"> tunes is like german rap music - mostly it sucks! German rappers may have</span>
+<span id="L491" class="l"> their fans, maybe they&#x27;re not that much bad, but they&#x27;re nothing compared</span>
+<span id="L492" class="l"> to any bad westcoast rapper ! On the other side, no black rapper can  </span>
+<span id="L493" class="l"> look that c00L that Kraftwerk looks like ! Kraftwerk did what the most</span>
+<span id="L494" class="l"> german musicians did not - making their own music which is best on them !</span>
+<span id="L495" class="l"> Have you ever heard german swing?? If not, then you&#x27;re a very lucky </span>
+<span id="L496" class="l"> guy indeed!! Every &quot;realistic&quot; tune is a little bit like german swing,</span>
+<span id="L497" class="l"> every jazz-tune is off course not &quot;tracked jazz&quot; but tracked pseudo-jazz. </span>
+<span id="L498" class="l"> I gonna have respect to the work of those tuners, but they may ask </span>
+<span id="L499" class="l"> theirselves if this is worth it! Plagiatism is not very c00L....</span>
+<span id="L500" class="l"> By the way, talking about plagiatism: Self-plagiatism is what I mostly</span>
+<span id="L501" class="l"> need to critizise on</span>
+<span id="L502" class="l"> </span>
+<span id="L503" class="l"> - music discs</span>
+<span id="L504" class="l"> </span>
+<span id="L505" class="l"> but I still may except Necros. His &quot;Progression&quot; music disc was not only</span>
+<span id="L506" class="l"> perfect sound, also every tune got a different sound! Mostly music discs</span>
+<span id="L507" class="l"> features collected modules of the composer, who mostly got his &quot;style&quot;,</span>
+<span id="L508" class="l"> which means mostly the same samples or the same song principe or the</span>
+<span id="L509" class="l"> same song theme in every tune is used. These trackers may be damn c00L,</span>
+<span id="L510" class="l"> but only on one tune, which concept will be repeated ten times. Maybe</span>
+<span id="L511" class="l"> I&#x27;m the only one who think this is boring, dontcare how good the tracker</span>
+<span id="L512" class="l"> is. But if you&#x27;re unable to do a fast, a slow, an intensive and a loose</span>
+<span id="L513" class="l"> tune on one music disc, you&#x27;re unable to do a music disc anyway. Big</span>
+<span id="L514" class="l"> Respects to everyone who did a music disc that way (I haven&#x27;t heard that </span>
+<span id="L515" class="l"> much good music discs yet...)</span>
+<span id="L516" class="l">  </span>
+<span id="L517" class="l"> Maybe the most specialized &quot;realistic&quot; veteran tuners may not agree with</span>
+<span id="L518" class="l"> me and will continue doing their stuff, which is ok. Maybe these c00L</span>
+<span id="L519" class="l"> stylish tuners may never try to leave their style - what for?? But every</span>
+<span id="L520" class="l"> beginning tuner may think about that ! Every song becomes boring with</span>
+<span id="L521" class="l"> the time ! All 3 points have one message: DONT TRY TO COPY !!</span>
+<span id="L522" class="l"> </span>
+<span id="L523" class="l"> Every agrees and disagrees please send to me...</span>
+<span id="L524" class="l"> </span>
+<span id="L525" class="l"> Der Walfisch / E.S.C. (Der_Walfisch@outside.in-berlin.de)</span>
+<span id="L526" class="l"> </span>
+<span id="L527" class="l">----------------------------------------------------------------------------</span>
+<span id="L528" class="l"> </span>
+<span id="L529" class="l"> </span>
+<span id="a4" class="an"></span><span id="L530" class="l hd">--[4. Why Stop At Your Computer?]---------------------------------[Coplan]--</span>
+<span id="L531" class="l"> </span>
+<span id="L532" class="l"> 	If you are any bit like myself, and many other participants in the</span>
+<span id="L533" class="l"> demoscene, you are addicted to tracked music.  In fact, as I write this </span>
+<span id="L534" class="l"> article, I have &quot;Dirt&quot; by Khyron playing in the background.  Whenever I</span>
+<span id="L535" class="l"> have a chance, I like to listen to as much tracked music as I can.  Don&#x27;t</span>
+<span id="L536" class="l"> get me wrong, I still listen to my favorite Tori Amos and Edwin Collins</span>
+<span id="L537" class="l"> albums.  But I often find myself sitting at my computer staring deep into</span>
+<span id="L538" class="l"> the pattern data scrolling across my screen.  Unfortunately, my computer</span>
+<span id="L539" class="l"> is a desktop model, and I can&#x27;t take it with me everywhere I go.  Besides,</span>
+<span id="L540" class="l"> I would imagine it would be rude if I were to pull out my laptop and start</span>
+<span id="L541" class="l"> playing &quot;Dust to Dust&quot; (Leviathan) during a lecture.  So what do I do?  I</span>
+<span id="L542" class="l"> record them. </span>
+<span id="L543" class="l"> 	If you are thinking right now &quot;what good will a WAV file do if you </span>
+<span id="L544" class="l"> still don&#x27;t have your computer with you,&quot; then you are too deeply involved </span>
+<span id="L545" class="l"> in the computer age.  I mean record the songs onto a simple audio cassette, </span>
+<span id="L546" class="l"> a matter of a few bucks in price.  For some people, recording your songs </span>
+<span id="L547" class="l"> may be more difficult than for others.  I personally have my computer </span>
+<span id="L548" class="l"> hooked directly into my stereo system.  So recording my tracked music</span>
+<span id="L549" class="l"> collection onto audio cassettes wasn&#x27;t a difficult task.  However, many</span>
+<span id="L550" class="l"> people don&#x27;t have this type of setup.  I would be willing to bet that more</span>
+<span id="L551" class="l"> people don&#x27;t have their computer hooked into their stereo system.  But</span>
+<span id="L552" class="l"> don&#x27;t give up!  You are a bright person (you learned tracking didn&#x27;t</span>
+<span id="L553" class="l"> you?).  I am sure you can figure out an easy way to connect your soundcard</span>
+<span id="L554" class="l"> to your stereo system.  Even if you connect it to a box radio with tape</span>
+<span id="L555" class="l"> deck.  I personally used a head-phone extension cord* and a Y-cable</span>
+<span id="L556" class="l"> (splitter cable) with RCA input plugs.  I plugged the RCA input into my</span>
+<span id="L557" class="l"> TV/VCR** input on my stereo.  Guess what?  That&#x27;s it.  Nothing fancy, and</span>
+<span id="L558" class="l"> it only cost me a total of $12.00 (US).</span>
+<span id="L559" class="l">	Now that you have your soundcard hooked up to your stereo, start </span>
+<span id="L560" class="l"> recording.  It&#x27;s really as simple as pressing the record button on your </span>
+<span id="L561" class="l"> stereo (with a fresh blank tape of course), and playing a song.  Each </span>
+<span id="L562" class="l"> stereo system is different, but most often, you will have to switch to</span>
+<span id="L563" class="l"> the option you plugged your computer into to record from it (this should</span>
+<span id="L564" class="l"> be obvious to most people).  Before you go off and start recording, I have</span>
+<span id="L565" class="l"> one recommendation.  Try to use the tracking program that the song was</span>
+<span id="L566" class="l"> tracked in whenever possible.  This will assure you that you are recording</span>
+<span id="L567" class="l"> the song in the quality that the tracker intended. </span>
+<span id="L568" class="l">	So, now you have your audio tapes of your collection, or at least </span>
+<span id="L569" class="l"> your favorite songs.  What do you do with the tapes?  If you haven&#x27;t </span>
+<span id="L570" class="l"> thought of a million uses yet, I can give you a few ideas.  Listen to</span>
+<span id="L571" class="l"> them in the car on your way to work or school.  Take a walk-man with you</span>
+<span id="L572" class="l"> and listen to it as you do your routine, whatever it may be.  I personally</span>
+<span id="L573" class="l"> like to study to it when I am at school.  One benefit of tracked music</span>
+<span id="L574" class="l"> that I have found is that it typically does not have lyrics.  So, there&#x27;s</span>
+<span id="L575" class="l"> nothing to sing along to, and in turn, nothing to distract me from my</span>
+<span id="L576" class="l"> studying.  I have even gotten a few people interested in tracking by</span>
+<span id="L577" class="l"> playing my tapes for them.  One friend of mine wrote several songs for his</span>
+<span id="L578" class="l"> girlfriend and recorded them onto audio cassettes because she doesn&#x27;t have</span>
+<span id="L579" class="l"> a computer (unfortunately, people like that do still exist!!!).  There are</span>
+<span id="L580" class="l"> probably zillions more uses that I haven&#x27;t come across yet.</span>
+<span id="L581" class="l">	At first, I wasn&#x27;t going to write this article.  I thought that </span>
+<span id="L582" class="l"> everyone did this, or at least something similar.  But upon talking to some </span>
+<span id="L583" class="l"> fellow tracking friends of mine, I discovered that they hadn&#x27;t even thought </span>
+<span id="L584" class="l"> of this.  So, I figured that there must be a handful of people out there </span>
+<span id="L585" class="l"> that also haven&#x27;t thought of this.  It&#x27;s a great art form, don&#x27;t let it</span>
+<span id="L586" class="l"> sit on your computer.  Take it with you. </span>
+<span id="L587" class="l"> </span>
+<span id="L588" class="l"> TIPS (as starred appropriately above):</span>
+<span id="L589" class="l"> *   - If you want stereo sound on your audio cassette, make sure you have a </span>
+<span id="L590" class="l">     stereo cable.  The easiest way to check this is to look at the </span>
+<span id="L591" class="l">     jack.  If it has one rubber band around it, it&#x27;s a mono cable.  If </span>
+<span id="L592" class="l">     it has two, that&#x27;s a stereo cable.</span>
+<span id="L593" class="l"> ** - Some stereo systems have two sets of inputs.  If you have one marked </span>
+<span id="L594" class="l">     PHONO or PHONOGRAPH, avoid it if at all possible.  It is set up for a </span>
+<span id="L595" class="l">     record player.  Often that set of inputs doesn&#x27;t have as high a quality </span>
+<span id="L596" class="l">     of sound as something like the TV/VCR inputs.</span>
+<span id="L597" class="l"> </span>
+<span id="L598" class="l"> </span>
+<span id="L599" class="l"> Comments, ideas...e-mail me.</span>
+<span id="L600" class="l"> </span>
+<span id="L601" class="l"> Coplan</span>
+<span id="L602" class="l"> coplan@thunder.ocis.temple.edu</span>
+<span id="L603" class="l"> </span>
+<span id="L604" class="l">----------------------------------------------------------------------------</span>
+<span id="L605" class="l"> </span>
+<span id="L606" class="l"> </span>
+<span id="a5" class="an"></span><span id="L607" class="l hd">--[5. &quot;Whaddaya mean Lame? Noone is lame?&quot;]-------------------------[Ming]--</span>
+<span id="L608" class="l"> </span>
+<span id="L609" class="l"> by MING / DiSC, Scrape, WMR</span>
+<span id="L610" class="l"> </span>
+<span id="L611" class="l"> Email: mattias.inghe@mailbox.swipnet.se</span>
+<span id="L612" class="l"> </span>
+<span id="L613" class="l"> --Reply to Era┤s &quot;An Outsider&#x27;s Outlook Into The Demoscene&quot; in TW#86-- </span>
+<span id="L614" class="l"> </span>
+<span id="L615" class="l">  As the outsider to The Scene I until recently (about a year ago) was, I</span>
+<span id="L616" class="l"> have to protest against the narrownindness reflected in the article. What</span>
+<span id="L617" class="l"> is described is not the scene I have come to know and love, this wonderful</span>
+<span id="L618" class="l"> meltingpot of styles, ideas and influences. Instead, someone says &quot;This is</span>
+<span id="L619" class="l"> how it should or not should sound. Those styles thou should not work with,</span>
+<span id="L620" class="l"> only because what you make is tracked modules, and not commercial.&quot;</span>
+<span id="L621" class="l"> </span>
+<span id="L622" class="l">  It┤s like saying to a dude with a pen: &quot;Thou MUST write poems, thou SHALL</span>
+<span id="L623" class="l"> NOT write anything else.&quot; Pretty naive, eh?</span>
+<span id="L624" class="l"> </span>
+<span id="L625" class="l"> &gt;        It&#x27;s when you try to compose something original and it winds up</span>
+<span id="L626" class="l"> &gt;sounding like the usual commercial breakbeat (and worse still, everyone</span>
+<span id="L627" class="l"> &gt;you play it for notices), that massive rejection from real-worlders comes</span>
+<span id="L628" class="l"> &gt;into play (unless you acknowledge it to be a cover track).</span>
+<span id="L629" class="l"> </span>
+<span id="L630" class="l">  Funny, the only rejection from the so called real-life listeners I┤ve</span>
+<span id="L631" class="l"> recieved so far have been reactions to songs that have been simply bad,</span>
+<span id="L632" class="l"> period. Regardless of style, commercial or underground (Ooh, I hate to</span>
+<span id="L633" class="l"> cathegorize this way, music is music, and nothing else.) good, enjoyable</span>
+<span id="L634" class="l"> songs are equally appretiated.</span>
+<span id="L635" class="l"> </span>
+<span id="L636" class="l"> &gt;Now, when a</span>
+<span id="L637" class="l"> &gt;musician simply emulates the style of another tracker, then that clearly</span>
+<span id="L638" class="l"> &gt;demostrates a lack of originality and creativity on their part. Lame! :-/</span>
+<span id="L639" class="l"> </span>
+<span id="L640" class="l">  If a composer wants to do music in a certain style, is he really worth</span>
+<span id="L641" class="l"> the title Lamer just because he don┤t invent his own genre or style?</span>
+<span id="L642" class="l"> Composing is as all other cultural activities a creative artform, and noone</span>
+<span id="L643" class="l"> can direct another artists influences or style. If a song is made in a</span>
+<span id="L644" class="l"> style resembling another composer I frankly don┤t give a damn. I listen to</span>
+<span id="L645" class="l"> the musical qualities, and not to the coolness factor.</span>
+<span id="L646" class="l"> </span>
+<span id="L647" class="l"> &gt;The whole point to listening to tracked music (in my opinion)</span>
+<span id="L648" class="l"> &gt;is mainly to get away from the crap we hear on the radio, in concerts, and</span>
+<span id="L649" class="l"> &gt;on tapes/CDs. If one truly wanted to hear commercial, mainstream,</span>
+<span id="L650" class="l"> &gt;real-world music, wouldn&#x27;t they just stick to the traditional medium of</span>
+<span id="L651" class="l"> &gt;radio/TV or tapes/CDs?</span>
+<span id="L652" class="l"> </span>
+<span id="L653" class="l">  The one thing that fascinated me most with the scene was the attitude that</span>
+<span id="L654" class="l"> nothing was wrong, everything was accepted. FM-rock, hilbillie-country or</span>
+<span id="L655" class="l"> underground, as long as you┤re openmided and not commited to elitism. Why</span>
+<span id="L656" class="l"> would mainstream music not fit in the scene┤s structure? As I said, what-</span>
+<span id="L657" class="l"> ever label you put on the music you hear, it is still music. The tracking</span>
+<span id="L658" class="l"> scene of today is a great marketplace(?) where all kinds of music can be</span>
+<span id="L659" class="l"> released, discussed and listened to without prejudice.  </span>
+<span id="L660" class="l"> </span>
+<span id="L661" class="l"> &gt;Composing is a process and sampling is part of that process.</span>
+<span id="L662" class="l"> </span>
+<span id="L663" class="l">  Correction: Composing and Sampling are both parts of the process called</span>
+<span id="L664" class="l"> Tracking. Composing CAN be done with a pen and a notesheet too, you know.</span>
+<span id="L665" class="l"> </span>
+<span id="L666" class="l"> &gt;The idea I am conveying here is REALISM. With</span>
+<span id="L667" class="l"> &gt;16-bit sample capabilities of IT and FT2 and the CD-Audio ripping utils</span>
+<span id="L668" class="l"> &gt;out there, maybe trackers can achieve greater realism in their music and</span>
+<span id="L669" class="l"> &gt;we can hear cover songs that sound less artificial, less synthesized in</span>
+<span id="L670" class="l"> &gt;the future.</span>
+<span id="L671" class="l"> </span>
+<span id="L672" class="l">  Amen. The quality of a tracked tune (if conducted with skill) could</span>
+<span id="L673" class="l"> nowadays be fully compareable with any syntesized music on disc. Let┤s</span>
+<span id="L674" class="l"> just hope that pepole understands that they posess powerful (and cheep :)</span>
+<span id="L675" class="l"> tools for making professional music, and not just something to make bleepy</span>
+<span id="L676" class="l"> demo tunes with. (Nothing wrong with that tough. It┤s still music. :D)</span>
+<span id="L677" class="l"> </span>
+<span id="L678" class="l"> &gt;        It&#x27;s things like seeing repetitive music (STOP REUSING THE EXACT</span>
+<span id="L679" class="l"> &gt;SAME PATTERN 4 OR MORE TIMES!!! ARGH!!!) that define my pet peeve...</span>
+<span id="L680" class="l"> &gt;please don&#x27;t drag out a song any longer than it needs to be. The length of</span>
+<span id="L681" class="l"> &gt;a demo, pic, or song is simply measured by the imagination of its creator.</span>
+<span id="L682" class="l"> </span>
+<span id="L683" class="l">  Again, that is what is called artistic freedom. If the effect the creator</span>
+<span id="L684" class="l"> of a tune wishes to achieve is repetition, I┤d say he is free to reuse as</span>
+<span id="L685" class="l"> many pattern he want. But then maybe noone likes the tune, but that┤s</span>
+<span id="L686" class="l"> another story. Then we┤re into success and popularity , an often tedious</span>
+<span id="L687" class="l"> subject, which could end up with the statement that Mainsteam Is Better,</span>
+<span id="L688" class="l"> Because It┤s More Popular. And who agrees with that? At least not I. :)</span>
+<span id="L689" class="l"> </span>
+<span id="L690" class="l">  And what is the lenght of a pic? ;) </span>
+<span id="L691" class="l"> </span>
+<span id="L692" class="l"> &gt;The Hornet Team, despite</span>
+<span id="L693" class="l"> &gt;criticism for its lack of objectivity in ratings (hey, they&#x27;re only</span>
+<span id="L694" class="l"> &gt;human!) are doing the demoscene a great service but I feel that they could</span>
+<span id="L695" class="l"> &gt;improve their objectivity if their ratings were more detailed.</span>
+<span id="L696" class="l"> </span>
+<span id="L697" class="l">  Or if they skipped the ratings. I have heard glorious * songs and totally</span>
+<span id="L698" class="l"> crap rated up to ****. But this have geen debated back and forth so much</span>
+<span id="L699" class="l"> that I guess there is nothing more to say. So I won┤t.</span>
+<span id="L700" class="l"> </span>
+<span id="L701" class="l">  Anyway, I┤ve said what I wanted to say here, that this stupid labeling</span>
+<span id="L702" class="l"> into Mainstream and Underground, this talk about the lameness of copying</span>
+<span id="L703" class="l"> styles and lameness or nonlameness of certain composing methods is just</span>
+<span id="L704" class="l"> plain bullshit. Noone is lame, except those who claims that other are.</span>
+<span id="L705" class="l"> (Did that line make ME lame then? :D) Keep doing whatever music you want</span>
+<span id="L706" class="l"> to and don┤t let the norm police catch you.</span>
+<span id="L707" class="l"> </span>
+<span id="L708" class="l">  Unfortunately, the scene have somewhat turned rigid lately because of</span>
+<span id="L709" class="l"> exactly this. Some pepole, quite a few, with great influence over the lot</span>
+<span id="L710" class="l"> have become so obsessed with this Underground thing that the movement have</span>
+<span id="L711" class="l"> been suffering. Less openminded pepole, growing elitism and a general fear</span>
+<span id="L712" class="l"> of being uncool is IMO the biggest threat of this thing we call the Scene.</span>
+<span id="L713" class="l"> </span>
+<span id="L714" class="l">  Anyway, I┤m not gonna hang out any names here, but if what I just said</span>
+<span id="L715" class="l"> pisses you off, you┤re probably one of them. ]&gt;8*D=</span>
+<span id="L716" class="l"> </span>
+<span id="L717" class="l">  Now I┤m done yodeling. :) I┤d appretiate feedback and continued public</span>
+<span id="L718" class="l"> debate on this, since I really think it┤s important.</span>
+<span id="L719" class="l"> </span>
+<span id="L720" class="l"> hugz</span>
+<span id="L721" class="l">   MING</span>
+<span id="L722" class="l"> </span>
+<span id="L723" class="l">----------------------------------------------------------------------------</span>
+<span id="L724" class="l"> </span>
+<span id="L725" class="l"> </span>
+<span id="s-closing" class="an"></span><span id="L726" class="l hd">/-[Closing]-----------------------------------------------------------------</span>
+<span id="L727" class="l">---------------------------------------------------------------------------/</span>
+<span id="L728" class="l"> </span>
+<span id="L729" class="l"> TraxWeekly is available via FTP from:</span>
+<span id="L730" class="l"> ftp.cdrom.com /demos/incoming/info (new issues)</span>
+<span id="L731" class="l"> ftp.cdrom.com /demos/info/traxweek/1995/ (back issues)</span>
+<span id="L732" class="l">               /demos/info/traxweek/1996/ (back issues)</span>
+<span id="L733" class="l">               /demos/info/traxweek/1997/ (back issues)</span>
+<span id="L734" class="l"> </span>
+<span id="L735" class="l"> TraxWeekly W3 is under development by Pinion (pinion@netcom.com)</span>
+<span id="L736" class="l"> </span>
+<span id="L737" class="l"> To subscribe, send mail to:      listserver@unseen.aztec.co.za</span>
+<span id="L738" class="l"> and put in the message body:     subscribe trax-weekly [name] (NOT address)</span>
+<span id="L739" class="l"> To unsubscribe, mail same and:   unsubscribe trax-weekly (in message body)</span>
+<span id="L740" class="l"> </span>
+<span id="L741" class="l"> Contributions for TraxWeekly must be formatted for *76* columns,</span>
+<span id="L742" class="l"> must have a space preceding each line, and have some measure of</span>
+<span id="L743" class="l"> journalistic value.  Please try to avoid the use of high ascii</span>
+<span id="L744" class="l"> characters, profanity, and above all: use your common sense.</span>
+<span id="L745" class="l"> </span>
+<span id="L746" class="l"> Contributions should be mailed as plain ascii text or filemailed</span>
+<span id="L747" class="l"> to: gwie@csusm.edu before 11:00pm PST (North America) every Wednesday.</span>
+<span id="L748" class="l"> </span>
+<span id="L749" class="l"> TraxWeekly is usually released over the listserver and ftp.cdrom.com</span>
+<span id="L750" class="l"> every Thursday or Friday at 10:00am PST (North America).</span>
+<span id="L751" class="l"> </span>
+<span id="L752" class="l"> TraxWeekly does not discriminate based on age, gender, race, political</span>
+<span id="L753" class="l"> or religious statures and standpoints.</span>
+<span id="L754" class="l"> </span>
+<span id="L755" class="l"> The staff can be reached at the following:</span>
+<span id="L756" class="l"> </span>
+<span id="L757" class="l"> Editor:   Psibelius (Gene Wie)..............gwie@csusm.edu</span>
+<span id="L758" class="l"> Staff:    Atlantic (Barry Freeman)..........atlantic@arcos.org</span>
+<span id="L759" class="l">           Benjamin Krause...................orogork@cs.tu-berlin.de</span>
+<span id="L760" class="l">           Fred (Fred Fredricks).............fred@paracom.com</span>
+<span id="L761" class="l">           Kal Zakath (John Townsend)........jtownsen@sescva.esc.edu</span>
+<span id="L762" class="l">           Kleitus (Seth Katzman)............katzms@rpi.edu</span>
+<span id="L763" class="l">           Mage (Glen Dwayne Warner).........gdwarner@vinson.navy.mil</span>
+<span id="L764" class="l">                                             gdwarner@ricochet.net</span>
+<span id="L765" class="l"> </span>
+<span id="L766" class="l"> Graphic Contributors:</span>
+<span id="L767" class="l">           Cruel Creator . Stezotehic . Squidgalator2 . White Wizard</span>
+<span id="L768" class="l"> </span>
+<span id="L769" class="l"> TraxWeekly is a HORNET affiliation.</span>
+<span id="L770" class="l"> Copyright (c)1995,1996,1997 - TraxWeekly Publishing, All Rights Reserved.</span>
+<span id="L771" class="l"> </span>
+<span id="L772" class="l"> </span>
+<span id="s-end" class="an"></span><span id="L773" class="l hd">/-[END]---------------------------------------------------------------------</span>
+<span id="L774" class="l">---------------------------------------------------------------------------/</span>
+<span id="L775" class="l">                                         ::</span>
+<span id="L776" class="l">                                          :::                  :</span>
+<span id="L777" class="l">     . ..... ..............................:::.................:....</span>
+<span id="L778" class="l">                                            :::                :</span>
+<span id="L779" class="l">                                            ::::               :</span>
+<span id="L780" class="l">        .::::.      .:::::.:::.     ..::::  ::::               :</span>
+<span id="L781" class="l">       ::    ::    :::  .::  ::    ::     WW::::               :</span>
+<span id="L782" class="l">       ::.   ::   :::  .::  ::   .::        ::::               :</span>
+<span id="L783" class="l">        :::.::.  :::  .:: .::  .:::::...   :: :::..      ... ..: ...</span>
+<span id="L784" class="l"> ..::::::::::::::::  .:: .:::::::   ::::::::    ::::::.. ::: ::: :::</span>
+<span id="L785" class="l">                                                               :</span>
+<span id="L786" class="l">                                              until next week! =)</span>
+<span id="L787" class="l">           ..  ... .. ....... ............... .................:..... .. .</span>
+<span id="L788" class="l">                                                               :</span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/traxweekly/TRAXWEEK.087.html">← TRAXWEEK.087</a> · <a href="../../raw/traxweekly/TRAXWEEK.089.html">TRAXWEEK.089 →</a></div></footer></article></main>
+  <aside class="rail"><nav class="toc"><h4>In this file</h4><ul><li class="l2"><a href="#s-letters-and-feedback">Letters and Feedback</a></li><li class="l3"><a href="#a1">1. Letter from Snowman</a></li><li class="l2"><a href="#s-general-articles">General Articles</a></li><li class="l3"><a href="#a2">2. Music Theory: A Modern Approach</a></li><li class="l3"><a href="#a3">3. Trackers Boringness or DO NOT COPY !!</a></li><li class="l3"><a href="#a4">4. Why Stop At Your Computer?</a></li><li class="l3"><a href="#a5">5. &quot;Whaddaya mean Lame? Noone is lame?&quot;</a></li><li class="l2"><a href="#s-closing">Closing</a></li><li class="l2"><a href="#s-end">END</a></li></ul></nav><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-tw087-music-theory-a-modern-approach.html">TW #87–#97 — Music Theory: A Modern Approach (The Modsquad, seven parts)</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, TraxWeekly articles…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:technique</code> <code>type:concept</code> <code>type:entity</code> <code>type:summary</code> <code>type:tw</code> · <code>kind:tool</code> <code>kind:person</code> … · <code>platform:c64</code> <code>platform:gameboy</code> <code>platform:pc-tracker</code> · <code>tag:sid</code> · hex and tracker notation search as typed (<code>$0E</code>, <code>Gxx</code>, <code>C-4</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-08-30 · 476 pages · 9084 links · 2 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>
