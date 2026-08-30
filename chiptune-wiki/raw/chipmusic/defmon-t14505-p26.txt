@@ -1,0 +1,268 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+156 Guests 0 Members 16 Bots (+42 bot dupes)
+
+# defMON (Page 26 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 24 25 26 27 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 401-416 of 444
+
+### 401 Oct 28, 2020 9:13 am
+
+MARiO64
+
+Offline
+
+Austria
+
+Hi! Since I never had original Gameboy cables, I personally always soldered my own connector to them. Prev I used micro usb for example. When you know the pinout it is not difficult to do. LSDJ for example needs the clock on SERIAL CLOCK (pin5), and GND (pin 6), SERIN (pin 3), and SEROUT (pin 2) to ground. Nanoloop only needs the clock on SERIN, GND to ground ofc, no further groundings. You really need no device for this.
+The arduinos output 5V TTL level, they can be directly used to go into gameboys (any sync), and also to use as analog sync.
+Same for MIDI - all can be done without further electronics - going directly from the arduino pin to
+Gameboy, analog sync, midi sync. Arduinos drive up to 40mA current. MIDI is a current loop. 40mA is enough, and if in doubt you can amplify with a single transistor + 2 resistors (< 1 EUR)
+With arduino I refer to the usual ATMEGA microcontrollers (and most others), which appear to me from the photos might be used in the defmon sync device. The code required is pretty much arduinoboy, reading the input from the user port signal (play, pause, 24 ppqn come from defmon instead of MIDI IN).
+I am up to to publish all my sync stuff open source, now realized: my old sync device is also (accidently) and can be used as defmon sync device. The "user port sync" as I had called it I have used with SID-Wizard 1.7 when I was only able to have the C64 as master So there is also a SID-Wizard version I can provide which works with the defmon sync device. !
+
+Last edited by MARiO64 (Oct 28, 2020 11:05 am)
+
+### 402 Oct 28, 2020 9:53 am
+
+MARiO64
+
+Offline
+
+Austria
+
+Some info on the link to the Gameboy sync adapter: this is only for GBA (Gameboy advance) and GBC (... color) versions. I want to add - these are not preferred for music - while thy sound ok, the original grey Gameboy (DMG) has the fattest sound. If one needs help connecting to that - you can see above and if there is sthg unclear I like to help out
+
+### 403 Oct 28, 2020 3:18 pm
+
+frantic
+
+Offline
+
+MARiO64 wrote:So there is also a SID-Wizard version I can provide which works with the defmon sync device
+
+Did I understand that correctly. You have a version of SID-Wizard laying around, that is able to use Scannerboy's sync interface to drive external gear?
+Thanks for the info, regarding connectors/cables.
+
+Last edited by frantic (Oct 28, 2020 3:19 pm)
+
+### 404 Oct 28, 2020 5:12 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+That catskull shop sync device is not expensive and it looks like established and verified product, so why to experiment with homebrew and maybe damage something i also see they are selling gameboy midi sync so maybe this can be paired with defMON adapter midi sync.
+But now i don't need that, i am happy that TD-3 works, even i don't have DMG/C64 songs that can be synced, every one is different.
+
+Last edited by martin_demsky (Oct 28, 2020 5:15 pm)
+
+### 405 Oct 28, 2020 7:30 pm
+
+MARiO64
+
+Offline
+
+Austria
+
+frantic wrote:Did I understand that correctly. You have a version of SID-Wizard laying around, that is able to use Scannerboy's sync interface to drive external gear?
+
+Short answer: yes
+Longer answer: I am on a sync journey for quite some years now. My start was that I am doing electronic music, and I also so much love the SID sound. More exactly - the sounds I grew up with = tracked sounds. Fast forward - so I was able to compose tunes around 2016 with SID-Wizard. And now I wanted to add samplers, synthesizers, etc. So I needed a sync. But there was nothing out that satisfied my "needs". My thing is I want to make music live, and I also want to use the real (old) hardware, and I want to work like I work on the step sequencers of the various synts (303, digitakt+tone,Korgs...,...) on a 16th note grid -> trackers. Then came LSDJ and nanoloop to me
+I think I explored any existing music software, all kinds of solutions (mssiah,prophet64 likes, cynthcart and likes, various trackers, midi boys and likes) but nothing satisfied my requirements. Maybe to note: I have a professional electronics background, so for me it's easy to quickly setup and hack sthg with signals.
+So I thought of building sthg to sync by myself. First idea was to at least play in sync - so modify the tracker in any way that it outputs any sync signal. SID-Wizard is open source, so I learned how to build it, and played around. I added a signal on the user port that I fed to an arduino. Then translated this to MIDI, analog, LSDJ and nanoloop sync. At this time I think I found this forum, and posted about it, I showed my stuff on facebook That was around 2017 I think. Very exciting, and I was almost there.
+The only limitation was, that the C64 had to be master. And I could either use 6 ticks per 1/16th note, or 5. -> 150,37 or 125,31 BPM. So the next 3 years I had the question floating around, can it be possible to sync a tracker ..... And came to the conclusion per se no. So I worked with this sync - I called it user port sync, since. hermit also mentioned it in SID-Wizard 1.8 readme
+Now I read a bit about the defmon sync. As it looks, it does exactly the same
+So ... yes I do have made a SID-Wizard version that works with the defmon sync device haha - how cool is that! But it is outdated, SID-Wizard 1.7. I can adapt the current 1.8 version - and send you. Or upload somewhere, no problem.
+
+### 406 Oct 28, 2020 7:36 pm
+
+MARiO64
+
+Offline
+
+Austria
+
+martin_demsky wrote:That catskull shop sync device is not expensive and it looks like established and verified product, so why to experiment with homebrew and maybe damage something i also see they are selling gameboy midi sync so maybe this can be paired with defMON adapter midi sync.
+
+Oh I more wanted to point out, that it is for GBAs/GBCs so not for the old grey Gameboys - which most often people have to make music. Be sure to have the right model and not to be disappointed at the time the device arrives was my intention to help here.
+Its fine to use of course. My homebrew stuff is really safe, otherwise I would not mention - but that's not for everyone absolutely agreed!
+
+Last edited by MARiO64 (Oct 28, 2020 7:39 pm)
+
+### 407 Oct 28, 2020 7:37 pm
+
+frantic
+
+Offline
+
+Hehe.. yeah that was kind of funny actually: that they work exactly the same.
+Having the 1.8 version with that code in it could potentially be useful, yes. If you do it, i'd like to have it, and in any case it could be relevant to have the 1.7 version that you had already modified
+
+### 408 Oct 28, 2020 7:49 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+On C64 is not possible CIA timing like is on Amiga? I remember i was always forced to use vblank in videogames, but afaik cia is more exact to bpm. In lsdj it is possible so it is maybe not big problem
+
+Last edited by martin_demsky (Oct 28, 2020 7:50 pm)
+
+### 409 Oct 28, 2020 7:51 pm
+
+frantic
+
+Offline
+
+defMON uses CIA timing. The "ticks" that were mentioned here doesn't relate to that, though. That just means the number of times the player code needs to be called to advance one step in the sequence.
+So.. there are two factors involved in "speed".
+1. The number of player code calls before advancing one step further in the sequence. In defMON the "speed" column in the sequence specifies the number of ticks until next step in the sequence, BUT... it is somewhat non-intuitive. (There is a reason for it actually, but..) Writing "2" in the speed column actually results in 3 ticks per step. Writing "3" results in 4, and so forth. So the actual number of ticks is always one more (+1) than what is written in the speed column.
+2. The time between each call to the player code. This can be controlled with VBLANK interrupt (on C64 it would be called a raster interrupt) or with a CIA timer. CIA timers are much more fine-grained, just like you say.
+
+Last edited by frantic (Oct 28, 2020 7:56 pm)
+
+### 410 Oct 29, 2020 6:09 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Wow, good to know these things, maybe +1 is because we have two sidtab calls at one line, so it takes more time to process. Btw, one thing l liked in sidtracker 64 or sid duzz it is separate speed column, so it is affecting all tracks, in defMON, when you have in every channel different speed (for example first 2, second shuffle speed 5353..., third whatever) then i don't know how it works, it tried it once.
+
+Last edited by martin_demsky (Oct 29, 2020 6:14 am)
+
+### 411 Oct 29, 2020 11:17 am
+
+frantic
+
+Offline
+
+@martin: Yes, having a speed column built into each track is not an obvious design choice. When I made defMON I tried to opt for the solutions that gave the most flexibility, even if they sometimes resulted in solutions that require some more work on behalf of the user. In some cases that makes defMON outright odd, yes.
+You can actually use different speeds in each channel, but they will always do sequence break at the same time. So, if one channel breaks earlier than the others, these other channels will also advance to the next sequence in the sequence list even if there was not yet any sequence breaks encountered in those channels.
+
+Last edited by frantic (Oct 29, 2020 11:18 am)
+
+### 412 Oct 30, 2020 9:22 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+To put it into perspective, it's pretty similar to either playing triplets in 4/4 or plain quarter-notes in 3/4. While the notation looks different, the outcome will technically sound the same.
+frantic wrote:Yes, having a speed column built into each track is not an obvious design choice. When I made defMON I tried to opt for the solutions that gave the most flexibility, even if they sometimes resulted in solutions that require some more work on behalf of the user. In some cases that makes defMON outright odd, yes.
+
+I greatly appreciate it works that way. It allows to play e.g. swinging drum section while the corresponding notes keep their regular rhythmic values, or simply to land some notes/instruments with absolute precision (rated 12/10, would buy again!).
+
+### 413 Nov 1, 2020 10:11 am
+
+MARiO64
+
+Offline
+
+Austria
+
+@frantic: I have digged out the old SW-1.7 version I used with sync out on the userport. I can share with you, but it was made for me personally - so there is a big M64 logo, other colors, and changes in the playback "logic", my first attempts for incorporating functions especially for live act usage And there is a little difference in the user port sync, compared to defmon sync. So in order to provide a version, that works with the defmon sync device - I suggest I rebuild an original SW 1.7 version, without my further changes, and with the start stop bit set for the defmon device:
+I compare my sync to what is written on the defmon wiki - there is a little difference:
+My version does not utilize a start/stop line, only 1 bit for the sync signal. The signal is set on each player call, and 0ed at return.
+The LSDJ sync and nanoloop sync work this way, that they keep position, when no sync signal comes. They "freeze". So my version of the device simply forwards (and translates) a sync signal whenever it comes from the user port. In SW this means when I press play, sync starts, and on pressing stop it stops. Just without a second signal.
+Also I have modifed the playback this way, that I can start playing a song (F1). Whenever I feel I need it - I can press F3 which is usually "pattern play". When I press this while song playback (F1), it switches to pattern play of the currently played pattern.
+That enables me to have a song where I pre arrange patterns, and can work on each as long as I want (F3), and it will advance to the next pattern, when I press F3 again, after the current pattern is finished playing.
+I am not sure anyone would want all this (esp a big M64 logo haha), so I gonna rebuild SW 1.7, and 1.8 with defmon sync. I need to insert just 2 lines additional to my sync: set start bit on play, and clear start bit on stop. Then your version and mine are the same. I can also still use this version, as my device simply ignores start/stop
+How can I best share it with you? I will send you the M64 branded version, too just for fun
+cheers, M64
+
+### 414 Nov 2, 2020 10:33 am
+
+frantic
+
+Offline
+
+So there was a slight difference after all in how the hardware worked. Thanks for this. I will send you a PM.
+
+### 415 Nov 2, 2020 1:43 pm
+
+frantic
+
+Offline
+
+F7sus4 wrote:I greatly appreciate it works that way. It allows to play e.g. swinging drum section while the corresponding notes keep their regular rhythmic values, or simply to land some notes/instruments with absolute precision (rated 12/10, would buy again!).
+
+Yeah, I kind of like it this way too — even in hindsight, after all these years — but I think one drawback is this:
+Swing-speed stuff can get a bit messy from a user interface point of view when combined with the fact that hard-restart instruments has to be trigged one line before the one where it is supposed to be heard. Strictly speaking, one could reasonably argue that this is not the fault of the way the speed column in the sequences works though, but rather a bad consequence of the way hard restart is handled in defMON. So, if anything, one would perhaps have desired a somewhat more user friendly way to trig hard restart stuff. (Like a setting that would configure whether each sound should be trigged exactly where it is put in the sequence, or +/- some ticks.) That would also get rid of the need for that strange "extra step in the beginning of sequences" feature of defMON, which is obviously quite weird. More like a necessary evil, given the way hard restart works, than a feature.
+Oh well.. Too late to change stuff like that for the original defMON anyway. Worth thinking about in relation to a defMON sequel though.
+
+### 416 Nov 2, 2020 4:37 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+frantic wrote:That would also get rid of the need for that strange "extra step in the beginning of sequences" feature of defMON, which is obviously quite weird. More like a necessary evil, given the way hard restart works, than a feature.
+
+This is what I was thinking when I started to use defMON, and I believe there was some other person commenting it here in the topic as well, but after a few years - I'd strongly defend this solution.
+Usually the cost of having the last note/position "missing" is smaller (and avoidable with some creativity) when compared to the possibility to call additional instructions from sidTAB for the current sequence (not necessarily just hard-restarts, but also filter envelope/markers/offsets, for example). The -1 position is also a perfect place to put sounds with slower attack rate (e.g. strings), so they can synchronize with the short/fast-paced ones (e.g. drumset) better.
+In a classical tracker we could technically close the gate for ADSR restart at the end of each sound/note instead of "before". I think it's a matter of design and user preference. To me, defMON is perfect as it is.
+
+Last edited by F7sus4 (Nov 2, 2020 4:57 pm)
+
+## Posts: 401-416 of 444
+
+Pages Previous 1 … 24 25 26 27 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

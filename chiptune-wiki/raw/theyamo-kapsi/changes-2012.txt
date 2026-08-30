@@ -1,0 +1,280 @@
+UP
+|
+HOME
+
+# Changes for CheeseCutter 2
+
+## Table of Contents
+
+- 1 Changelog
+
+- 1.1 Version 2.0.0 (9-12-2011)
+
+- 1.2 Version 2.1.0 (1-2-2012)
+
+- 1.3 Version 2.2.0 (6-2-2012)
+
+- 1.4 Version 2.2.1 (7-2-2012)
+
+- 1.5 Version 2.2.2 (9-2-2012)
+
+- 1.6 Version 2.2.3 (11-2-2012)
+
+- 1.7 Version 2.2.4 (15-2-2012)
+
+- 1.8 Version 2.2.5 (19-2-2012)
+
+- 1.9 Version 2.2.6 (2-3-2012)
+
+- 1.10 Version 2.3.0 (18-3-2012) - First beta!
+
+- 2 Known bugs and missing features
+
+- 2.1 Editor
+
+- 2.2 Player
+
+## 1 Changelog
+
+### 1.1 Version 2.0.0 (9-12-2011)
+
+-
+Can navigate between sequencer and tables using Ctrl-Tab.
+
+-
+Copy & paste functions for instrument table (Ctrl-c / Ctrl-v).
+
+### 1.2 Version 2.1.0 (1-2-2012)
+
+-
+Swingtempos are read from the chord table.
+
+-
+Resid-fp is now used as default (-nofp uses old resid instead).
+
+-
+Sequencer: F5 (track view) also displays the tracklist. The display is centered.
+
+-
+v0.5 docs removed.
+
+-
+First alpha version of the commandline song packer.
+
+-
+All infostrings editable with Alt-T.
+
+-
+Default audiobuffer size 2048 instead of 1024.
+
+-
+Help texts brought up to date.
+
+### 1.3 Version 2.2.0 (6-2-2012)
+
+-
+New wrapmark logic: the value is stored with the track end indicator byte in he tracklist.
+
+-
+Editor updated to display a marker for wrap mark position (the brown bar).
+Song playback always wraps to this point independent of the method the playback was started with (using keys F1, F2 or F3)
+Ctrl-Backspace in the sequencer sets the wrapmark.
+
+-
+Revised packer: attaches custom player for multispeed tunes on SID export.
+
+-
+Player: filter sweeps use 10 bit resolution instead of 11.
+
+-
+Default song speeds stored for each subtune now.
+
+-
+"Context help" implemented: F12 displays its own help screen for the Sequencer.
+Pressing F12 twice displays the global help screen.
+
+### 1.4 Version 2.2.1 (7-2-2012)
+
+-
+Followplay bugfixes: doesn't get out of sync when tracking songs with swingtempos.
+Should not screw up anymore when fastforwarding over a song speed change command.
+
+-
+Wrapmark also displayed in F7.
+
+### 1.5 Version 2.2.2 (9-2-2012)
+
+-
+Sequencer: instrument values not autoinserted when entering tied notes.
+
+-
+Message displayed when autoinsert mode gets toggled (with key ';')
+
+-
+Key '.' in wave table clears the row and moves cursor one row down.
+
+-
+Extra keys: [ and ] for speed change; { and } for multiplier change.
+
+-
+Some crucial packer bugfixes.
+
+### 1.6 Version 2.2.3 (11-2-2012)
+
+-
+Packer now supports subtunes.
+
+-
+Clock counter sometimes overwrapped when changing multiplier during play.
+
+### 1.7 Version 2.2.4 (15-2-2012)
+
+-
+1st version of the keyjam mode (Ctrl-Space). All editing functions disabled during keyjam.
+
+### 1.8 Version 2.2.5 (19-2-2012)
+
+-
+Player: Portamento logic changed: it's not affected by set instrument command anymore.
+This causes portamento to 'regular' (not tied) notes not to work :/
+
+-
+Sequencer: When entering notes, the note on currently activated instrument gets played (on 1st voice only though).
+
+### 1.9 Version 2.2.6 (2-3-2012)
+
+-
+Added a simple mouse support: Tables and voices can be activated and the cursor moved to the desired spot with a mouse click.
+Mouse wheel acts similarly to pressing cursor up or down on the activated window.
+Some elements on the screen are clickable as well:
+
+-
+Title
+
+-
+Playback multiplier (left button decreases the value, right increases)
+
+-
+SID Model & Filter preset (left button toggles the model, right button changes the preset)
+
+-
+Inactive voices are properly shut down when entering notes.
+
+-
+Caps lock also enables/disables keyjam.
+
+-
+Entered notes are always played on the voice the cursor is currently on.
+
+-
+Playback position is displayed in trackmap (F7).
+
+-
+Song purging (Alt-KP Del) actually works: Unused sequences and instruments are removed & wave- and chord tables are cleaned.
+Also, sequences are checked against duplicates (ie. their length and data is identical) and removed if necessary.
+
+-
+Doesn't crash when trying to load a non-editor file.
+
+-
+Lots of internal rewrites. New bugs may have been introduced.
+
+-
+Sequencer: Ctrl-G "grabs" the instrument value in the current row.
+
+-
+'Enter' jumps between track and sequence editing (like F5 does).
+
+-
+Default audio frequency 48000hz instead of 44100hz.
+
+### 1.10 Version 2.3.0 (18-3-2012) - First beta!
+
+-
+Major reorganization of the codebase.
+
+-
+Now using Derelict SDL bindings. The program should finally run natively on MacOS X. The SDL libraries are linked dynamically
+and might cause problems where used not to be any.
+
+-
+Can now skip forwards and backwards while in followplay mode (keys '+' and '-') (very experimental, expect issues)
+
+-
+Song data importing from Load File dialog (key Shift-Enter). Only the music data is loaded and
+the player that you currently have in memory is kept. This allows you to i.e. update your tune made with an
+older player to the current one.
+
+-
+Sequencer: Lots of improvements to F5 (the track view/editor)
+
+-
+Instead of being centered, the pointer is "anchored" to top of the screen when browsing up & down
+like it used to work in 0.x. Ctrl-L centers the display.
+
+-
+Shift-F5 toggles the "hybrid" view where the following/preceding tracks are also displayed.
+
+-
+Clear-command (alt-KP 0) clears subtunes as well.
+
+-
+Packer:
+
+-
+ct2pack replaced with ct2util which includes a few extra commands for song manipulation, besides packing.
+
+-
+Song relocating implemented, though only for singlespeed tunes as for now. (argument -r)
+
+-
+Dumping song data to acme source code implemented (BETA - instrument tables are not packed but dumped entirely).
+
+-
+Importing (same as Shift-Enter in fileselector)
+
+## 2 Known bugs and missing features
+
+### 2.1 Editor
+
+-
+Multispeed playback doesn't work well past 4x.
+
+-
+Changing speed during playback confuses the followplay.
+
+-
+No drive selection in the file selector.
+
+-
+Sometimes when starting the playback the player gets confused.
+
+-
+Some crashes related to unicode handling.
+
+-
+Importing really old songs can cause crashes.
+
+-
+NTSC support incomplete, untested etc. If anyone actually still makes NTSC tunes, let me know.
+
+-
+1024x768 resolution very buggy.
+
+-
+A couple of small warts in the sequencer.
+
+### 2.2 Player
+
+-
+Issuing a portamento resets an ongoing slide. Needs quite a big rewrite on the player to fix it.
+
+-
+Slide, vibrato & portamento commands can't be started on the same row with a tied note.
+
+Author: abaddon
+<abad.flt at gmail.com>
+
+Date: 2012-03-18 12:41:33 EET
+
+HTML generated by org-mode 6.33x in emacs 23

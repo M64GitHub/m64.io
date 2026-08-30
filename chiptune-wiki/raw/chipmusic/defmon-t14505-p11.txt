@@ -1,0 +1,265 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+148 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 11 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 9 10 11 12 13 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 161-176 of 444
+
+### 161 Oct 29, 2017 8:26 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Reagrding the shift-N/shift-U I noticed a quirk a while ago, not sure if it's worth fixing though.
+So, I think this function scans the playlist for whatever is written into it, but it doesn't skip the FF parameters. So it will assume that whatever position you're jumping to or the loop number are used patterns.
+There really isn't a real drawback to this as the tunes get optimised when packed, unless you have used up ALL the available patterns.
+But I thought I'd mention it anyway
+
+### 162 Oct 29, 2017 12:18 pm
+
+frantic
+
+Offline
+
+Ah... Haven't thought of that, but of course you're right. That's easy to fix, and a fix will be included in the next release version.
+Thanks!
+
+Last edited by frantic (Oct 29, 2017 12:19 pm)
+
+### 163 Oct 30, 2017 6:53 am
+
+cTrix
+
+Offline
+
+Australia
+
+iLKke wrote:Reagrding the shift-N/shift-U I noticed a quirk a while ago, not sure if it's worth fixing though.
+So, I think this function scans the playlist for whatever is written into it, but it doesn't skip the FF parameters. So it will assume that whatever position you're jumping to or the loop number are used patterns.
+There really isn't a real drawback to this as the tunes get optimised when packed, unless you have used up ALL the available patterns.
+But I thought I'd mention it anyway
+
+So ilKke, does this mean you are working on something for Syntax Demoparty?? ;-)
+See you in Melbourne in a few weeks mate!!
+
+### 164 Nov 23, 2017 3:49 pm
+
+frantic
+
+Offline
+
+defMON used by a robot arm: https://www.goto80.com/robotmusic
+
+### 165 Feb 9, 2018 1:05 am
+
+arlen
+
+Offline
+
+anyone used defmon on an ntsc machine before?
+
+### 166 Feb 9, 2018 4:31 pm
+
+frantic
+
+Offline
+
+It hasn't been tested on NTSC during development, so it may not work, but on the other hand there are no obvious reasons for why it couldn't work or so. Also, setting VICE to NTSC mode and starting defMON didn't produce any obvious errors when I tried it a minute ago, but I didn't test much.
+The frequency table used for notes is for PAL though, and not NTSC, so note frequencies will be a little off if played together with some other instrument that has standard tuning (where A = 440hz).
+Did you run into some particular problem or what is the reason for your post?
+
+### 167 Feb 10, 2018 4:22 am
+
+arlen
+
+Offline
+
+frantic wrote:It hasn't been tested on NTSC during development, so it may not work, but on the other hand there are no obvious reasons for why it couldn't work or so. Also, setting VICE to NTSC mode and starting defMON didn't produce any obvious errors when I tried it a minute ago, but I didn't test much.
+The frequency table used for notes is for PAL though, and not NTSC, so note frequencies will be a little off if played together with some other instrument that has standard tuning (where A = 440hz).
+Did you run into some particular problem or what is the reason for your post?
+
+No real particular reason. Interested in trying it out on my c64. Could I edit the frequency tables of defmon to be correct? I did that on GoatTracker a few years ago and it worked out fine.
+Very interested in pairing c64 with my x0xb0x. I know defmon can sync well with other hardware
+
+### 168 Feb 10, 2018 10:36 am
+
+frantic
+
+Offline
+
+Sure you can edit the frequency tables. Low bytes of freq table start at 0x159c in RAM, and high bytes start at 0x1638 in my latest development version. The particular RAM location may vary a little between versions though, so if this doesn't seem to work, you can search for this string of bytes to find the lobyte table:
+!byte $46,$4a,$4e,$53,$58,$5d,$62,$68,$6e,$75,$7c,$83
+...and this string of bytes to find the hibyte table:
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+!byte $01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$02
+!byte $02,$02,$02,$02,$02,$02,$03,$03,$03,$03,$03,$04
+!byte $04,$04,$04,$05,$05,$05,$06,$06,$06,$07,$07,$08
+Actually, it is a little more intricate than that, since these tables are preceded by some other bytes that are used for frequency slide functions as well, so the real frequency table in defMON looks like this in the source code:
+_player_notes_lo_slide:
+!byte $00,$00,$01,$01,$02,$02,$04,$04,$08,$08,$0c,$0c ;To allow very slow slides too..
+_player_notes_lo_finetune:
+!byte $11,$12,$14,$15,$16,$17,$19,$1a,$1c,$1d,$1f,$21
+!byte $23,$25,$27,$29,$2c,$2e,$31,$34,$37,$3b,$3e,$42
+_player_notes_lo:
+!byte $46,$4a,$4e,$53,$58,$5d,$62,$68,$6e,$75,$7c,$83
+!byte $8b,$93,$9c,$a6,$af,$ba,$c5,$d1,$dd,$ea,$f8,$07
+!byte $16,$27,$39,$4b,$5f,$74,$8a,$a1,$ba,$d4,$f0,$0e
+!byte $2d,$4e,$71,$96,$be,$e7,$14,$42,$74,$a9,$e0,$1b
+!byte $5a,$9c,$e2,$2d,$7b,$cf,$27,$85,$e8,$51,$c1,$37
+!byte $b4,$38,$c4,$59,$f7,$9d,$4e,$0a,$d0,$a2,$81,$6d
+!byte $67,$70,$89,$b2,$ed,$3b,$9c,$13,$a0,$45,$02,$da
+!byte $ce,$e0,$11,$64,$da,$76,$39,$26,$40,$89,$04,$b4
+!byte $9c,$c0,$23,$c8,$b4,$eb,$72,$4c,$80,$12,$08,$68
+!byte $39,$80,$45,$90,$68,$d6,$e3,$99,$00,$24,$10,$ff
+_player_notes_hi_slide:
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ;To allow very slow slides too..
+_player_notes_hi_finetune:
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+_player_notes_hi:
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+!byte $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+!byte $01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$02
+!byte $02,$02,$02,$02,$02,$02,$03,$03,$03,$03,$03,$04
+!byte $04,$04,$04,$05,$05,$05,$06,$06,$06,$07,$07,$08
+!byte $08,$09,$09,$0a,$0a,$0b,$0c,$0d,$0d,$0e,$0f,$10
+!byte $11,$12,$13,$14,$15,$17,$18,$1a,$1b,$1d,$1f,$20
+!byte $22,$24,$27,$29,$2b,$2e,$31,$34,$37,$3a,$3e,$41
+!byte $45,$49,$4e,$52,$57,$5c,$62,$68,$6e,$75,$7c,$83
+!byte $8b,$93,$9c,$a5,$af,$b9,$c4,$d0,$dd,$ea,$f8,$ff
+Anyway, if editing the table seems to work in general on an NTSC machine I might add a specific NTSC version in the next release of defMON. I won't make promises as for when that might happen though.
+
+### 169 Feb 10, 2018 4:51 pm
+
+arlen
+
+Offline
+
+Woah. That's a lot more intricate than I expected. Would I need to edit the slide frequency tables as well?
+I'll have to dig into this a bit more. It was really easy to tune to NTSC with GT lol.
+
+### 170 Feb 11, 2018 11:02 am
+
+frantic
+
+Offline
+
+The finetune/slide stuff is actually just a continuation of the frequency table so all you would have to do is to calculate some more data. Except the twelve bytes following the _player_notes_lo_slide label are just some sort of manually typed in interpolation between 0 and $11 (e.g. the first byte following the _player_notes_lo_finetune label). Only every second byte are used on that row, so that's why there are pairs of identical values on that row. If you don't use slow slides (less than $86 in the sid table or so), you don't need to bother about those 12 bytes of slide stuff.
+So, what you have to do is bascially to calculate 12 octaves of NTSC frequency data, and put the lobytes in one table, the hibytes in another (I'm pretty sure it is the same in GT, except for maybe a different number of octaves required), and then make that manual interpolation between 0 and X for the slide values if desired.
+
+Last edited by frantic (Feb 11, 2018 11:07 am)
+
+### 171 Feb 11, 2018 2:05 pm
+
+frantic
+
+Offline
+
+Ha!
+http://toolsforscholars.com/defmon/doku … s_overseas
+
+### 172 Feb 11, 2018 5:49 pm
+
+arlen
+
+Offline
+
+frantic wrote:Ha!
+http://toolsforscholars.com/defmon/doku … s_overseas
+
+well damn i was reading up on the frequency tables and was going to mess around with it today haha.
+now i HAVE to really sit down and learn defmon.
+
+### 173 Feb 11, 2018 7:35 pm
+
+frantic
+
+Offline
+
+For quite a while I've been thinking about making a series of instruction videos on youtube or something, possibly even two: One about how the SID works in general, and one about how to use defMON. Main obstacle is actually that I don't have a video camera.
+
+### 174 Feb 11, 2018 9:34 pm
+
+arlen
+
+Offline
+
+frantic wrote:For quite a while I've been thinking about making a series of instruction videos on youtube or something, possibly even two: One about how the SID works in general, and one about how to use defMON. Main obstacle is actually that I don't have a video camera.
+
+I definitely support this idea. You could always screencap VICE and explain through captions for a video guide.
+
+### 175 Feb 11, 2018 9:57 pm
+
+frantic
+
+Offline
+
+Yep. Currently looking into different solutions. One thing that makes defMON different from most other videos that explain how to use software is that you use a keyboard a lot, whereas those other videos are very much based on moving the mouse arrow arround etc. ...but I'll figure something out.
+
+Last edited by frantic (Feb 11, 2018 9:57 pm)
+
+### 176 Feb 12, 2018 6:32 pm
+
+Amelinium
+
+Offline
+
+frantic wrote:For quite a while I've been thinking about making a series of instruction videos on youtube or something, possibly even two: One about how the SID works in general, and one about how to use defMON. Main obstacle is actually that I don't have a video camera.
+
+That's interesting because this is literally what I am preparing to do myself especially in regards to defMON. I still use the GP version but plan to go updated for the YouTube vids.
+
+## Posts: 161-176 of 444
+
+Pages Previous 1 … 9 10 11 12 13 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

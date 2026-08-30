@@ -1,0 +1,265 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+152 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 19 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 17 18 19 20 21 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 289-304 of 444
+
+### 289 Jul 29, 2020 6:35 pm
+
+frantic
+
+Offline
+
+Thanks for reporting guys. I'll have a look at it.
+
+### 290 Jul 29, 2020 8:45 pm
+
+frantic
+
+Offline
+
+Hmhm.. I wasn't able to replicate the problem. Staring at the code for a few minutes didn't reveal any obvious problems either. It looks pretty solid.
+It is of course easy to mess things up when using SHIFT+U, even if the function works as intended, so just to make sure that everything is clear regarding its intended function: In this context "unused" doesn't refer to empty sequences, but to sequences that are not used anywhere in any of the two sequence lists. So if a particular sequence is only used in a single place and you press SHIFT+U at that location (so that sequence number no longer appears in any of the two sequence lists), then this sequence may very well be overwritten next time SHIFT+U is pressed at some other location in the sequence list. I guess you're both well aware that this is how the function works though. Just want to make sure we're on the same page.
+So, if there is a bug here, any further information that could help track the bug down would be appreciated. This is definitely the type of function that should be rock solid. Messing up song data isn't fun. I have never experienced it myself though. Odd!
+
+### 291 Jul 30, 2020 9:37 pm
+
+d3Ni$e
+
+Offline
+
+Yeah that sounds like the Shift+U issue I had 1 time making a long track and patterns got erased.
+That thing only became a good experience for me and now I only use the SHIT+U command Simple because of one ground rule in my head:
+When creating patterns ALWAYS keep them in the Seq-list! For me it is more flexible to work like that also. If I have some patterns Im unsure about to use (just a few) or want to try out later I just put them under the "FF" row in Seq-list for an easier access later on.
+This projects from this user is so rad https://www.youtube.com/watch?v=rudz9QbDh68&t=6s and maybe he/she is around here? and if someone is willing to share ideas and setting or unfinished projects I would love to twist them or finish them as I call me a "music enthusiast" and not a music artist. just PM me
+I had myself a simple dubby chip session outside the other night https://www.youtube.com/watch?v=mNAiT52Pcog and it is so easy to just jam and create stuff what comes in mind along the way.
+With that said as Frantic was talking about before with making it more live friendly. how cool it would be with parameter tweaking layed out on the keybed. I continue to donating for this project!
+This night Im gonna install a second SID for the first time and I hope it is going well. It would be so nice with better chord progression! Im into making defMON mixtapes now also.
+Cheers
+
+### 292 Jul 30, 2020 9:58 pm
+
+frantic
+
+Offline
+
+Nice spaceship setup there. Reminds me a little bit about the Papaya Dub track that Goto80 and me did together, something like 20 years ago and before defMON existed. We used the 8x-speed version of the JCH editor/player for that track:
+https://www.youtube.com/watch?v=gOG5hUUe4Gg
+Good luck with the 2sid-experiments!
+
+### 293 Jul 31, 2020 5:01 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+deni$e wrote:When creating patterns ALWAYS keep them in the Seq-list! For me it is more flexible to work like that also. If I have some patterns Im unsure about to use (just a few) or want to try out later I just put them under the "FF" row in Seq-list for an easier access later on.
+
+This is quite obvious practice, since patterns not stored in the sequence list will not be saved to disk, which is why the tracker assumes they were abandoned and safe to overwrite. However, described bug happens regardless of that.
+deni$e wrote:This projects from this user is so rad https://www.youtube.com/watch?v=rudz9QbDh68&t=6s and maybe he/she is around here?
+
+Yes, these were my previews for 25Hz compo at CSDb that I shared with my friends and forgot to set the private flag. The music is already finished and now released.
+
+Last edited by F7sus4 (Aug 1, 2020 10:18 am)
+
+### 294 Jul 31, 2020 11:45 pm
+
+d3Ni$e
+
+Offline
+
+@frantic: That tune has always been my favourite from that EP! Wow did not even know you were involved. So nostalgic feeling from that tune same with "Ajvar Relish" by Goto80. Maybe the world will hear some defMON tunes by the creator himself in the future?
+@F7sus4 Happy accident that you didnt made it private then. I really enjoy slow C64 tunes. Looking forward to hear the tunes.
+The speed function is so good!
+
+### 295 Aug 1, 2020 8:53 am
+
+frantic
+
+Offline
+
+@f7sus4: Thanks for confirming. I just wanted to make really sure that there were no misunderstandings involved before going on extensive bug-hunts. I'm still unsure what may cause the bug though, so let me know if you (or anyone else) find some further clues about the context(s) where this problem may appear.
+@d3ni$e: That's nice to hear. Thank you also very much for that second donation! You're the only one who donated any money so far, and I am very grateful for that. Regarding defMON tunes from me, I don't have any particular plans on spending time on anything C64-related at all except for that new editor. That will receive my full focus. All play and no work makes jack a dull boy.
+
+Last edited by frantic (Aug 1, 2020 10:57 am)
+
+### 296 Aug 2, 2020 8:18 am
+
+F7sus4
+
+Offline
+
+Poland
+
+Random thoughts on the "pattern overwrite bug":
+I've spent several hours trying to trigger the bug with clean start yesterday, but with no luck. This leads me to assumption that the circumstances involved are complicated. It always happened during multi-hour extensive music editing.
+Gut feeling/guess: I also remember reporting that deleting large chunks of instrument data might result in misbehaving sound and (sometimes) corrupted file after saving. This leads me to conjecture that there could be some sort of data leakage in this area which might also interfere with pattern data resulting in said behavior. If not, there are no other existing-and-pending data issues I could think of right now. Will keep looking.
+
+Last edited by F7sus4 (Aug 5, 2020 10:03 am)
+
+### 297 Aug 2, 2020 1:13 pm
+
+frantic
+
+Offline
+
+Ah.. Yes, that's a good way of thinking actually, because when I looked at that actual code (the code trigged by SHIFT+U) I couldn't see anything that seemed wrong about it, but maybe the problem is — precisely what you suggest — that it DOES work, but only when one assumes that the data that this code operates on is well formed. I'll look further. Thanks for the input.
+
+### 298 Aug 2, 2020 5:02 pm
+
+d3Ni$e
+
+Offline
+
+@F7sus4: Fantastic work! Will run this as the first test cus Im almost done with my second SID installation.
+I dont understand that "25 Hertz" thing tho? What tempo or speed is that? I saw you have "3" in the speed column in the first video but in the second video it was faster and changed to "2" in the speed column. I have very little knowledge about Hertz so excuse me for that haha!
+@frantic: Im only happy for donating in something meaningful in my life. It has been a very difficult year but as Freddie Mercury said "The Show Must Go On"
+@defMON: So I was thinking about all this Shift-U things again and was thinking about something else..
+Lets say Im making an empty Seq-list all filled with "00" and I write "01" and making a pattern there but I then take it away from the Seq-list.
+I take it back again by typing "01" and I can see my pattern there still. I take it all away again so I have only "00" in the Seq-list. I then write "02" in Seq-list and making a pattern there. I take it away again as I write "00" only in Seq-list. It will remeber my patterns anyway right?
+But how far can it remember my patterns? All the way up to "FE"?
+d.
+
+### 299 Aug 2, 2020 10:09 pm
+
+frantic
+
+Offline
+
+d3Ni$e wrote:@F7sus4: Fantastic work! Will run this as the first test cus Im almost done with my second SID installation.
+I dont understand that "25 Hertz" thing tho? What tempo or speed is that? I saw you have "3" in the speed column in the first video but in the second video it was faster and changed to "2" in the speed column. I have very little knowledge about Hertz so excuse me for that haha!
+
+The C64 video circuitry updates the image on the monitor 50 times each second = a frame rate of 50 Hz. Typically C64 music is played by calling the player code once every frame. The current compo at CSDb asks people to create tunes that call the player code half as often = 25 hz. This means that the sounds will have a lower "resolution" in the sense that SID parameters are only updated half as often as a normal single speed tune. You could think of it as the opposite of a tune with multi speed sounds in it.
+("Tempo" is "how many times the player code needs to be called before a new step in the sequence is parsed", so that's a different concept. )
+d3Ni$e wrote:Lets say Im making an empty Seq-list all filled with "00" and I write "01" and making a pattern there but I then take it away from the Seq-list.
+I take it back again by typing "01" and I can see my pattern there still. I take it all away again so I have only "00" in the Seq-list. I then write "02" in Seq-list and making a pattern there. I take it away again as I write "00" only in Seq-list. It will remeber my patterns anyway right?
+
+Yes, it will remember the patterns anyway.
+d3Ni$e wrote:But how far can it remember my patterns? All the way up to "FE"?
+
+The maximum number of patterns in defMON is 7F. All patterns 00-7F will be remembered the way you asked about here.
+
+### 300 Aug 3, 2020 11:59 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Someone at Deflemask discord #c64 asked for punchy kick drum, but i use Deflemask only for Sega Genesis mode, so i designed pretty punchy kick drum with noise and pulse waveform, some transposition and pitchbend, which can be applied maybe also for Deflemask, for even punchier kick drum can be used two patches on two channels, each with slightly different settings
+https://www.youtube.com/watch?v=xSFOpC29omA
+
+Last edited by martin_demsky (Aug 6, 2020 8:16 am)
+
+### 301 Aug 5, 2020 9:58 am
+
+F7sus4
+
+Offline
+
+Poland
+
+Custom multi-speed setting stability issue:
+defMON by default supports x1, x2, x4 and x8 multispeed mode, which in timer settings translates to $2663 for x2, $1331 for x4 etc.
+However, we are also free to achieve x3 multispeed with $1997 manual setting (same with e.g. x6 or x9).
+Now, if we choose x2 mode first and we slide the timer down to $1997, it will work stable in the new "custom" x3 mode. But if we choose x4 mode and slide the timer up to $1997, the pattern will play twice as slow as previously and the software will suffer from multi-second hangups in which there will be no response from the keyboard input. This state will pass after a minute or two, but it renders the program unusable during the time.
+
+Last edited by F7sus4 (Aug 5, 2020 10:05 am)
+
+### 302 Aug 5, 2020 5:11 pm
+
+frantic
+
+Offline
+
+@F7sus4: Thanks again for all your hard work reporting bugs and quirks. Regarding the keyboard hangup; yes, that's definitely a bug/quirk in the sense that I haven't implemented any protection against that. It may be possible to do that, so I'll put that on the "possible things to fix in defMON" list. Regarding 4x playing the sequence half as fast as 2x, that is the way it should be. "2x" means "call sidtab parsing twice for every time sequences are parsed" and "4x" means "call sidtab parsing four times for every time sequences are parsed".
+...and yeah, 3x speed is something like a favourite of mine. Just enough to be enough, but not more than that.
+Some other news:
+1. For a long time I have had some plans to do a little series of video tutorials on defMON, to put on YouTube. So far it is just plans, so I don't want to promise too much. We'll see when/if it becomes reality. Nevertheless, the plans are at least quite concrete in the sense that I have noted down things I would like to include and in what episode, and so on. The target audience will be people who might not know much at all about how to use a C64, so it will definitely be basic and start from the very beginning. At least it will be basic in the beginning, and it may go into more complex things later on. If you have requests of what a video tutorial like that should include, don't hesitate to tell me.
+2. I installed a little forum on the defMON wiki site. The forum software is really primitive, but... I dunno.. somehow I liked it for its simplicity. I am not sure if there is any interest in such a forum, since we have this thread here for example, but I think it is worth a try. At least it could help to organize things a bit. For example, there could be separate separate threads for each bug report etc. The link to the forum is:
+https://toolsforscholars.com/defmon/forum/
+I will continue to monitor this discussion thread of the time being though.
+
+Last edited by frantic (Aug 5, 2020 5:42 pm)
+
+### 303 Aug 5, 2020 8:03 pm
+
+frantic
+
+Offline
+
+F7sus4 wrote:Instrument deletion bug.
+If you load previously made tune, then delete large chunks of instrument data with shift+RETURN, and proceed to save the file, it might become corrupted. This does not happen if instrument lines are erased byte-by-byte with space bar.
+It's difficult to predict whether this behavior is related to memory allocation or instrument jump points that defMON tries to recalculate while erasing consecutive lines.
+
+A question of clarification here. What does "large chunks of instrument data" refer to here? Like.. just deleting a few rows, or... something like changing the block size and keeping SHIFT+RETURN pressed to delete like most of the instrument data? And also, what is it that gets corrupted? Is it the sidtab data specifically that gets corrupted (how? some random data shows up?), or does it seem to corrupt other data (like sequence data or whatever)?
+Please respond at the new defMON forum, in this thread:
+https://toolsforscholars.com/defmon/for … a7z2gc4rzc
+
+Last edited by frantic (Aug 5, 2020 8:12 pm)
+
+### 304 Aug 8, 2020 4:58 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@Frantic: Done.
+
+## Posts: 289-304 of 444
+
+Pages Previous 1 … 17 18 19 20 21 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

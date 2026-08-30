@@ -1,0 +1,271 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+151 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 17 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 15 16 17 18 19 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 257-272 of 444
+
+### 257 Dec 24, 2018 1:16 pm
+
+frantic
+
+Offline
+
+Merry christmas defMON users!
+Some haphazard ranting below (note that this doesn't mean that I'm going to start answering questions here on a regular basis):
+Amelenium is probably right that martin_demskys problems are related to the ADSR bug in the SID chip. Learning how ADSR behaves in the SID is not straightforward, as things like doing very fast notes is something that doesn't really work well on the SID chip, unless you force it to stabilize using tricks like hard restart. Many other music editors on the C64 does hard restart for the user, which is good for beginners, but it comes at the cost of not giving the user full control. defMON is rather designed to allow the user to do things the way he/she prefers (you can do hard restart in several different ways), and therefore you are responsible for dealing with the SID beast yourself. This makes the learning curve steeper, because you have to understand a bit more of how the SID actually works. It is not quite as easy as knowing what ADSR is on a general level.
+Anarkiwi is right about slight differences in the note frequency tables that defMON uses, compared to what just about every other music player on the C64 uses. This is deliberate. The reason is that in defMON frequencies are not rounded to the nearest integer value (below or above, depending on which value that is closest). Instead the values are floored down to the closest integer below. When you floor the values the table actually loops in a curious way, so you can reuse part of the same table data both for the high byte and for the low byte of the 16-bit frequency register. It also enables the possibility of some nice kinds of calculations that exploit this "looping" character of the table data. Rounding or flooring of the frequency data doesn't really make an audible difference anyway.
+The two WG columns behave identically, and they are combined using the bitwise OR instruction in the CPU of the C64, before being written to the SID chip. The instruction is called ORA when you write it in assembler and it works like this: Any bit (of the 8 bits that make up a byte) that is set to 1 in either of the bytes will be 1 when the bytes are combined. Some examples of this:
+00001111 OR 11110000 = 11111111 (corresponding to $0F OR $F0 = $FF in hexadecimal)
+00100000 OR 00000001 = 00100001 (corresponding to $20 OR $01 = $21 in hexadecimal)
+00000001 OR 00100000 = 00100001 (corresponding to $01 OR $20 = $21 in hexadecimal)
+00000001 OR 00000001 = 00000001 (corresponding to $01 OR $01 = $01 in hexadecimal)
+00010010 OR 00000001 = 00010011 (corresponding to $12 OR $01 = $13 in hexadecimal)
+
+This allows users to do things like controlling the gatebit (using one WG column) separately from controlling the waveform that is currently enabled (using the other WG column). It doesn't matter which of the two WG columns you use for what though.
+
+Last edited by frantic (Dec 24, 2018 2:46 pm)
+
+### 258 Dec 25, 2018 9:20 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+frantic wrote:The two WG columns behave identically
+
+Merry christmas also from me so this is interesting, finally i understand why it is 2x. I have read that ADSR bug (btw chrome is warning me about this codebase64 as unsafe page) -- the classical hard-restart stops the oscillator so that no sound is heard, then sets ADSR to some value and gate off in preparation to next note, so i can use in these quicker notes with short envelope rather hard restart which include also gate off flag?
+$08 = Test bit (kind of "hard restart"): reset tone + Release set
+$09 = Also some kind of "hard restart": reset tone + ADS cycle set
+So if i want to be exact, i just can use 08 instead of 00?
+
+### 259 Dec 25, 2018 7:29 pm
+
+4mat
+
+Offline
+
+Yeah, $08 on the first frame before you set the gate will give you a solid start. Have the gate set for two frames to give it a really solid start before switching it off. (eg: $08,$41,$41,$40)
+
+### 260 Dec 29, 2018 9:00 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+I'd say that full hard-restart (including oscillator reset via test-bit) feels obligatory only with drums and snares as you really need that sharp "click" in the beginning of the sound/instrument. The rest (lead melody, bass, arpeggios etc.) should be fine with soft-restarting.
+Now it's time to make things more complicated.
+First of all, emulated environment works differently than real C64. Long story short, Vice 2.xx (reSID-fp engine) will usually not cut the sound when real C64 sometimes will, but (surprisingly!) Vice 3.xx will provide way more hiccups to your ears than real C64. Therefore, some hard-restart delays should be tested via trial-and-error, but usually 2 frames total are enough to do the job with short sounds.
+Second, you need to set proper delay (DL) values to both gate closed (e.g. $00) and oscillator hard-restart ($09) frames/lines in order to make it work. Please note that using multi-speed tunes (x2/x4/x8) will require you to adjust those delay values accordingly (but not necessarily by multiplying them).
+If you take a closer look at Amelinium's YT video, you'll notice that she restarts ADSR by setting 0000 value in WGWG ($00=no waveform and gate closed), and ADSR value set as 0F00. Then she'll open the gate by setting WG (gate) to $09 along with proper ADSR values that will later apply to the instrument ($41, $55... whatever). This is very similar to what I do and what I've also seen in Goto80's tracks (also a good reference).
+Works like a charm and I'm very thankful we actually have manual hard-restart in defMON. The freedom of editing with this tool is simply mindfucking and gives tons of possibilities.
+
+Last edited by F7sus4 (Dec 29, 2018 9:20 pm)
+
+### 261 Dec 29, 2018 9:37 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I have real C64G with 1541-Ultimate II+, Cynthcart, FC III and great cable with grounded audio out and s-video, but i am lazy to turn it on so now is my Demobit song maybe in the middle and in the new year i turn on C64 instead of Vice C64 emulator , i have looked again now at Amelinium's video, that tremolo strings are great, i see that gate zeros and 09s are on beginning of the patch, sometimes is used pulse width and speed on sawtooth, but i use it also because i change waveforms on the fly
+Other things are pretty crazy, but i see smart things like combining waveform type and gate type in first WG column, so second WG column can be used for that 00 which acts as tremolo So i finally also understood why in Sid Duzz It i always used in waveform column 41 instead of 40 because here was also gate on at first tick.
+
+Last edited by martin_demsky (Dec 30, 2018 10:26 am)
+
+### 262 Dec 29, 2018 10:20 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+All defMON stuffs made available via YouTube, huh? Can do:
+http://www.youtube.com/watch?v=Gj0JVTV6IU4
+
+### 263 Dec 29, 2018 11:05 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Thanks, tomorrow i will study your sid programming, btw if you search on YT some defMON tutorials you will find only one that from Goto80 without live commenting what he does, also that your video is not visible on your channel, so maybe it is working only as a direct link like you posted. I see that you also use 00 00 0F00, i created in my current Demobit tune this as "zero" patch so i can use it where i want between other patches, also for that quick tones with variation of hard reset.
+This your piece sounds almost like in Goto80 style great, i see you use also two sid configuration like Goto80 used in latest Demobit performance, so sound is very massive, i have only one sid but i am afraid to buy sidfx for second, because my C64 is in great condition and i dont want to damage anything, maybe i rather buy another C64 a sync them via cable i noticed that you sometimes use sidTAB call one line before note starts, maybe this guarantee that note is properly triggered.
+But as you can see, you must bring to live performance a lot of work because it is live programming of sid chip which is not that easy, basically on average synth you can do these filter/ringmod things easily with some knobs, so C64 is really hard platform to work with even for me, and back in time i mastered even VAST synthesis in Kurzweil synths, but took me one year to create 100 programs/setups.
+Good luck.
+
+Last edited by martin_demsky (Dec 30, 2018 11:20 am)
+
+### 264 Dec 30, 2018 11:43 am
+
+F7sus4
+
+Offline
+
+Poland
+
+I'm not really up much for live sound programming, even though defMON seem to have great potential on the field.
+Regarding that hard-restart thingy again, a sample tune here with a few instrument puzzles to think about.
+Also, if you take a look at line 06, you'll notice 09 06 values ($09 for gate-bit and 06 for ADSR). You can change 06 from 01 to 0F to affect volume of the drum sound. Small "out of manual" trick if you struggled with optimizing volumes of your sounds/instruments.
+
+Last edited by F7sus4 (Dec 30, 2018 11:51 am)
+
+### 265 Dec 31, 2018 2:32 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Thanks, i looked at your file, you always manage to create something unusual than classic chiptune and yes i hear difference when changing that 06, i also changed some other waveforms to noises and muted other channels to hear what is going on. Today i loaded my tune and also this your example to my C64G and it sounds almost same, except of course more analogue, but these fundamental things like filters and gates works almost exactly so i am glad that current Vice C64 version 3.2 is pretty trusty. At third channel 020A is interesting how you set gate on with filter at first sidtab call and on second instrument, which is followed by 00 sidtab call with 00 gate, so tones are slowly falling at SR 6C.
+
+Last edited by martin_demsky (Dec 31, 2018 3:04 pm)
+
+### 266 Jan 27, 2019 4:32 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Today i finished my Demobit tune in defMON but i reached #80 (in hexadecimal) sequences/patterns per channel, it is not enough and it is ordinary tune with timing 2:48, it is possible to extend sequences to FE? (FF is the end of tune)
+
+Last edited by martin_demsky (Jan 27, 2019 4:34 pm)
+
+### 267 Jan 28, 2019 11:00 am
+
+F7sus4
+
+Offline
+
+Poland
+
+That's a lot. Many legacy editors had $3F (64) patterns max, compared to this $7F (128) feels like freedom.
+Never reached more than $50-ish with 4+ minute detailed tunes. Is this some ultraspeed one?
+
+### 268 Jan 28, 2019 1:44 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I varied a lot of things based on main theme and a lot of patterns was added due to transposition, because there is no live transpose of pattern like in other editors, but i never finish another that complex tune in defMON because it is really better on live programming and unusual things. It is my first defMON tune and i started it like standard chiptune. I smiled almost to death yesterday when i added 7F, 80, 81.... patterns during playback and whoaaa... what is going on??? In manual i didn't noticed max number of patterns so i expected to have it FE, because FF is always sign of end of tune, then i visited Chordians comparision of C64 music editors http://chordian.net/c64editors.htm and i see that defMON have 128 patterns which is in hexadecimal that #80 (respectively #7F because first is #00).
+Tune is standard default speed 125 bpm because i have to synchronize it with another half of song in Sidtracker 64 on iPad, which was made earlier.
+I also realized that i very like on Gameboy in LSDJ concept with song/chain with transpose/block, because i don't need to remember all those patterns when arranging main song. It could be hell if i change major things and move patterns. But of course pattern per channel is more memory-savvy, which is crucial mainly on 8-bit computers.
+
+Last edited by martin_demsky (Jan 28, 2019 1:55 pm)
+
+### 269 Feb 15, 2019 5:37 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Instrument "double jump" bug.
+This is mini-report on newly discovered bug. Weirdly enough, it affects only packed files - PRG and RAW, but does not happen in the tracker.
+Let's use this picture as an example:
+- When we call A5 - it will play A5, jump to 9F, play 9F and and stop instead of jumping back to 9E (as continuous loop).
+
+Last edited by F7sus4 (Feb 17, 2019 1:39 pm)
+
+### 270 May 3, 2019 9:36 am
+
+F7sus4
+
+Offline
+
+Poland
+
+Instrument deletion bug.
+If you load previously made tune, then delete large chunks of instrument data with shift+RETURN, and proceed to save the file, it might become corrupted. This does not happen if instrument lines are erased byte-by-byte with space bar.
+It's difficult to predict whether this behavior is related to memory allocation or instrument jump points that defMON tries to recalculate while erasing consecutive lines.
+
+Last edited by F7sus4 (May 3, 2019 6:19 pm)
+
+### 271 Jul 10, 2019 10:33 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+https://youtu.be/q4CcxrkvHGg
+I am doing some videos now, here is something about defmon part 2 and sorry for my lame english
+
+### 272 Oct 1, 2019 8:41 pm
+
+darenager
+
+Offline
+
+Never mind, solved it.
+
+Last edited by darenager (Sep 1, 2020 10:45 pm)
+
+## Posts: 257-272 of 444
+
+Pages Previous 1 … 15 16 17 18 19 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

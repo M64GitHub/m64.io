@@ -1,0 +1,240 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+148 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 13 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 11 12 13 14 15 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 193-208 of 444
+
+### 193 Feb 22, 2018 1:47 pm
+
+Amelinium
+
+Offline
+
+I appreciate the syncing link. It made my day waaaaay easier.
+I also do understand the reason for position -1 being there as I think I guessed properly ADSR hardrestart being the most possible scenario. It makes sense.
+However! In some cases this limits the flexibility instead of increasing it. Again, ADSR hardrestart can be done without using -1 position. And if you use every single line of the pattern for notes, you will find yourself forced to make multiple copies of the next following pattern only to move the last note from previous pattern there.
+
+Last edited by Amelinium (Feb 22, 2018 2:54 pm)
+
+### 194 Feb 23, 2018 2:01 pm
+
+frantic
+
+Offline
+
+There are in fact a number of complications associated with doing hardrestart without using a -1 position (unless you have the kind of look-ahead code that other editors have, but that I wanted to avoid for the reasons that I mentioned). Some of these complications relate to mixing sounds with different kinds of hardrestart or no hard restart, and some of them relate to synching defMON to external synths.
+Anyway, none of this really matters too much because: note that you can actually use the -1 step as a step 0. That is, you can indeed put your first note on that -1 step. It is actually just a way of presenting things graphically that makes you think the "-1" step is a -1 step in the first place. You could just as well treat it as step 0 and do hardrestart the way you want to (e.g. to make the actual start of the audible sound a bit delayed compared to the position in the sequence where you put the sidtab value, if I understand you correctly.) When you press F1 or F3 to play your tune, the -1 step will be played first, so in that sense this step is actually just like any other "first step in a sequence". It is just that line numbers will seem odd in that case of course, but at least the choice is there.
+Shortcut to get to the -1 step in a sequence: Press CTRL+G twice. First time will take you to step 0. Second time will take you to step -1.
+
+### 195 Aug 1, 2018 11:11 am
+
+Amelinium
+
+Offline
+
+@Frantic: Would it be possible to improve "instrument table" in the next defMON version? I specifically mean JP (jump) with predefined amount of loops (similar to how FF xx 02 works in pattern list = loops jumping to xx for 2 times). At this moment it's quite easy to run out of lines when creating longer volume or filter envelopes. This loop would be the ultimate help.
+
+Last edited by Amelinium (Aug 4, 2018 11:44 am)
+
+### 196 Aug 1, 2018 2:08 pm
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+Although it can get messy, it's perfectly possible to do these kinds of longer events in the sequences instead.
+An advantage of that is also that you get encouraged to make the sounds more dynamic, instead of having static instruments.
+
+### 197 Aug 1, 2018 2:10 pm
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+I'd say that the possibility to not even have any fixed instruments at all, is what gives defMON its spiritual power.
+
+### 198 Aug 6, 2018 12:57 pm
+
+Amelinium
+
+Offline
+
+Guys, please don't get me wrong. My decision to stick with defMON was to have absolute control over the sound. Having a bit of predefinied automation is still different than editor doing all the magic instead of you. I hope you get my point. I won't argue if it's easier to program loopable JP in instrument table or to type everything manually via pattern, although I'd actually argue it will fuck up the envelopes without $09 testbit hardrestart each time you retrigger it without closing the gate.
+
+### 199 Aug 7, 2018 8:31 am
+
+frantic
+
+Offline
+
+Amelinium wrote:it will fuck up the envelopes without $09 testbit hardrestart each time you retrigger it without closing the gate.
+
+The testbit has nothing to do with ADSR envelopes and gate on/off. What the testbit does is to reset the oscillator that produces the waveform, and that is completely independent of the volume envelope generation (ADSR + gate) in the SID hardware.
+Anyway, I can see the point in some automation like the one you're thinking of, and of course I've thought about it too, but it won't happen because:
+There are a lot of things that would be nice to have and that would make a lot of sense — individually — but starting to implement them, one by one, will gradually make defMON slower, more bloated, probably more prone to bugs due to increased complexity, and so forth. The limit has to be drawn somewhere, and I've chosen to draw it pretty narrowly around what's really important to have. Think of it as a design decision.
+A change like this would also break the file format of defMON tunes, and this would cause some trouble for various secret tools that are around.
+
+### 200 Aug 16, 2018 12:42 pm
+
+Amelinium
+
+Offline
+
+frantic wrote:There are a lot of things that would be nice to have and that would make a lot of sense — individually — but starting to implement them, one by one, will gradually make defMON slower, more bloated, probably more prone to bugs due to increased complexity, and so forth.
+
+It's always a matter of choice what is a burden and what is actually useful.
+
+Last edited by Amelinium (Aug 16, 2018 1:30 pm)
+
+### 201 Aug 20, 2018 7:27 am
+
+Amelinium
+
+Offline
+
+Just wanted to report the large file bug again. Can't tell what it causes but happens more often than in previous builds... Using 20171026.
+
+### 202 Aug 20, 2018 6:54 pm
+
+frantic
+
+Offline
+
+Thanks for reporting!
+Have other people experienced this as well? It has happened to me once.
+
+### 203 Aug 22, 2018 8:19 am
+
+d3Ni$e
+
+Offline
+
+frantic wrote:Thanks for reporting!
+Have other people experienced this as well? It has happened to me once.
+
+Tjääna!
+I have been working with defMON alot lately.. I have been saving 3-4 files at the time but not convert anything, no bugs for me so far
+Is it the overflow in the diskmenu you talking about?
+
+### 204 Aug 22, 2018 9:56 am
+
+frantic
+
+Offline
+
+Good to hear that it works well for you. It is not the overflow in the disk menu (I don't think that should be a bug anymore? what version are you using?) that we are talking about, but a bug that some people have reported where some saved tunes suddenly take up a lot of space, for no reason, when saved on disk. As far as I know, this bug causes no other problems than extended loading/saving times, but it is still an annoyance of course.
+It would be good if people who have experienced the "large file bug" could send me a d64 that includes one of those large tunes. Maybe I could find out the reason for the bug by looking at such tunes. Not sure I have the disk anymore with the tune where this bug appeared for me.
+
+Last edited by frantic (Aug 22, 2018 9:58 am)
+
+### 205 Aug 22, 2018 8:07 pm
+
+Amelinium
+
+Offline
+
+Yes. Here you go. Started from scratch on fresh bare C64. After saving the music for the first time I have 66 blocks file. And after compressing it, the raw file is $1000 to circa $2000 most of the time.
+
+### 206 Aug 23, 2018 4:58 am
+
+F7sus4
+
+Offline
+
+Poland
+
+frantic wrote:Have other people experienced this as well? It has happened to me once.Have other people experienced this as well? It has happened to me once.
+
+I confirm the bug. Latest defMON build (2017/10/26).
+Testing results: empty affected song has 65 blocks, but finished affected song has 76 blocks (all 00-7F sequences used, all 00-FF instruments used). This is only 11 blocks of difference between empty and maxed out song.
+Unaffected songs usually have 2 blocks when empty and go up to 60 blocks when maxed out. This time it is 58 blocks difference.
+It means that something is unnecessarily saved as if it was user data in affected songs, but still can be overwritten by the actual user data.
+Amelinium wrote:After saving the music for the first time I have 66 blocks file. And after compressing it, the raw file is $1000 to circa $2000 most of the time.
+
+This is also true. Affected empty song has 16 blocks after saving it in RAW mode ($1000-$1F11). It feels super huge.
+How often the bug happens? It is semi-permanent, in 75% cases I'm getting large files. Once the file becomes "affected", there's no going back. However, if you load "affected" song using older defMON build (eg. 20141108) and save it, the file will be "healed" from unnecessary data.
+Where does the bug happen? Both on real C64 hardware and Vice 2.xx+3.xx emulators.
+_____________________________________________________________________
+PS. I know it won't change much, but the jump X times loop idea for instrument lines is a idea. Good directon. Useful to say the least. Would molest every here and there, 10/10.
+
+Last edited by F7sus4 (Oct 21, 2018 1:04 pm)
+
+### 207 Oct 13, 2018 4:21 am
+
+anarkiwi
+
+Offline
+
+Hello all,
+I have am embarrassing n00b question (thanks for defMON BTW - having a great time learning it). I'm using defMON 20171026.
+Using the seqED, when I edit anything for voc 1, my edits are immediately mirrored to voc 2. In other words, if I add a C4 to voc 1 at some step a C4 immediately appears in voc 2 in the same step - and goes away when I delete it from voc 1. Likewise with sidCalls etc. I'm sure I am not in super command mode. I've loaded some patterns written by others and edited them and the mirroring doesn't happen, so I feel it must be something configurable/stored in the workfile.
+I can't for the life of me figure out how to disable this mirrored editing. I feel like this may be a n00b test to overcome, in which case I clearly am failing it. What's the secret?
+Thanks,
+
+### 208 Oct 13, 2018 1:18 pm
+
+frantic
+
+Offline
+
+@F7sus4: Thanks for the input. I had missed that post, so sorry for not responding. This information will be useful for sure. Minor comment in the meantime: RAW save of $1000-$1F11 includes the actual player code, not only music data, so that is why it seems huge.
+@Anarkiwi: If you look at the list of sequences used in the song (the list of values on the right side of the screen when you start defMON), and look specifically at the first line, you'll see that it says 01 00 00. This means that in the first channel, sequence 01 is shown. Both of the other two channels show sequence 00. Therefore, when you edit sequence 00, you'll see these changes in both channels, as it simply is the same sequence shown in both places. In general it is a good idea to leave sequence 00 alone (empty that is). Normal workflow would be to go to the sequence list, place the cursor on one of those "00" values, and press SHIFT+U to automatically change the sequence number to "next Unused" sequence. If you're starting on a new blank song, that would of course be sequence 02. You could achieve the same thing by simply writing 02 instead of 00 at that location in the sequence list.
+
+Last edited by frantic (Oct 13, 2018 8:21 pm)
+
+## Posts: 193-208 of 444
+
+Pages Previous 1 … 11 12 13 14 15 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

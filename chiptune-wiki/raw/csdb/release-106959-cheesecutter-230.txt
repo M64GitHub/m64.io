@@ -1,0 +1,215 @@
+|
+
+|
+|
+|
+
+|
+
+| | |
+
+You are not logged in - nap
+
+|
+
+|
+
+|
+
+|
+CheeseCutter 2.3.0 [2012]
+
+| |
+Released by :
+Abaddon
+
+Release Date :
+
+20 March 2012
+
+Type :
+Other Platform C64 Tool
+
+Website :
+
+http://theyamo.kapsi.fi/
+
+| User rating: | awaiting 8 votes (6 left) See votestatistics
+
+Credits :
+
+| Code | .... | Abaddon
+
+| Music | .... | Abaddon
+
+SIDs used in this release :
+
+| F.F.F. (chaingun mix) | | (/MUSICIANS/A/Abaddon/F_F_F_chaingun_mix.sid)
+| Kalmankone | | (/MUSICIANS/A/Abaddon/Kalmankone.sid)
+| Swingcat | | (/MUSICIANS/A/Abaddon/Swingcat.sid)
+| Trouble Every Day | | (/MUSICIANS/A/Abaddon/Trouble_Every_Day.sid)
+
+Download :
+
+| http://theyamo.kapsi.fi/ccutter/dist/ccutter-2.3.0-win32.zip (downloads: 709)
+
+| http://theyamo.kapsi.fi/ccutter/dist/ccutter-2.3.1-win32.zip (downloads: 320)
+
+| http://theyamo.kapsi.fi/ccutter/dist/ccutter-2.3.0-linux.tar.gz (downloads: 269)
+
+| http://theyamo.kapsi.fi/ccutter/dist/ccutter-2.3.0.tar.gz (downloads: 232)
+
+| http://csdb.dk/getinternalfile.php/156690/ccutter-2.3.1-win32.zip (downloads: 117)
+
+| http://csdb.dk/getinternalfile.php/156688/ccutter-2.3.0-linux.tar.gz (downloads: 103)
+
+| http://csdb.dk/getinternalfile.php/156689/ccutter-2.3.0-win32.zip (downloads: 101)
+
+| http://csdb.dk/getinternalfile.php/156687/ccutter-2.3.0.tar.gz (downloads: 90)
+
+Look for downloads on external sites:
+
+Pokefinder.org
+
+User Comment
+Submitted by Scarzix on 8 August 2013
+| there is a 2.5.0 release and you can also compile your own version as the sourcecode is in the download for that.
+
+Lastly, we have a free Facebook group (where I am the admin) and we allow anyone interested in SID sound to join it. In there you will find help and also a Mac OSX version that is compatible with airbook.
+
+User Comment
+Submitted by Youth on 8 August 2013
+| This sounds cool, I want to use it but my Mac has no numpad :( And no scroll-lock... anyone else using Mac that can help we with this?
+
+User Comment
+Submitted by abaddon on 26 March 2012
+| Added d/l links to version 2.3.1 which fixes the Windows console output issue (ct2util outputs its messages properly now).
+
+User Comment
+Submitted by Mr. SID on 22 March 2012
+| I also gave it a try, but the lack of maturity of the D tool set and my lack of experience with it made it impossible... ;)
+
+User Comment
+Submitted by abaddon on 22 March 2012
+| Ah, apparently Mr Ammo couldn't get it to run after all. I'll have to look at this issue when I get the time.
+
+In the meanwhile, I hope that running it on Wine suffices for you mac ppl.
+
+User Comment
+Submitted by abaddon on 22 March 2012
+| If that doesn't work out, you may be able to run the Windows version with Wine.
+
+User Comment
+Submitted by abaddon on 22 March 2012
+| Brandon: ask Mr Ammo, I think he compiled it for MacOS a couple of days ago.
+
+User Comment
+Submitted by BrandonWalsh on 22 March 2012
+| Could someone provide a version for MacOSX so I could try this out? I guess it would not be too hard to compile, right? Yeah, I am lazy.
+
+User Comment
+Submitted by abaddon on 21 March 2012
+| Regarding the buffer size issue; most of the cases it's no big deal unless you start getting audio dropouts. ALSA seems to be the most prone to setting its own buffer size regardless of what was requested.
+
+User Comment
+Submitted by abaddon on 21 March 2012
+| swingcat should work now. I updated all the packages accordingly.
+
+User Comment
+Submitted by terric on 21 March 2012
+| Nice.
+
+This might be the choice for me. :)!!!
+
+Btw , playing Swingcat to the end crash the program.
+
+My system saysWarning: obtained buffer size differs (tried 2048, got 1024).
+
+audio init: engine=resid-fp, freq=48000, buf=1024, sid=6581, clock=pal, interpolation=on, altdelay=on
+
+Error: ArrayBoundsError src/song/base.d(233)
+
+User Comment
+Submitted by abaddon on 21 March 2012
+| Seems like I rushed the release a bit; I forgot to change some of the example tunes to handle the new song wrapping style. Will be fixed tonight.
+
+User Comment
+Submitted by Yogibear on 20 March 2012
+| Wow! An update of a great SID tracker! Also nice demo songs, especially Kalmankone! (Some Walker influences!)
+
+|
+
+| | Search CSDb
+
+| |
+|
+
+All
+Releases
+Groups
+Sceners
+Events
+BBS
+SIDs
+-------
+Forum
+Comments
+
+|
+
+|
+Advanced
+
+| | Navigate
+| |
+|
+Prev - Random - Next
+
+| | Detailed Info
+| |
+|
+· Summaries (1)
+
+· User Comments (13)
+
+· Production Notes (1)
+
+| | Fun Stuff
+| |
+|
+· Goofs (1)
+
+· Hidden Parts
+· Trivia
+
+| | Forum
+| |
+|
+· Discuss this release (16)
+
+| | Support CSDb
+| |
+
+|
+Help keep CSDb running:
+
+Funding status:
+
+| |
+
+|
+
+About this site:
+
+CSDb (Commodore 64 Scene Database) is a website which goal is to gather as much information and material about the scene
+around the commodore 64 computer - the worlds most popular home computer throughout time. Here you can find almost anything which was ever made
+for the commodore 64, and more is being added every day. As this website is scene related, you can mostly find demos, music and graphics made by the
+people who made the scene (the sceners), but you can also find a lot of the old classic games here.
+Try out the search box in the top right corner, or check out the CSDb main page for the latest additions.
+
+|
+
+Home - Disclaimer
+Copyright © No Name 2001-2026
+
+Page generated in: 0.086 sec.

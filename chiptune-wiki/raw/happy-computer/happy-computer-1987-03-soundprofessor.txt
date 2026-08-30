@@ -1,0 +1,374 @@
+
+
+122 
+
+
+
+Ausaobe 3/Mflrz 1987 
+
+
+
+Musik Thema 
+
+
+
+Mlisik gehort wohl zum Inter- 
+essantesten was aus dem 
+Computer herauszuholen ist. 
+Wie programmiert man aber 
+professionelle Sounds? Wir 
+sahen einem der besten deut- 
+schen Musikprogrammierer 
+bei seiner Arbeit zu und zei- 
+gen einige seiner Tricks. 
+
+■■ s ist 6.35 Uhr, ich habe es gera- 
+WM de noch geschafft und sitze im 
+■■Intercity von Miinchen nach 
+Frankfurt. Ich bin neugierig, aber 
+auch skeptisch, In ein paar Stunden 
+treffe ich mich mit einem der besten 
+deutschen Musikprogrammierer. 
+
+In einem Ort in der Nahe von 
+Frankfurt erwartet mich Chris Hiils- 
+beck vor der Haustiir, Nach der kur- 
+zen BegrtiSung fuhrt er mich in sein 
+Zimmer. Zu meiner Uberraschung 
+sieht es hier gar nicht aus wie in ei- 
+nem Musikstudio, sondern eher wie 
+in tausend anderen Zimmern, wo ju* 
+gendliche Freaks ihrem Computer- 
+hobby frbhnen. Ein Tisch mit zwei 
+C 64-Computern, ein Floppy-Lauf- 
+werk und dahinter in der Ecke leicht 
+versteckt ein Amiga. »Den Amiga 
+benutze ich noch nicht zur Sound- 
+programmierung«, antwortete er auf 
+meinen fragenden Blick. So wird 
+auch der Monitor etwas zweckent- 
+fremdet an den C 64 angeschlossen. 
+
+Wahrend ich mich noch im Zim- 
+mer umsehe, hat Chris bereits die 
+erste Diskette ins Laufwerk einge- 
+legt, und fuhrt mir seine neuesten 
+Musikstucke vor. Was da aus den 
+Lautsprechern der Stereoanlage 
+kam, konnte mit den Produkten der 
+bekannten englischen Programmie- 
+rer Rob Hubbard und Martin Gal- 
+way ohue weiteres inithalten. »Fanta- 
+stisch« war meine erste Reaktion, So 
+etwas hatte ich nun wirklich nicht er- 
+
+
+
+Der 
+
+Soundprofessor 
+
+
+
+
+wartet, Aber wie programmiert 
+Chris Hulsbeck solche Musik? Ich 
+habe Gluck, Chris bietet mir an; »Ich 
+arbeite gerade an einem neuen 
+Spiel. An diesem Beispiel kann ich 
+es Dir am besten demonstrieren.* 
+
+Jeder Programmierer braucht 
+Werkzeug, urn zu arbeiten. Set es 
+ein Compiler, Interpreter oder ein 
+Grafikprogramm. Chris benutzt zur 
+Soundprogrammierung seinen 
+setbstgeschriebenen xSound moni- 
+
+
+
+tor", Damit laBt sich am Soundchip 
+alles nur Erdenkliche einstellen und 
+manipulieren. Aber mit dem Werk- 
+zeug alleine ist es nattlrlich nicht ge- 
+tan. Man muB zuerst einmal wissen, 
+was man iiberhaupt machen moch- 
+te. 
+
+Angenommen, man hat gerade 
+ein tolles Spiel geschrieben und 
+mochte es nun mit entsprechender 
+Musik untermalen, Wie macht man 
+so etwas? Chris uberlegt sich zuerst 
+
+
+
+
+cord track 
+i .iv voice 
+antize 
+
+iound a/an 
+
+
+
+2 ? 
+
+O/B 
+
+
+
+Bel 
+
+
+
+C-0 
+
+>y transpose -ttt 
+arpeggio £i ; qo 
+begin/stop iki 
+
+
+
+■To bo on top... daa Spiel, an dem Chris g*rade arbeitot 
+
+Ausgabe 3/Marz 1987 
+
+
+
+Wichtigstes Werkzeug bel der Programmforung 
+
+
+
+I henta Musik 
+
+
+
+einmal, welche Musik zu diesem 
+Spiel am besten pafit. SpieLt es bei- 
+spielsweise im Mittelaltei, verwen- 
+det er barockeTone. Wenn es in der 
+Gegenwart spielt, benutzt er Tone 
+aus der Discoszene, Bei einem Fan- 
+tasy-Spiel wurde er zum Beispiel 
+mystische Synthesizerklange einset- 
+zen; je nachdem, was ihm letztend- 
+lich am besten gefallt und was am 
+besten zum Spiel paBt. Dazu kommt 
+naturlich noch die Dramatik der Mu- 
+sik. ganz wie im Kino. 
+
+Hat man die entsprechenden 
+Klange ausgewahlt, zum Beispiel 
+durch Experimentieren, dann muB 
+man sich an das Komponieren ma- 
+chen. Denn selbstkomponierte 
+Stiicke geben dem Spiel auch eine 
+ganz personliche Note, wie bei- 
+spielsweise bei Martin Galway oder 
+Rob Hubbard. Anregen lafit man 
+sich am besten durch das Kino oder 
+eben durch viel Musik horen. Chris 
+geht zum Beispiel sehr hciufig nur ins 
+Kino, um sich inspirieren zu lassen. 
+
+1st nun alles beisammen. dann 
+kommt die Programmierung. Wie 
+bekommt man den Sound ins fertige 
+Spielprogramm? Das ist die nachste 
+Frage, mit der man sich auseinan- 
+dersetzen muB. Hat man diese auch 
+noch geldst, ist das Spiel mit der 
+ganz personlichen Note fertig. 
+
+Tips vom Prof i 
+
+Da uns Chris natiirlich keine ferti- 
+gen Kochrezepte liefert, gibt er uns 
+ein paar Tips fur alle, die sich mit der 
+Musikprogrammierung beschafti- 
+
+gen: . . 
+
+Als allererstes sollte man sich 
+iiberlegen, ob man in der Lage ist, 
+ein Musikprogramm auf die Beine 
+zu stellen, denn meistens program- 
+miert mandabei in Assembler. Traut 
+man sich dies zu. kommen die nach- 
+sten Oberlegungen: Wie program- 
+miert man den Soundchip? Soil die- 
+se Routine im Interrupt laufen? Wie 
+miissen die Daten im Speicher ab- 
+gelegt werden? Als Beispiel sei nur 
+mal das Anlegen einer Notentabelle 
+in Hexadezimalzahlen erwahnt. Die 
+Noten kann man dann als Zahlen- 
+werte von $00 bis $FF abrufen. Dies 
+bringt auch Platzersparnisse mit 
+sich. Man sollte sich auch mal Ge- 
+danken uber Erweiterungen ma- 
+chen, wie man zum Beispiel die Puls- 
+weite moduliert, oder wie man Filter 
+manipuliert. Dadurch entstehen 
+sehr schbne Effekte. Wichtig ist 
+auch, daB der Sound wahrend des 
+Spiels gewechselt werden kann, 
+und daB man Gruppen von Tonen 
+zusammenfaBt (diese Gruppen be- 
+zetchnet man als "Takte), Diese Takte 
+
+124 
+
+
+
+kann man dann in einem extra Spei- 
+cher ablegen und in beliebiger Rei- 
+henfolge und beliebig oft abspielen. 
+Alles tragt dazu bei. daB die Musik 
+hinterher viel besser khngt, als das. 
+was normalerweise aus dem Sound- 
+chip herauszuholen ist. Diese Tricks 
+
+
+
+verwendet Chris auch in seinen Pro- 
+grammen. 
+
+Man sieht also, mit den richtigen 
+Ideen und etwas Kreativitat kann 
+man tolle Klange aus dem Computer 
+zaubern. wie sie in vielen professio- 
+nellen Spielen zu finden sind, (kl) 
+
+
+
+Interview 
+mit Chris Hulsbeck: 
+
+
+
+Happy-Computer: Mittlerweile 
+.bist Du in Deutschland kein Un- 
+'bekannter mehr. Wie ist man auf 
+Dich aufmerksam geworden? 
+Chris: Angefangenhateigenthch 
+alles mit dem Musikwettbewerb 
+in der »64'er« (eine Schwesterzeit- 
+schrift der Happy-Computer), 
+Das war im Februar 1986. Ich ha- 
+be von dem Wettbewerb gelesen 
+und dachte mir, ich mache da mal 
+mit. Davor programmierte ich 
+schon einige Musikstiicke mit ei- 
+nem Freund zusammen, aller- 
+dings nichts Weltbewegendes. 
+Programme wie beispielsweise 
+»Synthsample« brachten mich auf 
+die Idee, auch mal etwas in der 
+Art zu machen, Dann ha be ich 
+.Shades, programmiert und es 
+eingesandt. Ich rechnete gar 
+nicht damit, daB ich solch einen 
+Erfolg haben wurde, und dann 
+belegte ich sogar den ersten 
+Platz. Danach habe ich mit der 
+Redaklion vereinbart. daB ich 
+noch ein Programm schreibe, 
+den »Soundmonitor«. Der war im 
+Oktober 1986 das "Listing des 
+Monats«. In der Zwischenzeit ha- 
+be ich mich mit Rainbow Arts in 
+Vcrbindung gesetzt, bei denen 
+ich nun fest angestellt bin. 
+Happy-Computer: Im Moment 
+bist Du noch Schiller. Warum 
+m6chtest Du die Schule abbre- 
+chen, ist die Schule beim Pro- 
+grammieren etwas zu kurz ge- 
+kommen? 
+
+Chris: Es ist eher umgekehrt. Die 
+Programmierung kommt durch 
+die Schule zu kurz. Wenn ich 
+abends nach Hause komme, bin 
+ich einfach zu milde, um noch am 
+Computer zu sitzen. Da mir das 
+Programm ieren aber SpaB 
+macht, stand ich vor der Entschei- 
+dung, entweder Computer oder 
+Schule. Nun. da habe ich mich 
+eben fur den Computer entschie- 
+den, Natiirlich kann ich das nur 
+machen. weil ich jetzt den Job bei 
+Rainbow Arts habe. 
+
+
+
+Happy-Computer. Du hast Dir 
+das Musizieren selbst beige- 
+bracht, und Du hast Dir das Pro- 
+grammieren beigebracht. Nun 
+bist Du ein Profi. Was muB man da 
+mehr sein, Musiker oder Pro- 
+gram mierer? 
+
+Chris: Oh, das ist sehr schwer zu 
+beanrworten. Das eine wie das 
+andere birgt Vor- und Nachteile. 
+Ist man beispielsweise ein guter 
+Programmierer, so konnte man 
+zwar gute Soundprogramme 
+schreiben, aber es fehlt einem 
+das musikalische Verstandnis. 
+Andererseits ist eine musikali- 
+sche Ausbildung auch nicht un- 
+bedingt nStig. Das ist auch bei 
+mir so, ich kann namlich keine No- 
+ten lesen. Atlerdings spiele ich 
+sehr viel auf Musikinstrumenten 
+und weiB inzwischen schon eini- 
+ges iiber Musik. 1st man aber nur 
+ein guter Musiker, dann kann 
+man sein K6nnen auf den Compu- 
+ter nicht optimal umsetzen. Man 
+muB also beides sein, wobei der 
+Programmierer meiner Meinung 
+nach iiberwiegen sollte. 
+Happy-Computar: Wie wir erfah- 
+ren haben, arbeitest Du gerade 
+an einem neuen Spiel, kannst Du 
+uns dariiber etwas erzahlen? 
+Chris: Eigentlich ist es janoch ge- 
+heim, aber ich kann Euch wohl 
+soviel verraten, daB es eine Mi- 
+schung aus Action, Musik-Ad ven- 
+ture und Strategie sein wird. Pn- 
+mares Ziel ist dabei, daB der 
+Spieler als Musiker versuchen 
+muB, einen Hit in der Hitparade 
+zu landen, Also, er hat hier nicht 
+die Rolle des Managers, sondern 
+die des KUnstlers. 
+Happy-Computer: Das hdrt sich 
+ja sehr vielversprechend an, Ei- 
+ne letzte Frage: Wann wird Dein 
+Programm voraussichtlich erhalt- 
+lich sein? 
+
+Chris: Voraussichtlich wird es im 
+Zeitraum Mai, Juni dieses Jahres 
+auf dem Markt erscheinen. 
+
+(kl) 
+
+
+
+Ausgabe 3/Mftrz 1887 
+
+
+
+Musik Thema 
+
+
+

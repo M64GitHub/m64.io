@@ -1,0 +1,20 @@
+====== Stereo SID features ======
+
+defMON allows you to make use of two SID chips in case you got a fancy machine like that. There is a separate seqLIST for the second SID, effectively allowing you to play different sequences on the second SID. To switch between the two seqLISTs, just press CTLR + ← (i.e. BACKARROW key at the top left of the C64 keyboard. Not the cursor key.)
+
+But...
+
+...this won't work in case you're currently in mono sid mode, which is the default when defMON starts up. To enable stereo SID mode you need to press CTRL + SHIFT + <-. To go back to mono SID mode, just press the same key combo again.
+
+When switching to stereo mode you can see the base address that is currently configured for the second SID chip, displayed in the status bar. If the base address for the second SID is not correctly set up and you start playing the tune, RAM may be corrupted and the program might even crash. So make sure to set it up correctly. To change the base address of the second SID chip, press CTRL + SHIFT + UPARROW (not the cursor up key, but the other up-arrow on the keyboard) to toggle between $D4xx, $D5xx, $DExx and $DFxx. In order to change the "xx" part of those addresses, press CTRL + C= + UPARROW to toggle the low byte of the base adress in steps of $20 (00, 20, 40, 60, ...).
+
+If you are not sure what the base adress you have for your second sid chip, you can use TLR's nice little tool {{ :docs:sid-detect2.zip | sid-detect2.prg}} to scan your system for SID chips. 
+
+The config (mono or stereo mode, and base address of SID #2) is saved as part of the worktune savefile, so you only need to do the stereo SID configuration once for each tune. (Note that if you made a tune in a version prior to the 2014-06-15 version which had stereo SID support enabled, your tune may actually be remembered as being in stereo SID mode even if you didn't explicitly enable that. Just toggle back to mono SID and save it again, and it will be remembered as such.)
+
+
+===== Some additional notes =====
+
+  * There is currently no way of exporting/packing stereo tunes from defMON. Only the data for SID #1 will be included if you do that.
+  * Raster time usage for SID #1 and SID #2 is shown with separate colors since version 2014-06-15.
+  * Toggle channels on/off works also for SID #2 since version 2014-06-15 (and actually in a few versions before that as well).

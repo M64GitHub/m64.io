@@ -1,0 +1,256 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+154 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 20 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 18 19 20 21 22 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 305-320 of 444
+
+### 305 Aug 8, 2020 8:12 pm
+
+frantic
+
+Offline
+
+@f7sus4: Much appreciated!
+
+### 306 Aug 28, 2020 3:06 pm
+
+d3Ni$e
+
+Offline
+
+Finally we have access to something really good!
+I have been craving so much about this when it comes to the defMON community!
+I've been following this discussion here always with big interest and the official defMON toolsforscholars have been my handbook of choise BUT I have missed something big: INSPIRATION!
+Where is the tunes? why is there no big collection?
+There is only some links to some SIDs in a weird underground based Commodore 64 site where you download a SID-file then you need to download a emulator for open the SID-file and it sounds weak. There is Stone Oakvalley but how do I know what is created in defMON? Plus alot is missing there.
+I want MP3s, a folder where I have and can play defMON tunes instantly and now we have it thanks to DeepSID!!!
+https://deepsid.chordian.net/?player=9& … rch=defmon
+Here we have tunes made in defMON for instant play, creating own plays lists and upload tunes easily.
+In my opinion this is the right direction for sure!
+Just wanted to express my happy feelings!
+Have a wonderful weekend!
+D.
+
+### 307 Aug 29, 2020 4:40 pm
+
+frantic
+
+Offline
+
+Thanks! That's good to know! I added that link to the defMON wiki. That also reminds me: If anyone has a tune in worktune format, that they would like to share, as an example for new users of what defMON can do and how it works, don't hesitate to add it to the defMON wiki or send it to me so I can add it.
+
+### 308 Aug 30, 2020 7:15 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I can share my defMON tunes (i used to extract prg files from D64 file app DirMaster from Style) and also sid tunes
+https://we.tl/t-yPLsSOP547
+
+### 309 Aug 30, 2020 8:32 am
+
+frantic
+
+Offline
+
+Thanks! I've uploaded it to the defMON wiki now.
+
+### 310 Aug 31, 2020 4:22 pm
+
+d3Ni$e
+
+Offline
+
+Hello guys! the synth legends FRAK enjoyed my little remix tune I made in defMON with my Commodore 64.. they said I did a good twist on it so that made me really happy.
+https://www.youtube.com/watch?v=9mEZUTjtV80
+I think I want to pack the tune and turn it into a sid now but hearing it after packing it is not the same as playing it in the tracker.
+It sounds really bad when I listen to the packed file.
+Any idea what I do wrong or something?
+Thanks Martin! Your tunes are so cool!
+D.
+
+### 311 Aug 31, 2020 6:04 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Yes that packing to executable prg sometimes sounds different, then i edit in sidedit init and play address to usual $1000 and $1003 and name of autor/tune and sid chip, and some ring modulation or transpose settings sounds different, but now only in one sid tune in sidplay 2/w. In defMON i really miss transpose of a pattern, i must clone it and transpose it manually.
+
+Last edited by martin_demsky (Aug 31, 2020 6:18 pm)
+
+### 312 Aug 31, 2020 6:30 pm
+
+d3Ni$e
+
+Offline
+
+martin_demsky wrote:Yes that packing to executable prg sometimes sounds different, then i edit in sidedit init and play address to usual $1000 and $1003 and name of autor/tune and sid chip, and some ring modulation or transpose settings sounds different. In defMON i really miss transpose of a pattern i must clone it and transpose it manually.
+
+That is what I thinking of also about the different sounding and how it turns after packing for example with the transpose settings.
+I have alot of workfiles but honestly is all messy and in my style of programing. That is what I enjoy so much that you have your own kind of way of program in the SIDTab and it can turn out so good. I see for example Goto80 always types "F8" in the "RE" column for example.
+What we all need or "newbies" is like a ground structure of everything and that is also important to program in the "right" way so it not turns out to sound different after packing the tune like in my case here.
+
+### 313 Aug 31, 2020 6:44 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Yes i use F8 almost always, F is maximum resonance and 8 is filter enable to current channel, some months i also use second sidTAB call, so you can call for example instrument in first row and in second you can call whatever, arpeggio (don't forget to loop it), filter settings, resetting of transpose or filter, whatever, and when you always design from zero all things in sidTAB, then you will learn a lot every day and quickly.
+
+### 314 Aug 31, 2020 7:04 pm
+
+d3Ni$e
+
+Offline
+
+Yes I know and it is the big space of oppertunities that makes it so exciting. I rarely use F8.. I go "11" "61" "AA" and all kind of crazy commands depending of what Im doing in the "CP" Coloumn also.
+Yes arpeggios are really funny to create because I always want it to be perfectly synced of the tempo of the tune Im making.
+Im thinking about making some short basic tutorial some day..Like a quick guide for people to understand fast. I think you would fit to do that also Martin.
+
+### 315 Sep 5, 2020 3:03 pm
+
+frantic
+
+Offline
+
+Frak.. Nice! I have some Frak vinyl albums lying around at home.
+Regarding songs sounding different after packing:
+The first thing to note is that at least some slight differences are close to impossible to avoid, since the timing simply won't be the same after packing, on a very detailed level. Such small differences are sometimes enough to trigger more noticeable/audible differences, such as the ADSR bug, or some phasing type of effect that make things sound a bit different, and so on. However, I am not sure that this is what you are talking about here. Maybe there is some more basic/fundamental type of difference appearing here, for some reason, between the worktune and the packed tune.
+@d3Ni$e: If you want, you can email me a D64 with defMON and the worktune, and then I can (a) listen to the difference myself, and (b) try to pack it and see if I can figure out if there would be some particular reason for why it might sound very different.
+
+### 316 Sep 5, 2020 3:37 pm
+
+d3Ni$e
+
+Offline
+
+frantic wrote:@d3Ni$e: If you want, you can email me a D64 with defMON and the worktune, and then I can (a) listen to the difference myself, and (b) try to pack it and see if I can figure out if there would be some particular reason for why it might sound very different.
+
+Hello my friend!
+Thanks alot I sent you a PM now.
+D.
+
+### 317 Sep 6, 2020 5:12 pm
+
+d3Ni$e
+
+Offline
+
+Hurray! Everything went well with the packing of my tune.
+So to clarify my packing issues:
+1. I was using an old version of defMON from 2017 and with the old versions there was some minor issues with the packer and the filter sweeps of the 8580 according to Frantic which is fixed by now.
+2. I was programming incorrectly in the SID-TAB like jumping up from a row to the same row instead of just setting "ST" command in the DL-column.
+I changed to the latest version and fixed the errors and re-packed it and all went smooth!
+Thank you Frantic!
+
+### 318 Sep 6, 2020 9:10 pm
+
+frantic
+
+Offline
+
+@d3Ni$e: Good to hear that it worked out in the end. Regarding the "jumping to the same row" thing, it is of course really hard to know that this should be avoided, given the lack of proper manual/documentation of defMON. I really should do that tutorial that I have been thinking about. Let's see if I ever find the time. It is a tough call whether to prioritise something like that, or to prioritise work on a sequel to defMON.
+
+Last edited by frantic (Sep 6, 2020 9:10 pm)
+
+### 319 Sep 8, 2020 12:30 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+I was thinking about the whole-sequence transposition as well, but sometimes not having a functionality leads to greater good.
+For example, a lot of contemporary GoatTracker2 tunes sound tedious since C64 musicians started to share their skillfully crafted "trademark" instruments. In defMON, every single tune puts you in carte blanché scenario, which is good for creativity. You do music, but don't redo it.
+I understand that global transpose might come in handy, but if you actually have to retype every single note, there comes the chance that you'll tweak something in the new sequence a bit, getting more and more variety.
+(A small preview of my forthcoming tune @defMON/8580).
+
+Last edited by F7sus4 (Sep 8, 2020 12:42 pm)
+
+### 320 Sep 9, 2020 10:18 pm
+
+frantic
+
+Offline
+
+Yep, no pattern transpose in defMON. Easiest way to do it manually:
+* Clone sequence using the normal SHIFT+N or SHIFT+U operation
+* Put cursor on first step of the sequence by pressing CTRL+G twice
+* Hold CTRL while typing S 2 0, to put editor in "edit 20 steps at once" mode.
+* Transpose the cloned sequence up/down with PERIOD and COMMA keys
+* Press CTRL+RETURN to get back to normal editing mode again.
+If you know for sure that you want to transpose a sequence up 12 ($0C) steps, for example, you could replace the third step in the procedure with:
+* Hold CTRL while typing S 2 0 R C, to put editor in "edit 20 steps at once and repeat each operation $C times" mode.
+Then it will be enough to press PERIOD once to transpose the sequence up $0C steps = one octave.
+If you want to transpoe ALL notes in the whole song one step up, you could replace the third step in the procedure with:
+* Hold CTRL while typing Z A S 2 0 to put editor in "apply operation to ALL sequences and edit 20 steps at once" mode.
+Then pressing period once will transpose every note in the whole song one step up. Obviously this is a quite dangerous mode to operate in, since accidentally pressing a key will affect the whole song (e.g. pressing space would erase all notes in the whole song), so make sure to get back to normal operating mode at once afterwards by pressing CTRL+RETURN.
+defMON II will probably be a bit more "normal" in these regards, so there I guess it would look more like:
+COMMA/PERIOD = transpose current step up/down
+SHIFT + COMMA/PERIOD = transpose current sequence up/down
+...or something like that. Not sure it would include functionality to transpose whole sequences from the sequence list though, the way you can do it in e.g. JCH editor and some other editors.
+
+Last edited by frantic (Sep 10, 2020 12:48 pm)
+
+## Posts: 305-320 of 444
+
+Pages Previous 1 … 18 19 20 21 22 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

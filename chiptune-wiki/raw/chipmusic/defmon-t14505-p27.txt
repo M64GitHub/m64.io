@@ -1,0 +1,260 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+156 Guests 0 Members 16 Bots (+41 bot dupes)
+
+# defMON (Page 27 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 25 26 27 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 417-432 of 444
+
+### 417 Nov 3, 2020 7:30 pm
+
+frantic
+
+Offline
+
+F7sus4 wrote:This is what I was thinking when I started to use defMON, and I believe there was some other person commenting it here in the topic as well, but after a few years - I'd strongly defend this solution.
+
+Hehe.. Yeah.. I actually agree. It is funny how one thing (e.g. insistence of doing hard restart manually since that lead to more generic code in the player without special code for hard restart) led to another ("extra" step in the beginning of sequences) and how that turned out to be a quite useful feature for some things.
+I also seem to remember that someone commented on this at some point in this thread and I think I said then that in a way this is actually just a result of how the sequence data is presented on the screen (and... well... where you end up if you press CTRL+G for example), since the row numbers start at the second step instead of starting at the first step. So.. if someone *badly* wants the first step to actually be the first step, they can simply treat it that way. Of course they will run into problems then, if they want to put hard restart sounds on the first row, but... at least they can.
+
+### 418 Nov 5, 2020 11:21 am
+
+frantic
+
+Offline
+
+The defMON wiki has a new home:
+https://www.vandervecken.com/defmon/
+I am indebted to Anarkiwi for his generous sharing of web space.
+
+### 419 Dec 21, 2020 4:17 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+New HVSC came out and i am also here, so it was pretty productive year
+https://deepsid.chordian.net/?file=/MUS … ky_Martin/
+
+### 420 Jan 2, 2021 11:47 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Happy new year to everybody i am working on new track in defMON, but i have one question, which i wanted to ask often, but i forgot it. As we know, ordinary sequence/pattern have length from 0 to F, but named is every second line, so at the end it should be 32 lines, but this last line after F is jumping into new pattern, so new pattern is not starting from 0, but from that line above. So for example i have sequence like this, which i have really often
+
+but as you can see, i cannot add that last note because sequence is jumping into new pattern, it is because every line reserve two ticks (two sid calls at one line)?
+
+Last edited by martin_demsky (Jan 2, 2021 11:48 am)
+
+### 421 Jan 3, 2021 8:05 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@martin_demsky There's nothing preventing you from placing A6 note at -1 position. This is exactly what we were talking about with Frantic right above your post. You can also program instrument 65 to play that arpeggio for you, instead of typing enormous amounts of notes in the sequences.
+
+Last edited by F7sus4 (Jan 3, 2021 8:07 pm)
+
+### 422 Jan 3, 2021 9:02 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Aha i see it, i haven't read that post, i use arpeggios often in second sidtab call, but these are normal notes which i don't know exactly how will be in final version.
+But i will leave that note after F as unused/resting, it is not that important.
+
+Last edited by martin_demsky (Jan 3, 2021 9:03 pm)
+
+### 423 Feb 11, 2021 11:23 am
+
+F7sus4
+
+Offline
+
+Poland
+
+2SID mode bug: loop visual desync.
+Let's say we're composing 2SID music.
+On SID1 we use FF0000 to indefintely loop the first sequence line in the order list.
+On SID2 we use FF0100 to indefintely loop two (or more, it doesn't matter) sequence lines in the order list (while SID1 has only one sequence line looped at the time).
+Bug: The display (F5) for SID2 becomes stuck in the sequence loop that was meant for SID1, but it still plays the song normally.
+This is purely visual, but if the song happens to utilize many loop points in different places for SID1 and SID2, the display will become heavily desynchronized. There's no workaround right now other than to manually transform loops into subsequent sequences in the order list.
+To better visualize the issue, here's a video (please note that the 00 sequence should be empty here):
+https://www.youtube.com/watch?v=NQFuNKok8Fs
+
+Last edited by F7sus4 (Feb 11, 2021 11:33 am)
+
+### 424 Feb 11, 2021 11:28 am
+
+frantic
+
+Offline
+
+Thanks for reporting! Sometimes I wish I never would have forced 2sid support into defMON. I'd say about 95% of all bugs I have fixed in defMON over the years were related to that, directly or indirectly.
+Even better would of course have been if defMON was designed with 2sid support in mind from start, but that's another issue.
+Thanks a lot for the bug report!
+
+### 425 Feb 12, 2021 8:28 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+And in new defMON 2 will be native support for sidfx? Perhaps i will purchase it, 6 channels could be cool for some extra stuff, also i created now snapshot from Vice 64 and i see that fonts are two pixels fat, so if you shrink fonts to one pixel (some sort of condensed fonts) then you can see 6 channels on one screen, i did preview screenshot in photoshop now of course with nearest neighbor resampling without aliasing of pixels.
+
+### 426 Feb 12, 2021 2:08 pm
+
+frantic
+
+Offline
+
+@Martin: Nice! Unfortunately it is no easy task to shrink the characters in the font to 4x8 size, instead of 8x8. The reason is that the graphics chip of the C64 has this "character mode" which is used in defMON, where it operates with 8x8 chunks of graphics. If one would use 4x8 characters, then one would have to do plotting of individual pixels to draw the characters instead, which would be way too slow for the processor to handle.
+Another problem is that 1 pixel wide graphics on the C64 do not work well on many monitors. In some cases it can turn out barely visible on an old PAL TV. That is the reason for those "two pixel wide" fonts.
+I have actually been experimenting with a custom font that shrinks the "C-3", "D#5" etc character strings to something that fits into two 8x8 chars instead of three, so some things like that are possible to do and still use the "character mode". The problem is that custom fonts have to be put in RAM, so some RAM is wasted on that. If one uses the built in font of the C64, there is no need to "waste" precious RAM on a custom font as the system font is located in a separate ROM chip. So, that is a trade off between different priorities.
+Having said that, I must confess that I lost some of the inspiration for a defMON II after the conflicts raving around here and on other forums a while ago. What I am considering instead though is something like a "defMON 1.5", which builds mostly on the good old defMON, but that does some changes that might break backwards compatibility of the tunes. (defMON 2 would do that too anyway). I haven't decided though, so at the moment this is just something that I have been thinking about. Primarily it would be a matter of investigating how much support for a midi interface ( https://github.com/anarkiwi/vessel ) I could add to defMON. Things like MIDI sync IN, MIDI note data OUT and so on.
+You can use the sidfx already in the original defMON. I have that in two of my machines and it works fine with defMON.
+
+Last edited by frantic (Apr 27, 2021 3:30 pm)
+
+### 427 Feb 12, 2021 4:09 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Aha, good to know about that defMON 2, i was surprised when i heard about it, just because not so many people use defMON, and original was something like non-public tracker made only for Goto80. But at same time i am wondering why it is not very popular, (because i tried several trackers and i like defMON most of them) maybe because "instrument" section is always empty and you need to program it.
+
+Last edited by martin_demsky (Feb 12, 2021 4:18 pm)
+
+### 428 Feb 12, 2021 4:43 pm
+
+Amelinium
+
+Offline
+
+@f7sus4 Is this an actual c64 defmon recording?
+
+### 429 Feb 20, 2021 12:46 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+In my opinion, there's very little reason to force 6 voices into 1 screen, and from UI/user's point of view I can see several issues with it: 1) SID1 and SID2 sequence list may utilize different loop points or even play at different speeds, which makes the conjoined "current sequence marker" redundant or at least problematic to display properly, 2) SID1 and SID2 do not share the same filter type/value/envelopes, so the filter behavior between voices might become counter-intuitive for some users, 3) the same applies to ring-modulation/sync links between the voices, 4) small fonts on (yet even smaller) CRT screens might become unreadable, defMON still is a native C64 tracker.
+frantic wrote:What I am considering instead though is something like a "defMON 1.5", which builds mostly on the good old defMON, but that does some changes that might break backwards compatibility of the tunes. (defMON 2 would do that too anyway). I haven't decided though, so at the moment this is just something that I have been thinking about
+
+Both ways seem like great ideas and I'll try to support them outside of the forums as much as possible.
+Amelinium wrote:Is this an actual c64 defmon recording?
+
+If you're asking if the recording comes from real C64 machine then the answer is no. This is Vice 2.4 video-grab utilizing reSID-fp emulation (which I highly recommend), in this case: SID 6581R4AR model (one of many, as they all sound dramatically different).
+
+Last edited by F7sus4 (Feb 21, 2021 10:59 am)
+
+### 430 Feb 24, 2021 10:15 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+https://we.tl/t-bIEEd5wlKV
+I also created defMON t-shirt for myself (for chiptune fests), but i can share it in case that anyone wants to print it out. PDF/AI is vectorized thru image trace to curves.
+
+Last edited by martin_demsky (Feb 24, 2021 10:18 am)
+
+### 431 Apr 27, 2021 7:03 am
+
+frantic
+
+Offline
+
+Hi guys,
+Sorry to say, but defMON will no longer be a public project. I started coding defMON about 15 years ago, and it has been public for the last 8 years or so. The reason for pulling the plug is that I am receiving various accusations, and since 25 of April even some vague threats. I have definitely had enough. Therefore I am now closing the doors on this project. At the moment I can't see that there will be any development behind closed doors either, as these things really made me lose inspiration for this project altogether. Of course things might change at some point, but I can't see that it will happen within the foreseeable future. Sorry, but that's how it is.
+I won't delete the defMON wiki or any of the old downloadable versions though, so that will still be available. People here have been helpful in finding various bugs, and while many of them have been fixed, not all of them have, but I would still say that the current version seem to be relatively bug free. At least that is my impression. (The reason for why some of those bugs are not fixed is precisely because it has been hard/rare to even make them appear.) Hence, people who want to give defMON a try should be good to go with the versions that are already available. More specifically, the latest version is the recommended one.
+As for this forum thread, I am not going to read/write in it anymore, which means that it will no longer serve as a place for bug reports.
+That's all I had to say. Take care out there!
+Ciao!
+
+Last edited by frantic (Apr 27, 2021 8:43 am)
+
+### 432 Apr 27, 2021 7:03 am
+
+frantic
+
+Offline
+
+[apparently this was sent twice to the server. this message can be deleted]
+
+Last edited by frantic (Apr 27, 2021 7:10 am)
+
+## Posts: 417-432 of 444
+
+Pages Previous 1 … 25 26 27 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
+
+-

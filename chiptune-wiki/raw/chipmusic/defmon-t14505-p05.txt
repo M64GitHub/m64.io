@@ -1,0 +1,286 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+146 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 5 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 2 3 4 5 6 7 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 65-80 of 444
+
+### 65 Jun 25, 2015 2:47 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+PULSELOOPER wrote:And btw: is there a way to export the song as .sid file?
+
+Not currently, I think
+IIRC it is trivial to convert a packed tune to a SID (you just need to add a little header) but I don't know if there is a tool to do that for you
+
+### 66 Jun 25, 2015 6:07 am
+
+frantic
+
+Offline
+
+There are several tools that allows conversion from executable C64 files (e.g. packed sid tunes) to playsid format (e.g. with the header that ilkke mentions). Since I never use them myself I don't really know what to recommend, but here is one, assuming that you're running Windows:
+https://csdb.dk/release/?id=6600
+Here is yet another one, also windows executable:
+http://www.transbyte.org/SID/SIDedit_download.html
+The actual format of the playsid header that ilkke mentions is documented here by the way:
+http://www.transbyte.org/SID/SID_file_format.txt
+
+Last edited by frantic (Jun 25, 2015 2:49 pm)
+
+### 67 Jun 25, 2015 2:31 pm
+
+d3Ni$e
+
+Offline
+
+Ace! Thank you frantic
+Recommend beginners to read this:
+http://www.waitingforfriday.com/index.p … _Datasheet
+along with the defMON-wiki and ilkkes field guide.
+
+Last edited by d3Ni$e (Jun 25, 2015 2:33 pm)
+
+### 68 Jun 27, 2015 9:32 pm
+
+d3Ni$e
+
+Offline
+
+Heya!
+I uploaded a little vid here
+https://www.youtube.com/watch?v=LmwBLNAtZNE
+I did some tasty drum programing basically and took it to the editor and I was expanding the full song.
+From here everything went good and my brain told me that every pattern I did in the editor was automatically connected to the specific seqnumber in the songlist. I switch some numbers and switched back but everything was gone.
+Right after that something strange happened.. When I was back to first line and did the notes again it looped the first sequence 3 times and then a (now gone pattern) was heard before it went to the next steps in the list, a bug? When I was typing in some other instruments and notes the problem was gone.
+Did I do wrong or am I going mental?
+Can you playback a single sequence?
+How do I edit tunes in the editor while playing the song?
+Can birds fly?
+d.
+
+### 69 Jun 28, 2015 7:03 am
+
+frantic
+
+Offline
+
+Hi! To be honest I don't quite understand the question. The "three times X and then Y" sounds a bit like the looping function where you play a particular segment X times before proceeding to Y. On the other hand, there seems to be other things involved as well, which makes it somewhat hard to grasp what exactly you were doing and what exactly that happened. In general there are no known bugs that remind me of any of this.
+As for your other questions: No there is actually no way to loop current song position just by pressing a key. You have to put FFXX00 in the sequence list in the step after, so e.g. FF0200 would jump to position 02 in the seqlist.
+As for how to edit tunes in the editor while playing the song... Just press play (F1 or F3) and then edit all you like. You may want to toggle "followplay mode" on/off by pressing F5 so that the sequences are not scrolling while the tune is playing.
+Some birds can fly.
+//FTC
+
+Last edited by frantic (Jun 28, 2015 3:29 pm)
+
+### 70 Jun 28, 2015 7:08 am
+
+bitwise
+
+Offline
+
+╱╲╱╲╱╲╱
+
+d3Ni$e wrote:Can you playback a single sequence?
+How do I edit tunes in the editor while playing the song?
+
+I don't know if this is really possible, but you're able to mute channels with ctrl+ ; ' \ for voices 0, 1 and 2 respectively.
+While playing, you can still write notes and commands. To toggle the 'follow' mode press f5.
+Um, Can I apply filter to any other voices except of voc0?
+
+Last edited by bitwise (Jun 28, 2015 7:09 am)
+
+### 71 Jun 28, 2015 7:17 am
+
+frantic
+
+Offline
+
+No need to press CTRL for voice muting as far as I can remember. (In fact, those voice muting keys work like "shift/ctrl/C= keys" in the sense that you can press several of them at once without having they keyboard handler getting confused, meaning that it doesn't actually matter if CTRL is pressed at the same time or not, since these three voice mute keys are interpreted separately anyway.)
+Use F8 in the RE column to set resonance to F and "turn filter on for current voice". (You can also hard code which voice that should be enabled, although that is rarely meaningful/useful: F1 would enable filter in voice 1, F2 in voice 2 and F4 in voice 3. So F8 is a special function used by the editor, meaning that it figures out internally how to set the SID depending on from which of the voices the sidtab chunk was called.)
+
+### 72 Jun 28, 2015 7:20 am
+
+frantic
+
+Offline
+
+By the way.. Just came to think of something which may be relevant in relation to the question of playing something over and over again. If you press F3 to "PLAY FROM HERE" and then press F7, it will stop where you are, but if you then press F7 one more time, the editor will take you back to where you started playing from. Then you can press F3 again to play the same part of the song again. Not exactly what denize asked for, but at least a bit related to that.
+
+### 73 Jun 28, 2015 11:13 am
+
+bitwise
+
+Offline
+
+╱╲╱╲╱╲╱
+
+Thanks, Frantic!
+
+### 74 Jun 29, 2015 2:28 pm
+
+d3Ni$e
+
+Offline
+
+frantic: Thx for the tips! That "FFXX00" jump function will do it good cus the last row is always the most relevant.
+If I want to edit a row in the middle of the track I can just simply take those pattern numbers and take it to the last and empty row and make it jump back to it.
+bitwise: The follow function was what I was looking for also
+
+### 75 Jun 29, 2015 2:31 pm
+
+PULSELOOPER
+
+Offline
+
+São Paulo, Brazil
+
+frantic wrote:There are several tools that allows conversion from executable C64 files (e.g. packed sid tunes) to playsid format (e.g. with the header that ilkke mentions). Since I never use them myself I don't really know what to recommend, but here is one, assuming that you're running Windows:
+https://csdb.dk/release/?id=6600
+Here is yet another one, also windows executable:
+http://www.transbyte.org/SID/SIDedit_download.html
+The actual format of the playsid header that ilkke mentions is documented here by the way:
+http://www.transbyte.org/SID/SID_file_format.txt
+
+Thanks! I'll try it out at home.
+frantic wrote:By the way.. Just came to think of something which may be relevant in relation to the question of playing something over and over again. If you press F3 to "PLAY FROM HERE" and then press F7, it will stop where you are, but if you then press F7 one more time, the editor will take you back to where you started playing from. Then you can press F3 again to play the same part of the song again. Not exactly what denize asked for, but at least a bit related to that.
+
+That is a hell of a tip.
+
+### 76 Jul 31, 2015 11:28 am
+
+d3Ni$e
+
+Offline
+
+did some defMON patterns about 2 days ago
+https://www.youtube.com/watch?v=6CW3-MJ … e=youtu.be
+going to work on a more serious one next time.
+I find it quite hard to do some nice drum kits but Im in the learning mode really.
+Ciao
+
+### 77 Jul 31, 2015 1:22 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+I also find it quite hard to wrap my head around making drums (coming from LSDJ). Drum tutorials (or examples ;P) would be a godsend
+
+### 78 Aug 1, 2015 12:04 pm
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+While we are on the topic of using FF jumps in the orderlist... here are some things that I found useful...
+First is, I commonly use FF steps to make visual vreaks between different sections of a song. I just make it jump to the next line, so for example on step 07 you can put FF0800. This makes it easier for me to find a specific part when the songs get bigger, and also if I need to loop a sequence when working on it I can just edit the numbers temporarily and then back again.
+Second, you can use FFxxyy to jump to row xx for yy times. So in early stages of making a song I just do a FFxx03 to repeat a step 4 times (because 3 times it will jump back to play it once more in addition to the first play).
+Later I 'unfold' the loop by repeating lines and then add variation afterwards.
+Oh! And a mega workflow pro tip that might not be obvious from the 101 guide is to press shift+U to clone a sequence. It will automatically find the next unused number and copy into it and then replace the old one with the new. Ideal for adding variation.
+
+### 79 Aug 1, 2015 12:05 pm
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+scannerboy wrote:I also find it quite hard to wrap my head around making drums (coming from LSDJ). Drum tutorials (or examples ;P) would be a godsend
+
+You mean making the sounds?
+
+### 80 Aug 1, 2015 12:43 pm
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+So, this thread has a lot of great tips/thoughts:
+http://csdb.dk/forums/index.php?roomid= … icid=97576
+But I can quickly explain the principle here.
+A kick drum would typically be a bit of noise (08) followed by a triangle (01) (or square (04) for a noisier distorted sound), while doing a pitch drop (try something like E0 in the AF column and play the note at c-5). Do'nt forget that you must specify a pulse width or square will not be audible. You can omit the noise part of the kick if you don't want it to have the hihat like snap.
+Snare would start with 04 for a bit of a punch and then switch to noise for the tail.
+Hat is usually just a bit of high pitched noise.
+Ideally you would also be using a technique known as 'hard restart'. This makes sure the sounds are player properly every time (SID chip has an ADSR related bug) but as an added bonus it adds more snap to the sound which works well for drums. It's a big topic so I'm not gonna go into it here.
+Here's a really quick example of a kick
+
+++ 01 --090ff0----
+++ 00 40010283--E0 0800
+++ ST --00--------
+
+line 1 is hard restart, line 2 is square wave with ADSR and pitch drop, line 3 just closes the gate
+And a snare:
+
+++ 01 --090ff0----
+++ 00 400104f6--E4 0800
+++ ST 8000--------
+
+Line 1 is the same hard restart, line 2 again some square, line 3 gate off plus switch to noise
+Hope that helps a bit!
+
+Last edited by iLKke (Aug 1, 2015 12:49 pm)
+
+## Posts: 65-80 of 444
+
+Pages Previous 1 2 3 4 5 6 7 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

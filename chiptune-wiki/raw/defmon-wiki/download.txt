@@ -1,0 +1,155 @@
+====== Download defMON ======
+
+You can see what version of defMON you have by looking in the status bar when the program starts up. The version numbers are essentially just date stamps that reflect the day when the program was compiled.
+
+See the time stamp at the bottom of the screen:
+{{ :download:screen1_timestamp.png | See the time stamp at the bottom of the screen}}
+
+
+If you got a version of defMON that is not available on this page, feel very free to add it here. Especially if you have an older version than the ones available here, as many of the older versions are lost.
+
+===== 2020-10-08 — "Nudge Nudge!" =====
+DOWNLOAD: {{ :download:defmon-20201008.zip | defmon-20201008.zip}}
+
+WHAT'S NEW?
+  * NEW (OLD) FEATURE: defSYNC has made a comback. This is a really old feature that has been disabled for a long time, and that you may not know about. Two C64 computers running defMON can be made to start at the same time, if connected with a standard serial disk drive cable. You can either connect the two C64 computers directly or connect C64 number 1 to a disk drive, and then a second cable from that disk drive to C64 number 2. If you have a drive in betweeen like that, both C64s can load/save from that drive, although not at the same time. CTRL+F1/F3 works like ordinary F1/F3, except that it first tells the C64 to wait until someone presses PLAY on the second C64, and then start playing both at the same time. It remains to be seen if this works fully reliably when used at the same time as the scannerboy sync interface and stereo sid, but some hours of testing last weekend seems to indicate that this old code actually still works well. (We also found that if one of the C64 computers is an Ultimate64, you can connect another C64 straight to it, and both can use the built in "drive" in the Ultimate64.) This sync feature was originally kicked out because it didn't fit in RAM together with some other code, and nobody seemed to use it anyway, but now it is back.
+  * BUG FIX: When SID1 and SID2 were playing from different song positions and follow play mode was selected, the wrong sequences were shown on screen when viewing the sequences of SID2. (It would use the song position from SID1.) This bug is now fixed.
+  * NEW FEATURE: Now you can "nudge" the song that is currently playing, one tick forward or backward. So, if defMON is running alongside other sources of music that runs at the same speed but that are not aligned with each other in time, you can now nudge the defMON tune one tick back or one tick ahead by pressing CTRL+F5/F7 to go back/forth.
+  * NEW FEATURE: Each release of defMON now consists of two different .d64 files. Both of them contain the defMON music editor. One of them also contains a number of demo tunes, kindly shared by Goto80, Ilkke and F7sus4, that other users can learn from. It is always interesting to see what approach people have to defMON so thanks a lot for sharing!
+
+===== 2020-09-18 — "Perfect Vision" =====
+DOWNLOAD: {{ :download:defmon-20200918.zip | defmon-20200918.zip}}
+
+WHAT'S NEW?
+  * When muting voices in 2SID mode, the visual representation of which channels that are currently on/off was incorrect (e.g. muting VOC0 for SID1 would make the label VOC0 disappear for SID2 as well.). This bug is now fixed.
+
+===== 2020-06-01 — "Packman" =====
+DOWNLOAD: {{ :download:defmon-20200601.zip | defmon-20200601.zip}}
+
+WHAT'S NEW?
+  * Fixed a bug in the packer where the packer tried to follow jumps in the sidtab to see which rows were used/unused. The bug caused the packer to fail in some cases when jumps were involved, so the packed tune would get corrupted.
+  * The loop-jump command in the sequence list wasn't initialized properly when restarting a tune. This should now be fixed.
+  * A minor fix to SHIFT+U (copy current sequence to next unused sequence) to make sure that parameters to jump commands (FF XX XX) aren't misinterpreted as "used sequece numbers".
+
+
+===== 2018-11-01 — "Filter falter flamboyee" =====
+DOWNLOAD: {{ :download:defmon-20181101.zip | defmon-20181101.zip}}
+
+WHAT'S NEW?
+  * BUG FIX: A pretty bad bug was fixed that might cause code corruption of different kinds, depending on a number of factors. The way the bug happened to manifest itself in the previous version, it caused filter sweeps and filter settings not to work as intended when using a 8580 SID. Special thanks to F7sus4 at chipmusic.org once more for spotting the problem with the filter, and also for extensive testing of this new bug-fixed version. 
+
+
+  
+===== 2018-10-27 — "No more inflatable worktunes" =====
+DOWNLOAD:
+{{ :download:defmon-20181027.zip |defmon-20181027.zip}}
+
+WHAT'S NEW?
+  * BUG FIX: In some versions (probably since the data healing version from 2017-10-24) saved worktunes sometimes turned out very large when saved to disk. This is now fixed. Special thanks to F7sus4 at Chipmusic.org for reporting on this bug in detail and for providing an example tune that suffered from this problem.
+
+
+===== 2018-02-11 — "defMON goes overseas" =====
+DOWNLOAD:
+{{ :download:defmon-20180211-ntsc.zip |defmon-20180211-ntsc.zip}}
+
+Note that this version is for NTSC computers only. It is highly experimental and may not work at all. 
+
+WHAT'S DIFFERENT?
+  * The only changes here are a changed frequency table for NTSC as well as NTSC speed in "call player once per frame" timer interrupts, and I haven't done any kind of testing except just setting NTSC mode in VICE and checking that the program starts at least. The release of this version doesn't indicate that I will necessarily be committed to making substantial changes to defMON, in case it would turn out that this is required to make it work properly on NTSC computers. Still it would be interesting to hear what experiences people have, so don't hesitate to post about this in the [[https://chipmusic.org/forums/topic/14505/defmon/|defMON thread at chipmusic.org]]. With some luck, it will just work, and if it does, I may start releasing both PAL and NTSC versions of defMON in the future. 
+
+
+
+===== 2017-10-26 — "SHIFT+N vs SHIFT+U" =====
+
+DOWNLOAD:
+{{ :download:defmon-20171026.zip |defmon-20171026.zip}}
+
+For reference: If SHIFT+N is pressed in the sequence list, defMON will copy the current sequence (the one that the cursor currently points at in the sequence list) to the Next //empty// sequence. If SHIFT+U is pressed in the sequence list, the current sequence will be copied to the next sequence that is //Unused// in the sequence list (no matter if this sequence is actually empty or not!).
+
+WHAT'S NEW?
+  * BUG FIX: SHIFT+N (e.g. find next empty sequence) was accidentally disabled in the previous version. It should now be enabled again.
+  * BUG FIX: SHIFT+N was broken in some previous versions. After saving and then loading a file, the only result of pressing SHIFT+N would be a red flash in the border, whereas in this fixed version SHIFT+N should do what it is supposed to do.
+  * BUG FIX/ADDITION: SHIFT+U (e.g. find next sequence that is not used in the sequence list) has now been changed to work also in stereo SID mode. This means it is now scanning the list of sequences for the second sid as well, in case stereo sid mode is currently enabled in defMON.
+
+
+===== 2017-10-24 — "Data Healing" =====
+
+DOWNLOAD:
+{{ :download:defmon-20171024.zip |defmon-20171024.zip}}
+
+WHAT'S NEW?
+  * ADDITION: The current state of the filter is now displayed correctly in the sequence edit screen. This visualization now also works in 2sid mode, so that you'll see the state of the filter of the currently selected SID chip. Previously it always showed the status of SID chip #1.
+  * BUG FIX: In previous versions pattern breaks in unused sequences were lost when saving and then loading a tune. Special thanks to F7sus4 at Chipmusic.org for reporting on this bug in detail. The bug also indirectly caused some other funny behaviour, like strange playback at times and problems with copying of sequences. If you have an old tune where sequence breaks are lost, all you have to do is to load them into this version of defMON and the sequence breaks will magically be there again for you.
+
+
+===== 2014-11-08 — "Enter the defMON Sync Galaxy" =====
+
+The hardware sync interface is available from Scannerboy at the chipmusic.org forum, right [[http://chipmusic.org/forums/post/226822/#p226822|here]]. 
+
+DOWNLOAD:
+{{:download:defmon-20141108.zip|defmon-20141108.zip}}
+
+WHAT'S NEW?
+  * NEW FEATURE: Support for Scannerboy's defMON sync interface for the user port, which allows DIN-sync, MIDI sync, Gameboy sync (LSDj and Nanoloop) as well as modular synths.
+    * NOTE: Sync is always enabled in this version, and this could potentially lead to some unexpected behavior if you have some other kind of hardware connected to the user port than the defMON Sync interface.
+    * defMON Sync starts as soon as you hit play (F1/F3) and stops when you press stop (F7). To fine-tune when the first sync pulse should be sent after hitting the play button you can change the DIN Sync delay parameter, using CTRL+SHIFT+DOT/COMMA. Delay $00 is the default and starts sending sync pulses as soon as possible. Delay $04 may be recommended for most cases, but you have to experiment with what sounds best for your hardware and tune etc. Goto80 reported $05 to be optimal for defMON in sync with a 808. You will also notice that the timing changes a slight bit if you change from 1x speed to 8x speed and such. 
+    * Note that the Sync functionality assumes that there will always be 6 ticks for each two steps in the sequence so you can't just change the values in the speed columns in the sequences to whatever values and still expect defMON Sync interface to work. You'll either have to use 3 ticks on each step (corresponding to the default setting of 2 in the speed column) or you can alternate between 4 and 2 ticks (=6). To change the playback speed of tunes when using the sync interface, you rather have to use the C=(+SHIFT)+F1..F7 button settings that change how often the player should be called.
+    * The delay value is saved with your tune when you save it, so you don't need to change it again when loading the tune some other day.
+  * BUG FIX from previous version: Playing tunes wouldn't work after loading another tune when a channel on SID #2 in a stereo sid tune was previously turned off.
+
+
+
+===== 2014-07-11 — "San Diego" =====
+
+DOWNLOAD:
+{{:download:defmon-20140711.zip|defmon-20140711.zip}}
+
+WHAT'S NEW?
+  * Fixed two bugs reported by Scannerboy for the 2014-06-15 version.
+    * Channel muting and stopping tune (F7) didn't quite work for the second SID on stereo machines.
+    * Wasn't possible to pack tune and save as RAW anymore. When that was selected you got right back to the disk menu instead.
+
+
+===== 2014-06-15 — "Stereo SID Returns" =====
+
+DOWNLOAD:
+{{:download:defmon-20140615.zip|defmon-20140615.zip}}
+
+WHAT'S NEW?
+  * Updates to the [[docs:stereo_sid_features|stereo SID support]]. Here is a summary of old and new stereo SID features.
+    * CTLR + <- to switch between SID #1 and SID #2, or rather the two different sequence lists.
+    * CTRL + SHIFT + <- to toggle between mono SID mode and stereo SID mode. You need to enable stereo SID mode before you can access the other stereo SID features specified here. Mono SID mode is the default when the editor starts up.
+    * CTRL + UPARROW (not the cursor up key, but the other up-arrow on the keyboard) to toggle between $d4xx, $d5xx, $dexx and $dfxx as base address for the second SID chip.
+    * CTRL + C= + UPARROW to toggle the low byte of the base adress in steps of $20, i.e. the "xx" in the addresses listed above.
+    * The config (mono or stereo, and base address of SID #2) is saved as part of the worktune savefile, so you only need to do the stereo SID configuration once for each tune.
+    * Note that there is currently no way of exporting/packing stereo tunes from defMON. Only the data for SID #1 will be included if you do that.
+    * Raster time usage for SID #1 and SID #2 is now shown with separate colors.
+    * Toggle channels on/off works also for SID #2 since a few versions back.
+  * In earlier version of defMON, when toggling between different multispeed settings (1x, 2x, 4x and 8x) while a tune was playing, the player would sometimes go slightly out of sync. You would notice this if you were playing a defMON tune in sync with some other source of muzak. This issue has now been fixed, or at least improved. Let's hope that the problem is now gone.
+  * The disk menu can now handle disks with more files than fit on a single screen. The implementation is not super elegant, but works.
+  * The possibility to loop a segment of the seqLIST was previously only accessible in a separate "deluxe" version of defMON, but is now part of the standard version of the program. (Actually I think this feature was enabled in the 2014-06-12 version as well, but.. anyway..) Something like FF 00 03 on a row in the seqLIST would jump back to position 00 three times and then go ahead downward in the seqLIST (so in total the looped segment is played 4 times).
+
+
+===== 2014-06-12 — "Export Expert" =====
+
+DOWNLOAD:
+{{:download:defmon-20140612.zip|defmon-20140612}}
+
+WHAT'S NEW?
+  * Export tune to an executable file — Just press SHIFT+P in the disk menu, press Y to continue, and then select save as executable by pressing E. Remember that you won't get back into the editor after packing a tune, so make sure to do a normal save first. Packing files, no matter if saved as raw file or executable prg, doesn't work with stereo sid tunes. If you want to make the executable files smaller, you can use a [[http://csdb.dk/release/?id=97284|cruncher]] (set start address to $080d).
+
+
+===== 2013-08-03 — "Cracked by Hackers" =====
+
+The first publicly available version of defMON was the one that was "cracked" by Genesis Project in 2013. You can find it on [[http://csdb.dk/release/?id=120965|CSDb]]. That version differs in some ways from the "ordinary" versions used by people like Goto80, Ilkke, and others. 
+
+
+===== Prehistoric versions =====
+
+The first versions of defMON that were actually useable appeared around spring 2008. At that point defMON wasn't released to the public, but mainly used by Goto80 and a few others. Many of those old versions are lost in time, but the following zip archive contains four different old versions that were dug up from the prehistoric era. 
+
+One is from April 2008. One is from a disk labelled October 2008, but I am not sure if that means that this version was created then, or if it is just the tunes that was on the disk. At least it is not newer than that. The other two I don't know, but they should both be pre 2009 too.
+
+{{ :download:oldversions.zip | Prehistoric versions of defMON }}
+
+I remember when Goto80 tried defMON for the first time, and exclaimed "Man.. I gotta quit my job!". :D

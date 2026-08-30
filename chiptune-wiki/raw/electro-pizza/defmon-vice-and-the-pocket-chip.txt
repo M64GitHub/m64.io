@@ -1,0 +1,248 @@
+- Writing
+
+- Reading
+
+- About
+
+- RSS
+
+-
+
+-
+
+-
+
+Previous post
+Next post
+Back to top
+Share post
+
+-
+
+-
+
+-
+
+-
+
+- 1. Vice Installation
+
+- 2. VICE Configuration
+- 2.0.1. Settings > VIC-II settings
+
+- 2.0.2. Settings > Sound settings
+
+- 2.0.3. Settings > Drive settings
+
+- 2.1. A note on the keyboard:
+
+- 3. defMON
+- 3.1. Pocket Chip Homepage Launcher
+
+- 4. Thoughts on Usage
+
+#
+defMON, VICE, and the Pocket CHIP
+
+electro·pizza
+
+2019·07·29
+
+C64, Music, SBC
+
+defMON is a music tracker for the Commodore 64. It is a bit unique in that it does not use references across many tables, as most C64 sound editors do, but rather a single flexible instruments and effects table. Further, it is under semi-active development – its most recent release is from November of 2018 (as of this writing). This is somewhat of a rarity for an application that runs on nearly 40 year old hardware. I initially became aware of defMON through the works of the artist and musician GOTO80, who makes heavy use of it both in his recordings and live performances. The sounds he is able to tease out of the Commodore’s SID chip are unlike most C64 music I have heard, making me very curious about this esoteric application.
+
+After running the program on my own Commodor 64 and reading through what documentation there is, it became clear, like most things, that defMON would take practice, exploration, and experimentation to really grasp its capabilities. Unfortunately my home lab is small and cluttered, and leaving a Commodore 64 setup would take up a lot of precious space. However, a Commodore can be emulated, and a portable device with a keyboard like the Pocket CHIP would make for a handy way to practice defMON (and use the Commodore in general) without being tethered to a desk.
+
+This post details the process I went through to setup and configure VICE (the VersatIle Commodore Emulator) on the Pocket CHIP to run defMON. While my end goal here is to be able to run defMON from the homepage launcher of the Pocket CHIP, you can follow this setup process (ignoring the defMON stuff) to have a working Commodore emulator. This will allow you to run any number of games, applications, or wild demo packages on the Pocket CHIP.
+
+## Vice Installation
+VICE is available in the APT repositories, so you can install it via the package manager from Pocket CHIP’s command line.
+
+| sudo apt install vice
+
+This package does not install the Commodore 64 system ROM due to copyright concerns (I think) and will not run correctly without it. To add the system ROM after running the apt installation, you need to download the full VICE install from http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/vice-3.3.tar.gz, unpack it, and copy the contents of its data/C64/ folder to /usr/lib/vice/C64/. I like working in a ~/src/ folder for stuff like this, but you can of course download this to wherever you want.
+
+| # Create a directory to work from
+mkdir -p ~/src/c64/vice
+cd ~/src/c64/vice
+
+# Download and extract the ROM
+wget http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/vice-3.3.tar.gz
+tar -vzxf vice-3.3.tar.gz
+
+# Copy the C64 system ROM
+sudo cp -rv vice-3.3/data/C64/* /usr/lib/vice/C64/
+
+You can now verify that this was all installed correctly by running the x64 command. Things will look a bit crazy on this initial run, but as long as you see the blue Commodore 64 ‘Ready’ screen (be patient it takes a few seconds), you have successfully installed VICE along with the Commodore 64 system ROM. You can exit VICE by pressing alt+q.
+
+## VICE Configuration
+So VICE is installed but looking pretty broken. The emulator will be more or less unusable on the Pocket CHIP until you make some adjustments to the VICE configuration. All of these adjustments will be under the “Settings” menu, which is difficult to navigate to with the touch screen. I’ve found the best way to do this is to touch the top left corner above “File” and then use the arrow keys to navigate to the “Settings” menu. If you don’t see the top menu bar, you can press alt+b to toggle its visibility. If you would rather not mess with walking through the menu, and just want to use the configuration I’m using at this time, you can replace your vice configuration file at ~/.vice/vicerc with my configuration file.
+
+| cd ~/src/c64/vice
+
+# Download, rename, and replace the config file
+wget https://electro.pizza/2019/07/defmon-vice-chip/vicerc.txt
+cp vicerc.txt ~/.vice/vicerc
+
+I am still experimenting with some of the VICE configuration options, but so far the settings I’ve found that work best for the Pocket Chip and for defMON specifically, are as follows:
+
+#### Settings > VIC-II settings
+
+- Disable “Hardware scaling” (required)
+
+- Disable “Double size” (required)
+
+- Set “Render Filter” to “Unfiltered”
+
+- Set “Enable fullscreen” in “Fullscreen settings” (or press alt+d)
+
+#### Settings > Sound settings
+
+- Set “Sound device name” to “alsa” (required)
+
+- Set “Output mode” to “Stereo”
+
+- Decrease “Sample Rate” to “22050Hz”
+(playback seems smoothest at this rate, though this could probably be tweaked)
+
+- Ensure “Enable sound playback” is enabled
+
+#### Settings > Drive settings
+
+- Disable “Drive sound emulation”
+
+Be sure to Save your settings before exiting.
+
+### A note on the keyboard:
+
+By default VICE uses symbolic keybindings, and I’ve found that for the most part it is intuitive to use. However, there are a few keys that are special to the Commodore 64 keyboard with symbolic mappings that are not obvious. Most notably:
+
+|
+
+| C64 Key
+| Position on C64
+| Mapping
+
+| <-
+| Top Left
+| _ (underscore)
+
+| ctrl
+| Upper Middle Left
+| tab
+
+| Run Stop
+| Lower Middle Left
+| esc
+
+| C=
+| Bottom Left
+| ctrl
+
+There is more information about VICE’s keyboard emulation and the VICE emulator in general in their very comprehensive user manual.
+
+## defMON
+
+Your browser is having trouble with the video. You can check it out here.
+
+You can grab the latest defMON release from the defMON wiki. Once again this is probably best done from the Pocket CHIP command line.
+
+Double check the defMON wiki for the latest version. You may need to change the filename in the following command to get the newest version.
+
+| mkdir ~/src/c64/defmon
+cd ~/src/c64/defmon
+
+# Download and extract defMON
+wget http://toolsforscholars.com/defmon/lib/exe/fetch.php?media=download:defmon-20181101.zip
+unzip defmon-20181101.zip
+
+While you can select a ROM from the VICE GUI, I’ve found it more convenient to directly point at the ROM when executing the x64 command. So to run defMON:
+
+| x64 ~/src/c64/defmon/defmon-20181101.d64
+
+### Pocket Chip Homepage Launcher
+
+Background Image: @mr.melville
+
+Since I am wanting to practice with defMON somewhat regularly, I’d like to add an item to the homepage launcher to quickly fire up the program. If you are unfamiliar with customizing the launcher, you can do so by editing the /usr/share/pocket-home/config.json file. Simply replace one of the entries in the JSON file with a title, icon, and the command you wish to run.
+
+| {
+"name": "defMON",
+"icon": "appIcons/musicsequencer.png",
+"shell": "x64 /home/chip/src/c64/imgs/defmon-20181101.d64"
+}
+
+Of course, if you’d rather just run VICE without autorunning defMON you could replace the above shell command with x64.
+
+## Thoughts on Usage
+Generally defMON runs well with this setup, but there are definitely some drawbacks.
+
+Overall the sound is good, but not as good as running this on an actual SID chip (that’s to be expected). I’ve noticed the audio hiccuping sometimes when running more complex tracks. This hiccuping could potentially be resolved with further adjustments to the VICE settings, but as it is, it’s not too bad.
+
+The keyboard has proven to be pretty awkward. defMON’s key commands make a lot of sense on a Commodore 64, but not so much when they are mapped to a modern keyboard layout. This, coupled with how awkward the Pocket CHIP’s keyboard already is, makes certain tasks feel clumsy. Therefore, I can’t recommend using this setup for any kind of live performance, or for any long term in-depth work. However, it is an excellent way to get more familiar with how to use defMON, and is proving especially useful in experimenting with and constructing instruments and effects in the SID tab.
+
+Stepping back from defMON, VICE runs well on the Pocket CHIP. Most games don’t rely as heavily on the Commodore’s special keys, making the keyboard inconveniences less of an issue. The few games I have tried are responsive with smooth gameplay. This setup has also proven to be a fun way to quickly check out various demo scene creations.
+
+Your browser is having trouble with the video. You can check it out here.
+
+_"In Memory of"_
+_created by: Hollowman_
+
+( || ) ? : NULL
+
+- Writing
+
+- Reading
+
+- About
+
+- RSS
+
+- 1. Vice Installation
+
+- 2. VICE Configuration
+- 2.0.1. Settings > VIC-II settings
+
+- 2.0.2. Settings > Sound settings
+
+- 2.0.3. Settings > Drive settings
+
+- 2.1. A note on the keyboard:
+
+- 3. defMON
+- 3.1. Pocket Chip Homepage Launcher
+
+- 4. Thoughts on Usage
+
+-
+
+-
+
+-
+
+-
+
+- TOC
+
+- Share
+
+- Top
+
+- Menu
+
+- Writing
+
+- Reading
+
+- About
+
+- RSS
+
+Ryan Oles
+
+-
+
+-
+
+-

@@ -1,0 +1,267 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+155 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 22 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 20 21 22 23 24 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 337-352 of 444
+
+### 337 Sep 20, 2020 11:48 pm
+
+d3Ni$e
+
+Offline
+
+Hi again!
+Well Im in a situation that I need a smaller tune that the packer did for me.
+I was thinking to use the whole tune but it was too large so I go: "okey I'll try just 1 minute of it and go for it but with no luck so I got a bit frustrated and limited the tune to like 05 seconds! but no luck there either.. It went down from $2041 to $2019 lol.
+Anyway I don't blame the player at all because I know it has it's functions with Stereo-SID option and I understand now the speed option priority of the player. I was just thinking if you got a exteral way or an "old punk defMON-version" that could helped me out.
+Off Topic:
+Well Im gonna try to focus on the RAM-problem I have for now and not the tune.
+I love that Block Acid Dub tune! I got it on in the background while typing.
+Iam still in a rookie stage when it comes to bytes and bits but the way of assembly has goten my attention now and I love it (not for making games, big demos or my own editoris or something like that) But Im also Impressed by people who made their own SID-Players.
+There is some good and nice info on the codebase64 I have learned from.
+BTW the Deepsid site is so nice but the emulation of some tunes compared to the real SID-Chip sounds totally different..
+I wonder what the best SID-emulator is. I don't think it has been made yet.
+/D.
+
+### 338 Sep 21, 2020 6:07 am
+
+frantic
+
+Offline
+
+Is the tune for a demo or so? Is it that you need to put some graphics starting from $2000? If so, you could try to switch to another graphics bank, like $4000-$8000 or so.
+Yes, the deepsid SID emulation sounds a bit different. I'd say some versions of VICE sound reasonably close to the real thing. But, on the other hand, the reason why I did a music editor for the real machine was partly because then you can work on the real chip and the proper SID sound while you work. I was never really tempted to do a PC/Mac editor, like Goattracker or so, even though that would obviously make the creation of a user friendly GUI much easier.
+
+### 339 Sep 21, 2020 7:57 am
+
+d3Ni$e
+
+Offline
+
+@frantic: It is for a simple Intro and the head of our little group requested a little "hiphop beat" to go along with the Intro so I was thinking "I should make it in defMON with the 6581 chip and that will be pretty dirty!"
+But we are failing to load in the short sample of the tune into the Intro
+Error: In segment 'Default' the memoryblock 'Music' ($1000-$2041) overlaps 'Bitmap_1' ($1000-$2f3f)
+Little bit annoying as the Intro is almost done.
+It is way more of fun and better sound to sit with the real C64 and an editor.. It is just a way of getting along with the old fashioned key commands but I don't look down on people who are using Cross-platforms of course.. Up to each and everyone.
+Hope you all having a great week by the way!
+D.
+
+### 340 Sep 21, 2020 8:51 am
+
+frantic
+
+Offline
+
+I see. Not sure, but that error message almost sounds like the overlap in RAM starts already from $1000...? If so, that would indicate that even a 1 byte long tune would overlap with "Bitmap_1" in this case. That is, it indicates that maybe there is something else going wrong here?
+Anyway, the typical solution would be to use the graphics bank at $4000-$8000 instead of the default one at $0000-$4000 that you are currently using:
+https://codebase64.org/doku.php?id=base … organizing
+However, I should also mention that it *is* possible for me to shrink tunes a little bit further than the packer is able to do, like I said a few posts ago. Also, I am actually also able to relocate tunes. Relocating tunes means that I can move them elsewhere in RAM, so they don't have to start at $1000. I have done that for the "Rent a cop" games and in some other cases. It requires some manual work on my side, so it isn't something that I do on a regular basis. However, I'd say:
+First try to use the other graphics bank, like I suggested, by setting $dd00 to another value and placing the graphics elsewhere in RAM. That should work in most situations and I really think it should probably work in your case too. If, for some reason, it isn't actually possible, I could have a go at shrinking and/or relocating the tune since you have paid for defMON. What I need then is the tune in worktune format, rather than a packed tune, and obviously it would also have to be the final version of the tune so I won't have to do it all over again.
+Good to hear that you find codebase64.org useful by the way. I am actually the person who is in charge of that site.
+
+Last edited by frantic (Sep 21, 2020 8:55 am)
+
+### 341 Sep 21, 2020 1:12 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+d3Ni$e wrote:Well Im in a situation that I need a smaller tune that the packer did for me.
+I was thinking to use the whole tune but it was too large so I go: "okey I'll try just 1 minute of it and go for it but with no luck so I got a bit frustrated and limited the tune to like 05 seconds! but no luck there either.. It went down from $2041 to $2019 lol.
+
+Many coders used to reserve music area up to $1FFF (from $1000) in contemporary demos, and even though it's relatively carved-in-stone custom, there's little point for it to be that way, since (pragmatically speaking) no harm will be done if it exceeds $1FFF a bit.
+There is always a possibility to load subsequent chunks of code/graphic/data more flexibly (assuming out of memory scenarios), and relocation is yet another possibility (this is what we did in NGC1277).
+By the way, significant part of file size optimization lies on the musician. The fewer instrument lines are being used, the smaller the compiled file will become. The same applies to notes and sound-program/instrument numbers used in sequences/patterns. So it is possible to shrink the file noticeably with a bit of strategic approach to composing. GL!
+
+Last edited by F7sus4 (Oct 2, 2020 5:56 pm)
+
+### 342 Sep 21, 2020 1:27 pm
+
+frantic
+
+Offline
+
+F7sus4 wrote:Many coders used to reserve music area up to $1FFF (from $1000) in contemporary demos, and even though it's relatively carved-in-stone custom, there's little point for it to be that way.
+
+Yes, and the reason for this is that the VIC (the graphics chip) can't see the RAM area between $1000-$1FFF anyway, so therefore it is a good idea to use that RAM area for music data. The VIC chip always sees the built in Character ROM from $1000-$1FFF, e.g. the built in font in the C64, no matter what contents that resides in RAM between $1000-$1FFF. The ROM font is also always visible to the VIC chip in the same way between $9000-$9FFF, if you use the VIC graphics bank from $8000-$BFFF. If you use the graphics banks starting at $4000 or $c000, the VIC can use the whole bank as it can access the full RAM range.
+This comment wasn't directed specifically to F7sus4 by the way, but was just a general comment for anyone who happen to be interested.
+
+### 343 Sep 23, 2020 9:05 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Yes these emulators are very strange, it seems developments are going backwards. I have Commodore 64G (latest german version with 8580 sid chip) with Ultimate 1541-II+ cartridge instead of floppy drive, but now i also use emulator on PC/Mac, i used long time at work Vice x64 2.4 emulator on iMac (cpu Intel Core i7 at 3,5 GHz), this is old version from 2012, and i tried also latest version, same at home on my Lenovo laptop with exactly same settings and sometimes on PC is triangle waveform (10) barely hearable and filters also sounds different. On iMac i also must installed some SDL2/GTK gui extensions because menus are not visible like was in old version and these menus looks so crappy like ported from Linux or what, but i can live with it. Other side is CPU eating, x64sc takes on both computers approx. 40-50 % of CPU time, so it is really incredible, but i see that also other emulations (for example mdplayer, deflemask) eats also similar.
+So it is better than nothing, when i finish tune, i run it on real C64 and finetune some things.
+https://we.tl/t-MUYeJjTaco
+Here is my latest tune Mato7, i played it on all emulator versions and i like that old Vice x64 2.4 most, so i am deleting new versions
+
+Last edited by martin_demsky (Sep 23, 2020 10:05 am)
+
+### 344 Sep 23, 2020 9:36 pm
+
+frantic
+
+Offline
+
+Yes, people tend to mention Vice 2.4 as something they stick with, for various reasons. At the same time the VICE developers claim newer versions "should" be more accurate in the emulation. It is all quite confusing. To be honest, I find it confusing enough just with the real SID chips, since they differ so much — not just between 8580 and 6581, or between different revisions of the 6581 or so — but also between individual chips from the same revision. It's like a fractal maze that drives you more mad the closer you try to get to it. In the end, I think one better just be happy if one is in the midst of squeezing out a freaking cool sound of the machine at hand, whatever it is.
+
+### 345 Sep 24, 2020 12:30 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Agreed. While Vice 3.4 seem to emulate the rather quirky ADSR behavior way more reliably than any other existing software, in the sound department (especially filters), it's reSID-fp based Vice 2.4 that does the job.
+
+Last edited by F7sus4 (Oct 2, 2020 5:55 pm)
+
+### 346 Sep 26, 2020 5:34 pm
+
+d3Ni$e
+
+Offline
+
+@martin_demsky Super nice worktunes you got and I really like the mato 7 in the list there. I would love to see a release.
+And sad that you take away your defMON vids from Youtube because they are really nice to listen and see whats goin on in the player.. So entertaning!
+@frantic: We are not many people that are using defMON but we looking forward for updates and realease-news about defMON2.
+We should all encourage each other in our small defMON-group and help each other and come with tips and tricks like we all have being doing so great here. You know also frantic that Im more than willing to donate money into your projects.
+[Edited by moderator - Take this sort of talk somewhere else]
+Have a good week folks! Ciao Ciao
+/D.
+
+Last edited by Trash80 (Sep 26, 2020 7:05 pm)
+
+### 347 Sep 27, 2020 12:49 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+https://martindemsky.bandcamp.com/track/jazzy-ocean
+I have released second chiptune album and i have here almost all defMON tunes, i also sent sid tunes to hvsc, so it should be included in next release. I am also working on new defMON tune, it sounds interesting, it is finished only one minute so i will see when it i finish it, because i am primarily working on one long-term orchestral album.
+
+Last edited by martin_demsky (Sep 27, 2020 12:49 pm)
+
+### 348 Sep 27, 2020 8:49 pm
+
+frantic
+
+Offline
+
+@martin: Makes me happy to see that ppl get some joy out of defMON!
+
+### 349 Sep 30, 2020 9:49 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Yes i very like defMON! My new tune is here
+https://www.youtube.com/watch?v=gqpvC2Edc0U
+
+### 350 Oct 1, 2020 9:51 am
+
+d3Ni$e
+
+Offline
+
+@martin nice tune! Keep it up!
+Nice to be back here again with a bitter sweet taste in my mouth..
+Anyway in the time of my break my little group manage to do a short Graphic Animation witih a tune made in defMON (1:16 min short)
+It could have been made by a 9-year old? The music also? Who knows? Goto80 Liked it
+https://csdb.dk/release/?id=196258
+@frantic: It would be nice to see more vids under the "C64 productions with defMON music" on the official site but maybe that is more for the big serious demogroups? I don't know how you see it there around.
+We have goten lots of support by lovely people around and help with much love and it feels so nice but it is another side of the coin as I see it now also by people that aiming for being better then others and have a negative approach.
+@frantic: I did not feel any respons from you in my last message here so Im going straight forward with my questions instead:
+Who are you aiming for with the defMON & defMON2 Projects? Iam more than happy to support and donate so you know but I want to hear your thoughts about it..
+Is it aiming and gonna be kept for "Internetgurus" and "Big demoscenegroups" and proffesional musicans that making money of music and being in the scene for over 20 year or is it gonna be shared and open for everyone to share, explore and having fun with defMON & defMON2?
+I like donating money.. Specially for something good even if it is sad with kickstarter projects failing etc.. But Im intrested in the vision of the creator behind certain projects Im investing my money in and in general Im against fraud.
+Hope you understand my thoughts and questions.
+Cheers
+D.
+
+### 351 Oct 1, 2020 4:57 pm
+
+frantic
+
+Offline
+
+@denise: Are you suggesting that I am doing defMON as some kind of fraud? If so, I take that as a personal offence.
+
+Last edited by frantic (Oct 1, 2020 5:22 pm)
+
+### 352 Oct 1, 2020 6:29 pm
+
+herr_prof
+
+Offline
+
+Unsubscribe
+
+Im offended too!
+
+## Posts: 337-352 of 444
+
+Pages Previous 1 … 20 21 22 23 24 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

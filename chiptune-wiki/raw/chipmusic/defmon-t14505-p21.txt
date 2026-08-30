@@ -1,0 +1,288 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+154 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 21 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 19 20 21 22 23 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 321-336 of 444
+
+### 321 Sep 12, 2020 9:52 am
+
+F7sus4
+
+Offline
+
+Poland
+
+frantic wrote:COMMA/PERIOD = transpose current step up/down
+SHIFT + COMMA/PERIOD = transpose current sequence up/down
+
+I don't really know how much time and effort would implementing such feature into defMON take, but it's probably one of those good all around QoL stuff to have. Not crucial, but important.
+I understand defMON2 will become a priority soon, so there goes the question if defMON is planned to reach some sort of retired/final safe-and-stable version? I'm still thinking about 2SID bugs including copying and channel mute (visual), and probably even more than multispeed stability issue, since the latter is at least manageable.
+Also, my best words for defMON2. If it happens for you to collect brainstormed input (not requests, but ideas), I'm open to the subject.
+
+Last edited by F7sus4 (Sep 14, 2020 8:45 am)
+
+### 322 Sep 13, 2020 4:12 pm
+
+frantic
+
+Offline
+
+@F7sus4: Yes, I intend to keep fixing bugs in the original defMON to some extent. The pattern overwrite bug is a mystery at the moment though, so that one won't be fixed until I somehow manage to find a clue what might cause it. I have a feeling that this bug is coming from an unexpected direction. Maybe something like the filter bug you reported at some point, which wasn't due to any error in the filter code, but due to a memory leak in an entirely different part of the code.
+New features aren't really planned for the original defMON, although not impossible.
+Regarding features/ideas for defMON2, there is certainly no harm done in telling me about it. It is quite likely that the ideas will be ignored, since there are so many limitations when doing stuff for the C64, and it is darn complicated to make everything work as it is, but.. like I said. There is no harm in telling me about the ideas. Who knows, maybe some idea will actually make it into the editor in some way or another.
+Thanks also for your work in reporting bugs in defMON. It is very much appreciated.
+
+### 323 Sep 14, 2020 11:21 am
+
+d3Ni$e
+
+Offline
+
+My kind of defMON2:
+1. - Fix the 2SID bug that F7sus4 was talking about before and if there are some more minor bugs.
+2. - Two Main Screens as now but ability of making more rows in the SEQ-List.
+3. - Tiny note-table to take up/hiding for inserting notes about what instruments columns you are working with.
+4. - Tweaking filters instantly on the keyboard.
+5. - Two SID-Tabs of course! Bigger and better than ever!
+6. - Better packer.
+I don't mind a 3SID solution (Save that for defMON3 lol just joking here) and you better not mind me at all really.
+and don't take me too seriously.
+Have a wonderful week my comrades!
+.D
+
+### 324 Sep 14, 2020 1:34 pm
+
+frantic
+
+Offline
+
+Regarding 3: I didn't quite understand what you meant here. Please elaborate.
+Regarding 6: Anything in particular you were thinking about? Smaller size of the packed files? Ability to export directly to psid format, or... something else?
+
+### 325 Sep 14, 2020 2:56 pm
+
+d3Ni$e
+
+Offline
+
+3. So we are coming to a point when we working with 2 Main screens (2 SIDs). Alot of instruments and effects are made in the SID-Tab and you maybe have over 10 or 20 instruments you have been working on. I like fast flow style sometimes and when Im making a pattern from scratch I would like to remember easily what I want to put in my pattern.
+I can really not explain in english sorry but: "En enkel ruta för att anteckna" that you can put up and hide just with a key command.
+------------------------------------------------------------
+I 4E: Wobbly bass I
+I 10: Helicopter Noise I
+I 2F: Bell sound I
+I 6A: Short snare I
+I AD: Fast PW arpeggio I
+------------------------------------------------------------
+Just for typing down some small notices inside the small table and nothing else.
+Numero 6: pack 2SID into the executable form.
+/D.
+
+### 326 Sep 14, 2020 3:17 pm
+
+frantic
+
+Offline
+
+3. Ahh.. I read "notes" as in musical notes, rather than textual notes. Now I get what you meant!
+6. Yes, that one is a really reasonable/natural/logical feature to request. By the way, I am actually able to pack 2SID tunes into executable form using some custom scripts on my mac. It involves some manual work, so it isn't really a service I can offer on a regular basis, but let's say you have one or a few tunes that you really really want to be able to use in some particular production or so, send me a message and I'll see what I can do.
+
+### 327 Sep 15, 2020 8:45 am
+
+F7sus4
+
+Offline
+
+Poland
+
+I was afraid to start a request-fest. Sorry for that, Frantic.
+Basically, what I intended to share was 2-3 particular concepts that kept coming back to my mind during the years, and which I'd find at least innovative in any C64 tracker software:
+- Randomizer. That's it. Be it waveform, filter value, filter type or whatever.
+- Paddles support. This is more live-act fronted, but anyway - if preprogrammed filter values (or sidtab programs) could be affected by global CP offset via paddles just the for purposes of the playback, that would be an extremely powerful feature.
+- Multi-speed/timer setting change via command. From musicians' POV, a lot of versatility lies behind the concept.
+
+Last edited by F7sus4 (Sep 15, 2020 5:26 pm)
+
+### 328 Sep 15, 2020 9:51 am
+
+frantic
+
+Offline
+
+@f7sus4: No worries about that. I don't mind hearing suggestions at all. Potential trouble would emerge if people start to expect me to implement the suggestions just because they want these features, but so far people do not bug me about it in that way, so everything is fine.
+At least the first two features are part of my thoughts for defMON 2. Regarding the third one.. Could you be a bit more specific about what you have in mind and how it could be used? Generally speaking though, I *think* defMON 2 will work like this:
+* Variable speed for sequence parsing, probably including some sort of commands for changing this.
+* Fixed 3-times-per-screen speed for sidtab parsing. (Using delays you can of course make slower sounds as well).
+
+Last edited by frantic (Sep 15, 2020 9:57 am)
+
+### 329 Sep 15, 2020 11:18 am
+
+F7sus4
+
+Offline
+
+Poland
+
+F7sus4 wrote:- Multi-speed/timer setting change via command. From musicians' POV, a lot of versatility lies behind the concept.
+
+During several live experiments I've realized that switching between x1/x2/x4/x8 speed modes provides interesting "deconstructing" potential to the music. So far, we're bound to one fixed timer setting ($2663, $1CC7 and so on), but if it would be possible to adjust/shift it via command (sidtab program, sequence-specific command, whatever) well, that would change a lot.
+
+Last edited by F7sus4 (Sep 15, 2020 5:27 pm)
+
+### 330 Sep 15, 2020 1:47 pm
+
+frantic
+
+Offline
+
+Right. Yes, I've also used 1x/2x/4x/8x switching in live contexts as it is one of those few things that you can actually do in defMON that actually works a bit like applying an effect on the music, without having to go into specific bytes in the sidtab and modifying them to change the way things sound. I agree that the effect of doing this can sound quite interesting, although it also sound crappy in some cases.
+On the other hand, there has also been many times when I wanted to change the speed of the music without changing the way the sounds sound, and that was impossible since the speed of sequence parsing was tied to the speed of sidtab parsing.
+Anyway, defMON2 will be constructed in ways that are more compatible with the way that MIDI works. So, for example, if the C64 is to act as a MIDI slave, it makes more sense not to "drive" the sound parsing code in ways that depend on the speed of the MIDI clock, since that may vary and the user will then expect that only the sequence parsing should be affected if changing the BPM of the music in a DAW or so. ...and so on. In general, a lot of things become much more complicated when involving MIDI more fundamentally into the scheme of things and needs some careful thinking to even work/be compatible.
+In play-modes that are not driven by external midi clock coming in to the C64, it will be possible to control the timer values though, and to do so directly from the sidtab.
+defMON2 is also going to offer more ways to do live tweaking (including the use of paddles). There will be something called "the buffer", which is like a little table of values that can be used in an almost "modular synthesis" kind of way by the sidtab. So you could slide a value in the buffer, and use that to make a filter slide. Then you could also affect the same value by moving the paddles. ...and things like this.
+(All of this is obviously assuming that defMON 2 will ever see the light of the day. I hope it will, and according to my plans it will. I'm only saying that you never know until it has actually happened.)
+
+### 331 Sep 15, 2020 4:20 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+frantic wrote:defMON2 is also going to offer more ways to do live tweaking (including the use of paddles). There will be something called "the buffer", which is like a little table of values that can be used in an almost "modular synthesis" kind of way by the sidtab. So you could slide a value in the buffer, and use that to make a filter slide. Then you could also affect the same value by moving the paddles. ...and things like this.
+
+Uhm, so if I understand correctly, one of the features would be grabbing/recording filter "envelopes" via the real-time paddles/knobs manipulation into "the buffer table", and then allowing it to use as a sort of preset? If so, standing ovations.
+
+Last edited by F7sus4 (Sep 15, 2020 5:27 pm)
+
+### 332 Sep 15, 2020 4:59 pm
+
+frantic
+
+Offline
+
+Ah, I'm afraid that's not quite what I meant. RAM is very limited, so recordings of such time-series of paddle data would quickly fill upp the RAM. The paddle support would be for playback only, rather than recording of envelopes.
+What I meant was rather something like this:
+* Values ("parameters") can be pushed into the buffer from particular positions in a sequence.
+* Paddle movement can be set to affect values at particular positions in the buffer (at playback time).
+* Sidtab lines can use (and set/slide/randomize/etc) such values in the buffer.
+Example of usage: One particular line in the sidtab may set CP to the value which is currently stored at position 00 in the buffer. Then you could push different values directly from the sequence into position 00 in the buffer, to create filter sweeps directly from the sequence.
+Another example: One particular line in the sidtab may set CP to the value which is currently stored at position 00 in the buffer. Then you could use a paddle to affect the value at position 00 in the buffer, to make a paddle controlled filter sweep (at playback time).
+
+Last edited by frantic (Sep 15, 2020 5:02 pm)
+
+### 333 Sep 15, 2020 5:13 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Yes, to my understanding, "recording" filter envelopes on the fly would probably also come with the problem of truncating grabbed data into time frames/delays compatible with the music speed/timing (even assuming that the recording itself could be RAM-efficient enough).
+Nevertheless, paddle support for tracked sequences' playback is more than any (defMON) musician could ever dream of.
+
+Last edited by F7sus4 (Sep 15, 2020 5:16 pm)
+
+### 334 Sep 18, 2020 8:15 pm
+
+frantic
+
+Offline
+
+Yeah there could be some further complications, depending on how such sampling of paddle data is implemented.
+This evening I spent a few hours coding on defMON 2. Feels good!
+A new version of defMON is available. It contains a fix of a bug that F7sus4 had reported. Previously the visual representation of which channels were muted and which ones that weren't wasn't working properly in 2sid-mode, even though the actual channel muting worked properly. Now the visual representation should (hopefully) correspond to the actual channel muting state.
+https://toolsforscholars.com/defmon/dok … d:download
+
+Last edited by frantic (Sep 19, 2020 5:20 pm)
+
+### 335 Sep 20, 2020 4:49 pm
+
+d3Ni$e
+
+Offline
+
+Thanks for the new update!
+Regarding the packing again and smaller size of the packed files.. Is there any possible way to make a smaller size of the tunes?
+I have heard SID-tunes that are almost 1 minut and are around $0801-$1900 but when I do a 5 seconds short tune in defMON it is way over $2000 in loadrange.
+Can it be fixed in some kind of way?
+Cheers
+
+### 336 Sep 20, 2020 5:32 pm
+
+frantic
+
+Offline
+
+Hi!
+Most of the memory used by the packed tune is used by the player code, rather than the player data. This is why you see that it takes quite some size even if you make just a small tune. Also, 5 second tunes are rarely used, so in practice this is seldom that much of a drawback.
+The player code in defMON is optimized for speed rather than size. There is always a trade-off. Either you write a player which is very small and takes little RAM, but then the code will also be slower, or you write a player which is very fast, but then the code will also be larger.
+It would be possible to write another player (code) which takes much less space but which is also much slower, but that is able to play the very same music data. That could be desirable in some cases, but having more than one version of the player code often complicates things, so I have opted just to go for a single "one size fits all" player for defMON — and that one is optimized for speed, rather than size. Most C64 productions tend to prioritize speed optimization.
+If you have a look at the table presented in the link below, you will see that the player code in defMON is among the fastest, compared to other editors. There are some editors that are substantially faster, but then it comes at the expense of limiting the features of the player quite a lot:
+http://chordian.net/c64editors.htm
+So the editors that you are comparing with are precisely those editors that haven't prioritized speed quite as much as I have done in defMON (or those that are both faster and smaller, because they offer less features). In the case of defMON optimization for speed (rather than RAM size) makes sense in yet another way, which is because it supports stereo sid and multispeed. When doing a stereo sid tune in 4x speed, having a speed optimized player is almost a requirement.
+Having more then one player (e.g. one optimized for RAM size and another one optimized for CPU speed, and perhaps yet another one which is somewhere in between these other two) for the same editor also complicates things in the sense that the tune will sound sliiiightly different since the SID registers are written at slightly different times, depending on how fast the player code is that you are using. People tend to complain about that.
+Did you ask out of curiosity, or because you are actually in a situation where you need a tune that is smaller than the one that the defMON packer has produced for you? Like, for something a one file demo where a lot of things has to fit in RAM at the same time, and so forth? For "special occasions" I can do some manual work on a packed tune, to pack it a bit further than the packer in defMON is able to do. This isn't something that is going to be implemented in the packer, precisely because it requires some manual work. That still won't make the playe code smaller though. It is just a matter of packing the music data a bit further. If you really need super small tunes, then defMON would probably simply be the wrong choice.
+Here is a link to a tune that I created once, where the player code and the player code together only takes 256 ($100) bytes. That was clearly optimized for size though, and it (obviously) wasn't created by defMON:
+https://codebase64.org/doku.php?id=base … une_player
+https://deepsid.chordian.net/?file=/MUS … _Block.sid
+...and another one which is also only 256 bytes:
+https://deepsid.chordian.net/?file=/MUS … _bytes.sid
+
+Last edited by frantic (Sep 21, 2020 6:01 am)
+
+## Posts: 321-336 of 444
+
+Pages Previous 1 … 19 20 21 22 23 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

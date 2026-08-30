@@ -1,0 +1,311 @@
+# The Player (CheeseCutter v2.0 onwards)
+
+This document is slightly inaccurate.
+Table of contents:
+
+- Tracklist
+
+- Sequence format
+
+- Command column values
+
+- Command table
+
+- Instrument table
+
+- Pulse table
+
+- Filter table
+
+- Chord table
+
+- Things of interest
+
+### Tracklist
+
+A001
+8002
+F000
+...
+
+- Transpose value is now a signed number with value A0
+corresponding zero, A1
+transposing by +1, 9F
+transposing by -1 etc.
+
+- Transpose value 80
+is a skip value meaning the player will use whatever transpose was previously given in the tracklist.
+
+- The end mark (FF00) can't be manually touched by user anymore, the wrap pointer is stored there and is handled
+automatically by the editor. You can set it with Ctrl-Backspace from the editor.
+
+### Sequence format
+
+- A single row in a sequence looks like this:
+C-1 00 01
+
+The first column is obviously the note, second is an instrument value and third is an optional command value.
+
+#### Command column values
+
+- 01-3F
+Execute a command from the Command Table (see below for details on possible commands.)
+
+- 40-5F
+Changes the pulse table pointer for the currently playing note. Will be overwritten with the default
+value from the instrument table when the next note comes up (unless the instrument doesn't define a pulse pointer).
+
+- 60-7F
+Change the filter table pointer. Works similarily to the pulse table change.
+
+- 80-9F
+Activates a "chord" from the Chord Table.
+
+The chord values are read in tandem with the
+Wave Table (meaning that the wave delay value also affects the chord) and added to the base note. You can apply a chord
+over any kind of wave table program except that absolute note values (80-DF) are not affected.
+
+The Chord Table is indexed, meaning that the value entered into the Command column does not directly point to the Chord Table
+but to an index which holds the beginning point of each chord program.
+
+Values 40-7F are considered negative transpose values, with 7F equaling to -1, 7E equaling to -2 etc.
+
+- A0-AF
+Sets the Attack envelope value for the currently playing note.
+
+- B0-BF
+Works similarily for Decay.
+
+- C0-CF
+Works similarily for Sustain.
+
+- D0-DF
+Works similarily for Release.
+
+- E0-EF
+Sets the global volume.
+
+- F0-FF
+Sets the song speed; values 0 or 1 enable the swing tempo. The first set in the Chord Table
+defines the swing program.
+
+### Command Table
+
+A B C
+- -- --
+00:0-00 00
+
+- 0
+- Slide up
+
+- 1
+- Slide down
+
+- 2
+- Vibrato. This is the usual delta vibrato as found in JCH's players from 20.G4 upwards. You probably know
+how to use it. Try values 2-00 32 and 2-00 43 for starters.
+
+- 3
+- Detune the currently playing note. It's a 16 bit value so the whole frequency range is available. Should have use in creating Galwayish flanging sounds.
+
+- 4
+- Set ADSR for the current note.
+
+- 5
+- Set filter. Superseded by the matching Sequencer command (60-7F).
+
+- 6
+- Set pulse. Superseded by the matching Sequencer commad (40-5F).
+
+- 7
+- Portamento.
+This is a bit tricky to use. Due to current implementation you must activate the portamento BEFORE
+the note(s) you wish to portamento to. Issuing the command in the same row with a note applies the portamento only
+on notes following that.
+
+You can use it only on tied notes. When a regular note is encountered the portamento command is shut down.
+This behavior might be changed in the future.
+
+### Instrument Table
+
+A B C D E F G H
+-- -- -- -- -- -- -- --
+00:00 F9 00 00 00 01 00 05
+
+- Byte A / B: ADSR
+
+- Byte C: Hardrestart type & Wave program delay value
+Works mostly as in NP21.G5.
+
+- Low nibble (x0-xF): Wave program delay value.
+
+- 0x: Note restart type 1: Gate off three frames before next note. Waveform cleared one frame before next note.
+
+- 4x: Soft restart. Gate off two frames before next note.
+
+- 8x: Regular hard restart.
+Gate off & write hard restart value to ADSR two frames before next note.
+The current instrument's byte D is written to waveform register.
+
+- Ax: Laxity restart. Works like 8x except the AD part of the volume envelope is not touched.
+
+Restart types 0x and 8x are the ones to use for most of the time.
+
+4x (soft restart) usually works best (least buggy) with large (>= 8) release values.
+
+- Byte D: Hardrestart waveform
+Used when Byte C (Hardrestart type) = 8x or Ax. The value is written into SID waveform register 1 frame before next note.
+
+Usually values 0 & 8 are the most useful. The gate bit is automatically set by the player, so it does not make a difference if you type e.g. 00 or 01.
+
+- Byte E: Filter table program. 00 = no filter; the voice keeps playing any filter program set by another instrument or sequence command.
+
+- Byte F: Pulse table program. 00 = no pulse; the voice keeps playing any pulse program set by another instrument or sequence command.
+
+- Byte G: Unused.
+
+- Byte H: Wave table pointer.
+
+### Wave Table
+
+A B
+-- --
+00:DF 81
+01:0C 41
+02:00 00
+03:7E 00
+...
+
+Works mostly like it did in JCH's editor.
+
+- The transpose column (byte A):
+
+- 00-5F
+- Regular transpose values.
+
+- 80-DF
+- Absolute transpose values (unaffected by note or any other transpose value)
+
+- 7E
+- Stop, the wave program stays in the previous row
+
+- 7F
+- Wrap, byte B defines the wrap point
+
+- The waveform column (byte B):
+
+- 00
+- Does nothing (keeps the previously set waveform).
+
+- 01-0F
+- Overrides the instrument's Wave Delay value for this row. Also affects the chord program if
+one has been enabled. The execution continues at the regular speed after this row is completed.
+
+- 10-DF
+- SID waveform values.
+
+- E0-EF
+- SID waveform values 00-0F.
+
+### Pulse Table
+
+A B C D
+-- -- -- --
+01:10 40 00 00
+02:90 40 FF 01
+...
+
+- Duration (byte A). Works like byte C in JCH's players.
+
+- 00-7F
+Duration with positive add value.
+
+- 80-FF
+Duration with negative add value.
+
+- Add value (byte B). Works like byte B in JCH's players. As previously mentioned, the 7th bit of byte
+A defines the direction which the pulse sweeps.
+
+- Init value (byte C). Works like byte A in JCH's players. Defines the initial value for the sweep. FF
+
+uses the previously set value.
+
+- The jump value (byte D). Works somewhat like byte D in JCH's players, except that value 00
+always jumps
+to the following row and value 7F
+stops the pulse program execution.
+
+What the "stop" jump value (7F) really does is it just jumps to the row 0 in the pulse table which usually holds the sequence "00 00 FF 7F", which never changes anything and continously wraps back to itself.
+
+### Filter Table
+
+If byte A >= $80, then this row is a filter init where byte A sets the filter type, byte B sets the resonance and voice bitmask
+and byte C sets the initial cutoff.
+
+Filter sweeps works mostly like the Pulse Table with the exception that add value is always an add, never a subtraction.
+So add value of FF actually subtracts by one, FE subtracts by 2 etc.
+Everyone who knows JCH's players or knows what two's complement means will have no problem understanding how it works.
+
+Filter sweeps have 10 bit accuracy so they are 4 times as fine as those on JCH players.
+
+A B C D
+-- -- -- --
+01:90 F1 10 7F
+
+- Set the Filter type to $10 (as defined in byte A).
+
+- Set the Filter resonance to $F and voice bitmask to 1 (as defined in byte B).
+
+- Set the Filter cutoff to $10 (as defined in byte C).
+
+- Stop the filter table execution (byte D).
+
+A B C D
+-- -- -- --
+01:C0 07 FF 04
+
+- Set the Filter type to 4 (as defined in byte A).
+
+- Set the Filter resonance to 0 and voice bitmask to 7 - all voices filtered (as defined in byte B).
+
+- Do not init - keep the previous cutoff value (as defined in byte C).
+
+- Jump to row 04 after this row is done (byte D).
+
+A B C D
+-- -- -- --
+01:10 01 FF 00
+
+- Set the duration for this row to $10 (byte A).
+
+- Set the filter add value to 1 - a really slow upward sweep (byte B).
+
+- Do not init - keep the previous cutoff value (as defined in byte C).
+
+- Jump to the following row when this one is completed (byte D).
+
+### Chord Table
+
+- 00-3F
+Positive transpose values - e.g. the familiar major chord would be 0-4-7.
+
+- 40-7F
+Negative transpose values - 7F
+= -1, 7E
+= -2 etc.
+
+- 80-FF
+Wrap value.
+
+### Things of interest
+
+- The hardrestart ADSR value is read from the first row in the Command Table in bytes B and C. The default value is 0F 00.
+
+- The first set of values in the Chord Table defines the swing tempo program. When you set the speed of your song to 0 or 1 either from the editor or with command Fx, the swing program is enabled. Setting the speed back to >= 2 stops the swing program.
+
+- Setting a frequency altering command (a slide or vibrato, but not portamento) on a row with tied note causes the command not to be executed. All other command types are usable (portamento included).
+
+- Unfortunately it's not currently possible to change the wavetable pointer of instruments on the fly. That would probably require
+yet another table for the user to enter wavetable jump points (and editor code to maintain it after wavetable edits).
+
+Return to main page

@@ -1,0 +1,38 @@
+====== Using a defMON tune in your own program ======
+
+Once you have finished a tune in defMON and packed it you can use it in your own programs. The interface is more or less the same as in 90% of all other sid tunes out there, at least if you are going to play a single speed tune. There are nevertheless some things that may be worth pointing out.
+
+When you include the tune in your assembler project, make sure to place it at address $1000. Something like:
+
+<code>
+	* = $1000
+	!incbin "mypackeddefmontune.bin"
+</code>
+
+Just keep in mind that the first two bytes of a packed tune will contain the load adress, just like in any other .prg file on the C64. This means that the first two bytes are $00,$10 and need to be stripped away. How to do that depends on your assembler. (An ugly "trick" is otherwise to include the file at * = $0ffe instead).
+
+To initialize the player — you just need to do that once before you start playing the tune — you simply do:
+
+<code>
+	lda #$00
+	jsr $1000 ;Call the player INIT routine
+</code>
+
+"lda #$00" means the tune will start playing from the beginning. You can also set the A register to some other value to start playing the tune from another song position.
+
+You should be aware that the init routine in the defMON player contains a piece of code that [[http://codebase64.org/doku.php?id=base:detecting_sid_type_-_safe_method|detects the SID model]] (6581 or 8580) in the machine. This routine temporarily disables interrupts, which may cause unexpected behavior in case you are not aware of this. Once the SID model has been detected, the interrupt flag will be restored back to what it was before the init routine was called (sei or cli).
+
+In order to actually play the tune you need to call the player once every screen update:
+
+<code>
+	jsr $1003 ;Call this routine once a frame to play your single speed tune
+</code>
+
+This assumes that the tune is a single speed tune. In case your tune is a multi speed tune, that needs to be updated more often, things are slightly more complicated. Let's say you did a four speed tune, that needs to be updated four times each frame. Then you call "jsr $1003" the FIRST time. The other three times you need to call "jsr $1006" instead. Calls to $1003 parses sequence data and update sounds. Calls to $1006 only updates the sounds. If you would call $1003 four times each frame you would get the undesired result of playing the song data four times as quick, which is not what you want when playing multi speed tunes. So, basically, you always call $1003 once each frame, and then $1006 the other times. The table below summarises this:
+
+^ Multispeed       ^ Call $1003  ^ Call $1006     ^
+| 1x               | Once        | Never          |
+| 2x               | Once        | Once           |
+| 4x               | Once        | Three times    |
+| 8x               | Once        | Seven times    |
+

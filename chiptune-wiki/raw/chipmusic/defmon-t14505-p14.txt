@@ -1,0 +1,237 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+148 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 14 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 12 13 14 15 16 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 209-224 of 444
+
+### 209 Oct 13, 2018 7:40 pm
+
+anarkiwi
+
+Offline
+
+Thank you very much. Another kind soul also just explained that to me privately.
+I'm doing a basic video tutorial at the moment which I'll send in a couple of days for review (also been digesting all the helpful background in this forum). If anyone here has time to review it (especially for accuracy) that'd be great. If I get the basics right then perhaps it might support a bunch of different follow up ones that concentrate on various sidtab techniques.
+
+### 210 Oct 16, 2018 10:28 pm
+
+anarkiwi
+
+Offline
+
+Hi all;
+https://vimeo.com/295475988
+I made a very simple defMON introduction,
+I'd very much like your feedback - my goal for this video is to make it easier for people like me to get started and get over the initial terror . It'd be great to work with others to have other tutorials on things like hard restart, understanding how BPM works, more advanced effects in the sidtab, etc.
+Thanks,
+
+### 211 Oct 21, 2018 1:07 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@Frantic: I've updated bug behavior in previous post with some additional details.
+One unrelated question though. I've never found a key that would allow to leave "special command" screen (green border) without typing any command. Is there any, actually?
+
+### 212 Oct 22, 2018 8:46 am
+
+frantic
+
+Offline
+
+@anarkiwi: Nice! I put a link to your video on the defMON wiki. Hope that was OK.
+@F7sus4: Thanks! CTRL+ENTER if I remember correctly.
+
+Last edited by frantic (Oct 22, 2018 3:42 pm)
+
+### 213 Oct 24, 2018 8:49 am
+
+frantic
+
+Offline
+
+F7sus4 wrote:However, if you load "affected" song using older defMON build (eg. 20141108) and save it, the file will be "healed" from unnecessary data.
+
+That is very useful to know! Thank you very much! Could someone send me one or a few "inflated" tunes? That would help debugging.
+I have a feeling that that particular version (2014-11-08) may be the last one that doesn't have this problem with "inflated size" of some saved tunes, since the version after that (2017-10-24) involved some fixing of bugs related to packing of worktunes when saving them, and possibly therefore created a new bug in the packer code.
+Could you or someone else confirm that 2014-11-08 would fix the inflated size problem, whereas loading the tune in 2017-10-24 would not?
+
+Last edited by frantic (Oct 24, 2018 1:22 pm)
+
+### 214 Oct 27, 2018 10:52 am
+
+F7sus4
+
+Offline
+
+Poland
+
+@Frantic: Sure, no problem. Here's .d64 with "inflated" sample tune from 20171026 build and then "healed" with 20141108 build.
+
+Last edited by F7sus4 (Oct 27, 2018 2:54 pm)
+
+### 215 Oct 27, 2018 11:31 am
+
+frantic
+
+Offline
+
+@F7sus4: Thank you very much! Now I've got what I need to be able to look into the problem.
+
+### 216 Oct 27, 2018 3:28 pm
+
+frantic
+
+Offline
+
+I think I finally managed to find and fix that "inflated file size" bug. Let me know if things work as expected:
+http://toolsforscholars.com/defmon/doku … d:download
+It may be wise to keep a backup copy of your tunes before trying this version, since I made changes to code that relate to the saving of tunes. I think it will work fine though.
+
+Last edited by frantic (Oct 27, 2018 5:11 pm)
+
+### 217 Oct 27, 2018 5:32 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@Frantic: Testing done.
+Tested with 25+ worktunes from 20090304, 20141107 and 20171026 builds.
+- Everything seems to work perfectly.
+- 0% "inflated" files and no data is lost or corrupted.
+- Loading affected files and re-saving them fixes both end-pattern (red dots) bug and "inflated" filesize problem.
+- Whatever is saved with current 20181027 build works 100% fine in down to 20141107 build.
+- Funnily, some 20090304 tunes are getting even smaller in 20181027, but no data is lost.
+So far, I think it's safe to say, it's 100% stable and working version.
+
+Last edited by F7sus4 (Oct 27, 2018 6:24 pm)
+
+### 218 Oct 27, 2018 6:14 pm
+
+frantic
+
+Offline
+
+This is great. Thanks a lot for testing!
+I just realized: I think it was in 2008 that defMON got finished enough to be usable, and the first user (goto80) started using it. That should be around 10 years ago now! Then it got public around 2013, when a "cracked" version was released by G*P, which is five years ago. Double anniversary!
+
+Last edited by frantic (Oct 27, 2018 6:40 pm)
+
+### 219 Oct 27, 2018 7:00 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Time goes by quickly as hell. I'd be happy to see any version older than 20090304. I know they are there. It's been great adventure through all these years. :-)
+
+### 220 Oct 27, 2018 7:10 pm
+
+frantic
+
+Offline
+
+Goto80 may have some old versions. I may have that too, but the floppies and my diskdrives are in different places, so it may take a long time before I would be able to check. Nowadays I'm only using the 1541U2 as "diskdrive".
+
+### 221 Oct 27, 2018 8:53 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+While we loved floppies back in the time, well, I guess nobody can't really imagine going back to them today. And now some defMON music preview for tonight...
+(edit: fixed "private" YouTube tag)
+
+Last edited by F7sus4 (Oct 28, 2018 11:14 am)
+
+### 222 Oct 27, 2018 9:13 pm
+
+frantic
+
+Offline
+
+The link didn't work here.
+
+### 223 Oct 28, 2018 10:34 am
+
+frantic
+
+Offline
+
+Goto80 digged up a few old versions. One is from April 2008. One is from a disk labelled October 2008, but I am not sure if that means that this defmon version was created then, or if it is just the tunes that was on the disk. The defMON version may be some months older. The other two I don't know, but I think they are both pre 2009 too.
+http://toolsforscholars.com/defmon/oldversions.zip
+
+### 224 Oct 28, 2018 11:12 am
+
+F7sus4
+
+Offline
+
+Poland
+
+That's pure gold, thank you for sharing. Obviously, there's very little reason to use them today, but the historical value is enormous. However, I still miss that white screen flashing with each new pattern, even though it delayed the display a bit. ;-)
+
+Last edited by F7sus4 (Oct 28, 2018 11:14 am)
+
+## Posts: 209-224 of 444
+
+Pages Previous 1 … 12 13 14 15 16 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

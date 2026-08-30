@@ -1,0 +1,250 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+147 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 7 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 5 6 7 8 9 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 97-112 of 444
+
+### 97 Jul 18, 2016 5:28 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Hey, unfortunately I dont have anymore units left If it would get enough interest I could make a new batch. Send me those PMs!
+PS: I posted the sources HERE so you can always try to make one yourself
+
+Last edited by scannerboy (Jul 18, 2016 5:31 pm)
+
+### 98 Oct 23, 2016 10:17 am
+
+Promok
+
+Offline
+
+scannerboy wrote:https://instagram.com/p/z8LLU-RzvQ/
+Hey, I just want you guys to know that the adapters are ready to go ;)
+It fits into the user port
+The adapter lets defmon output:
+-LSDJ sync signal
+-nanoloop sync signal
+-midi clock
+-din sync
+-clock signal with adjustable resolution from 24ppqn to 2ppqn for Korg Volcas, TE Pocket Operators, Arturia Microbrute, MI Anushri etc
+It should also work with Prophet64
+Price with worldwide postage: 36EUR
+I will post the sources in about a week if anybody is interested
+
+where are i can buy this adapter?i can paid with paypal or bank transfer?many thanks,best regards
+
+### 99 Nov 21, 2016 8:42 pm
+
+frantic
+
+Offline
+
+I added a little section on the defMON wiki about the little known "Super Command" mode of defMON:
+http://toolsforscholars.com/defmon/doku.php?id=start
+It is very brief, but it may at least give a little hint about how the Super Command mode works.
+
+### 100 Nov 22, 2016 3:53 am
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+Please note that people who use Super Commands have been denied entrance.
+
+### 101 Nov 23, 2016 3:47 am
+
+Tumult
+
+Offline
+
+Horsetralia
+
+Someone should add DUBCRT to the creations page - since there would be no DUBCRT without defMON
+
+### 102 Nov 23, 2016 4:47 am
+
+frantic
+
+Offline
+
+I added DUBCRT now!
+
+### 103 Feb 26, 2017 3:43 pm
+
+d3Ni$e
+
+Offline
+
+Can not navigate in the defMON site.. need the bpm calculator. Please help!
+
+### 104 Feb 26, 2017 3:56 pm
+
+frantic
+
+Offline
+
+Yes, something happened with the wiki last night when I updated the wiki software. Unfortunately I have no time to fix that right now, but in the meantime, the direct link to the BPM calculator is:
+http://toolsforscholars.com/defmon/bpm.html
+
+### 105 Feb 27, 2017 10:19 am
+
+d3Ni$e
+
+Offline
+
+Thank you!!!
+
+### 106 Feb 27, 2017 10:03 pm
+
+clickclack777
+
+Offline
+
+Hi, I want to buy a Defmon sync adapter if anyone wants to sell theirs. Please PM me.
+
+### 107 Feb 27, 2017 10:50 pm
+
+frantic
+
+Offline
+
+clickclack777 wrote:Hi, I want to buy a Defmon sync adapter if anyone wants to sell theirs. Please PM me.
+
+I don't have one to sell unfortunately, but just wanted to make sure that you've seen the following:
+scannerboy wrote:Hey, unfortunately I dont have anymore units left If it would get enough interest I could make a new batch. Send me those PMs!
+
+Would be nice if enough interest for a new batch was generated.
+By the way: I think I fixed the defMON wiki to work as it should again.
+//FTC
+
+### 108 Feb 27, 2017 11:58 pm
+
+clickclack777
+
+Offline
+
+frantic wrote:clickclack777 wrote:Hi, I want to buy a Defmon sync adapter if anyone wants to sell theirs. Please PM me.
+
+I don't have one to sell unfortunately, but just wanted to make sure that you've seen the following:
+scannerboy wrote:Hey, unfortunately I dont have anymore units left If it would get enough interest I could make a new batch. Send me those PMs!
+
+Would be nice if enough interest for a new batch was generated.
+By the way: I think I fixed the defMON wiki to work as it should again.
+//FTC
+
+Thanks, Frantic. Yes, I´ve stalked scannerboy the last couple of days to make me one since I missed the first batch. I just discovered DEFmon and I´m becoming a junkie. I´ve had a SIDStation for more than 14 years but DEFmon opened a new SID wormhole for me.
+Any chance that DEFmon could support ASID in a future release so I can sequence the SIDStation through USB > MIDI from VICE running DEFmon on OSX? Thanks for amazing job so far.
+
+Last edited by clickclack777 (Feb 28, 2017 12:00 am)
+
+### 109 Feb 28, 2017 12:53 am
+
+frantic
+
+Offline
+
+clickclack777 wrote:Any chance that DEFmon could support ASID in a future release so I can sequence the SIDStation through USB > MIDI from VICE running DEFmon on OSX? Thanks for amazing job so far.
+
+Not really, I'm afraid. Furthermore, the version of the sync interface that has been released is precisely just a sync interface, and does not send the full set of midi messages. Only the midi sync message (and probably start/stop too I think — can't remember the details right now). Maybe I misunderstand the question. I'm not really familiar with ASID.
+I suppose you could convert your finished defMON (not DEFmon ) tune to the common sid file format that is used in the HVSIDS collection and play it on your SIDStation the way you would play sids from the HVSIDS collection. Not sure how well it would work.
+
+Last edited by frantic (Feb 28, 2017 3:56 pm)
+
+### 110 Feb 28, 2017 11:16 pm
+
+clickclack777
+
+Offline
+
+frantic wrote:clickclack777 wrote:Any chance that DEFmon could support ASID in a future release so I can sequence the SIDStation through USB > MIDI from VICE running DEFmon on OSX? Thanks for amazing job so far.
+
+Not really, I'm afraid. Furthermore, the version of the sync interface that has been released is precisely just a sync interface, and does not send the full set of midi messages. Only the midi sync message (and probably start/stop too I think — can't remember the details right now). Maybe I misunderstand the question. I'm not really familiar with ASID.
+I suppose you could convert your finished defMON (not DEFmon ) tune to the common sid file format that is used in the HVSIDS collection and play it on your SIDStation the way you would play sids from the HVSIDS collection. Not sure how well it would work.
+
+Alright, if its only sync then there is no purpose. Thought it transmitted midi messages as well. Good idea with the sid export. That would work.
+Still interested in a Sync adapter if anyone is selling theirs.
+
+### 111 Mar 5, 2017 11:46 pm
+
+clickclack777
+
+Offline
+
+Would one of these work to sync defMON through MIDI?
+http://www.ebay.co.uk/itm/322417562931? … EBIDX%3AIT
+
+### 112 Mar 6, 2017 7:30 am
+
+frantic
+
+Offline
+
+Not at the moment, but it is not entirely impossible that it might some day. It wouldn't be an awful lot of work to make defMON work with an interface like that (if I'd only find the time). I'm not making promises though.
+What you're linking to is a standard MIDI interface for the C64 and they are quite straightforward to use from a coder's point of view. There is a whole family of MIDI interfaces for the cartridge port that all more or less work the same way. You can see a list of those interfaces here, and the DATEL one is included there:
+https://codebase64.org/doku.php?id=base … interfaces
+Just a few years ago there was also a MIDI cart called something like Kerberos MIDI developed, but it is now sold out. That one was also similar to the midi cartridges listed on that codebase page if I remember correctly. Not 100% sure though as I never really looked into that one.
+The only "problem" is that in these days most people use something like a 1541 Ultimate cartridge or similar that occupies the cartridge port, so from that point of view using the cartridge port for MIDI connectivity isn't really desirable. This is also the main reason for making that defMON sync interface for the user port instead, since that one is not used by other hardware on most people's C64 setups.
+There are also other benefits of having a cartridge like Action Replay, Final Cartridge or Retro Replay in the cartridge port (which is what you would have if you've got a 1541U2 sitting in the cartridge port). For example, defMON makes use of the built in fastload/save routines in these cartridges if they are present. That makes loading/saving tunes a whole lot faster.
+Personally I'd much rather see new batches of Scannerboy's sync interface. That one was affordable as well.
+
+Last edited by frantic (Mar 6, 2017 7:35 am)
+
+## Posts: 97-112 of 444
+
+Pages Previous 1 … 5 6 7 8 9 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

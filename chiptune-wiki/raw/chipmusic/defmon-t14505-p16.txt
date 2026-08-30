@@ -1,0 +1,283 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+151 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 16 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 14 15 16 17 18 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 241-256 of 444
+
+### 241 Dec 13, 2018 10:50 am
+
+Amelinium
+
+Offline
+
+@martin_demsky
+@byte.observer
+No, this is only partially true. You can use 5401 and 5005. In the end, it's $55 waveform in both cases. This is to give additional freedom when it comes to instrument editing.
+For example: You can hard enable ringmod by 05 in second WG (means gate is opened and ringmod on) and then switch waveforms - pretty much like this:
+WGWG
+5005
+10
+50
+10
+50
+But you can also do something else, like this:
+WGWG
+5401
+50
+14
+10
+20
+In that case only first and third line will use ringmod ($55, $15), but for the rest of the lines the gate will be always on (01) and will play the normal $50, $20 and $10 waveforms in their respective lines with no ringmod.
+
+Last edited by Amelinium (Dec 13, 2018 10:52 am)
+
+### 242 Dec 13, 2018 12:29 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+You must know some hidden commands, because at defMON docs is only this:
+Waveform (yellow WG) corresponds to the waveform bit of the SID. Note that you should only use the first digit of this column.
+Gate Bit (green WG) controls the gate of the SID voice, and also Hardsync and Ring Modulation. Please refer to SID chip information for details. Note that you should only use the second digit.
+WG x0 waveform
++1 triangle
++2 saw
++4 pulse
++8 noise
+WG 0x gate
++1 gate on
++2 sync
++4 ringmod
++8 test-bit (reset)
+But i know what you wrote, because i've studied that doc about the sid native waves, so 50 is pulse and triangle combined waveform, but what is 05 at 2nd WG, at doc it is not used.
+
+### 243 Dec 13, 2018 9:14 pm
+
+Amelinium
+
+Offline
+
+Not at all. You were given examples on how to be creative. You can switch ringmods/sync on/off on the fly without affecting waveform or vice versa you can use different waveforms on the fly independently of ringmod/sync effect(s).
+Note, that you can even use second column at the sequencer editor to trigger different instrument lines (thus, waveform values).
+As for values, they are additive, therefore:
+07 = 04 (ringmod) +02 (sync) +01 (gate open)
+05 = 04 (ringmod) +01 (gate open=key on)
+04 = 04 (ringmod) +00 (gate closed=key off)
+50 = 40 (pulse, and pulse table applies) + 10 triangle
+So basically, $55 may be written as either 5401 or 5005 (in WGWG columns).
+
+Last edited by Amelinium (Dec 13, 2018 9:20 pm)
+
+### 244 Dec 14, 2018 8:21 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+...
+
+Last edited by martin_demsky (Dec 30, 2018 10:27 am)
+
+### 245 Dec 16, 2018 1:41 pm
+
+Amelinium
+
+Offline
+
+It is probably worth mentioning that sync/ringmod is based on channel pairing, pretty much like this: 1 and 2, 2 and 3, 3 and 1. You will notice that changing notes on the subsequent channel (voice) will affect the sound of $15/$55 instruments, quite easily.
+
+Last edited by Amelinium (Dec 17, 2018 7:53 am)
+
+### 246 Dec 16, 2018 1:45 pm
+
+Amelinium
+
+Offline
+
+@martin_demsky
+You can also refer to those experiments of mine for some additional insight if you wish:
+https://youtu.be/UEc3_y2LHbM
+
+Last edited by Amelinium (Dec 17, 2018 12:56 pm)
+
+### 247 Dec 17, 2018 11:09 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+It sounds very interesting, up to now i only viewed multiple times that Goto80's tutorials/performances, latest one from Demobit 2018 performance is made from zero in realtime, but i takes a lot of years of experience in defMON for sure
+
+### 248 Dec 21, 2018 3:00 am
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+martin_demsky wrote:It sounds very interesting, up to now i only viewed multiple times that Goto80's tutorials/performances, latest one from Demobit 2018 performance is made from zero in realtime, but i takes a lot of years of experience in defMON for sure
+
+Goto80 dreams, breathes and eats DefMon everyday as it is a part of a healthy Swedish diet.
+
+### 249 Dec 21, 2018 3:01 am
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+DefMon Ringmod or bust!
+
+### 250 Dec 21, 2018 12:32 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I tried now that variable shuffle tempo which i did on some songs made in Sid Duzz It (C64) or on Sidtracker 64 (iPad) but i am not fully understand what it does, so i write it from beginning: default delay in tracker is number 2, according to manual it is CPU cycles, i created track with 8/4 or 7/3 (repeating from first to last line of track), designed sound at default BPM value must have very short adsr envelope, because at longer sustain/release is sequencer dropping notes, maybe because gate cycle to release note must be also 2 cycles to start new.
+At higher BPM or SPD value is skipping of notes even more noticeable... 2nd track i did contain ordinary drum at 4/4 and i placed around that drums some closed hihats (noise with short release) to see, if shuffle delay at 1st track affects that hihats, and voila, it does, because i did also variation of first track with normal 2 delay value, but display is in some way wrong, because it show bad actually played note.
+Btw, i also experimented with those C= + Fkeys to alter tempos, i see and understand what does every F key, but sometime it freezes whole app, song is played but i cannot do anything except reset, so maybe CPU is overloaded I also dont understand why BPM value is displayed also in hexa like T $4CC6, and beside of that, what it mean? Converted to decimal value is 19654.
+
+Last edited by martin_demsky (Dec 21, 2018 12:44 pm)
+
+### 251 Dec 21, 2018 12:48 pm
+
+Amelinium
+
+Offline
+
+@martin_demsky BPM, speed (rasterbar x1/x2/x4/x8) and pattern sequence speed are three different factors that affect the outcome. If you set x8, use 1 (fastest) speed at the sequence editor (dark grey row) and active lots of complicated (looped) instruments, you're likely to hang up the software, but this is still quite dork-ass scenario when you can simply adjust the speed to expected values via Control+C= (Ctrl+Tab in emulator) without even touching BPM. From what I know the default BPM for speed "3" is 125.
+
+### 252 Dec 21, 2018 11:26 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I know what do you mean, even back in 90s during my Amiga times, because there was at least in OctaMED SPD timing (probably Vblank in Protracker), BPM timing (maybe CIA in PT) and also this speed of lines in tracker, but i dont know why in SDI or Sidtracker notes are not missing, this must be some trick to avoid these 2 CPU cycles to start new gate on, maybe hard restart, so overall envelopes of sid arent very fast probably. But thats ok, i am slowly painting picture in my mind what defMON can do beside of that classic trackers mainly in live performance so i focus on that.
+
+### 253 Dec 22, 2018 12:40 am
+
+Amelinium
+
+Offline
+
+@martin_demsky What I meant is that sound-cluttering might not be related to speed but proper instrument restarting. 1) Be sure not to close the gate multiple times in a row, 2) 0F00 ADSR during restart while gate closed 0000 seems to give best results, 3) increasing delay values in the line(s) responsible for hardrestart (with 09 testbit or without it) might help.
+
+### 254 Dec 22, 2018 10:52 pm
+
+anarkiwi
+
+Offline
+
+Hi all,
+Noticed what I think is a filter control corner case - defmon doesn't seem to touch $d415 (54293)/register 21 - filter offset low.
+If I run the latest defmon (20181101) under vice, set the sound device to "dump" (ie. so I can see what register/values are being written) and either set an absolute value under ACID or a sweep value, I only see register 22 being set (the high offset). Likewise setting CP only seems to affect register 22.
+Is this intentional? It does seem then that the rightmost 2 ACID digits don't do anything.
+Thanks,
+
+### 255 Dec 22, 2018 11:01 pm
+
+anarkiwi
+
+Offline
+
+Hi all again ,
+It seems that defmon uses slightly different frequency values to the first principles calculations at http://codebase64.org/doku.php?id=base: … ncy_table.
+Using the latest defmon (20181101) under vice, setting sound device to "dump", I see that sending a defmon A6, results in hi 29/lo 71 (0x1d47) being set in the voice's frequency registers.
+By contrast, http://codebase64.org/doku.php?id=base: … ency_table says A6 (they call it A5) should use 0x1d46. Though the calculation given in http://codebase64.org/doku.php?id=base: … ency_table says 0x1d45!
+I'll set up my Tek scope to verify - but which of these 3 values is correct? I presume defmon is...
+Thanks,
+
+### 256 Dec 23, 2018 8:41 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+anarkiwi wrote:Hi all,
+Is this intentional? It does seem then that the rightmost 2 ACID digits don't do anything.
+Thanks,
+
+I tried it now and i also see it is difficult to understand what it does. In defMON wiki is this:
+ACID cutoff set/slide
+0000-7FFF cutoff set
+8000-BFFF cutoff slide up
+C000-FFFF cutoff slide down
+so i created patch with lowpass filter at low set value in acid 0020, in next line i enter value 8000, so it is lowest slide up (also DL value i set to 70 to see how long it goes up), when i increase value in c (from acid) it is acting as LFO rate or something like this (wah-wah), so higher value, quicker wahwahing, i value (also from acid) seems to affect, how quickly is cutoff sliding up, in my case is at DL 70 optimal value 5 (it also may be acted as low LFO value, because on synthesizers is mostly LFO or additional envelope used to modulate parameters like filter sweeps), because until next line it goes filter almost to max frequency, and at next line i set C020, also at speed of DL 70 and filter is slowly closing, when i change waveform from pulse to noise, it is even better noticeable what it does (in my case it sounds exactly like Last Ninja III intro sounds haha).
+https://youtu.be/NWRLxN_LC-0
+
+Amelinium wrote:@martin_demsky What I meant is that sound-cluttering might not be related to speed but proper instrument restarting. 1) Be sure not to close the gate multiple times in a row, 2) 0F00 ADSR during restart while gate closed 0000 seems to give best results, 3) increasing delay values in the line(s) responsible for hardrestart (with 09 testbit or without it) might help.
+
+1. but what else i can do? afaik only when you close the gate, is sustain and release from envelope performed, so if i want short quick noted in long sequence i must close the gate, aside of that of course i used sometimes patch, preferably originally designed as long lead pulse with variable width and rest of notes is written without instrument number, so first note is hard and other as slide notes, where pulsewidth is changing from first note and rest is only changing oscillator frequency.
+2. that means if you use 0F00 in adsr, sr values are zeros and you dont need to close gate?
+
+Last edited by martin_demsky (Dec 23, 2018 10:28 am)
+
+## Posts: 241-256 of 444
+
+Pages Previous 1 … 14 15 16 17 18 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

@@ -1,0 +1,236 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+147 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 9 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 7 8 9 10 11 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 129-144 of 444
+
+### 129 Aug 15, 2017 1:39 pm
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+Big ups to scannerboy!
+
+### 130 Aug 15, 2017 2:18 pm
+
+d3Ni$e
+
+Offline
+
+Yees! planning to hook it up with my Monomachine.. going to be insane.
+
+### 131 Aug 15, 2017 4:04 pm
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+LET'S SYNC EVERYTHING!
+
+### 132 Aug 16, 2017 1:32 pm
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+goto80 wrote:LET'S SYNC EVERYTHING!
+
+LET'S SYNC OUR BRAIN NUERO TRANSMITTERS!
+
+### 133 Aug 18, 2017 11:04 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Okay... so regarding the previous bugreport, I understand the fix is not happening, neither is any possible workaround meant to be shared, or what is the plan right now? I mean, some of you lived with the bug for 8 years now, so it would be extraordinarily awesome to know how to prevent this poo from happening. :-)
+
+### 134 Aug 20, 2017 2:56 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+The boards are assembled, tested and ready to go. Please PM me if you didnt do it yet
+
+### 135 Oct 20, 2017 10:38 pm
+
+Ett nytt liv
+
+Offline
+
+Sweden
+
+I started to use defMON recently, but I encountered a problem. Everything works fine until I come to the sequences that start with letters instead of numbers. Those sequences start to act wierd and hick up. I've noticed that they don't end with the two red dots that seems to be standard otherwise. Does someone have a clue to what could be the cause of this problem?
+
+### 136 Oct 21, 2017 1:32 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+You can't use sequences above 7F
+That means you have 128 sequences at your disposal, should be enough for most songs
+
+### 137 Oct 21, 2017 8:50 am
+
+Ett nytt liv
+
+Offline
+
+Sweden
+
+Thanks for the reply. Well, what I meant was that I can use the sequences from 01 to 09, but from 0A and upwards it starts to get messy. But today I discouvered that actually the red dots seems to be missing just by random. Anyhow, when the sequence list reach step 04 (containing sequence 0A) it starts to reapeat itself and then gets stuck on step 05 for some reason, doesn't seem to have anything to do with the red dots really. I post a link to a video of my messy project here: https://www.youtube.com/watch?v=Jpn0shaYO3Q
+Could it be some sort of bug? I am using an emulator on windows. The problem occurs on Vice aswell as on CCS64 so my guess is that it's not caused by the emulator software. By the way, Is there some meaning of the red dots?
+
+### 138 Oct 21, 2017 9:50 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+OK that definitely looks like a bug.
+The red dots are the pattern end. Normally they are on the last step but you can set the pattern break to be sooner if you want shorter patterns or weird time signatures.
+What version are you using?
+I remember that one particular version had some issues with missing pattern breaks.
+When you start defmon there is a number lower left on the status bar (actually a date of the build). Can you read that number for me?
+
+### 139 Oct 21, 2017 9:52 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Or I guess grab the latest version from here and see if the bug persists:
+http://toolsforscholars.com/defmon/doku … d:download
+
+### 140 Oct 22, 2017 12:44 pm
+
+Ett nytt liv
+
+Offline
+
+Sweden
+
+I use the latest version although the number in the lower left is 20141107 (and not 20141108 as the name of the file, but I guess that's in order). I see now that there is a comment about the pattern end bug at http://csdb.dk/release/?id=150895 so it seems to be a known problem. Luckily I could solve it by manually insert the missing end pattern dots.
+
+### 141 Oct 22, 2017 12:51 pm
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+[edit] I added version 201711 ot the defmon wiki download page: http://toolsforscholars.com/defmon/doku … d:download
+Pretty sure this version fixes that bug (and is the last non-experimental version that I know of)
+It might not retroactively fix your song but like you said you can just add the pattern breaks to it.
+
+Last edited by iLKke (Oct 23, 2017 1:05 pm)
+
+### 142 Oct 22, 2017 2:35 pm
+
+Ett nytt liv
+
+Offline
+
+Sweden
+
+Thanks! I will try it out.
+
+### 143 Oct 23, 2017 11:00 pm
+
+frantic
+
+Offline
+
+Hey guys.. regarding that bug with sequence breaks that disappear in unused sequences if you save and then load a tune.. Try this version and see if it fixes your problems:
+http://toolsforscholars.com/defmon-20171024.zip (EDIT: Use the link in the next post instead. This one will be removed.)
+I did some changes to the worktune (un)packer code. If it works as intended, these changes to the code will not only avoid the problem in the future, but will also fix tunes with missing sequence breaks that were created in previous versions. Just go ahead and load your broken tunes in this version of defMON and see if they are magically healed. If it works, we can add it as a new version to the defMON wiki.
+A word of caution: I didn't have time to test these changes to the code very thoroughly, so please save some backup version of your tunes before trying this version of defMON, in case the added code messes something up.
+@Ett nytt liv: Good to see new defMON users. I think your problem relates to the missing sequence breaks (red dots). Looks like those were missing in all three sequences precisely at the place where defMON started behaving weirdly in your video.
+
+Last edited by frantic (Oct 24, 2017 11:24 am)
+
+### 144 Oct 24, 2017 11:19 am
+
+frantic
+
+Offline
+
+I actually added this updated version of defMON to the wiki now as an official release:
+http://toolsforscholars.com/defmon/doku … d:download
+Please continue to tell me about problems you encounter. Although I am not always very fast when it comes to fixing bugs, I surely take note of them when I hear about it.
+Special thanks to F7sus4 for reporting in detail on the sequence break bug.
+
+Last edited by frantic (Oct 24, 2017 11:44 am)
+
+## Posts: 129-144 of 444
+
+Pages Previous 1 … 7 8 9 10 11 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

@@ -1,0 +1,94 @@
+====== Interface Overview ======
+
+This chapter will guide you through the various parts of the interface and introduce you to main concepts of the program.
+
+===== Main Screen =====
+
+<WRAP center round box 60%>
+Main Screen
+{{ docs:00_main_screen.png?nolink |Main Screen}}
+</WRAP>
+This is the first screen you will see after loading defMON.\\ It contains the Sequence Editor (seqED), the Sequence List (seqLIST) and shows some useful info.
+----
+
+<WRAP center round box 60%>
+Sequence Editor
+{{ :docs:01_seqed.png?nolink |Sequence Editor}}
+</WRAP>
+The Sequence Editor shows the note data for all three SID channels side by side (referred to as Voice 0, Voice 1 and Voice 2 in defMON).\\ Songs are made of units called Sequences which contain notes, effects and ornamentation. These are played vertically, top-to-bottom.
+----
+
+<WRAP center round box 60%>
+Sequence Anatomy
+{{ :docs:04_sequence.png?nolink |Sequence Anatomy}}
+</WRAP>
+Anatomy of an individual sequence is as such:\\
+Each line of the sequence is called a Step. All the events contained in various columns on a step are executed simultaneously.
+To the far left is the position column that highlights beats and divisions (grey). You cannot edit this, it is purely for reference.\\
+Next two columns are the two Sound Program columns (blue and green). They actually point to parts of the sound table (in this example line 08 and line 00) and are the equivalent of instrument numbers or effect commands in other trackers. Hold down C= key and SHIFT key respectively to edit these columns. Note that all numbers in defMON are in hexadecimal format.\\
+Next is the speed column (gray). The number in this column is the amount of delay before the next step of the sequence is executed, so the bigger the number, the slower the song. To edit this column hold CTRL and C= together. \\
+The last is the note column. You enter the notes by using your computer keyboard like a 2 octave piano keyboard. Refer to the key chart for details. C4 in our example means note C octave 4. A C-sharp note in the same octave would be displayed as C4#.
+----
+
+<WRAP center round box 60%>
+Sequence List
+{{ :docs:02_seqlist.png?nolink |Sequence List}}
+</WRAP>
+To the right is the Sequence List. Think of it as a zoomed out view of the entire song. \\
+Each double-digit number in the 3 rightmost columns refers to a Sequence. The leftmost grey column is the line number and cannot be edited. So in this example, line 00 will play Sequence 01 on the first voice and Sequence 00 (usually left empty) on other two voices. \\
+Note that step 01 contains FF in the first voice. This is not a sequence number but a special Jump command. The number in the second voice (00) is the target position to jump to. So in this case the song would jump back to position 00, thus looping step 00 forever.\\
+Press RUNSTOP key to quickly jump between the seqED and seqLIST.
+----
+
+<WRAP center round box 60%>
+Info
+{{ :docs:03_info.png?nolink |Info}}
+</WRAP>
+Also on this screen there are some extra useful bits of information.\\
+At the top there are several filter indicators. When a Voice is being filtered, and F will appear to the right in that Voice’s header.\\
+The top right area above the seqLIST shows the filter band (L,B,H for Low-pass, Band-pass and High-pass filter) and the number to the har right is the filter cutoff Value. In this example the filter is in low-pass mode, cutting off at 200 Acids (official filter cutoff unit)\\
+At the bottom is the info bar. To the far left you will see various bits of information (version number is shown when defMON is first loaded), and to the far right is the current octave number.
+----
+
+===== SID Table Screen (sidTAB) =====
+
+<WRAP center round box 60%>
+The Mighty sidTAB
+{{ :docs:10_sidtab.png?nolink |sidTAB}}
+</WRAP>
+This is where you make all the sounds and effects that you trigger within Sequences.
+The top part of the screen is actual table data that roughly corresponds to the registers of the SID chip. All instruments and effects are merely changes within these registers. Similar to sequences, a horizontal line defines data to be executed simultaneously.
+----
+
+<WRAP center round box 60%>
+Table Data
+{{ :docs:11_tabdata.png?nolink |Table Data}}
+</WRAP>
+Breakdown of the table structure:\\
+Step Number is the same number you put into Sound Program columns in seqED. Some numbers are highlighted (so called ‘chunks’), it is common practice to start your instrument definitions at these points.\\
+Step Jump (JP) is similar to the jump function in SeqLIST. Any number you insert here means that the table call will jump to that line number. This allows you to create loops for vibratos and arpeggios, for example.\\ 
+Delay (DL) is the same as in Speed column of a Sequence. That is, number of ticks (CPU cycles) to wait before proceeding to the next line.\\
+Waveform (yellow WG) corresponds to the waveform bit of the SID. Note that you should only use the first digit of this column.\\
+Gate Bit (green WG) controls the gate of the SID voice, and also Hardsync and Ring Modulation. Please refer to SID chip information for details. Note that you should only use the second digit.\\
+Attack/Decay (AD) and Sustain/Release (SR) control the volume envelope of the voice.\\
+Transpose (TR) modifies the pitch of the sound so you can make arpeggios, for example. 
+Values 00-7F add semitones to the base pitch (defined by the note in the Sequence). Values 80-FF are for setting absolute pitches. Please refer to the absolute pitch table in “defMONing 101 - operator field guide” for details.\\
+Finetune/Bend (AF) is used for (duh) finetuning or bending the pitch. Values 00-7F increase the pitch in finetune amounts with 19 being equal to a semitone up. 80-BF define the speed of pitch bend u, and C0-FF define the speed of pitch bend down.\\
+Next two columns control the pulse width (duty cycle) of the Pulse waveform (04)\\
+Pulse Width (PW) sets the pulse width. Value of 08 equals the 50% pulse.\\
+Pulse Sweep (PS) defines the direction and speed of the pulse width sweep. 00-7F will sweep left, and 80-FF will sweep right.\\
+Remaining four columns control the SID filter.\\
+Resonance / Voice Mask (RE) - The first digit sets the filter resonance. The second digit is the bit mask allowing you to select which Voices are affected by the filter (refer to SID documentation for details). defMON has a special feature where entering 8 into this spot activates the filter for the Voice the Sound Program is called from.\\
+Filter Type (FV) sets the filter type (or band). Only the first digit is used. Refer to SID documentation for details.\\
+Cutoff Offset (CP) is a relative value added or substracted from the base cutoff value (similar to how TR column affects the pitch)\\
+CUTOFF (ACID) is a four-digit value for the cutoff frequency. defMON locks the minimum value at 200 Acids so you don’t blow your speakers/eardrums.
+----
+
+<WRAP center round box 60%>
+Info
+{{ :docs:12_tab_info.png?nolink |Info}}
+</WRAP>
+There is some extra info shown on this screen.\\
+As mentioned earlier, some positions of the table are highlighted (every 8th by default). These highlight denote the Chunks of the table. Chunks subdivide the table into individual Sound Programs so that when you add or delete table lines it will only affect the current one. Chunk size is shown at bottom right and can be changed or even turned off (by setting the Chunk size to the size of the entire sound table).\\
+Also on the screen is an Info Bar similar to the one on the Main Screen.
+----

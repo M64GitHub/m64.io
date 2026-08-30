@@ -1,0 +1,310 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+146 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 6 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 4 5 6 7 8 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 81-96 of 444
+
+### 81 Aug 1, 2015 12:48 pm
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Oh and don't be afraid to use way more lines for a nice kick or snare, these were made to be short, not elaborate.
+Also you can read examples from docs for any other c64 tracker. Just bear in mind that defMON goes 2 octaves lower than any other program I know of so adjust pitches accordingly (esp since many people will use absolute pitch for drums)
+
+### 82 Aug 2, 2015 6:42 pm
+
+d3Ni$e
+
+Offline
+
+iLKke: wow that was some really useful info thx!
+So the key to it all is the "hard restart" line.. then the pitch, AF column and changing different waveforms depending on what drum sound I want (also noise ofc).
+OT: How can I never heard about that ADSR bug ey? hug for someone who can give me a info link about the bug.
+Im in the mode for packing a file and it's asking me what format I wanna do it in.. RAW or Exac.. what is the difference really? (sorry if it has been up already)
+d.
+
+### 83 Aug 2, 2015 7:12 pm
+
+4mat
+
+Offline
+
+There's a few forum posts on csdb.dk , I'm hard-pressed to find a single one with lots of info in thouigh, so.
+lft's description at the top
+and
+rambling post with some info in it on different settings
+Some editors (like GT for example) have their own hard restart fix by default, which you can choose the settings on.
+
+Last edited by 4mat (Aug 2, 2015 7:12 pm)
+
+### 84 Aug 3, 2015 12:40 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Again, I'll try to provide an (over)simplified introduction.
+The ADSR bug is, more or less, sounds failing to trigger properly because the ADSR envelope of the previous sound on the same channel didn't clear yet. Sometimes it will drop a note, sometimes it will make it sound different. This is more noticeable if you're triggering notes rapidly and also depends a lot on the ADSR values of the sounds involved.
+It's worth noting that if you are patient / experienced enough with ADSR values you can avoid the bug even without using hard restart.
+For example some ppl say that setting the A to 1 instead of 0 helps, or setting S to less than F, etc. I just tend to play around.
+It still makes the drum sounds punchier.
+There are two components to setting up HR, one is resetting the gate bit, and the other is an ADSR envelope to be set up before the sounds actual envelope, we call this one ADHR.
+Also note that there needs to pass some time (2 frames I think) after the HR line before you trigger the actual sound, thus the wait in the DL column in those examples I posted.
+This delay makes the hardrestarted sounds trigger slightly later than the non-HR ones, so if that is audible in your tune you have to compensate.
+As 4mat noted, Goattracker (and some other trackers) will do this for you but then as a tradeoff all HR sounds have to use the same hard restart.
+With defMON being so flexible you have many options on how to compensate for this delay.
+First you can trigger HRed sounds a line in advance (notice how dM has a line before line 0) or you can set up the sound the line before and then trigger the note later (goto80 does this), or you could build a little delay into all the non-HR sounds as well, or you could make all your HRs as separate commands and then trigger those the line before (I use this one when I can).
+Again this is only significant if you can hear the unwanted delay.
+Or if you need a really rapid fire machinegun beat you can keep the gate open and use other tricks to mute/control the perceived volume (like setting the waveform to 0 or using really thin pulse widths). This is more like a kill-switch method so you lose almost all the dynamics, sort of like overcompressing to death, but it sidesteps the use of ADSR completely and thus the ADSR bug as well.
+To round it off, here's some notes I compiled a while ago from CSDb, looking into SID tunes with siddump, and looking into how different trackers handle it.
+dl = delay (in frames)
+w = waveform
+g = gate bit
+ADHR = hard restart envelope
+ADSR = envelope for your sound
+HARD RESTART
+------------
+
+METHODS
+
+old school
+dl w g adsr
+----------------
+1 - 0 0000
+0 W 1 ADSR + NOTE
+
+new school
+dl w g adsr
+----------------
+1 - 0 ADHR
+0 - 9 ADSR
+0 W 1 ---- + NOTE
+
+hybrid
+dl w g adsr
+----------------
+1 - 0 0000
+0 - 1 ADSR
+0 W - ----
+
+heatbeat
+dl w g adsr
+----------------
+0 - 9 ADSR
+0 W 1 ---- + NOTE
+...
+1 - 0 ----
+0 - 9 ----
+0 W 1 ---- + NOTE
+
+EXAMPLE ADHRs VALUES
+
+0000 hardest
+0F00 most common
+0F18 Drax
+0F20 GRG
+0FF0 Randall/Jammer
+F000 Linus
+FF00 Jeff
+
+OTHER NOTES
+
+Sustain of F is especially buggy (try E then? :)
+soft restart usually works best with big (>= 8) release values
+
+### 85 Aug 4, 2015 4:05 pm
+
+PULSELOOPER
+
+Offline
+
+São Paulo, Brazil
+
+iLKke, these are great tips, thanks. They´re specially good for noobs to start experimenting. I personally enjoy the fact that in defMON you can create great sounds from trial-and-error methods. It is the perfect tool for knowing only the basics and then unsleash the SID beast.
+
+### 86 Aug 16, 2015 7:29 pm
+
+d3Ni$e
+
+Offline
+
+PULSELOOPER: Yes, iLKkes tips are ace! Everything is going togheter for me when reading his stuff.
+Got a pair of krk Rookit monitors and wow what bass u can make
+
+Last edited by d3Ni$e (Sep 7, 2015 12:15 pm)
+
+### 87 Sep 7, 2015 12:48 pm
+
+d3Ni$e
+
+Offline
+
+My latest defMON experiment
+runtime: 02:37 .sid 6581 (glitchbeat.. not for the faint hearted)
+While I was doing it I runned into a BUG?
+Was stuck in the sequencer and the only command I could do was jump into the SIDTAB and the video shows what was going on there.
+Cheers
+d.
+
+### 88 Apr 16, 2016 9:12 am
+
+frantic
+
+Offline
+
+d3NI$e: Sounds a bit like a flakey keyboard to me. Anyway, if it was indeed something that went wrong with the keyboard reading code, then you can always try pressing SHIFT+X to get into the disk menu. Reason: When going to the disk menu there are a bunch of things under the hood which are resetted/restored, so going to the disk menu and then back to the editor might help. Then again, you said the only thing that worked was going into the sidtab, so I'm not sure if going to the disk menu would have been possible, but anyway...
+
+### 89 May 14, 2016 2:43 pm
+
+frantic
+
+Offline
+
+I just wanted to mention this stereo SID unit:
+http://www.sidfx.dk
+The reason is that I think that project deserves all the support it can get. I'd say it is the ultimate stereo sid solution. At least as "ultimate" as it gets in actual practice. Among other things it allows you to put any SID model(s) in any C64 (such as new SID on old breadbin, or one of each SID model, or whatever). Perhaps I should also say that I am not affiliated to that project, but merely a customer. It might only be produced in one batch, so if you want it, this is your chance.
+It works with defMON, and when and IF defMON 2 becomes reality, it will certainly support this thing too, including the special features.
+
+Last edited by frantic (May 14, 2016 2:47 pm)
+
+### 90 May 17, 2016 12:25 pm
+
+d3Ni$e
+
+Offline
+
+frantic wrote:I just wanted to mention this stereo SID unit:
+http://www.sidfx.dk
+The reason is that I think that project deserves all the support it can get. I'd say it is the ultimate stereo sid solution. At least as "ultimate" as it gets in actual practice. Among other things it allows you to put any SID model(s) in any C64 (such as new SID on old breadbin, or one of each SID model, or whatever). Perhaps I should also say that I am not affiliated to that project, but merely a customer. It might only be produced in one batch, so if you want it, this is your chance.
+It works with defMON, and when and IF defMON 2 becomes reality, it will certainly support this thing too, including the special features.
+
+This is really a cool solution! Like it when you don't need the soldering experience too.
+Still using defMON with an old breadbox.. my only problem is that it is too much noise when Im trying to record straight from the TV. Any soulution to my problem?
+
+### 91 May 17, 2016 12:30 pm
+
+frantic
+
+Offline
+
+Well.. hehe.. Best option is to use the VIDEO port for sound output. There is also some general info on SID noise here at codebase64:
+http://codebase64.org/doku.php?id=base:reduce_noise
+
+### 92 May 17, 2016 12:45 pm
+
+4mat
+
+Offline
+
+Yes, don't use the RF port. Get one of those old DIN video cables and use that, but you'll always have a bit of "sid whine" without the hardware fix that's floating about on the net. (but that is authentic sid whine ) The other thing with the c64 is noise from the display, try and avoid having any bright coloured text on the screen or border/screen combinations when recording. Ideally you'd have border/screen black and the screen switched off (with a POKE 53265,65) but depends how you're recording it. (use POKE 53265,155 to get your screen back )
+It's been a while since I did anything on the real c64 but as an example of vic noise try:
+
+10 POKE53280,0
+20 POKE53281,1
+30 PRINT"A";
+40 GOTO 30
+
+and have a listen to your output.
+
+### 93 Jul 5, 2016 12:55 pm
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+Here's a video of defMON synced to a TR-808 (with a kind of odd time signature).
+The screen, however, is out of sync with the C-64.
+https://www.youtube.com/watch?v=l4_7f_5nv7I
+defPOWER!
+
+### 94 Jul 18, 2016 9:22 am
+
+d3Ni$e
+
+Offline
+
+Whaat! thats crazy!
+DIN-Sync with C64 + defMON?
+
+### 95 Jul 18, 2016 4:51 pm
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+Yeah someone's selling those midi adapters for DefMon somewhere....
+
+### 96 Jul 18, 2016 4:52 pm
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+.
+
+Last edited by GLOOMS (Jul 18, 2016 4:52 pm)
+
+## Posts: 81-96 of 444
+
+Pages Previous 1 … 4 5 6 7 8 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

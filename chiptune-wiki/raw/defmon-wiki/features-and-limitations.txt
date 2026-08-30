@@ -1,0 +1,15 @@
+====== Features and limitations ======
+
+===== Some features =====
+  * Power through simplicity and flexibility rather than a large number of "special functions":
+    * defMON doesn't make a distinction between "instruments" and "effects". Instead ALL control of sound is handled through the same sound editing table (the "sidtab"), where you can make small snippets of sound settings ("sidtab chunks").
+    * In each step of the sequences you can execute two different sidtab chunks at the same time. If the second chunk sets some of the same parameters as the first chunk, the settings from the second chunk will override those in the first. This can be used to vary settings in a chunk without having to create duplicates of it, or it can be used as if it was some sort of effect (e.g. slide or vibrato), and so forth. You decide!
+  * Support for multi speed tunes: 1x, 2x, 4x and 8x.
+  * Stereo SID support.
+  * Relatively low CPU usage. At least if not all features are used at the same time. DefMON tunes can be, and have been, used in various demos and games.
+
+===== Some limitations =====
+
+  * There is very little documentation for the program as it was mainly created for "in house" use. (Although this may change through the creation of this wiki.)
+  * It is not designed primarily to be self-instructing, but rather to be relatively straightforward and flexible once you know how it works.
+  * Since you handle all sound programming through the same interface — the sidtab — there are a number of things which require more manual work in defMON than in other editors. (On the other hand, you have more freedom at your hands than in many other editors.) For example, things like "hard restart" (various tricks to avoid the ADSR bug in the SID) is handled through sidtab chunks rather than through code, which means that you can do it the way you prefer yourself, although you have to do it manually. Another example is an effect like vibrato. In defMON you would create a vibrato the way you like it, rather than calling a pre-programmed vibrato, which again means that there is more flexibility, but also more manual work.

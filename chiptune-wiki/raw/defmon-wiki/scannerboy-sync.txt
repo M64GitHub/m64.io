@@ -1,0 +1,53 @@
+====== DIN/MIDI/LSDj/Nanoloop sync ======
+
+The adapter connects to the user port and lets defmon output:
+  * LSDJ sync signal
+  * nanoloop sync signal
+  * midi clock
+  * din sync
+  * clock signal with adjustable resolution from 24ppqn to 2ppqn for Korg Volcas, TE Pocket Operators, Arturia Microbrute, MI Anushri etc
+
+It should also work with Prophet64.
+
+{{ :docs:scannerboy-interface.png?300 |}}
+
+This sync adapter was produced by Scannerboy a few years ago. If you are interested in getting a unit, try to [[http://chipmusic.org/forums/topic/14505/defmon/|contact Scannerboy at chipmusic.org]]. With some luck it may still be possible to get hold of one.
+
+There is a GitHub repository available for this sync adapter [[https://github.com/mstram/defmon-sync|here]].
+
+
+===== Control it from your own code =====
+
+First of all, before you start trying to send stuff to the interface, make sure to set all the pins of the user port to OUTPUT!
+<code>
+	;Initialize the User Port = Set all pins to Output
+	lda #$ff
+	sta $dd03
+</code>
+
+Then set $dd01 to #$00, just to make sure the sync interface is set to do nothing.
+<code>
+	;Make sure the interface does nothing at all
+	lda #$00
+	sta $dd01
+</code>
+
+Now you're set up to start sending sync pulses. There are two bits/pins that you use to control the interface. First there is the PLAY bit (bit 2, e.g. the third lowest bit of $dd01), which tells the interface whether the music is playing or whether it is stopped. This should obviously always be set to 1 whenever the music is playing and 0 when it is not. Then there is the SYNC bit (bit 3, e.g. the fourth lowest bit of $dd01), which is what you use to send actual sync pulses. A complete pulse consists of first setting the SYNC bit to 1, and then turning it back to 0 again. So to start playing the music and to send one complete pulse, just do the following:
+
+<code>
+	;PLAY:  Bit 2 = start and stop
+	;SYNC:  Bit 3 = clock pulses
+	lda #%00001100
+	sta $dd01 ;Set SYNC pulse on
+
+	;Call your C64 music player code here
+	jsr call_my_sid_code
+
+	;Now clear the SYNC bit (but not the PLAY bit)
+	lda #%00000100
+	sta $dd01
+</code>
+
+Just repeat that code as often as you wanna send a SYNC pulse. If I remember correctly, six pulses correspond to one step in the tracker sequence. When you're done playing and want to stop the music altogether, set the PLAY bit back to 0. In practice you'll just set the whole byte of $dd01 to #$00. 
+
+As you have understood by now, it is really easy to use this interface from your own code. Horray for Scannerboy!!!

@@ -1,0 +1,608 @@
+-------------------------------------------------------------------------------
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+						      " d e f M O N i n g   1 0 2 "
+						a defMON operator field guide
+								        by iLKke
+		     + frantic + scannerboy + F7sus4 + Amelinium + FTC + ryba
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+-------------------------------------------------------------------------------
+disCLAIMER
+-------------------------------------------------------------------------------
+
+This guide is the result of my limited defMON knowledge based largely on 
+experimentation, therefore it almost certainly contains inaccuracies and 
+omissions. It is not intended as an exhaustive explanation of the program, but 
+rather a brief survival guide and reference. It assumes basic familiarity with 
+trackers and the SID chip.
+
+Hope you find this text helpful. You are encouraged to experiment.
+
+-------------------------------------------------------------------------------
+intRODUCTION
+-------------------------------------------------------------------------------
+
+defMON is what I would call the only true tracker for the C64 (as opposed to 
+sound 'editors'). No tables with pointers to tables, no multiple lines of table 
+data performing a single function. In defMON, screen Y-axis is always time, as 
+in a tracker.
+
+
+Some advantages of defMON:
+	-Single, all-powerful instrument table that is easy to read
+	-No discrimination between instruments & effects (similar to NinjaTracker)
+	I will refer to these as "sidCalls" in the guide.
+	-Combine 2 sidCalls at once. This makes it possible to make modifiers for 
+	instruments instead of duplicating and then modifying
+	-Two cutoff controls so you can modulate/offset a filter envelope
+	-Relative channel filtering, e.g. filter CURRENT channel
+	-Most flexible hard restart ever, period. Because you do it all yourself. 
+	You can have each instrument use a completely different HR.
+	-Almost any SID tune can be remade in defMON (up to 8x speed, and with 
+	the exception of "digis", or samples)
+	-Adjustable BPM
+	-Low rastertime use
+
+Some disadvantages of defMON:
+	-Instruments have no names, you will need to remember some numbers
+	-You need to manually specify instrument number for each note
+	-The song packer is built in, but you will need to make a PRG or SID file 
+	yourself
+	-You might not want to go back
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------	
+oveRVIEW
+-------------------------------------------------------------------------------
+
+defMON consists of 3 screens.
+
+1. The main screen contains the pattern editor on the left (where you put your 
+notes) and the arranger on the right (where you arrange patterns into a full 
+song). Each track (channel) has the following columns: sidCALL1, 
+sidCALL2, note, speed.
+Exact order of these columns can differ depending on defMON version.
+
+2. The sidTAB is the only table you will ever need. This is where sounds are 
+made. It is quite similar to sidDump output. If you know your SID registers you 
+should have no trouble understanding it. 
+
+3. Disk menu is where you load, save and pack your tunes.
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+keyBOARD REFERENCE
+-------------------------------------------------------------------------------
+
+	NAVIGATION:
+
+	<-		switch pattern/sidTAB
+	c=+<-		jump to position in sidTAB [pattern]
+	shift+<-		jump to position in sidTAB [pattern]
+	ctrl+<-		switch sid1/sid2
+	runstop		switch pattern/arranger, exit sidTAB
+	c=+runstop	jump to position in pattern [arranger]
+	ctrl+curs	step thru patterns (1 step) / sidTAB (8 steps)
+	ctrl+G/H/J/K	cursor to 0/4/8/C position in pattern
+	ctrl+GG		cursor to -1 position in pattern
+	shift+X		disk menu:
+				return		load song
+				L		load song
+				S		save new song
+				shift+S		overwrite song (!)
+				shift+P		pack song
+				space		read dir
+				W,R		write and read legacy format
+				</>		prev/next drive
+				<-		exit			
+
+
+
+
+	PLAYBACK:
+
+	F1		play from cursor
+	F3		play from start
+	F5		follow on/off
+	F7		stop/top
+	[,],=		mute tracks (Ö,Ä,* on Swedish keyboard)
+
+	SETUP:
+
+	F2 (shift+F1)	BPM reset (sets speed directly to default value: $4CC7, 1/1)
+	F2/F4/F6/F8	multispeed (sets speed directly to: $4CC7/$2663/$1331/$0998)
+	c=+F1		speed + 1 CPU cycle (slower)
+	c=+F2(shift+F1)	speed - 1 CPU cycle (faster)
+	c=+F3		speed + 80 CPU cycles (slower)
+	c=+F4(shift+F3)	speed - 80 CPU cycles (faster)
+	c=+F5		speed 1/1, 1/2, 1/3, 1/4, 1/5, 1/6, 1/7, 1/8 (slower, 1/1 is default)
+	c=+F6(shift+F5)	speed 1/8, 1/7, 1/6, 1/5, 1/4, 1/3, 1/2, 1/1 (faster)
+	c=+F7		speed *2 (slower)
+	c=+F8(shift+F7)	speed /2 (faster)
+
+	ctrl+<,>		octave down/up (shown in right bottom in the main screen)
+	c=+/		decrease chunksize [sidTAB]
+	shift+/		increase chunksize [sidTAB]
+			possible values 0(whole tab),1,2,4,8,$10,$20,$40,$80
+
+
+
+
+	INPUT:
+
+	return		insert step
+	shift+return	remove step
+	<		decrease a value
+	>		increase a value
+	shift+N		clone pattern into Next empty pattern [arranger]
+	shift+U		clone pattern into next pattern that is Unused in the [arranger]
+			there are 00-7F patterns you can use
+	c=, shift		edit sidTAB calls (position in sidTAB) [pattern]
+			If you call two different sidTABs at once and both contains
+			parameters in the same column (eg. ADSR), the rightmost sidTAB	
+			overwrites the leftmost
+	ctrl+c=		edit speed column [pattern]
+	ctrl+c=+SPC	insert pattern break (shown as two red DOTS in sidCALL1 column)
+	del		delete value
+	space		delete value+advance step
+	c=+X		copy row (sidCALLS + Note) [pattern]
+	c=+V		paste row [pattern]
+	ctrl+num	edit X steps at once (supER COMMANDS)
+	
+	FFXXYY	jump to position XX and repeat YY times [arranger]
+			00 in YY column for infinite repeat
+
+
+
+
+
+-------------------------------------------------------------------------------
+fraMES
+-------------------------------------------------------------------------------
+
+sidTAB consists of fraMES (smallest section of time in defMON). Each row represents one fraME
+by default. If you increase DL (step delay) by +1, you put one EMPTY fraME (row) after edited
+sidTAB step, so it takes 2 fraMES to proceed to another row.
+
+pattern speed column is set to 2 delay steps (DL) by default. This means it takes 2 delayed
+(3 actual) fraMES to proceed from one pattern row to another.
+
+-------------------------------------------------------------------------------
+sidTAB REFERENCE
+-------------------------------------------------------------------------------
+
+SidTAB is running in circle from sidCALL specified in pattern (e.g. 00) to the bottom,
+to FF position, than back to 00 and so on, unless it reaches position jump (in JP)
+or STop command (in DL) or another sidCALL
+
+Chunks are only aesthetic separations of sidTAB,
+When you insert or remove rows, it will only affect the current chunk
+
+	JP		position jump
+			SPC	delete position jump
+	DL		00-7F	step delay (00-7F fraMES) to advance to next row
+			80-FF 	insert STop command (execute row and delay forever)
+			SPC	reset step delay to 00
+
+
+
+	WG		x0 waveform
+			+1	triangle
+			+2	saw
+			+4	pulse
+				(you have to set PW - e.g. 08 for 50% square wave)
+			+8 	noise
+	WG		0x gate
+			 0	gate off
+				(executes Release phase of ADSR)
+			+1	gate on
+				(executes Attack,Decay,Sustain phase of ADSR)
+			+2	sync
+			+4	ringmod
+				(sync/ringmod is based on channel pairing, 1+2, 2+3, 3+1)
+				(e.g. used in channel 1 means channel 3 modifies channel 1)
+			+8	test-bit/reset (resets the oscillator and sets gate to 0)
+			+9	test bit/reset (resets the oscillator and sets gate to 1)
+	ADSR		volume envelope (*see below)
+	TR		transpose (*see table below)
+			00-7F	relative pitch up (wrap)
+				(+ 00-7F semitones from basic note - in pattern note column)
+			80-FF	absolute notes
+				(value of the basic note in pattern is ignored)
+	AF		00-19 	finetune (19=note up)
+			21-7F 	pitch up (wrap)
+			80-BF 	pitch bend up (wrap)
+			C0-FF 	pitch bend down (wrap)
+
+
+
+	PW		pulsewidth set (*see below)
+				low byte first, then high byte
+	PS		pulsewidth slide
+				00-7F	slide left (to 0%, lowering PW value in time)
+				80-FF	slide right (to 100%, increasing PW value in time)
+	RE		filter resonance/channel mask
+			x0	resonance
+			0x	channel mask
+				00	disable on current
+				01	1
+				02	2
+				03	1+2
+				04	3
+				05	1+3
+				06	2+3
+				07	1+2+3
+				08	current
+				09	c+1
+				0A	c+2
+				0B	c+1+2
+				0C	c+3
+				0D	c+1+3
+				0E	c+2+3
+				0F	c+1+2+3
+
+
+
+
+
+	FV		filter type
+			x0	filter type
+				00,80	off
+				10,90	lp
+				20,A0	bp
+				30,B0	lp+bp (high stop)
+				40,C0	hp
+				50,D0	lp+hp (band stop)
+				60,E0	bp+hp (low stop)
+				70,F0	lp+bp+hp
+	CP		relative cutoff offset
+				00-7F	add
+				80-FF	substract
+	ACID		cutoff set/slide
+				0000-7FFF cutoff set
+				8000-BFFF cutoff slide up
+				C000-FFFF cutoff slide down
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+supER COMMANDS
+-------------------------------------------------------------------------------
+
+	ctrl+XX 		set XX (00-20) steps to be edited at once
+	or ctrl+S+XX	(from cursor position to the end of the pattern,
+			it doesn't work outside of pattern that you're actually in)
+	ctrl+R+XX	repeat each operation by XX times
+	ctrl+W+X	set width (0-F), every Xth step will be edited
+			(1 is default)
+	ctrl+Z+A	zone all (edit in all 3 patterns or whole sidTAB)
+	ctrl+return	exit supER COMMANDS mode
+
+_______________________________________________________________________________
+
+supER COMMANDS example
+_______________________________________________________________________________
+
+* Clone sequence using the normal SHIFT+N or SHIFT+U operation
+* Put cursor on first step of the sequence by pressing CTRL+G twice
+* Hold CTRL while typing S 2 0, to put editor in "edit 20 steps at once" mode.
+* Transpose the cloned sequence up/down with >/< keys
+* Press CTRL+RETURN to get back to normal editing mode again.
+
+If you know for sure that you want to transpose a sequence up 12 ($0C) steps, for example,
+you could replace the third step in the procedure with:
+
+* Hold CTRL while typing S 2 0 R C, to put editor in "edit 20 steps at once and repeat
+each operation $C times" mode.
+
+Then it will be enough to press > once to transpose the sequence up $0C steps = one octave.
+
+If you want to transpoe ALL notes in the whole song one step up, you could replace the third
+step in the procedure with:
+
+* Hold CTRL while typing Z A S 2 0 to put editor in "apply operation to ALL sequences and edit
+20 steps at once" mode.
+
+Then pressing > once will transpose every note in the whole song one step up. Obviously this is
+a quite dangerous mode to operate in, since accidentally pressing a key will affect the whole song
+(e.g. pressing space would erase all notes in the whole song), so make sure to get back to normal
+operating mode at once afterwards by pressing CTRL+RETURN.
+
+-------------------------------------------------------------------------------
+DinSYNC (scannerboy interface)
+-------------------------------------------------------------------------------
+
+ctrl+shift+> 	Midi/Dinsync delay value up
+ctrl+shift+<	Midi/Dinsync delay value down
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+tipS
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+_______________________________________________________________________________
+
+adsR and gatE BIT
+_______________________________________________________________________________
+
+Attack
+$0 is quickest and $F is slowest = the time it takes for the volume to rise from zero to max.
+The Attack phase starts whenever the GATE bit is turned on (more info on the GATE bit below).
+
+Decay
+$0 is quickest and $F is slowest = the time it takes for the volume to fall from max and down
+to the Sustain level (see below). The Decay phase starts automatically as soon as the Attack
+phase has finished.
+
+Sustain
+$0 is silence and $F is the loudest = the VOLUME (not the time) that the ADSR envelope stops
+at after having gone through the Attack and the Decay phase. As long as the GATE bit is still on,
+the ADSR envelope will stay in the Sustain phase forever. When GATE is turned off, the Sustain
+phase ends and the Release phase (see below) starts instead.
+
+
+
+
+
+Release
+$0 is quickest and $f is slowest = the time it takes for the volume to fall from the Sustain level
+down to zero volume. More accurately, the Release phase may be started even before the ADSR 
+envelope has reached the Sustain phase. For example, if you have a really slow Attack, and turn 
+GATE off before the Attack is done, the Release will start falling from whatever volume the ADSR
+is at, rather than from the specified Sustain level.
+
+The GATE bit, that triggers the ADSR, is found in the WG columns on the sidTAB screen in defMON. 
+Normal usage of the WG columns would be to only use the upper nibble (e.g. the X in $XY) in the 
+first WG column to set waveforms, and to only use the lower nibble (e.g. the Y in $XY)  in the 
+second WG column.
+
+So to set triangle waveform (the $10 in the first WG column), and the GATE bit to ON
+(the $01 in the second WG column), and ADSR to $11FA, you execute a line that looks like this:
+
+
+WG WG AD SR
+10 01 11 FA
+...and then some time later you would execute a line where there is a 00 in the second WG column
+to turn the GATE bit off again, which will then have the effect that the ADSR envelope stops 
+hovering at the Sustain level and instead enters the Release phase. Like this:
+
+WG WG AD SR
+.. 00 .. ..
+(This is also why there are two WG columns, because it allows the waveform to be "remembered"
+(in the first WG column) even if you turn the gate bit off in the second WG column.)
+
+
+_______________________________________________________________________________
+
+harD RESTART and adsR BUG
+_______________________________________________________________________________
+
+The ADSR bug is, more or less, sounds failing to trigger properly because the ADSR envelope
+of the previous sound on the same channel didn't clear yet. Sometimes it will drop a note,
+sometimes it will make it sound different. This is more noticeable if you're triggering notes
+rapidly and also depends a lot on the ADSR values of the sounds involved.
+
+It's worth noting that if you are patient / experienced enough with ADSR values you can avoid
+the bug even without using harD RESTART.
+For example some people say that setting the Attack to 1 instead of 0 helps, or setting Sustain
+to less than F, etc. I just tend to play around.
+
+It still makes the drum sounds punchier.
+
+There are two components to setting up HR, one is resetting the gate bit, and the other
+is an ADSR envelope to be set up before the sounds actual envelope, we call this one ADHR.
+
+Also note that there needs to pass some time (2 frames I think) after the HR line before you 
+trigger the actual sound, thus the wait in the DL column in those examples I posted.
+
+This delay makes the hardrestarted sounds trigger slightly later than the non-HR ones,
+so if that is audible in your tune you have to compensate.
+
+With defMON being so flexible you have many options on how to compensate for this delay.
+First you can trigger HRed sounds a line in advance (notice how dM has a line before line 0)
+or you can set up the sound the line before and then trigger the note later (goto80 does this),
+or you could build a little delay into all the non-HR sounds as well, or you could make all your
+HRs as separate commands and then trigger those the line before (I use this one when I can).
+
+Again this is only significant if you can hear the unwanted delay.
+
+Or if you need a really rapid fire machinegun beat you can keep the gate open and use other tricks
+to mute/control the perceived volume (like setting the waveform to 0 or using really thin pulse widths).
+This is more like a kill-switch method so you lose almost all the dynamics, sort of like overcompressing
+to death, but it sidesteps the use of ADSR completely and thus the ADSR bug as well.
+
+To round it off, here's some notes I compiled a while ago from CSDb, looking into SID tunes with
+siddump, and looking into how different trackers handle it.
+
+dl = delay (in frames)
+w = waveform
+g = gate bit
+ADHR = hard restart envelope
+ADSR = envelope for your sound
+
+HARD RESTART
+------------
+
+METHODS
+
+    old school
+        dl    w    g    adsr
+        ----------------
+        1     -    0    0000
+        0     W    1    ADSR + NOTE
+
+    new school
+        dl    w    g    adsr
+        ----------------
+        1     -    0    ADHR
+        0     -    9    ADSR
+        0     W    1    ---- + NOTE
+        
+    hybrid
+        dl    w    g    adsr
+        ----------------
+        1     -    0    0000
+        0     -    1    ADSR
+        0     W    -    ----
+ 
+    heatbeat
+        dl    w    g    adsr
+        ----------------        
+        0     -    9    ADSR
+        0     W    1    ---- + NOTE
+        ...
+        1     -    0    ----
+        0     -    9    ----
+        0     W    1    ---- + NOTE
+    
+
+
+
+
+
+EXAMPLE ADHRs VALUES
+
+    0000    hardest
+    0F00    most common
+    0F18    Drax
+    0F20    GRG
+    0FF0    Randall/Jammer
+    F000    Linus
+    FF00    Jeff
+
+OTHER NOTES
+
+    Sustain of F is especially buggy (try E then? :)
+    soft restart usually works best with big (>= 8) release values
+
+
+_______________________________________________________________________________
+
+-1 steP in pattern
+_______________________________________________________________________________
+
+defMON is designed to implement as little "built in" functions as possible.
+Things like hardrestart, vibrato, etc...
+Instead it is up to the user to do it themselves in the sidTAB.
+That comes at a cost of course (less automation), but the benefit is increased flexibility.
+You can do any kind of hardrestart in defMON, whereas most other editors only feature one type
+of built in hardrestart and no reasonable way to do it manually (especially not at that first
+step in the sequence).
+
+Also, implementing hardrestart without that "prior first step" in sequences requires that
+the sequence parsing code looks ahead: e.g. that it parses sequences before it is actually
+time to parse them, to see if a hardrestart sound is coming up, because the hardrestart has
+to be trigged 2-3 fraMES (depending on what sort of hardrestart you do) before the actual
+start of the audible sound. Such look ahead-parsing adds overhead to the code and consumes
+CPU that isn't strictly required. Original defMON was intended to be usable in demos/games,
+with low raster time consumption.
+
+_______________________________________________________________________________
+
+pulSEWIDTH
+_______________________________________________________________________________
+
+pulSEWIDTH ranges from $000 to $FFF (from 0% to 100%)
+in value of YXY and is set by XY in PW column.
+e.g. 83 in PW column sets pulSEWIDTH to 383 value.
+
+Examples:
+50% sqare wave ($800) - $F7 ($7F7) and $08 ($808) is closest to ($800) 
+75% pulse wave ($C00) - $FB ($BFB) and $0C ($C0C) is closest to ($C00)
+25% pulse wave ($400) - $F3 ($3F3) and $04 ($404) is closest to ($400)
+
+If pulSEWIDTH is set near to 0% or 100%, the pulse waveform is inaudible.
+
+
+
+
+
+
+_______________________________________________________________________________
+
+addITION OF BITS
+_______________________________________________________________________________
+
+As for values, they are additive, therefore:
+
+07 = 04 (ringmod) +02 (sync) +01 (gate on)
+05 = 04 (ringmod) +01 (gate on)
+04 = 04 (ringmod) +00 (gate off)
+
+50 = 40 (pulse, and pulse table applied) + 10 triangle
+
+So basically, $55 may be written as either 5401 or 5005 (in WGWG columns).
+
+_______________________________________________________________________________
+_______________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+traNSPOSE TABLE
+-------------------------------------------------------------------------------
+
+relative pitches
+0	 	01	02	03	04	05	06	07	08	09	0a	0b
+1	0c	0d	0e	0f	10	11	12	13	14	15	16	17
+2	18	19	1a	1b	1c	1d	1e	1f	20	21	22	23
+3	24	25	26	27	28	29	2a	2b	2c	2d	2e	2f
+4	30	31	32	33	34	35	36	37	38	39	3a	3b
+5	3c	3d	3e	3f	40	41	42	43	44	45	46	47
+6	48	49	4a	4b	4c	4d	4e	4f	50	51	52	53
+7	54	55	56	57	58	59	5a	5b	5c	5d	5e	5f
+8	60	61	62	63	64	65	66	67	68	69	6a	6b
+9	6c	6d	6e	6f	70	71	72	73	74	75	76	77
+10	78	79	7a	7b	7c	7d	7e	7f
+
+absolute pitches
+	C	C#	D	D#	E	F	F#	G	G#	A	A#	B
+0		81	82	83	84	85	86	87	88	89	8a	8b
+1	8c	8d	8e	8f	90	91	92	93	94	95	96	97
+2	98	99	9a	9b	9c	9d	9e	9f	a0	a1	a2	a3
+3	a4	a5	a6	a7	a8	a9	aa	ab	ac	ad	ae	af
+4	b0	b1	b2	b3	b4	b5	b6	b7	b8	b9	ba	bb
+5	bc	bd	be	bf	c0	c1	c2	c3	c4	c5	c6	c7
+6	c8	c9	ca	cb	cc	cd	ce	cf	d0	d1	d2	d3
+7	d4	d5	d6	d7	d8	d9	da	db	dc	dd	de	df
+8	e0	e1	e2	e3	e4	e5	e6	e7	e8	e9	ea	eb
+9	ec	ed	ee	ef	f0	f1	f2	f3	f4	f5	f6	f7

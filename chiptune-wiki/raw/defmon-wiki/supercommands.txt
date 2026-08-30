@@ -1,0 +1,19 @@
+====== Super Commands ======
+
+A less known feature of defMON are the so-called Super Commands. If, for example, you want to transpose the notes in a whole sequence 7 steps upwards, you can do this:
+
+  - Press "CTRL+G" twice to get to the very first step of the sequence.
+  - Press "CTRL+S 20" to set STEPS to 20, e.g. the number of steps in a sequence. This will put you in a mode where every edit keystroke you do will be applied to 20 steps forwards, including the step where the cursor is standing.
+  - Press "CTRL+R 7" to set REPEAT to 7. This changes the number of times each edit keystroke is applied on each step, from the default 1 to 7.
+
+If you would now press dot ("."), you will now transpose the whole sequence 7 steps up. Pressing the "." key would normally just transpose the current step, where the cursor is standing, one step upwards. However, now that you have set some Super Command parameters — STEPS and REPEAT — the "." key will behave differently as it will be applied 7 times on each of the 20 steps in the sequence.
+
+If you continue pressing other keys you will notice that you are messing up your tune. If you would set a note for example, it would be set on all 20 steps as well. (7 times on each step actually, in this case, although you won't notice this as repeatedly setting a note on a given step produces the same result as just setting it once). You clearly want to escape this mode quickly. To get out of Super Command mode:
+
+  - Press "CTRL+ENTER". This will clear the color in the border, to indicate that you're no longer in Super Command mode.
+
+I'll write more on Super Commands later, but before that, let me just say that there are also a WIDTH parameter available, which sets the number of steps between each STEP. So, to edit every second line of a sequence, press "CTRL+S 10 CTRL+W 2".
+
+You can also edit ALL sequences at once by pressing "CTRL+Z A" (e.g. "ZONE ALL"). So to clear all the sequences you can press "CTRL+Z A CTRL+S 20" and then go to the first line of any sequence and clear it by pressing C=+SHIFT+SPACE. This will apply the "clear line operation" for 20 steps in all sequences, which equals clearing the tune. Don't forget to press CTRL+ENTER to get out of this potentially very destructive Super Command setup.
+
+You probably won't use Super Commands very often, but sometimes they come in handy.

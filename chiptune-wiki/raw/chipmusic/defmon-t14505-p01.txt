@@ -1,0 +1,244 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+144 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 1 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages 1 2 3 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 1-16 of 444
+
+### 1 Jun 8, 2014 11:10 pm
+
+frantic
+
+Offline
+
+Yo guys! Nice to see some interest in defMON. I couldn't reply in the actual thread since newly registered users are not allowed to post in topics that haven't been active for three months. Duh.. ...but this is the thread I wanted to reply to:
+http://chipmusic.org/forums/topic/11869 … encracked/
+Anyway.. If you are one of those people who tried it out and actually did something, raise your hand please.
+(Maybe it would be an idea to set up something like a defMON wiki.)
+//FTC
+
+### 2 Jun 9, 2014 7:01 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+I'm actually currently working on few tracks using defmon. I think that a wiki would be a great idea for us n00bs
+
+### 3 Jun 9, 2014 11:22 pm
+
+frantic
+
+Offline
+
+Good to hear!
+...and I actually smashed up a wiki now:
+http://toolsforscholars.com/defmon/
+
+### 4 Jun 10, 2014 9:58 am
+
+Jellica
+
+Offline
+
+England
+
+goat80 sent me a few docs.
+im gonna learn it now i finished my goattracker release.
+
+### 5 Jun 10, 2014 6:44 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Could you please share the docs or are they secret?
+I would be very thankfull for info about exporting songs from defmon. I currently use prg2sid, sidedit and psid64 but I can't get the songs playing at the correct speed ;//
+
+### 6 Jun 10, 2014 7:06 pm
+
+frantic
+
+Offline
+
+@scannerboy: I don't think those tools support anything else than ordinary single speed tunes. Those should play at correct speed though. Are you doing multi speed tunes or do you change playback speed in the editor in other ways?
+
+Last edited by frantic (Jun 10, 2014 7:06 pm)
+
+### 7 Jun 10, 2014 7:08 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+normal multispeed plays ok. I change the speed with c= + f-keys
+
+### 8 Jun 10, 2014 7:13 pm
+
+frantic
+
+Offline
+
+Alright. I am not aware of any tools that support special speed settings like that, although there could of course be something out there that I am not aware of.
+If you know anything about coding, this may be helpful to you:
+http://toolsforscholars.com/defmon/doku … gtheplayer
+If you don't... well.. If this is a feature that many people would like, I guess I could consider adding direct export to a self-executable file from within defmon, and perhaps to playsid format as well. Both of these are of course reasonable features to have in an editor like this. Didn't quite get what you are primarily after.. sidplay file, or self-executable file? ...or perhaps both?
+
+Last edited by frantic (Jun 10, 2014 7:14 pm)
+
+### 9 Jun 10, 2014 7:57 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Thanks for the info. Unfortunetly I'm still a n00b when it comes to the c64 but I guess that it gets me closer to my goal ;p
+frantic wrote:If this is a feature that many people would like, I guess I could consider adding direct export to a self-executable file from within defmon, and perhaps to playsid format as well. Both of these are of course reasonable features to have in an editor like this. Didn't quite get what you are primarily after.. sidplay file, or self-executable file? ...or perhaps both?
+
+If you plan to release a new version of defmon to the public it would be a killer feature to add. I'm mainly after executable prgs but both would be even better
+Also the 2sid support ;p
+
+Last edited by scannerboy (Jun 10, 2014 8:51 pm)
+
+### 10 Jun 11, 2014 8:07 am
+
+frantic
+
+Offline
+
+Right.. Yes, if I find the time, I'll add the executable prg feature. It would definitely be a good thing!
+Whenever a new version comes out, the stereo sid function will be part of that for sure. It is a little bit of a hack on top of everything else, but it works, kind of, and it has actually been there for quite a long time. To be honest I am not sure how it happened that it was not part of the version that G*P got their hands on. More a coincidence than anything else really.
+I'm currently working (in a very slow pace though) on something like a version 1.5 of the program with a new feature that allows you to put commands on lines in the sequences that modify the contents of the sidtable. This makes it easier to tweak sounds on the fly and even modify them gradually and such. Changing speed and direction of sweeps and so forth..
+
+Last edited by frantic (Jun 11, 2014 8:10 am)
+
+### 11 Jun 11, 2014 9:02 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Don't forget that packing a tune into a SID or runnable PRG can maybe be handled by a separate / crossplatform tool!
+If that's easier to make than building it into defMON, that is.
+
+### 12 Jun 11, 2014 9:05 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Also I guess this would be a good place to plug my latest defMON tune:
+mp3 here http://weeklybeats.com/#/ilkke/music/klotokok
+prg here http://csdb.dk/release/?id=131296
+I will also upload the workfile somewhere so people can learn from it, even though I strongly doubt my bumbling workflow is a good learning resource.
+Also also, please let me know if any part of that defmoning 101 guide is unclear/needs expanding.
+
+### 13 Jun 11, 2014 9:07 am
+
+frantic
+
+Offline
+
+Yep! Thanks for the input! The benefit of putting that functionality into the editor would be that the editor knows about the exact speed settings that are used in the tune. Otherwise the user would need to note that down, and then pass it as parameters to the separate/crossplatform tool. Not a big problem perhaps, but.. yeah.. It isn't that complicated to add support for executable tune anyway. I can just put a little pre-compiled driver binary into the defMON binary, and then throw that in front of the tune in RAM once it is packed, and save it down to disk. ...as an extra option to the packing process: "SAVE AS EXECUTABLE PRG? (Y/N)"
+I think it could be quite nice to have a little section on the wiki for work tunes that could be loaded into the editor. If you don't mind that is.. Added a page on the wiki for that purpose now:
+http://toolsforscholars.com/defmon/doku … :worktunes
+
+Last edited by frantic (Jun 11, 2014 9:10 am)
+
+### 14 Jun 11, 2014 10:56 pm
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+frantic wrote:I think it could be quite nice to have a little section on the wiki for work tunes that could be loaded into the editor. If you don't mind that is..
+
+Ah, definitely don't mind, I am not 1337 enough to be protective of my workfiles
+Hmm, might want to make some simple ones specifically as examples of basic concepts.
+
+### 15 Jun 12, 2014 11:14 am
+
+frantic
+
+Offline
+
+Added export to executable today, and you can find it here:
+http://toolsforscholars.com/defmon/doku … d:download
+No support for stereo sid in this version though, and the export to executable function doesn't support it either, even if it would have been enabled. That would require substantial changes to the way the packer works, so export to executable of stereo sid tunes probably won't appear in the near future...
+
+### 16 Jun 12, 2014 5:22 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+oh man! That was fast. It's funny that I tried to make an executable prg myself yesterday using ca65 and was planning to try again today but using dasm or turbo assembler, but I guess I don't have to anymore. Thanks very much will test it ASAP
+PS: About the 2sid version. Is it possible to select an address for the second sid? If not, then what address is it? Also if it's not de00 could you please release an alternative version with this address? I'm asking because a lot of us are using sid2sid. Pretty please ;p
+
+## Posts: 1-16 of 444
+
+Pages 1 2 3 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

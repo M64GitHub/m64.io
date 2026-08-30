@@ -1,0 +1,248 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+148 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 10 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 8 9 10 11 12 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 145-160 of 444
+
+### 145 Oct 25, 2017 9:58 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+It was mentioned in the initial report that random pattern skipping is directly related to the missing red-dot marker.
+Thanks so much for this version!
+@frantic: One question - Was copy+paste keyboard shortcut change from shift+N (or U) to just shift+U intended or purely accidental?
+I also did quite extensive testing of the 20171024 build especially having in mind those tunes that had the end-pattern signature (red dots) put in an unusual place (e.g. 3/4 or 5/8 tunes), but everything works perfectly so far. No other problems related to load/save operation affecting the tunes found as well.
+
+Last edited by F7sus4 (Oct 26, 2017 12:08 pm)
+
+### 146 Oct 26, 2017 9:53 am
+
+frantic
+
+Offline
+
+Good to hear that it seems to work!
+Shift+N and shift+U are different operations and both of them have "always" been there. Nothing should have changed in that regard.Does this imply that shift+N no longer works? ...which could very well be related to changes regarding the sequence breaks. If this can be confirmed, I'll look into it.
+EDIT: Yes.. Shift+N seems broken. I'll look into it today already. In fact I think I know what is going on. Just remembered that I started working on implementing that for stereo SID as well a while ago. In previous version shift+N didn't work for SID2. I must have left that half implemented or something.
+
+Last edited by frantic (Oct 26, 2017 6:59 pm)
+
+### 147 Oct 26, 2017 11:27 am
+
+F7sus4
+
+Offline
+
+Poland
+
+@frantic: I'm sorry I've found that only to ruin your day. ;-))
+
+Last edited by F7sus4 (Oct 26, 2017 12:00 pm)
+
+### 148 Oct 26, 2017 11:42 am
+
+frantic
+
+Offline
+
+Well, it is only good that I was reminded about this. By the way, note that SHIFT+U is a more dangerous operation in the sense that it will find the next sequence that is unused in the sequence list — but not necessarily empty — whereas SHIFT+N will find the next unused AND empty sequence and use that.
+
+### 149 Oct 26, 2017 12:05 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Just referred to the great and holy manual to get the difference. To add some humor to the situation, depending on how messy people edit their tunes, there is a wide range of this function being basically the same as shift+N to total uber wreckage destruction machine. ;-)
+
+Last edited by F7sus4 (Oct 26, 2017 12:13 pm)
+
+### 150 Oct 26, 2017 12:16 pm
+
+frantic
+
+Offline
+
+A new version is up on the wiki. Hopefully SHIFT+N works now. In addition SHIFT+U has been updated to work in stereo SID mode, as I added some code to support that.
+http://toolsforscholars.com/defmon/doku … d:download
+NOTE: I also realized that I was wrong in the previous message. SHIFT+N does not check if a sequence is used. It simply means FIND NEXT EMPTY SEQUENCE, and does not check the sequence list at all, but rather scans the contents of the actual sequences to find the next one which is considered empty.
+NOTE2: Please remember that stereo sid support is still sort of experimental. It is not fully implemented across all aspects of the editor, the way one may expect. Nevertheless, if you run into trouble, don't hesitate to mention it here in this thread as this helps me to know what things that are actually causing trouble to people.
+
+Last edited by frantic (Oct 26, 2017 12:23 pm)
+
+### 151 Oct 26, 2017 12:26 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@frantic: Bug-report. The release name "Shift+N strikes back" was a bit hasty and ironic at the same time... :-) Well, shift+N does not work. It does until you work on "clear" tune from scratch (doesn't matter if mono/stereoSID). But once you save it and load it - pressing shift+N only makes the border flash in red, but nothing happens and the pattern is not copied (this is identical behavior when we still had red-dot marker bug in place) - and this applies to both saved monoSID and stereoSID tunes.
+
+Last edited by F7sus4 (Oct 26, 2017 12:29 pm)
+
+### 152 Oct 26, 2017 12:28 pm
+
+frantic
+
+Offline
+
+Mfghgnrrrr... At least that explains why SHIFT+N was disabled.
+Thanks for reporting!
+
+Last edited by frantic (Oct 26, 2017 12:31 pm)
+
+### 153 Oct 26, 2017 12:30 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+This is epic. :-)
+
+Last edited by F7sus4 (Oct 26, 2017 1:00 pm)
+
+### 154 Oct 26, 2017 1:12 pm
+
+frantic
+
+Offline
+
+The saga continues. Anyway, replaced the download file at the wiki with a slightly updated one. Works now? No?
+(Note: If you downloaded before 3:19 PM (Swedish time), I had managed to upload the wrong version, which will actually freeze when SHIFT+N is used. If so, please just download once again.)
+Just for reference for people who don't know the difference:
+SHIFT + N = find next EMPTY sequence
+SHIFT + U = find next sequence that is UNUSED in the sequence list
+
+Last edited by frantic (Oct 26, 2017 1:39 pm)
+
+### 155 Oct 26, 2017 1:36 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Tested with monoSID and stereoSID tunes, both in "from the scratch" state (clean reset) and after multiple save/load operations. Used all the dirtiest tricks to glitch the functions (incl. leaving gaps between pattern numbers to see how the "new" numbers are being assigned with both copying methods shift+N/+U, removing/misplacing red-dots to glitch the player and copying patterns afterwards, this includes setting multiple pattern loop markers with dead/bugged patterns including irregular loop positions on SID#1 and SID#2 just for sake of testing) and... everything works perfectly fine! Also tested multiple saving/overwriting/loading to see if bugged patterns are being "healed" consistently. Works fine as well. I was not able to glitch the player at all.
+PS. There's only one "visual" bug that is here for ages. stereoSID mode - if only SID#1 uses pattern looping marker function (e.g. FF 04), but SID#2 doesn't mimic the same looping point, the patterns will loop, but the grey pattern position indicator for SID#2 will continue to go down the order list as though there was no pattern loop point set at all. (Doesn't matter at all, because in no real circumstances the tune should be edited like that.)
+Now burning onto the cartridge as I did that three times today already. ;-)
+
+Last edited by F7sus4 (Oct 26, 2017 6:22 pm)
+
+### 156 Oct 26, 2017 1:53 pm
+
+frantic
+
+Offline
+
+Great!
+That stereosid mode "bug" (or rather something that is not implemented yet) is already in my notes. Thanks!
+Trivia for the interested: When SHIFT+N searches for empty sequences, it disregards the speed values. This means that if you have an empty sequence where speed values have been changed somehow, this will still be regarded as an "empty" sequence. Sequence breaks at other positions than the last position in a sequence will have the effect that the sequence is not considered empty. (It is fascinating how many special cases and subtle details that are involved in everything when coding an editor like this.)
+What cartridge? Easyflash?
+
+Last edited by frantic (Oct 26, 2017 2:01 pm)
+
+### 157 Oct 26, 2017 2:22 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Yep, EasyFlash, because it is idiot-resistant and that's basically me in coding. (Made a separate tool with selectable menu in PETSCII for defMON 20090403 and 20171024 builds and also utils like Cynthcart and Retroskoi. I must admit this required to hack defMON a bit to force I/O reset for 8 drive after loading - otherwise it would see EasyFlash virtual D64 instead of real drive 8).
+https://youtu.be/4DivryXSnMU
+
+Last edited by F7sus4 (Oct 26, 2017 2:27 pm)
+
+### 158 Oct 26, 2017 2:27 pm
+
+frantic
+
+Offline
+
+Well, you can hack it as much as you want. Out of curiousity, what code exactly is required to force the I/O reset you're talking about? If it is just something simple that doesn't interfere with other stuff, it would probably be easy to include in the code on my side.
+
+### 159 Oct 26, 2017 2:34 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Jump. Reset. Back. I was given specific instructions on how to do it because as I said I'm an utter boob when it comes to coding.
+https://k2s.cc/file/ddaa7d523a8b7 (sorry for lame host - don't have any private FTP passwds stored here).
+
+Last edited by F7sus4 (Oct 26, 2017 2:48 pm)
+
+### 160 Oct 26, 2017 2:38 pm
+
+frantic
+
+Offline
+
+"Failed generating direct download link, please try again later." Anyway.. I'm not going to dig into a binary file to try to find what you've changed, so doesn't matter.
+
+## Posts: 145-160 of 444
+
+Pages Previous 1 … 8 9 10 11 12 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

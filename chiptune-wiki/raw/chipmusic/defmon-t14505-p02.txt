@@ -1,0 +1,233 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+145 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 2 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 2 3 4 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 17-32 of 444
+
+### 17 Jun 12, 2014 5:36 pm
+
+frantic
+
+Offline
+
+Hehe.. yes.. fast it was! Too bad I robbed you of the learning experience with dasm or tass.
+At the moment there is no functionality for switching location of the second sid from within the program, although it is of course possible to set it when you compile the program, with separate versions for different mem locations. ...but I am actually sitting right now shaping up the 2sid part of the program a little bit. It was really just a hack on top of everything, so to speak. Not built that way from start. So there are a few quirks that need to be straightened out. One of the things I hope to include is precisely functionality to switch between different memory locations.
+
+### 18 Jun 12, 2014 5:57 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+That is great news. Can't wait
+PS: Are you sure you have uploaded the right version? Cause I can't really see the option to "save as executable".
+PS2: What are the diffrences between the dx and standard versions?
+
+### 19 Jun 12, 2014 6:04 pm
+
+frantic
+
+Offline
+
+Hmm.. you're sure you don't see anything? First press SHIFT+P to get into the packer thingy, and then press Y to confirm that you want to pack it, and then you should see that question ("SAVE AS EXECUTABLE OR RAW? E/R").. no?
+Sitting on another computer right now without emulators and stuff so I can't check myself right now.
+The differences between standard and "deluxe" versions are minimal. In the beginning I wanted to keep the defMON player as slimmed as possible, to save CPU cycles for tunes used in games and demos and stuff, so I just made a separate "deluxe" version which really just adds the possibility to loop a chunks of the playlist X number of times. Can't remember any other differences really. The idea was that one could add a few features like that to the "deluxe" version, but still keep the standard one slimmed. We'll see. Maybe I'll keep on separating the two versions, or maybe I'll just make the "deluxe" version the new main one.
+
+Last edited by frantic (Jun 12, 2014 6:06 pm)
+
+### 20 Jun 12, 2014 6:08 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+unfortunetly the second question doesnt appear. It's just a question if you're sure and then put the name.
+PS: the timestamp is from january
+
+Last edited by scannerboy (Jun 12, 2014 6:13 pm)
+
+### 21 Jun 12, 2014 6:40 pm
+
+frantic
+
+Offline
+
+Hmm.. oh.. yes indeed... Messed up with the files somehow. Updated the wiki with the correct (hopefully) version now.
+
+### 22 Jun 12, 2014 6:50 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Great, now it works like a charm (cool look btw ) THANKS!
+
+### 23 Jun 14, 2014 4:14 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Yay for new version!
+$DF00 is the second sid address, if I remember correctly
+
+### 24 Jun 14, 2014 4:36 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+Yes, the only difference in the deluxe version is that you can set a loop to repeat a finite amount of times before continuing (something I use a lot, especially early in the process of making a tune), like so:
+FF 00 03
+This would jump back to position 00 three times and then keep on playing (so in total it is played 4 times). Saves you from copying the same part of song 4 times in the seqlist.
+
+### 25 Jun 14, 2014 10:31 am
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+thx ilkke for the info! df00 address is also ok for me. I still cant make the 2sid working though (20140113 looks like it has support for it), I push ctrl+<-, enter some notes and table row numbers, but cant hear anything ;/
+the ctrl+/ keyboard mode is cool aswell
+
+### 26 Jun 15, 2014 9:24 pm
+
+frantic
+
+Offline
+
+I just uploaded yet another version with various changes and additions. Among other things you can now set base address of the second SID chip from within the program. See more info here:
+http://toolsforscholars.com/defmon/doku … d:download
+
+Last edited by frantic (Jun 16, 2014 6:34 am)
+
+### 27 Jun 15, 2014 9:34 pm
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+Great also with the multispeed-shift-optimization. Opens new doors to the realitiy.
+
+### 28 Jun 16, 2014 6:37 am
+
+frantic
+
+Offline
+
+@goto: hehe.. yes.. that fix was of course dedicated to yooooooouuuuu.
+Generally I'd also like to point out that you can subscribe to the RSS feed of the defMON wiki in case you want to keep track of when new versions are released:
+http://toolsforscholars.com/defmon/feed.php
+(The feed will inform you about any changes to the whole wiki though. Not just changes to the download page specifically. But maybe you'd be interested in following updates on the wiki in general anyway, so..)
+
+### 29 Jun 16, 2014 3:19 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+OMG, I've been waiting for this since I got my C64! Big thanks!
+I noticed that I can't register on the wiki - the password doesn't come by email.
+Could you please turn off the crazy colors while using the keyboard mode or just make the color scheme go back to default while exiting the sidtab?
+EDIT: found out, that channel muting on sid2 doesn't work so great
+
+Last edited by scannerboy (Jun 16, 2014 7:07 pm)
+
+### 30 Jun 17, 2014 12:27 am
+
+iLKke
+
+Offline
+
+Psydney, Australia
+
+You can go to disk menu and then back to restore the colours.
+When registering for the wiki make sure you've clicked through all the prompts and confirmations. I was waiting for the email myself then noticed there was one more registration step left before it sends it.
+
+### 31 Jun 18, 2014 10:11 am
+
+frantic
+
+Offline
+
+Will look into the SHIFT+SLASH mode colors and channel muting on sid 2 whenever I find the time to do some more work on defMON. In the meantime, could you describe the channel muting problem in more detail? "Doesn't work so great"... Does it work at all, or only.. almost?
+
+### 32 Jun 18, 2014 11:52 am
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Sorry for not being clear about it.
+I think that it actually does not work at all. Also upon testing it a little more I have noticed that pushing F7 does not mute the sound aswell.
+
+## Posts: 17-32 of 444
+
+Pages Previous 1 2 3 4 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

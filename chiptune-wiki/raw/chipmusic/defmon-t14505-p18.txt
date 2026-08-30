@@ -1,0 +1,257 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+152 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 18 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 16 17 18 19 20 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 273-288 of 444
+
+### 273 May 14, 2020 4:02 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+2SID executable PRG export (request).
+It would be ultra-dope thing to be finally able to pack some of 2SID defMON pearls into the executable form.
+https://www.youtube.com/watch?v=Gj0JVTV6IU4
+F7sus4 wrote:Instrument "double jump" bug.
+This is mini-report on newly discovered bug. Weirdly enough, it affects only packed files - PRG and RAW, but does not happen in the tracker.
+Let's use this picture as an example:
+- When we call A5 - it will play A5, jump to 9F, play 9F and and stop instead of jumping back to 9E (as continuous loop).
+
+F7sus4 wrote:Instrument deletion bug.
+If you load previously made tune, then delete large chunks of instrument data with shift+RETURN, and proceed to save the file, it might become corrupted. This does not happen if instrument lines are erased byte-by-byte with space bar.
+It's difficult to predict whether this behavior is related to memory allocation or instrument jump points that defMON tries to recalculate while erasing consecutive lines.
+
+### 274 May 15, 2020 1:49 pm
+
+frantic
+
+Offline
+
+Hi! This is a very reasonable request, and I would like to have it myself. Anyway, there are some complications involved. The defMON player wasn't initially designed to support more than one sid, but was rather designed to allow for making tunes that could be used in demos/games with relatively reasonable CPU usage.
+defMON scores reasonably alright in that respect when compared to other editors, and especially so if one uses the sid table cleverly (and do things like refraining from using two different pointers in a single channel to the sid table at the same time — if low CPU usage is really an issue). This table shows a comparison of a lot of C64 music editors, including the "raster time usage" which is a measure of the CPU load/usage:
+http://chordian.net/c64editors.htm
+When I implemented 2 sid support in defMON, I wanted to keep that (the reasonably low CPU usage), so rather than rewriting the player in a way that would allow for two SIDs (and losing some of the CPU usage) my solution was a weird kind of hack that introduced a new separate copy of the whole player in RAM, where each of the two players are hardcoded to work with a certain SID chip. This in turn creates some complications when it comes to the packer.
+One option would be to rewrite the player itself, to have a single player that supported more than one sid, but that would be quite a lot of work (and I don't have a lot of spare time unfortunately) and it would also be likely to introduce some minor differences in sound compared to the way things would sound when played in the editor.
+Another (more likely) option would be to provide some kind of new packer (perhaps executed on mac/pc) that could do this, but that would probably require re-assembling some stuff each time one wanted to "pack" a tune, so it could be that it would be hard to provide a convenient package for this, that would be understandably by anyone but myself. This solution too would require some of my time of course.
+Did you have creation of compo tunes in mind, or tunes that could be used in demos/games? You asked for the executable form, which indicates that you had compo tunes in mind.
+By the way: Regarding that first bug mentioned there, it must be related to the packer and the way it tries to figure out what rows that are used or unused, in order to remove the unused stuff. I'm not sure it can handle (apparently!) multiple jumps under all possible conditions, as that can get somewhat complex in some cases.
+
+Last edited by frantic (May 15, 2020 2:25 pm)
+
+### 275 May 15, 2020 8:15 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+1. Regarding the instrument jump bug - this is minor issue and workarounds are possible, but since it's counter-intuitive for the tracker to play the tunes differently than its own player after packing, I decided to report the behavior.
+2. The 2SID packing-to-executable request comes with purely pragmatic reasoning, but rather a strong one considering there's already fully functioning 2SID mode inside the tracker allowing users to compose their own 2SID music with it. Sometimes the tracker sources are not meant to be shared with public (music compo environment), but also without 2SID packer, it is impossible to implement 2SID defMON music in any coded production as of now.
+
+Last edited by F7sus4 (May 15, 2020 8:45 pm)
+
+### 276 May 15, 2020 10:33 pm
+
+frantic
+
+Offline
+
+Yep, it all makes sense. I want a way to export 2sid tunes too, so hopefully I will find the time to have a look at that some day.
+Also, I appreciate all kinds of bug reporting, and it doesn't matter if it is a big or small bug/quirk. It is definitely good to know no matter what. Your bug reports have been very useful and I thank you for that.
+
+Last edited by frantic (May 16, 2020 12:19 am)
+
+### 277 May 16, 2020 8:46 am
+
+F7sus4
+
+Offline
+
+Poland
+
+There are many quirks that could probably be brought up, but it's debatable whether they would fall under the tracker-specific behavior discussion or a "bug" report.
+From the musician's point of view, the most imminent behavior that made my interaction with the tracker problematic was the AF column, and specifically - how the set finetune range works "separately" from the pitch bend (80-FF). To portray it better, I made this small graphic scheme:
+However, there's very little reason to consider doing any adjustment/rework as of now, mostly because of the downward compatibility loss.
+
+Last edited by F7sus4 (May 16, 2020 11:06 am)
+
+### 278 May 16, 2020 11:57 am
+
+frantic
+
+Offline
+
+True that. Yes it works the way you describe. I think what i'd do would be to only use the slide functionality in that case, and leave out finetune. Like this:
+One step of slide up with 00 delay. Then another step that waits a bunch of frames with slide set to zero. Those two steps would replace the finetune step in your example. Then a step that runs a bunch of frames with that 8C slide. I know it not identical in behavior to what you had in mind. Just saying how I would do it if I wanted to try to emulate the behavior you asked for.
+
+Last edited by frantic (May 16, 2020 12:00 pm)
+
+### 279 May 16, 2020 12:15 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+This workaround could become problematic with short sounds that should be played in rapid succession, but on the other hand it is also a very specific scenario that won't come to life in 99,9% situations. Vice versa, it's perfectly possible to advocate for the way it currently works.
+
+Last edited by F7sus4 (May 16, 2020 8:09 pm)
+
+### 280 May 16, 2020 7:46 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Active/muted voice visual bug (2SID only).
+When muting voices in 2SID mode, the visual representation of which channels are currently on/off is incorrect (e.g. muting VOC0 for SID1 makes the label VOC0 disappear for SID2 as well. It requires a few toggles to unclog. This is purely visual, the channel mute works fine.)
+
+Last edited by F7sus4 (May 18, 2020 10:46 am)
+
+### 281 May 17, 2020 5:50 pm
+
+frantic
+
+Offline
+
+Ah, yes. I also noticed that quite a while ago. Kinda strange, since I really thought I had fixed that at some point. Not sure what happened. I should have a look at that in the not too distant future. Thanks for reporting!
+
+### 282 Jun 1, 2020 5:09 pm
+
+frantic
+
+Offline
+
+New version of defMON available:
+http://toolsforscholars.com/defmon/doku … d:download
+
+### 283 Jun 10, 2020 7:34 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I did some live experiments with defMON, i love it
+https://www.youtube.com/watch?v=cbNi_wjwbnI
+
+### 284 Jun 23, 2020 4:09 pm
+
+frantic
+
+Offline
+
+Yeah, I sometimes also get lost for an hour or so, just tweaking around in the sidtab with one or a few sequences looping.
+NEWS: Active development of defMON II has started! The planned editor is a quite substantial undertaking, so it would be unrealistic to expect it to be finished/available any time soon, but at least I wanted you guys to know that I'm now actively working on this.
+Whereas the original defMON was designed to allow the tunes to be used in things like games and demos, aiming for as little CPU usage as possible, defMON II instead takes the approach that all the available CPU power can be used for music. It will support at least three SID chips (9 channels) and there will be some sort of MIDI support as well (not just MIDI sync, but actual MIDI data).
+(If you want to support the development, please consider setting up a small monthly donation. See the defMON wiki for info on that.)
+
+### 285 Jun 24, 2020 12:43 pm
+
+d3Ni$e
+
+Offline
+
+martin_demsky: That is really cool! When I do random stuff I use to make 4 of the same sound within 4 different chunks.. Then I play them together With LP-filter in 4-6 patterns and changing the ACID parameter in every sound as it goes. So much fun!
+Frantic: I donated 500 svenska coronas to you and you can expect more donations from me this summer.
+I also did a tiny defMON tune:
+https://www.youtube.com/watch?v=9mEZUTjtV80
+Cheers
+
+### 286 Jun 24, 2020 1:18 pm
+
+frantic
+
+Offline
+
+Woohoo! Thanks a lot for that d3Ni$e! That is definitely super super appreciated!
+Speaking of tweaking things like the ACID parameter, I plan to make defMON II a bit more live/jam friendly in a few different ways. One of these ways involves making it possible to do things like controlling the ACID parameter using paddles. A few weeks ago I visited Goto80, and we spent a whole evening just brainstorming around how defMON II could be made more live friendly than defMON, so I have a fairly clear idea of how I want things to work now. Many of the exact details of defMON II aren't settled yet though as I am early in the process, so I better not promise anything too specific at this point.
+At the moment I am coding on the actual player (as opposed to the editor) that generates the music from the music data. While there are definitely some challenges relating to the player, I think the more difficult part of coding defMON II will actually be to write the code for the editor. defMON II will contain a sidtab on steroids, compared to defMON, so it will be a challenge to make the editor user friendly in that regard.
+
+Last edited by frantic (Jun 24, 2020 1:19 pm)
+
+### 287 Jul 28, 2020 3:38 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Patterns getting overwritten (2SID only)
+When working in 2SID mode, it is possible to have your existing sequences/patterns overwritten by copying using shift+U. It seems to affect sequences in SID2 list only, while copying sequences in SID1 list, but not vice versa.
+
+Last edited by F7sus4 (Jul 29, 2020 6:43 pm)
+
+### 288 Jul 29, 2020 7:16 am
+
+goto80
+
+Offline
+
+CHIPTUNE
+
+Same here, could never really figure out why it happened. Shift+N is the safer option in double trouble mode...
+
+## Posts: 273-288 of 444
+
+Pages Previous 1 … 16 17 18 19 20 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
+
+-

@@ -1,0 +1,17 @@
+====== Changing the global volume ======
+
+In the SID there is a register which allows you to change the global volume of the output in 4 bit precision = 16 steps, ranging from $0 to $f. If you're using a defMON tune in some other program you may want to control this register, to fade music in or out.
+
+To do this, just change the code below and change the operand of the ora instruction. At least in some versions of the defMON player, this is found at location $10b1 in RAM. Make sure that the upper nibble is always zero. In essence, set this location to $0x, where x is a value between $0 (silent) and $f (max volume). Looking under the hood, the code looks like this:
+
+<code>
+.sidf_mode_gvol1    = *+1
+                lda #0
+.sidf_mode_gvol2    = *+1
+                ora #$0f
+                sta sidbase+$18        ;$D418/54296/SID+24 Select Filter Mode and Volume
+</code>
+
+.sidf_mode_gvol1 is modified by the player, and .sidf_mode_gvol2 can be modified by you. 
+
+Happy hacking!

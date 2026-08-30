@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title>Commodore C64 BPM calc</title>
+
+		
+	<script>
+	
+	PAL = 985248;
+	NTSC = 1022727;
+
+	function Dec2Hex(dec,padTo) {
+		//*** Turns a decimal number into hexadecimal
+		//*** If padTo is specified (optional) the result is padded with leading zeros to the specified number of characters
+		var h=Math.round(dec).toString(16).toLowerCase();
+		if (padTo && h.length<padTo) h=(Math.pow(10,padTo-h.length)+h).substr(1);
+		return h;
+	}
+	
+	function Hex2Dec(hex) {
+		
+		return parseInt(hex,16);
+	}
+
+	function getclock() {
+		
+		if (f.system.value == "NTSC") return NTSC;
+		else return PAL;
+	}
+	
+	function tim2bpm() {
+
+		clock = getclock(); //system clock
+		f.bpm.value = 60*(clock/(Hex2Dec(f.timerhex.value) + 1))/(f.speed.value*f.ticksperbeat.value);
+		return;
+	}
+	
+	function bpm2tim() {
+		
+		clock = getclock(); //system clock
+		tval = (clock/((f.bpm.value/60)*f.speed.value*f.ticksperbeat.value))-1;
+		f.timerhex.value = Dec2Hex(tval,4); //Present result in hex
+	}
+	</script>
+	
+</head>
+
+<body bgcolor="#000000" text="#00ee00" onload="tim2bpm();">
+<h1>defBPM</h1>
+<br />
+<table>
+<form name="f">
+	<tr><td>TIMER (hex):</td><td><input name="timerhex" onChange="tim2bpm();" type="text" value="4CC7"></td></tr>
+	<tr><td>SYSTEM:</td><td><select name="system" onChange="tim2bpm();"><option value="PAL">PAL</option><option value="NTSC">NTSC</option></select></td></tr>
+	<tr><td>SPEED:</td><td><input name="speed" onChange="tim2bpm();" type="text" value="3"></td></tr>
+	<tr><td>STEPS PER BEAT:</td><td><input name="ticksperbeat" onChange="tim2bpm();" type="text" value="8"></td></tr>
+	<tr><td colspan="2"><hr></td></tr>
+	<tr><td>BPM:</td><td><input name="bpm" onChange="bpm2tim();" type="text" value=""></td></tr>
+</form>
+</table>
+
+</body>
+</html>
+	

@@ -1,0 +1,247 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+147 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 8 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 6 7 8 9 10 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 113-128 of 444
+
+### 113 Mar 6, 2017 7:59 pm
+
+clickclack777
+
+Offline
+
+Alright, I see you point. To be honest, I´m all in for a new batch of Scannerboy´s sync interface considering it´s capabilities to sync so many other gear that doesn´t use midi. Just trying to find a midi sync solution until or if he will ever do a new batch. *fingers crossed* . How many were made in the first batch?
+
+Last edited by clickclack777 (Mar 6, 2017 7:59 pm)
+
+### 114 Mar 17, 2017 1:01 am
+
+COVOXED
+
+Offline
+
+Its really cool to hear that a new batch *might* happen!! Does anyone know how things are going?
+Speaking of the software itself, defMON, did it die out or will there one day be a new version? (I have read both "No", and "Maybe" on various places on the web). I tried to register on the wiki by the way, but the defMON-wiki pw did not land in my inbox.
+
+Last edited by COVOXED (Mar 17, 2017 1:02 am)
+
+### 115 Mar 17, 2017 1:52 pm
+
+frantic
+
+Offline
+
+defMON isn't actively developed, but I wouldn't necessarily say that it is dead. You may still see occasional bug fixes and possibly still some additions of features though I don't make promises.
+See PM about the wiki registration.
+
+### 116 Mar 20, 2017 10:23 pm
+
+Tumult
+
+Offline
+
+Horsetralia
+
+I hear the Alien Group Voice Box speech synthesis update is on the way
+
+### 117 Mar 21, 2017 8:27 am
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Hey, I just want to clear things up.
+Im currently moving to another city so right now Im too busy to work on the adapters.
+Maybe later this year when things calm down and there will be enough interest I can start working on a new batch.
+Cheers!
+
+Last edited by scannerboy (Mar 21, 2017 9:59 am)
+
+### 118 Jun 4, 2017 12:00 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Okay. I decided to share mini-bug report on several defMON builds. I'd really appreciate to get some feedback.
+20090304 build
+1) If you load saved tune from the disk each new (unused) pattern will be missing end-pattern signature (red dots) at the end of the pattern. Unfortunately you're unable to put it manually in the last line again (you can put it anywhere else but not on the last line). This leads to player bugging out on pattern changes.
+2) It's impossible to copy+paste patterns on tunes loaded from the disk anymore.
+20141107 build
+1) You can fix missing end-pattern signature (red dots) bug on corrupted tunes in this build.
+2) If you load saved tune from the disk you still won't be able to copy+paste patterns anymore.
+______________________________________________________________________________
+Question 1 - If there's any workaround copy+paste not working after loading saved tune in 20141107 build - please let me know.
+Question 2 - If there's any workaround missing end-pattern signature in 20090304 build after loading saved tune - please let me know.
+
+Last edited by F7sus4 (Jun 4, 2017 12:05 pm)
+
+### 119 Jun 4, 2017 8:47 pm
+
+frantic
+
+Offline
+
+Hi!
+Not sure why one would use such an old version as 20090304 (8 years ago) at all? In general it is advisable to always use the latest build.
+Regarding the pattern end-marks, I've noticed this bug from time to time as well. However, it very rarely happens to me myself, whereas for some ppl it seems to happen more often. This bug really confuses me and I'd be happy to get more detailed information that could help track down when it actually happens. The way you describe it here, you seem to imply that it *always* happens to you? Is that really true?
+About copy+paste after loading/saving tune, I haven't experienced that myself. Again I'd be happy to get more detailed information on when this might happen. It sounds like something that could be related to the first bug, e.g. that the copy/paste routine freaks out when no pattern end-mark is encountered.
+
+### 120 Jun 5, 2017 8:15 am
+
+F7sus4
+
+Offline
+
+Poland
+
+I sometimes use 20090304 instead of 20141107 for downwards-compatibility (e.g. TR+AF behaves differently in 20130803 and newer builds etc.) and because we had dualSID support cut out in the public 20130803 version at that time.
+Notice 1 - the lack of end-pattern marker (red dots) bug always coexists with no copy+paste pattern bug (shift+N = the screen flashes red but nothing happens). I guess they are connected somehow (defMON not being able to recognize start+end of the pattern to copy because of missing end-pattern marker?). It also causes the affected pattern to skip (jump to next pattern) prematurely/at random.
+Notice 2 - the bug will never happen if you start a new tune. It always happens after you load a tune from a disk. It looks like the end-pattern marker is not written to unused patterns. And after loading a tune from the disk it's simply not there because defMON doesn't automatically fill end-pattern markers into unused patterns.
+To reliably reproduce it: 1) Start editing any tune. 2) Save it to disk. 3) (optional) Restart your C64. 4) Load the tune from the disk. 5) Voila.
+No red-dot markers in any new pattern. And no copy+paste possible.
+A quick video (edit: corrected link):
+http://youtu.be/uSNeIQdu7WU
+Solution I tried:
+I hoped that in both 20090304 and 20141107 it would be possible to work around the bug by copy+pasting existing empty pattern (00) with the end-pattern marker into new pattern that became corrupted (force override). That would be easy solution but when the bug happens - copy+paste doesn't work at all either (the border flashes red color only but the pattern is not copied - like at the end of the vid).
+It happens both on real C64 (10+ different mobos+chips tested dating from 1982 up to 1993) and in emulated environment (Vice/CCS64/whatever) but I really don't think it's cycle/hardware-related issue.
+
+Last edited by F7sus4 (Oct 26, 2017 5:36 am)
+
+### 121 Jun 5, 2017 10:15 am
+
+frantic
+
+Offline
+
+Wow. Now that is clearly the most detailed and thorough bug report that I have ever received in relation to defMON. It certainly helps. Thanks for that! I'll try to look into it as soon as possible. The next version will also include some small bugfixes related to stereo SID stuff.
+Also good to hear that you enjoy using defMON.
+
+### 122 Jun 5, 2017 10:44 am
+
+F7sus4
+
+Offline
+
+Poland
+
+Speaking of future improvements, if there are any planned, I'd again sell my soul to have the possibility to change x1/x2/x4/x8 raster-speed on pattern via command. :-)
+
+Last edited by F7sus4 (Jun 5, 2017 10:48 am)
+
+### 123 Jun 5, 2017 12:20 pm
+
+frantic
+
+Offline
+
+Hi! I managed to track down the bug now thanks to your report. Not sure exactly when I will have the time to actually fix it, but at least it is within reach now. I won't do any promises here, but hopefully I'll fix it within a week or something.
+A command to change the multispeed setting is — unfortunately — not very likely to be included since the multispeed stuff is actually handled by the editor (e.g. by the code that calls the player code) rather than the player code itself. Therefore such tunes wouldn't work when played outside the editor, e.g. after packing them. It is a reasonable request though and of course I see that it could be useful in some ways if it would have been implemented.
+
+### 124 Jul 24, 2017 7:06 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Hey, I plan to release a new batch of the sync adapters. They should be ready in a month. PM me if interested
+
+Cheers
+
+### 125 Jul 24, 2017 7:17 pm
+
+frantic
+
+Offline
+
+@Scannerboy: That's great news!
+
+### 126 Aug 15, 2017 12:44 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+https://www.instagram.com/p/BX0JgNUhGTG/ -They will be available till the end of the week
+
+### 127 Aug 15, 2017 1:02 pm
+
+frantic
+
+Offline
+
+That's even more great news! How many units did you do? Those 9 on the picture?
+Stuff like this certainly makes me inspired to work further on a defMON II.
+
+Last edited by frantic (Aug 15, 2017 1:06 pm)
+
+### 128 Aug 15, 2017 1:06 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Ten to be exact but one is for my own use. I must say that assembling them while watching Sonic Mania streams is quite nice
+
+## Posts: 113-128 of 444
+
+Pages Previous 1 … 6 7 8 9 10 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

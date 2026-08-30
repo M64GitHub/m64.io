@@ -1,0 +1,245 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+151 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 15 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 13 14 15 16 17 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 225-240 of 444
+
+### 225 Oct 28, 2018 11:41 am
+
+frantic
+
+Offline
+
+The white screen flashing didn't cause any delay. It only takes 6 cpu cycles to execute that code out of 19656 cycles available for one frame. Maybe it seemed that way due to the way perception works, or there was some kind of slight delay when changing patterns for some other reason (but I don't think so) unrelated to the white flash. On old TV sets having a white background may also distort the screen slightly, so maybe that phenomenon was involved as well, when shifting from black to white background.
+
+### 226 Oct 28, 2018 7:34 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+Bug-report for 20181027 build.
+Basically, in current build, the player somehow reaches way lower filter values than expected while using Cxxx command (ACID) and/or filter offset (CP), but only after loading a song. This results in music getting "muffled" in some places, because the filter goes down to e.g. 0040, where it would normally be ca. 0240 there (in all builds up to 20171026). It's always difference of 0200 in the "bottom" values.
+95% songs from all previous versions are getting affected as a result, but it's difficult to tell what exactly triggers this behavior.
+5% songs that do not become affected are "empty songs", e.g. using 1 sequence and barely a few instrument lines.
+It's not possible to trigger this bug before loading any song.
+This leads me to guess that this behavior is still somehow related to disk operations issue.
+__________________________________________________________________________
+edit: Ok. I realized that the lowest possible filter value for defMON always was 0200 (playback-wise). Well, it still is, except when loading a song - then the tracker "loses" that feature, thus making the playback noticeably inconsistent between loading and saving.
+PS. Sorry to be the "bad messenger" again.
+
+Last edited by F7sus4 (Oct 30, 2018 8:53 am)
+
+### 227 Oct 30, 2018 12:26 pm
+
+frantic
+
+Offline
+
+Thanks for reporting. I don't remember exactly right away, but I think the 0200 limit that you mention is only for 8580 SID chips, and is part of some code that treats filters slightly differently on 6581 and 8580 to achieve a little more similar results irrespectively of what SID chip that is used. I don't see why it would affect only the most recent version, since that code has been there for a long time, but I guess it is possible. I'll look into it!
+Since this may also be related to SID chip detection, I wonder if you use a real machine or an emulator, and if you use 6581 or 8580?
+Keep the bug reports coming!
+
+Last edited by frantic (Oct 30, 2018 12:26 pm)
+
+### 228 Oct 30, 2018 2:50 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@Frantic: Yes, 0200 is the "hard-cap" for 8580 and my current report is based on realC64 with 8580, but it behaves identically in emulated environment as well (Vice+reSID-fp). Because the tracker loses that feature after loading a file only (therefore it cannot be triggered from "clean start" in pre-load state), it leads me to rather strong conclusion that it's somehow part of the file operation issue. Once the "don't go below 0200" rule is broken, the behavior cannot be "healed" and C64 restart is needed.
+I think SID chip detection is a bad guess. Even in emulator environment it's perfectly possible to switch between 6581 and 8580 without restarting and defMON reacts accordingly by applying 0000 "hard-cap" to 6581 and 0200 "hard-cap" to 8580 when playback starts (F1/F3). But once this feature becomes broken by loading the tune, again - there's no coming back and restart is needed.
+
+Last edited by F7sus4 (Oct 30, 2018 2:55 pm)
+
+### 229 Oct 30, 2018 2:56 pm
+
+frantic
+
+Offline
+
+Alright. Thanks for the clarifications!
+
+### 230 Nov 1, 2018 12:59 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+I'm sharing defMON 20181027 in bugged state freezed with AR. I know freezing is dork-ass stupid, but the bug does not trigger consistently.
+New findings:
+- The bug does never happen when loading songs that were saved using 20181027 build.
+- Only songs from 20171026 build and older (20171024, 20141108) seem to break the player. Not all, though. (All are mono SID songs with proper mono flag.)
+- Annoying, but possible workaround is to load "affecting songs" in 20181027 build, save to disk, restart C64 and reload new file.
+F7sus4 wrote:Even in emulator environment it's perfectly possible to switch between 6581 and 8580 without restarting and defMON reacts accordingly by applying 0000 "hard-cap" to 6581 and 0200 "hard-cap" to 8580 when playback starts (F1/F3)...
+
+...but not anymore once it becomes broken. (This can be tested with attached "broken defMON" freeze.)
+
+Last edited by F7sus4 (Nov 1, 2018 1:40 pm)
+
+### 231 Nov 1, 2018 5:10 pm
+
+frantic
+
+Offline
+
+Great bughunting there!
+Looking at it, and I found some things that do go wrong, but still haven't found the root cause. Somehow the player sometimes believes (after loading a new file) that the second SID resides at $1500, which then causes some other code to write $00 to $1517, which accidentally happens to be a memory location right in the middle of the player code (for sid1) that ensures that the filter never sweeps lower than 0200 for 8580 SID chips.
+
+Last edited by frantic (Nov 1, 2018 6:00 pm)
+
+### 232 Nov 1, 2018 5:44 pm
+
+frantic
+
+Offline
+
+@F7sus4: Maybe I found the bug now. Does this do the trick? http://toolsforscholars.com/defmon/defmon-20181101.zip
+
+Last edited by frantic (Nov 1, 2018 6:00 pm)
+
+### 233 Nov 1, 2018 6:24 pm
+
+F7sus4
+
+Offline
+
+Poland
+
+@Frantic: Long story short: Everything seems fine now!
+- Tested both playback and disk operations (ca. 30+ load/save attempts using songs from various versions, ranging 20090304 to 20181027) for malfunctioning, including data loss, filter misbehavior, 2SID playback etc. All good!
+- Since you mentioned it might be related to SID chip detection, I also tested several realC64 setups: 1) vanilla 8580, 2) dual 8580+8580 (@$D500/$DE00), 3) dual 6581+6581 (@$D500/$DE00), and 4) 6581+8580 combo-build (mono @$D400) that I suspected might be quirky, but everything was fine too and defMON adjusted the filter accordingly to SID model whichever was active at given time.
+- The same applies to emulated environment (Vice 2.xx+3.xx).
+Hurray!
+
+Last edited by F7sus4 (Nov 1, 2018 7:49 pm)
+
+### 234 Nov 1, 2018 7:53 pm
+
+frantic
+
+Offline
+
+Wow! Now that's clearly a fantastic testing report. Thanks a lot man. This is definitely much appreciated. I'll put this version up for download as an official release then.
+
+### 235 Nov 11, 2018 4:01 pm
+
+Amelinium
+
+Offline
+
+Got another question This is not wishlist but just thinking if this wouldn't be total dope additional feature maybe in the future?
+WG table - Rx sets random waveform ($10-$70). Now imagine the melody being played with different waveform each single note
+ACID table - Rxxx sets random filtervalue (0000-7FFF). Similar purpose.
+
+### 236 Nov 26, 2018 7:24 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I am also learning defMON, it is great live tracker! BTW it is possible to play only actual position? Here is first thing i am working on (Mato1):
+https://we.tl/t-DUAqqsxogM
+
+### 237 Nov 28, 2018 10:32 pm
+
+byte.observer
+
+Offline
+
+defMON!
+I have a small question: When you set a jump address for some row in the sidtab, is it possible to revert that row back to an ordinary row? Sometimes I accidentally type something in the jump column and it's annoying not being able to go back (especially if I don't remember what I had written there). I read through the forum here but couldn't find anything about it.
+
+### 238 Nov 29, 2018 8:45 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Of course, when you type space jump is deleted, i personally use jumps to only rest of vertical highlight (00-07), mostly to one line up from jump (after zeroing gate) because i better see "patches". BTW that same WGWG row should be really changed to something different, i dont have problem with this, but first row is clearly type of waveform so it should be WF, another one WG is waveform gate/sync/ringmod. And if you dont know first 00 DL (delay) ST means stop, it is not documented on defMON page but someone mentioned it here earlier. And that ADSR envelope should be highlighted with brighted green as was darker green ACID because it is one block.
+
+Last edited by martin_demsky (Nov 29, 2018 11:03 am)
+
+### 239 Nov 30, 2018 6:55 pm
+
+byte.observer
+
+Offline
+
+Oh excellent, I wonder how it happened that I tried pressing almost every key except for space...
+I agree about the column naming. I also wish there was a way to alter the number of lines in a sequence. Maybe I just don't know it?
+
+### 240 Nov 30, 2018 9:13 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+You can insert pattern break with ctrl+c=+SPC, i tried it now and it is working, before defMON i was also working some years in Sid Duzz It tracker, but defMON is overall better and i very like that sidTAB because you can see big chunk of data on separate full screen that CAN be even bigger if that big defMON logotype developers push away.
+Only thing i havent tried yet in it was variable shuffle type tempo, i always liked in Sid Duzz It that it features 4th independent tempo channel where i can control speed of all three channels. In defMON is tempo (practically delay) that gray number left from note which is at default 2, i set BPM tempo with C= and F1/2 keys and i will try to alter that gray value to see what happens.
+
+## Posts: 225-240 of 444
+
+Pages Previous 1 … 13 14 15 16 17 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators

@@ -1,0 +1,274 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+156 Guests 0 Members 16 Bots (+42 bot dupes)
+
+# defMON (Page 24 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 22 23 24 25 26 27 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 369-384 of 444
+
+### 369 Oct 9, 2020 11:21 am
+
+4mat
+
+Offline
+
+slightly offtopic but, Frantic do you have any info on how you implemented that defSync feature with the serial cable? I'm looking at options to add this in my mixing tool rather than using dual sids on the same machine. Did you do a serial talk and listen setup or did it need more work to get beat matching?
+
+### 370 Oct 9, 2020 5:47 pm
+
+frantic
+
+Offline
+
+Sure! The short form of the explanation is something like this: C64 #1 is put into a polling wait loop, which is just waiting for the other C64 to set the CLK bit. When that bit is set, it just starts playing. The tunes running on each computer are assumed to run in the same speed, so this is really just starting them at the same time. It is not actively listening for more sync signals after the initial start. Both C64s sends sync singnals every time a new sequence/pattern is started though, so it is possible for any C64 to re-sync at a new pattern start at any time.
+So.. to elaborate a bit. That wait loop in C64 #1 just looks like this:
+- bit $dc01 ;Check STOP-key, in order not to get locked in the polling loop
+bpl .stopwait
+bit $dd00 ;Wait until CLK bit is set..
+bvs -
+
+Before that $dd00 is set like this in C64 #1:
+lda $dd00
+ora #%00100000 ;Set DATA bit (makes it 0 on the other side)
+sta $dd00
+
+C64 #2 sets the CLK bit like this to make C64 #1 start playing:
+;Send sync signal
+lda $dd00
+bmi .nosyncrequest
+.syncrequest: ;Reply by setting CLK bit
+ora #%00010000 ;Set CLK bit (makes CLK 0 on the other side)
+sta $dd00
+
+;Some delay to allow the other C64 to react
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+
+lda #%11000111 ;=199 - back to normal
+sta $dd00 ;Back to normal...
+.nosyncrequest:
+
+That delay is probably just quite arbitrary. I don't think I did any careful calculations to figure out how many nops were enough.
+So this is really quite simple. The longer version of the explanation would also involve explanation of some other features that surrounds this stuff. There is some code that actively prevents the other C64 from sending sync signals when the other has gone into the disk menu, and things like that, which means that there are also some other things going on. Don't hesitate to send me a PM in case you want me to elaborate on this.
+
+Last edited by frantic (Oct 9, 2020 5:51 pm)
+
+### 371 Oct 9, 2020 6:46 pm
+
+4mat
+
+Offline
+
+Thanks, will do. I'll try this out.
+
+### 372 Oct 9, 2020 7:53 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+I have looked at some included tunes, very interesting, some programming in sidtab was similar to mine, i have also thinked about more channels scenario via sidfx, but for me one sid is enough, which is maybe pretty weird, because when i record instruments live (synths, piano, guitars) i have often in Logic Pro X at least 50 stereo audio tracks. But it was always that, 3-4 channels is in trackers enough, when it is more, it is harder to manage so daw/piano roll/live recording to audio tracks is always more comfortable.
+
+Last edited by martin_demsky (Oct 9, 2020 8:00 pm)
+
+### 373 Oct 9, 2020 8:07 pm
+
+frantic
+
+Offline
+
+@4mat: I actually once did a simple sidplay tool, and was planning to implement this type of sync (or at least something similar), for purposes of dj type mixing of sids. I never did more than the actual sidplay tool, so it is good to hear that you're doing something similar. ...if that is what you're doing, that is? What sort of "mixing tool" is it?
+@Martin: One SID surely goes a long way. Good to hear that you found it interesting. I do too.
+
+### 374 Oct 10, 2020 12:57 am
+
+4mat
+
+Offline
+
+I can show you a couple of videos of earlier tests. The idea is tracks run from a master tempo (from one of the songs) with other tracks syncing to that, then channels can be mixed and matched and have some software effects applied to them. Instead of using the drive I'd probably go with a 'record bag' approach, where there's a tool to build a set of songs compressed with the editor and then you can unpack them into memory for playing as the set goes on.
+
+### 375 Oct 10, 2020 9:03 am
+
+frantic
+
+Offline
+
+@4mat: that's a really cool idea. Seriously. I like the explorative spirit of your work. A pre-built record bag+tool seems like a reasonable approach in this case. I think I understand why.
+
+### 376 Oct 11, 2020 12:27 pm
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+What does 4mat is beyond incredible.
+
+### 377 Oct 13, 2020 9:40 am
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+Hello guys! Long time no see. I have a quick question. Im currently selling my C64 and wanted to know if its possible now to sync 2 instances of defmon in VICE?
+
+### 378 Oct 13, 2020 1:05 pm
+
+frantic
+
+Offline
+
+@scannerboy: not that i am aware of. If two instances of VICE could be connected as if there was a serial cable running between them, then it would be possible, but I presume that this would require modifications of VICE. On the other hand, maybe it could be achieved using the remote monitor, since this "sync" is mostly just a matter of starting them at the same time. Not sure.
+
+### 379 Oct 13, 2020 2:05 pm
+
+scannerboy
+
+Offline
+
+Poland, Gdansk
+
+https://twitter.com/4mat_scenemusic/sta … 6228816899
+Maybe 4mat knows how to set it up
+
+### 380 Oct 13, 2020 4:58 pm
+
+frantic
+
+Offline
+
+Looks like that!
+
+### 381 Oct 13, 2020 5:46 pm
+
+4mat
+
+Offline
+
+Hello, I used the tutorial here to get two copies of Vice 3.1 talking. Though I set them both to 2400 baud because the Vice docs said to.
+I haven't tried running two copies of Defmon with that method. In that video I'm opening a file on device 2, sending a byte over and then checking if it's arrived at the other end with the kernal routines. Not very useable in audio but I'd been messing around with settings for an hour by then. (my fault)
+The first byte that gets sent looked broken to me but the rest were fine, again that could well be my doing.
+; ON BOTH
+LDA #NAME2-NAME
+LDY #>NAME
+LDX #<NAME
+JSR $FFBD ;SETNAM (SEND BAUD RATE)
+LDA #2
+LDX #2
+LDY #0
+JSR $FFBA ;SETLFS (SET DEVICE #2)
+JSR $FFC0 ;OPEN
+
+NAME .byte $0a,$00 ; first value is baud rate.
+NAME2
+
+; FOR TALKING COMPUTER
+LDX #2 ;LOGICAL FILE #2
+JSR $FFC9 ;CHKOUT
+LDA #$41 ; SEND BYTE OVER
+JSR $FFD2 ; CHROUT
+
+; FOR LISTENING COMPUTER (HALTS MACHINE UNTIL BYTE ARRIVES, BAD)
+LDX #2 ;LOGICAL FILE #2
+JSR $FFC6 ; CHKIN
+JSR $FFCF ; CHRIN
+
+### 382 Oct 13, 2020 7:09 pm
+
+frantic
+
+Offline
+
+Funky stuff! Thanks for sharing.
+
+### 383 Oct 14, 2020 7:17 am
+
+martin_demsky
+
+Offline
+
+Bratislava, Slovakia
+
+Yesterday i matched default defMON speed with Behringer TD-3 bassline synth, i ran sequence for a 30 minutes with no delay so it should be perfect bpm setting, but that sync device from Scannerboy should be more easy, especially on live performance
+
+Last edited by martin_demsky (Oct 14, 2020 2:54 pm)
+
+### 384 Oct 14, 2020 4:42 pm
+
+frantic
+
+Offline
+
+@Martin: Did I understand correctly? You turned the "Tempo" knob, and managed to find an almost exact match in speed with the C64? ...or was that TD-3 synced to some other MIDI clock or something?
+-----8<-----
+...and now for something else: The annual bill for the web hosting turned up today, and as usual they raise the price a little bit each year and by now it is actually a non-negligible amount of money. Therefore I am thinking of taking down the defMON wiki. There isn't a lot of content in it anyway, and the content that is there could easily be bundled with the defMON download, and I could use CSDb as the "download site" for defMON. Another option could be to move the wiki to some other server, in case someone happens to have access to a server where the wiki could be hosted.
+Any reactions?
+
+## Posts: 369-384 of 444
+
+Pages Previous 1 … 22 23 24 25 26 27 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
+
+-

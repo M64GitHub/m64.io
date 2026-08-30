@@ -1,0 +1,240 @@
+Skip to forum content
+
+ChipMusic.org
+
+chipmusic.org is an online community in respect and relation to chip music, art and its parallels.
+
+- Home
+
+- Music
+
+- Forums
+
+- Recent Posts
+
+- Members
+
+- Sign-Up
+
+- Login
+
+You are not logged in. Please login or register.
+
+### Search
+
+Advanced Search
+
+## Stats
+
+-
+
+-
+
+### Who's Online
+147 Guests 0 Members 15 Bots (+41 bot dupes)
+
+# defMON (Page 12 of 28)
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Pages Previous 1 … 10 11 12 13 14 … 28 Next
+
+You must login or sign up to post a reply
+
+## Posts: 177-192 of 444
+
+### 177 Feb 12, 2018 6:57 pm
+
+frantic
+
+Offline
+
+Nice! I'll do my videos in any case, but more is always better for these things. Actually I did some preparations for this yesterday, so I think I'm rolling now, so to speak.
+
+### 178 Feb 12, 2018 7:06 pm
+
+Amelinium
+
+Offline
+
+Haha now I regret I did not finish that idea earlier My target are entry level people with some understanding in tracking software. Lets say casual musicians. The idea is to give them knowledge how each column in editor corresponds with sound. The questions are popular recently. But I assume you will cover the topic way better. Link your vids too.
+
+### 179 Feb 12, 2018 11:58 pm
+
+arlen
+
+Offline
+
+Any good resources on programming the sid registers? I understand some of how it works, but I really want a better understanding on creating sounds with the sid chip.
+So far defmon is pretty fun and easy to use!
+
+### 180 Feb 13, 2018 1:28 am
+
+frantic
+
+Offline
+
+The reference I tend to use, not just for SID but for C64 in general, is this one:
+http://unusedino.de/ec64/technical/aay/c64/sidmain.htm
+It doesn't explain much though as it is mainly just a summary of the registers. Not sure if that is what you're interested in. Otherwise some of the chapters on SID in books like "Mapping the 64" and "Programmers Reference Guide" may be worth a look:
+https://codebase64.org/doku.php?id=books:start
+http://project64.c64.org/hw/c64.html
+
+### 181 Feb 13, 2018 12:49 pm
+
+arlen
+
+Offline
+
+I'm having the most difficulty with the adsr registers. Can't seem to get anything but a full sustain envelope going.
+
+### 182 Feb 13, 2018 2:47 pm
+
+Amelinium
+
+Offline
+
+This might be tricky and I was struggling as well.
+At first I used AD (e.g. 0C), without SR. This with WGWG set to 2001 will make a bit prolonged saw sound. Manipulate 0C value up and down to see how it works for you.
+Remember to set --00 in WGWG and 0000 in ADSR in the line before all instruments to restart the envelope.
+Once you know how to make sounds like this, try setting ADSR value to e.g. 6C66. It will raise slower and sustain for a bit. You can release it by calling instrument 00 in the pattern editor from second column.
+
+### 183 Feb 13, 2018 5:42 pm
+
+frantic
+
+Offline
+
+ADSR in brief:
+Attack
+$0 is quickest and $f is slowest = the time it takes for the volume to rise from zero to max. The Attack phase starts whenever the GATE bit is turned on (more info on the GATE bit below).
+Decay
+$0 is quickest and $f is slowest = the time it takes for the volume to fall from max and down to the Sustain level (see below). The Decay phase starts automatically as soon as the Attack phase has finished.
+Sustain
+$0 is silence and $if is the loudest = the VOLUME (not the time) that the ADSR envelope stops at after having gone through the Attack and the Decay phase. As long as the GATE bit is still on, the ADSR envelope will stay in the Sustain phase forever. When GATE is turned off, the Sustain phase ends and the Release phase (see below) starts instead.
+Release
+$0 is quickest and $f is slowest = the time it takes for the volume to fall from the Sustain level and down to zero volume. More accurately, the Release phase may be started even before the ADSR envelope has reached the Sustain phase. For example, if you have a really slow Attack, and turn gate off before the Attack is done, the Release will start falling from whatever volume the ADSR is at, rather than from the specified Sustain level.
+The GATE bit, that triggers the ADSR, is found in the WG columns on the sidtab screen in defMON. Normal usage of the WG columns would be to only use the upper nibble (e.g. the X in $XY) in the first WG column to set waveforms, and to only use the lower nibble (e.g. the Y in $XY) in the second WG column.
+So to set triangle waveform (the $10 in the first WG column), and the gate bit to ON (the $01 in the second WG column), and ADSR to $11fa, you execute a line that looks like this:
+WG WG AD SR
+10 01 11 fa
+
+...and then some time later you would execute a line where there is a 00 in the second WG column to turn the GATE bit off again, which will then have the effect that the ADSR envelope stops hovering at the Sustain level and instead enters the Release phase. Like this:
+WG WG AD SR
+.. 00 .. ..
+
+(This is also why there are two WG columns, because it allows the waveform to be "remembered" (in the first WG column) even if you turn the gate bit off in the second WG column.)
+This explanation is quite technical, but hopefully it helps in some way at least. In those instruction videos that I'll do, I'll make sure to visualize the ADSR stuff graphically, to make it easier to grasp.
+
+Last edited by frantic (Feb 13, 2018 6:49 pm)
+
+### 184 Feb 13, 2018 7:18 pm
+
+GLOOMS
+
+Offline
+
+The Forest, WA
+
+This helps a lot thanks for posting !
+
+### 185 Feb 14, 2018 1:38 am
+
+arlen
+
+Offline
+
+Ahhh I think my hang up was from not turning off the gate bit. This is super helpful!
+I'll be making defmon acid in no time!
+
+### 186 Feb 15, 2018 7:43 pm
+
+Amelinium
+
+Offline
+
+I see people reporting bugs here. Is this the right place? If so, I know one. Sometimes output file is reeaaaaaaaally big despite the fact I just started the song and have only a few patterns. This happens in GP version that I'm using. I didn't find the end pattern bug. I always copy 00 pattern because I have custom speed settings written there and am too lazy to retype that on each new pattern.
+
+### 187 Feb 15, 2018 8:01 pm
+
+frantic
+
+Offline
+
+Thanks for reporting! Yes, this is the right place. Actually the same thing happened to me as well for the first time only a few days ago. Haven't seen it before, or actually even heard about it from others either. Will keep an eye out for that. Any clues of under what circumstances this may happen are of course very welcome. Anyway, since it happened to me for the first time only recently, I kind of guessed that this may be some new bug introduced in recent versions, but maybe it is actually an old bug then. Good to know!
+On the whole I can't recommend the G*P version since a bunch of bugs have been fixed since then, but I guess you know that already.
+Trick to apply speed settings globally:
+1. CTRL+Z CTRL+A to select "ZONE ALL" = edit all sequences at the same time (warning! This mode of editing is obviously potentially very destructive in case you happen to change something else as well. The border color will change to indicate that you're in a different mode than the normal one.)
+2. Then type in the speed pattern you want
+3. CTRL+RETURN to get out of this mode and edit normally again. (The border color will go back to normal.)
+Then again, doing it the way you do isn't necessarily a bad solution either. I also do that a lot.
+
+Last edited by frantic (Feb 15, 2018 8:05 pm)
+
+### 188 Feb 15, 2018 8:20 pm
+
+Amelinium
+
+Offline
+
+This is my habit because I did not know about Global Mode. I entered it once and was annoyed thinking I bugged defMON.
+About the bug: affected songs went to 66 Blocks out of nowhere. I use Commodore64 and SD2IEC.
+
+### 189 Feb 15, 2018 8:27 pm
+
+frantic
+
+Offline
+
+Okay.. so all of them get the same size. Also good to know. Seems that the worktune packing sometimes fails then. Good thing that the unpacking of those tunes work at least, when you load them again. How often, roughly, would you say this happens?
+Then again, maybe I shouldn't think too much about this until you switch to a new version and still keep reporting this issue.
+
+Last edited by frantic (Feb 15, 2018 8:30 pm)
+
+### 190 Feb 15, 2018 8:40 pm
+
+Amelinium
+
+Offline
+
+Rarely. I overwrite a lot and I thought that was the reason. But today I started a sample song to upload at the forum - and poof! 4 patterns and 66 Blocks instantly.
+
+Last edited by Amelinium (Feb 20, 2018 9:51 pm)
+
+### 191 Feb 22, 2018 11:26 am
+
+Amelinium
+
+Offline
+
+I recently realised the last note in each pattern does not belong to it. What was the design idea for having virtual position -1 before position 0? You can hardrestart ADSR without that.
+I noticed on YouTube that previous defMON versions had border blinking with each pattern. Is it possible for this feature to come back? It would help with syncing defMON with external hardware. A lot.
+
+Last edited by Amelinium (Feb 22, 2018 11:27 am)
+
+### 192 Feb 22, 2018 12:24 pm
+
+frantic
+
+Offline
+
+About the "-1" step: That is because defMON is designed to implement as little "built in" functions as possible. Things like hardrestart, vibrato, etc.. Instead it is up to the user to do it themselves in the sidtab. That comes at a cost of course (less automation), but the benefit is increased flexibility. You can do any kind of hardrestart in defMON, whereas most other editors only feature one type of built in hardrestart and no reasonable way to do it manually (especially not at that first step in the sequence).
+Also, implementing hardrestart without that "prior first step" in sequences requires that the sequence parsing code looks ahead: e.g. that it parses sequences before it is actually time to parse them, to see if a hardrestart sound is coming up, because the hardrestart has to be trigged 2-3 frames (depending on what sort of hardrestart you do) before the actual start of the audible sound. Such look ahead-parsing adds overhead to the code and consumes CPU that isn't strictly required. Original defMON was intended to be usable in demos/games, with low raster time consumption.
+if defMON II becomes reality at some point, it will ditch the idea of its tunes being usable in demos/games, and rather go for usability and allow the program to use all the CPU power there is. If that happens, the weird "-1" step won't be there, and things will rather look like the rest of the trackers in this world do.
+Have a look here for a BPM calculator, which may make manual syncinc easier:
+http://toolsforscholars.com/defmon/bpm.html
+There are no plans for adding the flashing thing again.
+
+## Posts: 177-192 of 444
+
+Pages Previous 1 … 10 11 12 13 14 … 28 Next
+
+You must login or sign up to post a reply
+
+ChipMusic.org / Forums / Commodore Computers / defMON
+
+Contact Us
+
+Forum Rules and Announcements
+
+View Forum Moderators
