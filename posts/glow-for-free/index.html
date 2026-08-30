@@ -7,7 +7,7 @@
   <title>Glow for Free</title>
   <meta property="og:title" content="Glow for Free">
   <meta property="og:description" content="movy doesn't really draw glow — it draws light and is bad at forgetting. The one persistent buffer behind the bloom and the trails.">
-  <meta property="og:image" content="https://m64.io/m64logo-600.png">
+  <meta property="og:image" content="https://m64.io/posts/glow-for-free/images/glow-compare.png">
   <link rel="stylesheet" href="../article-style.css">
 </head>
 <body>
@@ -34,7 +34,7 @@
       </div>
       <h1 id="glow-for-free">Glow for Free</h1>
       <p><strong>How movy fakes neon in a terminal with one persistent buffer.</strong></p>
-      <div class="article-byline">M. Schallner, 2026.06.25</div>
+      <div class="article-byline">M. Schallner, 2026.08.30</div>
 
       <h2 id="intro">Intro</h2>
       <p>The first time someone watches <strong>movy</strong> render, the question is always some flavor of the same thing: <em>wait — that's glowing… in a terminal?</em></p>
@@ -63,14 +63,15 @@ frame.<span class="c-fn">beginFrame</span>();   <span class="c-com">// glow *= 0
 
 <span class="c-com">// ... draw opaque pixels into `solid`, emit light into `glow` ...</span>
 
-frame.<span class="c-fn">composite</span>();    <span class="c-com">// clamp(solid + glow) -> vignette -> scanline -> tint -> surface</span></code></pre>
+frame.<span class="c-fn">composite</span>();    <span class="c-com">// clamp(solid + glow) -> vignette -> scanline -> warmth -> flash -> tint -> surface</span></code></pre>
       <p>That's the entire engine of the look. Three operations — <strong>decay, blur, add</strong> — on one buffer. There is no glow "feature" anywhere in here. There's a buffer that fades and spreads, and then you keep pouring light into it.</p>
 
       <figure class="article-image">
-        <div class="image-placeholder">
-          <div class="placeholder-notice">Image: the same frame with the glow buffer off vs. on.<br><small>(drop a comparison screenshot here)</small></div>
+        <div class="compare">
+          <div><img src="images/glow-off.png" alt="A neon scene rendered by movy with the glow buffer zeroed: a magenta outline, an amber horizon, a cyan floor grid and three small moving lights — flat, no halos, no trails" width="960" height="540"><span class="lbl">glow buffer off</span></div>
+          <div><img src="images/glow-on.png" alt="The identical frame with the glow buffer composited in: the outline and horizon bloom, and the moving lights leave fading neon trails" width="960" height="540"><span class="lbl lbl-on">glow buffer on</span></div>
         </div>
-        <figcaption>The only difference is whether the glow buffer is composited in. Same geometry, same colors.</figcaption>
+        <figcaption>The only difference is whether the glow buffer is composited in. Same geometry, same colors, same frame — the halos on the still shapes and the trails behind the moving ones are what the buffer remembered. (Rendered headless with <code>Frame.savePng()</code>, 160×90 px.)</figcaption>
       </figure>
 
       <h2 id="why-float">Why It Has to Be Float</h2>
