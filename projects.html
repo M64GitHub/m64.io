@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="m64 projects — open-source terminal graphics, a C64 emulation stack, and a terminal game, in Zig.">
+  <meta name="description" content="m64 projects — a terminal graphics engine and the demo that placed at Assembly 2026, a C64 emulation stack, a tracker, a theory lab and a wiki for chip music, and terminal games — mostly in Zig.">
   <title>m64 — projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
       <a href="index.html">// home</a>
       <a href="projects.html" class="active">// projects</a>
       <a href="posts/">// blog</a>
+      <a href="chiptune-wiki/">// wiki</a>
     </nav>
   </header>
 
@@ -29,9 +30,10 @@
       <h2 class="shead">projects</h2>
       <p style="max-width:660px">
         Unusual systems at the intersection of low-level engineering and creative computing —
-        all open source, mostly in <span class="hl">Zig</span>. A terminal graphics engine, a
-        true-color video player, a <span class="hl">Commodore 64</span> emulation stack, and a
-        terminal game. From a 1982 sound chip up to neon at 60fps in a text terminal.
+        mostly in <span class="hl">Zig</span>, mostly open source. A terminal graphics engine and the
+        demo that ran on it at Assembly, a true-color video player, a <span class="hl">Commodore 64</span>
+        emulation stack, a tracker, a theory lab and a wiki for chip music, and a terminal game. From a
+        1982 sound chip up to neon at 60fps in a text terminal.
       </p>
     </section>
 
@@ -52,14 +54,22 @@
             pipeline that even handles the hard parts: seeking across keyframes and pausing a live decode.</div>
           <div class="meta"><span class="tag">#video #truecolor #zig</span></div>
         </a>
+        <a class="card a-magenta" href="pxlv/">
+          <div class="pname">PIXEL LOVE <span class="badge done">4th place</span></div>
+          <div class="pone">A terminal demo prompted into existence: 177×49 characters become 177×98 pixels at 60fps for exactly
+            five minutes, in a text terminal. All demo code written by Claude Code in 782 prompts — on movy, the hand-written
+            engine underneath. An AI's love letter to the demoscene. Binaries and readme on the page.</div>
+          <div class="meta"><span class="tag">#demoscene #assembly2026 #movy</span></div>
+        </a>
       </div>
     </section>
 
-    <!-- CHIP SOUND & THE C64 -->
+    <!-- CHIP MUSIC -->
     <section class="section">
-      <h2 class="shead">chip sound &amp; the c64</h2>
+      <h2 class="shead">chip music</h2>
       <p style="max-width:660px;margin-bottom:20px">
-        The Commodore 64, brought to Zig — emulate the CPU, then emulate the sound chip and play real C64 music.
+        The Commodore 64, brought to Zig — emulate the CPU, then the sound chip, then play real C64 music. And then
+        the rest of making it: a tracker, a theory lab that speaks tracker, and a wiki on how chip music is done.
       </p>
       <div class="grid">
         <a class="card a-green" href="https://github.com/M64GitHub/zigreSID">
@@ -73,6 +83,26 @@
           <div class="pone">A cycle-accurate Commodore 64 MOS 6510 CPU core in Zig — CPU, RAM, raster timing, SID register tracking,
             and a disassembler. The metal under zigreSID. As low-level as it goes.</div>
           <div class="meta"><span class="tag">#c64 #6510 #emulator</span></div>
+        </a>
+        <a class="card a-cyan" href="duet-player/">
+          <div class="pname">DUET <span class="badge soon">v0.1.0-alpha</span> <span class="badge live">web player</span></div>
+          <div class="pone">Impulse Tracker and SID-Wizard on one grid — two real trackers, one clock, one save button. The <code>.it</code>
+            side from ITTECH.TXT, the SID-Wizard side reimplemented from Hermit's 6502 player and verified register-for-register
+            through reSID; up to four SID chips as pattern columns. Repo's private for now — hear it in the web player.</div>
+          <div class="meta"><span class="tag">#tracker #sid #zig</span></div>
+        </a>
+        <a class="card a-amber" href="037-lab/">
+          <div class="pname">0 3 7 lab <span class="badge live">live</span></div>
+          <div class="pone">Is <code>0 3 7</code> the right chord on every note of the scale? No. A one-file Web Audio app that teaches
+            scales, chords and melody in the only unit a tracker needs — and pastes straight into OpenMPT, Schism or DUET.</div>
+          <div class="meta"><span class="tag">#theory #webaudio #trackers</span></div>
+        </a>
+        <a class="card a-violet" href="chiptune-wiki/">
+          <div class="pname">Chiptune Wiki <span class="badge live">476 pages</span></div>
+          <div class="pone">How to make chip music and understand it — SID, Game Boy and PC trackers: techniques, tools, theory in
+            tracker terms, formats, history, people. Sources in, cross-linked pages out: 32 techniques, 24 concepts, 182 entities,
+            a graph, cheat sheets.</div>
+          <div class="meta"><span class="tag">#chiptune #trackers #llm-wiki</span></div>
         </a>
       </div>
     </section>

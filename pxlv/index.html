@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PIXEL LOVE (pxlv) — a terminal demo prompted into existence. 4th place, Assembly 2026, AI Coding compo. 177×98 pixels at 60fps in a text terminal for exactly five minutes; all demo code written by Claude Code on the hand-written movy engine. Download for Linux and Apple Silicon.">
+  <meta property="og:title" content="PIXEL LOVE — a terminal demo prompted into existence">
+  <meta property="og:description" content="4th place, Assembly 2026 (AI Coding compo). 177×98 pixels at 60fps in a text terminal, for exactly five minutes.">
+  <meta property="og:image" content="https://m64.io/pxlv/pxlv-screenshot.png">
+  <meta property="og:type" content="website">
+  <title>m64 — PIXEL LOVE (pxlv)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-hero { text-align: center; padding: 36px 0 8px; }
+    .demo-hero .name { font-family: var(--font-mono); font-size: clamp(34px, 7vw, 56px); font-weight: 600; letter-spacing: 0.08em; color: var(--magenta); text-shadow: 0 0 22px rgba(255,64,192,0.55), 0 0 60px rgba(255,64,192,0.25); margin: 0; }
+    .demo-hero .name .px { color: var(--cyan); text-shadow: 0 0 22px var(--cyan-glow), 0 0 60px rgba(0,255,255,0.25); }
+    .place { display: inline-block; margin-top: 18px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--amber); border-radius: 999px; padding: 6px 16px; background: rgba(255,160,50,0.06); box-shadow: 0 0 18px rgba(255,160,50,0.25); }
+    .place b { color: var(--amber-bright); }
+    .shot { margin: 28px 0 0; }
+    .shot img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid rgba(255,64,192,0.35); box-shadow: 0 0 28px rgba(255,64,192,0.28), 0 0 80px rgba(0,255,255,0.10); }
+    .shot figcaption { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim); margin-top: 10px; text-align: center; }
+    .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 20px 0 4px; }
+    .section p + p { margin-top: 14px; }
+    .fact { border: 1px solid var(--hair); border-radius: var(--radius); padding: 12px 14px; background: rgba(0,255,255,0.03); }
+    .fact .v { font-family: var(--font-mono); font-size: 20px; font-weight: 500; color: var(--cyan); text-shadow: 0 0 12px var(--cyan-glow); }
+    .fact .k { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.04em; }
+    .dl { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 18px; }
+    .dl .btn small { font-weight: 300; opacity: 0.7; margin-left: 6px; }
+    .section pre { overflow-x: auto; font-size: 12.5px; line-height: 1.35; }
+    .section pre.diz { color: var(--magenta-soft); text-shadow: 0 0 10px rgba(255,64,192,0.35); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 6px; }
+    .split > div { border: 1px solid var(--hair-soft); border-radius: var(--radius); padding: 14px 16px; }
+    .split h3 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px; }
+    .split .ai h3 { color: var(--magenta); } .split .hand h3 { color: var(--cyan); }
+    .split p { font-size: 14.5px; line-height: 1.65; margin: 0; }
+    .quote { border-left: 2px solid var(--amber); padding-left: 16px; color: var(--text); font-style: italic; }
+    .files a { color: var(--cyan); text-decoration: none; font-family: var(--font-mono); font-size: 14px; }
+    .files a:hover { text-shadow: 0 0 12px var(--cyan-glow); }
+    @media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-scan" aria-hidden="true"></div>
+  <div class="bg-vignette" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html">m64</a>
+    <nav class="nav">
+      <a href="../index.html">// home</a>
+      <a href="../projects.html" class="active">// projects</a>
+      <a href="../posts/">// blog</a>
+      <a href="../chiptune-wiki/">// wiki</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="demo-hero">
+      <h1 class="name"><span class="px">PIXEL</span> LOVE</h1>
+      <div class="tagline">a terminal demo<span class="sep">·</span>prompted into existence</div>
+      <div class="place">Assembly 2026 · AI Coding (Vibe Demo) compo · <b>4th place</b></div>
+      <figure class="shot">
+        <img src="pxlv-screenshot.png" alt="PIXEL LOVE running in a text terminal — neon glow, half-block pixels" width="1770" height="980">
+        <figcaption>177 × 49 characters → 177 × 98 pixels. Every pixel is an ANSI character.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">what this is</h2>
+      <p>
+        A real-time demo that runs entirely in a text terminal. No OpenGL, no framework, no game engine,
+        no video player: <span class="hl">177 × 49 characters become 177 × 98 pixels</span>, sixty times a
+        second, for exactly five minutes. It competed at <span class="am">Assembly 2026</span> in Helsinki —
+        one of the oldest and biggest demoparties in the world — in the AI Coding compo, and placed
+        <span class="am">4th</span>.
+      </p>
+      <p>
+        The split is the point. <span class="mg">All of the demo's code was written by Claude Code</span> —
+        every scene, every effect, the director and timeline, the fonts, the texts — in 782 prompts, co-directed
+        rather than autocompleted. It runs on <span class="hl">movy</span>, the terminal graphics engine I wrote
+        by hand, with no AI at all. The machine wrote the demo, on an engine a human built for it. That felt like
+        the right way around.
+      </p>
+      <div class="facts">
+        <div class="fact"><div class="v">60 fps</div><div class="k">in a text terminal</div></div>
+        <div class="fact"><div class="v">5:00</div><div class="k">exactly · 700 beats</div></div>
+        <div class="fact"><div class="v">782</div><div class="k">prompts · 82 sessions</div></div>
+        <div class="fact"><div class="v">39,713</div><div class="k">lines of Zig, by Claude</div></div>
+        <div class="fact"><div class="v">15,673</div><div class="k">lines of movy, by hand</div></div>
+        <div class="fact"><div class="v">13 MB</div><div class="k">one binary, music inside</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">download</h2>
+      <div class="dl">
+        <a class="btn mg" href="pxlv.zip">pxlv.zip <small>both binaries + readme · 25 MB</small></a>
+        <a class="btn" href="pxlv-linux">pxlv-linux <small>x86_64 · 13 MB</small></a>
+        <a class="btn" href="pxlv-apple-silicon">pxlv-apple-silicon <small>arm64 · 13 MB</small></a>
+      </div>
+      <p>
+        Fullscreen terminal (F11), then <code>chmod +x pxlv-linux &amp;&amp; ./pxlv-linux</code>. Needs at least
+        <span class="hl">177 × 49</span> characters — the demo checks, and tells you. It was built for 16:9 at that
+        size, so increase the font until 49 lines fill the screen. Keyboard only; <code>ESC</code> quits. It runs
+        exactly 5:00 and exits by itself. One self-contained binary with the soundtrack embedded — no install,
+        no assets folder, no dependencies. Copy it and run it.
+      </p>
+      <p class="files">
+        <a href="readme.txt">readme.txt</a> &nbsp;·&nbsp; <a href="FILE_ID.DIZ">FILE_ID.DIZ</a>
+        &nbsp;·&nbsp; <span style="color:var(--text-dim);font-family:var(--font-mono);font-size:13px">macOS may quarantine the download: <code>xattr -d com.apple.quarantine pxlv-apple-silicon</code></span>
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">how it was made</h2>
+      <div class="split">
+        <div class="ai">
+          <h3>by the machine</h3>
+          <p><span class="mg">Claude Code</span> (Anthropic — Opus 4.8, Opus 5, Fable 5) wrote 100% of the demo's code:
+            every scene, every effect, the director and timeline, the fonts, the texts. 39,713 lines of Zig in 782 prompts
+            across 82 sessions. Not autocompleted: co-directed — I said what I wanted and judged what came back; Claude
+            designed and wrote it.</p>
+          <p style="margin-top:10px">The soundtrack <span class="am">"Pixel Surge"</span> came from <span class="mg">Suno 4.5</span>,
+            from one prompt: "Chiptune EDM with Game Boy and Commodore 64 colors…". Suno returned 5:40 at 140 BPM;
+            I cut 40 seconds by hand in Reason — to exactly 5:00, which is exactly 700 beats.</p>
+        </div>
+        <div class="hand">
+          <h3>by hand</h3>
+          <p><span class="hl">movy</span>, the terminal graphics engine this runs on — 15,673 lines of Zig, 210 commits, no AI.
+            The direction, the pixel art, the arrangement, and every decision about what stayed in.</p>
+          <p style="margin-top:10px">The renderer is movy's: a float framebuffer with a second, persistent glow buffer that blurs
+            and decays every frame — which is where the bloom and the neon trails come from, for free. Pixels are half-block
+            characters, so one cell is two pixels and the aspect comes out square. Output is a hand-rolled dirty-row ANSI
+            writer that only repaints what changed — that is what makes 60 fps in a terminal possible at all.</p>
+        </div>
+      </div>
+      <p style="margin-top:18px">
+        Everything is a pure function of the beat: the demo plays identically every time it is executed.
+        55,386 lines of Zig, engine included. All of it in this room.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">file_id.diz</h2>
+<pre class="diz">
+████████████████████████████████████████████████████    ████████████████████
+██                  ██                ██          ██    ██      ██        ██
+██                  ██                ██          ██    ██      ██        ██
+██                  ██                ██          ██    ██      ██        ██
+██        ██        ██████        ██████          ████████      ██        ██
+██                  ██                ██                ██                ██
+██                  ██                ██                ██                ██
+██        ████████████                ██                ██                ██
+██        ██        ██                ██                ██                ██
+████████████        ████████████████████████████████████████████████████████
+
+ P X L V   ( P I X E L - L O V E )
+ a terminal demo, 5:00
+ ASSEMBLY 2026 · AI Coding (Vibe Demo)
+ by m64 · all code by Claude Code
+-------------------------------------
+ 177x49 chars = 177x98 px @ 60 fps,
+ in a text terminal. ANSI only: no
+ GL, no framework, no video player.
+ Runs on movy, my hand-written Zig
+ engine - a persistent glow buffer
+ makes the neon real.
+ PROMPTED INTO EXISTENCE: 100% of
+ the demo code written by Claude
+ Code, in 782 prompts. Music "Pixel
+ Surge" by Suno - from one prompt.
+ An AI's love letter to the
+ demoscene.        &lt;3  keep glowing
+</pre>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">credits</h2>
+      <p>
+        code <span class="arrow">→</span> Claude Code (Anthropic) &nbsp;·&nbsp;
+        music <span class="arrow">→</span> Suno 4.5 &nbsp;·&nbsp;
+        engine, direction, pixel art, arrangement <span class="arrow">→</span> <span class="hl">m64</span>
+      </p>
+      <p style="font-size:14px;color:var(--text-dim)">
+        PXLV logo 1 visually inspired by Dragon ^ Death Sector / Heineken, 1990. &nbsp;
+        <a href="https://github.com/M64GitHub/movy" style="color:var(--cyan);text-decoration:none">movy on GitHub →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p>m64 / Mario Schallner · Vienna</p>
+    <p>Made with <span class="heart">&lt;3</span> and Zig</p>
+  </footer>
+</body>
+</html>
