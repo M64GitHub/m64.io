@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0 3 7 — music theory lab for tracker people</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1220; --panel:#151a2c; --panel2:#1a2038; --line:#262e4a; --line2:#333d63;
+  --ink:#dfe4f5; --dim:#8890ad; --faint:#5a6180;
+  --cyan:#5fd9e0; --cyan-soft:rgba(95,217,224,.14);
+  --amber:#ffb454; --amber-soft:rgba(255,180,84,.16);
+  --pink:#ff6fa5; --pink-soft:rgba(255,111,165,.16);
+  --red:#ff5c5c; --red-soft:rgba(255,92,92,.16);
+  --mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scrollbar-color:#2b3352 var(--bg)}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(1200px 500px at 50% -140px, rgba(95,217,224,.07), transparent 60%);
+  color:var(--ink); font-family:var(--mono); font-size:14px; line-height:1.55;
+  min-height:100vh;
+}
+::selection{background:rgba(95,217,224,.28)}
+button{font-family:var(--mono)}
+select,input[type=number]{
+  font-family:var(--mono); background:var(--panel2); color:var(--ink);
+  border:1px solid var(--line2); border-radius:6px; padding:5px 8px; font-size:13px; outline:none;
+}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--cyan); outline-offset:1px}
+select:hover{border-color:var(--cyan)}
+input[type=range]{accent-color:var(--cyan); vertical-align:middle}
+input[type=checkbox]{accent-color:var(--cyan); width:14px;height:14px; vertical-align:-2px}
+
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(14,18,32,.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.hd-top{display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding:12px 20px 8px}
+.logo{display:flex; align-items:baseline; gap:10px; margin-right:6px}
+.logo .mark{
+  font-weight:800; font-size:21px; letter-spacing:2px; white-space:nowrap;
+  background:linear-gradient(90deg,var(--cyan),var(--pink));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.logo .sub{color:var(--faint); font-size:11px; letter-spacing:.5px}
+.gctl{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.gctl label{display:flex; align-items:center; gap:6px; font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:1px}
+.gctl .val{color:var(--cyan); min-width:5ch; font-size:12px; text-transform:none}
+nav{display:flex; gap:4px; padding:0 16px; overflow-x:auto}
+nav button{
+  background:none; border:none; border-bottom:2px solid transparent;
+  color:var(--dim); padding:8px 14px 10px; font-size:12.5px; letter-spacing:1.5px;
+  text-transform:uppercase; cursor:pointer; white-space:nowrap; font-weight:500;
+}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--cyan); border-bottom-color:var(--cyan)}
+
+main{max-width:1100px; margin:0 auto; padding:22px 20px 80px}
+.tab{display:none}
+.tab.on{display:block; animation:fade .18s ease}
+@keyframes fade{from{opacity:0; transform:translateY(3px)}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
+
+/* ---------- shared bits ---------- */
+h2{font-size:15px; letter-spacing:2px; text-transform:uppercase; color:var(--ink); margin:26px 0 4px; font-weight:700}
+h2:first-child{margin-top:0}
+.hint{color:var(--dim); font-size:12.5px; margin-bottom:12px}
+.hint b{color:var(--ink); font-weight:500}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px}
+.btn{
+  background:var(--panel2); border:1px solid var(--line2); color:var(--ink);
+  border-radius:6px; padding:6px 12px; font-size:12px; cursor:pointer; letter-spacing:.5px;
+}
+.btn:hover{border-color:var(--cyan); color:var(--cyan)}
+.btn.primary{border-color:var(--cyan); color:var(--cyan); background:var(--cyan-soft)}
+.btn.primary:hover{background:rgba(95,217,224,.24)}
+.btn.small{padding:3px 8px; font-size:11px}
+.btn.pinky{border-color:var(--pink); color:var(--pink); background:var(--pink-soft)}
+.chip{
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--panel2); border:1px solid var(--line2); border-radius:6px;
+  padding:3px 9px; font-size:12.5px; cursor:pointer; color:var(--ink);
+}
+.chip:hover{border-color:var(--cyan)}
+.chip.on{border-color:var(--cyan); color:var(--cyan); background:var(--cyan-soft)}
+.chip .f{color:var(--faint); font-size:11px}
+.chip.on .f{color:var(--cyan); opacity:.75}
+.chiprow{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 14px}
+
+/* formula digits */
+.formula{display:inline-flex; gap:4px}
+.formula span{
+  display:inline-block; min-width:22px; text-align:center; padding:2px 4px;
+  background:var(--panel2); border:1px solid var(--line2); border-radius:5px;
+  font-weight:700; font-size:13px;
+}
+.formula span.adj{color:var(--amber); border-color:var(--amber); background:var(--amber-soft)}
+.formula span.out{color:var(--red); border-color:var(--red); background:var(--red-soft)}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-size:11.5px; color:var(--dim); margin:6px 0 0}
+.legend i{font-style:normal; display:inline-flex; align-items:center; gap:6px}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+.dot.n{background:var(--panel2); border:1px solid var(--line2)}
+.dot.a{background:var(--amber-soft); border:1px solid var(--amber)}
+.dot.o{background:var(--red-soft); border:1px solid var(--red)}
+
+/* ---------- keyboard ---------- */
+.kb-wrap{overflow-x:auto; padding-bottom:4px}
+.kb{position:relative; height:132px; min-width:640px; user-select:none}
+.kb .wk,.kb .bk{position:absolute; top:0; cursor:pointer; border-radius:0 0 5px 5px}
+.kb .wk{
+  height:100%; background:#e9ecf5; border:1px solid #0a0d18; z-index:1;
+  display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px;
+}
+.kb .bk{
+  height:60%; background:#10131f; border:1px solid #000; z-index:2;
+  display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;
+}
+.kb .wk .lbl{font-size:9.5px; color:#4a5069}
+.kb .bk .lbl{font-size:8.5px; color:#666f8f}
+.kb .wk.in{background:linear-gradient(#e9ecf5 55%, #9be9e0)}
+.kb .bk.in{background:linear-gradient(#10131f 45%, #0f4a49)}
+.kb .wk.root{background:linear-gradient(#e9ecf5 55%, #ffa8c9)}
+.kb .bk.root{background:linear-gradient(#10131f 45%, #6e2b48)}
+.kb .wk.off{background:#b9bdcc; opacity:.55}
+.kb .bk.off{opacity:.45}
+.kb .deg{
+  position:absolute; top:6px; left:50%; transform:translateX(-50%);
+  font-size:9px; color:#0a0d18; background:var(--cyan); border-radius:4px; padding:0 4px; font-weight:700;
+}
+.kb .bk .deg{background:var(--cyan)}
+.kb .root .deg{background:var(--pink)}
+.kb .wk.lit{background:linear-gradient(#fff,#5fd9e0)!important}
+.kb .bk.lit{background:linear-gradient(#243,#177)!important}
+
+.scale-strip{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:12px}
+.snote{
+  display:flex; flex-direction:column; align-items:center; min-width:52px;
+  background:var(--panel2); border:1px solid var(--line2); border-radius:8px; padding:5px 8px; cursor:pointer;
+}
+.snote:hover{border-color:var(--cyan)}
+.snote .nm{font-weight:700; font-size:14px}
+.snote .st{font-size:10.5px; color:var(--faint)}
+.snote.root{border-color:var(--pink)} .snote.root .nm{color:var(--pink)}
+
+/* ---------- degree cards ---------- */
+.degrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px}
+.dcard{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 13px}
+.dcard:hover{border-color:var(--line2)}
+.dcard .top{display:flex; align-items:baseline; gap:8px; margin-bottom:7px}
+.dcard .rn{font-size:11px; color:var(--faint); min-width:3ch}
+.dcard .note{font-size:17px; font-weight:800}
+.dcard .cname{margin-left:auto; font-size:12px; color:var(--dim)}
+.dcard .tones{font-size:11.5px; color:var(--dim); margin:7px 0 9px; letter-spacing:.5px}
+.dcard .acts{display:flex; gap:6px; flex-wrap:wrap}
+.dcard.tonic{border-color:rgba(255,111,165,.5)}
+.dcard.tonic .note{color:var(--pink)}
+.inv{margin-top:10px; border-top:1px dashed var(--line2); padding-top:9px; display:none}
+.inv.open{display:block}
+.inv .row{display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:12px}
+.inv .row .tag{color:var(--faint); min-width:4.2ch; font-size:11px}
+.inv .row .tn{color:var(--dim); font-size:11px; margin-left:auto}
+
+/* ---------- progressions ---------- */
+.prog{display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:9px 12px; border:1px solid var(--line); border-radius:9px; background:var(--panel); margin-bottom:8px}
+.prog .pname{font-size:12px; color:var(--dim); min-width:210px}
+.prog .seq{display:flex; gap:6px; flex-wrap:wrap}
+.prog .pc{background:var(--panel2); border:1px solid var(--line2); border-radius:6px; padding:3px 9px; font-size:12.5px}
+.prog .pc b{color:var(--cyan)}
+.prog .pc .pf{color:var(--faint); font-size:11px}
+.prog .btn{margin-left:auto}
+
+/* ---------- melody lab ---------- */
+.mlay{display:grid; grid-template-columns:280px 1fr; gap:16px}
+@media(max-width:820px){.mlay{grid-template-columns:1fr}}
+.ctlcard label{display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:12px; color:var(--dim); margin-bottom:10px}
+.ctlcard label .v{color:var(--cyan); font-size:12px; min-width:4ch; text-align:right}
+.ctlcard select{max-width:160px}
+.ctlcard .sect{border-top:1px dashed var(--line2); margin:12px 0; padding-top:12px}
+.ctlcard .btns{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px}
+.pattern{
+  background:#0b0f1c; border:1px solid var(--line); border-radius:10px;
+  max-height:560px; overflow-y:auto; font-size:13px;
+}
+.prow,.phead{display:grid; grid-template-columns:44px 76px 48px 104px 1fr; gap:0; padding:1px 10px; cursor:default}
+.phead{grid-template-columns:44px 124px 104px 1fr; align-items:center; position:sticky; top:0; z-index:1; padding:5px 10px 4px; background:#0b0f1c; border-bottom:1px solid var(--line); color:var(--faint); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase}
+.phead .hm,.phead .hb{display:flex; align-items:center; gap:4px; padding:0 5px} .phead .ch{text-align:right}
+.xb{font-family:var(--mono); font-size:10px; letter-spacing:.04em; line-height:15px; padding:0 5px; border:1px solid var(--line2); border-radius:4px; background:var(--panel2); color:var(--dim); cursor:pointer}
+.xb:hover{border-color:var(--cyan); color:var(--cyan)} .phead .hm .xb:first-of-type{margin-left:4px}
+.prow .st{color:var(--faint)}
+.prow .nt{font-weight:700; cursor:pointer; border-radius:4px; padding:0 5px}
+.prow .nt:hover{background:var(--cyan-soft)}
+.prow .nt.rest{color:var(--faint); font-weight:400}
+.prow .nt.holdc{color:var(--faint); font-weight:400}
+.prow .fx{color:var(--amber); font-size:12px}
+.prow .bs{color:var(--dim); font-weight:600; padding:0 5px}
+.prow .bs.rest,.prow .bs.holdc{color:var(--faint); font-weight:400}
+#mPat.nobass .bs{opacity:.35}
+#mPat.noslide .fx{opacity:.35; text-decoration:line-through}
+.prow .ch{color:var(--faint); font-size:11.5px; text-align:right}
+.prow.beat{background:rgba(255,255,255,.028)}
+.prow.bar{border-top:1px solid var(--line)}
+.prow.cur{background:rgba(95,217,224,.16)}
+.prow.cur .st{color:var(--cyan)}
+.mhead{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px}
+.mhead .sp{flex:1}
+.playing .btn.playstop{border-color:var(--pink); color:var(--pink)}
+
+/* ---------- learn cards ---------- */
+.learn{display:flex; flex-direction:column; gap:12px}
+.lcard{background:var(--panel); border:1px solid var(--line); border-radius:10px}
+.lcard>button.head{
+  width:100%; background:none; border:none; color:var(--ink); text-align:left; cursor:pointer;
+  padding:13px 16px; font-size:13.5px; font-weight:700; letter-spacing:.6px;
+  display:flex; align-items:center; gap:10px;
+}
+.lcard>button.head .idx{color:var(--faint); font-weight:500; font-size:12px}
+.lcard>button.head .caret{margin-left:auto; color:var(--faint); transition:transform .15s}
+.lcard.open>button.head .caret{transform:rotate(90deg); color:var(--cyan)}
+.lcard .body{display:none; padding:2px 16px 15px; color:#c3c9de; font-size:13px}
+.lcard.open .body{display:block}
+.lcard .body p{margin-bottom:9px}
+.lcard .body code{
+  background:var(--panel2); border:1px solid var(--line2); border-radius:4px;
+  padding:1px 6px; font-size:12.5px; color:var(--cyan); white-space:nowrap;
+}
+.lcard .body code.a{color:var(--amber)}
+.lcard .body table{border-collapse:collapse; margin:10px 0; width:100%; max-width:640px}
+.lcard .body th,.lcard .body td{border:1px solid var(--line2); padding:4px 9px; text-align:left; font-size:12.5px}
+.lcard .body th{color:var(--dim); font-weight:500; text-transform:uppercase; font-size:10.5px; letter-spacing:1px}
+.lcard .body td b{color:var(--cyan)}
+.lcard .body .demo{margin:8px 0}
+.lcard .body ul{margin:0 0 9px 18px}
+.lcard .body li{margin-bottom:4px}
+footer{max-width:1100px; margin:0 auto; padding:0 20px 30px; color:var(--faint); font-size:11.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd-top">
+    <div class="logo"><span class="mark">0&thinsp;3&thinsp;7</span><span class="sub">music theory lab for tracker people</span></div>
+    <div class="gctl">
+      <label>Root <select id="rootSel"></select></label>
+      <label>Scale <select id="scaleSel"></select></label>
+      <label>Wave <select id="waveSel">
+        <option value="pulse50">Square 50%</option>
+        <option value="pulse25" selected>Pulse 25%</option>
+        <option value="pulse125">Pulse 12.5%</option>
+        <option value="triangle">Triangle</option>
+        <option value="sawtooth">Saw</option>
+        <option value="sine">Sine</option>
+      </select></label>
+      <label>Arp <input type="range" id="arpRate" min="8" max="60" value="30" step="1"><span class="val" id="arpRateVal">30/s</span></label>
+      <label>Vol <input type="range" id="vol" min="0" max="100" value="70"></label>
+    </div>
+  </div>
+  <nav id="tabs">
+    <button data-tab="scales" class="on">Scale &amp; Chords</button>
+    <button data-tab="melody">Melody Lab</button>
+    <button data-tab="tech">Techniques</button>
+    <button data-tab="theory">Theory</button>
+  </nav>
+</header>
+<main>
+  <section class="tab on" id="tab-scales">
+    <h2 id="scaleTitle"></h2>
+    <div class="hint" id="scaleHint"></div>
+    <div class="card">
+      <div class="kb-wrap"><div class="kb" id="kb"></div></div>
+      <div class="scale-strip" id="scaleStrip"></div>
+    </div>
+
+    <h2>Chords on every scale note</h2>
+    <div class="hint">Pick a chord shape. Under each scale note you see the numbers to type in your tracker&rsquo;s arp.
+      <span style="color:var(--amber)">Amber digits</span> were bent to stay in scale &mdash; that&rsquo;s the answer to &ldquo;is it always 0&nbsp;3&nbsp;7?&rdquo; (it isn&rsquo;t).</div>
+    <div class="chiprow" id="chordChips"></div>
+    <div style="margin:-6px 0 12px; display:flex; gap:14px; align-items:center; flex-wrap:wrap">
+      <label style="font-size:12px; color:var(--dim); display:flex; gap:7px; align-items:center">
+        <input type="checkbox" id="snapChk" checked> Snap to scale (show adjusted numbers)
+      </label>
+      <div class="legend">
+        <i><span class="dot n"></span> as selected</i>
+        <i><span class="dot a"></span> adjusted to fit scale</i>
+        <i><span class="dot o"></span> outside the scale</i>
+      </div>
+    </div>
+    <div class="degrid" id="degGrid"></div>
+
+    <h2>Common progressions in this key</h2>
+    <div class="hint">Degrees of the scale, played as fast arps &mdash; one bar each. Steal freely; every hit song does.</div>
+    <div id="progList"></div>
+  </section>
+
+  <section class="tab" id="tab-melody">
+    <h2>Melody Lab</h2>
+    <div class="hint">Generates melodies from the current scale on a 16th-note grid, tracker-style.
+      <b>Click a note</b> to reroll it &middot; <b>double-click</b> to mute it to a rest. <code style="color:var(--faint)">&middot;&middot;&middot;</code> = rest, <code style="color:var(--faint)">|</code> = note still ringing &middot; <code style="color:var(--amber)">3xx</code> = slide into the note (tone portamento) &middot; the <b>Bass</b> column shows the octave-bass figure playing underneath (display only, no fx). The <b>IT</b> / <b>SWM</b> buttons in the column headers copy that column to the clipboard for DUET, OpenMPT or Schism.</div>
+    <div class="mlay">
+      <div class="card ctlcard">
+        <label>Length <select id="mLen"><option value="16">16 steps (1 bar)</option><option value="32" selected>32 steps (2 bars)</option><option value="64">64 steps (4 bars)</option></select></label>
+        <label>Tempo <input type="range" id="mBpm" min="70" max="200" value="128"><span class="v" id="mBpmVal">128</span></label>
+        <label>Density <select id="mDens"><option value="sparse">Sparse</option><option value="medium" selected>Medium</option><option value="busy">Busy</option></select></label>
+        <label>Range <select id="mRange"><option value="1">1 octave</option><option value="2" selected>2 octaves</option><option value="3">3 octaves</option></select></label>
+        <label>Rests <input type="range" id="mRest" min="0" max="40" value="10"><span class="v" id="mRestVal">10%</span></label>
+        <label>Leaps <input type="range" id="mLeap" min="0" max="50" value="15"><span class="v" id="mLeapVal">15%</span></label>
+        <label>Slides <select id="mSlide"><option value="off" selected>Off</option><option value="some">Some</option><option value="lots">Lots</option></select></label>
+        <div class="sect">
+          <label>Progression <select id="mProg"></select></label>
+          <label>Chord arps <input type="checkbox" id="mArp" checked></label>
+          <label>Bass <input type="checkbox" id="mBass" checked></label>
+          <label>Hear slides <input type="checkbox" id="mHearSlide" checked></label>
+          <label>Loop <input type="checkbox" id="mLoop" checked></label>
+        </div>
+        <div class="btns">
+          <button class="btn primary" id="mGen">Generate</button>
+          <button class="btn" id="mVar">Variation</button>
+          <button class="btn playstop" id="mPlay">Play</button>
+          <button class="btn" id="mCopy">Copy as text</button>
+        </div>
+        <div class="hint" style="margin-top:10px" id="mMsg"></div>
+      </div>
+      <div class="pattern" id="mPat"></div>
+    </div>
+  </section>
+
+  <section class="tab" id="tab-tech">
+    <h2>Chip &amp; tracker techniques</h2>
+    <div class="hint">The tricks that make three channels sound like a band. Most have a <b>Hear it</b> button.</div>
+    <div class="learn" id="techList"></div>
+  </section>
+
+  <section class="tab" id="tab-theory">
+    <h2>Theory, in semitones</h2>
+    <div class="hint">No staff notation anywhere. Everything is counted in halftone steps, the way your tracker thinks.</div>
+    <div class="learn" id="theoryList"></div>
+  </section>
+</main>
+<footer>0 3 7 &mdash; runs entirely offline in your browser &middot; keep it next to your tracker &middot; sound: Web Audio, chip waveforms</footer>
+<script>
+/* ================= data ================= */
+const NOTE_NAMES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function tname(midi){const pc=((midi%12)+12)%12,oct=Math.floor(midi/12)-1;const n=NOTE_NAMES[pc];return (n.length===1?n+'-':n)+oct;}
+function pcname(pc){return NOTE_NAMES[((pc%12)+12)%12];}
+
+const SCALES=[
+ {id:'major',   name:'Major (Ionian)',          iv:[0,2,4,5,7,9,11], mood:'bright, confident, happy end-boss-defeated energy'},
+ {id:'nminor',  name:'Natural Minor (Aeolian)', iv:[0,2,3,5,7,8,10], mood:'melancholic, serious — the chiptune default'},
+ {id:'hminor',  name:'Harmonic Minor',          iv:[0,2,3,5,7,8,11], mood:'dramatic, gothic, castle-level tension'},
+ {id:'mminor',  name:'Melodic Minor',           iv:[0,2,3,5,7,9,11], mood:'smooth minor, slightly jazzy'},
+ {id:'dorian',  name:'Dorian',                  iv:[0,2,3,5,7,9,10], mood:'cool, hopeful minor — funk and 90s dance love it'},
+ {id:'phrygian',name:'Phrygian',                iv:[0,1,3,5,7,8,10], mood:'dark, menacing, spanish tinge'},
+ {id:'phrygdom',name:'Phrygian Dominant',       iv:[0,1,4,5,7,8,10], mood:'exotic, eastern, metal'},
+ {id:'lydian',  name:'Lydian',                  iv:[0,2,4,6,7,9,11], mood:'dreamy, floating, sci-fi wonder'},
+ {id:'mixo',    name:'Mixolydian',              iv:[0,2,4,5,7,9,10], mood:'bright but laid back, rock/blues'},
+ {id:'majpent', name:'Major Pentatonic',        iv:[0,2,4,7,9],      mood:'simple and folky — almost impossible to hit a wrong note'},
+ {id:'minpent', name:'Minor Pentatonic',        iv:[0,3,5,7,10],     mood:'riff machine, bluesy'},
+ {id:'blues',   name:'Blues',                   iv:[0,3,5,6,7,10],   mood:'gritty, expressive, bend-me notes'}
+];
+
+/* deg = which scale steps the chord stacks (0-based). Used to snap the shape into any scale. */
+const CHORDS=[
+ {id:'min',  name:'Minor',        sfx:'m',     iv:[0,3,7],     deg:[0,2,4]},
+ {id:'maj',  name:'Major',        sfx:'',      iv:[0,4,7],     deg:[0,2,4]},
+ {id:'dim',  name:'Diminished',   sfx:'dim',   iv:[0,3,6],     deg:[0,2,4]},
+ {id:'aug',  name:'Augmented',    sfx:'aug',   iv:[0,4,8],     deg:[0,2,4]},
+ {id:'sus2', name:'Sus2',         sfx:'sus2',  iv:[0,2,7],     deg:[0,1,4]},
+ {id:'sus4', name:'Sus4',         sfx:'sus4',  iv:[0,5,7],     deg:[0,3,4]},
+ {id:'p5',   name:'Power / 5th',  sfx:'5',     iv:[0,7],       deg:[0,4]},
+ {id:'m7',   name:'Minor 7',      sfx:'m7',    iv:[0,3,7,10],  deg:[0,2,4,6]},
+ {id:'d7',   name:'Dominant 7',   sfx:'7',     iv:[0,4,7,10],  deg:[0,2,4,6]},
+ {id:'maj7', name:'Major 7',      sfx:'maj7',  iv:[0,4,7,11],  deg:[0,2,4,6]},
+ {id:'m7b5', name:'Half-dim',     sfx:'m7\u266d5', iv:[0,3,6,10], deg:[0,2,4,6]},
+ {id:'dim7', name:'Dim 7',        sfx:'dim7',  iv:[0,3,6,9],   deg:[0,2,4,6]},
+ {id:'6',    name:'Major 6',      sfx:'6',     iv:[0,4,7,9],   deg:[0,2,4,5]},
+ {id:'m6',   name:'Minor 6',      sfx:'m6',    iv:[0,3,7,9],   deg:[0,2,4,5]},
+ {id:'add9', name:'Add 9',        sfx:'add9',  iv:[0,4,7,14],  deg:[0,2,4,8]}
+];
+
+const PROGS=[
+ {name:'1 \u00b7 5 \u00b7 6 \u00b7 4', tag:'the pop anthem',        degs:[0,4,5,3]},
+ {name:'6 \u00b7 4 \u00b7 1 \u00b7 5', tag:'emotional pop',         degs:[5,3,0,4]},
+ {name:'1 \u00b7 6 \u00b7 4 \u00b7 5', tag:'doo-wop / 8-bit classic', degs:[0,5,3,4]},
+ {name:'1 \u00b7 7 \u00b7 6 \u00b7 7', tag:'synthwave loop',        degs:[0,6,5,6]},
+ {name:'1 \u00b7 6 \u00b7 3 \u00b7 7', tag:'minor pop loop',        degs:[0,5,2,6]},
+ {name:'1 \u00b7 4 \u00b7 5 \u00b7 4', tag:'simple rave',           degs:[0,3,4,3]},
+ {name:'2 \u00b7 5 \u00b7 1 \u00b7 1', tag:'jazz cadence',          degs:[1,4,0,0]},
+ {name:'1 \u00b7 3 \u00b7 4 \u00b7 6', tag:'wistful',               degs:[0,2,3,5]}
+];
+
+/* ================= state ================= */
+const S={
+  root:9,            /* A */
+  scale:SCALES[1],   /* natural minor */
+  chord:CHORDS[0],   /* minor 0 3 7 */
+  snap:true,
+  wave:'pulse25',
+  arpRate:30,
+  vol:0.7
+};
+function scalePcs(){return S.scale.iv.map(i=>(S.root+i)%12);}
+function inScalePc(pc){return scalePcs().includes(((pc%12)+12)%12);}
+function rootMidi(){return 48+S.root+(S.root<3?12:0);} /* keep the chord-root register comfortable across all 12 keys */
+
+/* chord fitted into the scale at a scale degree. returns {rel:[...], adj:[bool], out:[bool], midis:[...]} */
+function fitChord(degIdx, chord, snap){
+  const L=S.scale.iv.length;
+  const degMidi=rootMidi()+S.scale.iv[degIdx];
+  let rel;
+  if(snap){
+    rel=chord.deg.map(off=>{
+      const i=degIdx+off, oct=Math.floor(i/L);
+      return (S.scale.iv[i%L]+12*oct)-S.scale.iv[degIdx];
+    });
+  }else{
+    rel=chord.iv.slice();
+  }
+  const adj=rel.map((r,i)=>snap && r!==chord.iv[i]);
+  const out=rel.map(r=>!inScalePc(degMidi+r));
+  return {rel, adj, out, midis:rel.map(r=>degMidi+r), rootNote:degMidi};
+}
+function chordLabel(rel){
+  const c=CHORDS.find(c=>c.iv.length===rel.length && c.iv.every((v,i)=>v===rel[i]));
+  return c? c.sfx : null;
+}
+function romanFor(degIdx, rel){
+  const R=['I','II','III','IV','V','VI','VII'];
+  if(S.scale.iv.length!==7) return String(degIdx+1);
+  let r=R[degIdx];
+  const third=rel[1], fifth=rel.length>2?rel[2]:7;
+  if(third===3) r=r.toLowerCase();
+  let mark='';
+  if(third===3&&fifth===6) mark='\u00b0';
+  if(third===4&&fifth===8) mark='+';
+  return r+mark;
+}
+function invert(midis, n){
+  const m=midis.slice();
+  for(let i=0;i<n;i++) m.push(m.shift()+12);
+  const rel=m.map(x=>x-m[0]);
+  return {midis:m, rel};
+}
+
+/* ================= audio ================= */
+let AC=null, master=null, comp=null, waves={};
+function audio(){
+  if(AC) {if(AC.state==='suspended')AC.resume(); return AC;}
+  AC=new (window.AudioContext||window.webkitAudioContext)();
+  comp=AC.createDynamicsCompressor();
+  comp.threshold.value=-16; comp.ratio.value=6; comp.attack.value=.002; comp.release.value=.12;
+  const lp=AC.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=9500; lp.Q.value=.5;
+  master=AC.createGain(); master.gain.value=S.vol*0.55;
+  comp.connect(lp); lp.connect(master); master.connect(AC.destination);
+  for(const [id,duty] of [['pulse50',.5],['pulse25',.25],['pulse125',.125]]){
+    const N=48, re=new Float32Array(N), im=new Float32Array(N);
+    for(let n=1;n<N;n++) im[n]=(2/(n*Math.PI))*Math.sin(n*Math.PI*duty);
+    waves[id]=AC.createPeriodicWave(re,im,{disableNormalization:false});
+  }
+  return AC;
+}
+function freq(m){return 440*Math.pow(2,(m-69)/12);}
+let live=[];
+function voice(midi,{t=null,dur=.3,gain=.8,wave=null,glideTo=null,glideT=0,vib=false,ramps=null}={}){
+  const ac=audio(); const t0=(t==null?ac.currentTime:t);
+  const o=ac.createOscillator();
+  const w=wave||S.wave;
+  if(waves[w]) o.setPeriodicWave(waves[w]); else o.type=w;
+  o.frequency.setValueAtTime(freq(midi),t0);
+  if(glideTo!=null) o.frequency.exponentialRampToValueAtTime(freq(glideTo),t0+glideT);
+  // ramps: [{t,midi,secs}] — tone portamento chain, linear in Hz like a SID/tracker player, no retrigger
+  if(ramps){ let cur=midi; for(const r of ramps){ o.frequency.setValueAtTime(freq(cur),r.t); o.frequency.linearRampToValueAtTime(freq(r.midi),r.t+r.secs); cur=r.midi; } }
+  let lfo=null,lg=null;
+  if(vib){
+    lfo=ac.createOscillator(); lg=ac.createGain();
+    lfo.frequency.value=5.6; lg.gain.setValueAtTime(0,t0);
+    lg.gain.setValueAtTime(0,t0+Math.min(.18,dur*.4));
+    lg.gain.linearRampToValueAtTime(freq(midi)*.012,t0+Math.min(.3,dur*.6));
+    lfo.connect(lg); lg.connect(o.frequency); lfo.start(t0); lfo.stop(t0+dur+.1);
+  }
+  const g=ac.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(gain,t0+.004);
+  g.gain.exponentialRampToValueAtTime(Math.max(gain*.55,.001),t0+Math.min(.09,dur));
+  g.gain.setValueAtTime(Math.max(gain*.55,.001),t0+Math.max(dur-.03,.01));
+  g.gain.exponentialRampToValueAtTime(.0008,t0+dur);
+  o.connect(g); g.connect(comp);
+  o.start(t0); o.stop(t0+dur+.05);
+  live.push(o); o.onended=()=>{live=live.filter(x=>x!==o); try{g.disconnect()}catch(e){}};
+  return o;
+}
+function stopAll(){ for(const o of live){try{o.stop()}catch(e){}} live=[]; }
+function playNote(m,dur=.35,gain=.8){voice(m,{dur,gain});}
+function playChordSim(midis,dur=.9){const ac=audio(),t=ac.currentTime; midis.forEach(m=>voice(m,{t,dur,gain:.5}));}
+function playArp(midis,secs=1.1,rate=null,opts={}){
+  const {t=null,gain=.7,wave=null}=opts;
+  const ac=audio(); const t0=(t==null?ac.currentTime+.02:t);
+  const r=rate||S.arpRate; const step=1/r; const n=Math.max(1,Math.floor(secs*r));
+  for(let i=0;i<n;i++){
+    voice(midis[i%midis.length],{t:t0+i*step,dur:step*1.05,gain,wave});
+  }
+}
+
+/* ================= tabs ================= */
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  $$('#tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  $$('.tab').forEach(x=>x.classList.toggle('on',x.id==='tab-'+b.dataset.tab));
+});
+
+/* ================= global controls ================= */
+function fillGlobal(){
+  const rs=$('#rootSel');
+  rs.innerHTML=NOTE_NAMES.map((n,i)=>`<option value="${i}" ${i===S.root?'selected':''}>${n}</option>`).join('');
+  const ss=$('#scaleSel');
+  ss.innerHTML=SCALES.map(s=>`<option value="${s.id}" ${s.id===S.scale.id?'selected':''}>${s.name}</option>`).join('');
+  rs.onchange=()=>{S.root=+rs.value; renderScaleTab(); fillMelodyProg();};
+  ss.onchange=()=>{S.scale=SCALES.find(x=>x.id===ss.value); renderScaleTab(); fillMelodyProg();};
+  $('#waveSel').onchange=e=>S.wave=e.target.value;
+  $('#arpRate').oninput=e=>{S.arpRate=+e.target.value; $('#arpRateVal').textContent=S.arpRate+'/s';};
+  $('#vol').oninput=e=>{S.vol=e.target.value/100; if(master)master.gain.value=S.vol*0.55;};
+}
+
+/* ================= keyboard ================= */
+const KB_LOW=48, KB_HIGH=83; /* C3..B5 */
+function renderKeyboard(){
+  const kb=$('#kb'); kb.innerHTML='';
+  const whites=[]; for(let m=KB_LOW;m<=KB_HIGH;m++){ if([0,2,4,5,7,9,11].includes(m%12)) whites.push(m); }
+  const ww=100/whites.length;
+  const pcs=scalePcs();
+  let wi=0;
+  for(let m=KB_LOW;m<=KB_HIGH;m++){
+    const pc=m%12, isW=[0,2,4,5,7,9,11].includes(pc);
+    const el=document.createElement('div');
+    const inSc=pcs.includes(pc), isRoot=pc===S.root;
+    el.className=(isW?'wk':'bk')+(isRoot?' root':inSc?' in':' off');
+    el.dataset.midi=m;
+    if(isW){ el.style.left=(wi*ww)+'%'; el.style.width=ww+'%'; wi++; }
+    else { el.style.left=(wi*ww - ww*0.30)+'%'; el.style.width=(ww*0.62)+'%'; }
+    const lbl=document.createElement('span'); lbl.className='lbl'; lbl.textContent=tname(m); el.appendChild(lbl);
+    if(inSc){ const d=document.createElement('span'); d.className='deg'; d.textContent=pcs.indexOf(pc)+1; el.appendChild(d); }
+    el.addEventListener('pointerdown',()=>{ playNote(m,.4); el.classList.add('lit'); setTimeout(()=>el.classList.remove('lit'),220); });
+    kb.appendChild(el);
+  }
+}
+function renderScaleStrip(){
+  const st=$('#scaleStrip'); st.innerHTML='';
+  const b=document.createElement('button'); b.className='btn primary small'; b.textContent='\u25b8 Play scale';
+  b.onclick=()=>{ const ac=audio(); const t=ac.currentTime+.03;
+    const ms=[...S.scale.iv.map(i=>rootMidi()+i), rootMidi()+12];
+    ms.forEach((m,i)=>voice(m,{t:t+i*.19,dur:.19,gain:.7})); };
+  st.appendChild(b);
+  S.scale.iv.forEach((iv,i)=>{
+    const m=rootMidi()+iv;
+    const d=document.createElement('div'); d.className='snote'+(i===0?' root':'');
+    d.innerHTML=`<span class="nm">${pcname(S.root+iv)}</span><span class="st">+${iv} \u00b7 deg ${i+1}</span>`;
+    d.onclick=()=>playNote(m,.4);
+    st.appendChild(d);
+  });
+}
+
+/* ================= chord chips + degree cards ================= */
+function renderChordChips(){
+  const row=$('#chordChips'); row.innerHTML='';
+  CHORDS.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='chip'+(c.id===S.chord.id?' on':'');
+    b.innerHTML=`${c.name} <span class="f">${c.iv.join(' ')}</span>`;
+    b.onclick=()=>{S.chord=c; renderChordChips(); renderDegrees();};
+    row.appendChild(b);
+  });
+}
+function formulaHTML(f){
+  return '<span class="formula">'+f.rel.map((r,i)=>{
+    const cls=f.out[i]?'out':(f.adj[i]?'adj':'');
+    return `<span class="${cls}">${r}</span>`;
+  }).join('')+'</span>';
+}
+function renderDegrees(){
+  const g=$('#degGrid'); g.innerHTML='';
+  S.scale.iv.forEach((iv,di)=>{
+    const f=fitChord(di,S.chord,S.snap);
+    const card=document.createElement('div');
+    card.className='dcard'+(di===0?' tonic':'');
+    const label=chordLabel(f.rel);
+    const nm=pcname(S.root+iv);
+    card.innerHTML=`
+      <div class="top"><span class="rn">${romanFor(di,f.rel)}</span><span class="note">${nm}</span>
+        <span class="cname">${label!==null?(nm+label):'custom'}</span></div>
+      ${formulaHTML(f)}
+      <div class="tones">${f.midis.map(tname).join('&ensp;')}</div>
+      <div class="acts">
+        <button class="btn small primary" data-a="chord">\u25b8 Chord</button>
+        <button class="btn small" data-a="arp">\u25b8 Arp</button>
+        <button class="btn small" data-a="inv">Inversions</button>
+      </div>
+      <div class="inv"></div>`;
+    card.querySelector('[data-a=chord]').onclick=()=>playChordSim(f.midis);
+    card.querySelector('[data-a=arp]').onclick=()=>playArp(f.midis,1.2);
+    const invBox=card.querySelector('.inv');
+    card.querySelector('[data-a=inv]').onclick=()=>{
+      if(!invBox.classList.contains('open')){
+        invBox.innerHTML='';
+        const tags=['root','1st','2nd','3rd'];
+        for(let n=0;n<f.midis.length;n++){
+          const v=invert(f.midis,n);
+          const row=document.createElement('div'); row.className='row';
+          row.innerHTML=`<span class="tag">${tags[n]||n+'th'}</span>
+            <span class="formula">${v.rel.map(r=>`<span>${r}</span>`).join('')}</span>
+            <span class="tn">${v.midis.map(tname).join(' ')}</span>`;
+          const pb=document.createElement('button'); pb.className='btn small'; pb.textContent='\u25b8';
+          pb.onclick=()=>playArp(v.midis,1.0);
+          row.appendChild(pb); invBox.appendChild(row);
+        }
+      }
+      invBox.classList.toggle('open');
+    };
+    g.appendChild(card);
+  });
+}
+
+/* ================= progressions ================= */
+let progTimer=null;
+function renderProgs(){
+  const box=$('#progList'); box.innerHTML='';
+  PROGS.forEach(p=>{
+    const L=S.scale.iv.length;
+    const chords=p.degs.map(d=>fitChord(d%L,CHORDS[0],true)); /* snapped triads */
+    const row=document.createElement('div'); row.className='prog';
+    const seq=chords.map((f,i)=>{
+      const nm=pcname(S.root+S.scale.iv[p.degs[i]%L]);
+      const lb=chordLabel(f.rel);
+      return `<span class="pc"><b>${nm}${lb!==null?lb:''}</b> <span class="pf">${f.rel.join(' ')}</span></span>`;
+    }).join('');
+    row.innerHTML=`<span class="pname">${p.name} <span style="color:var(--faint)">\u2014 ${p.tag}</span></span><span class="seq">${seq}</span>`;
+    const b=document.createElement('button'); b.className='btn small primary'; b.textContent='\u25b8 Play';
+    b.onclick=()=>{
+      stopAll(); const ac=audio(); const bar=1.35; let t=ac.currentTime+.03;
+      chords.forEach(f=>{ playArp(f.midis,bar*0.96,null,{t,gain:.6}); voice(f.midis[0]-12,{t,dur:bar*0.9,gain:.5,wave:'triangle'}); t+=bar; });
+    };
+    row.appendChild(b); box.appendChild(row);
+  });
+}
+
+function renderScaleTab(){
+  $('#scaleTitle').textContent=`${pcname(S.root)} ${S.scale.name} \u2014 ${S.scale.iv.join(' ')}`;
+  $('#scaleHint').textContent=S.scale.mood.charAt(0).toUpperCase()+S.scale.mood.slice(1)+'. Click keys or the note chips to hear them.';
+  renderKeyboard(); renderScaleStrip(); renderChordChips(); renderDegrees(); renderProgs();
+}
+$('#snapChk').addEventListener('change',e=>{S.snap=e.target.checked; renderDegrees();});
+
+/* ================= melody lab ================= */
+const RHY={
+ sparse:[ [[0,4],[4,4],[8,4],[12,4]], [[0,6],[6,2],[8,4],[12,4]], [[0,4],[6,2],[8,8]], [[0,8],[8,4],[12,4]], [[0,4],[4,4],[8,6],[14,2]] ],
+ medium:[ [[0,2],[2,2],[4,4],[8,2],[10,2],[12,4]], [[0,4],[4,2],[6,2],[8,4],[12,2],[14,2]], [[0,2],[2,2],[4,2],[6,2],[8,4],[12,4]], [[0,3],[3,1],[4,4],[8,2],[10,2],[12,4]], [[0,2],[4,2],[6,2],[8,2],[10,2],[12,4]] ],
+ busy:[ [[0,2],[2,2],[4,2],[6,2],[8,2],[10,2],[12,2],[14,2]], [[0,1],[1,1],[2,2],[4,2],[6,2],[8,2],[10,2],[12,4]], [[0,2],[2,1],[3,1],[4,2],[6,2],[8,2],[10,1],[11,1],[12,2],[14,2]], [[0,2],[2,2],[4,1],[5,1],[6,2],[8,2],[10,2],[12,2],[14,2]] ]
+};
+const MEL={cells:[],bass:[],bars:0,chords:[],playing:false,t0:0,stepDur:0,loopTimer:null,raf:null};
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const chance=p=>Math.random()<p;
+
+function melodyPool(){
+  const range=+$('#mRange').value;
+  const lo=rootMidi()+12, hi=lo+12*range;
+  const pcs=scalePcs(), pool=[];
+  for(let m=lo;m<=hi;m++) if(pcs.includes(m%12)) pool.push(m);
+  return pool;
+}
+function nearestInPool(pool,target,filterPcs=null){
+  let best=null,bd=1e9;
+  for(const m of pool){
+    if(filterPcs && !filterPcs.includes(m%12)) continue;
+    const d=Math.abs(m-target); if(d<bd){bd=d;best=m;}
+  }
+  return best==null?rnd(pool):best;
+}
+function walkPitch(pool,prev,leapP,chordPcs,strong){
+  if(prev==null) return nearestInPool(pool,rootMidi()+12+ (chance(.5)?0:7),chordPcs);
+  if(strong && chance(.8)) {
+    const t=prev+(chance(.5)?0:(chance(.5)?3:-3));
+    return nearestInPool(pool,t,chordPcs);
+  }
+  const i=pool.indexOf(prev)>=0?pool.indexOf(prev):pool.indexOf(nearestInPool(pool,prev));
+  let step;
+  if(chance(leapP)) step=rnd([-4,-3,3,4,5,-5]);
+  else step=rnd([-2,-1,-1,1,1,1,2,2]);
+  let j=Math.min(pool.length-1,Math.max(0,i+step));
+  return pool[j];
+}
+function genBar(chordF,prevPitch,opts){
+  const cells=new Array(16).fill(null).map(()=>({type:'rest'}));
+  const tmpl=rnd(RHY[opts.dens]);
+  const chordPcs=chordF.midis.map(m=>m%12);
+  let prev=prevPitch;
+  for(const [pos,len] of tmpl){
+    if(chance(opts.restP) && pos%4!==0){ continue; }
+    const strong=pos%4===0;
+    const midi=walkPitch(opts.pool,prev,opts.leapP,chordPcs,strong);
+    prev=midi;
+    cells[pos]={type:'note',midi,len};
+    for(let k=1;k<len && pos+k<16;k++){ if(cells[pos+k].type==='rest') cells[pos+k]={type:'hold'}; }
+  }
+  if(cells.every(c=>c.type==='rest')) cells[0]={type:'note',midi:nearestInPool(opts.pool,rootMidi()+12,chordPcs),len:4};
+  return {cells,last:prev};
+}
+function varyBar(bar,chordF,opts,amount,cadence){
+  const cells=bar.cells.map(c=>({...c}));
+  const chordPcs=chordF.midis.map(m=>m%12);
+  let prev=null, onsets=[];
+  cells.forEach((c,i)=>{if(c.type==='note')onsets.push(i);});
+  for(const i of onsets){
+    if(chance(amount)){
+      const strong=i%4===0;
+      cells[i].midi=walkPitch(opts.pool,cells[i].midi,opts.leapP,chordPcs,strong);
+    }
+  }
+  if(cadence && onsets.length){
+    const li=onsets[onsets.length-1];
+    cells[li].midi=nearestInPool(opts.pool,cells[li].midi,[S.root, (S.root+S.scale.iv[Math.min(4,S.scale.iv.length-1)])%12]);
+  }
+  return {cells,last:cells[onsets[onsets.length-1]]?.midi??null};
+}
+/* --- slides (tone portamento, 3xx) --- */
+const SLIDE_LV={some:{cap:2,leapP:.3,stepP:0},lots:{cap:4,leapP:.6,stepP:.3}};
+function noteLen(cells,i){ let n=1; while(i+n<cells.length&&cells[i+n].type==='hold') n++; return n; }
+// pitch of the note still ringing when step i starts; null if a rest sits in between (nothing to slide from)
+function prevNoteMidi(cells,i){ for(let j=i-1;j>=0;j--){ if(cells[j].type==='note') return cells[j].midi; if(cells[j].type==='rest') return null; } return null; }
+// SID-Wizard 03vv timing: time ≈ (1 − 2^(−semis/12)) · 2^((107 − ⌈vv/2⌉)/12) · 20 ms, and its inverse
+function slideSecs(semi,vv){ return (1-Math.pow(2,-semi/12))*Math.pow(2,(107-Math.ceil(vv/2))/12)*.02; }
+function slideVal(semi,secs){ const v=2*Math.round(107-12*Math.log2(secs/(.02*(1-Math.pow(2,-semi/12))))); return Math.max(0x10,Math.min(0xA0,v)); }
+function fxText(c){ return (c.type==='note'&&c.slide!=null)?'3'+c.slide.toString(16).toUpperCase().padStart(2,'0'):''; }
+function curStepDur(){ return 60/(+$('#mBpm').value)/4; }
+function placeSlides(cells,level,bars,stepDur){
+  cells.forEach(c=>{ if(c.slide!=null) delete c.slide; });
+  const lv=SLIDE_LV[level]; if(!lv) return;
+  for(let b=0;b<bars;b++){
+    const on=[]; for(let i=b*16;i<b*16+16;i++) if(cells[i].type==='note') on.push(i);
+    if(!on.length) continue;
+    // candidates: previous note still ringing, at least an 8th long, and actually a different pitch
+    const cand=on.map(i=>{
+      const p=prevNoteMidi(cells,i); if(p==null) return null;
+      const len=noteLen(cells,i); if(len<2) return null;
+      const semi=cells[i].midi-p; if(!semi) return null;
+      return {i,semi,len};
+    }).filter(Boolean);
+    if(!cand.length) continue;
+    const peak=Math.max(...on.map(i=>cells[i].midi)), last=on[on.length-1];
+    const picked=[]; const take=(c,frac)=>{ if(c&&picked.length<lv.cap&&!picked.some(p=>p.i===c.i)) picked.push({...c,frac}); };
+    take(cand.find(c=>cells[c.i].midi===peak&&c.semi>=2),.5);                   // slide up into the peak of the bar
+    if(b===bars-1) take(cand.find(c=>c.i===last),.7);                            // slow slide into the cadence note
+    for(const c of cand) if(Math.abs(c.semi)>=4&&chance(lv.leapP)) take(c,.5);   // bends on leaps
+    for(const c of cand) if(Math.abs(c.semi)<=2&&chance(lv.stepP)) take(c,.3);   // quick legato on steps (Lots only)
+    // speed from the interval and the note length: the glide should be done part-way into the note
+    for(const p of picked) cells[p.i].slide=slideVal(Math.abs(p.semi),p.len*stepDur*p.frac);
+  }
+}
+function reslide(i){
+  const c=MEL.cells[i]; if(c.type!=='note'||c.slide==null) return;
+  const p=prevNoteMidi(MEL.cells,i), semi=p==null?0:Math.abs(c.midi-p);
+  if(!semi){ delete c.slide; return; }
+  c.slide=slideVal(semi,noteLen(MEL.cells,i)*curStepDur()*.5);
+}
+/* --- bass: octave-bass figure derived from the bar chords, same cell format as the lead --- */
+function genBass(chords){
+  const cells=[];
+  for(const f of chords){
+    const bar=new Array(16).fill(null).map(()=>({type:'rest'}));
+    for(const beat of [0,4,8,12]){
+      bar[beat]={type:'note',midi:f.rootNote-24,len:2}; bar[beat+1]={type:'hold'};
+      bar[beat+2]={type:'note',midi:f.rootNote-12,len:2}; bar[beat+3]={type:'hold'};
+    }
+    cells.push(...bar);
+  }
+  return cells;
+}
+function currentProg(){ return PROGS[+$('#mProg').value]; }
+function barChord(b){
+  const L=S.scale.iv.length;
+  return fitChord(currentProg().degs[b%4]%L,CHORDS[0],true);
+}
+function generateMelody(){
+  stopMelody();
+  const bars=(+$('#mLen').value)/16;
+  const opts={
+    dens:$('#mDens').value,
+    restP:(+$('#mRest').value)/100,
+    leapP:(+$('#mLeap').value)/100,
+    pool:melodyPool()
+  };
+  MEL.bars=bars; MEL.cells=[]; MEL.chords=[];
+  const made=[];
+  let prev=null;
+  for(let b=0;b<bars;b++){
+    const cf=barChord(b); MEL.chords.push(cf);
+    let bar;
+    if(bars===4 && b===2) bar={cells:made[0].cells.map(c=>({...c})),last:made[0].last};
+    else if(bars===4 && b===3) bar=varyBar(made[1],cf,opts,.4,true);
+    else if(bars===2 && b===1) bar=varyBar(made[0],cf,opts,.35,true);
+    else if(bars===1) { bar=genBar(cf,prev,opts); bar=varyBar(bar,cf,opts,0,true); }
+    else bar=genBar(cf,prev,opts);
+    made.push(bar); prev=bar.last??prev;
+    MEL.cells.push(...bar.cells);
+  }
+  MEL.bass=genBass(MEL.chords);
+  placeSlides(MEL.cells,$('#mSlide').value,bars,curStepDur());
+  if(bars===4) for(let i=0;i<16;i++){ const s=MEL.cells[i].slide; if(s!=null) MEL.cells[32+i].slide=s; else delete MEL.cells[32+i].slide; }
+  renderPattern();
+  $('#mMsg').textContent='';
+}
+function variationMelody(){
+  if(!MEL.cells.length){generateMelody();return;}
+  stopMelody();
+  const opts={dens:$('#mDens').value,restP:0,leapP:(+$('#mLeap').value)/100,pool:melodyPool()};
+  for(let b=0;b<MEL.bars;b++){
+    const bar={cells:MEL.cells.slice(b*16,b*16+16)};
+    const v=varyBar(bar,MEL.chords[b],opts,.3,b===MEL.bars-1);
+    for(let i=0;i<16;i++) MEL.cells[b*16+i]=v.cells[i];
+  }
+  placeSlides(MEL.cells,$('#mSlide').value,MEL.bars,curStepDur());
+  renderPattern();
+}
+function renderPattern(){
+  const box=$('#mPat'); box.innerHTML='';
+  if(!MEL.cells.length){box.innerHTML='<div style="padding:24px;color:var(--faint)">Press Generate to get a melody.</div>';return;}
+  const head=document.createElement('div'); head.className='phead';
+  const xb=(col,fmt)=>`<button class="xb" data-col="${col}" data-fmt="${fmt}" title="Copy the ${col==='mel'?'melody':'bass'} column as ${fmt==='it'?'OpenMPT / IT text (DUET, OpenMPT, Schism)':'DUET SW text (SID-Wizard track)'}">${fmt==='it'?'IT':'SWM'}</button>`;
+  head.innerHTML='<span class="st">#</span><span class="hm">Melody'+xb('mel','it')+xb('mel','swm')+'</span><span class="hb">Bass'+xb('bass','it')+xb('bass','swm')+'</span><span class="ch">Chord</span>';
+  head.querySelectorAll('.xb').forEach(b=>b.addEventListener('click',()=>exportColumn(b.dataset.col,b.dataset.fmt)));
+  box.appendChild(head);
+  MEL.cells.forEach((c,i)=>{
+    const row=document.createElement('div');
+    row.className='prow'+(i%4===0?' beat':'')+(i%16===0?' bar':'');
+    row.dataset.step=i;
+    const hex=i.toString(16).toUpperCase().padStart(2,'0');
+    let nt,cls='nt';
+    if(c.type==='note') nt=tname(c.midi);
+    else if(c.type==='hold'){nt='&nbsp;|';cls='nt holdc';}
+    else {nt='\u00b7\u00b7\u00b7';cls='nt rest';}
+    const ch=(i%16===0)?(()=>{const f=MEL.chords[i/16];const nm=pcname(f.rootNote);const lb=chordLabel(f.rel);return nm+(lb!==null?lb:'')+ ' \u2039'+f.rel.join(' ')+'\u203a';})():'';
+    const fx=fxText(c); let fxTitle='';
+    if(fx){ const p=prevNoteMidi(MEL.cells,i); const semi=p==null?0:Math.abs(c.midi-p);
+      fxTitle=` title="tone portamento ${fx}`+(semi?` \u00b7 \u2248${Math.round(slideSecs(semi,c.slide)*1000)} ms over ${semi} st`:'')+'"'; }
+    const b=MEL.bass[i]||{type:'rest'}; let bt,bcls='bs';
+    if(b.type==='note') bt=tname(b.midi); else if(b.type==='hold'){bt='&nbsp;|';bcls='bs holdc';} else {bt='\u00b7\u00b7\u00b7';bcls='bs rest';}
+    row.innerHTML=`<span class="st">${hex}</span><span class="${cls}">${nt}</span><span class="fx"${fxTitle}>${fx}</span><span class="${bcls}">${bt}</span><span class="ch">${ch}</span>`;
+    const ncell=row.querySelector('.nt');
+    ncell.addEventListener('click',()=>{
+      const cell=MEL.cells[i];
+      if(cell.type==='note'){
+        const pool=melodyPool();
+        const chordPcs=MEL.chords[Math.floor(i/16)].midis.map(m=>m%12);
+        cell.midi=walkPitch(pool,cell.midi,.2,chordPcs,i%4===0);
+        reslide(i); if(i+1<MEL.cells.length) reslide(i+noteLen(MEL.cells,i));
+        playNote(cell.midi,.25); renderPattern();
+      }
+    });
+    ncell.addEventListener('dblclick',()=>{
+      const cell=MEL.cells[i];
+      if(cell.type==='note'){ MEL.cells[i]={type:'rest'};
+        let k=i+1; while(k<MEL.cells.length&&MEL.cells[k].type==='hold'){MEL.cells[k]={type:'rest'};k++;}
+      } else {
+        const pool=melodyPool();
+        const chordPcs=MEL.chords[Math.floor(i/16)].midis.map(m=>m%12);
+        MEL.cells[i]={type:'note',midi:walkPitch(pool,null,0,chordPcs,true),len:1};
+      }
+      renderPattern();
+    });
+    box.appendChild(row);
+  });
+}
+function scheduleMelody(t0){
+  const ac=audio();
+  const bpm=+$('#mBpm').value, stepDur=60/bpm/4;
+  MEL.stepDur=stepDur;
+  const useArp=$('#mArp').checked, useBass=$('#mBass').checked, hear=$('#mHearSlide').checked;
+  // lead: a note plus every following 3xx note that starts exactly where the previous one ends
+  // is ONE voice (no retrigger) whose pitch ramps at each slide — that is what tone portamento means
+  const on=[]; MEL.cells.forEach((c,i)=>{ if(c.type==='note') on.push(i); });
+  for(let k=0;k<on.length;){
+    const i=on[k]; let cur=MEL.cells[i].midi, end=i+noteLen(MEL.cells,i); const ramps=[];
+    let j=k+1;
+    while(hear&&j<on.length&&on[j]===end&&MEL.cells[on[j]].slide!=null){
+      const n=MEL.cells[on[j]], len=noteLen(MEL.cells,on[j]);
+      const secs=Math.min(slideSecs(Math.abs(n.midi-cur),n.slide),len*stepDur*.95);   // must land before the note ends
+      ramps.push({t:t0+on[j]*stepDur,midi:n.midi,secs:Math.max(secs,.005)});
+      cur=n.midi; end=on[j]+len; j++;
+    }
+    voice(MEL.cells[i].midi,{t:t0+i*stepDur,dur:Math.max((end-i)*stepDur*.92,.06),gain:.85,ramps:ramps.length?ramps:null});
+    k=j;
+  }
+  for(let b=0;b<MEL.bars;b++){
+    const f=MEL.chords[b], bt=t0+b*16*stepDur;
+    if(useArp){
+      const am=f.midis.map(m=>m-12);
+      playArp(am,16*stepDur*.99,null,{t:bt,gain:.20,wave:'pulse125'});
+    }
+  }
+  if(useBass) MEL.bass.forEach((c,i)=>{
+    if(c.type==='note') voice(c.midi,{t:t0+i*stepDur,dur:Math.max(noteLen(MEL.bass,i)*stepDur*.92,.06),gain:i%4===0?.6:.35,wave:'triangle'});
+  });
+  return MEL.cells.length*stepDur;
+}
+function playMelody(){
+  if(!MEL.cells.length) generateMelody();
+  stopMelody(false);
+  const ac=audio();
+  MEL.playing=true; document.body.classList.add('playing'); $('#mPlay').textContent='Stop';
+  const t0=ac.currentTime+.08; MEL.t0=t0;
+  const total=scheduleMelody(t0);
+  const loop=()=>{ if(!MEL.playing)return;
+    MEL.loopTimer=setTimeout(()=>{ if(!MEL.playing)return;
+      if($('#mLoop').checked){ MEL.t0=MEL.t0+total; scheduleMelody(MEL.t0); loop(); }
+      else stopMelody();
+    },(MEL.t0+total-ac.currentTime-0.12)*1000);
+  };
+  loop();
+  const tick=()=>{ if(!MEL.playing)return;
+    const st=Math.floor((ac.currentTime-MEL.t0)/MEL.stepDur);
+    $$('#mPat .prow').forEach(r=>r.classList.toggle('cur',+r.dataset.step===st));
+    if(st>=0&&st<MEL.cells.length){
+      const row=$('#mPat').querySelector('.prow[data-step="'+st+'"]');
+      if(row){const box=$('#mPat'); const target=row.offsetTop-box.clientHeight/2+20;
+        box.scrollTop+= (target-box.scrollTop)*.25;}
+    }
+    MEL.raf=requestAnimationFrame(tick);
+  };
+  MEL.raf=requestAnimationFrame(tick);
+}
+function stopMelody(reset=true){
+  MEL.playing=false; clearTimeout(MEL.loopTimer); cancelAnimationFrame(MEL.raf);
+  stopAll();
+  document.body.classList.remove('playing'); $('#mPlay').textContent='Play';
+  if(reset) $$('#mPat .prow').forEach(r=>r.classList.remove('cur'));
+}
+function copyMelody(){
+  if(!MEL.cells.length)return;
+  const bpm=+$('#mBpm').value;
+  let out=`${pcname(S.root)} ${S.scale.name} \u00b7 ${MEL.cells.length} steps @ ${bpm} BPM \u00b7 prog ${currentProg().name}\n`;
+  out+='## Mel FX  Bass\n';
+  const cellTxt=c=>c.type==='note'?tname(c.midi):c.type==='hold'?' | ':'...';
+  MEL.cells.forEach((c,i)=>{
+    const hex=i.toString(16).toUpperCase().padStart(2,'0');
+    out+=hex+' '+cellTxt(c)+' '+(fxText(c)||'...')+' '+cellTxt(MEL.bass[i]||{type:'rest'})+'\n';
+  });
+  if(MEL.cells.some(c=>c.slide!=null)) out+='3xx = tone portamento (SID-Wizard speed values)\n';
+  navigator.clipboard.writeText(out).then(()=>{$('#mMsg').textContent='Copied to clipboard.';})
+    .catch(()=>{$('#mMsg').textContent='Clipboard blocked \u2014 select the pattern and copy manually.';});
+}
+/* --- clipboard export: OpenMPT "ModPlug Tracker  IT" and "DUET SW" (see duetracker/docs/clipboard-format.md) --- */
+function itName(m){ return tname(m+12); }   // IT / OpenMPT / DUET: middle C (MIDI 60) is C-5, the app shows it as C-4
+// IT Gxx = xx/16 semitone per tick on the 5 non-first ticks of a row; speed 6 and tempo = BPM make one row a 16th
+function itSpeed(semi,secs,bpm){ return Math.max(1,Math.min(255,Math.round(40*semi/(bpm*secs)))); }
+function exportText(cells,fmt){
+  const bpm=+$('#mBpm').value, hex2=v=>v.toString(16).toUpperCase().padStart(2,'0'), it=fmt==='it';
+  const lines=[it?'ModPlug Tracker  IT':'DUET SW'];
+  cells.forEach((c,i)=>{
+    let note='...', fx=it?'...':'....';
+    if(c.type==='note'){
+      note=itName(c.midi);
+      if(c.slide!=null){
+        const p=prevNoteMidi(cells,i), semi=p==null?0:Math.abs(c.midi-p);
+        if(semi) fx=it?'G'+hex2(itSpeed(semi,slideSecs(semi,c.slide),bpm)):'03'+hex2(c.slide);
+      }
+    } else if(c.type==='rest'&&it&&i>0&&cells[i-1].type!=='rest') note='===';   // note-off: the app's rest is silence
+    lines.push(it?'|'+note+'..'+'...'+fx:'|'+note+'..'+fx);                       // 11 chars (IT) / 9 chars (SWM) per cell
+  });
+  return lines.join('\n')+'\n';
+}
+function exportColumn(col,fmt){
+  const cells=col==='mel'?MEL.cells:MEL.bass; if(!cells.length) return;
+  const text=exportText(cells,fmt);
+  const what=(col==='mel'?'Melody':'Bass')+' \u2192 clipboard as '+(fmt==='it'?'ModPlug IT':'DUET SW')+', '+cells.length+' rows.';
+  navigator.clipboard.writeText(text).then(()=>{$('#mMsg').textContent=what;})
+    .catch(()=>{$('#mMsg').textContent='Clipboard blocked \u2014 try again after clicking in the page.';});
+}
+function fillMelodyProg(){
+  const sel=$('#mProg'); const cur=sel.value||'0';
+  sel.innerHTML=PROGS.map((p,i)=>`<option value="${i}">${p.name} (${p.tag})</option>`).join('');
+  sel.value=cur;
+}
+$('#mGen').addEventListener('click',generateMelody);
+$('#mVar').addEventListener('click',variationMelody);
+$('#mPlay').addEventListener('click',()=>MEL.playing?stopMelody():playMelody());
+$('#mCopy').addEventListener('click',copyMelody);
+$('#mBpm').addEventListener('input',e=>$('#mBpmVal').textContent=e.target.value);
+$('#mRest').addEventListener('input',e=>$('#mRestVal').textContent=e.target.value+'%');
+$('#mLeap').addEventListener('input',e=>$('#mLeapVal').textContent=e.target.value+'%');
+$('#mHearSlide').addEventListener('change',e=>{ $('#mPat').classList.toggle('noslide',!e.target.checked); if(MEL.playing) playMelody(); });
+$('#mBass').addEventListener('change',e=>{ $('#mPat').classList.toggle('nobass',!e.target.checked); if(MEL.playing) playMelody(); });
+$('#mArp').addEventListener('change',()=>{ if(MEL.playing) playMelody(); });
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space' && $('#tab-melody').classList.contains('on') && !['SELECT','INPUT','BUTTON'].includes(e.target.tagName)){
+    e.preventDefault(); MEL.playing?stopMelody():playMelody();
+  }
+});
+
+/* ================= demos ================= */
+function am(){const r=57;return [r,r+3,r+7];} /* A minor around A3 for demos */
+const DEMOS={
+  arpVsChord(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03;
+    am().forEach(m=>voice(m,{t,dur:1.0,gain:.5}));
+    playArp(am().map(m=>m+12),1.3,50,{t:t+1.25,gain:.7}); },
+  inversions(){ stopAll(); const ac=audio(); let t=ac.currentTime+.03; const base=am().map(m=>m+12);
+    for(let n=0;n<3;n++){ playArp(invert(base,n).midis,0.85,50,{t,gain:.7}); t+=1.0; } },
+  echo(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03; const seq=[[76,0],[79,.22],[76,.44]];
+    for(const [m,dt] of seq){ voice(m,{t:t+dt,dur:.18,gain:.8});
+      voice(m,{t:t+dt+.33,dur:.16,gain:.3}); voice(m,{t:t+dt+.66,dur:.14,gain:.12}); } },
+  vibrato(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03;
+    voice(69,{t,dur:1.0,gain:.7}); voice(69,{t:t+1.2,dur:1.6,gain:.7,vib:true}); },
+  slide(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03;
+    voice(69,{t,dur:.8,gain:.75,glideTo:76,glideT:.35});
+    voice(76,{t:t+.9,dur:.7,gain:.75,glideTo:72,glideT:.5}); },
+  octbass(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03; const st=.13;
+    for(let i=0;i<16;i++) voice(i%2?45+12:45,{t:t+i*st,dur:st*.9,gain:.75,wave:'triangle'}); },
+  detune(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03;
+    voice(69,{t,dur:1.0,gain:.6});
+    voice(69.07,{t:t+1.2,dur:1.7,gain:.42}); voice(68.93,{t:t+1.2,dur:1.7,gain:.42}); },
+  pwm(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03;
+    const seq=['pulse50','pulse25','pulse125','pulse25','pulse50','pulse25','pulse125','pulse25','pulse50','pulse25','pulse125','pulse25'];
+    seq.forEach((w,i)=>voice(57,{t:t+i*.14,dur:.15,gain:.6,wave:w})); },
+  pump(){ stopAll(); const ac=audio(); const t=ac.currentTime+.05; const beat=.46;
+    for(let b=0;b<6;b++){ am().map(m=>m+12).forEach(m=>{
+      const o=ac.createOscillator(); if(waves[S.wave])o.setPeriodicWave(waves[S.wave]); else o.type=S.wave;
+      o.frequency.value=freq(m); const g=ac.createGain(); const t0=t+b*beat;
+      g.gain.setValueAtTime(.02,t0); g.gain.linearRampToValueAtTime(.34,t0+beat*.8);
+      g.gain.linearRampToValueAtTime(.02,t0+beat);
+      o.connect(g); g.connect(comp); o.start(t0); o.stop(t0+beat+.02); live.push(o); }); } },
+  interleave(){ stopAll(); const ac=audio(); const t=ac.currentTime+.03; const st=.115;
+    const lead=[81,79,76,79,81,84,81,79]; 
+    for(let i=0;i<16;i++){
+      if(i%2===0) voice(45,{t:t+i*st,dur:st*.85,gain:.7,wave:'triangle'});
+      else voice(lead[(i-1)/2%8],{t:t+i*st,dur:st*.85,gain:.6});
+    } }
+};
+
+/* ================= techniques content ================= */
+const TECH=[
+{t:'Chord arps \u2014 the famous 0 3 7 trick',d:'arpVsChord',b:`
+<p>Chips rarely have enough channels for real chords, so you cycle through the chord tones extremely fast on one channel. At roughly 25\u201350 notes per second the ear fuses them into one shimmering chord \u2014 the signature chiptune sound.</p>
+<p>The numbers are semitone offsets from the base note: <code>0 3 7</code> is a minor chord, <code>0 4 7</code> major, <code>0 3 6</code> diminished. Slower rates (10\u201315/s) sound like a deliberate arpeggio riff instead of a chord \u2014 both are useful.</p>
+<p>Which numbers to use on which note of your scale? That is exactly what the <b>Scale &amp; Chords</b> tab computes for you.</p>`},
+{t:'Pick the inversion for the top note',d:'inversions',b:`
+<p>A fast arp is heard mostly by its <b>highest</b> note \u2014 it pokes out of the blur. <code>0 3 7</code>, <code>0 4 9</code> and <code>0 5 8</code> are the same minor chord, but each puts a different chord tone on top (and needs a different base note).</p>
+<p>Trick: choose inversions so the top notes of successive chords move by small steps. Your chord channel then plays a hidden second melody for free. The demo plays the same chord in all three inversions \u2014 listen to the top note climb.</p>`},
+{t:'Echo / fake delay',d:'echo',b:`
+<p>Repeat each melody note after a fixed time (say 3 or 6 pattern rows) at much lower volume, and again even quieter. On a spare channel it becomes a lush echo; on the <i>same</i> channel, placed in the gaps of your melody, it fills space for free.</p>
+<p>Rule of thumb: echo volume \u2248 40% of the original, second echo \u2248 15%. Delay times that match the tempo (dotted 8th = 6 rows of 16ths) always groove.</p>`},
+{t:'Delayed vibrato',d:'vibrato',b:`
+<p>Real singers and lead synths don\u2019t wobble immediately \u2014 the note lands straight, then vibrato fades in. Most trackers have a vibrato command (often <code>4xy</code>); set it a few rows <i>after</i> the note starts, or use an instrument envelope with delay.</p>
+<p>Straight attack + late vibrato instantly makes long notes sound intentional instead of static. The demo plays the same note plain, then with delayed vibrato.</p>`},
+{t:'Slides &amp; portamento',d:'slide',b:`
+<p>Gliding into a note (tone portamento, often <code>3xx</code>) is the cheapest way to add emotion. Classic uses: slide up into the highest note of a phrase, slide down at the end of a phrase, or slow bends between two notes for that lead-guitar feel.</p>
+<p>Fast slide = accent. Slow slide = drama. EDM leads and basses live on this.</p>
+<p>In SID-Wizard the value sets a &ldquo;calculated&rdquo; speed, so a slide of N semitones takes about the same time at any pitch: <code>$30</code>&ndash;<code>$60</code> is the everyday portamento zone (a semitone in ~140&ndash;40 ms), <code>$08</code>&ndash;<code>$20</code> is a slow, dramatic slide, <code>$80</code> and up is a one-frame snap. Every +<code>$18</code> doubles the speed.</p>
+<p>The <b>Melody Lab</b> can place slides for you: set <b>Slides</b> to Some or Lots and Generate &mdash; the amber <code>3xx</code> column is the value to type, hover it for the glide time. Untick <b>Hear slides</b> to A/B the same melody without them.</p>`},
+{t:'Octave bass',d:'octbass',b:`
+<p>The oldest trick in dance music and chiptune alike: alternate the bass note with the same note one octave up (<code>0 12 0 12\u2026</code>) in straight 8ths or 16ths. Instant drive, zero extra channels.</p>
+<p>Variants: octave on the off-beats only, or up two octaves every 4th hit. Triangle or 25% pulse works great.</p>`},
+{t:'Detune two channels',d:'detune',b:`
+<p>If you can spare a channel, play the lead on two channels a few cents apart (or use a fine-tune setting). The slow beating between them sounds huge \u2014 the chip version of a supersaw.</p>
+<p>Small detune (5\u201310 cents) = fat. Large detune (a quarter tone) = seasick \u2014 sometimes exactly right. Demo: single voice, then detuned pair.</p>`},
+{t:'PWM \u2014 animate the waveform',d:'pwm',b:`
+<p>A pulse wave\u2019s character depends on its duty cycle: 50% is hollow and round, 25% brassy, 12.5% thin and nasal. Sweeping the width while a note plays (PWM) makes a single channel sound alive \u2014 the classic C64/SID shimmer.</p>
+<p>In sample-based trackers, fake it by switching between pulse samples of different widths every row or two, like the demo does.</p>`},
+{t:'Sidechain pump (EDM feel)',d:'pump',b:`
+<p>Duck the volume of chords and bass at every beat, then let it swell back before the next one. It creates the breathing, pumping motion of modern dance music \u2014 even with no kick drum playing at all.</p>
+<p>In a tracker: volume-slide command starting low on each beat (e.g. <code>Axx</code> ramps), or an instrument volume envelope retriggered per beat.</p>`},
+{t:'One channel, two jobs',d:'interleave',b:`
+<p>When channels are scarce, interleave: bass note on every even 16th, melody notes on the odd ones. Played fast, the ear separates them into two lines \u2014 a bassline and a lead \u2014 from a single channel.</p>
+<p>Same idea works for drums + bass (kick on the beat, bass filling between) and for self-accompanying leads. Masters of 1-channel and 2-channel chip music build entire songs this way.</p>`},
+{t:'Instrument design beats note count',b:`
+<p>A lot of \u201cchiptune magic\u201d is in the instrument, not the pattern: a fast pitch drop at note start makes a kick out of any voice; a couple of frames of noise before a tone makes a snare or a pluck; a tiny downward pitch envelope makes bass punchy.</p>
+<p>Build a small library: pluck, soft lead, hard lead, bass, kick, snare, hat \u2014 each just an envelope + waveform recipe. Then writing music becomes fast.</p>`},
+{t:'Arrangement: think in 4s and 8s',b:`
+<p>Almost all chiptune and EDM breathes in 4- and 8-bar phrases. Introduce or remove one element every 4 or 8 bars: drop the bass out, bring drums in, transpose the whole thing up, add a counter-melody. Repetition is not the enemy \u2014 <i>unchanging</i> repetition is.</p>
+<p>Cheap but killer moves: copy a whole section up a fifth (+7) or up an octave for the finale; strip everything to bass+drums for 4 bars before the big chorus; end phrases on a held note while the chords keep moving.</p>`}
+];
+
+/* ================= theory content ================= */
+const INTERVALS=[
+ [0,'Unison','same note','\u2014'],
+ [1,'Minor 2nd','maximum tension, horror shark','dissonant'],
+ [2,'Major 2nd','a step; melody fuel','mild'],
+ [3,'Minor 3rd','the \u201csad\u201d interval','consonant'],
+ [4,'Major 3rd','the \u201chappy\u201d interval','consonant'],
+ [5,'Perfect 4th','open, heroic fanfare','consonant-ish'],
+ [6,'Tritone','maximum unrest, metal &amp; sirens','dissonant'],
+ [7,'Perfect 5th','power chord, stable','very consonant'],
+ [8,'Minor 6th','bittersweet','consonant'],
+ [9,'Major 6th','warm, open','consonant'],
+ [10,'Minor 7th','funky tension, wants to resolve','mild'],
+ [11,'Major 7th','dreamy tension','mild'],
+ [12,'Octave','same note, higher','perfect']
+];
+function intervalTable(){
+  return '<table><tr><th>+semi</th><th>name</th><th>character</th><th></th></tr>'+
+   INTERVALS.map(([s,n,c])=>`<tr><td><b>${s}</b></td><td>${n}</td><td>${c}</td><td><button class="btn small" data-int="${s}">\u25b8</button></td></tr>`).join('')+'</table>';
+}
+const THEORY=[
+{t:'Semitones \u2014 the only unit you need',b:`
+<p>One semitone = one row in your tracker\u2019s note column = one key on a piano (black and white counted equally). Every interval, chord and scale is just a pattern of semitone distances \u2014 which is why tracker arps are written as numbers like <code>0 3 7</code>.</p>
+<p>Each interval has its own emotional flavour. Learn these by ear \u2014 press play, sing along:</p>
+${intervalTable()}
+<p>Intervals keep their character anywhere: +4 sounds \u201cmajor\u201d whether you start on C or on F#. That\u2019s why everything below transposes freely.</p>`},
+{t:'Scales \u2014 your palette of allowed notes',b:`
+<p>A scale is a subset of the 12 semitones, written as offsets from a root: Major = <code>0 2 4 5 7 9 11</code>, Natural Minor = <code>0 2 3 5 7 8 10</code>. Stay inside the set and (almost) everything you play fits together \u2014 that\u2019s the whole point.</p>
+<p>Useful facts:</p>
+<ul>
+<li><b>Relative major/minor:</b> A minor and C major contain the exact same notes (minor starts 3 semitones lower: <code>A = C \u2212 3</code>). Same palette, different home base \u2014 different mood.</li>
+<li><b>Modes</b> (Dorian, Phrygian, Lydian\u2026) are the same idea: one note set, different root. Each mode has one or two \u201ccolour notes\u201d that give it its flavour \u2014 Dorian\u2019s bright 6th (+9), Phrygian\u2019s dark \u266d2 (+1), Lydian\u2019s floating #4 (+6).</li>
+<li><b>Pentatonics</b> (5 notes) remove the two most friction-prone notes. Great for fast melodic runs that can\u2019t go wrong.</li>
+<li>Notes <i>outside</i> the scale aren\u2019t forbidden \u2014 they\u2019re spice. Used briefly, on weak beats, passing between two scale notes, they add sophistication (chromatic passing tones).</li>
+</ul>
+<p>Changing the root of the same scale type = <b>transposing</b>. The pattern of numbers never changes; in a tracker you just shift every note by the same amount.</p>`},
+{t:'Chords \u2014 why it is NOT always 0 3 7',b:`
+<p>A basic chord (triad) = root + a third + a fifth. But \u201ca third\u201d comes in two sizes: minor (+3) or major (+4). And the fifth is usually +7, sometimes +6 or +8. So:</p>
+<table>
+<tr><th>formula</th><th>name</th><th>sound</th></tr>
+<tr><td><b>0 4 7</b></td><td>major</td><td>bright, resolved</td></tr>
+<tr><td><b>0 3 7</b></td><td>minor</td><td>sad, warm</td></tr>
+<tr><td><b>0 3 6</b></td><td>diminished</td><td>anxious, unstable</td></tr>
+<tr><td><b>0 4 8</b></td><td>augmented</td><td>weird, dreamlike</td></tr>
+</table>
+<p>Now the key insight: build a chord on <i>every</i> note of a scale, using only scale notes, and the formula changes per degree. In C major:</p>
+<table>
+<tr><th>degree</th><th>root</th><th>chord</th><th>formula</th></tr>
+<tr><td>I</td><td>C</td><td>C major</td><td>0 <b>4</b> 7</td></tr>
+<tr><td>ii</td><td>D</td><td>D minor</td><td>0 <b>3</b> 7</td></tr>
+<tr><td>iii</td><td>E</td><td>E minor</td><td>0 <b>3</b> 7</td></tr>
+<tr><td>IV</td><td>F</td><td>F major</td><td>0 <b>4</b> 7</td></tr>
+<tr><td>V</td><td>G</td><td>G major</td><td>0 <b>4</b> 7</td></tr>
+<tr><td>vi</td><td>A</td><td>A minor</td><td>0 <b>3</b> 7</td></tr>
+<tr><td>vii\u00b0</td><td>B</td><td>B dim</td><td>0 3 <b class="a">6</b></td></tr>
+</table>
+<p>If you typed <code>0 3 7</code> on every note of C major, the chords on C, F and G would contain notes outside the scale and clash. These in-scale chords are called <b>diatonic</b> chords \u2014 the Scale &amp; Chords tab computes them for any scale and highlights every adjusted digit in amber.</p>
+<p>Beyond triads: add a 4th tone for seventh chords (<code>0 4 7 10</code> = dominant 7, <code>0 3 7 10</code> = minor 7 \u2014 instant funk/jazz). Replace the third for suspended chords (<code>0 5 7</code> sus4, <code>0 2 7</code> sus2) \u2014 neither major nor minor, great for tension before resolving. Drop the third entirely for a power chord <code>0 7</code>.</p>`},
+{t:'Inversions \u2014 same chord, different stacking',b:`
+<p>Any chord tone can be the lowest note. Take minor <code>0 3 7</code>, move the bottom note up an octave and re-measure from the new lowest note:</p>
+<table>
+<tr><th>position</th><th>formula</th><th>A minor example</th></tr>
+<tr><td>root</td><td><b>0 3 7</b></td><td>A C E</td></tr>
+<tr><td>1st inversion</td><td><b>0 4 9</b></td><td>C E A</td></tr>
+<tr><td>2nd inversion</td><td><b>0 5 8</b></td><td>E A C</td></tr>
+</table>
+<p>Why care? Two reasons. <b>Voice leading:</b> moving between chords sounds smoothest when each note travels a short distance \u2014 inversions let chords share or nearly-share notes. <b>Top note control:</b> in fast arps the highest note dominates, so inversions choose which chord tone \u201csings\u201d. Every degree card in Scale &amp; Chords shows its inversions with the numbers ready for your tracker.</p>`},
+{t:'Progressions \u2014 chords in motion',b:`
+<p>Chords have jobs. The chord on degree 1 (<b>tonic</b>) is home. Degree 5 (<b>dominant</b>) creates pull back home. Degree 4 (<b>subdominant</b>) is the scenic route between them. Most songs are just clever trips away from home and back.</p>
+<p>Write progressions as scale degrees and they work in every key: 1\u20115\u20116\u20114 is the modern pop anthem, 1\u20116\u20114\u20115 the 50s/8-bit classic, 1\u20117\u20116\u20117 the synthwave loop. The Scale &amp; Chords tab spells them out with real notes and formulas for your current key \u2014 press play and steal what you like.</p>
+<p>Guidelines, not laws: one chord per bar is a fine default; change chords on strong beats; end sections on degree 1 (or hang on degree 5 to demand a next part). Repeating a 4-chord loop for a whole track is completely legitimate \u2014 ask any rave anthem.</p>`},
+{t:'Writing melodies that work',b:`
+<p>The two ingredients of a melody note: <b>is it in the current chord?</b> and <b>is it on a strong beat?</b> Chord tones on strong beats (rows 0, 4, 8, 12 of a 16-step bar) make the melody sound anchored. Non-chord scale notes are passing/neighbour tones \u2014 put them between chord tones, on weak beats.</p>
+<ul>
+<li><b>Steps beat leaps.</b> Move mostly by 1\u20112 scale steps; save a big leap for the emotional peak \u2014 then step back down.</li>
+<li><b>Phrases are sentences.</b> 2\u2011bar or 4\u2011bar phrases, with a breath (rest) at the end. Classic shape: question (ends off the root, unresolved) \u2192 answer (ends on the root).</li>
+<li><b>Repeat, then change one thing.</b> The most reliable trick in all of music: play a phrase again with a different ending, or shifted to the next chord. Listeners love recognizing + being surprised, at the same time.</li>
+<li><b>One peak per section.</b> Give the melody a single highest note per phrase or section \u2014 it reads as the emotional target.</li>
+<li><b>Land the last note.</b> End on the root for closure, on the 5th for \u201cto be continued\u201d, on the 3rd for bittersweet.</li>
+</ul>
+<p>The Melody Lab follows exactly these rules when generating \u2014 use it for raw material, then edit: reroll notes you dislike, mute a few into rests, and keep the phrase you\u2019d hum.</p>`},
+{t:'Rhythm &amp; groove',b:`
+<p>In 4/4 with 16 rows per bar: rows 0 and 8 are the strong beats, 4 and 12 the medium ones, everything else is weak. Notes on weak positions \u2014 especially just <i>before</i> a strong beat \u2014 create <b>syncopation</b>, the engine of all dance music.</p>
+<ul>
+<li>Melody: long notes on strong beats, short runs on weak ones \u2014 then break the rule once per phrase.</li>
+<li>Off-beat stabs (chords on rows 2, 6, 10, 14) = instant house/rave energy.</li>
+<li>Rests are notes too. The silence before a downbeat makes the downbeat hit twice as hard.</li>
+<li>Shuffle/swing: delay every second 16th slightly (tracker groove/speed settings) \u2014 turns a stiff pattern human.</li>
+</ul>`},
+{t:'Cheat sheet',b:`
+<p><b>Chords:</b> <code>0 4 7</code> maj \u00b7 <code>0 3 7</code> min \u00b7 <code>0 3 6</code> dim \u00b7 <code>0 4 8</code> aug \u00b7 <code>0 2 7</code> sus2 \u00b7 <code>0 5 7</code> sus4 \u00b7 <code>0 7</code> power \u00b7 <code>0 4 7 10</code> 7 \u00b7 <code>0 3 7 10</code> m7 \u00b7 <code>0 4 7 11</code> maj7 \u00b7 <code>0 4 7 9</code> 6 \u00b7 <code>0 4 7 14</code> add9</p>
+<p><b>Minor inversions:</b> <code>0 3 7 \u2192 0 4 9 \u2192 0 5 8</code> &ensp; <b>Major inversions:</b> <code>0 4 7 \u2192 0 3 8 \u2192 0 5 9</code></p>
+<p><b>Scales:</b> Major <code>0 2 4 5 7 9 11</code> \u00b7 Minor <code>0 2 3 5 7 8 10</code> \u00b7 Min pent <code>0 3 5 7 10</code> \u00b7 Maj pent <code>0 2 4 7 9</code> \u00b7 Blues <code>0 3 5 6 7 10</code></p>
+<p><b>Progressions (degrees):</b> 1\u20115\u20116\u20114 \u00b7 6\u20114\u20111\u20115 \u00b7 1\u20116\u20114\u20115 \u00b7 1\u20117\u20116\u20117 \u00b7 2\u20115\u20111</p>
+<p><b>Transpose:</b> everything +n semitones = same music, new key. Relative minor = major root \u2212 3.</p>
+<p><b>Strong rows (16/bar):</b> 0 &gt; 8 &gt; 4, 12 &gt; the rest. Chord tones on strong rows, passing tones between.</p>`}
+];
+
+/* ================= learn renderer ================= */
+function renderLearn(el,items){
+  const box=$(el); box.innerHTML='';
+  items.forEach((it,i)=>{
+    const c=document.createElement('div'); c.className='lcard'+(i===0?' open':'');
+    c.innerHTML=`<button class="head"><span class="idx">${String(i+1).padStart(2,'0')}</span> ${it.t}<span class="caret">\u25b8</span></button><div class="body">${it.b}</div>`;
+    c.querySelector('.head').onclick=()=>c.classList.toggle('open');
+    if(it.d){
+      const btn=document.createElement('button'); btn.className='btn primary small demo'; btn.textContent='\u25b8 Hear it';
+      btn.onclick=e=>{e.stopPropagation(); DEMOS[it.d]();};
+      c.querySelector('.body').prepend(btn);
+    }
+    box.appendChild(c);
+  });
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-int]'); if(!b)return;
+  const s=+b.dataset.int; const ac=audio(); const t=ac.currentTime+.02;
+  voice(60,{t,dur:.35,gain:.7}); voice(60+s,{t:t+.4,dur:.35,gain:.7});
+  voice(60,{t:t+.85,dur:.7,gain:.5}); voice(60+s,{t:t+.85,dur:.7,gain:.5});
+});
+
+/* ================= init ================= */
+fillGlobal();
+renderScaleTab();
+fillMelodyProg();
+renderPattern();
+renderLearn('#techList',TECH);
+renderLearn('#theoryList',THEORY);
+generateMelody();
+</script>
+</body>
+</html>
