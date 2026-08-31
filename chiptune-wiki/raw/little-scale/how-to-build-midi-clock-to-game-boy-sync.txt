@@ -1,0 +1,1963 @@
+skip to main |
+skip to sidebar
+
+## Thursday, July 03, 2008
+
+###
+How to Build a MIDI Clock to Game Boy Sync Thing for Around AU$15
+
+Introduction
+Here is a simple, step-by-step guide to make your very own MIDI Clock to LSDJ and/or Nanoloop Sync Device.
+
+This device will respond to 'STOP', 'START' and 'CONTINUE' MIDI real time messages, making it compatible with devices that are able to output MIDI clock messages. (eg. a drum machine or a sequencer). You can synchronise up to 6 copies of LSDJ and/or 6 copies of Nanoloop simultaneously to MIDI clock.
+
+If you would like to build one of these yourself, you can contact me and I can send you a pre-flashed Freeduino chip etc for a very low cost. This device cost me around AU$15 in parts to make and it is not very hard at all.
+
+Schematic
+There is no need to worry about this schematic is you follow the steps below.
+• The above schematic shows what the circuit is.
+• In addition, you will need to apply 5V to the Arduino / Freeduino pins 7 and 20, ground to pin 8 and add a 16MHz crystal in between pins 9 and 10 which go to ground via 2 20pF capacitors. Additionally, pin 1 will need to be connected to 5V via a 10k ohm resistor.
+• PORTD refers to the IC pins 2 - 6, 11 - 13
+• PORTB refers to the IC pins 14 - 19
+• PORTC refers to the IC pins 23 - 28
+
+Arduino Code
+There is no need to worry about this code if you would like me to send you a pre-flashed chip.
+
+You can view and download the Arduino code here:
+http://milkcrate.com.au/_other/downloads/projects/MIDIGBSYNC/
+
+What You Will Need
+
+Let's have a look at the required electronic components:
+
+Resistors
+1. 3.3k ohm resistor
+2. 110k ohm resistor
+3. 220 ohm resistor
+4. 10k ohm resistor
+
+Capacitors
+5. 20pF ceramic capacitor (x 2)
+6. 0.1uF ceramic capacitor
+7. 47uF electrolytic capacitor
+
+Diodes
+8. 1n4148 small signal diode
+
+Crystals
+9. 16.00 MHz crystal
+
+Integrated Circuit
+10. 4n25 Optocoupler
+11. Pre-flashed Arduino / Freeduino ATMega168
+
+Sockets
+12. 14 pin DIP socket (x 2)
+
+You will also need:
+• A circuit board of some sort
+• A USB A to B cable that you can splice up (or some other 5V power source)
+• A Game Boy link cable that you can splice up
+• A 5 pin DIN socket with solderable lugs on the back
+• Wiring
+
+How to Build It, Step By Step
+1. This is the circuit board I will be using in this tutorial. The brand is Datak and the model is 21-113.
+
+2. Solder the integrated circuits and some basic components into place. Solder the 4n25 directly onto the board, being careful not to overheat the IC. If you prefer, use a 6 pin socket instead of soldering the IC directly to the board. Solder the 14 pin sockets to the board, so that they will allow the 28 pin Freeduino IC to fit comfortably in the two. This is where the Freeduino IC will sit, so I will refer to these two sockets as being the Freeduino IC.
+
+Solder the crystal between pins 9 and 10 of the Fredduino IC. Solder the two 20pF capacitors between pins 9 and 10 respectively, and two free positions on the board. When soldering the two legs of the capacitors that are not connected to the Freeduino, use a little bit more solder and join the two together.
+
+3. Solder the resistors and the diode into place. The diode goes in between pins 1 and 2 of the 4n25. The black band on the diode should point towards pin 1 of the 4n25. The 220 ohm resistor goes from pin 1 of the 4n25 to an empty point on the board. The 3.3k ohm resistor goes from pin 5 of the 4n25 to an empty point on the board. The 110k ohm resistor goes from pin 6 of the 4n25 to an empty point on the board.
+
+4. Solder some caps to the power supply busses. The two long strips along the middle of the board are going to be the power supply busses. When looking at the component side, with the 4n25 facing up, the left bus is 5V and the right one is ground. Solder the 0.1uF capacitor in between 5V and ground. Solder the 47uF capacitor in between 5V and ground, so that the side with the white minus signs is connected to ground.
+
+5. Connect power to the appropriate places for the ICs. Ground connections are shown in blue; 5V connections are shown in orange. The unconnected side of the 110k ohm resistor should go to ground. Pin 8 of the Freeduino should go to ground. The unconnected side of the two 20pF capacitors should go to ground. Pin 4 of the 4n25 should go to ground (this can be done quite easily by simply applying a little more solder to the pin and the bridging it across to the ground bus).
+
+Pin 7 and 20 of the Freeduino should go to 5V. The unconnected side of the 3.3k ohm resistor should go to 5V.
+
+6. Looking at the 5 pin din MIDI female connection from the back, point the five soldering lugs downwards. The second-most left pin should be soldered to the unconnected side of the 220 ohm resistor. The second-most right pin should be soldered to pin 2 of the 4n25.
+
+7. Splice a Game Boy link cable. The green wire (clock) goes to Freeduino pin 23 (in fact, you can sync up to 6 Game Boys running LSDJ with this device... simply connect clock signals to Freeduino pins 23 - 28). Connect the blue (ground), orange (serin or serout) and red (serout or serin) to ground. You may need to make more ground connections by bridging the ground bus with another row.
+
+8. Splice up a USB cable and connect the 5V and ground lines to the 5V and ground busses respectively. When looking at the USB connector with the four contacts facing downwards, ground is on the very left and 5V is on the very right. These two lines are usually designated with a red and a black wire.
+
+9. And you're finished!
+
+How To Use It with LSDJ
+• Connect the USB connector to a power source, such as a computer USB port or a mains to USB power supply.
+
+• Connect the MIDI connector to the output of a MIDI device that is capable of sending MIDI clock messages (such as a sequencer or a drum machine or an environment such as Max/MSP etc).
+
+• Connect the Game Boy end of the link cable to the Game Boy.
+
+• Start up LSDJ and load the song file of your choice.
+
+• Set LSDJ to slave sync mode in the project screen.
+
+• Select the correct position to in the song that you want to start on and press start. LSDJ will say 'WAIT'.
+
+• Ensure that the output of your MIDI clock-generating device is set up properly to output the MIDI clock signal (for example, in Ableton Live, set the correct MIDI output to Sync On).
+
+• Press start on your MIDI clock-generating device, LSDJ will follow.
+
+• As you change tempo on your MIDI clock-generating device, LSDJ will follow.
+
+• If you press stop on your MIDI clock-generating device, LSDJ will stop. However, to start again from the same position in the LSDJ song, you will need to manually select it and press start before pressing play on the MIDI clock-generating device.
+
+Construction for Use with Nanoloop
+This is identical to the steps above, except that the Game Boy link cable must be connected in a different way:
+• Connect ground on the Game Boy link cable to ground on the board
+
+• Connect SERIN on the Game Boy link cable to Freeduino pins 14, 15, 16, 17, 18 or 19
+
+Share
+|
+
+Posted by
+Sebastian Tomczak
+
+at
+10:48 AM
+
+Labels:
+arduino,
+chipmusic,
+chiptech,
+diy stuff,
+sync
+
+####
+31
+comments:
+
+nak
+said...
+
+Hi, very cool tutorial! I was just wondering if you've heard of instructables.com. They have a very neat system for making tutorials pretty easily.
+
+I'll have to try this out :)
+
+7/04/2008 2:26 AM
+
+Anonymous
+said...
+
+Hey, this is awesome. Exactly what I've been looking for. I've never built circuits though, and the idea kind of scares me. Would you be willing to build one for me? And if so, for how much?
+
+7/05/2008 1:30 PM
+
+Sebastian Tomczak
+said...
+
+@ Nak: Oh hi! Thanks for the comment. Yes, I've heard of instructables, but I've never added my own stuff there.
+
+@ideasweforget: please email me and we can work something out, i am sure.
+
+7/05/2008 1:32 PM
+
+Adam John Rex
+said...
+
+Hi there,
+just wanted to know how to get a pre-flashed chip?
+Could you please email me
+
+adamjohnrex at gmail dot com
+
+cheers
+
+adam
+
+8/11/2008 6:30 AM
+
+Anonymous
+said...
+
+hi there.
+is it possible that someone could make and post me one of these. I eill pay ya £50-100. Depending on how good it is. Please get back to me if u interested.
+
+8/23/2008 7:58 PM
+
+Sebastian Tomczak
+said...
+
+Hi Robert,
+Lets chat over email.
+
+seb dot tomczak at gmail dot com
+
+I am sure we can work something out
+
+"Depending on how good it is"
+^^ Although you will need to clarify this statement :) Have a think about how many game boys, what types of game boys, and so on. Maybe there are other features you would like to see as well?
+
+Kind regards,
+
+seb
+
+8/23/2008 10:21 PM
+
+Anonymous
+said...
+
+hi there
+i e mailed you
+thanks very much
+
+8/27/2008 1:00 AM
+
+Charles
+said...
+
+Thanks for posting this tutorial. I am just curious if providing 1mA to RX is enough to get you a signal?
+
+5v/3300Ohm = .0015 ~ 1.5mA
+
+I am playing around with a 4N25 and having trouble with it.
+
+Is attaching pin 6 to ground via the 110K resistor in order to increase switching speed?
+
+Thank you.
+
+2/17/2009 10:03 PM
+
+Robin Sutcliffe
+said...
+
+Hi, I wondered if you got my mail (I mailed you last week sometime)
+
+I would lke to buy a pre-flashed chip from you, is that possible?
+
+ultimatesoundclash (at) gmail.com
+
+Thanks very much,
+
+Robin Sutcliffe
+
+8/03/2009 10:57 AM
+
+Anonymous
+said...
+
+Does this work with GBA and nanoloop 2.3? Trying it out but it doesn't seem to want to. Any tips on the cable colour code/what I could try? Thanks
+
+8/12/2009 5:36 AM
+
+Sebastian Tomczak
+said...
+
+Hi Robin,
+This should work with Nano 2x in a GBA, however if you are having problems try powering the circuit from the GBA instead of from USB.
+
+If you check out this post: http://little-scale.blogspot.com/2009/08/pin-swapping-gba-cable-for-vcc.htmlyou will find a way to easily get a power line from the GBA cable to power the circuit from the advance itself.
+
+8/12/2009 6:22 AM
+
+Anonymous
+said...
+
+Hi Seb, thanks very much for your reply.
+
+I'm going to try this out tomorrow now, it's past my DIY time... : )
+
+I'll let you know how I get on
+
+8/12/2009 7:51 AM
+
+Sebastian Tomczak
+said...
+
+Also Robin, if you're making it just for NanoLoop 2.3, please check out this post: http://little-scale.blogspot.com/2009/08/dual-nanoloop-2-mdi-sync-with-tuplet.html
+
+8/12/2009 8:14 AM
+
+Anonymous
+said...
+
+Ok so it turns out all pins were connected on my link cable, so pin 1 had vcc already.
+
+I still can't get the circuit to operate though.
+
+When I was poking around originally the gameboy crashed a few times and sometimes made some odd noises (this was when I was poking around with the pin one VCC cable, which is white in my case)
+
+Do you think I have fried the 4n25 or the atmega by applying the 3.3v whilst it already had 5v (from USB) ?
+
+Thanks,
+
+Robin
+
+8/12/2009 11:25 PM
+
+Sebastian Tomczak
+said...
+
+Hi Robin,
+1) Don't use both the USB power and the GBA power - use only the GBA power.
+
+2) Try using a 4n28 instead.
+
+8/13/2009 7:33 AM
+
+Robin
+said...
+
+Hi Seb, I had inadvertently used both Vcc's before you suggested to use the GBA Vcc (I must have the only GBA link cable to have Vcc already connected!)
+
+I then tried it with only GBA power and no result, that's why I thought I could have previously fried the chips with over-voltage.
+
+I will try a 4n28 instead, Thank you for your tips!
+
+8/13/2009 2:49 PM
+
+Robin Sutcliffe
+said...
+
+Hi, I tried a 4N28, and a 4N27 with no success. Is there any more help you could offer? Do you think if I sent you the circuit you could complete it for me (for a fee of course)I really want to be able to sync my GBA and nanoloop but I am unable to get this circuit working by myself.
+
+Thanks,
+
+Robin
+
+9/19/2009 10:37 PM
+
+Unknown
+said...
+
+Hi Seb, If you are still up to doing so, I can pay you whatever you like to set one of these up for me. I could probably do it myself but things are picking up for me as an artist and I truly don't have the time and patience to come up with the components and make this happen. I'll send you an email or you can email me if you get to the reply first. thanks.
+
+-josh
+
+shagnetics @ gmail dot com
+
+2/26/2010 2:44 PM
+
+Ben Matthew
+said...
+
+Hi Seb
+I was wondering if this would work with an underclocked gameboy or would this cause sync issues?
+
+9/18/2010 12:59 AM
+
+ultrastatic
+said...
+
+Hey there. Great tutorial! I'm wondering if I could get one of the pre-programmed chips. You can email me here dmgking@gmail.com Thanks a lot!
+
+9/03/2011 12:42 PM
+
+Sebastian Tomczak
+said...
+
+Hi Ultrastatic, this project is no longer active. However, can I recommend this one, which is basically an updates version with USB support. http://little-scale.blogspot.com/2011/08/usb-midi-game-boy-sync-for-16.html
+
+9/04/2011 4:19 AM
+
+Anonymous
+said...
+
+hi,
+i'm just wanted to know how to get a pre-flashed chip ? is it available ?
+Can you please e-mail me.
+andre
+andy1210@hotmail.fr
+
+thanks
+
+4/28/2012 5:30 PM
+
+Anonymous
+said...
+
+Hi there,
+just wanted to know how to get a pre-flashed chip?
+Could you please email me.
+thanks
+andré
+andy1210@hotmail.fr
+
+4/28/2012 5:42 PM
+
+Jaclyn
+said...
+
+Thanks so much for this article, pretty useful material.
+
+9/14/2012 10:02 PM
+
+Unknown
+said...
+
+Hi,
+
+Great tutorial here!
+
+I just got all the parts (including the freeduino atMega chip), and now all I'm unsure about is how to flash the atMega chip. I have an arduino-board - could I use this to flash it, and do you know how?
+
+you can mail me at: mail AT sorenandreasen DOT com
+
+the best
+Søren
+
+10/23/2012 10:09 PM
+
+Unknown
+said...
+
+Hi,
+
+Great tutorial here!
+
+I just got all the parts (including the freeduino atMega chip), and now all I'm unsure about is how to flash the atMega chip. I have an arduino-board - could I use this to flash it, and do you know how?
+
+you can mail me at: mail AT sorenandreasen DOT com
+
+the best
+Søren
+
+10/23/2012 10:09 PM
+
+Unknown
+said...
+
+Hi,
+
+Great tutorial here!
+
+I just got all the parts (including the freeduino atMega chip), and now all I'm unsure about is how to flash the atMega chip. I have an arduino-board - could I use this to flash it, and do you know how?
+
+you can mail me at: mail AT sorenandreasen DOT com
+
+the best
+Søren
+
+10/23/2012 10:09 PM
+
+Unknown
+said...
+
+Hi,
+
+Great tutorial here!
+
+I just got all the parts (including the freeduino atMega chip), and now all I'm unsure about is how to flash the atMega chip. I have an arduino-board - could I use this to flash it, and do you know how?
+
+you can mail me at: mail AT sorenandreasen DOT com
+
+the best
+Søren
+
+10/23/2012 10:10 PM
+
+Unknown
+said...
+
+Hi,
+
+Great tutorial here!
+
+I just got all the parts (including the freeduino atMega chip), and now all I'm unsure about is how to flash the atMega chip. I have an arduino-board - could I use this to flash it, and do you know how?
+
+you can mail me at: mail AT sorenandreasen DOT com
+
+the best
+Søren
+
+10/23/2012 10:10 PM
+
+Unknown
+said...
+
+Hi,
+
+Great tutorial here!
+
+I just got all the parts (including the freeduino atMega chip), and now all I'm unsure about is how to flash the atMega chip. I have an arduino-board - could I use this to flash it, and do you know how?
+
+you can mail me at: mail AT sorenandreasen DOT com
+
+the best
+Søren
+
+10/23/2012 10:11 PM
+
+Tyler Barnes
+said...
+
+Nice device. I would very much like a pre-flashed chip please. a socket would be appreciated too, but is optional. please email me at bassmonster138@hotmail.com
+
+2/28/2013 6:42 PM
+
+Post a Comment
+
+Newer Post
+
+Older Post
+
+Home
+
+Subscribe to:
+Post Comments (Atom)
+
+## About Me
+
+Australia
+
+View my complete profile
+
+## Blog Archive
+
+Blog Archive
+May 2026 (1)
+Jun 2025 (4)
+Apr 2025 (1)
+Oct 2024 (1)
+Mar 2024 (1)
+Feb 2024 (1)
+Nov 2023 (9)
+Aug 2023 (1)
+May 2023 (1)
+Apr 2023 (5)
+Mar 2023 (6)
+Feb 2023 (3)
+Jan 2023 (18)
+Dec 2022 (1)
+Jun 2022 (2)
+Jul 2021 (2)
+Jun 2021 (6)
+May 2021 (3)
+Apr 2021 (12)
+Jan 2021 (1)
+Jul 2020 (3)
+Jun 2020 (5)
+May 2020 (8)
+Apr 2020 (1)
+Feb 2020 (1)
+Sep 2019 (1)
+Aug 2019 (1)
+Apr 2019 (1)
+Mar 2019 (2)
+Feb 2019 (6)
+Jan 2019 (4)
+Dec 2018 (3)
+Nov 2018 (2)
+Oct 2018 (2)
+Sep 2018 (2)
+Aug 2018 (1)
+Jul 2018 (1)
+Jun 2018 (4)
+May 2018 (2)
+Apr 2018 (1)
+Mar 2018 (4)
+Feb 2018 (4)
+Jan 2018 (4)
+Dec 2017 (1)
+Nov 2017 (8)
+Oct 2017 (6)
+Sep 2017 (8)
+Aug 2017 (12)
+Jul 2017 (5)
+Jun 2017 (5)
+May 2017 (13)
+Apr 2017 (7)
+Mar 2017 (26)
+Feb 2017 (5)
+Jan 2017 (19)
+Dec 2016 (26)
+Nov 2016 (21)
+Oct 2016 (2)
+Sep 2016 (11)
+Aug 2016 (33)
+Jul 2016 (15)
+Jun 2016 (14)
+May 2016 (14)
+Mar 2016 (4)
+Feb 2016 (6)
+Jan 2016 (6)
+Dec 2015 (20)
+Nov 2015 (58)
+Oct 2015 (34)
+Sep 2015 (4)
+Aug 2015 (22)
+Jul 2015 (33)
+Jun 2015 (16)
+May 2015 (16)
+Apr 2015 (12)
+Mar 2015 (27)
+Feb 2015 (1)
+Dec 2014 (1)
+Nov 2014 (3)
+Oct 2014 (28)
+Sep 2014 (26)
+Aug 2014 (30)
+Jul 2014 (6)
+Jun 2014 (14)
+May 2014 (33)
+Apr 2014 (51)
+Mar 2014 (16)
+Feb 2014 (17)
+Jan 2014 (22)
+Dec 2013 (65)
+Nov 2013 (40)
+Oct 2013 (19)
+Sep 2013 (6)
+Aug 2013 (17)
+Jul 2013 (8)
+Jun 2013 (8)
+May 2013 (41)
+Apr 2013 (20)
+Mar 2013 (55)
+Feb 2013 (55)
+Jan 2013 (59)
+Dec 2012 (39)
+Nov 2012 (7)
+Oct 2012 (77)
+Sep 2012 (29)
+Aug 2012 (8)
+Jul 2012 (12)
+Jun 2012 (14)
+May 2012 (17)
+Apr 2012 (18)
+Mar 2012 (16)
+Feb 2012 (12)
+Jan 2012 (18)
+Dec 2011 (13)
+Nov 2011 (10)
+Oct 2011 (19)
+Sep 2011 (21)
+Aug 2011 (16)
+Jul 2011 (11)
+Jun 2011 (15)
+May 2011 (11)
+Apr 2011 (12)
+Mar 2011 (6)
+Feb 2011 (1)
+Jan 2011 (3)
+Dec 2010 (13)
+Nov 2010 (13)
+Oct 2010 (4)
+Sep 2010 (20)
+Aug 2010 (3)
+Jul 2010 (2)
+Jun 2010 (15)
+May 2010 (10)
+Apr 2010 (25)
+Mar 2010 (25)
+Feb 2010 (23)
+Jan 2010 (24)
+Dec 2009 (51)
+Nov 2009 (17)
+Oct 2009 (32)
+Sep 2009 (27)
+Aug 2009 (25)
+Jul 2009 (36)
+Jun 2009 (33)
+May 2009 (39)
+Apr 2009 (39)
+Mar 2009 (46)
+Feb 2009 (22)
+Jan 2009 (14)
+Dec 2008 (22)
+Nov 2008 (35)
+Oct 2008 (25)
+Sep 2008 (35)
+Aug 2008 (24)
+Jul 2008 (26)
+Jun 2008 (23)
+May 2008 (39)
+Apr 2008 (19)
+Mar 2008 (10)
+Feb 2008 (27)
+Jan 2008 (45)
+Dec 2007 (36)
+Nov 2007 (34)
+Oct 2007 (14)
+Sep 2007 (18)
+Aug 2007 (19)
+Jul 2007 (22)
+Jun 2007 (18)
+May 2007 (20)
+Apr 2007 (11)
+Mar 2007 (18)
+Feb 2007 (2)
+Jan 2007 (12)
+Dec 2006 (11)
+Nov 2006 (4)
+Oct 2006 (2)
+Sep 2006 (3)
+Aug 2006 (4)
+Jul 2006 (7)
+Jun 2006 (9)
+May 2006 (13)
+Apr 2006 (21)
+Mar 2006 (24)
+
+## Labels
+
+Select a label
+1-bit music
+(2)
+
+12eps.com
+(5)
+
+16x9gifs
+(6)
+
+3bit Music
+(3)
+
+3d printing
+(19)
+
+82bpm
+(1)
+
+a
+(1)
+
+A_SID
+(2)
+
+A26F
+(4)
+
+ableton audio effects rack
+(6)
+
+ableton live
+(471)
+
+ableton live control surface scripts
+(1)
+
+ableton live user group
+(1)
+
+AFUM
+(7)
+
+ai
+(1)
+
+air quality
+(1)
+
+airhorn
+(1)
+
+ambisonics
+(1)
+
+amiibo
+(2)
+
+analog electronics
+(2)
+
+analog synthesis
+(6)
+
+android
+(5)
+
+animals
+(3)
+
+anti laptop music
+(8)
+
+arduino
+(222)
+
+arduino libraries
+(4)
+
+arduino sound
+(12)
+
+artnet
+(9)
+
+aruco
+(1)
+
+astrophotography
+(6)
+
+atari 2600
+(49)
+
+atem
+(2)
+
+attiny45
+(2)
+
+audio library
+(4)
+
+audio to midi
+(1)
+
+audiomulch
+(2)
+
+ay38912
+(1)
+
+beap
+(3)
+
+beap basics
+(3)
+
+beatmaker
+(1)
+
+beeper
+(6)
+
+bidule
+(6)
+
+bidule basics
+(5)
+
+biohacking
+(3)
+
+biological digital
+(4)
+
+bitwig
+(1)
+
+black midi
+(4)
+
+ble
+(1)
+
+bleak pizza
+(1)
+
+bodymod
+(1)
+
+bom
+(1)
+
+books
+(1)
+
+bouncy ball
+(1)
+
+breadboard basics
+(4)
+
+buoy music
+(1)
+
+capacitance sensing
+(3)
+
+cello
+(2)
+
+charity
+(2)
+
+chipmusic
+(668)
+
+chiptech
+(260)
+
+chiptune array
+(1)
+
+circuit bending
+(48)
+
+circuit bending basics
+(11)
+
+climate
+(1)
+
+clouds
+(1)
+
+cmc-pd
+(1)
+
+cmos
+(5)
+
+cognitive
+(1)
+
+collabs
+(57)
+
+commodore 64
+(9)
+
+competitions
+(5)
+
+compilations
+(48)
+
+computer vision
+(6)
+
+computers
+(2)
+
+control voltage and gate
+(2)
+
+convolution
+(17)
+
+cool stuff by other people
+(72)
+
+covers
+(3)
+
+cross modal modulation
+(1)
+
+crowdfunding
+(1)
+
+cryptography
+(1)
+
+crystals
+(1)
+
+daily january 2013
+(2)
+
+data bending
+(2)
+
+data moshing
+(2)
+
+data protocols
+(4)
+
+demo
+(1)
+
+destruction
+(1)
+
+digital feedback
+(17)
+
+digital manipulation
+(141)
+
+din sync
+(1)
+
+dither
+(4)
+
+diy
+(27)
+
+diy stuff
+(223)
+
+dmx
+(7)
+
+dnb
+(1)
+
+donk
+(3)
+
+dorkbot
+(17)
+
+drowning goldfish
+(6)
+
+duane's world!!!
+(1)
+
+ecology
+(2)
+
+electromagnetic induction recordings
+(5)
+
+emulation
+(4)
+
+encapsulation
+(1)
+
+eprom music
+(10)
+
+erit satis
+(1)
+
+esp32
+(2)
+
+esp8266
+(3)
+
+ethnomusicology
+(1)
+
+eurorack
+(45)
+
+excel
+(1)
+
+exo sequencer
+(1)
+
+experimental circuits
+(1)
+
+experimentation
+(1)
+
+exs 24
+(1)
+
+extrafile
+(1)
+
+f1
+(2)
+
+fakebit
+(5)
+
+fashion
+(14)
+
+feedback
+(11)
+
+field drop
+(12)
+
+field recordings
+(33)
+
+fingerless
+(2)
+
+flash music
+(4)
+
+flex sensor
+(1)
+
+fonts
+(6)
+
+food
+(4)
+
+footdrag
+(16)
+
+footwork
+(6)
+
+force sensor
+(1)
+
+fun with sea moss
+(5)
+
+fundraising
+(1)
+
+future
+(3)
+
+game boy
+(27)
+
+game sound
+(13)
+
+gameboy advance
+(9)
+
+gamecube
+(8)
+
+GameSalad
+(4)
+
+gear
+(1)
+
+gen~
+(7)
+
+gender
+(1)
+
+genmdm firmware
+(8)
+
+genmdm tutorials
+(14)
+
+geophone
+(1)
+
+gig photography
+(2)
+
+gigs
+(133)
+
+github
+(3)
+
+glitch
+(32)
+
+gpt
+(1)
+
+granulation
+(1)
+
+grid controllers
+(12)
+
+HID
+(6)
+
+hidden sounds
+(1)
+
+hidden village
+(57)
+
+homeassistant
+(1)
+
+homemade drum machine
+(3)
+
+house
+(1)
+
+hui
+(1)
+
+humour
+(39)
+
+immersive audio
+(1)
+
+implant
+(1)
+
+impulse response packs
+(13)
+
+installations
+(4)
+
+intensity shuttle
+(1)
+
+internet
+(2)
+
+interwebs
+(2)
+
+ios
+(6)
+
+iot
+(1)
+
+ipad
+(11)
+
+iphone
+(10)
+
+isight
+(1)
+
+jamming
+(1)
+
+jazz
+(1)
+
+jitter
+(1)
+
+jus chillin with little-scale
+(5)
+
+kaleidoscope
+(1)
+
+kicad
+(1)
+
+kira the cat
+(1)
+
+landscapes
+(1)
+
+lauren's stuff
+(10)
+
+laying of hands
+(3)
+
+lazerscale2010
+(17)
+
+lenses
+(7)
+
+let's listen
+(4)
+
+let's make
+(1)
+
+light
+(1)
+
+lightroom
+(1)
+
+link
+(4)
+
+little-scale
+(314)
+
+live below the line
+(1)
+
+live impulse presets
+(1)
+
+LiveDrummer
+(1)
+
+logic
+(10)
+
+low fidelity
+(1)
+
+low light photography
+(11)
+
+lsdj
+(2)
+
+lumen
+(3)
+
+m8 headless
+(4)
+
+m8 tracker
+(4)
+
+machine learning
+(4)
+
+macro
+(1)
+
+magnetometer
+(1)
+
+maker faire
+(1)
+
+mashtactic
+(3)
+
+massive
+(1)
+
+maths
+(9)
+
+max for live
+(330)
+
+max for live basics
+(6)
+
+max for live snippets
+(4)
+
+max/msp
+(309)
+
+MCP4922
+(7)
+
+mediapipe
+(5)
+
+mega drive sound comparison
+(1)
+
+memes
+(1)
+
+mentorship
+(2)
+
+merch
+(1)
+
+meta
+(13)
+
+microphones
+(1)
+
+MIDI
+(25)
+
+milkcrate
+(78)
+
+mini tutorial series
+(1)
+
+mira
+(11)
+
+misc musical stuff
+(64)
+
+mixcloud
+(4)
+
+mixtapes
+(7)
+
+mobile phones
+(5)
+
+modular
+(69)
+
+modular sequencing
+(13)
+
+moire
+(1)
+
+molecular code
+(8)
+
+monotron
+(4)
+
+mother-32
+(4)
+
+motion
+(1)
+
+multichannel audio
+(1)
+
+myriad
+(2)
+
+nanoloop
+(15)
+
+nature
+(14)
+
+neopixel
+(4)
+
+NES
+(2)
+
+new me-ism
+(10)
+
+nfc
+(1)
+
+ninjam
+(1)
+
+nintendo ds
+(4)
+
+no input
+(25)
+
+noise
+(7)
+
+non haptic
+(1)
+
+nrf52840
+(1)
+
+o against i
+(1)
+
+oled
+(1)
+
+one hour remix challenge
+(2)
+
+onebutton
+(1)
+
+onehander
+(2)
+
+open gl
+(1)
+
+opencv
+(1)
+
+osc
+(15)
+
+osculator
+(4)
+
+other
+(224)
+
+panning
+(2)
+
+patch anatomy
+(2)
+
+path
+(5)
+
+pathMIDI
+(3)
+
+patterning
+(2)
+
+PD
+(2)
+
+permutations and sets
+(7)
+
+photography
+(44)
+
+photography field testing
+(1)
+
+physical control
+(72)
+
+physical digital
+(33)
+
+picaxe
+(16)
+
+picture2midi
+(2)
+
+pictures of buildings
+(16)
+
+ping
+(6)
+
+pitchmap
+(1)
+
+pixel point
+(21)
+
+pixel sorting
+(1)
+
+plants
+(2)
+
+plugins
+(9)
+
+PO-12
+(5)
+
+PO-20
+(1)
+
+pocket operator
+(9)
+
+pokey
+(10)
+
+politics
+(5)
+
+pozible
+(1)
+
+printer stuff
+(9)
+
+processing
+(4)
+
+project data
+(14)
+
+protools
+(3)
+
+push
+(9)
+
+python
+(1)
+
+qr code
+(1)
+
+quadrophonic
+(1)
+
+quick tips
+(1)
+
+QuickTime
+(1)
+
+radiation
+(4)
+
+ram music
+(1)
+
+raspberry pi
+(5)
+
+reconstruction
+(1)
+
+red board tutorials
+(3)
+
+remixing
+(42)
+
+resolume
+(62)
+
+resolume tutorial
+(5)
+
+resynthesis
+(5)
+
+reverberate software
+(6)
+
+reviews
+(18)
+
+rfid
+(4)
+
+rnbo
+(3)
+
+rss feeds and podcasts
+(1)
+
+SAA 1099
+(3)
+
+sample sets
+(40)
+
+samsung galaxy s4
+(4)
+
+sausage fattener
+(1)
+
+SAWA
+(1)
+
+saxophone
+(2)
+
+scores
+(3)
+
+screencast
+(4)
+
+sd card
+(1)
+
+sdi monitor waveform image
+(1)
+
+seapunk
+(9)
+
+secret handshake
+(2)
+
+sega game gear
+(15)
+
+sega master system
+(89)
+
+sega mega drive / genesis
+(92)
+
+sega nomad
+(18)
+
+servo motor
+(1)
+
+shameless publicity
+(162)
+
+shortest sample
+(1)
+
+simpsonwave
+(1)
+
+smsm
+(4)
+
+sn76489
+(30)
+
+solar panel
+(1)
+
+solenoid
+(1)
+
+solstice mix
+(2)
+
+sonification
+(2)
+
+sound font
+(2)
+
+soundfont
+(1)
+
+space designer
+(5)
+
+sparkler
+(1)
+
+speech synthesis
+(2)
+
+spi
+(6)
+
+stealing art
+(2)
+
+streaming
+(9)
+
+stretch
+(3)
+
+studio hardware and infrastructure
+(8)
+
+studio software
+(1)
+
+study
+(31)
+
+super buddies
+(3)
+
+super slow startup sounds
+(4)
+
+supercollider
+(1)
+
+surround sound
+(2)
+
+sync
+(22)
+
+syphon
+(2)
+
+tape stuff
+(4)
+
+teaching
+(20)
+
+techfest 2009
+(1)
+
+teensy
+(159)
+
+teensy 3.6 basics
+(19)
+
+teensy 4.1
+(9)
+
+teensy basics
+(8)
+
+television
+(1)
+
+three.js
+(1)
+
+timelapse
+(1)
+
+tomczak sr
+(6)
+
+touchosc
+(8)
+
+toys
+(1)
+
+trail
+(9)
+
+traktor
+(3)
+
+translations
+(2)
+
+travel
+(17)
+
+tumblr
+(1)
+
+tuning
+(13)
+
+twitch
+(7)
+
+ukulele
+(3)
+
+Unity
+(7)
+
+useless
+(1)
+
+vdmx
+(1)
+
+vectrex
+(29)
+
+vernus v110 pressure-sensitive floors
+(2)
+
+vga
+(4)
+
+vgm
+(12)
+
+vgm data capture
+(2)
+
+vibe coding
+(1)
+
+video
+(5)
+
+video editing
+(2)
+
+video rompler
+(1)
+
+video stills
+(2)
+
+video synthesis
+(21)
+
+videogames
+(31)
+
+videography
+(1)
+
+vine
+(1)
+
+visual arts
+(39)
+
+vj
+(40)
+
+vOPM
+(1)
+
+vox samples
+(1)
+
+wacom
+(4)
+
+water music
+(26)
+
+weather
+(1)
+
+web layer
+(2)
+
+webhook
+(1)
+
+wedding
+(4)
+
+weeklybeats
+(56)
+
+weeklyvids
+(15)
+
+whistling
+(1)
+
+wii
+(8)
+
+workshops
+(15)
+
+written things
+(4)
+
+ws2811
+(4)
+
+xbee
+(3)
+
+xiao
+(3)
+
+ym2413
+(20)
+
+zines
+(1)
+
+## Followers
+
+Share
+|
+
+## Tomczak-centric Links
+
+- arduino projects
+
+- chiptech projects
+
+- electronic music unit
+
+- flickr stream
+
+- milkcrate
+
+- music
+
+- youtube
+
+## Papers Etc
+
+- Affordable Physical Computing: A DIY Approach (ACMC 2006) (Paper and Presentation)
+
+- Authenticity and Emulation: Chiptune in the Early Twenty-first Century (ICMC 2008) (Paper and Presentation)
+
+- EPROM Music (ACMC2009) (Poster)
+
+- Handheld Console Comparisons: Lateral Consumer Machines as Musical Instruments (ACMC 2007) (Paper and Presentation)
+
+- Low Cost Physical Interfacing in Music Technology : Reasoning, Process and Realisation (2006) (Honours Thesis)
+
+- Worlds Colliding?: Traditional Japanese and Western Music in the cult anime film “Ghost In the Shell” (JSAA 2005) (Paper and Presentation)
