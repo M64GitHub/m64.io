@@ -1,0 +1,186 @@
+RAW: chipmusic.org forum thread "LSDJ - Live Performance - Tips/Guides/Tutorials/Videos" | https://chipmusic.org/forums/topic/530/lsdj-live-performance-tipsguidestutorialsvideos/ | 2 pages, started 2010-01-28 by BitPop | fetched 2026-08-31 with a browser user agent | posts extracted with tools/extract-forum-posts.py; quotes marked ">"
+
+----- post 1 · Jan 28, 2010 1:03 pm · BitPop -----
+I'm sure everyone has their own way of using live mode, so I'd love to see and hear how you all use this feature. Post any tips, guides and clips here!
+
+Last edited by BitPop (Jan 29, 2010 3:42 pm)
+
+----- post 2 · Jan 28, 2010 2:46 pm · PixyJunket -----
+The only thing that makes Live Mode unique is the ability to start and stop channels "live," that's it. Any other fiddling around that you can do to alter the song while it is playing (for example soloing/muting/panning channels) will work in Song Mode.
+
+I would suggest a thread title change to "LSDJ - Live Performance - Tips/Guides/Tutorials/Videos" to get better discussion (though I'm sure most people will "get" what you're asking anyway).
+
+----- post 3 · Jan 28, 2010 10:08 pm · xero -----
+live mode is fun.
+turning on / off loops,
+but the best part is jumping between
+different song positions while playing,
+w/o causing audio glitches or lost synchronization.
+
+LSDj Manual wrote:
+
+> 3.5.1 Chain Loops
+> Using chain loops is a useful live mode technique. This technique is based
+> on the fact that the song sequencer (when being in the live mode) won’t
+> rewind the song position all the way up to the first song sequencer step
+> when encountering end of track; instead, it stops rewinding as soon as it
+> encounters an empty step.
+
+> Assume that we start playing pulse channel 1 at song position 4. The
+> player will now loop chains 2 and 3. Defining a number of such chain
+> loops to alternate between would provide a good starting point for a live
+> performance.
+
+i like editing the instrument properties in live mode.
+changing the length for instance.
+
+----- post 4 · Jan 29, 2010 7:40 am · Rei Yano -----
+xero wrote:
+
+> live mode is fun.
+> turning on / off loops,
+> but the best part is jumping between
+> different song positions while playing,
+> w/o causing audio glitches or lost synchronization.
+
+> LSDj Manual wrote:
+
+> 3.5.1 Chain Loops
+> Using chain loops is a useful live mode technique. This technique is based
+> on the fact that the song sequencer (when being in the live mode) won’t
+> rewind the song position all the way up to the first song sequencer step
+> when encountering end of track; instead, it stops rewinding as soon as it
+> encounters an empty step.
+
+> Assume that we start playing pulse channel 1 at song position 4. The
+> player will now loop chains 2 and 3. Defining a number of such chain
+> loops to alternate between would provide a good starting point for a live
+> performance.
+
+> i like editing the instrument properties in live mode.
+> changing the length for instance.
+
+I use live mode and am pretty comfortable with lsdj... but I really do not understand what you mean here... no offence but I just want to know if I am missing out on something here.
+
+----- post 5 · Jan 29, 2010 9:22 pm · PixyJunket -----
+Yeah, I can't make sense of that either.
+
+I THINK it's sort of referring to isolating chucks of a song that can loop so you can jump in and out of these chunks at will during Live Mode. I mean, that's all I can pull from it. The rewind thing doesn't make sense since the looping properties are identical in Song and Live Mood as far as I know. Maybe it's referring to behavior that's change since 3.5.1, I mean that's a long time ago.
+
+----- post 6 · Jan 29, 2010 9:29 pm · herr_prof -----
+So...
+
+00
+01
+--
+02
+
+Means that when 01 ends, it loops back to 00 instead of playing 02.
+
+----- post 7 · Jan 29, 2010 9:32 pm · PixyJunket -----
+herr_prof wrote:
+
+> So...
+
+> 00
+> 01
+> --
+> 02
+
+> Means that when 01 ends, it loops back to 00 instead of playing 02.
+
+Yes, but that is the case for Song AND Live Mode.
+
+I know I'm not crazy on this.. at least I hope I'm not.
+
+----- post 8 · Jan 29, 2010 9:47 pm · Bit Shifter -----
+Yeah but in live mode you can queue up, in each individual channel & independently of the others, a chain anywhere before or after the one currently playing. If you set up isolated "islands" of chains beforehand, it can lend itself to less risky, more controlled live mode use (i.e. you can be assured that a bassline [for instance] will only cycle through the parts you want it to, rather than continuing on and advancing through the rest of the song. Until you TELL it to, by navigating to the specific chain you want to hear next & queuing that one up).
+
+I'm not explaining it so well. :\
+
+----- post 9 · Jan 29, 2010 9:48 pm · aphasia -----
+It's essentially so you can split up bits of songs and then loop them parts indefinitely and independently from any of the other channels.
+
+Which is very useful.
+
+----- post 10 · Jan 29, 2010 9:50 pm · PixyJunket -----
+^ Yeah, that's the same thing I was trying to explain with the "chunks" thing above.
+
+Which, wasn't explained well either.
+
+----- post 11 · Jan 29, 2010 9:57 pm · Bit Shifter -----
+I guess the difference is that in live mode, the channels can be queued up independently of one another. So while in song mode, all channels in the same row will play simultaneously, and the song position indicator will advance in-step (provided all chains in a row contain the same number of phrases). Live mode lets you coordinate playback from different rows in different channels simultaneously. So PU1 can be playing the chain at position 01 while PU2 plays the chain at position 2F, etc.
+
+But I'm probably misunderstanding what part of live mode is unclear here. In any event, the "rewinding" reference in the manual is sort of awkward & potentially misleading wording. Your interpretation that that section is just referring to using isolated islands of chains is right, I think.
+
+----- post 12 · Jan 30, 2010 2:41 am · Lazerbeat -----
+One neat little thing you can do with live or song mode and this isnt something I have heard people talk much about is altering parameters while playing. Altering "Q" in wave instruments while a song is playing is alot of fun for sweepy type stuff.
+
+----- post 13 · Jan 30, 2010 5:00 am · BR1GHT PR1MATE -----
+a fun live mode technique I've been really enjoying is writing "vamp sections" using a bit of aleatory ; 
+
+with pu1, pu2 and wav, write a few chains of various lengths using long melodies with generally the same harmonic material, then let 'em loose over a beat and blend accordingly. if the length of the melodies are different enough, and you just let them all cycle through at various times, you can get amazing "resultant" harmonic/melodic textures that you never would have planned for... if you are clever with volume envelopes, the mix of tones / melodies and registers can be quite beautiful, string quartet-like...
+
+further, to create easy polyrhythm for these, write a few chains with different rhythmic lengths using the "H" command in the tracker screen. the chain with the hop will cycle its length simultaneously with the rest of the "song" screen still running straight 16th notes in 4/4, giving you a wacky, shifting groove. (i suggest being subtle with this, otherwise it can sound like utter shite)
+
+Its extremely easy to get brain-bending grooves going if you throw, say, a 5/8 drum ostinato under the "resultant melody" technique i mentioned in the first section. also, its totally surprising and awesome to listen to because although you wrote the individual sections, hearing the material overlap in unexpected ways creates its own sort of organic "structure". try it, really ;D
+
+Last edited by BR1GHT PR1MATE (Jan 30, 2010 5:02 am)
+
+----- post 14 · Jan 31, 2010 2:38 am · Subway Sonicbeat -----
+Live mode is no mystery, is easy!
+
+At first it looks like a beast, but as soon as you try it, and start experimenting with it you'll see is the best thing in LSDJ.
+
+The song mode is straightforward, and if you want to play something along other than the game boy, then keep doing it. But, in live mode, you can keep "mixing" your song the way you want it, you can keep it playing more than you made it the first time.
+
+You can keep a bassline all the way thru a song while you keep drums and lead fucking it up the way you want. Or the other ways around. Really, no mystery. It come from error and repeat.
+
+----- post 15 · Jan 31, 2010 3:37 am · PlainFlavored -----
+For maximum Nullsleepishness, switch the sync mode to slave in the middle of a note.
+
+Drooooone.
+
+----- post 16 · Jan 31, 2010 4:11 am · ovenrake -----
+I usually write all of my songs in live mode. I try to make everything loop seamlessly, but making transitions is always such a bitch.
+
+
+----- post 17 · Jan 31, 2010 7:37 am · pixls -----
+PlainFlavored wrote:
+
+> For maximum Nullsleepishness, switch the sync mode to slave in the middle of a note.
+
+> Drooooone.
+
+that's actually really cool. tried that with this one kind of drone-y song i've been working on, +5 epic points.
+
+----- post 18 · Jan 31, 2010 9:38 am · Nue -----
+Chuck the tempo on like 90 for a pattern or so.
+
+.... Well thats all i do
+
+----- post 19 · Jan 31, 2010 7:29 pm · STereochan -----
+I'm always a bit too afraid to fuck up the song by switching to live mode and triggering the wrong chain/pattern/whatever...
+but when writing a completely new track from scratch, it's fucking awesome
+
+----- post 20 · Feb 1, 2010 4:39 am · Note! -----
+STereochan wrote:
+
+> I'm always a bit too afraid to fuck up the song by switching to live mode and triggering the wrong chain/pattern/whatever...
+> but when writing a completely new track from scratch, it's fucking awesome
+
+This is indeed dangerous. But more dangerous is accidentally switching your master to slave (or worse even, MIDI) in the middle of a song resulting in a delicious drooooooooooooooooooooone and loud "SHITCAKES!"
+
+----- post 21 · Feb 1, 2010 5:18 am · Starscream -----
+My favorite use of live mode has been to introduce songs live by slowly piecing them together. Kind of remixing my own songs/life on stage as a lead up to the original structure.
+
+----- post 22 · Feb 1, 2010 7:24 am · BR1GHT PR1MATE -----
+Starscream wrote:
+
+> My favorite use of live mode has been to introduce songs live by slowly piecing them together. Kind of remixing my own songs/life on stage as a lead up to the original structure.
+
+this, totally. every performance can be different!!!
+
+----- post 23 · Feb 1, 2010 4:12 pm · PixyJunket -----
+One song I'm working on now, the lead plays naked but I've set up a few tables to give it some altered sounds that aren't used in the song itself. I'll be switching up the tables and duty length when I play it live soon, so I'll see how well it works. Sounds nice when I'm messing around, so..
+

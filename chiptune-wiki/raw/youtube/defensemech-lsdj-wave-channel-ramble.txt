@@ -1,0 +1,173 @@
+# LSDJ Wave Channel Tutorial..? (More of a ramble)
+Channel: DEFENSE MECHANISM (https://www.youtube.com/channel/UCApkR1dVSaKCbwRyPs8_yTg)
+URL: https://www.youtube.com/watch?v=hJZczkZx8fU
+Uploaded: 2020-04-09 · Duration: 40:47 · Views at fetch: 4137
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [hJZczkZx8fU.en-orig.vtt]
+
+## Description
+
+LSDj Learning Lab: Wave Channel playlist https://www.youtube.com/playlist?list=PLfhdj6Qak_ehuZgnwhiz9akZnTMsDeNpy
+Intense Tech with Defense Mech Wave Tutorial Blogs
+https://defensemech.com/intense-tech/en/01-lsdj-wave-synth-deep-dive-part-1.md.html
+https://defensemech.com/intense-tech/en/02-lsdj-wave-synth-deep-dive-part-2.md.html
+Find my save files at https://defensemech.com/songs 
+LSDJ Wave Synth Frame Chart
+Length - Frames
+0-0
+1-0F
+2-07F
+3-05AF
+4-037BF
+5-0369CF
+6-0257ADF
+7-02469BDF
+8-013579BDF
+9-0135789BDF
+A-0134679BCEF
+B-0124578ABDEF
+C-01235679ABDEF
+D-012346789BCDEF
+E-012345679ABCDEF
+F-0123456789ABCDEF
+
+## Transcript
+[0:00] what's up everybody its defense mechanism I wanted to make a new video and I've kind of figured that I would shoot for a wave channel video because a lot of people are curious about the wave synth I've written like I guess for blog articles or something like that about it but I don't know that it's the style of learning for everyone is to read a blog article even though there are a lot of videos like little clips throughout to kind of illustrate the concepts that I'm
+
+[0:32] talking about so I'll say this if you want like the text version or if you want something that you can refer to and you don't want to watch like an hour-long video or however long this ends up being I'll link to the to the blog articles below there also on my website defense Mikami you can go check them out there but I thought for the people who like video formats and who are interested in watching something this might be you know kind of a good way to explain the wave channel synth so let's talk about
+
+[1:08] what the wave channel synth is for a minute I so basically there is a in the gameboy hardware a section of memory that is reserved for waveforms I'm sure we've all seen the wave screen if you haven't maybe you're a beginner and you've been kind of intimidated and you don't really understand what this means just to talk about waveforms for a moment this is the shape of the sound
+
+[1:43] wave that will come out of the speaker at a various rate more or less so we're looking at this is called a sawtooth wave because when it repeats it looks like a saw essentially in the original programming days the the Gameboy hardware was basically meant to load up one of these waveforms so like say I don't know you go to a new level in a video game and you load up some kind of weight weird waveform that looks like whatever
+
+[2:16] and it was usually I think chosen somewhat carefully by the the programmers or the composer at the time to kind of make it sound like a trumpet or a flute or whatever so they would have a waveform they would load it up and then you play the level and then it would go to the next level or whatever when we were using LSD Jay we have way more control and way more facility over the waveform that's playing in this
+
+[2:49] channel than any programmer ever had while they were while they were designing a game for this for most cases I think when you get to the Game Boy Color games you find some more wave channel shenanigans and a lot more sound shenanigans because you had like a processor that was twice as capable of doing stuff and you had a little more memory too so we can choose our basic waveform when we're talking about the wave synth in this signal parameter here
+
+[3:23] so here you've got your sawtooth and this is where you get to see like what the little waveform looks like and a sawtooth wave is composed of every harmonic so if you're not familiar with the harmonic series we'll illustrate it a little bit later but basically you can think of it as kind of like subdivisions of a frequency or multipliers I guess if you're thinking of it like a string vibrating it's kind of like subdivisions if you're thinking of it as like the base level frequency then it's like multipliers so a sawtooth has every
+
+[3:59] number of the base frequency base frequency multiplied by one two three four five six seven in the case of LSD J I think it's up to 15 I guess so let's take a look at the square wave so the square wave is basically a square you can see this a little more clearly if you put the volume up here we've got on and off this is essentially the same as what's happening in the pulse channels LSD J does some fancy math to get what looks more like a pure I mean in four bits of a pure analog
+
+[4:35] square wave so that's why you see these like little kind of irregularities in the wave form but this is what it actually looks like if you were to like take a really low resolution photo of a waveform or something like that from an oscilloscope and then this the square waveform has all of the odd waveforms or I'm sorry all the odd harmonics in it so it would be is it odd or even I think it's odd one three five seven nine eleven will actually get back to this later because we'll be able to
+
+[5:08] illustrate this and then you've got your either depending on who you ask the triangle or the sine so if you ask me it looks pretty triangle like it doesn't really smooth out in the way that I would expect a sine wave to but I also know that doing a kind of pure sine wave math on the Gameboy like this isn't in exact science because the processor is only so precise but I'll say that it basically ends up sounding kind of like
+
+[5:40] a triangle wave and this is like a pretty typical sound wave that was on like for example the NES sound chip you find a lot of triangle and this one I think I think it's the same as the square it has all of the odd harmonics but they decrease in amplitude like twice as quickly or something like that I didn't reference this beforehand because it wasn't my aim to talk about the basics of waveforms and you can skip this section if you are already bored but the essential thing to know is that you can get different waveforms and that
+
+[6:13] they have sort of like different strengths so probably for my purposes I'm going to talk about the sawtooth wave the most because it has every harmonic in it and that you know is basically going to provide us with the most options if you really want a square wave then the best way to do that is to start with a square wave and and do whatever you're gonna do from there but for purposes of this video I probably spend a lot of time on the sawtooth so the filter type the fun thing about LSD J is it kind of
+
+[6:49] emulates different filter types and this is a wave table synthesizer it's not a subtractive synthesizer so the filters that you see here are actually just kind of emulated they're not real filters it will just generate what what you might expect to see from these kind of filters but when you're talking about the filters low-pass means that the lowest frequency the lowest harmonics will filter through and the higher ones will get filtered out the high-pass filter means that the highest frequencies will
+
+[7:23] come through and the lowest ones will get filtered out the high ones will pass through band pass means like a specific bandwidth of frequencies or harmonics will pass through and the low or the high ones will get filtered out and all paths means that all of the frequencies will come through and you basically will use the resonance to kind of determine the sound so let's stick with low-pass for now we've got the different distortion types these are what happens when the waveform like for instance the volume reaches past our available
+
+[7:57] dynamic range and we only have four bits of it so this is easy to accomplish clip basically means it will clip it as 0 or F and that like becomes the floor and the ceiling and if you go past 0 or past F then those just get kind of rounded off to 0 or F so fold will kind of mirror them so if you reach past F it will kind of wrap around no it won't wrap it will mirror it sorry and if you go underneath 0 then it will kind of mirror it back over wrap is what will
+
+[8:31] wrap around this is where you can think of it as if it goes past F then the next value will come up from 0 and likewise if you go downwards from 0 then it will come downwards starting at F and I'll illustrate these when we actually look at the waveform the phase is what happens so these are kind of you can think of like what happens vertically speaking phase is like what happens horizontally speaking so normal phase this will kind of adjust this is almost like squaring off the wave kind
+
+[9:06] of both of these are like squaring off the wave resync this will kind of like duplicate your wave so it's a good way to kind of really get high harmonics quickly because it will kind of duplicate the wave in full and then resync to will kind of like duplicate it but sort of chop it off when it duplicates I'll just talk about these briefly for now and then we can come back and you actually be able to see them as we're playing them with the oscilloscope and then the volume this is
+
+[9:39] the volume of the initial signal before it goes through the later phases and then zero zero through zero F we have to you know we have a start a start way frame and an end way frame and these two values get interpolated from the first frame to the second frame there are sixteen cents so every cent that you pick has 16 frames so Q is also known as resonance and this is the boost of the frequency that happens at this cutoff
+
+[10:15] value so we can set the cutoff from anywhere from zero to F F which is 255 the important thing to notice though actually is that we've got this is essentially the zero these the first digit over here basically corresponds to the number of the harmonic so this gets really important because you can choose where to emphasize we're to place the emphasis with this Q on whatever harmonic or overtone that you that you
+
+[10:52] want and I'll illustrate this too viii shift just kind of shifts the center of the waveform up upwards it can be useful it can kind of do interesting stuff or add more noise but I haven't really found a really super effective way to use V shift but it is there if you're interested limit this is the volume after these parameters get applied so like if you have a lot of boost on a certain frequency like you dial the Q way up you can then turn it
+
+[11:25] back down or you could also use this to fade in so this basically tells you zero has no dynamic range so we have no there is no value zero is completely silent whereas turning it all the way up to F will increase the values all the way from zero to F so you have full range from zero to F this is really a really great feature to have because anybody who's used older versions of LS CJ before limit I think they've known that
+
+[12:00] it's at least this is what I found it's really easy to get the wave channel to loud and then you're kind of fighting the volume of the pulse channels and everything else and then this phase value kind of affects how much the wave is squashed horizontally kind of like how the V shift determines how much it's squashed vertically but enough of me talking about this so let's go on to some actual demonstration so a straight up like I mean we've all probably heard the default kind of low-pass waveform
+
+[12:35] just this kind of regular old sawtooth wave [Music] it's great it sounds like a sawtooth it is what it is let's go the other cool thing about this is that now if I can figure out where I'm at now I can just kind of go between the synth screen and the phrase screen do this and yeah so let's check this low-pass filter so right now we've have we have every
+
+[13:07] harmonic playing if I take this all the way down to 10 now we're filtering out every wave every harmonic that is below that is above the the first overtone or the first harmonic and I'm going to boost the volume a little so you can see this so we essentially will just have the first harmonic or the first overtone and nothing else so it's like a very smooth sound that has no other other harmonics in it no
+
+[13:44] other frequencies in that waveform and then if we go up to 20 from here now we have the first and the second so with low pass or high pass you will have like with low pass you'll have this 20 and then everything below 20 if I change is the high pass will only have 20 and above but it will filter out the first that lowest note so you lose that very first harmonic and as
+
+[14:21] you go up the note will thin out the fun thing about this is that even when you take out the lowest harmonics adding together all of the higher harmonics still like has the effect of creating kind of an artificial low harmonic so like it still kind of sounds like it's there even though it's actually not being generated and the other thing is that like the way that this waveform is
+
+[14:54] created you still get this kind of variation like if I manually just make this like like this it's gonna sound a lot less like a real note or a little bit anyway but what I really wanted to show off is this band pass where this is like probably gonna be the clearest illustration and I'm gonna bump up the Q of where the waveforms are that construct each each sound so at zero we have nothing right at 1 we have this
+
+[15:29] again this is our raw kind of what would be sort of like a sine wave but it really ends up kind of being more like a triangle almost and then two would be an octave above and then three should be a fifth above and then 40 should be another octave above and then 50 would be a major third above that we can boost the queue a little bit to get more
+
+[16:02] and then 60 should be another fifth and then 70 is like an out-of-tune kind of seventh and then ad will be another octave the 90 will be like a major second and then 10 or 10 a zero will be another major third and then this will be like a sharp for
+
+[16:40] starts to make a little bit less and that si will be another octave No it's actually I think it should be another fifth it's a little hard to make out here but you can hear it actually you can hear that fifth above its it's really quiet oops I don't want to name this yet we can probably if I lower the octave here a little better it's almost like a sixth kind of there's kind of a flat seventh
+
+[17:25] again as almost the last octave if I go all the way up here nope nothing yeah so it probably only generates up to here really so you can kind of hear that those those overtones get added depending on what cue you have what band what filter you have and so on so this
+
+[18:00] is really cool for all paths because it will keep this whole sawtooth intact and actually it's sort of displays it a little differently it's kind of like an inverted sawtooth and then it will put the emphasis like say you really wanted an emphasis on this octave then you can just add an emphasis on the octave of this harmonic or like say you wanted it way up here or like if you wanted it on the fifth
+
+[18:40] [Music] you can also do it at 30 [Music] that one's a little bit harder to discern unless you dial this all the way up sorry I keep I'm getting a little lost over here that you can really hear so this is
+
+[19:17] really useful if you really want some kind of wah like if you wanted something to go you know wah because you just start this here and then you end it here and you keep the queue up pretty high probably I don't know let's try it around like 9:00 bump the volume up here and then of course you can set your wave instrument to change from manual to once and chat set the speed at like three set the length at F and then so there you go pretty wicked and then you can kind of tune
+
+[19:57] this like maybe you want to start it you know a little bit up and then not have it go all the way up so that way you kind of kind of limit the range into where you like hear it the most and you can do the same thing like with low-pass [Music] it's a little bit less dramatic because you're not getting all of the high overtones over here and stuff like that and you could do it in high pass in
+
+[20:30] Reverse if you wanted to even more different effect it's kind of like the bass kind of disappears on that one okay so we've talked a little bit about this filtering so let's go back to the square just to kind of show you what happens when an opposite set this back to manual when you do this kind of thing so we've got our file this back to like - maybe so you've got our first one but what
+
+[21:07] happens when we put this at twenty does anything change a little bit oops sorry but but it's really not it really just increases the volume like the waveform itself is actually the same so we don't get that second octave here even though we're at 20 we have to go up to 30 before we can get and we don't get the octave we get a fifth here yeah there we go just my settings are a
+
+[21:58] little funny it's there but it's not that noticeable maybe we need to go to 40 to get it there we go so it must be all of the huh that's interesting okay seems like this is actually adding the overtone that should be at 30 because if we would normally expect 40 to go for a different octave but only I solicit what happens at 60 but that doesn't happen at 50 you kind
+
+[22:33] of get a mix of the two but you don't get that fifth and anyway and this it would be the same thing for triangle I guess I'll let you experiment with that on your own let's talk about the distortion types a little so I guess the important thing to notice here before we get into the distortion is that whenever you let me go back to this so like at this first harmonic
+
+[23:07] we just have one waveform and it looks like this and I can sort of reduce the boost and you'll see that this is basically what it looks like it's this waveform this is like a sort of close to a sine wave kind of the closest you can get to a sine wave here and then when you go up to 20 you kind of replicate your waveform right these these are at different amplitudes throughout the whole song but this so this is basically what adding extra overtones does every
+
+[23:49] time you add an extra overtone you multiply the waveform so there's another way to do this without just using the bandpass filter if we do if we kind of recreate this sine wave situation in our low-pass that this is close enough for me well we get and probably get a little closer now that's close enough we can do the same thing by resyncing the phase so when we add more phases we're actually
+
+[24:24] just kind of adding more copies of the waveform right so this is basically the same as what we just had and we should expect it to sound largely the same right so that's at least on resync when we add this to normal you're just adding nothing it's like adding a square wave essentially to this Yi with a square wave that octave up wave form so in
+
+[25:04] essence anything that you're doing with any of these parameters is just finding out a way to add different overtones or harmonics different frequencies to the wave form you've already got and if you know if you are able to you can control them if you learn about what each one of these does like you can add them in a more or less controlled fashion the more you know about it the more controlled you can be about trying to add harmonics that kind of make sense with what you're
+
+[25:37] doing so when you're folding something like this you know this looks the same but like let's increase this Q right now you can see that as these started to extend above or below they kind of wrapped around and we can probably do this more smoothly if I do it with volume instead of a set of Q so as we go the volume up but what is this really
+
+[26:11] doing this is just adding more frequencies and probably tell this more if I take the phase off not entirely drastic but when we change it to rap now we've got all kinds of extra harmonics and overtones here and you've also got a wider dynamic range because instead of only having dynamic range from here you know and a
+
+[26:45] little bit here and we go we've got you know from about one to about e but when we use this dynamic range we've got all kinds of stuff happening all over the dynamic range so it's gonna be louder and like just more intense um so we've talked about normal weave what resync to this we'll just kind of cut off this waveform with another copy of the waveform but it doesn't squish it so you
+
+[27:19] don't get another copy you just kind of get the same thing that sort of creeps in and what this usually has the effect of doing is somewhere kind of like being like the regular resync but just quieter sorry if I'm making anyone dizzy with all the screen navigation [Applause] [Music] so and yeah the more volume you add to this and the more queue you add like the
+
+[27:53] more drastic your rap is going to be and at some point you basically this is kind of gonna sound more or less like noise so when you have like a lot of just random samples that don't follow any kind of pattern this is essentially gonna sound kind of annoying like noise I'm just gonna go ahead and try to make this like the most random thing that I can even though it is periodic because we're still playing the same thing you're gonna hear it pitched but if I play it like at a really low pitch
+
+[28:25] you're probably just gonna hear it as kind of a noise and any waveform that looks like this kind of random dot picture is basically gonna sound the same so there's not really gonna be anything that much different between this and any other like really crazy looking waveform it's kind of got a it doesn't really sound like a really pure low waveform it kind of sounds like it's got a lot of
+
+[28:57] stuff happening in the higher frequencies which it basically does so I'm trying to think of what else I can really talk about because I kind of showed you the allpass thing I've showed you low-pass we've got the different waveforms I guess the other thing to talk about is probably the instrument settings so let's just set up something kind of basic that starts at a high cutoff kind of ends at a low cutoff let's put this at like 80 put this one at 20 or 10 actually set these cues at a
+
+[29:42] little bit lower all right like 2 3 set our phase all the way to 0 set this back to normal set this to clip okay and then change this to once so let's talk about the speed this is in ticks this is it changes the way frame every three ticks the length is f so it's playing from zero to F if we
+
+[30:16] shorten length it doesn't just play from zero to e or from zero to D or from zero to see it actually always plays from zero to F but it will only play as many frames and it will interpolate those there's a nice chart online I could probably just post it in the description I was kind of hoping that we can add this to the manual and maybe it will happen at some point but the most important thing you need to know is that it kind of skips frames in the middle to equalize them so this will always play from zero to F it will just kind of do
+
+[30:51] so twice as fast because there's only half as many frames so that's one thing so one way to get this to travel from zero to have twice as fast reduce the length another way is to reduce the speed so once plays this through and then stops right loop plays these all the way through and then it will loop starting from the loop point I think I I think I mentioned this in the last version eight video but maybe not and if you want the sound to just play once and
+
+[31:28] sustain then you can set the loop point you know at the end or you can kind of set it in the middle and then ping-pong will do kind of the same as loop except for that it travels to the end and then back to the beginning first so let's hear what that sounds like the loop point at zero let's see what it sounds like the loop point at the end again it just sustains and then in the middle it just ping-pong is back to the middle so those are the
+
+[32:04] kinds of different settings that you can have here is there anything else that we really need to go over I guess we can just kind of play around with the different signals for a little while and you can kind of hear this is a little more subtle than that sawtooth because we don't have all of the overtones and the triangle or sine wave is even more subtle that's kind of that's kind of really awesome and since we have a waveform the waveform inversion aids the
+
+[32:38] waveforms are being smoothed out you have a lot more potential here at speeds like 2 & 1 that's kind of ridiculous but also kind of fun you know I'm kind of surprised it how much that really does sound like that's pretty good obviously this is the most dramatic so the filter effects especially with the cue are
+
+[33:12] really exaggerated with this sawtooth and they're less exaggerated the further you go down let's check it with a high-pass [Music] and then like with different distortions rap is a great way to just add a lot of
+
+[33:49] noise to anything that you're doing sometimes it seems almost unusable but there you go and you can also do a similar thing like let's say that we just put these both at 10 and we want to change the phase like you can do a really similar thing with the resync I should also mention that the resync now are the the phase at 1 F now is not total silence as it used to be it's actually just this waveform so that's like very extreme but if you want
+
+[34:24] to take it down you know or even like maybe here the thing that you don't get really is like the extra overtones you do so you get to get a few but so that should work even with this so there you go not quite the same with normal either
+
+[34:59] like let's see how that sounds it actually works pretty well but it's a little more subtle even more subtle [Music] so yeah I don't know I know we didn't really cover v-shaped oh this is that's right this is one thing I wanted to show off was this limit so one thing that I like to do a lot is kind of like have this low-pass bass let's put this on
+
+[35:35] manual for a moment let's have to put an F command so that I can that might even be a little more exaggerated but I just like to have some kind of upper overtone with like a little bit of Q on it it just kind of adds a little more to the bass and you can even reduce this if you wanted less you can lower the cutoff here sorry but one of the things that I really
+
+[36:12] liked a lot was instead of doing something like having a kick you know for sidechaining and then doing like this which you know it's still fine but like let's say we don't want to do this because the the way that these volume commands work is this is 25% this is 50% and this is a hundred percent and there's nothing between fifty and a hundred percent so like it's kind of it tends to be a little bit jarring and in
+
+[36:44] the context of the song and especially with the four bit dynamic range like it usually works pretty well but sometimes two is too soft for an instrument and three is too loud in the context of your mix so but let's listen to this anyway oh gosh I had to put this on put this back up to F here we go like especially when you're listening to that by itself
+
+[37:21] it's just it's not that pleasing to me personally it would be really nice if we had a way to control the volume so like normally you would have a kick here and I'm kind of leaving out the kick right now just because it's fine I can illustrate this without a kick so let's put our limit at zero and then put this on like say I don't know loop I usually like to put the loop position at the end is just so that it will sustain and then
+
+[37:54] now we can have this going from zero to F and have this kind of naturally do its own side chaining and let's say you know you can control the again like the speed of this like maybe I want this to go slower and I only wanted to do three frames you know or maybe I want to slow it down or maybe I don't want this to start at zero maybe
+
+[38:27] I want it to start at like four you know or maybe I want this to go even faster like so it's a great way and you could do more than limit to like you could do volume here you could do queue of this or whatever so then you have like more than just the limit going up but also
+
+[39:00] the volume and the queue so that's like a really useful sidechain trick to actually give this video some like practical stuff on it and it sounds great this is something that's a little bit harder to do in the older versions I mean it still sounds good I'm sure but it was something that I wasn't really exploring because like the wave channel was just so clicky whereas now it's really possible to do this without that so I hope this is a cool overview let me know if you think that that I should go over something else or more wave design tricks or I
+
+[39:32] don't it's not that I have tricks I just like my idea was to kind of explain the principles of it so that way you could kind of explore it with some knowledge of the principles yourself and kind of understand what makes the wave channel do different things at some point I think I might do like a safe file walkthrough or a song walkthrough or something like that and just kind of go over how I was writing it will be interesting to see how things change with version eight because most of my writing was done in like versions five and six and I've been
+
+[40:05] using eight for some of the very very new stuff that I was writing but I still think it's probably useful to go through and kind of explain that stuff all my save files are up on my website defense Mikami if you scroll down to the bottom and click on the defense make logo it'll take you to the songs page that has all of the SAF files and stuff on it so I hope that somebody finds that stuff useful I'm gonna upload a new save soon that has some of the new stuff on it so I hope that you found this useful let me know if you have any questions or if you
+
+[40:38] think that there's something that deserves great or coverage and I'll see if I can get back to it other than that thanks for watching

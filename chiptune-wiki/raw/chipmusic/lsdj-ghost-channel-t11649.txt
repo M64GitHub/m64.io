@@ -1,0 +1,113 @@
+RAW: chipmusic.org forum thread "Advanced LSDj Tutorial - The Ghost Channel" | https://chipmusic.org/forums/topic/11649/advanced-lsdj-tutorial-the-ghost-channel/ | 16 posts, 2013-07-11, one page | fetched 2026-08-31 with a browser user agent (the site 403s plain fetchers) | post text extracted from the HTML with tools/extract-forum-posts.py (post number, timestamp, author; quotes marked ">"); the embedded video and the song-file link are plain text in post 1, images/signatures not included
+
+----- post 1 · Jul 11, 2013 10:19 am · TylerBarnes -----
+‌Ok, so I've had this tutorial in mind for ages and finally decided to make it. This is a method I've devised for getting an extra channel of sound out of LSDj. This hidden channel of sound is given to us via custom waveforms + frame switching. I've tried to be as clear as possible when explaining how it works and how to play with it, so pardon me if I'm not the best teacher. Also forgive the very long runtime, but I had a ton of info to pass on. Without further adieu, here is a video Demonstration/Tutorial on 'The Ghost Channel'.
+
+VIDEO TUTORIAL HERE
+
+LSDJ SONG FILE HERE
+
+Something I forgot to record in the video is that if you want to make your square waves louder than 3 pixels high (as shown in the example), then you must create more headroom by sacrificing some of your sine wave's amplitude.
+
+Last edited by TylerBarnes (Jul 11, 2013 10:55 am)
+
+----- post 2 · Jul 11, 2013 11:04 am · W4LKR -----
+I didn't know this was possible.
+
+The way I see this is like god creating a new colour.
+
+----- post 3 · Jul 11, 2013 11:11 am · defPREMIUM -----
+ok tylerbarnes ok i see u u know wassup
+
+----- post 4 · Jul 11, 2013 11:14 am · my.Explosion -----
+This is amazing...
+
+----- post 5 · Jul 11, 2013 11:50 am · SuperBustySamuraiMonkey -----
+what the
+
+----- post 6 · Jul 11, 2013 12:15 pm · nitro2k01 -----
+Believe it or not, I have experimented with these things. A couple of pointers:
+
+You can select multiple samples using select+B and then moving the pointer to extend the election, similar to other clipboard operations in LSDj. Once you've done that, you can press up and down to offset the selection. This also doubles as a copy function, and you can paste with sel+A. When you have a selection, you can also flip the selection horizontally/vertically by holding A and pressing left/right or up/down. By using these tricks and absuing symmetries in the waveforms, you can speed up the manual labor a lot.
+
+You can also make other waveforms, like a sawtooth by moving up 1,2,3,4,1,2,3,4 etc amplitude steps. You can also try doing other intervals, but those have to be more than one octave up. You have the harmonic series dictating these notes:
+
+Overtone.
+v   Coresponding note.
+1   Base note
+2   1st octave
+3   1st octave, 7 semitones (major 5th, G in a C scale)
+4   2nd octave
+5   2nd octave, 4 semitones (major 3rd, E in a C scale)
+6   2nd octave, 7 semitones (major 5th, G in a C scale)
+7   2nd octave, 10 semitones (minor 7th, A#/Bb in a C scale)
+8   2nd octave
+
+This take a little trickery to get right. In part because these are perfect intervals and slightly detuned from our modern equal temperament tuning, in part because, unlike the octave intervals, the other intervals don't line up to single steps, so you don't move the cursor the same number of steps to the right for each part of the superimposed waveforms. This makes each interval sound a bit different due to aliasing.
+
+In practice, perhaps only index 3 (octave + fifth) is really useful, unless you want to get waves that sound "bad".
+
+To figure out how many steps you should move the cursor to the right between each half wave, you calculate 16/x and that's the number of steps between each alternation. For example, for the 1 octave 5th, that's 16/3 = 5.333... so on average 5 1/3 steps between each step.
+
+Now how to do this easily? Let's use some Javascript. Press ctrl+shift-j (if you're in Chrome) to open up the JS console. Paste the following. (Fixed!)
+
+mod = 32/3; acc = 0; i=32; while(i--){console.log((i%mod)>=mod/2)}
+
+You should see something like this:
+
+This means, move the waveform up for 5 samples, leave the next 5 samples untouched, move the next 6 samples up, leave the next 5 sample untouched and so on. Vary the 3 in 32/3 for a different overtone according to the table above. Again, note that the higher overtones will sound ugly, and are also two octaves up.
+
+Lastly, something you obviously must have done, but didn't address in the video, is to use the vshift value in the synth screen to move the waveform when generating it.
+
+I would make a video about all this if I didn't hate my voice so much.
+
+Last edited by nitro2k01 (Jul 11, 2013 8:56 pm)
+
+----- post 7 · Jul 11, 2013 12:49 pm · TylerBarnes -----
+I have indeed experimented with using a saw instead of the square, but I could get more octaves and a louder sine when using the square.
+
+Also, nothing was generated, I drew each sine wave manually (I have experience creating pixel art so curved lines aren't too challenging for me). No synth screen commands were used. They didn't produce the tones I was after.
+
+ I didn't know about the horizontal flipping, but have indeed used a lot of those copy paste commands whilst making this setup. I didn't use any in the video cause I wanted to illustrate the idea behind it all more than just to get it done quickly.
+
+That java stuff a little over my head and will require me to take a closer look at it when I'm not so tired, but I'm delighted to see all the work you've already accomplished on this subject.
+
+EDIT: I plugged in that script into a java console and had fun hearing these new intervals, but like you said, only the 1oct,5th is really useful. The others are too saturated and detuned. kinda disappointing it's only on that octave. I'm a sucker for completion and for elegance. Having only one usable 5th out of five octaves is far from ideal, but I'm still happy to now have the option. And for that I thank you nitro. Also another thing I overlooked was being able to highlighting multiple samples(pixels) and offsetting them with the arrow keys would have made things a bit quicker than raising each pixel individually XD. I'll know better next time.
+
+Last edited by TylerBarnes (Jul 12, 2013 10:30 am)
+
+----- post 8 · Jul 11, 2013 1:59 pm · barbeque -----
+WOAH
+
+----- post 9 · Jul 11, 2013 2:04 pm · snesei -----
+barbeque wrote:
+
+> WOAH
+
+Yeah lol, might try this when I get off work. Those chords sound ace
+
+----- post 10 · Jul 11, 2013 2:13 pm · Monotron -----
+This is awesome, I'll have to remember this
+
+----- post 11 · Jul 11, 2013 2:53 pm · herr_prof -----
+master class.
+
+----- post 12 · Jul 11, 2013 3:51 pm · Alpine -----
+This is pretty dope, I'm going to have to try this out.
+
+----- post 13 · Jul 11, 2013 4:02 pm · VCMG -----
+Man, I can't wait to see what people can do with this.
+
+----- post 14 · Jul 11, 2013 5:08 pm · bryface -----
+nice tutorial!   few people realize the WAV channel's potential for doing neat stuff with overtones and additive synthesis.  you explained the process very well.  i'm doing something similar on a tune i'm working on, except the waves aren't hand-drawn and it was mostly trial and error to get the necessary overtones.
+
+a potential disadvantage of this is because you're additively piling on waveforms on top of each other, you need extra volume headroom, which means your wav sounds will sound quieter on average.   but that can be worked around somewhat by making all your other instruments quieter.
+
+drawing the waves by hand is most definitely an arduous process though!  i wonder if there's a tool that can autogenerate these waves and spit out an lsdsng..
+
+----- post 15 · Jul 11, 2013 5:09 pm · herr_prof -----
+iirc there was a html editing tool that let you draw waves and export a lsdsng file?
+
+----- post 16 · Jul 11, 2013 5:32 pm · theghostservant -----
+hotdamn
+

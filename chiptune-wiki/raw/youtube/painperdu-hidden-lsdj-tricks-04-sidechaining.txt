@@ -1,0 +1,92 @@
+# Pain Perdu LSDJ Hidden Tricks EP4 - Sidechaining
+Channel: Pain Perdu (https://www.youtube.com/channel/UCiqCI92PN7oNhPvOu3fPuZA)
+URL: https://www.youtube.com/watch?v=XotQNL6WHWw
+Uploaded: 2016-08-25 · Duration: 10:40 · Views at fetch: 2357
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [XotQNL6WHWw.en-orig.vtt] · spoken language: en
+
+## Description
+
+TIMESTAMPED TABLE OF CONTENTS BELOW!
+
+First of all sorry for the horrible backdrop idea.
+
+In this video we cover Sidechain!
+What is it? How does it work? Why should we use it?
+How can we achieve a similar result in LSDJ?
+
+After watching the vid I realized I said "in the context of" WAY to often. Sorry for that as well.
+
+Thanks for watching!
+
+Don't hesitate to react in the comments if you've liked the video, or if you want us to explain a specific topic in more detail. You can also give us feedback, suggestions, and tell us which topics you'd like us to cover in the next episode!
+
+If you liked this video, please subscribe to this channel!
+You can also find us on
+- Facebook : https://www.facebook.com/painperdu8bit/?fref=ts
+- Soundcloud : https://soundcloud.com/pain-perdu
+- Twitter : @PainPerdu8bit
+- Instagram : @PainPerdu8bit
+
+Want to join an awesome and welcoming Chiptune FB group with over 5000 great people from all over the world?
+Look no further than Chiptunes=WIN!
+https://www.facebook.com/groups/chiptuneswin/?fref=ts
+
+=== Table of contents ===
+
+INTRO
+00:06 - Actual beginning
+00:43 - Strobe Cover
+01:15 - What is Sidechaining?
+
+APPLICATION 
+03:16 - Emulating Sidechaining in LSDJ
+04:04 - Using WAV envelope commands in standard Groove
+04:52 - Using 3/3 Groove to control the effect better
+
+CONTROL AND OTHER USES
+05:59 - Using Pulse Channel Envelope commands
+07:27 - Making room in the WAV channel for bigger kicks, in Groove 3/3
+09:30 - "Pumping" noise effect with Envelope commands
+
+CONCLUSION
+10:20 - Thanks for watching!
+
+## Transcript
+[0:06] hello guys this is paul from pamperdue and welcome to the fourth episode of lsdj hidden tips and tricks well this one is not really that much of a hidden trick as much of a tutorial on how to achieve a very specific sound design that is essential to making i think electronic dance music now so we're going to talk about sidechaining compression and i've had this idea by making a very small snippet of a dead mouse cover of his song strobe
+
+[0:39] which i do not own please don't sue me and here is what it sounds like do
+
+[1:14] okay so first what we need to do is to cover what side chaining actually is in the context of modern electronic music today and then we're going to cover how to achieve a similar effect inside sdj and within its limitations so first of all what is sidechaining sidechaining is short for sidechaining compression and what it does is basically you route the kick track of a song or any other track really but it's most telling when you take a kick track you write the kick track of a song to a limiting compressor
+
+[1:47] and what it's going to do is it's going to detect the kick waveforms and crush the volume of every other track that you've routed the compressor to so that every time the kick hits the volume of every other track is crushed down and then back up so that the kick sounds more full and more present than if it was heard at the same time of as like for example a reverb tail or a bass track or a chord track
+
+[2:22] in the context of a song so it's and then it's been used as part of electronic sound design in modern electronic music uh to an extent where it's more part of writing than sound design itself but telling examples include for example flume's remix of disclosure song you and me when you have the kick being very very loud and then the chord tracks being faded in very slowly like
+
+[2:55] and then this has been used in electronic dance music in in house in any kind of electronic dance music even even starting from the 90s when you have like kick and chord and kick encode and sound like for example and in the context of the song of the dead mouse cover there is a way to emulate a similar effect as sight chaining even without compressors because in the context of lsdj we do not have access to compressors
+
+[3:26] so in the context of the dead mouse cover here is what the main baseline should sound like without any effect but since uh in most of the time kick and bass has to happen in the same channel in the context of lsdj we're gonna have to have this so you are going to notice two things
+
+[4:01] first the groove is three instead of six you can you can totally achieve a similar result in groove six this is groove six and what we can do to like technically this is already a similar effect as the sidechain because you cannot have the kick and the bass playing at the same time but then what we can do to increase the fade in effect on the bass is this putting envelope commands
+
+[4:37] so two is fifty percent three is a hundred percent volume so this is what it's gonna sound like it's very nice because it's time together with the 16th note but you might want a higher resolution of control for your envelope commands and you might not want the pumping effect so what you can do is actually put the groove to three that is to say double the speed of what we've just seen
+
+[5:10] and have double the resolution for your envelope commands so this is still sidechained but much faster actually double the speed of what we just heard just as if this was triggered at the same time actually this is a 30-second note so this is barely noticeable and that's what we want we want the effect to be there so that the kick stands out but to be barely noticeable in the context of this first loop this is what it sounds like
+
+[5:51] it's almost as if you you hear the bass being triggered at the same time as the kick but this is an illusion being made possible by the fast groove also you're going to notice that the pulse channel is also subject to side sidechaining it's almost as if you hear the kick pumping in even if it's not triggered so what we use to do this is just the same an envelope command my
+
+[6:24] instrument here has a constant envelope of six but what i did was put an envelope command that starts from zero and rises at the speed of a every beat this is in groove six this is in group zero so group six so this gives a little bit more of a
+
+[6:58] four to the floor groove to your track and it helps the kickstand stand out a little more and even if you have no kick playing you still have the feel of the song being played like without the side chaining envelope effect you would be kind of at a loss to what the feel of the song would be but with the envelope command on you can really clearly hear when the kick is going to hit and in this second loop i have increased this even further
+
+[7:40] so what i did was actually take a second kick patch we're back in groove one so three take a second kick patch and make it longer kill at six and a slower pitch down whereas the first kick was actually killed at four and had actually the same pitch down so this has more low end being played in this part of the song kind of this is a exact this place at exactly the same space
+
+[8:13] in exactly the same place as if i had played this part but but here the envelope up is more gradual than in the previous loop so this gives time for the kick to really stand out and then we have the bass pumping in faster
+
+[8:46] so you can you can hear the kick very clearly and then the bass just is just there as if nothing had happened and i also increased so the power of the kick and also the kick transient whereas in the first loop was really more subject so you can really play with it to have a change of intensity in the context of a full track for example this could be a verse and this a chorus
+
+[9:26] so this is how you can use sidechaining in the context of a full track you can also apply the same envelope command to a noise channel for example if you want if you want this for example let's put the same command o a and then copy paste it every bit actually this is kind of really used often in the context of house
+
+[9:59] tracks like yours heads are not actually hit but they're just like pumping in and this is great for like brakes or risers where you can just have the note being pumped in instead of hitting on the on the beat this way your kick really stands out more i think that wraps it up thanks for watching guys this has been the first episode of pampers lsdj hidden tips and tricks see you soon for another video please
+
+[10:30] react in the comments if you liked it if it was clear enough and what you would like us to cover next in the next video thanks goodbye

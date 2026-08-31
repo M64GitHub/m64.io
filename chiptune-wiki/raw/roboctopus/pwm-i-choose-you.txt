@@ -1,0 +1,45 @@
+RAW: roboctopus, "LSDJ & You" (tumblr mirror of the noisechannel.org series) | https://roboctopus-8bit.tumblr.com/post/85730355523 | fetched 2026-08-31 via the tumblr API (/api/read), body converted to text | inline images kept as [image: url] markers; the SoundCloud examples are links only
+
+TITLE: PWM, I Choose You!
+URL: https://roboctopus-8bit.tumblr.com/post/85730355523
+DATE: Wed, 14 May 2014 12:24:00
+
+Building on the previous introduction to custom waveforms, now we’re going to go more in-depth and hand-draw a square wave with pulse width modulation (PWM).  (What this means is that the width of the pulse is changed as the wave plays, from a 50% pulse to a very narrow one and back.) PWM will allow your game boy to sound a bit more like a C64, though nowhere near as smooth and classy.
+
+Before we create a PWM instrument, let’s review some functions of the WAVE screen and the SYNTH screen.  
+
+First thing we’re going to do is set up square pulse to use.  I started with a volume of ten.  This will work with other volumes.  (Don’t forget–the amplitude controls the volume.) Remember the really narrow pulse we made last week? What we’re going to do this week is alter the standard square pulse frame-by-frame until it’s a very narrow pulse.
+
+[image: https://64.media.tumblr.com/7b5b159fefc378ec8d6fabe0681d0753/tumblr_inline_n5knvzZpOa1sn56w5.jpg]
+
+Press select + left from the SYNTH screen to go to the WAVE screen.  The first screen should be the number of the synth you are using plus zero.  For example, if you’re using synth 8, the first WAVE screen is 80.   You should see something like this:
+
+[image: https://64.media.tumblr.com/72701ee55b3e337f67e82ebde05f1182/tumblr_inline_n5knxjp6Tp1sn56w5.jpg]
+
+I like to sort of smooth my PWM instruments out (OCD style), but you don’t have to. This is what I’m going to start with:
+
+[image: https://64.media.tumblr.com/f878a6c651c83297476025a4fea0c45c/tumblr_inline_n5knyfS46V1sn56w5.jpg]
+
+The WAVE screen shows you each frame of the synth, which is comprised of 16 frames (0 to F).  To navigate between each frame hold down B and press left or right.  What we have to do to create a PWM synth is alter each frame. (It is a bit tedious, but if you want PWM in LSDJ, it’s worth it.)
+
+Basically, we just need to make each frame of the pulse narrower than the one before.  (Hold select and hit B twice to copy the entire wave shape in the synth screen. Move to the next frame and hit select + A to paste it so you don&rsquo;t have to re-draw the entire thing again.)
+
+ Behold, a .gif!
+
+[image: https://64.media.tumblr.com/3ed67916a879fb993beac3900383bc35/tumblr_inline_n5knzanwGa1sn56w5.gif]
+
+Now that we have the PWM drawn, we need to set up an instrument to make use of it.
+
+[image: https://64.media.tumblr.com/a85cbc54663bfa1b4f4a587062c9631f/tumblr_inline_n5knzwYosX1sn56w5.jpg]
+
+Set it to pingpong, which will cause the synth to play from the first frame to the last and then back to the first, playing the gradually narrowing pulse we just created.  Set the repeat to F, which causes the synth to repeat endlessly.  Don’t worry about length for now–just leave it at F.  The speed setting controls the speed at which the frames are played, so a nice slow speed will really highlight the narrowing pulse.
+
+In the example below you can hear the width of the pulse being modulated and how it affects the sound. 
+
+https://soundcloud.com/lsdjandyou/pwm-sample 
+
+You’ll notice you can hear the synth stepping through each frame, unlike the smoother PWM on a C64.  This is less noticeable on leads/basses in a full mix with pulse and noise instruments, and barely discernible when used in a fast arpeggio. Below is a short clip of the PWM in a mix with some melancholic chords.
+
+https://soundcloud.com/lsdjandyou/pwm-in-the-mix 
+
+Now that you have your instrument set up, just play around with it.  It’s great for giving a lead line a more organic feel, and it makes a pretty massive bass.  It sounds great with arps, too, and can give a track a more distinct sound.

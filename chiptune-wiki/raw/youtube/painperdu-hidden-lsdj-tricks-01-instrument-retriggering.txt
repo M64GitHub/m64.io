@@ -1,0 +1,128 @@
+# Pain Perdu's Hidden LSDJ Tricks EP1 - Instrument Retriggering
+Channel: Pain Perdu (https://www.youtube.com/channel/UCiqCI92PN7oNhPvOu3fPuZA)
+URL: https://www.youtube.com/watch?v=NbzhRnRAeYU
+Uploaded: 2016-07-04 · Duration: 20:31 · Views at fetch: 9164
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [NbzhRnRAeYU.en-orig.vtt]
+
+## Description
+
+TIMESTAMPED TABLE OF CONTENTS BELOW
+
+Hey all, Paul from Pain Perdu here!
+Here's a proof-of-concept pilot video I did for a small series on LSDJ tips and tricks.
+
+This episode covers the intricacies of instruments in LSDJ and how they affect the way you produce music.
+
+Please let us know what you thought about this!
+Did you find it interesting? Was it too long or too verbose? How terribad is my accent? What would you like us to cover next? The floor is yours!
+
+If you liked this video please don't hesitate to subscribe to this wee baby channel, and follow us on Facebook, Twitter and Soundcloud!
+
+Thanks for watching!
+
+Like our page!
+https://www.facebook.com/painperdu8bit/?fref=nf
+Hear our music!
+https://www.soundcloud.com/pain-perdu
+See us live!
+https://www.facebook.com/events/946473188805927/
+Read this blog!
+http://chiptuneswin.com/blog/volume-5/
+
+[FR]
+Pour les francophones endurcis du bulbe, je ferai peut être des sous-titres si vous êtes gentils. Bisous!
+
+=== Table of Contents===
+
+INTRO
+00:00 - Bleh
+
+BASICS AND EXAMPLES IN PULSE
+00:53 - Dependance and independance, proof of concept.
+03:00 - Example : rising envelope through several notes
+04:39 - Controlling table triggers
+06:59 - Controlling "automated" table progress
+
+WAV EXAMPLES
+08:20 - Letting a slow "pingpong" WAV instrument unfold through multiple notes
+12:00 - What about Kicks? Interference and limitations
+Note : With F you can call later frames in the cycle of your evolving wav instrument to counteract the Kick interfering.
+
+13:29 - Timing a cycling bass with 1 instrument
+16:54 - Using the retrigger creatively to add rhythm
+
+CONCLUSION
+18:22 - Recap
+19:19 - Thanks for watching
+
+## Transcript
+[0:00] Oh hello guys this is Paul from pan perdu and with this video I'm going to start a new series about hidden tricks in LSD J that are probably in the manual but not necessarily gone over in enough detail or just cool tricks that people have found through experimentation but that aren't necessarily well-documented you're gonna go and say hey just read the manual and get good an experiment
+
+[0:32] well this is true I'm not going I'm not exactly going to show a huge breakthrough zorb super cool techniques just simple things and simple tricks that I think are really practical in terms of organization ergonomics and overall practicality of LSD J and that I wish I had known when I started out so here goes in this first installment I'm going to talk about a very simple thing called the instrument retrigger in so some of you may know already but you
+
+[1:04] don't necessarily need to have an instrument value next to a note for it to produce sounds so let's look at an example okay I have here very simple standard pulse instruments with the rising envelope it starts from 1 and rises up at the speed of B oh this this goes like this if I trigger it every notes notice that every time a note starts the
+
+[1:45] rising envelope goes down and up this is because what the instrument value does is it reads the settings from here and triggers it every time it reads the instrument value this means that if I delete the instrument value my envelope will start from here and keep rising even though a new note is inputted this is really important to know that instrument and note are actually independent well you need first settings but the note 2 actually exists but once
+
+[2:20] it's triggered you don't need to input it on every note and so this is a nice technique for you to save space save blocks and save CPU usage and this can also be used in a number of ways very creatively and very musically so just like I said if I trigger the envelope if I trigger this instrument at every note this is going to sound like this rising at every note rising at every instrument value if I only trigger it at every two notes this is good this is what it's
+
+[2:53] going to sound like it's gonna keep rising even the notes is change and this gives you a lot of really nice options like if you wanna have a standard slide Chaney art then I copy/paste debts you so here the instrument is triggered
+
+[3:26] every note so it's going to go ddddd but if I decide to trigger it only on the beat I'm gonna have a rising arpeggio that goes down on every beat and you can even add a bit a little bit of flavor with some elements you yeah come on work will be based
+
+[4:04] you this is what its gonna sound like this doesn't work as intended faster faster faster faster yes hey there you go nice legato arpeggio with the rising envelope that only needs one instrument value
+
+[4:37] each time you want to make it rise this is interesting in a number of ways they're going to notice that inside the instrument values is also the table information this is part of the instrument value so this is equally triggered let's make on a standard Abel for example it could be in my standard table here let's say you know the standard bleep okay so this is a bit hard to know
+
+[5:14] what's going on I'm gonna trigger it every note this is gonna suck this is gonna trigger the bleep e octave hands position table every note that's the same way it did with the envelope still has the envelope you can hear it and what we're going to see I'm going to change the envelope to something more telling like 8:4 same
+
+[5:46] and trigger the instrument on every beach this is gonna go down favor and the table will keep running if it wasn't retired because it isn't is it it isn't recruited so what I'm gonna do is I'm gonna prevent it from looping back because I'm gonna be rhythmically inappropriate I think I do that this was
+
+[6:21] gonna happen only yes this is gonna make it repeat here indefinitely so Eve so it's never going to reach the answer it's never going to look back so here you can notice the table is only triggering when I trigger the instrument value Prada Prada Prada Prada and this goes the same way even though this is still the same instrument it's just the
+
+[6:54] the instrument settings are not retriggered but this is it this is still instrument 0 and this goes the same way if I use an automated table I think the most telling example would be the super standard lrl our information table for those of you who don't know automates what automate does is it's every time it reads an instrument value instead of having the tics go down and triggering the effects commands every
+
+[7:29] tick is going to trigger them every instrument value not every note but every instrument value I'm going to dream demonstrate that here if we have it on if we know this is going to go left right left right left right very nice stereo effect to use musically and the same goes if we actually trigger it every two notes this is going to go left left right right even though the notes are still here and if we pair that
+
+[8:06] with the rising envelope and have really interesting effects oh that's how you that's how you can make interesting things with Inter ministry which we're going in the pulse channel what I think is really more interesting than this is if we go to the wave channel and make a really long evaluative lead or base instruments let's create something in the wave channel new instrument non-0 something completely this is your super bad bass
+
+[8:44] I'm gonna go with the same thing sorry for the really awful sound I'm gonna did it of this later so they'd be happy like a da da da da okay so in the wave channel the instrument settings are really different you still have the output you still have the vibrato type but instead of the envelope value you have the synth value and we want something that right to be really
+
+[9:17] telling we want something that ping pongs the weather that's gonna do is that's going to create a cycle of wav frames that goes back and forth with f frames at the speed of four so I'm gonna use a bit less room let's say something like eight and this is the number of tics it takes or a way frame to cycle through another so that means if we take three texts this is going to be two wave frames or sixteenth notes
+
+[9:54] I'm gonna go in my main synth here make a really smooth triangle wave with a low-pass anyway start at volume 10 let's fish this you know path with with q-value and let let's make this work you're really gritty really raw sounding well this is not as raw as I would like it to be but you get the idea
+
+[10:27] I want something smooth that goes into something wrong and because of where where is it because of this I cannot actually hear the full range of wave cycles because it the wave cycle is also retriggered by the instrument value I'm going to do the same I'm going to only trigger the instrument value every four notes you can actually little cycle through your the old phrase happen there it has no repeats okay don't forget to
+
+[11:04] set your repeat value nice this is this gives it a little edge you can also do this every four notes the same kind of rising effect we go so we go from something way to something loud if we use something a little bit lower maybe this is gonna sound pretty here you can use this for base a lot also the
+
+[11:42] sidechain and some such but I think it's really interesting for leads because if you if you have something that cycles through waves really slowly you can have rhythmically evolving waves that are really interesting but then you're gonna tell me what about my kicks I want my kicks and yes everybody has kicks in the wave channel so let's make that let's make a kick I usually like my kicks at c6 because it has its that's
+
+[12:17] really high and then it goes down really fast okay speedrunning a really easy kick manual right angle I like them at 40 standard trying wave and I forgot the table I kill them at 5 just be just before the next sixteenth notes triggers and I nice ok super standard super bad kick just for the sake of it
+
+[12:57] I'm gonna hit every beat action don't forget to retrigger actually if I had not inputted this this would still be instrument to this kind of gets in the way of what I was telling earlier about the wave instrument being able being able to evolve freely if you have the kick that it that is to say a new instrument you will have to reach rigor your lead it still evolves but it doesn't have as
+
+[13:30] much space that we would like to what we can do here go here and set the length but the number of frames to say three because it has three maybe maybe six no let's let's say three and set the tick frame speed at six so that it evolves exactly every sixteenth note will be a different will be a different way frame in the
+
+[14:03] cycle and it's and if my lengths is three it's gonna go through the whole cycle in only three frames so it's going to evolve faster so what we could do is you can actually hear that it's going at the exact tempo exactly at sixteenth notes so I'm gonna transform this into a basic don't forget to delete your new instrument value
+
+[14:40] because every time you edit your notes it inputs the instrument value let's try this copy ace there's something you can agree ugly something interesting that evolves
+
+[15:23] exactly at the speed of sixteenth notes and that only requires one instrument value could actually even though the note change what what what's important to notice here is that the evolution of the wave cycle is independent from the notes if I had just this it would sound this way I can still have the same kind of evolution make it
+
+[15:58] a bit faster so that you could notice it every 32nd notes I'm gonna cycle through a frame of six frames this way you're gonna hear it really nice it's gonna go instead of going yeah yeah no this is gonna go like this yow even though the nose change
+
+[16:53] these you can actually use the retrigger in super creativity here I'm just triggering at the beginning but I could do for example something like this if I had the opposites like something that starts super greedy and end and ends up being soft we'd have something like this that's just invert exactly what we did you see so here we have actually an
+
+[17:30] attack and we could use this to our advantage rhythmically example if we do this the attack is gonna be retriggered every time I input the one here you're here look you hear the blah
+
+[18:05] blah blah really clearly whereas here you have one one wobble for three notes in just like this one and three and sentry this is number maybe the best sounding example but it really if you're a good look at what you can do with instrument or triggering booth in the pulse and in the wave channel so pair that with carefully laid-out effects automated tables whatever you have under
+
+[18:39] in your trick bag this also works for noise but I have really no no good telling example maybe if we use the S command okay so the instrument for triggering is a very nice trick because you can use it in a very you can very use it very creatively in a wide number of uses you can save spaces if you are out of blocks you can save instrument slots you can save CPU you can save time
+
+[19:15] and you can use it very inventively musically as I have shown don't forget to subscribe to our very new channel I think this is our very first video like the pan perdu page on facebook follow us on soundcloud we're going to release some things really really soon we're gonna open for how they likes music in a few days so I'm really excited thanks for watching this first video in the installment of the hidden LS DJ tricks please comment if there's something you
+
+[19:48] would like us to cover in the next videos and offer constructive criticism that would be really great because I know this is not the best setup I have this is really basic it doesn't sound good so if you have constructive criticism you want to offers please do so in the comment section below this has been really fun for me this is also way too long but I hope you kept through it I hope you kept pushing it through the entire video and I hope you found this interesting and informative thanks again I have said things way too
+
+[20:22] many times I am now stopping the recording this was this was pulled from time value and see you next time

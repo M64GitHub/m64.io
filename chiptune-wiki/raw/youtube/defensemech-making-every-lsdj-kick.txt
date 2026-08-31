@@ -1,0 +1,154 @@
+# Making every LSDJ Kick I can think of!
+Channel: DEFENSE MECHANISM (https://www.youtube.com/channel/UCApkR1dVSaKCbwRyPs8_yTg)
+URL: https://www.youtube.com/watch?v=vUEGW3ixW5s
+Uploaded: 2024-02-02 · Duration: 33:27 · Views at fetch: 4106
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [vUEGW3ixW5s.en-orig.vtt] · spoken language: en
+
+## Description
+
+Grab the LSDPRJ file: https://defensemech.com/songs/kicks-v9.2+.lsdprj 
+Thanks to @sunnexo for the kicks and @nintenkwondo for the noise kick + hat tech!
+
+My website https://defensemech.com
+My Game Boy chiptunes: https://defensemechanism.bandcamp.com
+Support me
+https://patreon.com/defensem3ch  
+https://paypal.me/defensem3ch
+https://venmo.com/defensem3ch
+https://ko-fi.com/defensem3ch
+
+Timestamps
+00:00 - Intro
+00:24 - Sample kicks
+01:43 - Wave synth kick using P and L cmds
+06:48 - Wave synth: Tuning transient
+08:06 - Wave synth: Waveform transient ("Kyoto" kick)
+11:47 - Wave synth: 808
+15:51 - Wave synth: Stutter kick
+18:19 - Pulse: PU1 Sweep kick
+19:40 - Pulse: Kicks using P and L cmd
+22:05 - Pulse: Stutter kicks
+24:29 - Pulse: R80 Gabber kick
+26:35 - Noise: Noise kick with SAFE pitch
+30:26 - Noise: Kick with fake hi-hat
+31:52 - Other considerations
+
+## Transcript
+[0:00] hey everyone it's defense mechanism um it's been a while since I made a kick tutorial video so I thought in this one I would just make every lsdj kick that I can think of let's just go ahead and get into it so I'm using lsdj 940 which was released a little while ago and it actually does have something that is relevant to this topic the first and I think most obvious kick is the wave kit sample kick so it's just playing sample um I actually hit up SEO and I said yo
+
+[0:34] what are your favorite kicks and uh they sent me a bunch of these so I just threw them in this I'll go ahead and leave the lsdj project file in the description so that you can grab this kit and also you've got all of the other kicks that I'm going to demo in this but yeah if you [Music] just I mean it's pretty straightforward obviously I'm playing playing these you know in both columns so they're like twice as loud but if you take them
+
+[1:07] [Music] out so that's just this kit obviously the easiest one um lsdj comes with a bunch of drum kits installed by default like 606 808 909 and so on so probably the simplest route for anybody who wants a kick you know go ahead and use one of the samples which is great that's super easy and very
+
+[1:43] straightforward next um we'll take a look at the wave synth and this is going to be the most similar to the kick that I've talked about in previous versions so take a listen this is what it sounds like [Music] and there are some various um considerations here so let me first talk about the P command and the L command I'll take a quick detour to just talk about the waveform I'm using this is the synth it's just taking this kind of sish
+
+[2:17] shape and raising it to clip it a little at the top um obviously the more the higher in volume the closer this looks to a square wave so you can kind of modulate it that way you you can also modulate it using the cut off um and the Q so if you put this right at 10 and then boost this Q it's this essentially the same thing although it's it's like a very dramatic shift so you can get some hu you know you can really make it look like a square this way um so that's that I've also got this
+
+[2:52] kind of slowly decreasing in volume using limit uh I don't know if that's actually the best way because limit really makes it look like a square so you could also you know use the actual volume of the signal and that will lower it more like a a sign and we can hear what that sounds like but right now it's this looks a lot like a sine wave actually so right now it's just playing this first wave um so you can actually use if we change the speed and the
+
+[3:25] length put the length all the way through yeah you can kind of get that volume to reduce it doesn't sound like completely natural it's harsh the reason is because uh the waveform is Shifting in the middle of the pitch band so uh yeah let's put it back on manual and then we can talk about this so let's first talk about just the P command so I'm going to take out this L command and you've got
+
+[3:59] your P command and you can definitely do a kick just with a p command and a pitch slide downwards it this is a little fast for that so if you put it up a little higher so you can you can put it at a a place or you could even move this kill command earlier and that would allow you to get more of a downward pitch you know before the pitch wraps around that's probably about as fast of
+
+[4:41] a downward pitch as I can get without it starting to wrap you can hear it kind of doing that so one reason that I like to put that L command here which basically will will transpose it all the way down to 80 so this is transposing it to the lowest note possible like whatever that is C1 yeah C1 so it's going to go all the way down to C1 from C8 um and it's going to do that in however many ticks basically we specify
+
+[5:17] so um you could also just only use the L [Music] command changing this number will change the slope of the kick [Music] also I should mention this uh the pitch is in drum mode so um it has that nice logarithmic pitch um you can also set it in fast mode if you really want like a zappy
+
+[5:51] kick typically I don't want that I would rather have it in drum or you could use tick mode but I pretty wild um I probably wouldn't use that but you can have a go with it if you feel like it so yeah I mean that and that sounds good on its own right so but let's say if you wanted a little bit more control you you could control the speed of the pitch bin on this transient [Music]
+
+[6:28] first it just gives a little more control but if you don't feel like messing with that you know feel free to just use one or the other it doesn't really make a difference um I think that's probably all I wanted to say about using the p&l command so let's see what's next okay so tuning the transient one of the things that I do is I don't mess with this transpose column unless I'm using the L command here cuz I'm just
+
+[7:01] telling the direction of the L command to go down all the way to the lowest note which is C1 and what that allows me to do is actually tune the transient of the kick using the starting pitch in the note column so let me start playing and adjust these notes and you'll be able to hear the thing with drum pitch is it's not going to necessarily affect like every note but you definitely have a range and here I'll just show you what I mean so by increasing the octave and it makes
+
+[7:42] a bigger difference if you have a slower pitch shift as [Music] well so pretty much these upper octaves are are kind of the same um but that allows you to get more highend so let's move on to the next one okay so to get a transient on your kick changing the first wave form of your synth and if we just
+
+[8:20] play uh this Frame and if we turn off this table you'll be able to hear okay so if your whole kick sounds like that it's going to be pretty wild um so feel free to use that if you want there are a couple different ways you can do this one is you can throw an F command here on the first tick and that will switch from this Frame to this Frame if I copy this Frame first I want to retain this but I want to change the
+
+[8:55] synth setting so like if we lowered the volume to like something a lot lower and then I paste back in my initial frame you know you could you could use the F command to switch to one of these lower volume waves [Music] so doesn't quite sound as good with that real harsh transient so let's go back to one it's like a super
+
+[9:30] hard kick hard style kick and you can feel free to manipulate this transient however you see fit um so this is a pretty classic Kyoto kick waveform I think this is like some kind of default in version four uh if you boost the volume up with with these settings to a certain point um it kind of accidentally wraps it so you've got these like staggered kind of real noisy you know things if I straighten it
+
+[10:03] out it sounds just like a regular square kick basically or you could try something like this where you just kind of add this like real uh abrupt like Notch so there's that kind of a thing the other way that you can do it is by using resync or you know you could use one of these other modes too but resync
+
+[10:37] will have kind of the same effect as this F command um putting it at length one and loop position one is actually more like putting this here f0f it's going to skip to the very last wave frame in your synth which is going to be this one so uh I don't really care about overwriting these so I'm just going to put this back up to like 40 so it will it'll play this wave and then I can come back in here add in this
+
+[11:09] transient again I'll just kind of make one up I don't really care what it looks like um so you're getting that same effect where it's like it starts with that real harsh transient and then it skips directly to the last frame so yeah again we're in drum mode we've got transpose off and yeah super easy uh way to get like that extra
+
+[11:42] attack on your kick so let's take a look at the next one so this is the 808 style kick a lot of people know this as the kick that transitions into a bass note uh so I have this little example so all I'm really doing here is I've got my pitch on Fast um we could try this in drum mode I can't remember if it works or not it does it's kind of whatever you
+
+[12:16] prefer for this waveform I'm pretty much using a slightly clipped sort of sign wave form and then it's decreasing in volume as well and that's what I'm using the F commands for in the frame so this is one way to do it in this table I'm actually using this transpose to just go down one two three octaves and then I've got this L command this is going to go down to C2 right this is going to go down to A1 gsh 1 A1 and then I'm kind of using these F commands as a
+
+[12:50] way to decrease the volume but you could take them out or you could use e commands here as as well but I kind of like the way that this offers a little more control over the volume so this is definitely one way and it's valid and it's pretty easy I'm going to offer another way as well which is basically to combine the kind of standard wave kick and a an 808 base instrument and that way you'll have separate control over the kick and the Bas and you can also set this to a
+
+[13:25] certain speed and length and additionally you can use the w command to actually control how quickly or slowly the synth like decays and then like use a separate one when you want to it just gives you control over how your synth is fading out so like I can get it to fade out super quick here or a little
+
+[13:59] slower and for these Groove commands on Groove 10 I just have 39 so I want this kick to play for three ticks and then I want the base to play for the next nine and then I'm switching it back to groove zero which is just six and then on Groove 11 this is a little trickier so I'm just putting 3 96 because I need to have six ticks here in order for the timing to work out right and then I'm switching back to groove zero here so but if this is too confusing or you know you you don't want
+
+[14:30] to have to keep switching back and forth between grooves the first option it's just as good it's almost as good and you can combine these two so like you could go ahead and throw this here and just use a separate [Music] base and that kind of removes some of this clickiness it's kind of up to your taste how much of these clicks you prefer because a lot of times when everything is kind of mixed in together
+
+[15:03] with the pulses and the noise and like panning and all kinds of other stuff like these clicks are kind of Superfluous They Don't Really catch your ear as much so there's a couple of different ways to do it I sort of prefer this way because I have more control but you know there might be a case where I just feel like actually I'd rather you know the other thing is that like this kick it's just it it can be a lot punchier or you can you can really you can really have more control over it as opposed to just working with this you don't really have a whole
+
+[15:37] lot of room to control that like transient of the kick it's really just up to you your workflow your taste and what you think is going to work best so with that being said let's move on to the next one stutter kicks in the earlier versions of lsdj using an R command here um doesn't actually reset the pitch so uh what what we have to do is in the earlier versions prior to 940 if we want these to stutter we have
+
+[16:13] to actually throw in an l0000 command on the tick that we want to restart the kick and what this does and we can't we can't use this we we're stuck with the p command so so what I'm going to do is have this pitch down for three ticks then I'm going to reset the pitch and it might help to actually look at it like this so let's say I'm going to restart the pitch at the beginning and I want
+
+[16:45] this kick to stutter at Double speed every three ticks instead of every six ticks so I want this kick to happen twice every line and this is what you're going to have to do so if I take out this L command even if I put well I can't show you that on this version because it actually works in this version but in previous versions you could try it uh if you put like an r03 it actually doesn't reset the pitch I can show you in fast
+
+[17:19] mode so it doesn't re trig it every three ticks but if I put the l0000 here now it's working even though it's horribly annoying that's one way to do it in the earlier versions but now we we actually don't have to do that we can we can use our full kick table um down 80 80 put the kill command here
+
+[17:53] boom stutter kick instant stutter kick but if you're not using this version you don't want to update you can use the other route by putting l0000 in the table so that means that like anytime you want to do that you have to add an a Command put in a new you know your stutter kick table basically since yeah that's how it works so I wanted to cover that and let's take a look at the next one okay so now we're going to get into the pulse channels this is probably arguably the simplest and also the most
+
+[18:26] efficient it takes like no C CPU whatsoever because we are using this pulse Hardware sweep to sweep the pulse Channel One it doesn't work in pulse Channel 2 uh all the way down the nice thing about this is that the pulse channels have these cool software envelopes that are really smooth so there are actually some advantages to this I I really like this for like toms maybe not necessarily for kicks but for Toms I really like it but here's how it sounds
+
+[18:59] and if we try to tune this another Advantage it's pretty tunable so uh that's what that sounds like and you can kind of play play with this sweep values you know see what works the best for you I
+
+[19:31] think I just kind of landed on 64 so yeah that's that pretty simple pretty straightforward not much to it so let's move on to the next one so pulse kicks using p&l command again it's pretty much the same as what I already showed off in the wave Channel [Music]
+
+[20:06] because the pulse only goes down to C2 it doesn't quite have that real low impact that the wave channel does using drum pitch you know using a similar envelope to the previous kick and then just combining p&l commands again you could use just P you could use just L you can combine them it's really up to you but that's that one probably not much to it oh yeah I guess I should mention I am using 50% duty cycle AKA Square Wave It's kind of the beefiest duty cycle pulse so you
+
+[20:38] [Music] know you know there could be something to be said for doing like a similar trick to the Kyoto kick um by doing a waveform [Music] shift [Music] I don't know up to you something I
+
+[21:10] haven't really tried before but it could offer a little bit of that extra transient at the top it's honestly not that bad you start to listen to one thing over and over again and it like starts to sound good but the context matters right so like the arrangement of the other parts in the song are probably a good way to inform yourself of what kind of kick will work additionally like do you need to use the wave channel for a lead sound and throw some of the percussion like the kick off to the pulse or noise Channel like these are good arranging
+
+[21:43] techniques to have because you may end up having to use it and there's nothing wrong with that I do think that the wave kick really kind of offers the best sound but it's not always possible if you're trying to like pull off something different or experiment experimental it's kind of cool to know that you can access some of these sounds in the pulses too so let's take a look at the next one pulse stutter kicks so pretty much same deal that I had covered previously in the wave Channel I'm using this L command big difference to note here is
+
+[22:20] that this follows the envelope so it will cut off the stutter where the envelope cuts off so if you want it to go longer you know and then you could you could obviously cut it with a k a k command you can also cut it with this length this Hardware length to a degree so something that's slightly different and then again you actually
+
+[22:53] don't need to do this in this version because using the r command will actually rrig it for you although if you if you've got longer uh yeah where the P command wraps around it's always going to do that unless you're using the L command so that's kind of why I like to do that with the L command here because it it never wraps I'm not talking about the zero L command I'm talking about the 80 L command so
+
+[23:26] like we just putting a regular kick table back on here and doing the stutter yeah so um but that's not the stutter technique so we'll put this back to where it was using the L command and using hop to reset the pitch on row zero another way that you can arrange this table is like this if you really only want it to take
+
+[24:01] up one uh command column and then do something else in this command column you can hop to row one so uh yeah that that's a way where you can just arrange it slightly differently and have it sort of take up less room but I arranged it the other way because it's easier to see what's going on all right let's take a look at the next one okay the r80 gabber kick this is like
+
+[24:35] the game changer of the pulse Channel kicks so I'm going to go back here let's go ahead and clone this and call this PK gab okay everything's the same going to make it clone this table and all I'm going to do is put the command r80 here and what this does can we get a tool tip r8x equals resync and then r8f equals resync off so what this is going to do I'll play this
+
+[25:07] without the R8 first again and then I'll add it in and you can hear the [Music] change [Music] so basically what it's doing is it's it's ring the pulse Channel at a very high frequency which drops at about half an octave and you can choose where you
+
+[25:40] want this to [Music] go depending on how fast your kick pitches all the way down so that's like a pretty hardcore gabber kick I mean you start combining this with the resyncs especially you know you need this on tick three really if you want this to then you can really start going down right so okay so that's uh that's a
+
+[26:14] really important technique in my Arsenal for pulse kicks because it just allows you to get that much deeper get a little bit more range out of the pulse Channel not quite down to C1 but you're around like maybe f one or something like that so pretty cool and definitely worth throwing in there all right let's hop on to the next one okay so now we're getting into the noise Channel now you can definitely do this with free pitch but I like using safe pitch because it restarts the noise
+
+[26:46] channel on every pitch change including during pitch slides any pitch change whatsoever and it just offers this almost like a tonal aspect to the kick so this is kind of what I came up with and now in this instance I do like using the transpose column to tune the transient because it takes a long time just to be able to tune the stupid pitch slides so you know I've got it kind of
+
+[27:20] an aggressive pitch slide here and then I it kind of slows down and it's less intense of a pitch slide here I'm sure this S command I just threw in here because it sounded better but you can so so you can kind of choose what your pitch slides
+
+[27:53] are I kind of like having it hit that real low noise at the bottom it really seems like it needs to happen here so it's kind of okay it gets down there I also like this kind of envelope and you can definitely like make this more aggressive make this a little
+
+[28:35] it might even be worth stopping the pitch slide at some point I just think that you can spend so much time tweaking this and I feel like that the end result doesn't necessarily justify that amount of tweaking so anything that's kind of in the ballpark is good but yeah so let's check this with free
+
+[29:11] pitch it just completely loses its impact it really doesn't sound as good in my humble opinion as it does with the safe pitch feel free to play around with these values like that even sounds kind of half decent to me and that's probably about all there is to cover it's a lot easier to make a noise kick these days because we've got these P commands so in the older versions you're kind of stuck just using
+
+[29:44] transpose and S commands and that was also before we really had safe pitch the stable pitch still resulted in a lot of cutouts and that's the other thing about safe pitch your kick will never cut out it will never just randomly mute as the case with free pitch you might lose a kick here and there because the Game Boy noise Channel isn't extremely reliable when it comes to generating those pitches really quickly so having that safe pitch to restart the channel on every pitch change means like your kicks are 100% reliable which is pretty cool
+
+[30:21] all right so I think the next one is the last one and let's do it so this is a cool Tech I was hipped to this by nintend kwondo so shout out to them for showing me this I have two examples here so here's one that's the previous noise kick that we just did so actually it sounds good now I like it sounds good to me in context it sounds like oh yeah that's a kick so now
+
+[30:55] I'll show you the noise kick with the fake high hat so it's kind of allows you to squeeze an extra thing in there so all I did was add in this transpose on tick three you could even try to put it here I did change the envelope slightly because it's hard to control this you know you could also use the volume
+
+[31:29] column because it's like it's it is kind of an aggressive hat because we're still in the beginning of the transient you know of the kick but like I said in an arrangement where you want to just get that much extra out of each Channel like your wave channel is doing something else and you want to have like almost a full sounding drum kit like go ahead and throw this in here I mean another thing that's completely underrated is like layering these you know know layering pulse and noise kicks I do that all the time layering a wave kick and a noise kick or
+
+[32:03] even a wave kick and a pulse kick you can do crazy like panning stuff that way and get like stereo kicks you know which is wild or even the same thing with like toms or snares I know that somebody asked about using 2x 3x possibly 6X speed which doesn't really run on Hardware the main thing that I would want to consider is not really there but but putting some Groove commands in the tables which might be a little tricky to set the speed because you're probably not going to want those tables running
+
+[32:36] at one tick but it does offer the possibility especially like in the noise channel of getting some seriously fast going noise kicks it's not something I've actually investigated but I am intrigued by the idea of like getting some super fast pitch stuff going on so that you could like really get a low pitch like a a tone almost out of the noise Channel if I come up with something like that I will post it so yeah I hope this was helpful again I'll have this project file up on my website
+
+[33:10] that you can check out at defense.com SL songs uh that's also where all of my other lsdj project files live I hope this tutorial was helpful and useful and um let me know if you got any questions thanks for watching um hope you enjoyed and I'll see you soon bye yeah

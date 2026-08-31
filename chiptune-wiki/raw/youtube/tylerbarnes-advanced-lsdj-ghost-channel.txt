@@ -1,0 +1,82 @@
+# Advanced LSDJ Tutorial - The Ghost Channel
+Channel: Tyler Barnes (https://www.youtube.com/channel/UCyNBXPlkyK79Ch3qeTkKRKQ)
+URL: https://www.youtube.com/watch?v=73VLMNMaRAQ
+Uploaded: 2013-07-11 · Duration: 22:15 · Views at fetch: 21570
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [73VLMNMaRAQ.en-orig.vtt]
+
+## Description
+
+Here is another LSDj tutorial. This one is all about how to get an extra channel of sound out of your wav channel. This will allow your to achieve 4 note polyphony (Not including noise channel). 
+
+You may download the lsdj song file here: https://app.box.com/s/dxrylydzu2hrv6jt07ja
+Join in the forum descussion here: http://chipmusic.org/forums/topic/11649/advanced-lsdj-tutorial-the-ghost-channel/
+
+## Transcript
+[0:00] greetings and welcome today I'm going to be demonstrating something I like to call the ghost Channel or Phantom Channel this is a method I've devised in the wave channel of obtaining two sounds being played simultaneously now in lsdj a sort of a big deal we only have four channels to utilize one of which only plays Noise Okay I'm going to show you some examples on how this can be utilized this first example is the base by itself at constant volume [Music]
+
+[0:46] a second example the base is constant volume the ghost channel is constant volume constant pitch [Music] this third example the base is constant volume the ghost channel is modulated volume at a constant
+
+[1:28] pitch this next example the base is constant volume the ghost channel is constant volume and the pitch is modulated
+
+[2:01] this next example the base is modulated in volume and the ghost channel is constant pitch constant [Music] volume and in this last example the base is modulated
+
+[2:33] volume and the ghost channel is modulated pitch constant volume all right now I'm going to play those examples one more time in a more fleshed out context so you can hear how use useful all of them can really be one thing to keep in mind here is all these zeros contain silence nothing
+
+[3:28] else [Music] [Applause]
+
+[5:30] [Music] e
+
+[6:30] [Music] [Applause] so before I can show you how I did that in lsdj we need to learn a little bit about how Sound Works and how it behaves now I'm sure you all know how the shape
+
+[7:02] of waveform relates to what the speaker is actually doing um the shape determines at what speed and how long it takes for this speaker cone to push inwards and outwards so it's going to be exerting Force upon the air based on what the waveform is doing so if we wanted to build a square wave we would first need to start with silence and then as this Di shows up here we need to apply a force to it uniformly across time until we get these
+
+[7:36] Square Peaks as you see on this sine wave the forces are not uniform they grow in incremental steps in order to create this smooth transition so we add our uniform force on top of the silence and it looks a little something like this they should all be equidistant away from that silence to create these Square Peaks now instead of starting with silence we want to start with a sound that's already being played and in our case it's a sine wave so we start with the sine wave and
+
+[8:10] just like before we apply that Force uniformly upwards but instead of starting at this flat line we're going to start somewhere along this sine wave and apply that Force uniformly just like before the resulting waveform will look like it has a square wave embedded on top of a sine wave and here's what that looks like as you can see the forces are still uniform starting from that sine wave as a baseline here we can take a closer look at how these waveforms
+
+[8:45] behave here's what a square wave looks like when it's being modulated in [Music] volume now here's that same square wave being modulated but this time it's on top of a sine [Music] wave all right now this time the square wave is going to stay the same volume
+
+[9:19] and the sine wave will be changing volume okay now I'm going to start showing you how I built these waveforms inside of lsdj just like before we're going to start with silence and then build our square waves up from that my Square wave is going to be about three units high in volume okay we're going to start building the square Wave by pushing these pixels equal distance away from
+
+[9:54] their initial starting points and in this case we're starting with silence so 1 2 2 3 1 two 3 one two 3 and then you do this across the entire duration to build your Square wave all right so that's our first Square wave and then you would continue doing this for every octave and that's what these are and once again just like before
+
+[10:28] we're going to be adding a square wave on top of this sine wave so we're going to raise each pixel three units above its initial starting point one two 3 one two 3 one two 3 one two three and you want to continue all the way down depending on what octave Square you're using and cover the entire waveform
+
+[11:01] all right and that would be a um this is one example of a square wave superimposed on top of a sine wave so once you've done that to every sine wave you should get something that looks similar to this this is the one octave up Square this say two octaves up and so on increasing the Octave of the square wave on top of the original sine wave now this Square wave in particular is
+
+[11:33] fixed volume we haven't got into um changing the volume of the square wave yet okay now to create a square wave that has different volumes you're going to start with the first um the first instance of that uh squore wave superimposed on a sine wave and you're going to decrease those Peaks by one pixel every time until you get back to that or original sine wave and here's what a couple of those look like and in my case since I only have a
+
+[12:09] three unit high score wave I only get three different volumes now in order to modulate that original sine wave you need to draw every single waveform for this starting from silence all the way to the maximum volume and uh
+
+[12:42] I've already done that so this is what that looks like now you're going to make several duplicates of this sequence and then add every Octave of square wave on top of every one of these frames it's an awful lot of frames to be um manually editing but it's the only way to make this possible here's what a couple of mine
+
+[13:16] already look like now this is all done just by doing the same method I did before every single one of these sine
+
+[13:49] waves you'll have to draw manually draw that square wave on top of so one two 3 one two 3 one two 3 and so on and you're going to do that for every single frame it's long and tedious but um I think it's worth it in the end all right now that we have all of our waveforms drawn we can start plugging in some notes and choosing our frames all right we're going to start
+
+[14:24] off simple Let's uh plug in a note here and choose a desired waveform to start off I'm going to choose um 17 and here's what that waveform looks like and here's what it sounds [Music] like now if I want to change the Octave of that square wave I'm going to be changing the frame so let's plug in another frame now I want to raise this
+
+[15:00] up one octave so I'm going to move up one frame you'll hear that that sine wave stays the same octave but only the square wave moves up and down now if I wanted to do the opposite if I wanted to change the pitch of this sine wave but leave the square wave the same I would need to do that method in Reverse so I raise the Octave of the initial note and then I
+
+[15:35] decrease the frame we use and you'll hear that that square wave stayed the same while the sine wave actually moves now if we wanted to alter the volume of the square wave we need to um choose the appropriate frame so let's find where the volumes are set up okay how
+
+[16:09] about ZB is our loudest and 08 as our quietest all right so I've plugged in my volumes and um like I said before B is our loudest volume and then eight is our lowest volume like shown here eight is silence on the Square wave and then B is the loudest Square [Music] wave okay now if we wanted to keep our
+
+[16:56] volume modulated the way it is but change the octaves we need to do a little bit of clever editing so I'm going to erase all these the first thing I'm going to do is choose my octaves so instead of B for this first one I'm going to do F so it's going to between be between F and B
+
+[17:30] so F and B now let's copy these and paste them all right we have our octaves now to change the volumes we go to each one of these and decrease it or increase it depending on which direction you want to go by the amount you want it to be decreased by so this one's going to be increase by one this one's by two one two and this one's
+
+[18:03] by three one two three now we need to raise up from zero so find the Zero from this one 1 two three and then raise up one one two three raise up two one two and then this one's max volume and then this one decrease by one okay now if I wanted
+
+[18:42] to U modulate the sine wave we need to find the correct frames for that so let me go to the sine wave modulation and choose the octave Square I want in this case 4D will be our loudest and 41 will be our quietest let's copy this and paste
+
+[19:21] it all right I'm going to decrease the volume by one each time all right so I've plugged all those in decreasing by one each time and now I'm going to play it and the sine wave should decrease in [Music] volume okay now we're going to try to alter the Octave of the square wave while still decreasing the volume of that sine wave at the same
+
+[19:54] time we're going to find our um maximum volume sign wave and square waves so 4D will be a good one and also how about 5 a so 5 a and 4 d let's see 5 a and 4 d
+
+[20:31] you copy and paste and then decrease by however much you want this time instead of decreasing by one I'll decrease by two so one two one two one two one two one two one two one two one two one two one two one two one two one two one two one two all right just to make sure I'm going to
+
+[21:10] go back to my frames and see if 3F is one of these all right so I went a little bit too far 3F is not on the same waveform as that so let me fix it 41 is going to be our lowest so let me fix that to 41 and then raise these a couple times what is that at 4 e so 4E is a good one decrease these just slightly okay all right I've hope that has shown
+
+[21:51] you a little bit about how the frame switching is working and how the waveforms are set up um I'll post my song file and I'll answer as many questions as you have about this if I wasn't clear about anything but um I hope this has opened a lot of possibilities for you and I hope to hear some great music from you guys ciao for now

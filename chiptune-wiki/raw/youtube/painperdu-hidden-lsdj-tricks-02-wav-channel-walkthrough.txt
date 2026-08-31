@@ -1,0 +1,212 @@
+# Pain Perdu's Hidden LSDJ Tricks EP2 - In-depth WAV channel walkthrough
+Channel: Pain Perdu (https://www.youtube.com/channel/UCiqCI92PN7oNhPvOu3fPuZA)
+URL: https://www.youtube.com/watch?v=VNBhmLMI750
+Uploaded: 2016-07-07 · Duration: 47:42 · Views at fetch: 5304
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [VNBhmLMI750.en-orig.vtt] · spoken language: en
+
+## Description
+
+WARNING: this video is LONG.
+In this second episode I will be doing a step-by-step guide on how to comprehend and operate the wave channel parameters in LSDJ. This is by no means exhaustive and all comes from personal experience. Feel free to chime in in the comment section if you think I made a mistake somewhere!
+
+(Wave)table of contents *rimshot*
+
+INTRODUCTION
+0:00 - Bleh
+
+SYNTH SCREEN
+3:15 - Basics
+5:11 - Filter and Resonance/Q values
+7:35 - Start and End
+9:04 - Distortion, Clipping and Wrapping
+12:14 - Phase and Phase Resync
+17:14 - Cutoff
+20:35 - VShift
+21:30 - Recap and examples
+
+INSTRUMENT SCREEN
+23:24 - Basics (+ imprompu vibrato tip)
+24:13 - Cycle playback types
+25:37 - Length
+27:53 - Repeat
+29:09 - Speed
+
+30:39 - On pre-assigned synth cycles and waveform slots
+
+HAND-DRAWN WAVES
+31:48 - Debunking misconceptions: hand-drawing non-manual wave instruments is possible
+35:26 - Hand draw lock VS Synth parameters (Synth params first, then tweak by hand!)
+
+TIPS AND TRICKS
+36:00 - Cool resonant bass patch (Manual)
+37:47 - Fast V's are your friends but use them wisely
+43:22 - F commands and Synth Cycle offest bleedthrough
+(F in Manual: Call frame XX // F in non-manual: offset cycle by XX frames)
+
+Thanks for watching!
+
+## Transcript
+[0:01] hello guys this is Paul from Pompidou and we are here today for the second installment of our hidden tricks of ls DJ video series first of all I would like to apologize for the crappy sound my mic is quite sensitive and it picks up the the wind that my laptop fan makes which is pretty loud so I have a noise gate setup so this is gonna be not the best sound ever but still understandable I hope so yeah bear with me because
+
+[0:36] today work on a tackle a very important topic about lcj we're going to talk about waves which is why I have this super cool and let's DJ see blue skin I've had requests about ltj skins this is a custom skin and custom fonts let me show off made by my good friend William aka aqua lakhs which makes awesome LS DJ break or seriously go check his page he's awesome he's great
+
+[1:10] he's a great guy first of all donation he will give you an IPS patch that you can patch your LS DJ run with I recommend having 4.7 or 4.8 at least because I think that's what he's working on and the fonts are made by some guy over at chip music org and so we have the Mario font Mario NES font and the tracker wide font that looks like the I think I think it's the PC tracker I think it's impulse tracker but I'm not
+
+[1:41] sure and then we have this wonderful lowercase font which is really clear and I really like this one but for visibility purposes we're gonna switch to this one which I think most people will be more familiar with okay so enough about the introduction let's talk about waves I've had requests to talk about how the how the wave channel works and this is a fascinating subjects in LSD J when I started out it was really I looked at this and I mean
+
+[2:18] the pulse channel is pretty intuitive but then I looked at this and I saw this and I saw this and I was like what the what the hell no profanity hey what the shiz is going on with the wave Channel I have no idea what I'm doing let's play around anyway them and make cool stuff and I have a feeling that's what many people do and that's totally fine that's what I've been doing that's what mono dear which I hold in very high esteem for his LS DJ control and tightness and sound design mono tear has admitted to
+
+[2:52] not knowing how the channel worked on his first EPS which I think I really awesome go check them out and go buy them they're really really awesome so yeah let's start we're gonna tackle three sing three things in this video hopefully it will not be too long we're gonna take all the instruments screen that is specific to the wave channel and we're gonna tackle the synth screen and the wave screen first I think we're gonna start with the synthesis green because the way wave channel works in s DJ is it is a software wavetable synth
+
+[3:29] what your everything you're gonna do in s DJ is gonna be reproduced reproduced and the forms of a drawn wave so where is my screen I said and every wave channel instrument has a synth assigned to it you have F since that is to say 16 in hexadecimal and so this is kind of
+
+[4:06] your sub instrument you have your instrument is assigned a synth and what ascends does in the wave channel is it's going to create as a sequence of I think 16 F waveforms and these waveforms are here you can see the you can see the numbers running and it's really really what makes the wave channel super powerful is that it's gonna general rate 16 waveforms according to a an overwhelming number of
+
+[4:39] parameters that will then go through one by one first of all you're going to select a basic waveform this is gonna be sawtooth square-ish and there's a debate over whether this is sine wave a triangle I'm team triangle this obviously doesn't look like a sine wave but this does so I don't know but this is triangle to me so you have your wave your basic waveform then you have your fill to type so basically a basic
+
+[5:16] knowledge of synthesis is really handy when you went want to understand how the wave channel works for those of you who don't know filters are basically you have your whole range of frequencies from from 0 to 20 K Hertz and what filters will do is they will cut and if we will cut a range of frequencies low pass filters will let low frequencies pass so they will cut high frequencies high pass will do the opposite they will
+
+[5:49] cut cut low frequencies and let high frequencies pass High Pass bandpass will only have a section of the frequencies pass a band of the frequencies and all paths will let everything pass Q is what you would call the residence I think I don't know what it's called Q I think I think it's akin to the resonance in standard filters if you've ever used a filter in in a standard da when mixing or when doing DJing resonance is really
+
+[6:25] what shapes the sweep of the filter so we've we've covered what filter does a resonance is about the filter when you have for example a low-pass filter and you're applying it gradually you're gonna have something that goes like gradually cutting all the high frequencies what the resonance does is it's gonna boost the frequencies right where they are cut off so this is
+
+[7:02] what gives it the little notch this is what allows you to feel the sweep because if if you're just going to have a standard load Lopez you're just gonna hear more and more basin less and less trouble with the resonance you're gonna actually have some kind of a sonic cursor that will sound like frequencies decreasing in order to explain distortion I think I'm going to have to show you waves as I have said let's
+
+[7:38] tackle this first the wave channel is works with synths that create a section of 16 waveforms per synth so you have F waveforms for F since so F times F I think that's 255 but I might be wrong 16 times 16 math people help me out and you're gonna have a start position and an end position this will be the setting of the first wave frame and this will be the setting of the of the end
+
+[8:10] the the last way frame and what LSD J is going to do is it's going to calculate all the wave frames in between those so for example if we start we're gonna start with this sorry for the bad sound but I think the the saw wave is really explanatory visually we're gonna start with a super low like something like volume 1 this this is what your wave will look like and we're gonna make it increase up to volume 10 volume 10 you
+
+[8:48] see the saw wave creasing in amplitude when you cycle through the first F frames the first 16 frames okay so that's volume you can go higher than that of course you can go up to FF volume but as you can see volume 10 is basically where the the saw wave is at the fullest in terms of screen real estate
+
+[9:19] so what higher volumes will do if it's is it is they're gonna make the wave form clip as if the wave would like to grow past you see the the straight lines at the bottom and at the top this is what the wave form would be if it went over the screen borders and that is called clipping and so back to our distortion settings when distortion
+
+[9:52] Clips it's gonna read the wave form as is but then you have the second and this is what it's gonna sound like you can hear the wave form that starts with a basic cell wave and that gradually Clips adding to it more of a square wave kind of quality and this is what clique does it adds more square things to it because obviously if it clipped it's flat so it's square and what rap does is you're gonna see it actually well it's kind of
+
+[10:30] self-explanatory I'm gonna increase the volume so that you can see it even better that's good at 40 not even if if this literally oh this is a bit too much but what rap does is it's it wraps up the way firm that clips at the bottom or at the top when it clips I'm gonna try and look for a setting that explains what I want to show really well okay so you see
+
+[11:04] the wave it starts to reach the top and the bottom of the screen it reappears where it disappears and this is what you end up with this is what is called a wrapping waveform and this ends up being like instead of being one saw wave this is like force always that we see here and this this is way grittier then what a simple waveform looks like so you have your volume 1 up to volume I think 40 and if you go up to volume F which I
+
+[11:39] don't necessarily recommend if you like your eardrums this is what your end wave will look like a lot of saw waves that wrap into each other and this is really like this kills children this kills baby seals don't do that unless you want to kill baby seals ok so that's it for distortion I hope this was clear enough don't forget to comment if you think I have glossed over an aspect too much
+
+[12:13] let's talk now about phase you have let's say several types of phase settings which is normal phase resync and resync too and this has to do with the phase section at the beginning and at the end of the the synth first let's set it to normal and let's explain what phase does I'm gonna have this is gonna be my starting waveform volume 10 super
+
+[12:51] standard cell wave and I'm going to add phase gradually up to 1 F I think is the maximum I think that's 32 so you have yours okay this is my basic waveform and adding phase will actually push the waveform and squeeze it and squash it so that it becomes at the utmost highest face value it becomes nothing so don't put 1f unless you want silence
+
+[13:25] because a flat wave is silence and you're gonna hear that ends up being silence so you can same deal as distortion kind of you can add a little square kind of quality to your wave this is gonna be way more slowly and this is the this is low phase impact but basically yeah you see what you've seen what phase does but you have different
+
+[13:57] settings different phase settings so let's get faced back to one FM position maybe you want a this way it doesn't actually kill the wave this is the the highest phase so you you see here the two leftmost points is what's left of our stall wave it's being completely squashed into quasi nothingness so this is normal phase shift and if I go back to the synths Crean I'm gonna switch to
+
+[14:29] resync phase which is going to do that a new wave appears and when you have more waves higher harmonics appear look at this pretty does this satisfies my OCD okay so let's hear what this does in terms of wave form in terms of effects so you heard that at the end this is what I was talking about more saw waves so higher
+
+[15:03] harmonics this being like almost super high-pitched noise even where even though we're at c3 let's hear what this does to the to the lowest note for example yeah you can hear that pretty well it just increases the the high harmonics and resync to what we think too is gonna do is it's gonna be a different type of rethink that you you have more waves
+
+[15:35] appearing gradually and this it's just a different type of resynchronization I think the first one actually squashes the wave when it resyncs let's let's try using one wave screen and let's like go through my okay I'm struggling here did I forget something no okay the amplitude is still conserved it still goes up and down and
+
+[16:12] up and down with resync - it's going - yeah what's gonna do it's gonna override see it doesn't go up anymore the previous point is going is completely overwritten by the first phase of the next installment of the wave you can see the diagonal being progressively eaten by the new wave form and at the highest points this is kind of and even higher
+
+[16:47] so so here let's hear what this does seeking so say higher harmonics in a different kind of way so that's it for phase and resync this is our standard sink oh and we're actually in wrap but it doesn't right because we're still at volume 10 now cut off as I mentioned filters cut off
+
+[17:22] frequency so this is your cutoff value this is the frequencies that the this corresponds to a value in the wave that is going to be cut off by the filter if I put if I input 0 and cycle through FF and that's pretty face back at zero and let's see what this does you see the wave completely morphs into like from nothing zero frequency and gradually
+
+[17:56] adds low frequencies this is a quasi perfect saw wave I'm gonna sine wave I'm gonna show you what this sounds like what frame which frame is this this is frame 1 frame 0 from 1 and so let's call this with the F command I'm gonna deal with it I'm gonna deal with the F command later now I'm just gonna show you exactly what this frame sounds like this is the most low end rich waveform that you could have for a sine wave okay
+
+[18:34] let's go back to where we were no F okay basic raw what was I talking about I've done phase I'm doing cutoff so yeah from nothing because we cut off all the frequencies to low end to progressively more high end and this is what we end up with at frame F you can hear base to treble
+
+[19:11] and yeah this is what it does to the this is what cut-off does in case of a low pass filter let's try it with a high pass filter this is this is the exact opposite we start from zero frequencies to all highs zero we start from zero frequencies to all highs to gradually less eyes so this is only high frequencies gradually into this let's
+
+[19:50] try and see what this sounds like frame 2 this is kind of an inverted sine wave ish deal so this is what this is what this sounds like it's set our instrument back to once okay cut off this is what cut off does in case of a low pass and high pass I'm not gonna do
+
+[20:22] them all but you get the gist it cuts off frequencies and it makes waveforms cycle through the different phases now V shift the shift stands for vertical shifts and you're gonna see this actually pushes the waveform up it kind of in the same way that resync did the kind of in the same way that rap distortion did and you're gonna see this is this doesn't sound pretty but it looks pretty did I still set my film
+
+[20:58] cutoff I want no cutoff evolution so from F F to F F no evolution but I want V shift to evil from 0 to F F so look we're gonna lift this waveform up up to up to this and this is what you're going to hear in the middle the super raspy Ricci kind of kind of there you go this is V shift vertical shift of the wave form so now you've seen you have a
+
+[21:34] start position with volume cutoff phase and vertical shift and an end position with volume cut off phase and vertical shift so the more you play with the settings the more crazier the wave forms will get I'm gonna show you for example so I've talked about this Q value this is the resin so this is how much the frequency will be boosted at the threshold of the cutoff frequency so I'm gonna show you one of my favorites waveforms that I like to do resonance
+
+[22:09] level for volume I think 20 and cutoff I think 40 I really like this one and I'd like it to be and look at this waveform guys like this is really crazy you have your basic your basic saw wave that is gradually being completely warped into this mess okay I don't know why ether is like no low-end at all but
+
+[22:51] basically the more you play with this and the more crazy waveforms you recognize what you need to keep in mind is that it cycles from this info like from 10 to whatever whatever is in there and from F to whatever is in there and to zero from whatever and then Z and so on and it calculates and interpolates the values between this and this this and this and so on to create a a section of 16 or F waveforms so now that I've
+
+[23:25] covered the same screen let's go to the instrument screen because this is the section of 16 waveforms and this is how we will cycle through them we've got volume which is zero percent 25 percent 50 percent a hundred percent output left right center vibrato type high frequency and low frequency blah blah blah tip if you push a plus up and down instead of left and right left and
+
+[23:59] right cycles through the vibrato type up and down inverts the vibrato phase so here's for a cool trick so what instrument does in the wave tunnel you've got play type well this is going to do is this is gonna play the wave sequence once this is gonna do this and stop this is gonna loop really the is going to loop the wave sequence and this
+
+[24:33] is gonna cycle through the wave sequence ping pong so back and forth so for example first under global you're going to have whap that stops at the F wave form you're gonna have what whap whap and you're gonna have wow wow I hope I didn't make too much of an ass of myself but I think this is really illustrative what these do and then you have Manuel Manuel is interesting because it will only read the frame that you call this
+
+[25:09] is why when you have Manuel you have no clipping at all between sequences because it's only reading one and as soon as you switch to another you can hear you can hear a lot of clipping between giving you this is the clipping that is produced when the synth cycles from one wave frame to another length is the number of wave frames so you have 16 Way frames and this is the number this
+
+[25:45] is the number of wave frames that the sequence is going to cycle through so 0 which is equivalent to manual one which is actually two so we've got let's switch to another kind of since no VF from 1 to 15 so you got low volume to fast low volume to high volume in two wave frames this is the row this is one
+
+[26:22] so it's going to cycle from 0 to 1 this is 2 you could eat vide 4 and so on up to F and this is interesting this is the repeat value so so let's start over 0 1 it's more telling you if we play this in loops so you're going to hear 1 2 3 1 2 3 1 2 3
+
+[26:57] looping through waves 1 2 3 1 2 3 and actually it's not going to call waves 1 2 & 3 because the this section doesn't look at that how pretty this is the section does not call frames 1 2 & 3 when I say length is 3 it's gonna take that first and then if I say 3 I think it's gonna be the one exactly in the middle and then and then the last I might be wrong it might be the one and then the first and then the second third
+
+[27:29] and anyway you can play around to find which of the waveforms the the sequence is being is calling and then 1 2 3 4 1 2 3 4 1 2 3 4 5 etc up to 16 and this is the repeat value this is what the repeat value does is once you've gone through one sequence of
+
+[28:03] length like for example a sequence of three it's gonna repeat this number of frames so repeat zero it's gonna repeat nothing so it stays still it's gonna repeat one doodlee doodlee doodlee do so you got the first sequence 1 2 3 and then repeat it's gonna repeat 2 so if you play with this cleverly you
+
+[28:36] can have really interesting rhythmic wave cycles etc etc I usually said this as F because I whenever I said I said something to ping pong I wanted to repeat everything you can hear that going to do is it's going back and forth through my cycle this is the number of frames this is the Babur of frames that is repeated at the
+
+[29:08] end of the sequence and speed speed is the number of ticks that is that each wave frame is going to last so one is the fastest and I don't recommend using it because you've heard that it clips every time that it cycles through one way from to the other so one is going to be one tick which is the lowest time unit possible in LSD J one tick per wave frame so what your hair is more clipping than actual modulation two ticks three
+
+[29:44] takes 48 and I like six ticks because when you're in group six six six is the exact amount of text that you have per step so each step is actually like a new note like a new sixteenth notes in your beat da-da-da-da-da-da-da-da accelerate etc and then you have table settings because you have automation and table number I'm not going to go through these right now because I'm gonna do another video on
+
+[30:16] tables but most of you already know what these do okay so that's that's basically it that's where that's what the the instrument does and that's what the the saint's does so now hand drawn waves you might have noticed that you can actually alter each and every one of these frames okay one more detail since the gyro all the way frames are already here they already
+
+[30:49] take their slot in the memory and I'm I'm going to go up to FF I think there's FF waveforms accelerator and there's 16 per percent so you have F since so the first six things are assigned to the first things and if I do another saying and other things here we're gonna pull this to this you're gonna see first synth is gonna be this sequence is my first synth and when we go to 10 this is gonna be my second synth and so this way
+
+[31:27] you can you can easily remember which waveform is from we're just count up to 16 then you know where you are the first synth up to F 2nd synth from 10 to 1 F ok and it goes up to since F so FF now that that's out of the way I was going to talk about hand drawn waveforms so this is really useful in terms of visual cues but you cannot actually alter these by way by hand and one of the most common misconceptions is
+
+[32:05] that the hand-drawn waves in our CG are only accessible when you set this to manual because obviously if you set it to manual then you can do whatever you want and you can manually draw but actually hand-drawn waves are actually available even when you're in the ping-pong and loop and once play types and I'm going to demonstrate this we have our first things then it's going to be volume yeah volume ten to volume sixty now that's
+
+[32:39] since one so let's ignore this this is our first synth and this is synth since zero and since one so this is what the cycle is for since one I'm going to have my synth one my instrument go to a length of three and it's going to repeat everything so we're going to
+
+[33:14] have three waveforms that we are going to be able to edit by hand the first one I think should be should be waveform ten so on the first wave I'm going I'm going to do this I'm going to input some little modification you should you should hear a difference this is the first wave that I have edited now we are going to try and find the second one I think it's going to be 18 but I'm not sure no basically I don't think it's 18
+
+[33:52] which is curious let's try it one by one nope nope nope nope sorry about this is kind of tedious but nope still not okay still not still not okay and we
+
+[34:28] still not this one still not this one oh this is getting weird should I should I should have cycled through this one I mean this is kind of it that this really shows that I don't know how LSD J so that's the interpolation so I don't know which the second is but I can definitely assure you that the
+
+[35:03] third one is gonna be the last one so there you have it we've altered even though we have something that cycles through an entire cycle we can still alter this this is the first wave that we hear and one F is the second and be careful because once you start drawing you you better have your synth ready
+
+[35:36] because once you start drawing every time you're going to input a new modification this is gonna overwrite everything that you Vendrell in order to recalculate all the waves between and there's ten sections so there you have it I think that covers pretty much what I know and what I'm sure about there's a lot of things that I'm not sure about in the wave channels and yeah now I'm going to share with you a trick that I use a lot I've said that I usually do this
+
+[36:12] I said speed sex in order to have waves that cycle at the exact speed of a sixteenth note but this is relevant to the group so if you're in group five five this is going to be five for group seven seven this is going to be seven etcetera etcetera one of the tricks that I like to use is to have a base that I like she's usually 2040s my go-to listen to that let's look at the other way form of the distance so Mike this is
+
+[36:56] what I've drawn Oh something is really weird here what did I do phase 12 when did I put paste with please fight okay what I want is wave form 10 this is what I've drawn this is what I've created with these settings specifically this is this is the result of this exactly and so yeah this is
+
+[37:32] basically one of the one of the wave frames this is one of the wave forms that I used like to use because I think it's really rich in both high and low and it's really loud so yeah if you like like things you're gonna like this one but what people tend to not do is because you know this trick when you have a pulse instrument let's let's go to the post channel look look how how pretty they look how pretty that is all
+
+[38:05] of this let's go to the post channel and create a pulse this is your standard pulse instrument the clipping is caused by BG be [ __ ] all over head self so sorry and one of the standard tricks is to use high frequency V commands in order to give it a recipe a recipe edge and because wave forms because wave
+
+[38:43] instruments tend to be already super greedy we tend to not use these at all we tend to not use these in in the wave but this can have some really interesting results that's knit see if I can find what I'm looking for you ah yeah this is kind of what this is kind of what I was looking
+
+[39:16] so because the waveform is already super recipe and we're and we're inputting this and we're inputting a high-frequency recommend the rasp plus the rasp face together and they create a kind of flanger filtery modulation ii effect
+
+[39:52] yeah this is not maybe not I like this one and this is all in a completely manual one frame instrument now I use this a lot but be careful because this eats through CPU like crazy the more of these you have the more CPU
+
+[40:25] will eat because the pitch is gonna go the pitch is gonna go crazy and the center is gonna go crazy and it's going to eat your CPU so pop up your GBA ESPYs and start doing this we will but be careful because that there is a catch to this trick and it's and it's this if I put the same value like for example you're gonna say hey wait why do you put this in a slot and not in the
+
+[40:56] table I'm gonna show you why let's put my V I think it was a six as in yeah a six so we have this a five we will sew this this works nice but once once you switch notes is which
+
+[41:35] pitch and so the modulation of the vibrato is not going to be the same so you're going to have to find the right a value again yeah sorry about that this isn't maybe
+
+[42:13] not not the most entertaining part of the video so yeah F is super fast and super white so she even if this is supposed to be addy but actually it cycles so fast that it even transforms it into an E this is more like it I think anything
+
+[43:03] so now I find two values that make my wave wobble ish or even flange without the use of any synth tricks this is all manual Envy okay I think this can wrap up whatever I know about the wave channel Oh No one less thing one less thing you might have seen that when ever I used the wave manual wave
+
+[43:35] I used the F command this is what I forgot to talk about F commands f stands for frame and what is gonna do is it's for each since is gonna call a particular frame in the cycle so this is wave 10 and this is wave 11 so if I want my cycle to start one or one or two way frames later this is possible thanks to my friend the F command but keep in mind
+
+[44:08] that F is relative so this is not going to call frame one this is going to say frame +1 to the the existing wave to the existing cycle so this can lead to interesting results when in which you have your cycle is going to do instead of cycling in into itself it's going to start here and then you're going to go one two three four five up to 16 and it's gonna bleed through to the other synth so you're going to have a wave
+
+[44:41] that evolves into your other things really wordly because this is going to be okay I'm gonna start at plus eight and I'm gonna go 16 up and sixteen up is this this is the way frame that is gonna call so you're gonna end up with a with a sound that is not really relevant to what you've inputted this is interesting let's try and demonstrate this I have my since zero is this and if I put it in two people this sounds awful sorry about that I
+
+[45:22] don't have a heavy shift pesky pesky v-- shift let's try to find something that is not too ear rapey this is nice and this is what since one will sound like so since zero and since so you've heard them and now we're going
+
+[45:56] to say for example this is going to be since zero and in nicely goes inside its own cycle but if I do for example f0f I'm gonna I'm going to offset the the way frames by 16 and I think it's going to bleed into the other synth actually it's already bleeding into the other sense
+
+[46:29] because this is 16 so if I offset it by 8 you're gonna have half of the cycle is going to be synth 1 and half of the other cycle is gonna be since since 2 so this demonstrate what the f command does and when you're in manual it I think it just calls whatever frame number you input so I think that's it guys I've talked a lot I don't even know
+
+[47:02] how long the video is but I hope you like it I hope you liked it once again this has been Paul from pampers you tomorrow which is way too soon we're going to play and open for Harley likes music go like our page go follow us on soundcloud please subscribe to our new little channel and request something in the comment section or on Facebook I am a [ __ ] Jean you can reach me I pop out you on Facebook and this has been episode two of the hidden LSD G tips and tricks thanks for
+
+[47:39] watching and see you soon in video number three

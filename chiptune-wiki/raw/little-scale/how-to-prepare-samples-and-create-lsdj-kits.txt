@@ -1,0 +1,1714 @@
+RAW: little-scale (Sebastian Tomczak), "How to: Prepare Samples and Create LSDJ Kits" | https://little-scale.blogspot.com/2008/11/how-to-prepare-samples-and-create-lsdj.html | posted November 2008 (the first comment is dated 2008-11-19); the tutorial the chipmusic.org thread t258 points at | fetched 2026-08-31 | page text extracted with tools/html-to-text.py; the screenshots the text refers to are not saved; blog chrome and the comment thread are kept at the end
+
+skip to main |
+skip to sidebar
+
+## Wednesday, November 19, 2008
+
+###
+How to: Prepare Samples and Create LSDJ Kits
+
+Thanks to herr_prof and Random for their corrections and additions.
+
+Introduction
+I am going to go through how to prepare samples for LSDJ kits and then import them and create LSDJ kits. I am going to use the following three pieces of software:
+• Bias PEAK (5.2)
+• Apple QuickTime Pro (7.55)
+• LSDJ Patcher (5)
+
+I have had the best results with these three pieces of software, but of course there should be a number of options available to users on the major platforms.
+
+1. Select
+Select your samples wisely. Keep in mind that you only have just over two seconds worth of audio per kit, so whatever you put in has to count!
+
+2. Crop and Filter
+Crop your samples. This is very important, because every little bit of time that you can save on a sample is extra time you can have adding additional samples to your kit.
+
+Now, in my opinion there are three places to look for space when choosing where to crop you samples. You may notice that before the initial attack portion of your sample, there may be small amount of silence or almost silence. You can delete this, of course. Not only will this give you more time, but your depending on the length that you delete from the start, your samples may sound more "in time" with the rest of LSDJ (because the sound will be starting on the beat).
+
+The second place to crop a sound is silence or almost silence once the sound has finished. This is pretty obvious.
+
+The third place that you may or may not be able to crop a sound, depending on the material, is by cutting off part of the tail of the sound. Think about why you have chosen this particular sound - you may be able to remove some of the end of the sound whilst keeping most of its sonic identity intact.
+
+As an example, I am going to work with a particular sample from my creative commons Sega Mega Drive sample pack (md_0_001_oct4.wav is the file name of this sample). This sound is basically a rhythmic blip sort of sound, with a tail of a low frequency with a bit of noise added. Although the tail is harmonically related to the blip at the start, it is really jus the blip that I am interested in. I can keep its sonic identity intact (or at least the part that I want) and remove the tail as well.
+
+To crop a sample in Peak, simply select the portion of the waveform you wish to remove and hit the delete key.
+
+Below you can see a before and after shot of the waveform. My sample has gone from being more than 500 milliseconds in length to a mere 75 milliseconds, and it still has the important essence of what I wanted from it.
+
+Finally, it may be a good idea to roll off some high frequencies (keeping in mind that with a sampling rate of 11.468 KHz we have an upper limit determined by a nyquist frequency of 5.734 KHz). This may reduce some of the hum that is heard when playing back samples in LSDJ.
+
+Depending on your sample material you may want to also sharply roll off some low frequencies and / or use a DC offset remover. This will make normalisation more effective.
+
+3. Add Fades
+You may notice some clicking artifacts once you have cropped your sound. Depending on the extent of this clicking or popping, you may wish to fade the start or the end of your sample. Even a fade of 2 or 5 milliseconds may help you in many cases.
+
+To add a fade using Peak, select the portion of the waveform you wish to fade in or out, and select the appropriate command from the DSP menu. Below you can see a screen shot of the waveform after a fade out has been added to the end.
+
+4. Normalise, Add Gain, Dither
+Normalisation maximises the amplitude of your waveform before clipping without changing the relative level of amplitude of one portion of the wave to another (ie. it does not compress the waveform).
+
+Select Normalize... from the DSP menu in Peak. Leave the slider at 0.0 dB (this will maximise your waveform to the fullest extent). Hit OK.
+
+Because sample playback tends to be quiet in comparison to the other LSDJ channels, it is also recommended that gain is added after the normalisation process. Although this will clip your sample, the compromise in sound quality should not be too bad considering it will be played back on a Game Boy. Somewhere in the range of 3dB to 6dB should be added.
+
+In Peak, select Change Gain... from the DSP menu. Select an appropriate amount (between 3dB and 6dB). Hit OK. Save your samples to disk.
+
+Below is a screen shot of the sample once it has been normalised and gain has been added. I have added 6dB of gain. Yes, it looks terrible but it doesn't sound too bad.
+
+You may wish to also use dither (either in Peak or in the LSDJ Patcher program) as this may help reduce artifacts upon playback on a Game Boy.
+
+5. Convert
+Open up your samples in Apple QuickTime Movie Player.
+
+Select Export... from the File menu in QT Player. Under the Export dropdown menu, select sound to wave. Click on the Options... button. Set the dialog box to the following settings:
+
+Format: PCM; Channels: Mono; Rate: 11.468 KHz; Quality: Best; Sample Size: 8 bits.
+
+Hit OK. Select a path to save your sample to. Give your sample a three character name, because this is the name that will appear in LDJ when you actually go to use your kit. I have called my sample MD1.
+
+7. Add and Save
+Open up the LSDJ Patcher v5. Click on the Open ROM button, and navigate to your current version of LSDJ. Use the drop down menu towards the top to select the kit slot that you want to create your new kit in. You can either write over an existing kit or if you have any slots free, you can use these and create a kit there.
+
+Click the create new kit button. Click the add sample button and navigate to your first lsdj sample.
+
+Your sample will be added to the list of fifteen sample slots in your kit. You will also see that your sample takes up a portion of the 3FA0 bytes that are free per kit - this number is shown below the list of fifteen sample slots. In the screen shot above, my one sample takes 1C0 bytes.
+
+Add more samples until the 3FA0space is almost full - you may see that the figure 3FA0 turn red, this means that you have loaded too many samples in a kit.
+
+You can also delete samples from your kit by pressing drop sample.
+
+Once your kit is ready, press the compile kit button. You can then also rename your kit. Once you have renamed your kit, you may need to click the compile button again.
+
+Finally, you can export your kit as a single .kit file to share with other people, or you can export your modified LSDJ ROM. Click the save kit button to export your kit. Click the save rom image to export your custom LSDJ ROM.
+
+Now it is simply a matter of tranfering your newly created custom LSDJ ROM to your LSDJ cart or running in your favourite Game Boy emulator.
+
+Share
+|
+
+Posted by
+Sebastian Tomczak
+
+at
+6:25 AM
+
+Labels:
+chipmusic,
+chiptech
+
+####
+16
+comments:
+
+Anonymous
+said...
+
+Nice tutorial! Another thing that isn't mentioned here, which I think is really handy to do (since it gives the samples much better playback from LSDJ) is to filter the samples. Remove all unnecessary frequencies with a hard low-pass and high-pass filter. Be brutal, you may even cut into the fundamental frequency of the sample with the low-pass, and take away a lot of harmonics with the hi-pass; they won't be heard anyway, and it just takes up energy in the frequency band, and thus makes the sample sound quieter when being played back from the Game Boy.
+
+11/19/2008 9:54 AM
+
+synthtopia
+said...
+
+Very nice tutorial.
+
+This, along with your YouTube videos, may convince others to try making LSDJ sound libraries.
+
+I put up link to this at Synthtopia - hope it helps get the word out on what you are doing!
+
+11/19/2008 12:45 PM
+
+Sebastian Tomczak
+said...
+
+Thanks as always.
+
+Spreading the word for this kind of stuff is good, because its a question that comes up every now and then.
+
+Thanks again!
+
+Seb
+
+11/19/2008 12:47 PM
+
+Peter Swimm
+said...
+
+something Ive never tried, but guess should work is to apply some dither effect before doing the downsample effect. I would this there would be slightly less artifacts than simply brick wall limiting the conversion to a certain frequency...
+
+Thoughts?
+
+11/21/2008 10:44 PM
+
+Peter Swimm
+said...
+
+duh I forgot there is dither in the app.. still might be better to try it first in the external editor?
+
+11/21/2008 10:46 PM
+
+Sebastian Tomczak
+said...
+
+herrprof: i've mentioned dithering now, but not in detail because I haven't tried it (with lsdj stuff).
+
+Thanks for your input!
+
+11/22/2008 7:57 AM
+
+Anonymous
+said...
+
+Very nice tutorial indeed. Thanks for the stuff.
+
+12/05/2008 8:03 AM
+
+Anonymous
+said...
+
+great tutorial! thanks so much, i can now become a legend.
+
+12/09/2008 3:17 PM
+
+Anonymous
+said...
+
+why using quiktime for the final conversion intead of peak ?
+
+3/24/2009 8:17 PM
+
+ray ban 3025
+said...
+
+This tutorial has change my life! kudos
+
+1/29/2010 11:59 PM
+
+Anonymous
+said...
+
+if its not too much trouble, could you go into a little more detail about rolling off higher frequencies on the sample? i understand hi and lo pass filters, but am stumped about what cutoff i should use for removing the high frequencies. i'm unaware of what a nyquist frequency is and how or why it determines anything involved. specifically my sample when imported has alot of hum and noise, but i'm not sure if its because i have too much high or low frequency what might be wrong. if it gives you a better idea of the nature of the sample, i'm sampling the Ab Eb Bb and C string swells in the opening of 1812 overture.
+
+2/25/2010 2:51 PM
+
+Anonymous
+said...
+
+Interesting article as for me. I'd like to read more concerning this topic. The only thing I would like to see on that blog is a few photos of any devices.
+Katherine Flouee
+Phone jammer
+
+3/05/2010 8:10 PM
+
+laloutre
+said...
+
+Cool tuto !
+
+I'm posting here cause i'm having a problem :
+I've a 2seconds sample at 11468 16Bits, but once in LSDJ the sound isn't audible, it's just noise....
+I tried to filter it in many ways, but it doesn't change anything...
+Does anyone have the same ?
+Thx
+
+6/18/2010 12:14 AM
+
+laloutre
+said...
+
+Cool tuto !
+
+I'm posting here cause i'm having a problem :
+I've a 2seconds sample at 11468 16Bits, but once in LSDJ the sound isn't audible, it's just noise....
+I tried to filter it in many ways, but it doesn't change anything...
+Does anyone have the same ?
+Thx
+
+6/18/2010 12:14 AM
+
+HID Kits
+said...
+
+This comment has been removed by a blog administrator.
+
+10/24/2010 1:01 PM
+
+Anonymous
+said...
+
+Tha!!!
+
+4/06/2023 7:51 PM
+
+Post a Comment
+
+Newer Post
+
+Older Post
+
+Home
+
+Subscribe to:
+Post Comments (Atom)
+
+## About Me
+
+Australia
+
+View my complete profile
+
+## Blog Archive
+
+Blog Archive
+May 2026 (1)
+Jun 2025 (4)
+Apr 2025 (1)
+Oct 2024 (1)
+Mar 2024 (1)
+Feb 2024 (1)
+Nov 2023 (9)
+Aug 2023 (1)
+May 2023 (1)
+Apr 2023 (5)
+Mar 2023 (6)
+Feb 2023 (3)
+Jan 2023 (18)
+Dec 2022 (1)
+Jun 2022 (2)
+Jul 2021 (2)
+Jun 2021 (6)
+May 2021 (3)
+Apr 2021 (12)
+Jan 2021 (1)
+Jul 2020 (3)
+Jun 2020 (5)
+May 2020 (8)
+Apr 2020 (1)
+Feb 2020 (1)
+Sep 2019 (1)
+Aug 2019 (1)
+Apr 2019 (1)
+Mar 2019 (2)
+Feb 2019 (6)
+Jan 2019 (4)
+Dec 2018 (3)
+Nov 2018 (2)
+Oct 2018 (2)
+Sep 2018 (2)
+Aug 2018 (1)
+Jul 2018 (1)
+Jun 2018 (4)
+May 2018 (2)
+Apr 2018 (1)
+Mar 2018 (4)
+Feb 2018 (4)
+Jan 2018 (4)
+Dec 2017 (1)
+Nov 2017 (8)
+Oct 2017 (6)
+Sep 2017 (8)
+Aug 2017 (12)
+Jul 2017 (5)
+Jun 2017 (5)
+May 2017 (13)
+Apr 2017 (7)
+Mar 2017 (26)
+Feb 2017 (5)
+Jan 2017 (19)
+Dec 2016 (26)
+Nov 2016 (21)
+Oct 2016 (2)
+Sep 2016 (11)
+Aug 2016 (33)
+Jul 2016 (15)
+Jun 2016 (14)
+May 2016 (14)
+Mar 2016 (4)
+Feb 2016 (6)
+Jan 2016 (6)
+Dec 2015 (20)
+Nov 2015 (58)
+Oct 2015 (34)
+Sep 2015 (4)
+Aug 2015 (22)
+Jul 2015 (33)
+Jun 2015 (16)
+May 2015 (16)
+Apr 2015 (12)
+Mar 2015 (27)
+Feb 2015 (1)
+Dec 2014 (1)
+Nov 2014 (3)
+Oct 2014 (28)
+Sep 2014 (26)
+Aug 2014 (30)
+Jul 2014 (6)
+Jun 2014 (14)
+May 2014 (33)
+Apr 2014 (51)
+Mar 2014 (16)
+Feb 2014 (17)
+Jan 2014 (22)
+Dec 2013 (65)
+Nov 2013 (40)
+Oct 2013 (19)
+Sep 2013 (6)
+Aug 2013 (17)
+Jul 2013 (8)
+Jun 2013 (8)
+May 2013 (41)
+Apr 2013 (20)
+Mar 2013 (55)
+Feb 2013 (55)
+Jan 2013 (59)
+Dec 2012 (39)
+Nov 2012 (7)
+Oct 2012 (77)
+Sep 2012 (29)
+Aug 2012 (8)
+Jul 2012 (12)
+Jun 2012 (14)
+May 2012 (17)
+Apr 2012 (18)
+Mar 2012 (16)
+Feb 2012 (12)
+Jan 2012 (18)
+Dec 2011 (13)
+Nov 2011 (10)
+Oct 2011 (19)
+Sep 2011 (21)
+Aug 2011 (16)
+Jul 2011 (11)
+Jun 2011 (15)
+May 2011 (11)
+Apr 2011 (12)
+Mar 2011 (6)
+Feb 2011 (1)
+Jan 2011 (3)
+Dec 2010 (13)
+Nov 2010 (13)
+Oct 2010 (4)
+Sep 2010 (20)
+Aug 2010 (3)
+Jul 2010 (2)
+Jun 2010 (15)
+May 2010 (10)
+Apr 2010 (25)
+Mar 2010 (25)
+Feb 2010 (23)
+Jan 2010 (24)
+Dec 2009 (51)
+Nov 2009 (17)
+Oct 2009 (32)
+Sep 2009 (27)
+Aug 2009 (25)
+Jul 2009 (36)
+Jun 2009 (33)
+May 2009 (39)
+Apr 2009 (39)
+Mar 2009 (46)
+Feb 2009 (22)
+Jan 2009 (14)
+Dec 2008 (22)
+Nov 2008 (35)
+Oct 2008 (25)
+Sep 2008 (35)
+Aug 2008 (24)
+Jul 2008 (26)
+Jun 2008 (23)
+May 2008 (39)
+Apr 2008 (19)
+Mar 2008 (10)
+Feb 2008 (27)
+Jan 2008 (45)
+Dec 2007 (36)
+Nov 2007 (34)
+Oct 2007 (14)
+Sep 2007 (18)
+Aug 2007 (19)
+Jul 2007 (22)
+Jun 2007 (18)
+May 2007 (20)
+Apr 2007 (11)
+Mar 2007 (18)
+Feb 2007 (2)
+Jan 2007 (12)
+Dec 2006 (11)
+Nov 2006 (4)
+Oct 2006 (2)
+Sep 2006 (3)
+Aug 2006 (4)
+Jul 2006 (7)
+Jun 2006 (9)
+May 2006 (13)
+Apr 2006 (21)
+Mar 2006 (24)
+
+## Labels
+
+Select a label
+1-bit music
+(2)
+
+12eps.com
+(5)
+
+16x9gifs
+(6)
+
+3bit Music
+(3)
+
+3d printing
+(19)
+
+82bpm
+(1)
+
+a
+(1)
+
+A_SID
+(2)
+
+A26F
+(4)
+
+ableton audio effects rack
+(6)
+
+ableton live
+(471)
+
+ableton live control surface scripts
+(1)
+
+ableton live user group
+(1)
+
+AFUM
+(7)
+
+ai
+(1)
+
+air quality
+(1)
+
+airhorn
+(1)
+
+ambisonics
+(1)
+
+amiibo
+(2)
+
+analog electronics
+(2)
+
+analog synthesis
+(6)
+
+android
+(5)
+
+animals
+(3)
+
+anti laptop music
+(8)
+
+arduino
+(222)
+
+arduino libraries
+(4)
+
+arduino sound
+(12)
+
+artnet
+(9)
+
+aruco
+(1)
+
+astrophotography
+(6)
+
+atari 2600
+(49)
+
+atem
+(2)
+
+attiny45
+(2)
+
+audio library
+(4)
+
+audio to midi
+(1)
+
+audiomulch
+(2)
+
+ay38912
+(1)
+
+beap
+(3)
+
+beap basics
+(3)
+
+beatmaker
+(1)
+
+beeper
+(6)
+
+bidule
+(6)
+
+bidule basics
+(5)
+
+biohacking
+(3)
+
+biological digital
+(4)
+
+bitwig
+(1)
+
+black midi
+(4)
+
+ble
+(1)
+
+bleak pizza
+(1)
+
+bodymod
+(1)
+
+bom
+(1)
+
+books
+(1)
+
+bouncy ball
+(1)
+
+breadboard basics
+(4)
+
+buoy music
+(1)
+
+capacitance sensing
+(3)
+
+cello
+(2)
+
+charity
+(2)
+
+chipmusic
+(668)
+
+chiptech
+(260)
+
+chiptune array
+(1)
+
+circuit bending
+(48)
+
+circuit bending basics
+(11)
+
+climate
+(1)
+
+clouds
+(1)
+
+cmc-pd
+(1)
+
+cmos
+(5)
+
+cognitive
+(1)
+
+collabs
+(57)
+
+commodore 64
+(9)
+
+competitions
+(5)
+
+compilations
+(48)
+
+computer vision
+(6)
+
+computers
+(2)
+
+control voltage and gate
+(2)
+
+convolution
+(17)
+
+cool stuff by other people
+(72)
+
+covers
+(3)
+
+cross modal modulation
+(1)
+
+crowdfunding
+(1)
+
+cryptography
+(1)
+
+crystals
+(1)
+
+daily january 2013
+(2)
+
+data bending
+(2)
+
+data moshing
+(2)
+
+data protocols
+(4)
+
+demo
+(1)
+
+destruction
+(1)
+
+digital feedback
+(17)
+
+digital manipulation
+(141)
+
+din sync
+(1)
+
+dither
+(4)
+
+diy
+(27)
+
+diy stuff
+(223)
+
+dmx
+(7)
+
+dnb
+(1)
+
+donk
+(3)
+
+dorkbot
+(17)
+
+drowning goldfish
+(6)
+
+duane's world!!!
+(1)
+
+ecology
+(2)
+
+electromagnetic induction recordings
+(5)
+
+emulation
+(4)
+
+encapsulation
+(1)
+
+eprom music
+(10)
+
+erit satis
+(1)
+
+esp32
+(2)
+
+esp8266
+(3)
+
+ethnomusicology
+(1)
+
+eurorack
+(45)
+
+excel
+(1)
+
+exo sequencer
+(1)
+
+experimental circuits
+(1)
+
+experimentation
+(1)
+
+exs 24
+(1)
+
+extrafile
+(1)
+
+f1
+(2)
+
+fakebit
+(5)
+
+fashion
+(14)
+
+feedback
+(11)
+
+field drop
+(12)
+
+field recordings
+(33)
+
+fingerless
+(2)
+
+flash music
+(4)
+
+flex sensor
+(1)
+
+fonts
+(6)
+
+food
+(4)
+
+footdrag
+(16)
+
+footwork
+(6)
+
+force sensor
+(1)
+
+fun with sea moss
+(5)
+
+fundraising
+(1)
+
+future
+(3)
+
+game boy
+(27)
+
+game sound
+(13)
+
+gameboy advance
+(9)
+
+gamecube
+(8)
+
+GameSalad
+(4)
+
+gear
+(1)
+
+gen~
+(7)
+
+gender
+(1)
+
+genmdm firmware
+(8)
+
+genmdm tutorials
+(14)
+
+geophone
+(1)
+
+gig photography
+(2)
+
+gigs
+(133)
+
+github
+(3)
+
+glitch
+(32)
+
+gpt
+(1)
+
+granulation
+(1)
+
+grid controllers
+(12)
+
+HID
+(6)
+
+hidden sounds
+(1)
+
+hidden village
+(57)
+
+homeassistant
+(1)
+
+homemade drum machine
+(3)
+
+house
+(1)
+
+hui
+(1)
+
+humour
+(39)
+
+immersive audio
+(1)
+
+implant
+(1)
+
+impulse response packs
+(13)
+
+installations
+(4)
+
+intensity shuttle
+(1)
+
+internet
+(2)
+
+interwebs
+(2)
+
+ios
+(6)
+
+iot
+(1)
+
+ipad
+(11)
+
+iphone
+(10)
+
+isight
+(1)
+
+jamming
+(1)
+
+jazz
+(1)
+
+jitter
+(1)
+
+jus chillin with little-scale
+(5)
+
+kaleidoscope
+(1)
+
+kicad
+(1)
+
+kira the cat
+(1)
+
+landscapes
+(1)
+
+lauren's stuff
+(10)
+
+laying of hands
+(3)
+
+lazerscale2010
+(17)
+
+lenses
+(7)
+
+let's listen
+(4)
+
+let's make
+(1)
+
+light
+(1)
+
+lightroom
+(1)
+
+link
+(4)
+
+little-scale
+(314)
+
+live below the line
+(1)
+
+live impulse presets
+(1)
+
+LiveDrummer
+(1)
+
+logic
+(10)
+
+low fidelity
+(1)
+
+low light photography
+(11)
+
+lsdj
+(2)
+
+lumen
+(3)
+
+m8 headless
+(4)
+
+m8 tracker
+(4)
+
+machine learning
+(4)
+
+macro
+(1)
+
+magnetometer
+(1)
+
+maker faire
+(1)
+
+mashtactic
+(3)
+
+massive
+(1)
+
+maths
+(9)
+
+max for live
+(330)
+
+max for live basics
+(6)
+
+max for live snippets
+(4)
+
+max/msp
+(309)
+
+MCP4922
+(7)
+
+mediapipe
+(5)
+
+mega drive sound comparison
+(1)
+
+memes
+(1)
+
+mentorship
+(2)
+
+merch
+(1)
+
+meta
+(13)
+
+microphones
+(1)
+
+MIDI
+(25)
+
+milkcrate
+(78)
+
+mini tutorial series
+(1)
+
+mira
+(11)
+
+misc musical stuff
+(64)
+
+mixcloud
+(4)
+
+mixtapes
+(7)
+
+mobile phones
+(5)
+
+modular
+(69)
+
+modular sequencing
+(13)
+
+moire
+(1)
+
+molecular code
+(8)
+
+monotron
+(4)
+
+mother-32
+(4)
+
+motion
+(1)
+
+multichannel audio
+(1)
+
+myriad
+(2)
+
+nanoloop
+(15)
+
+nature
+(14)
+
+neopixel
+(4)
+
+NES
+(2)
+
+new me-ism
+(10)
+
+nfc
+(1)
+
+ninjam
+(1)
+
+nintendo ds
+(4)
+
+no input
+(25)
+
+noise
+(7)
+
+non haptic
+(1)
+
+nrf52840
+(1)
+
+o against i
+(1)
+
+oled
+(1)
+
+one hour remix challenge
+(2)
+
+onebutton
+(1)
+
+onehander
+(2)
+
+open gl
+(1)
+
+opencv
+(1)
+
+osc
+(15)
+
+osculator
+(4)
+
+other
+(224)
+
+panning
+(2)
+
+patch anatomy
+(2)
+
+path
+(5)
+
+pathMIDI
+(3)
+
+patterning
+(2)
+
+PD
+(2)
+
+permutations and sets
+(7)
+
+photography
+(44)
+
+photography field testing
+(1)
+
+physical control
+(72)
+
+physical digital
+(33)
+
+picaxe
+(16)
+
+picture2midi
+(2)
+
+pictures of buildings
+(16)
+
+ping
+(6)
+
+pitchmap
+(1)
+
+pixel point
+(21)
+
+pixel sorting
+(1)
+
+plants
+(2)
+
+plugins
+(9)
+
+PO-12
+(5)
+
+PO-20
+(1)
+
+pocket operator
+(9)
+
+pokey
+(10)
+
+politics
+(5)
+
+pozible
+(1)
+
+printer stuff
+(9)
+
+processing
+(4)
+
+project data
+(14)
+
+protools
+(3)
+
+push
+(9)
+
+python
+(1)
+
+qr code
+(1)
+
+quadrophonic
+(1)
+
+quick tips
+(1)
+
+QuickTime
+(1)
+
+radiation
+(4)
+
+ram music
+(1)
+
+raspberry pi
+(5)
+
+reconstruction
+(1)
+
+red board tutorials
+(3)
+
+remixing
+(42)
+
+resolume
+(62)
+
+resolume tutorial
+(5)
+
+resynthesis
+(5)
+
+reverberate software
+(6)
+
+reviews
+(18)
+
+rfid
+(4)
+
+rnbo
+(3)
+
+rss feeds and podcasts
+(1)
+
+SAA 1099
+(3)
+
+sample sets
+(40)
+
+samsung galaxy s4
+(4)
+
+sausage fattener
+(1)
+
+SAWA
+(1)
+
+saxophone
+(2)
+
+scores
+(3)
+
+screencast
+(4)
+
+sd card
+(1)
+
+sdi monitor waveform image
+(1)
+
+seapunk
+(9)
+
+secret handshake
+(2)
+
+sega game gear
+(15)
+
+sega master system
+(89)
+
+sega mega drive / genesis
+(92)
+
+sega nomad
+(18)
+
+servo motor
+(1)
+
+shameless publicity
+(162)
+
+shortest sample
+(1)
+
+simpsonwave
+(1)
+
+smsm
+(4)
+
+sn76489
+(30)
+
+solar panel
+(1)
+
+solenoid
+(1)
+
+solstice mix
+(2)
+
+sonification
+(2)
+
+sound font
+(2)
+
+soundfont
+(1)
+
+space designer
+(5)
+
+sparkler
+(1)
+
+speech synthesis
+(2)
+
+spi
+(6)
+
+stealing art
+(2)
+
+streaming
+(9)
+
+stretch
+(3)
+
+studio hardware and infrastructure
+(8)
+
+studio software
+(1)
+
+study
+(31)
+
+super buddies
+(3)
+
+super slow startup sounds
+(4)
+
+supercollider
+(1)
+
+surround sound
+(2)
+
+sync
+(22)
+
+syphon
+(2)
+
+tape stuff
+(4)
+
+teaching
+(20)
+
+techfest 2009
+(1)
+
+teensy
+(159)
+
+teensy 3.6 basics
+(19)
+
+teensy 4.1
+(9)
+
+teensy basics
+(8)
+
+television
+(1)
+
+three.js
+(1)
+
+timelapse
+(1)
+
+tomczak sr
+(6)
+
+touchosc
+(8)
+
+toys
+(1)
+
+trail
+(9)
+
+traktor
+(3)
+
+translations
+(2)
+
+travel
+(17)
+
+tumblr
+(1)
+
+tuning
+(13)
+
+twitch
+(7)
+
+ukulele
+(3)
+
+Unity
+(7)
+
+useless
+(1)
+
+vdmx
+(1)
+
+vectrex
+(29)
+
+vernus v110 pressure-sensitive floors
+(2)
+
+vga
+(4)
+
+vgm
+(12)
+
+vgm data capture
+(2)
+
+vibe coding
+(1)
+
+video
+(5)
+
+video editing
+(2)
+
+video rompler
+(1)
+
+video stills
+(2)
+
+video synthesis
+(21)
+
+videogames
+(31)
+
+videography
+(1)
+
+vine
+(1)
+
+visual arts
+(39)
+
+vj
+(40)
+
+vOPM
+(1)
+
+vox samples
+(1)
+
+wacom
+(4)
+
+water music
+(26)
+
+weather
+(1)
+
+web layer
+(2)
+
+webhook
+(1)
+
+wedding
+(4)
+
+weeklybeats
+(56)
+
+weeklyvids
+(15)
+
+whistling
+(1)
+
+wii
+(8)
+
+workshops
+(15)
+
+written things
+(4)
+
+ws2811
+(4)
+
+xbee
+(3)
+
+xiao
+(3)
+
+ym2413
+(20)
+
+zines
+(1)
+
+## Followers
+
+Share
+|
+
+## Tomczak-centric Links
+
+- arduino projects
+
+- chiptech projects
+
+- electronic music unit
+
+- flickr stream
+
+- milkcrate
+
+- music
+
+- youtube
+
+## Papers Etc
+
+- Affordable Physical Computing: A DIY Approach (ACMC 2006) (Paper and Presentation)
+
+- Authenticity and Emulation: Chiptune in the Early Twenty-first Century (ICMC 2008) (Paper and Presentation)
+
+- EPROM Music (ACMC2009) (Poster)
+
+- Handheld Console Comparisons: Lateral Consumer Machines as Musical Instruments (ACMC 2007) (Paper and Presentation)
+
+- Low Cost Physical Interfacing in Music Technology : Reasoning, Process and Realisation (2006) (Honours Thesis)
+
+- Worlds Colliding?: Traditional Japanese and Western Music in the cult anime film “Ghost In the Shell” (JSAA 2005) (Paper and Presentation)

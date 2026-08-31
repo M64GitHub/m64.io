@@ -1,0 +1,164 @@
+# Pain Perdu Hidden LSDJ Tricks EP6 - Fantastic Grooves and How to use them
+Channel: Pain Perdu (https://www.youtube.com/channel/UCiqCI92PN7oNhPvOu3fPuZA)
+URL: https://www.youtube.com/watch?v=s5wRxPao3IU
+Uploaded: 2016-11-30 · Duration: 27:56 · Views at fetch: 3914
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [s5wRxPao3IU.en-orig.vtt]
+
+## Description
+
+TIMESTAMPED TABLE OF CONTENTS BELOW
+
+FR : Des sous-titres viendront prochainement, n'hésitez pas à m'envoyer un message ou à commenter!
+ES : Se pueden solicitar subtitulos, enviadme un mensaje o un comment!
+
+Hey guys!
+Welcome to the 6th episode of our series.
+In this episode we're going to tackle the complex topic of Grooves.
+In my opinion LSDJ Grooves are one of the most powerful but also one of the most underappreciated features in the program. Let's see if we can shed some light on this fascinating topic.
+
+Thanks for watching!
+
+Don't hesitate to react in the comments if you've liked the video, or if you want us to explain a specific topic in more detail. You can also give us feedback, suggestions, and tell us which topics you'd like us to cover in the next episode!
+
+If you liked this video, please subscribe to this channel!
+You can also find us on
+- Facebook : https://www.facebook.com/painperdu8bit/?fref=ts
+- Soundcloud : https://soundcloud.com/pain-perdu
+- Twitter : @PainPerdu8bit
+- Instagram : @PainPerdu8bit
+
+Want to join an awesome and welcoming Chiptune FB group with over 5000 great people from all over the world?
+Look no further than Chiptunes=WIN!
+https://www.facebook.com/groups/chiptuneswin/?fref=ts
+
+===Table of contents===
+
+INTRODUCTION
+00:00 - Bleh
+
+THEORY: TEMPO AND GROOVES
+00:37 - Myth busting: The "Tempo" setting
+01:30 - What's a "'tick"?
+02:11 - Demonstration
+
+A CLOSER LOOK AT GROOVES
+03:04 - How Grooves work
+04:59 - Using the Groove Screen
+06:39 - Groove sync & keeping track of totals
+
+COMMON USES FOR GROOVES
+07:35 - Standard Groove, 3/3 Groove and Swing
+08:19 - Triplets and Sextuplets
+if 6/6 =＞4/4 ; if C/C =＞ 8/8, H always on step C
+
+NEW TECHNIQUES USING GROOVES
+10:13 - Using Grooves to control Table speed
+12:47 - Grooves are channel-independant
+13:59 - Out of tables? Use phrases for arps!
+
+OTHER PARAMETERES AFFECTED BY TICK SPEED AND THE "TEMPO" SETTING
+15:15 - Wav instrument cycles
+17:29 - Tempo/bpm limitations
+Using greater tick-per-step values reduces the max tempo/bpm cap - unless you overclock your GB somehow, which is possible
+
+18:53 - D command, Delay by xx ticks
+21:02 - R command, Retrigger every xx ticks, 00=1 tick
+
+CONCLUSION
+22:44 - Recap of techniques used
+24:12 - Secret technique challenge: 2 pulses in one ??
+27:25 - Thanks for watching!
+
+## Transcript
+[0:00] hey guys this is both from pump algae and welcome to the sixth episode of series hidden LSD G tips and tricks in this episode we're going to tackle a complex subject grooves fantastic grooves and how to use them now I apologize in advance this might be a little complicated a little wordy and this might be a long video so in order to streamline that I have taken notes I have made an illustrative save file and I will try to make a timestamp description so that you guys can navigate the video better and find the topics that most interest you but yeah
+
+[0:34] bear with me thanks for sticking out so far grooves in order to fully grasp the concepts and the powerfulness of grooves in anesthesia we need to debunk a little misconception when to bust a little myth tempo and I was DJ not tempo self with the tempo setting has nothing to do with bpm it should but turns out it doesn't and when you discover how this works on a technical level you are free to do
+
+[1:09] whatever you want and it gives you a better control the way you do it turns out that what actually governs the structure of your song is not the temp of setting its grooves what tempo does is it governs the clock speed and the tick rates that is to say what is it tick a tick is the lowest possible unit of time in a given LSD Jake projects that is to say it could be compared to the sample rate or the resolution of
+
+[1:43] your track picture for example a four-minute hourglass that would be your song a 4-minute song and a four-minute hourglass this hourglass would have grains of sand going down at a regular speed at a constant speed and these grains of sand would be ticks tempo says how fast they will fall but grooves say grooves will say how many of them will be in each note in order to demonstrate this I'm going to play a segment and keep the tempo
+
+[2:17] constant at 255 but change the grooves and this will allow me to slow down the tempo of the song the actual BPM make it faster and change the feel here goes here I'm making a Samba faster and slower here I'm faster and as I was I mention this one will speak
+
+[2:54] so nothing that said this is back to see just that it was okay so grooves what do they do how do they work what groups actually do according to what we've said is that they decide the number of ticks per step then I saw a phrase or a table the way you use it is with a G command put an NG command call the groove of your choice and set it however you want
+
+[3:29] the way I do it is for easier navigation groove one is one tick groove two is two ticks etc etc so that I know that if I'm in Group C I have seat X percent that means that this this is a phrase and these are steps these are not necessarily sixteenth notes this is not necessarily a bar according to your BPM this will be a bar only if your groove is six if your groove is C this can be half a bar if you're good if you if your
+
+[4:04] groove is three it could be two bars however you want to set it even be one of our and a half with with four but this is a bit complex let's see how this work how this works as I've said the master groove of any LSD J template is six six what that means is that each step of my phrase will last for six ticks okay so six six six six six six cetera
+
+[4:44] speed is constant with refine I could make it be a little faster etc another misconception is that you need two numbers you only need one if you want your B to be constants so six would be still six six six six six six six six would be the same six and six and six and six like so six six six six
+
+[5:21] six it actually wraps around but what you can also do and that a lot of people don't know about is that you can add numbers and and tell sdj to govern the speed of each and every step in your track now i'm purposefully making this weird groove so that you guys can see that actually sounds like Rufus what is that because I have 12 612 612 666 23
+
+[6:08] this is two long notes two short notes two long notes to four notes to long those two four notes and you could actually go completely crazy and put one six three four F a whatever but this wouldn't be very musical but if you want to make them to affect contemporary music and go crazy and make experimental stuff with grooms you totally can what I advise to do is to always keep track of
+
+[6:43] your total like for example this is in group 3 so 3 ticks per step my post one goes twice as fast as my way to work 1 2 3 but they have the same total in the end
+
+[7:15] because I have four phrases here and four and eight phrases there so you know in the at the end of the day they still sing together like so common other common uses of grooves are as I've said groove six in order to have exact sixteenth notes according to your tempo value groove three in order to have thirty-second
+
+[7:49] notes and faster phrases groove seven five or four eighths as I've shown you know those just to sing because this is a longer note on your shorter notes so these are the most common uses for groups but you could also make triplets if you wanted to like let's go back to
+
+[8:25] 265 this is in group c c means 12 so i have doubled the tempo and I've doubled the group so in the end I'm in the same BPM and this is in group 8 so 8 ticks per step so 8 8 8 8 8 and what I have is 12 times 16 12 times 16 senators and
+
+[9:05] here I have eight note triplets roommates so divide 12 by 3 that makes 4 and x 2 that makes 8 you also notice that here I have a hub command because in a ternary bars are not there aren't 16 notes there are 12 so 1 2 3 4 5 6 7 8 9 10 11 12 and here is where it helps so
+
+[9:45] this is exactly as long as this stay seasick what I haven't told you guys is that grooves also work in tables for example
+
+[10:21] here I have I have a table with an arc and I have a groove command in there by default tables run a tick one tick per step this is a bit too fast for me so what I'm going to do is put it in groove 2 which is set to be two ticks per step so this is one super step and let's make it twice as slow or even
+
+[11:02] slower that means that if you want to have if you want to control the speed of tables thanks to grooves you can shout out to Joe Toye from chiptune Belgium for showing me that tricks I had been using this old trick to make tables to make art table slower this is what I used to do and if I wanted to make a long art that actually took two tables to make
+
+[11:39] that was a bit of a hassle but thanks thanks to that trick I can now use half the space and control exactly how fast my tables go this is useful also offer percussion
+
+[12:19] for example because if you have a faster groove if you have a faster groove then you can add a lot more commons in a table in a shorter period of time so this this allows for greater control and this is something you use a lot of percussion to give it temporal effects what you need to know is that groove is channel independent this is really
+
+[12:53] important as I've said I can have this in Group C but I could have this in a special groove - let's use another example this is all in mercy twelve ticks per step but because I wants an ARP here and I'm not using a table for this one for visibility
+
+[13:27] purposes I have Group three here like I could have six I could have twelve and I could have three and as long as I keep my totals for phrases sixteen phrases that's all six together look how fast this is the advantage is that you have lured
+
+[14:02] phrases that you have tables so if you're like me and you overuse tables for Arps using grooves and phrases might be a better idea as I've said you can do triplets and this can also helps you make cool cuckoos this is intern Ari and this is
+
+[14:44] environment in my opinion this gives you far finer control than if you don't use grooves and only use tables which is still a very valid method but in my opinion harnessing the power of grooves is the key to a lot more control over whatever you do so we've seen that a resolution we've seen artisan phrases we've seen triplets and there are other things that grooves and tick speed
+
+[15:21] affect that you need to be aware of one of these things is the speed of wave cycles in wave instruments for example remember in my wave wave channel videos I had said that the speed setting of a wave instrument was measured in text well this is true if you're in 255 then the ticks will be a lot shorter and this will allow for very fast moving waves but this is also important if you want
+
+[16:12] to time your wave cycles with your with your beats for example here I mean guru C which was I have C takes per step if I put the speed to see it goes exactly as fast as my sixteenth notes this means I can have better control if my tempo is faster conversely
+
+[16:47] we can do exactly the same in a different group in a different tempo that be careful she no longer works here we need to go back to six because Michael is six but how that is useful is that with double tempo you will have a finer range of control over exactly how fast you
+
+[17:25] want to always just hike to cycle now the only downside I've seen with up being the tempo and using longer grooves is that it caps your tempo to 255 which is the double of 120 7.5 so if you want to use groove see your maximum tempo would be this but once again not
+
+[18:02] tightness if you want to have the fastest route possible so the fastest takes possible which means 255 and have your tempo go over 128 you just have to set your grooves accordingly here not exactly the same level of controls because I have less ticks per steps and calculations are not the same
+
+[18:35] because now I have ten but still I mean I can go over the tempo cap and still have a lot more control than in group six so this is useful in my opinion another thing that tick speed governs and that you should be aware of is D commands and arguments if I'm in 125 group 6 so standard tempo standard
+
+[19:14] groove and I use D commands I can use this to swing just in one second just in one phrase what de commands do is they delay a given notes by X text so d2 will delay this note by two ticks as opposed to this I can actually swing it but what if I'm not exactly satisfied with the
+
+[19:47] speed of my swing this is not not enough and this is too much let's say this is the case well what I can do is double the tempo or make it however faster you want use along the groove and then I will have twice as much control double resolution so you speak so this is without any swing and now I can adjust exactly how we want barely perceptible
+
+[20:25] with soluti this is nice but still not enough this is too much and this is exactly why that what I want well this exact setting would be inaccessible in group 6 because delay by one tick in group six would be exactly like daily delaying by two ticks in
+
+[20:57] Group C I hope this is clear if it's not I apologize and the other command that is governed by tick length is our what our does let's do the exact same thing what our does is takes a note and our re triggers it's by X takes zero being one so be careful with our count so if you want makeshift triplets and you don't
+
+[21:40] want to like cut your phrases into two and use a custom groove you can always use the arc command I mean it is useful if you want to like optimize etc etc but what if I want more control over this what if this is too fast but this is not fast enough what I can do is the same double the
+
+[22:12] tempo then use an auto command and I will have double the resolution because ticks will be shorter all right it becomes so fast that you can actually use timbrel effects on those instruments if you want cetera et cetera so more control over whatever you do in my opinion now I think I have covered kind of everything
+
+[22:48] I wanted to cover I hope this was clear enough for you guys I'm going to show you a little pallet of what I do with grooves so as you said as you as you've seen I can have finer percussion tables I can have arcs that go at different speeds
+
+[23:27] and Weiser I can have triplets and I can have basically whatever
+
+[24:06] control I want over the speed of anything and now the little surprise I want to show you guys is that thanks to grooves and also effects to a collects who showed me this wonderful technique super powerful I can actually give the illusion of layering to melodies into one so to speak I'm not going to show you exactly how I did it because this trick is first off not like to give away and secondly because I want you guys to
+
+[24:41] try and figure it out for yourself so it'll be a good exercise and according to all that I've said today I'm sure you will have the clues the necessary clues to to find out how I did it I'm going to play this sequence and you will find that these two pulses sounds like some like they have a lot more going on now if you pay attention this is a
+
+[25:23] standard art it's already pretty full sounds pretty cool already and this is what's most interesting so I have a staccato layered onto a lead and I will
+
+[26:04] challenge you guys to try and figure out how I did this is not that complicated especially if you now hopefully grasped how powerful groups can be and how to harness them which is the aim of this video basically and basically what I try to do because I still can't bring myself to use two LS DJ it's too complicated for me there's too much room for sound design and there's too much to consider but this in turn challenges me to find
+
+[26:40] crazy tricks and and try to cram as much information as possible into one channel and this is exactly what I've managed to do thanks to acrylics and his wonderful two pulses in one trick now this might not exactly be what you're looking for and you might wanna do things differently but this is how I work and this is what I'm trying to fill you guys ways of pushing limitations and bending the chip to your will I think that's
+
+[27:16] most of the fun of writing music with game boys is this I hope you're having fun I hope you're having more fun thanks to my videos and I hope to see you in the next one thanks for watching please react in the comments if you have appreciated this video give us a like give us a subscribe tell us what you've liked tell us what you have in store don't hesitate to comment and I will rescue you I will come to your rescue you can find us on Facebook and pump-out you and there will be I will always be glad to point you in
+
+[27:49] the right direction and help you find what you need thanks for watching and see you next time

@@ -1,0 +1,1537 @@
+skip to main |
+skip to sidebar
+
+## Thursday, December 10, 2009
+
+###
+Let's Tune the Game Boy Like a Japanese Koto
+
+Someone asked me to tune the Game Boy LSDJ ROM like a Japanese Koto. Sure, I said. The scale that this individual requested was the Hirajoshi 2 scale, which is a pentatonic scale made up of the following ratios above a fundamental frequency that is considered to be 1/1:
+
+• 9/8
+• 6/5
+• 3/2
+• 8/5
+• 2/1
+
+I've tuned the entire ROM to an A as a tonic note. The process was very similar to previous cases of retuning LSDJ for other purposes. I worked using a spreadsheet, which had the ratios and then calculated the frequencies for each note. Then, the data needed for the Game Boy to generate that frequency was calculated, and converted into hex. Finally, this block of hex tuning data was copied into the LSDJ ROM using a hex editor.
+
+If anyone wants to see the spreadsheet or would like more details, please let me know.
+
+Share
+|
+
+Posted by
+Sebastian Tomczak
+
+at
+10:33 AM
+
+Labels:
+chipmusic,
+chiptech,
+game boy,
+tuning
+
+####
+3
+comments:
+
+Unknown
+said...
+
+I love the novation programing! I especially like the ripple effect. Also from an audio standpoint I love the sega mega sounds sounds you have. keep up the good bending and thanks for the how to on the post below.
+James
+www.illuminatedsounds.com
+
+12/11/2009 3:59 AM
+
+T-FR
+said...
+
+I am trying to write in an indian scale. So far I have edited a few open source PC synths to get it to work but I'd like to try LSDJ too.
+
+I found the right chunk of hex in the rom but I thought you might be able to save me some time before I try to figure it out. What format is it in and what note does it start with?
+
+Thanks,
+
+12/13/2009 6:57 AM
+
+newbie
+said...
+
+Awesome blog! I would like to know how exactly you calculate tune the lsdj into a koto. It is amazing! Could you maybe one day make a video tutorial or something like that cuz I'm stupid just can't get it?
+
+11/17/2011 8:56 PM
+
+Post a Comment
+
+Newer Post
+
+Older Post
+
+Home
+
+Subscribe to:
+Post Comments (Atom)
+
+## About Me
+
+Australia
+
+View my complete profile
+
+## Blog Archive
+
+Blog Archive
+May 2026 (1)
+Jun 2025 (4)
+Apr 2025 (1)
+Oct 2024 (1)
+Mar 2024 (1)
+Feb 2024 (1)
+Nov 2023 (9)
+Aug 2023 (1)
+May 2023 (1)
+Apr 2023 (5)
+Mar 2023 (6)
+Feb 2023 (3)
+Jan 2023 (18)
+Dec 2022 (1)
+Jun 2022 (2)
+Jul 2021 (2)
+Jun 2021 (6)
+May 2021 (3)
+Apr 2021 (12)
+Jan 2021 (1)
+Jul 2020 (3)
+Jun 2020 (5)
+May 2020 (8)
+Apr 2020 (1)
+Feb 2020 (1)
+Sep 2019 (1)
+Aug 2019 (1)
+Apr 2019 (1)
+Mar 2019 (2)
+Feb 2019 (6)
+Jan 2019 (4)
+Dec 2018 (3)
+Nov 2018 (2)
+Oct 2018 (2)
+Sep 2018 (2)
+Aug 2018 (1)
+Jul 2018 (1)
+Jun 2018 (4)
+May 2018 (2)
+Apr 2018 (1)
+Mar 2018 (4)
+Feb 2018 (4)
+Jan 2018 (4)
+Dec 2017 (1)
+Nov 2017 (8)
+Oct 2017 (6)
+Sep 2017 (8)
+Aug 2017 (12)
+Jul 2017 (5)
+Jun 2017 (5)
+May 2017 (13)
+Apr 2017 (7)
+Mar 2017 (26)
+Feb 2017 (5)
+Jan 2017 (19)
+Dec 2016 (26)
+Nov 2016 (21)
+Oct 2016 (2)
+Sep 2016 (11)
+Aug 2016 (33)
+Jul 2016 (15)
+Jun 2016 (14)
+May 2016 (14)
+Mar 2016 (4)
+Feb 2016 (6)
+Jan 2016 (6)
+Dec 2015 (20)
+Nov 2015 (58)
+Oct 2015 (34)
+Sep 2015 (4)
+Aug 2015 (22)
+Jul 2015 (33)
+Jun 2015 (16)
+May 2015 (16)
+Apr 2015 (12)
+Mar 2015 (27)
+Feb 2015 (1)
+Dec 2014 (1)
+Nov 2014 (3)
+Oct 2014 (28)
+Sep 2014 (26)
+Aug 2014 (30)
+Jul 2014 (6)
+Jun 2014 (14)
+May 2014 (33)
+Apr 2014 (51)
+Mar 2014 (16)
+Feb 2014 (17)
+Jan 2014 (22)
+Dec 2013 (65)
+Nov 2013 (40)
+Oct 2013 (19)
+Sep 2013 (6)
+Aug 2013 (17)
+Jul 2013 (8)
+Jun 2013 (8)
+May 2013 (41)
+Apr 2013 (20)
+Mar 2013 (55)
+Feb 2013 (55)
+Jan 2013 (59)
+Dec 2012 (39)
+Nov 2012 (7)
+Oct 2012 (77)
+Sep 2012 (29)
+Aug 2012 (8)
+Jul 2012 (12)
+Jun 2012 (14)
+May 2012 (17)
+Apr 2012 (18)
+Mar 2012 (16)
+Feb 2012 (12)
+Jan 2012 (18)
+Dec 2011 (13)
+Nov 2011 (10)
+Oct 2011 (19)
+Sep 2011 (21)
+Aug 2011 (16)
+Jul 2011 (11)
+Jun 2011 (15)
+May 2011 (11)
+Apr 2011 (12)
+Mar 2011 (6)
+Feb 2011 (1)
+Jan 2011 (3)
+Dec 2010 (13)
+Nov 2010 (13)
+Oct 2010 (4)
+Sep 2010 (20)
+Aug 2010 (3)
+Jul 2010 (2)
+Jun 2010 (15)
+May 2010 (10)
+Apr 2010 (25)
+Mar 2010 (25)
+Feb 2010 (23)
+Jan 2010 (24)
+Dec 2009 (51)
+Nov 2009 (17)
+Oct 2009 (32)
+Sep 2009 (27)
+Aug 2009 (25)
+Jul 2009 (36)
+Jun 2009 (33)
+May 2009 (39)
+Apr 2009 (39)
+Mar 2009 (46)
+Feb 2009 (22)
+Jan 2009 (14)
+Dec 2008 (22)
+Nov 2008 (35)
+Oct 2008 (25)
+Sep 2008 (35)
+Aug 2008 (24)
+Jul 2008 (26)
+Jun 2008 (23)
+May 2008 (39)
+Apr 2008 (19)
+Mar 2008 (10)
+Feb 2008 (27)
+Jan 2008 (45)
+Dec 2007 (36)
+Nov 2007 (34)
+Oct 2007 (14)
+Sep 2007 (18)
+Aug 2007 (19)
+Jul 2007 (22)
+Jun 2007 (18)
+May 2007 (20)
+Apr 2007 (11)
+Mar 2007 (18)
+Feb 2007 (2)
+Jan 2007 (12)
+Dec 2006 (11)
+Nov 2006 (4)
+Oct 2006 (2)
+Sep 2006 (3)
+Aug 2006 (4)
+Jul 2006 (7)
+Jun 2006 (9)
+May 2006 (13)
+Apr 2006 (21)
+Mar 2006 (24)
+
+## Labels
+
+Select a label
+1-bit music
+(2)
+
+12eps.com
+(5)
+
+16x9gifs
+(6)
+
+3bit Music
+(3)
+
+3d printing
+(19)
+
+82bpm
+(1)
+
+a
+(1)
+
+A_SID
+(2)
+
+A26F
+(4)
+
+ableton audio effects rack
+(6)
+
+ableton live
+(471)
+
+ableton live control surface scripts
+(1)
+
+ableton live user group
+(1)
+
+AFUM
+(7)
+
+ai
+(1)
+
+air quality
+(1)
+
+airhorn
+(1)
+
+ambisonics
+(1)
+
+amiibo
+(2)
+
+analog electronics
+(2)
+
+analog synthesis
+(6)
+
+android
+(5)
+
+animals
+(3)
+
+anti laptop music
+(8)
+
+arduino
+(222)
+
+arduino libraries
+(4)
+
+arduino sound
+(12)
+
+artnet
+(9)
+
+aruco
+(1)
+
+astrophotography
+(6)
+
+atari 2600
+(49)
+
+atem
+(2)
+
+attiny45
+(2)
+
+audio library
+(4)
+
+audio to midi
+(1)
+
+audiomulch
+(2)
+
+ay38912
+(1)
+
+beap
+(3)
+
+beap basics
+(3)
+
+beatmaker
+(1)
+
+beeper
+(6)
+
+bidule
+(6)
+
+bidule basics
+(5)
+
+biohacking
+(3)
+
+biological digital
+(4)
+
+bitwig
+(1)
+
+black midi
+(4)
+
+ble
+(1)
+
+bleak pizza
+(1)
+
+bodymod
+(1)
+
+bom
+(1)
+
+books
+(1)
+
+bouncy ball
+(1)
+
+breadboard basics
+(4)
+
+buoy music
+(1)
+
+capacitance sensing
+(3)
+
+cello
+(2)
+
+charity
+(2)
+
+chipmusic
+(668)
+
+chiptech
+(260)
+
+chiptune array
+(1)
+
+circuit bending
+(48)
+
+circuit bending basics
+(11)
+
+climate
+(1)
+
+clouds
+(1)
+
+cmc-pd
+(1)
+
+cmos
+(5)
+
+cognitive
+(1)
+
+collabs
+(57)
+
+commodore 64
+(9)
+
+competitions
+(5)
+
+compilations
+(48)
+
+computer vision
+(6)
+
+computers
+(2)
+
+control voltage and gate
+(2)
+
+convolution
+(17)
+
+cool stuff by other people
+(72)
+
+covers
+(3)
+
+cross modal modulation
+(1)
+
+crowdfunding
+(1)
+
+cryptography
+(1)
+
+crystals
+(1)
+
+daily january 2013
+(2)
+
+data bending
+(2)
+
+data moshing
+(2)
+
+data protocols
+(4)
+
+demo
+(1)
+
+destruction
+(1)
+
+digital feedback
+(17)
+
+digital manipulation
+(141)
+
+din sync
+(1)
+
+dither
+(4)
+
+diy
+(27)
+
+diy stuff
+(223)
+
+dmx
+(7)
+
+dnb
+(1)
+
+donk
+(3)
+
+dorkbot
+(17)
+
+drowning goldfish
+(6)
+
+duane's world!!!
+(1)
+
+ecology
+(2)
+
+electromagnetic induction recordings
+(5)
+
+emulation
+(4)
+
+encapsulation
+(1)
+
+eprom music
+(10)
+
+erit satis
+(1)
+
+esp32
+(2)
+
+esp8266
+(3)
+
+ethnomusicology
+(1)
+
+eurorack
+(45)
+
+excel
+(1)
+
+exo sequencer
+(1)
+
+experimental circuits
+(1)
+
+experimentation
+(1)
+
+exs 24
+(1)
+
+extrafile
+(1)
+
+f1
+(2)
+
+fakebit
+(5)
+
+fashion
+(14)
+
+feedback
+(11)
+
+field drop
+(12)
+
+field recordings
+(33)
+
+fingerless
+(2)
+
+flash music
+(4)
+
+flex sensor
+(1)
+
+fonts
+(6)
+
+food
+(4)
+
+footdrag
+(16)
+
+footwork
+(6)
+
+force sensor
+(1)
+
+fun with sea moss
+(5)
+
+fundraising
+(1)
+
+future
+(3)
+
+game boy
+(27)
+
+game sound
+(13)
+
+gameboy advance
+(9)
+
+gamecube
+(8)
+
+GameSalad
+(4)
+
+gear
+(1)
+
+gen~
+(7)
+
+gender
+(1)
+
+genmdm firmware
+(8)
+
+genmdm tutorials
+(14)
+
+geophone
+(1)
+
+gig photography
+(2)
+
+gigs
+(133)
+
+github
+(3)
+
+glitch
+(32)
+
+gpt
+(1)
+
+granulation
+(1)
+
+grid controllers
+(12)
+
+HID
+(6)
+
+hidden sounds
+(1)
+
+hidden village
+(57)
+
+homeassistant
+(1)
+
+homemade drum machine
+(3)
+
+house
+(1)
+
+hui
+(1)
+
+humour
+(39)
+
+immersive audio
+(1)
+
+implant
+(1)
+
+impulse response packs
+(13)
+
+installations
+(4)
+
+intensity shuttle
+(1)
+
+internet
+(2)
+
+interwebs
+(2)
+
+ios
+(6)
+
+iot
+(1)
+
+ipad
+(11)
+
+iphone
+(10)
+
+isight
+(1)
+
+jamming
+(1)
+
+jazz
+(1)
+
+jitter
+(1)
+
+jus chillin with little-scale
+(5)
+
+kaleidoscope
+(1)
+
+kicad
+(1)
+
+kira the cat
+(1)
+
+landscapes
+(1)
+
+lauren's stuff
+(10)
+
+laying of hands
+(3)
+
+lazerscale2010
+(17)
+
+lenses
+(7)
+
+let's listen
+(4)
+
+let's make
+(1)
+
+light
+(1)
+
+lightroom
+(1)
+
+link
+(4)
+
+little-scale
+(314)
+
+live below the line
+(1)
+
+live impulse presets
+(1)
+
+LiveDrummer
+(1)
+
+logic
+(10)
+
+low fidelity
+(1)
+
+low light photography
+(11)
+
+lsdj
+(2)
+
+lumen
+(3)
+
+m8 headless
+(4)
+
+m8 tracker
+(4)
+
+machine learning
+(4)
+
+macro
+(1)
+
+magnetometer
+(1)
+
+maker faire
+(1)
+
+mashtactic
+(3)
+
+massive
+(1)
+
+maths
+(9)
+
+max for live
+(330)
+
+max for live basics
+(6)
+
+max for live snippets
+(4)
+
+max/msp
+(309)
+
+MCP4922
+(7)
+
+mediapipe
+(5)
+
+mega drive sound comparison
+(1)
+
+memes
+(1)
+
+mentorship
+(2)
+
+merch
+(1)
+
+meta
+(13)
+
+microphones
+(1)
+
+MIDI
+(25)
+
+milkcrate
+(78)
+
+mini tutorial series
+(1)
+
+mira
+(11)
+
+misc musical stuff
+(64)
+
+mixcloud
+(4)
+
+mixtapes
+(7)
+
+mobile phones
+(5)
+
+modular
+(69)
+
+modular sequencing
+(13)
+
+moire
+(1)
+
+molecular code
+(8)
+
+monotron
+(4)
+
+mother-32
+(4)
+
+motion
+(1)
+
+multichannel audio
+(1)
+
+myriad
+(2)
+
+nanoloop
+(15)
+
+nature
+(14)
+
+neopixel
+(4)
+
+NES
+(2)
+
+new me-ism
+(10)
+
+nfc
+(1)
+
+ninjam
+(1)
+
+nintendo ds
+(4)
+
+no input
+(25)
+
+noise
+(7)
+
+non haptic
+(1)
+
+nrf52840
+(1)
+
+o against i
+(1)
+
+oled
+(1)
+
+one hour remix challenge
+(2)
+
+onebutton
+(1)
+
+onehander
+(2)
+
+open gl
+(1)
+
+opencv
+(1)
+
+osc
+(15)
+
+osculator
+(4)
+
+other
+(224)
+
+panning
+(2)
+
+patch anatomy
+(2)
+
+path
+(5)
+
+pathMIDI
+(3)
+
+patterning
+(2)
+
+PD
+(2)
+
+permutations and sets
+(7)
+
+photography
+(44)
+
+photography field testing
+(1)
+
+physical control
+(72)
+
+physical digital
+(33)
+
+picaxe
+(16)
+
+picture2midi
+(2)
+
+pictures of buildings
+(16)
+
+ping
+(6)
+
+pitchmap
+(1)
+
+pixel point
+(21)
+
+pixel sorting
+(1)
+
+plants
+(2)
+
+plugins
+(9)
+
+PO-12
+(5)
+
+PO-20
+(1)
+
+pocket operator
+(9)
+
+pokey
+(10)
+
+politics
+(5)
+
+pozible
+(1)
+
+printer stuff
+(9)
+
+processing
+(4)
+
+project data
+(14)
+
+protools
+(3)
+
+push
+(9)
+
+python
+(1)
+
+qr code
+(1)
+
+quadrophonic
+(1)
+
+quick tips
+(1)
+
+QuickTime
+(1)
+
+radiation
+(4)
+
+ram music
+(1)
+
+raspberry pi
+(5)
+
+reconstruction
+(1)
+
+red board tutorials
+(3)
+
+remixing
+(42)
+
+resolume
+(62)
+
+resolume tutorial
+(5)
+
+resynthesis
+(5)
+
+reverberate software
+(6)
+
+reviews
+(18)
+
+rfid
+(4)
+
+rnbo
+(3)
+
+rss feeds and podcasts
+(1)
+
+SAA 1099
+(3)
+
+sample sets
+(40)
+
+samsung galaxy s4
+(4)
+
+sausage fattener
+(1)
+
+SAWA
+(1)
+
+saxophone
+(2)
+
+scores
+(3)
+
+screencast
+(4)
+
+sd card
+(1)
+
+sdi monitor waveform image
+(1)
+
+seapunk
+(9)
+
+secret handshake
+(2)
+
+sega game gear
+(15)
+
+sega master system
+(89)
+
+sega mega drive / genesis
+(92)
+
+sega nomad
+(18)
+
+servo motor
+(1)
+
+shameless publicity
+(162)
+
+shortest sample
+(1)
+
+simpsonwave
+(1)
+
+smsm
+(4)
+
+sn76489
+(30)
+
+solar panel
+(1)
+
+solenoid
+(1)
+
+solstice mix
+(2)
+
+sonification
+(2)
+
+sound font
+(2)
+
+soundfont
+(1)
+
+space designer
+(5)
+
+sparkler
+(1)
+
+speech synthesis
+(2)
+
+spi
+(6)
+
+stealing art
+(2)
+
+streaming
+(9)
+
+stretch
+(3)
+
+studio hardware and infrastructure
+(8)
+
+studio software
+(1)
+
+study
+(31)
+
+super buddies
+(3)
+
+super slow startup sounds
+(4)
+
+supercollider
+(1)
+
+surround sound
+(2)
+
+sync
+(22)
+
+syphon
+(2)
+
+tape stuff
+(4)
+
+teaching
+(20)
+
+techfest 2009
+(1)
+
+teensy
+(159)
+
+teensy 3.6 basics
+(19)
+
+teensy 4.1
+(9)
+
+teensy basics
+(8)
+
+television
+(1)
+
+three.js
+(1)
+
+timelapse
+(1)
+
+tomczak sr
+(6)
+
+touchosc
+(8)
+
+toys
+(1)
+
+trail
+(9)
+
+traktor
+(3)
+
+translations
+(2)
+
+travel
+(17)
+
+tumblr
+(1)
+
+tuning
+(13)
+
+twitch
+(7)
+
+ukulele
+(3)
+
+Unity
+(7)
+
+useless
+(1)
+
+vdmx
+(1)
+
+vectrex
+(29)
+
+vernus v110 pressure-sensitive floors
+(2)
+
+vga
+(4)
+
+vgm
+(12)
+
+vgm data capture
+(2)
+
+vibe coding
+(1)
+
+video
+(5)
+
+video editing
+(2)
+
+video rompler
+(1)
+
+video stills
+(2)
+
+video synthesis
+(21)
+
+videogames
+(31)
+
+videography
+(1)
+
+vine
+(1)
+
+visual arts
+(39)
+
+vj
+(40)
+
+vOPM
+(1)
+
+vox samples
+(1)
+
+wacom
+(4)
+
+water music
+(26)
+
+weather
+(1)
+
+web layer
+(2)
+
+webhook
+(1)
+
+wedding
+(4)
+
+weeklybeats
+(56)
+
+weeklyvids
+(15)
+
+whistling
+(1)
+
+wii
+(8)
+
+workshops
+(15)
+
+written things
+(4)
+
+ws2811
+(4)
+
+xbee
+(3)
+
+xiao
+(3)
+
+ym2413
+(20)
+
+zines
+(1)
+
+## Followers
+
+Share
+|
+
+## Tomczak-centric Links
+
+- arduino projects
+
+- chiptech projects
+
+- electronic music unit
+
+- flickr stream
+
+- milkcrate
+
+- music
+
+- youtube
+
+## Papers Etc
+
+- Affordable Physical Computing: A DIY Approach (ACMC 2006) (Paper and Presentation)
+
+- Authenticity and Emulation: Chiptune in the Early Twenty-first Century (ICMC 2008) (Paper and Presentation)
+
+- EPROM Music (ACMC2009) (Poster)
+
+- Handheld Console Comparisons: Lateral Consumer Machines as Musical Instruments (ACMC 2007) (Paper and Presentation)
+
+- Low Cost Physical Interfacing in Music Technology : Reasoning, Process and Realisation (2006) (Honours Thesis)
+
+- Worlds Colliding?: Traditional Japanese and Western Music in the cult anime film “Ghost In the Shell” (JSAA 2005) (Paper and Presentation)

@@ -1,0 +1,64 @@
+RAW: chipmusic.org forum thread "Wav Instrument Tutorials for LSDJ" | https://chipmusic.org/forums/topic/14721/wav-instrument-tutorials-for-lsdj/ | 12 posts, 2014-07-08 to 2014-07-11, one page | fetched 2026-08-31 with a browser user agent | post text extracted with tools/extract-forum-posts.py; images and signatures not included
+
+----- post 1 · Jul 8, 2014 4:51 am · baudtack -----
+I'm looking for good wav instrument tutorials so I can start to figure out how to go about creating specific sounds I'm looking for.
+
+Specifically I want to create a flute wave instrument, but all the tutorials I find are just about kick drums and snares.
+
+Does anyone know of any tutorials for other wav instruments or have any tips about how  to go about figuring out how to make instruments that imitate orchestra parts?
+
+----- post 2 · Jul 8, 2014 7:56 am · Victory Road -----
+a flute sound would be pretty close to a sine/triangle wave, maybe with a couple notches in it for some extra harmonics. i would make the first frame of the synth quite a bit louder than the rest and set the play mode to manual, then place a F01 command on the first tick of the instrument table; this way you can imitate tonguing and slurring in the phrases by removing the instrument number from notes that you want slurred.
+
+you could also use the third frame of the synth with a slightly different volume and shape, then alternate quickly between the second and third frames with F commands inside a new table to imitate flutter tonguing (F01 to move ahead, FFF to move back) - you can then activate this new table inside a phrase using an A command. using a variety of vibrato speeds
+
+(Vxx commands) will also help make a flutey tone sound more convincing. it's all about articulation, really. LSDJ is really good for flutey articulation though!
+
+Last edited by Victory Road (Jul 8, 2014 8:01 am)
+
+----- post 3 · Jul 8, 2014 5:53 pm · shanebro -----
+Roboctopus has done a few.. I don't have the links on hand, but yeah.
+
+----- post 4 · Jul 8, 2014 5:59 pm · Fudgers -----
+if you want to go nuts with it layering some very quiet noise with like a slow decay might be cool
+
+----- post 5 · Jul 9, 2014 6:30 am · TylerBarnes -----
+Triangle or sine variants for the main voice, as stated before. You can make some frames with mostly noise bursts to simulate the attack phase of a musician blowing into the flute. maybe creating a table that will take care of the frame switching/looping. Vibrato and tasteful volume modulation will be very important for emulating a flute.
+
+----- post 6 · Jul 9, 2014 7:24 am · baudtack -----
+Hrm... Thanks for the tips but i think h this may be more ambitious than i thought.
+
+Any recommendations for tutorials that get more in depth into wav instruments? Preferably ones that assume I'm clueless.
+
+----- post 7 · Jul 9, 2014 3:26 pm · an0va -----
+The best response I can come up with to this thread is to not worry about trying to emulate other instruments too much in LSDJ, you'll always get disappointed (and other people will only hear "8bit" anyway). Instead, try to embrace the timbres and come up with wacky crazy sounds through trial and error - you'll have a lot more fun with happy accidents than trying to make a specific thing and failing at it
+
+WAV sound design for me goes like this: Start with sine or a thick square so you have a lot of bass - then mess with parameters and chip away at the bass frequencies until you get something you like. It's like ice sculptures then - you're starting with a big block and then chipping (pun intended) away until you get something really nice and unique to your own sound!
+
+Last edited by an0va (Jul 9, 2014 3:26 pm)
+
+----- post 8 · Jul 9, 2014 5:42 pm · baudtack -----
+Yeah. Probably a good plan Stupid question, which are the bass frequencies? The 00 end of 00-0F?
+
+----- post 9 · Jul 9, 2014 6:13 pm · an0va -----
+That's not a stupid question at all! I think that confused me too.
+
+If I remember correctly you're right, the 00 end is the bass frequencies. This explains why when you switch to a High Pass Filter in the Synth screen that the sound cuts out - the default value is FF, which means that the cutoff is happening at the highest point (i.e. - all frequencies are being cutoff but the highest possible ones, so you might not hear anything unless you are a dog and can hear those high notes  )
+
+----- post 10 · Jul 10, 2014 8:56 pm · roboctopus -----
+I wrote a series of articles on the WAV channel. They were on noisechannel.org which seems to be dying. I'm slowly porting them over to my tumblr if you want to take a look at them:
+
+http://roboctopus-8bit.tumblr.com/
+
+----- post 11 · Jul 10, 2014 9:00 pm · baudtack -----
+Thanks. I had been reading them on tumblr and just found the rest on the other site.
+
+----- post 12 · Jul 11, 2014 5:06 am · JANX -----
+roboctopus wrote:
+
+> I wrote a series of articles on the WAV channel. They were on noisechannel.org which seems to be dying. I'm slowly porting them over to my tumblr if you want to take a look at them:
+
+> http://roboctopus-8bit.tumblr.com/
+
+Thank you based Robo!!!
+

@@ -1,0 +1,158 @@
+# LSDj Noise Channel Tutorial (v9.2.L)
+Channel: DEFENSE MECHANISM (https://www.youtube.com/channel/UCApkR1dVSaKCbwRyPs8_yTg)
+URL: https://www.youtube.com/watch?v=EHUKxgbDQzM
+Uploaded: 2022-06-05 · Duration: 37:16 · Views at fetch: 6449
+Fetched: 2026-08-31 with yt-dlp 2026.08.19
+Captions: AUTO-GENERATED (machine transcript — numbers, hex values and command names are UNVERIFIED) [EHUKxgbDQzM.en-orig.vtt] · spoken language: en
+
+## Description
+
+My website: https://defensemech.com
+My Game Boy music: https://defensemechanism.bandcamp.com
+Support me:
+https://patreon.com/defensem3ch
+https://paypal.me/defensem3ch
+https://venmo.com/defensem3ch
+https://ko-fi.com/defensem3ch
+
+Timestamps:
+0:00 Intro
+1:10 Noise notes
+4:19 Noise commands
+8:01 Noise instrument settings
+17:40 Noise snare design
+21:26 Noise hi-hat design
+28:03 Noise kick design
+33:46 R8x fast retrig
+34:46 Noise clap design
+
+## Transcript
+[0:02] hey everybody it's defense mac um back with another lsdj tutorial this one's maybe been a long time coming um i got a lot of questions about the noise channel because um it works pretty differently in the latest stable version of lsdj92l but i felt it was worth talking about because there's a tutorial by bowie meets robot and about the noise channel for version four and it's really good he spends
+
+[0:35] um maybe 25 minutes kind of talking about the different uh sound design for all of the noise instruments he uses but it doesn't really apply to the new noise channel because it's been just totally revamped um so for anybody who's kind of getting into lsdj version nine i hope this will be kind of a helpful introduction to the noise channel and maybe if you already know some some of the new noise channel maybe um there will be some new tricks in here um or maybe not either way um hopefully this will be helpful so let's get right
+
+[1:07] into it um first things first i think we have to talk about the notes so um i mean actually first off the default note for the noise channel is actually something that's kind of usable granted you know the the decay on this is maybe a little uh a little much so um not gonna spend a lot of time yet on these instrument parameters but i am just gonna kind of adjust this so that we can hear okay it's just a little bit shorter note
+
+[1:39] so um the first mode of the noise channel is this long loop mode or the sort of noisy mode where it sounds it's more or less like white noise and these are represented by these numbers um of the noi noise shape so the default is 30 and we can go basically from 0 to about 37 or 38 yeah 30 no up a little higher okay 3b so
+
+[2:13] that's what we've got here um so and yeah it goes all the way down to zero so we've got that many noise shapes and you can keep going if you go uh if you go up and down it will kind of shift you by octaves and if you continue past these numbers in either direction you'll start getting into the pitched noise or the short loop mode so you've got c minus four
+
+[2:47] and you can go through and these actually will display the note name um it's not exact pitch it just is the closest note in pitch to uh what the noise sound is [Music] so these are the pitches that we have and like i said going up and down will take you by octave so uh you don't have to use the s command anymore
+
+[3:20] even though i'm sort of getting ahead of myself um [Music] to change the shape uh you've got a perfect a lot of perfectly good options and and you might also notice um okay so some of these lower noises don't really give a whole lot of real character right they're just kind of just i mean literally noisy almost like static or something like that and then you kind of get into a little crunchier territory once you start you know getting up into these
+
+[3:53] about 20. so another thing you'll notice is the pitches are arranged in order of lowest to highest didn't used to be the case um but now it is so that's very nice um makes you know choosing uh descending you know progression a lot easier to create um the next thing and this might uh warrant a little bit longer envelope so let me just extend this a little bit
+
+[4:25] is to talk about some of the commands so um you know you've got your noise table we'll kind of come to that here uh you've got your maybe this is pretty standard across all channels that's just the probability of whether this note will play or not we've got some chords now one of the interesting things is that this actually works in the noise channel now so if i want to make an arpeggio that goes up
+
+[4:59] can actually do this by going up to one and then two so it will play f and then it will play yeah so you can actually get arpeggios in the noise channel um you could try you know it's kind of like an open fifth [Music] so pretty cool um that's the chord command d delay note that's pretty standard um volume envelope pretty much the same
+
+[5:33] g set groove h is hop k is kill note m as master volume etc these are pretty standard but the the pitch bend command now can also be used in the noise channel this has been the case for a while but i'm sort of speaking uh for people who you know may not have checked out any of the new versions for years and uh are looking into this for the first time so the you can actually do smooth pitch sweeps in the noise channel um and likewise you can go downward
+
+[6:12] and uh higher or lower values will kind of cause even crazier sounds so that's pretty cool likewise the the c command can actually kind of do some crazy stuff in this realm too so you can do like some quick kind of shape toggling um without even using a table
+
+[6:44] and you can even sort of combine these so let's skip to the v command so you can actually do vibrato um you've got your speed and depth like like usual and then you can yeah you can combine these so if you want to do this kind of with a vibrato but sliding downwards uh could probably go more dramatically [Music] so yeah these are um just some of the
+
+[7:22] craziest things you can do you've also got your s command now of course you know you can see that the shape that's playing over here on the right right so you can do this um i don't necessarily find a ton of use for the s command anymore but it is kind of cool to chain it to the z command so um you can do something like this to get a bunch of different random shapes uh or go even crazier um so that can be kind of nifty um
+
+[8:01] let's move on to talk a little bit about the instrument parameters okay so you've got your name not a big deal the envelope the envelope is great because it allows you to get really really quick transients and i find that transients are really great for shaping noise instruments so if you just want like a little click or pop you can get that with this um
+
+[8:33] and then you can go really quickly down to you know a lower volume so and even though it might not sound like much and you can certainly bump this up it just kind of helps it stick out and so i like to do this um i like to kind of start it up maybe around six or seven and then kind of get down to like five or four something like that or eight and it's you can kind of really hear it
+
+[9:06] here right so if we just kind of now compare that to if i just had this at five to me it makes a very big difference and and this the volume of this um can sort of come down a little bit and so if you have something like a snare or a hi-hat or really anything that you want to just have that extra pop but then get out of the way
+
+[9:37] it's almost like having a compressor on it because it allows you to get this really you know quick transient i mean it could certainly go even louder this envelope gives a lot of flexibility and it's nice that we've got this visualizer here just allowing a lot of control and you can even go back up or something like this is something
+
+[10:15] like you could even have it duck and then to like immediately duck and get out of the way and then come back like uh that's pretty crazy so i like that a lot um and i find it to be really helpful um for making the noise channel just pop that much more let's move on of course output is left channel or right channel or off entirely um not much to say there length this is the hardware length counter and you certainly can use it it can be helpful if uh you still need extra control to the length uh even after the
+
+[10:50] envelope but most of the time i find the envelope can be uh pretty effective at sort of cutting things off like abruptly where you need them to so i don't necessarily find a ton of use for length although it is good for maybe you have a patch that you're trying to kind of um bring from an older version into the new version and you just want to sort of keep everything the same it's good for backwards compatibility to have it there so this just sets the length it's not in ticks or anything it's just a hardware
+
+[11:22] length can be still very good for getting short sounds although i think maybe the envelope is more useful pitch we've got two pitch modes free and safe and this might uh harken your memory back to the old what is it free and stable or something like that um and a fun fact about the older versions of the stable setting it didn't actually do what it was intended to do more research was done in order to
+
+[11:54] determine kind of how the noise channel functions and in general it kind of depends on the model of game boy uh that you're using so sometimes especially on like hardware game boy like the original brick dmg the noise channel will cut out randomly and basically what happens is the noise channel noise is kind of made by this random generator called a linear feedback shift register and
+
+[12:26] sometimes the randomization is actually there's a bug in it essentially that causes it to create zeros and that results in silence like it's like a random sometimes it randomly produces zeros so what that means is essentially instead of having what should be sort of a smooth pitch shift downwards um let's take this off just so that we can hear this what might happen sometimes is it sounds
+
+[12:58] like this or even like this and it will just cut without a k command like on hardware it just won't work and so the only way to get around this is to actually restart the noise channel uh like re-initialize the channel on every pitch change so that's what safe mode does avoid random mute on dmg and old cgb gameboy color and even there are some models of game
+
+[13:30] boy advance i think that that have this i know like the gb player for gamecube definitely has it and so uh at the expense of the smoothness in the noise channel you can now basically have uh reassurance that your snare or whatever noise instrument crash whatever it may be uh will never cut out so as i mentioned is at the expense of smoothness it creates a harsher sound it's just a totally different texture um
+
+[14:06] you can kind of retain some of it by slowing down the pitch uh the rate of the change and in the mix you may not necessarily hear that kind of extra tonal thing but you know the faster you go kind of the more present it is so um very useful for hardware compatibility and some of these emulators like for instance i'm using same boy same boy emulates
+
+[14:38] this random cutout so and i think even bgb does too so you may actually want to use this even in some emulators depending on the version older versions of samboy and bgb don't don't emulate that they just the noise channel will basically never cut out it's as if it were designed perfectly so this may or may not be useful i tend to use it a lot we'll come back to this a little bit vibrato shape this is just the shape of the vibrato for the v command
+
+[15:10] so you can have fun playing with this a little bit maybe um you know square vibrato can be an interesting touch sometimes um right so something like that transpose on and off uh we've got a transpose switch so if you've got a noise kick and you're transposing things around you may want to turn the transpose off command rate this will change the uh
+
+[15:43] if pitch equals tick it will always change the p and v command rate in the noise channel so um this is another way to kind of slow down your pitch slides uh by changing this command rate um so it's like just yeah it's slowing it down in case pff is too fast or you want these pitch changes to
+
+[16:16] happen at a slightly slower rate i think that sounds so cool let's switch this back on safe for a second see that sounds a little a little bit smoother so there is a way to retain some of that smoothness i think by setting the command rate lower all in all it's just something extra to be able to play around with and then of
+
+[16:47] course we've got tables and i think one useful thing to talk about is maybe this volume column um or even using e commands a lot of my older snare designs have this kind of thing where i'll set the envelope just basically to this and then use the e command to control the rest of the volume shape here so that's kind of a way that i'm getting you know that transient to happen because this is essentially like having this as ee90 and and this is still an effective way to work but um
+
+[17:19] and it can be good if you're changing tempos around because these are dependent on ticks but all in all i find that using this envelope um is just a much faster and easier way of doing this and then i can avoid having to really set any e commands here and instead i can just work on setting transpose commands so let's talk a little bit about that so let's say i'm i do want this to be a snare you know i might sort of pick pick a pitch a pitch around here so
+
+[17:54] i think this this is a really long decay i'm going to shorten this a little bit i mean that could be a good snare even on its own it doesn't really need anything else um but one thing that can help is having a couple of transposes that kind of go you know up upwards and then i'm gonna stop this at some point you could use a k command to stop the note and the table i'm using a20 which is stop table so
+
+[18:26] um you know you can use whichever you feel is appropriate likewise you can play with these transpose commands i like putting it on safe here because i think that it just provides a little bit a little bit more crunchiness to the transient um but it's really up to you let's hear the difference not a whole lot man that sounds kind of great to me
+
+[19:07] oh now see to me this doesn't sound much different i would rather have it on safe because i know that this is never going to cut out i do think that that transient is a little bit too low so i'm going to bring these up a little that sounds pretty good so that might be an example of a sort of a basic snare and of course one really fun thing you can do is just change it to the pitch noise
+
+[19:43] [Music] and you know you might even consider throwing a p command on here like this right so now i think it maybe necessitates starting them up a little higher and this maybe i need to fade out a little quicker so
+
+[20:31] something like that perhaps um it doesn't have to be this dramatic by any means and you could certainly stop the p command at some point if you don't want it to continue any further or change the rate might be good to stop the p here because you as you can see it doesn't
+
+[21:05] actually stop it until you stop if you look over at the noise note on the right hand side it just kind of continues okay so let's call this a snare and uh move on um so let's talk about hi-hats it's a little more boring but you know um it is kind of necessary so let's do the same thing again where we've kind of we're going to set like a
+
+[21:38] transient here okay uh one cool thing obviously you can kind of change the volume even just by going uh up in the range as you get higher the volume gets a little quieter so this can be a way to add dynamics without even doing any kind of e commands or anything like that like it's just sort of naturally
+
+[22:09] embedded in the but let's talk about another way to add dynamics okay certainly everybody's favorite the e command you know this can be really good especially if you want to extend the note a little so you know this is kind of more like an open hi-hat um just setting it with a little bit longer decay and uh i should say actually here's
+
+[22:42] where the length would actually be useful because let's say you're using an e command this length counter will override the e command so it kind of like puts a cap on how long this envelope can actually be you could do like an upward envelope so actually it can be kind of good for
+
+[23:16] that but let's talk about another way to add dynamics too because i like doing this a lot and it's using the r command um retrig so actually i should have talked about this when i was talking about the other commands but that's okay we'll revisit this now because it's a good time and essentially this isn't really something i ever used before um i sort of didn't understand it but now that we've got this envelope um let's say i want to retain this transient something we can't do with an e command because it's emulating the
+
+[23:49] hardware volume which are very smooth slopes like they all sort of look like this right like they all kind of look like this or they look like you know this like you either go up or actually goes all the way up or like this so these are what all of the the e commands basically look like now i forgot what i had this set to that's okay it doesn't really matter because i'm just going to put it back to something so that's kind of okay i'm gonna change
+
+[24:33] okay anyways so r zero zero this doesn't really do anything but what we can do is if you want something quieter you can retrig this at one lower volume so this first digit will say reduce this by one level and it will keep these numbers and just essentially lower them like this so this is a way to add dynamics it just keeps getting quieter and quieter and shorter and you can also do this with your
+
+[25:10] snares right so if you want like a ghost snare or something like that likewise so you want one of these couple of these to be a little bit louder
+
+[25:43] actually let's like put in a little kind of snare fill and then move bump this up you know so anyways i think you get the idea not i'm not saying this actually sounds that good because i don't think it does um
+
+[26:16] but this r command and um another thing that i really like to do a lot is is more than just the single retragus to do like a triplet kind of um i guess this would be triplets so this will decrease the volume on every four tick retrig i should probably cut that off or and you can do stuff like don't retrig
+
+[26:52] the instrument but change the shape here right so um i think we're we're doing pretty good but we do need a kick right so all right let's talk about how to design a noise kick i don't you know these are just sort of general guidelines that i think of um there's certainly plenty of room to be like super creative with this put some of these as like you know ship noise uh
+
+[27:24] shape what am i talking about the short loop the the this kind of thing this is a just easy way to add some interest in here because um you know it's it kind of can be like a ride symbol or something like that huh
+
+[28:02] yeah so okay this this sounding pretty okay but like i said we need a kick so let's go in here let's just i probably should have called that other instrument hi-hat that's okay okay all right and then um noise kicks i like them to be loud so maybe start kind of like this we could also do something like this where we're kind of like sustaining this and then cutting it off sort of immediately you could also use length here and then let's set a table now
+
+[28:36] everybody's going to have their own sort of taste on what sounds good in a noise kick and for me i mean i think the easiest way is to kind of start with a p command and sort of see where you end up um so you know we're going to probably want to start this at a low note and i tend to think that these sound better using the pitched noise [Music] okay now that's not even that bad i mean
+
+[29:12] is it good not really but it's kind of okay we're already kind of at a good place um sometimes i like to give an actual like sort of upward transient here and so i'm going to transpose then we can start this on on this tick actually so that way it kind of gives a little bit of attack but really and i mean this isn't bad and you could certainly adjust the slope of the p command
+
+[29:50] kind of kind of thing it's definitely there i think but let's see if we can get it to sound even better if we switch the pitch to safe this is going to make it more tonal and like almost like a pulse kick and it probably is going to sound better pitched up a little like you can hear that that's like
+
+[30:32] actually pretty tonal i mean like i think that sounds pretty good um i mean and that's with what it's just a little transpose which let's see if we take that out and just use the p command if it sounds all right we could you know we could sort of get that transient just by tuning the note up a little bit i mean is it the most brilliant thing
+
+[31:11] ever not necessarily could even maybe stop this you know so and then let's try let's try what happens if we do the the long loop noise like it kind of even makes a serviceable kick with this this noise
+
+[31:46] and then i mean listen to what happens when we get up here you know like what a cool sound like that it kind of retains all of that low crunchiness because we're on the safe mode whereas when you go back to free like it loses all of that so you can hear how this adds just a little
+
+[32:29] bit of that that transient on top the click of the kick that you would expect right so actually like i find it that kind of gets a really good kick sound um and there are times when i i really need a kick to go in either the pulse channel or the noise channel and of course if you're the kind of person who just likes to write all the percussion in the noise channel i feel like that's pretty serviceable and of course like you could change this go a little
+
+[33:11] kind of play with the pitch command and the envelope to try to get something that fits where you need it to if it needs to be shorter you know make it a faster pitch and uh a shorter envelope if it needs to kind of hang in there and really get that bass then you kind of can do noise kicks sound a little farty yeah but they work well and i think that this safe pitch kind of kind of helps so uh those are the things that i mostly wanted to talk about there
+
+[33:44] there's even crazier stuff that you can do um if you get into this like r80 command um which is is the fast reach rig uh i'm just gonna put this on everything and see if i can get any interesting stuff to come out [Music] oh yeah [Music] so what this does is re-triggers like it's like at frame rate or uh i forget
+
+[34:17] what it says screen refresh rate maybe or um one through seven is increase volume knight through f is decrease second digit is the speed r8 x equals resync and then yes r8f would turn that off so um this is actually something that i have done to make a clap sound so let's maybe let's make a let's make a clap for for fun
+
+[34:50] uh is to set this like our 82 or something like that and then immediately sort of turn well let it last a couple of ticks and then sort of turn it off and if you do this right you can get a pretty convincing clap i honestly don't know how good i mean it's actually not too bad as it is sometimes it needs a shape command to kind of just get it to a new uh a new pitch let's see may need a longer envelope
+
+[35:27] maybe this is to see at different tempos obviously the table is going to go slower or faster yeah not bad maybe we can get a little if we did the transient thing again that's too too long i think you could even shift it up once uh and doubled with a kit clap that's not too bad
+
+[36:06] i can't wait until uh and and you could add something like a transpose here if you wanted to have a little slight transient it's maybe too much and maybe that's more the right pitch the point is really just that there are many options available to you
+
+[36:40] and i hope that this has given you you know some insight into the noise channel some good ideas maybe some default template you know starting places for your instruments um if you have any questions please let me know in the comments i really want to thank you for watching and i hope you enjoy playing with the noise channel yep if you have any questions let me know i think i said that already and uh yeah i hope you enjoy using the new noise channel in uh lsdj92l the new stable version until next time
+
+[37:13] happy lsdjing

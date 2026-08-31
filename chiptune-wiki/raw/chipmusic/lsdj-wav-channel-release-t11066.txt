@@ -1,0 +1,123 @@
+RAW: chipmusic.org forum thread "lsdj wav channel release?" | https://chipmusic.org/forums/topic/11066/lsdj-wav-channel-release/ | 18 posts, 2013-05-13 to 2013-05-14, 2 pages | fetched 2026-08-31 with a browser user agent (the site 403s plain fetchers) | post text extracted with tools/extract-forum-posts.py (post number, timestamp, author; quotes marked ">"); images and signatures not included
+
+----- post 1 · May 13, 2013 7:07 am · ShintarouMusic -----
+I have a similar question as the guy in this thread.. http://chipmusic.org/forums/topic/11058 … ut-tables/
+I've used lsdj for almost a year and googled around a bit, but I still haven't figured out how to get release out of a wav instrument.
+A volume envelope ending with 1 through 7 in either of the pulse channels gives you release, but nothing happens when you try to do the same thing in a table, in the wav channel.
+How does one get around this?
+
+----- post 2 · May 13, 2013 7:29 am · 9-Heart -----
+Tried the VOL stuff in the tables?
+
+----- post 3 · May 13, 2013 7:33 am · jefftheworld -----
+**NOTE: I'm assuming here that you understand the basic use of three things; the Synth/Wave Editor pages, tables, the Gxx command as it relates to tables. Aside from those things, this is super simple. If you have some questions on those things, just ask.**
+
+In LSDJ the wave channel doesn't have a traditional ADSR-style release. The E command is mostly useless for the wave channel, giving you only the range of E00-E03. That is; 0%, 25%, 75%, 100%. Throwing that into a table (perhaps with a GXX command to alter the speed of the table) might be enough for a quick release, but if you want a slower release it'll sound awkward.  However, if you dig into the wave editor and bust out some tables you can get the desired effect pretty handily.
+
+Each wave channel 'synth' in LSDJ has 16 'frames' which you can edit individually. You can generate these waveforms automagically using the 'synth screen' or manually edit each individual frame using the 'wave editor' screen. I generally get it roughly where I want it with the 'synth screen' and then go in and edit the waveforms manually until they sound as desired.
+
+LSDJ can animate between these automatically to form a dynamic waveform. You can use this technique for pulse width modulation, to acheive double or half period waveforms or to get some deep control over the ADSR of the wave channel. The play, length, speed and repeat options are all settings for automatically animating your frames and often will do the trick, but if you want more control there is always the trusty table.
+
+You can create several frames of wave 'animation' which will represent the waveform at various volumes - the number of frames you create will affect the resolution of your effects, meaning a single synth will allow for 16 step volume effects, not bad - Utilizing the frames you created is easy; first set the play option of the instrument to manual. Now, create a table and use the Fxx command to switch between frames as desired. A Gxx command can be used to alter the speed at which the table is played.
+
+One neat tip that I've discovered, the F command is not bounded by the current synth. F10 (hexadecimal for 16, which is outside the 0-15 range that represents your frames) will actually switch to the first frame of the next synth. In this way, you can tie together two synths and get a waveform animation that's 32 frames long! I've never used anything longer than that, but it's possible and could be a great way of getting some really complex waveforms out of LSDJ.
+
+Last edited by jefftheworld (May 13, 2013 7:37 am)
+
+----- post 4 · May 13, 2013 8:44 am · ShintarouMusic -----
+Hey thanks for all this Jeff!
+I'm trying this with a simple triangle wave with the volume at 30. I tried using the F command, but I only can get about 5 different frames of volume until (I think) it skips to the next synth and gives me the harsh sound of the new saw wave sound... Also I get noisy clicks in between each frame.
+I can't cleanly get it. Basically the sound I'm going for is this. http://www.wikiupload.com/2EG9LFP8WPPAZKF
+Any suggestions?
+Also, I had never touched those F commands before, that opened up a brand new thing for me to experiment with, thanks! (:
+
+Last edited by ShintarouMusic (May 13, 2013 10:20 am)
+
+----- post 5 · May 13, 2013 9:28 am · jefftheworld -----
+The click is mostly unavoidable with most Game Boy models and most LSDJ versions (the  v4.7.0+ "antispike" fix might reduce some of the click you get and using different motherboard revisions sometimes helps as well). It won't be very clean, though. The sonic qualities of the clicks mean they easily masked by other sounds, but if you want the note to play by it's lonesome, it's tough to avoid. Slowing down or speeding up the rate at which the frames change can sometimes help.
+
+As for getting more resolution to your volume adjustments, you'll need to learn how to use the synth screen and wave editor. You're currently setting the instrument up via the synth screen, but if you go into the wave editor you'll see you probably only have 5 frames that actually contain audible waveforms. In the wave editor you're going to want to draw as many frames of the wave as you need or want. Obviously, each one should be slightly quieter than the previous.
+
+Don't forget, numbering for frames is 00-0F for the first synth, 10-1F for the second and so on.
+
+EDIT: Any time you edit on the Synth Screen, every single wave frame of that synth will be immediately overwritten reflect those settings. You can use the Synth Screen to get a good starting point, but don't touch it again after doing manual adjusting on the Wave Editor screen! It'll silently overwrite any changes you made.
+
+Last edited by jefftheworld (May 13, 2013 9:35 am)
+
+----- post 6 · May 13, 2013 3:17 pm · kineticturtle -----
+Actually there's a warning message now - if you've drawn changes to the waveforms, it stops you from making changes in the synth screen with a "are you sure you want to override hand-drawn waveforms?" message.
+
+----- post 7 · May 13, 2013 3:38 pm · breakphase -----
+jefftheworld wrote:
+
+> The click is mostly unavoidable with most Game Boy models and most LSDJ versions (the  v4.7.0+ "antispike" fix might reduce some of the click you get and using different motherboard revisions sometimes helps as well). It won't be very clean, though. The sonic qualities of the clicks mean they easily masked by other sounds, but if you want the note to play by it's lonesome, it's tough to avoid. Slowing down or speeding up the rate at which the frames change can sometimes help.
+
+Just to repeat something I've probably said before, it can help if you match the speed of the frame change to the tempo of the music. So that the clicks will fall on 16th steps. The clicks can be covered up percussion pretty well.
+
+edit: Or Multiples of 16th notes will help too. If they fall on 32nd notes then half of them will be on 16th notes, etc..
+
+Last edited by breakphase (May 13, 2013 3:40 pm)
+
+----- post 8 · May 13, 2013 5:21 pm · SketchMan3 -----
+Also, the F command is additive, so if you have a table that goes F05 F05, the second F05 plus the first will land you at F0A. Better to use mostly F01 commands if you want to stay in the current synth.
+
+Personally, I usually just use the E command and stretch it out longer if I want a longer decay. It usually works out okay, imo, since there are a lot of other sounds to mask the simplicity.
+
+Sometimes I'll use the Synth screen and simply set the VOL setting high on the top and low on the bottom, and reverse that for swells and ignore the clicking. *shrug* Actually, I have one song in which I intentionally invoke clicks in the intro to emulate a record player to make the listener accustomed to it so they don't stand out during the rest of the song. I hope it works...
+
+Last edited by SketchMan3 (May 13, 2013 5:23 pm)
+
+----- post 9 · May 14, 2013 4:04 am · thebitman -----
+The E command in the WAV channel acts as the volume setting in the instrument screen: 00 is silent, 03 is loudest. Works in tables too. Hope that helps.
+
+----- post 10 · May 14, 2013 12:17 pm · ShintarouMusic -----
+Hey thanks guys, I've got a lot of new things to go try now.
+
+----- post 11 · May 14, 2013 12:37 pm · Bit wish -----
+I had the same question but wasn't sure how to ask it.
+
+----- post 12 · May 14, 2013 6:18 pm · SketchMan3 -----
+If the wav instrument is playing a solo all by itself you could always fiddle with the volume pot if you are post-pot-pro-sounded? derp
+
+----- post 13 · May 14, 2013 7:04 pm · Zef -----
+SketchMan3 wrote:
+
+> If the wav instrument is playing a solo all by itself you could always fiddle with the volume pot if you are post-pot-pro-sounded? derp
+
+If it's playing by itself just use M commands,
+
+Alternatively you could mix your wav channel full left and everything else full right, then use M commands to change volume on the stereo channels independently.
+
+----- post 14 · May 14, 2013 10:24 pm · egr -----
+Zef wrote:
+
+> SketchMan3 wrote:
+
+> If the wav instrument is playing a solo all by itself you could always fiddle with the volume pot if you are post-pot-pro-sounded? derp
+
+> If it's playing by itself just use M commands,
+
+> Alternatively you could mix your wav channel full left and everything else full right, then use M commands to change volume on the stereo channels independently.
+
+Wouldn't using M commands still only give you 3 steps of volume for the wav channel, though?  That's something I've never thought to compare, E vs M on the wav channel.
+
+Last edited by egr (May 14, 2013 10:25 pm)
+
+----- post 15 · May 14, 2013 10:45 pm · Zef -----
+M commands have an 8 step resolution rather than the WAV channel's 4 step. Since it's altering the master, it should alter the WAV volume too.
+
+----- post 16 · May 14, 2013 10:49 pm · herr_prof -----
+Yea but the wav channel only has four bits of resolution, so you cant really escape that?
+
+----- post 17 · May 14, 2013 10:58 pm · nitro2k01 -----
+herr_prof wrote:
+
+> Yea but the wav channel only has four bits of resolution, so you cant really escape that?
+
+The wave channel and master volumes work in different ways. The wave channel volume lower the volume by shifting each sample and discarding the lower bits. So in effect, wave channel only has 3 and 2 bits of resolution for the lower volume settings. The master volume does not have THIS problem but obviously affects all sound channels routed to that stereo channel.
+
+----- post 18 · May 14, 2013 11:15 pm · Zef -----
+Right, long story short I just tested M commands on a wav channel and you get the full 8 steps of control, I don't really see many practical uses for this though (unless you use the panning trick to achieve volume independence, which would totally work, but isn't the most practical thing to do).
+
+At any rate, it's always cool finding new tricks. Personally I just either write volume changes into the synth, or just mix things properly and it comes out in the wash.
+

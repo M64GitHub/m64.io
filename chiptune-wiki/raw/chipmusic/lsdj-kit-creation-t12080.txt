@@ -1,0 +1,232 @@
+RAW: chipmusic.org forum thread "LSDJ Kit Creation Thread [DROPBOX LINK]" | https://chipmusic.org/forums/topic/12080/lsdj-kit-creation-thread-dropbox-link/ | 2 pages, started 2013-09-01 by katsumbhong (first post last edited 2015-06-28) | fetched 2026-08-31 with a browser user agent | posts extracted with tools/extract-forum-posts.py; the Dropbox and lsdsng.com kit links are plain text and were not followed
+
+----- post 1 · Sep 1, 2013 6:51 am · katsumbhong -----
+How's it going folks.
+
+I wanted to start a thread on my take on how I create kits in LSDJ and allow a thread for those who also make kits to provide their input, tips and tricks.
+
+There is a youtube video with 2xAA showing the process on making kits and little-scale has a blog post on how he makes kits.
+
+My method:
+Software - Audacity (free program)
+
+1. Load sample.
+2. Set to 11,468 Project Rate (Hz). [input by AWESOMECAT]
+3. Set audio track to mono.
+4. Cut silence before and after sample. (Keep in mind that the sample is limited to 2 seconds in length)
+5. Apply Compressor Filter.
+(5a) I like to add an Amplify Filter that clips a little to increase the volume. Completely optional.
+6. Apply Lowpass Filter with cut off frequency at 5,734 Hz. [input by AWESOMECAT]
+7. Export as "Other Uncompressed Files" -> Options -> WAV (Microsoft) + Unsigned 8 bit PCM
+
+Currently working on kits with samples taken from a Texas Instruments Speak & Read.
+
+My mix of kits both personally made and hand picked are available via my Dropbox!
+https://www.dropbox.com/sh/w17c60l504if … tUMna?dl=0
+
+Kits Available
+[Updated November 2nd, 2013]
+-Claps from Note!
+-Amen Break
+-Chopin from Little-Scale
+-Debussy from Little-Scale
+-Debussy2 from Little-Scale
+-Jam Sessions 2 -> Basic Palette 1 Reverb from Bananasan! ***Run kits at 0.5 speed.***
+-Kicks
+-Mozart from Little-Scale
+-Piano
+-Speak & Read (Alphabet A-Z) from Bananasan!
+-Street Fighter 2 from Bananasan!
+-We Are Connected (vocal) from Bananasan!
+
+Feel free to post with ideas and tips and I will be updating the first post with your advice!
+
+Last edited by katsumbhong (Jun 28, 2015 2:32 am)
+
+----- post 2 · Sep 1, 2013 7:11 am · HardstyleFox -----
+I've recently made a lot of speak and spell kits. I'll upload them when I have the time.
+
+----- post 3 · Sep 1, 2013 8:31 am · XyNo -----
+I mostly follows little-scale tutorial for the kits I am doing right now !!!
+I suggest you to check out LSDSNG. This is a place to store and share your lsdj songs and kits !  http://lsdsng.com
+
+I did 3 kits for now...
+-My favorite break kits on mpc taken from VEXST on freesounds.com
+http://lsdsng.com/node/593
+-2 other kits are some classic Jungle vox I found !!!
+http://lsdsng.com/node/594
+http://lsdsng.com/node/595
+
+----- post 4 · Sep 1, 2013 10:40 am · 9-Heart -----
+I dunno how Dantes does his, but we got a small collection already.
+Still have ideas for more though.
+
+----- post 5 · Sep 1, 2013 4:40 pm · katsumbhong -----
+Added Speak and Read Alphabet kits to my Dropbox! Have at em!
+
+----- post 6 · Sep 3, 2013 1:26 pm · katsumbhong -----
+Does anyone have any tips on how to lessen the "hiss" in vocal samples?
+
+I've tried a couple of different frequency cut offs with low and high pass filters and can't seem to get it right...
+
+Last edited by katsumbhong (Sep 3, 2013 1:27 pm)
+
+----- post 7 · Sep 3, 2013 2:36 pm · herr_prof -----
+Its this:
+2. Set to 44100 Project Rate (Hz)
+
+Set the project rate to the gameboys sample rate (8192Hz), after doing an eq of all frequencies about this point and it maximize the volume as much as possible. triming the silent parts should help make any noise elftover as much as possible.
+
+----- post 8 · Sep 4, 2013 3:24 am · LLTH -----
+katsumbhong wrote:
+
+> Does anyone have any tips on how to lessen the "hiss" in vocal samples?
+
+> I've tried a couple of different frequency cut offs with low and high pass filters and can't seem to get it right...
+
+IIRC the sample rate for the wave channel is 11,468 Hz, and a lot of the hiss comes from artifacts caused by frequencies above the Nyquist frequency (which in this case is 5,734 Hz [sample rate divided by 2]). I get around this by running every sample I'm turning into a kit through a lowpass filter with the cutoff frequency at 5734 Hz. I've found it to make a pretty good difference.
+
+EDIT: I was wrong. Sample rate (according to the LSDJ manual) is 11,468 Hz instead of 11,478 Hz like I originally posted. This means that the Nyquist frequency is 5,734 Hz and not 5,739 Hz.
+
+Last edited by LLTH (Sep 4, 2013 3:26 am)
+
+----- post 9 · Sep 12, 2013 9:57 pm · alex -----
+I need help man, I have a lot of samples and Audacity, and everything is working good, but my problem is when I clic on the sample in LSDpatcher19 it sounds ugly, at the end in most samples. I don't know where to edit or modify in Audacity, I want to preserve the whole sample but most of them have out-fading, in other words they are silenced gradually at the end, then, I don't want to cut that fading part but it sounds bad, and the yellow graph in lsdpatcher shows a small square waves. I guess I need to remove/delete/edit those square waves.
+
+I suggest to you to check out my kit here:
+
+https://www.dropbox.com/s/fl4c0u600bl2urb/test.kit
+
+The 3 last samples sound bad at the end.
+
+----- post 10 · Sep 12, 2013 11:16 pm · katsumbhong -----
+In my experience there is always that click in longer samples when played inside the patcher only. When the kit is loaded into lsdj and played back on the gameboy there is no noticeable click.
+
+Last edited by katsumbhong (Sep 12, 2013 11:17 pm)
+
+----- post 11 · Sep 13, 2013 12:33 am · Dire Hit -----
+I've got samples I've been unable to patch into kit files due to my computer being absolute shit, here they are: https://www.dropbox.com/s/yekf2bkknd7av … ogress.rar
+
+Some still need chopping up to be short enough for lsdj.
+
+----- post 12 · Sep 13, 2013 1:46 am · Bit wish -----
+Does any one know where i can find the "chaos! control!" kit?
+
+----- post 13 · Sep 13, 2013 2:48 am · katsumbhong -----
+Dire Hit wrote:
+
+> I've got samples I've been unable to patch into kit files due to my computer being absolute shit, here they are: https://www.dropbox.com/s/yekf2bkknd7av … ogress.rar
+
+> Some still need chopping up to be short enough for lsdj.
+
+A quick kit I threw together that I did a few weeks ago. (It isn't perfect and the timing is off, I did this to see what it would sound like)
+
+Each sample is closer to 4 seconds than the allotted 2 second limit.
+
+My method to do this was to speed up the audio sample in audacity by 2x then play the kit back in LSDJ at 0.5 speed. That is one way to get around the kit limitations in longer samples.
+
+Last edited by katsumbhong (Sep 13, 2013 4:33 am)
+
+----- post 14 · Sep 13, 2013 4:14 am · Dire Hit -----
+katsumbhong wrote:
+
+> Dire Hit wrote:
+
+> I've got samples I've been unable to patch into kit files due to my computer being absolute shit, here they are: https://www.dropbox.com/s/yekf2bkknd7av … ogress.rar
+
+> Some still need chopping up to be short enough for lsdj.
+
+> A quick kit I threw together that I did a few weeks ago. (It isn't perfect and the timing is off, I did this to see what it would sound like)
+
+> Each sample is closer to 4 seconds than the allotted 2 second limit.
+
+> My method to do this was to speed up the audio sample in audacity by 2x then play the kit back in LSDJ at 0.5 speed. That is one way to get around the kit limitations in longer samples.
+
+Totally fucking doing this with scream/roar samples. Terrifying.
+
+----- post 15 · Sep 13, 2013 4:38 am · katsumbhong -----
+To be more clear with making longer samples:
+
+-If you have a really long sample, do all of your adjustments such as normalize, compressor, changing sample rate, etc. first.
+-Select the section you want to sample (keep it just under 4 seconds if anything).
+-Cut it.
+-Open up a new audacity window.
+-Paste it.
+-Run a Change Speed filter and make the sample twice as fast. This will bring it down to under 2 seconds.
+-Save the file.
+-Upload the file onto the LSDJ Patcher.
+-Save it as a kit or export as a GB ROM.
+-Load it up to LSDJ and place the sample kit into the WAV channel.
+-Adjust the kit instrument so that the speed will run at 0.5 rate.
+-You now have a kit that plays longer than 2 seconds in LSDJ.
+
+Repeat until really long sample is complete.
+
+It is very tedious, but if you really want to use a particular custom kit, you have to put in the mind numbing work. Beer usually helps.
+
+----- post 16 · Oct 30, 2013 7:52 pm · katsumbhong -----
+Creating a few guitar samples via Jam Sessions 2 on the DS, will update if the samples come out well.
+
+
+----- post 17 · Oct 30, 2013 9:33 pm · katsumbhong -----
+Uploaded a new kit!
+
+I took guitar samples from Jam Sessions 2 from their Basic Palette 1 selection of chords and kitted them into LSDj.
+
+You will need to play these kits at 0.5 speed in the instrument screen as they are 4 sec samples.
+
+----- post 18 · Oct 30, 2013 9:59 pm · XyNo -----
+I know some of you don't go on lsdsng.com so I just did a dropbox folder of my kits...
+Enjoy !
+https://www.dropbox.com/sh/dypzbhkfrvihow8/TBiVzwS8q2
+
+----- post 19 · Nov 3, 2013 4:53 am · katsumbhong -----
+Just completed editing and testing a batch of guitar samples for LSDJ kits!
+
+From: Jam Sessions 2
+Specifics: Basic Palette 1 Chords
+FX: Reverb
+Length: 4.5-5 seconds long
+Special Notes: Run kits at 0.5 speed.
+Nomenclature
+Ma = Major chords
+mi = Minor chords
+up/down = down stroke and return stroke of guitar strings.
+
+https://www.dropbox.com/sh/rvfhutzf76it83m/xu2Rljapja
+
+----- post 20 · Nov 3, 2013 11:34 am · egr -----
+katsumbhong wrote:
+
+> Just completed editing and testing a batch of guitar samples for LSDJ kits!
+
+> From: Jam Sessions 2
+> Specifics: Basic Palette 1 Chords
+> FX: Reverb
+> Length: 4.5-5 seconds long
+> Special Notes: Run kits at 0.5 speed.
+> Nomenclature
+> Ma = Major chords
+> mi = Minor chords
+> up/down = down stroke and return stroke of guitar strings.
+
+> https://www.dropbox.com/sh/rvfhutzf76it83m/xu2Rljapja
+
+Oh damn, I'm all about this one, thanks!
+
+----- post 21 · Nov 11, 2013 12:40 am · Limitbreak -----
+9-Heart wrote:
+
+> I dunno how Dantes does his, but we got a small collection already.
+> Still have ideas for more though.
+
+Are these available for DL? That "Hey Listen" kit seems fun.
+
+----- post 22 · May 25, 2014 9:24 pm · Xuriik -----
+Just sharing some LoZ kits I made here. One's on lsdsng.com and one's on mediafire, but direct downloads make it easier for people.
+
+https://www.dropbox.com/sh/3mxg0qiajsx9 … tj2xJUyfna
+
+----- post 23 · Jul 1, 2016 12:48 pm · Duck -----
+First post... please be gentle... this is probably a dumb question that I will work out as soon as I try this, but is there a limit on the number of kits you can have in a single modified ROM?
+

@@ -1,0 +1,123 @@
+RAW: Hackaday.io project log "Splitting pulse waves" (part 2) | https://hackaday.io/project/164161-retrochallenge-2019-gameboy-audiohacks/log/161136-splitting-pulse-waves | Quint (with utz), RetroChallenge 2019: Gameboy Audiohacks, 2019-04-01 | fetched 2026-08-31 | page text extracted from the HTML with tools/html-to-text.py; site chrome kept at top and bottom; the demo file cdn.hackaday.io/files/1641617023464224/sines.mp3 and the figures are not saved
+
+Projects
+
+Discover
+Contests
+Courses
+Stack
+
+More
+
+Courses
+Tutorials
+Events
+Hackerspaces
+
+Hackaday.com
+Tindie Marketplace
+
+Sign up
+Log in
+
+Close
+
+# Splitting pulse waves
+
+A project log for RetroChallenge 2019: Gameboy Audiohacks
+
+Squeezing more audio channels out of the 1989 Nintendo Gameboy, with utz and Quint
+
+Quint
+•
+
+04/01/2019 at 00:31•0 Comments
+
+Now that you know what channelhacking is, and why anyone would want to try it, let's look at precisely how this is accomplished.Sine waves being generated with PU1. First a single voice, then two voices summed together.
+
+# PU1 and PU2
+
+The Gameboy's two pulse channels produce a digital signal whose pulse width, frequency, amplitude, and decay can all be varied among discrete values within a range. Usually, a Gameboy game will read notes from a table and, at the beginning of each note, set these parameters accordingly. Decay happens automatically, so no unnecessary CPU time is wasted. Programmers can set a note once, then continue calculating necessary graphics and game logic until a new note needs to be played.
+
+Using the pulse channels in this way is CPU efficient, but risks sounding same-y. There's only so much you can do with four parameters. Chiptunes (and good game soundtracks) use effects like pitch bends, vibrato, and arpeggios to spice up their use of the pulse channel. The Gameboy doesn't have hardware support for these effects, so they have to be implemented in software. As the notes play, the CPU will occasionally be interrupted to fiddle with parameters according to the effects desired. This puts the CPU in a more active role in audio, as it will need to modify the underlying hardware channel parameters in realtime.
+
+# Misusing long pulses
+
+Our mechanism for PU1 and PU2 channelhacking is similar to these sorts of effects in that it relies on the CPU to fiddle with note parameters while the note is still playing. The trick is to set up each pulse channel so it's outputting a high value for as long as possible, then reset the PWM position before it has the chance to transition from high to low. The amplitude can then be varied at a very high speed to create waves that are more complex than a pulse.
+
+To do this, we first set the pulse channels to the lowest frequency and highest duty cycle available. This maximizes the time we have before the signal is pulled low again. During this time, code running in an interrupt is incrementing a value in memory (it's actually self-modifying) according to the frequency we want to produce. We can set up many such incrementers, but two is a good compromise number, giving us a total of four software wave channels: two for each of the two pulse channels. On each audio sample, each incrementer is used to index into a sine wave table. All the software channels for each hardware channel are then summed and the result is written to the amplitude of each channel.
+
+Nothing is without consequence. By splitting the channel, we go from 15 possible amplitudes (excluding zero, which silences output) to a measly 7, since we have to be able to add the results without overflowing. This means the sine waves we produce when we combine channels are half the quality of a single software sine channel, i.e. the wave is discretized into fewer little stair-step voltage levels.
+
+We only get 7 discrete amplitude levels per channel, as opposed to the 15 available levels we'd get if we didn't combine two waves together.
+
+In summary, we've managed to split each of the two pulse waves in two. By keeping track of wave position in two "soft" channels, looking amplitude values up in a table, and summing the results, we can use simple waves to generate much more complex waves on a single channel.
+
+# Example
+
+You can hear this synthesis engine at work. PU1 is panned center, PU2 left, WAV right, and NOI center as well. You'll first hear one voice playing on PU1, then another voice will come in, also on PU1. PU2 will come in with the first drum hit, then the WAV channel after that. 6 total channels, playing simultaneously.
+
+https://cdn.hackaday.io/files/1641617023464224/sines.mp3
+
+# WAV dead ends
+
+I had also investigated a different mechanism of splitting the WAV channel onto two discrete channels. You may have seen the videos about the so-called ghost channel, a technique for modifying wave data in LSDj to sound like a bass note and a much higher note are playing simultaneously by composing around the limitation that the higher note must be a harmonic of the lower one, so as to fit in the same amount of space in the wave sample. Through other clever composition tricks, like playing each note independently every so often, it can be a convincing technique, but it's ultimately limited by the relationship required between the notes being played.
+
+I had hoped to split the WAV channel by pre-calculating a wave buffer full of samples composed of several software waves summed, then recalculating and swapping out the wave buffer just as the cursor reaches the end. There are three problems with this:
+
+- First, the WAV channel is buggy as hell, and produces large clicks when swapping out waves. This can be partially mitigated with careful timing and interrupt control, but at the frequencies we'd be writing to the wave sample buffer, it will sound like a constant, out of tune note whose pitch varies based on how hard the CPU is working.
+
+- Timing must be incredibly precise, and there's not so much documentation about WAV channel timing and implementation details.
+
+- We'd be using a lot of CPU.
+
+After barking up that tree for some time, we abandoned this technique in favor of the pulse splitting idea.
+
+This has been an incredible learning experience for me. We've accomplished something on this platform that wasn't possible a month ago. Thanks again to utz and nitro2k01 for their blood/sweat/tears and excellent advice, respectively.
+
+—Quint
+
+Previous log
+
+###
+
+Channelhacking the Gameboy
+
+03/14/2019 at 19:05 •
+
+0 comments
+
+## Discussions
+
+Log In/Sign up to comment
+
+#
+Become a Hackaday.io Member
+
+Create an account to leave a comment.
+Already have an account?
+Log In.
+
+Sign up with Github
+
+Sign up with X
+
+OR
+
+Sign up
+
+Yes, delete it
+Cancel
+
+Going up?
+
+About Us
+Contact Hackaday.io
+Give Feedback
+Terms of Use
+Privacy Policy
+Hackaday API
+
+Cookie Management
+
+© 2026 Hackaday

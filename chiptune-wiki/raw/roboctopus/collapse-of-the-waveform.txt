@@ -1,0 +1,71 @@
+RAW: roboctopus, "LSDJ & You" (tumblr mirror of the noisechannel.org series) | https://roboctopus-8bit.tumblr.com/post/85729112083 | fetched 2026-08-31 via the tumblr API (/api/read), body converted to text | inline images kept as [image: url] markers; the SoundCloud examples are links only
+
+TITLE: LSDJ & You - Collapse of the Waveform
+URL: https://roboctopus-8bit.tumblr.com/post/85729112083
+DATE: Wed, 14 May 2014 12:06:27
+
+This week we’re going to do a sort of introduction to hand-draw (custom!) wave forms by altering each of the basic LSDJ waveforms to get different sounds.  Drawing out your own wave forms can help you create a more distinct sound tailored to the needs of a specific track.  Or, you know, you could just make obnoxious sounds.
+
+One note before we start: This may be obvious to some of you, but if you find your WAV channel sounds to be too quiet, turn those pulse and noise channels down!  I rarely have anything on pulse above A8, and pulse volumes are usually lower than that.  (A warning: this will increase the apparent volume of panning and envelope clicks, so take that into account.)
+
+The Saw VI: Revenge of the Son of the Saw
+
+The first waveform we’re going to tackle is a more robust saw wave than the LSDJ default—something with more bite and more low-end.  (You like low end, right?)
+
+First, set up an instrument on the WAV channel.  Manual play means that unless you use an “F” command in conjunction with that instrument it will play the static wave in the first frame of the synth.
+
+Next, go up into the synth screen then left into the WAVE screen.  All we’re going to do is alter the saw that’s already there into something more angular and vicious.  Rearrange the pixels to get this:
+
+[image: https://64.media.tumblr.com/4a445733124b33f1e129c35641150666/tumblr_inline_n5kn23IyC81sn56w5.jpg]
+
+So now we have a saw with more character than before:
+
+https://soundcloud.com/lsdjandyou/saw 
+
+What we need now is volume control.  The overall height (amplitude) of the waveform determines its volume.  Right now it’s at max volume.  To lower it, all we need to do is decrease the height.  The waveform below will give you a saw with a lower volume.  Simply decrease the height even more for lower volumes.  This works for any waveform you draw.  (Note, that it is not the height from the bottom of the WAVE screen but the overall height.)
+
+[image: https://64.media.tumblr.com/04fe5217cd2c010d87051b937773d3ba/tumblr_inline_n5kn4y886O1sn56w5.jpg]
+
+Attack of the Painfully Narrow Pulse Wave
+
+Since the default pulse is a square wave, we’re going to draw a really narrow pulse.  Set up a new instrument and a new synth, again set to manual play.  This time we’re going to set the synth wave to pulse and alter the start volume to 40 (altering the volume is just to give us a nice, easy-to-work-with wave to alter).  Lower all the pixel/values (for lack of a better term) to zero except the first one, like this:
+
+[image: https://64.media.tumblr.com/f4d4bc7ba4979862b946b7651274cd1e/tumblr_inline_n5kn5qEY781sn56w5.jpg]
+
+The sound of this wave is harsh—not much low end, pretty abrasive sounding.  It can be useful for a section of the song where you want low notes but no low-end.  It works very well for distinctive table arpeggios.
+
+https://soundcloud.com/lsdjandyou/pulse 
+
+You can also alter the pulse width simply by changing the values (from left to right) from zero to F:
+
+[image: https://64.media.tumblr.com/df50d6062151af82eb9ac4fa27d05e67/tumblr_inline_n5kn9oGlGE1sn56w5.jpg]
+
+Change the volume by lowering the overall height (amplitude).
+
+Sine Redefined
+
+The last thing we’re going to do is alter a slightly clipped sine wave to give it more definition while preserving some of that sine low-end (well, sort of).  Again, set up a WAV instrument set to manual.  This time select a sine wave and set the start volume to 40.  What we’re going to do is cut a notch in the top of the peak, like this:
+
+[image: https://64.media.tumblr.com/c5682e9380ba8193f073a38446338bb8/tumblr_inline_n5knamrKdv1sn56w5.jpg]
+
+The result is a bass with great low-end but enough definition to cut through the mix more than a sine wave:
+
+https://soundcloud.com/lsdjandyou/sine 
+
+This waveform is a good example of how a wave’s shape relates to its sound.  Think of it like this: the more angular the wave, the sharper its edges, the sharper and harsher the sound is.  For example, if we make our notch deeper, the tone gets more defined and harsher-sounding.
+
+[image: https://64.media.tumblr.com/a60c206694c83b8c1e4a70cd834cb052/tumblr_inline_n5knd7jXwJ1sn56w5.jpg]
+
+If we make our notch narrower—say, one pixel-value—the tone also gets sharper.
+
+[image: https://64.media.tumblr.com/cf19247e9a2bebd082d76002c48178b9/tumblr_inline_n5kndlwFgq1sn56w5.jpg]
+
+Likewise, if we give our notch smoother contour, it will result in a smoother sound.
+
+[image: https://64.media.tumblr.com/3e0847e4e43f86ff1bb7798280baad2f/tumblr_inline_n5kne4o3e01sn56w5.jpg]
+
+Try playing the wave and adding more spikes and edges to it and see how the sound changes.  Experiment!
+
+Blank Canvas
+
+My last tip is to encourage you to experiment and find your own sounds.  An easy way to do this is to set your instrument to manual play and set the start and end volumes of your synth to zero.  This gives you a straight-line for a wave form, which makes no sound.  Then while your bass or lead line plays, alter the waveform until you reach a sound you like.  With a little experimentation you’re sure to come up with some interesting sounds.
