@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jetstream-resources-v2.14.6.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../assets/theme.css">
+<link rel="stylesheet" href="../../assets/types.css">
+<script>window.ROOT="../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/question-bank.html" class="">Questions</a><a href="../../inbox/adr-toc.html" class="">ADRs</a><a href="../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../inbox/server-issues.html" class="">Server issues</a><a href="../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by facet</a></li><li><a href="../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › nats-server-src</div>
+<h1>jetstream-resources-v2.14.6.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#nats-server-src">nats-server-src</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://github.com/nats-io/nats-server">https://github.com/nats-io/nats-server</a> at tag <strong>v2.14.6</strong>, individual <code>server/*.go</code> files from <code>raw.githubusercontent.com</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-server-src/jetstream-resources-v2.14.6.md</code> · 486 lines · 16 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/nats-server-src/jetstream-resources-v2.14.6.md" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></div></div><div class="pn"><a href="../../raw/nats-server-src/jetstream-log-warnings-v2.14.6.md.html">← jetstream-log-warnings-v2.14.6.md</a> · <a href="../../raw/nats-server-src/lame-duck-v2.14.6.md.html">lame-duck-v2.14.6.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://github.com/nats-io/nats-server at tag v2.14.6 · files server/jetstream.go, server/disk_avail.go, server/jetstream_api.go, server/jetstream_cluster.go, server/stream.go, server/filestore.go, server/opts.go · fetched 2026-08-31 --&gt;</span>
+<span id="L2" class="l"># nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">Only the ranges this wiki quotes are stored, with their real line numbers, so each value links to</span>
+<span id="L5" class="l">`https://github.com/nats-io/nats-server/blob/v2.14.6/server/&lt;file&gt;#L&lt;line&gt;`. Apache-2.0.</span>
+<span id="L6" class="l"> </span>
+<span id="L7" class="l">Read for question-bank Q26 (*what happens when JetStream runs out of disk*) and for the docs-issue</span>
+<span id="L8" class="l">sweep of the generated `reference/config/jetstream` block.</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">### `server/jetstream.go` lines 2729–2784</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">```go</span>
+<span id="L13" class="l">  2729	const (</span>
+<span id="L14" class="l">  2730		// JetStreamStoreDir is the prefix we use.</span>
+<span id="L15" class="l">  2731		JetStreamStoreDir = &quot;jetstream&quot;</span>
+<span id="L16" class="l">  2732		// JetStreamMaxStoreDefault is the default disk storage limit. 1TB</span>
+<span id="L17" class="l">  2733		JetStreamMaxStoreDefault = 1024 * 1024 * 1024 * 1024</span>
+<span id="L18" class="l">  2734		// JetStreamMaxMemDefault is only used when we can&#x27;t determine system memory. 256MB</span>
+<span id="L19" class="l">  2735		JetStreamMaxMemDefault = 1024 * 1024 * 256</span>
+<span id="L20" class="l">  2736		// snapshot staging for restores.</span>
+<span id="L21" class="l">  2737		snapStagingDir = &quot;.snap-staging&quot;</span>
+<span id="L22" class="l">  2738	)</span>
+<span id="L23" class="l">  2739	</span>
+<span id="L24" class="l">  2740	// Dynamically create a config with a tmp based directory (repeatable) and 75% of system memory.</span>
+<span id="L25" class="l">  2741	func (s *Server) dynJetStreamConfig(storeDir string, maxStore, maxMem int64) *JetStreamConfig {</span>
+<span id="L26" class="l">  2742		jsc := &amp;JetStreamConfig{}</span>
+<span id="L27" class="l">  2743		if storeDir != _EMPTY_ {</span>
+<span id="L28" class="l">  2744			jsc.StoreDir = filepath.Join(storeDir, JetStreamStoreDir)</span>
+<span id="L29" class="l">  2745		} else {</span>
+<span id="L30" class="l">  2746			// Create one in tmp directory, but make it consistent for restarts.</span>
+<span id="L31" class="l">  2747			jsc.StoreDir = filepath.Join(os.TempDir(), &quot;nats&quot;, JetStreamStoreDir)</span>
+<span id="L32" class="l">  2748			s.Warnf(&quot;Temporary storage directory used, data could be lost on system reboot&quot;)</span>
+<span id="L33" class="l">  2749		}</span>
+<span id="L34" class="l">  2750	</span>
+<span id="L35" class="l">  2751		opts := s.getOpts()</span>
+<span id="L36" class="l">  2752	</span>
+<span id="L37" class="l">  2753		// Strict mode.</span>
+<span id="L38" class="l">  2754		jsc.Strict = !opts.NoJetStreamStrict</span>
+<span id="L39" class="l">  2755	</span>
+<span id="L40" class="l">  2756		// Sync options.</span>
+<span id="L41" class="l">  2757		jsc.SyncInterval = opts.SyncInterval</span>
+<span id="L42" class="l">  2758		jsc.SyncAlways = opts.SyncAlways</span>
+<span id="L43" class="l">  2759	</span>
+<span id="L44" class="l">  2760		if maxStore &gt; 0 || (opts.maxStoreSet &amp;&amp; maxStore == 0) {</span>
+<span id="L45" class="l">  2761			jsc.MaxStore = maxStore</span>
+<span id="L46" class="l">  2762		} else {</span>
+<span id="L47" class="l">  2763			jsc.MaxStore = diskAvailable(jsc.StoreDir)</span>
+<span id="L48" class="l">  2764			jsc.maxStorePending = true</span>
+<span id="L49" class="l">  2765		}</span>
+<span id="L50" class="l">  2766	</span>
+<span id="L51" class="l">  2767		if maxMem &gt; 0 || (opts.maxMemSet &amp;&amp; maxMem == 0) {</span>
+<span id="L52" class="l">  2768			jsc.MaxMemory = maxMem</span>
+<span id="L53" class="l">  2769		} else {</span>
+<span id="L54" class="l">  2770			// Estimate to 75% of total memory if we can determine system memory.</span>
+<span id="L55" class="l">  2771			if sysMem := sysmem.Memory(); sysMem &gt; 0 {</span>
+<span id="L56" class="l">  2772				// Check if we have been limited with GOMEMLIMIT and if lower use that value.</span>
+<span id="L57" class="l">  2773				if gml := debug.SetMemoryLimit(-1); gml != math.MaxInt64 &amp;&amp; gml &lt; sysMem {</span>
+<span id="L58" class="l">  2774					s.Debugf(&quot;JetStream detected GOMEMLIMIT of %v&quot;, friendlyBytes(gml))</span>
+<span id="L59" class="l">  2775					sysMem = gml</span>
+<span id="L60" class="l">  2776				}</span>
+<span id="L61" class="l">  2777				jsc.MaxMemory = sysMem / 4 * 3</span>
+<span id="L62" class="l">  2778			} else {</span>
+<span id="L63" class="l">  2779				jsc.MaxMemory = JetStreamMaxMemDefault</span>
+<span id="L64" class="l">  2780			}</span>
+<span id="L65" class="l">  2781		}</span>
+<span id="L66" class="l">  2782	</span>
+<span id="L67" class="l">  2783		return jsc</span>
+<span id="L68" class="l">  2784	}</span>
+<span id="L69" class="l">```</span>
+<span id="L70" class="l"> </span>
+<span id="L71" class="l">### `server/disk_avail.go` lines 14–37</span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">```go</span>
+<span id="L74" class="l">    14	//go:build !windows &amp;&amp; !openbsd &amp;&amp; !netbsd &amp;&amp; !wasm &amp;&amp; !illumos &amp;&amp; !solaris</span>
+<span id="L75" class="l">    15	</span>
+<span id="L76" class="l">    16	package server</span>
+<span id="L77" class="l">    17	</span>
+<span id="L78" class="l">    18	import (</span>
+<span id="L79" class="l">    19		&quot;os&quot;</span>
+<span id="L80" class="l">    20		&quot;syscall&quot;</span>
+<span id="L81" class="l">    21	)</span>
+<span id="L82" class="l">    22	</span>
+<span id="L83" class="l">    23	func diskAvailable(storeDir string) int64 {</span>
+<span id="L84" class="l">    24		var ba int64</span>
+<span id="L85" class="l">    25		if _, err := os.Stat(storeDir); os.IsNotExist(err) {</span>
+<span id="L86" class="l">    26			os.MkdirAll(storeDir, defaultDirPerms)</span>
+<span id="L87" class="l">    27		}</span>
+<span id="L88" class="l">    28		var fs syscall.Statfs_t</span>
+<span id="L89" class="l">    29		if err := syscall.Statfs(storeDir, &amp;fs); err == nil {</span>
+<span id="L90" class="l">    30			// Estimate 75% of available storage.</span>
+<span id="L91" class="l">    31			ba = int64(uint64(fs.Bavail) * uint64(fs.Bsize) / 4 * 3)</span>
+<span id="L92" class="l">    32		} else {</span>
+<span id="L93" class="l">    33			// Used 1TB default as a guess if all else fails.</span>
+<span id="L94" class="l">    34			ba = JetStreamMaxStoreDefault</span>
+<span id="L95" class="l">    35		}</span>
+<span id="L96" class="l">    36		return ba</span>
+<span id="L97" class="l">    37	}</span>
+<span id="L98" class="l">```</span>
+<span id="L99" class="l"> </span>
+<span id="L100" class="l">### `server/jetstream.go` lines 543–566</span>
+<span id="L101" class="l"> </span>
+<span id="L102" class="l">```go</span>
+<span id="L103" class="l">   543	// finalizeDynamicMaxStore settles a dynamic max store limit once all file based</span>
+<span id="L104" class="l">   544	// streams have been recovered. diskAvailable only reports free space, so add back</span>
+<span id="L105" class="l">   545	// what we occupy ourselves to keep the limit stable across restarts.</span>
+<span id="L106" class="l">   546	func (js *jetStream) finalizeDynamicMaxStore() {</span>
+<span id="L107" class="l">   547		js.mu.Lock()</span>
+<span id="L108" class="l">   548		if !js.config.maxStorePending {</span>
+<span id="L109" class="l">   549			js.mu.Unlock()</span>
+<span id="L110" class="l">   550			return</span>
+<span id="L111" class="l">   551		}</span>
+<span id="L112" class="l">   552		// From here on the limit is real and can be enforced, see sufficientResources.</span>
+<span id="L113" class="l">   553		js.config.maxStorePending = false</span>
+<span id="L114" class="l">   554		recovered := atomic.LoadInt64(&amp;js.storeUsed)</span>
+<span id="L115" class="l">   555		if recovered &lt;= 0 {</span>
+<span id="L116" class="l">   556			js.mu.Unlock()</span>
+<span id="L117" class="l">   557			return</span>
+<span id="L118" class="l">   558		}</span>
+<span id="L119" class="l">   559		// diskAvailable is already scaled down to 75% of what is free, so scale the</span>
+<span id="L120" class="l">   560		// recovered bytes the same way before adding them back.</span>
+<span id="L121" class="l">   561		maxStore := addSaturate(js.config.MaxStore, recovered/4*3)</span>
+<span id="L122" class="l">   562		js.config.MaxStore = maxStore</span>
+<span id="L123" class="l">   563		atomic.StoreInt64(&amp;js.storeMax, maxStore)</span>
+<span id="L124" class="l">   564		js.mu.Unlock()</span>
+<span id="L125" class="l">   565	}</span>
+<span id="L126" class="l">   566	</span>
+<span id="L127" class="l">```</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l">### `server/jetstream.go` lines 2377–2380</span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l">```go</span>
+<span id="L132" class="l">  2377	func (js *jetStream) limitsExceeded(storeType StorageType) bool {</span>
+<span id="L133" class="l">  2378		return js.wouldExceedLimits(storeType, 0)</span>
+<span id="L134" class="l">  2379	}</span>
+<span id="L135" class="l">  2380	</span>
+<span id="L136" class="l">```</span>
+<span id="L137" class="l"> </span>
+<span id="L138" class="l">### `server/jetstream.go` lines 2508–2554</span>
+<span id="L139" class="l"> </span>
+<span id="L140" class="l">```go</span>
+<span id="L141" class="l">  2508	// accountReservation returns how many bytes count against the account limit</span>
+<span id="L142" class="l">  2509	// for a stream with the given replica count. Un-tiered limits are flat, so R&gt;1</span>
+<span id="L143" class="l">  2510	// is counted as Replicas*bytes; tiered limits already bake in replication.</span>
+<span id="L144" class="l">  2511	func accountReservation(tier string, replicas int, bytes int64) int64 {</span>
+<span id="L145" class="l">  2512		if bytes &lt;= 0 {</span>
+<span id="L146" class="l">  2513			return 0</span>
+<span id="L147" class="l">  2514		}</span>
+<span id="L148" class="l">  2515		if tier == _EMPTY_ &amp;&amp; replicas &gt; 1 {</span>
+<span id="L149" class="l">  2516			return mulSaturate(int64(replicas), bytes)</span>
+<span id="L150" class="l">  2517		}</span>
+<span id="L151" class="l">  2518		return bytes</span>
+<span id="L152" class="l">  2519	}</span>
+<span id="L153" class="l">  2520	</span>
+<span id="L154" class="l">  2521	// Check if additional bytes will exceed our account limits and optionally the server itself.</span>
+<span id="L155" class="l">  2522	// Read Lock should be held.</span>
+<span id="L156" class="l">  2523	func (js *jetStream) checkBytesLimits(selectedLimits *JetStreamAccountLimits, tier string, addBytes int64, replicas int, storage StorageType, checkServer bool, currentRes, maxBytesOffset int64) error {</span>
+<span id="L157" class="l">  2524		if addBytes &lt; 0 {</span>
+<span id="L158" class="l">  2525			addBytes = 1</span>
+<span id="L159" class="l">  2526		}</span>
+<span id="L160" class="l">  2527		// The per-server footprint is a single replica&#x27;s worth of bytes; the</span>
+<span id="L161" class="l">  2528		// account footprint additionally accounts for replication in un-tiered setups.</span>
+<span id="L162" class="l">  2529		serverBytes := addSaturate(addBytes, maxBytesOffset)</span>
+<span id="L163" class="l">  2530		accountBytes := accountReservation(tier, replicas, serverBytes)</span>
+<span id="L164" class="l">  2531	</span>
+<span id="L165" class="l">  2532		switch storage {</span>
+<span id="L166" class="l">  2533		case MemoryStorage:</span>
+<span id="L167" class="l">  2534			// Account limits defined.</span>
+<span id="L168" class="l">  2535			if selectedLimits.MaxMemory &gt;= 0 &amp;&amp; (currentRes &gt; selectedLimits.MaxMemory || accountBytes &gt; selectedLimits.MaxMemory-currentRes) {</span>
+<span id="L169" class="l">  2536				return NewJSMemoryResourcesExceededError()</span>
+<span id="L170" class="l">  2537			}</span>
+<span id="L171" class="l">  2538			// Check if this server can handle request.</span>
+<span id="L172" class="l">  2539			if checkServer &amp;&amp; (js.memReserved &gt; js.config.MaxMemory || serverBytes &gt; js.config.MaxMemory-js.memReserved) {</span>
+<span id="L173" class="l">  2540				return NewJSMemoryResourcesExceededError()</span>
+<span id="L174" class="l">  2541			}</span>
+<span id="L175" class="l">  2542		case FileStorage:</span>
+<span id="L176" class="l">  2543			// Account limits defined.</span>
+<span id="L177" class="l">  2544			if selectedLimits.MaxStore &gt;= 0 &amp;&amp; (currentRes &gt; selectedLimits.MaxStore || accountBytes &gt; selectedLimits.MaxStore-currentRes) {</span>
+<span id="L178" class="l">  2545				return NewJSStorageResourcesExceededError()</span>
+<span id="L179" class="l">  2546			}</span>
+<span id="L180" class="l">  2547			// Check if this server can handle request.</span>
+<span id="L181" class="l">  2548			if checkServer &amp;&amp; (js.storeReserved &gt; js.config.MaxStore || serverBytes &gt; js.config.MaxStore-js.storeReserved) {</span>
+<span id="L182" class="l">  2549				return NewJSStorageResourcesExceededError()</span>
+<span id="L183" class="l">  2550			}</span>
+<span id="L184" class="l">  2551		}</span>
+<span id="L185" class="l">  2552	</span>
+<span id="L186" class="l">  2553		return nil</span>
+<span id="L187" class="l">  2554	}</span>
+<span id="L188" class="l">```</span>
+<span id="L189" class="l"> </span>
+<span id="L190" class="l">### `server/jetstream.go` lines 2626–2682</span>
+<span id="L191" class="l"> </span>
+<span id="L192" class="l">```go</span>
+<span id="L193" class="l">  2626	</span>
+<span id="L194" class="l">  2627	// Check to see if we have enough system resources for this account.</span>
+<span id="L195" class="l">  2628	// Lock should be held.</span>
+<span id="L196" class="l">  2629	func (js *jetStream) sufficientResources(limits map[string]JetStreamAccountLimits) error {</span>
+<span id="L197" class="l">  2630		// If we are clustered we do not really know how many resources will be ultimately available.</span>
+<span id="L198" class="l">  2631		// This needs to be handled out of band.</span>
+<span id="L199" class="l">  2632		// If we are a single server, we can make decisions here.</span>
+<span id="L200" class="l">  2633		if limits == nil || !js.standAlone {</span>
+<span id="L201" class="l">  2634			return nil</span>
+<span id="L202" class="l">  2635		}</span>
+<span id="L203" class="l">  2636	</span>
+<span id="L204" class="l">  2637		totalMaxBytes := func(limits map[string]JetStreamAccountLimits) (int64, int64) {</span>
+<span id="L205" class="l">  2638			totalMaxMemory := int64(0)</span>
+<span id="L206" class="l">  2639			totalMaxStore := int64(0)</span>
+<span id="L207" class="l">  2640			for _, l := range limits {</span>
+<span id="L208" class="l">  2641				if l.MaxMemory &gt; 0 {</span>
+<span id="L209" class="l">  2642					totalMaxMemory += l.MaxMemory</span>
+<span id="L210" class="l">  2643				}</span>
+<span id="L211" class="l">  2644				if l.MaxStore &gt; 0 {</span>
+<span id="L212" class="l">  2645					totalMaxStore += l.MaxStore</span>
+<span id="L213" class="l">  2646				}</span>
+<span id="L214" class="l">  2647			}</span>
+<span id="L215" class="l">  2648			return totalMaxMemory, totalMaxStore</span>
+<span id="L216" class="l">  2649		}</span>
+<span id="L217" class="l">  2650	</span>
+<span id="L218" class="l">  2651		totalMaxMemory, totalMaxStore := totalMaxBytes(limits)</span>
+<span id="L219" class="l">  2652	</span>
+<span id="L220" class="l">  2653		// Reserved is now specific to the MaxBytes for streams.</span>
+<span id="L221" class="l">  2654		if js.memReserved+totalMaxMemory &gt; js.config.MaxMemory {</span>
+<span id="L222" class="l">  2655			return NewJSMemoryResourcesExceededError()</span>
+<span id="L223" class="l">  2656		}</span>
+<span id="L224" class="l">  2657		// A dynamic limit is still provisional until recovery has run.</span>
+<span id="L225" class="l">  2658		recovering := js.config.maxStorePending</span>
+<span id="L226" class="l">  2659		if !recovering &amp;&amp; js.storeReserved+totalMaxStore &gt; js.config.MaxStore {</span>
+<span id="L227" class="l">  2660			return NewJSStorageResourcesExceededError()</span>
+<span id="L228" class="l">  2661		}</span>
+<span id="L229" class="l">  2662	</span>
+<span id="L230" class="l">  2663		// Since we know if we are here we are single server mode, check the account reservations.</span>
+<span id="L231" class="l">  2664		var storeReserved, memReserved int64</span>
+<span id="L232" class="l">  2665		for _, jsa := range js.accounts {</span>
+<span id="L233" class="l">  2666			if jsa.account.IsExpired() {</span>
+<span id="L234" class="l">  2667				continue</span>
+<span id="L235" class="l">  2668			}</span>
+<span id="L236" class="l">  2669			jsa.usageMu.RLock()</span>
+<span id="L237" class="l">  2670			maxMemory, maxStore := totalMaxBytes(jsa.limits)</span>
+<span id="L238" class="l">  2671			jsa.usageMu.RUnlock()</span>
+<span id="L239" class="l">  2672			memReserved += maxMemory</span>
+<span id="L240" class="l">  2673			storeReserved += maxStore</span>
+<span id="L241" class="l">  2674		}</span>
+<span id="L242" class="l">  2675	</span>
+<span id="L243" class="l">  2676		if memReserved+totalMaxMemory &gt; js.config.MaxMemory {</span>
+<span id="L244" class="l">  2677			return NewJSMemoryResourcesExceededError()</span>
+<span id="L245" class="l">  2678		}</span>
+<span id="L246" class="l">  2679		if !recovering &amp;&amp; storeReserved+totalMaxStore &gt; js.config.MaxStore {</span>
+<span id="L247" class="l">  2680			return NewJSStorageResourcesExceededError()</span>
+<span id="L248" class="l">  2681		}</span>
+<span id="L249" class="l">  2682	</span>
+<span id="L250" class="l">```</span>
+<span id="L251" class="l"> </span>
+<span id="L252" class="l">### `server/jetstream.go` lines 2686–2700</span>
+<span id="L253" class="l"> </span>
+<span id="L254" class="l">```go</span>
+<span id="L255" class="l">  2686	// This will reserve the stream resources requested.</span>
+<span id="L256" class="l">  2687	// This will spin off off of MaxBytes.</span>
+<span id="L257" class="l">  2688	func (js *jetStream) reserveStreamResources(cfg *StreamConfig) {</span>
+<span id="L258" class="l">  2689		if cfg == nil || cfg.MaxBytes &lt;= 0 {</span>
+<span id="L259" class="l">  2690			return</span>
+<span id="L260" class="l">  2691		}</span>
+<span id="L261" class="l">  2692	</span>
+<span id="L262" class="l">  2693		js.mu.Lock()</span>
+<span id="L263" class="l">  2694		switch cfg.Storage {</span>
+<span id="L264" class="l">  2695		case MemoryStorage:</span>
+<span id="L265" class="l">  2696			js.memReserved += cfg.MaxBytes</span>
+<span id="L266" class="l">  2697		case FileStorage:</span>
+<span id="L267" class="l">  2698			js.storeReserved += cfg.MaxBytes</span>
+<span id="L268" class="l">  2699		}</span>
+<span id="L269" class="l">  2700		s, clustered := js.srv, !js.standAlone</span>
+<span id="L270" class="l">```</span>
+<span id="L271" class="l"> </span>
+<span id="L272" class="l">### `server/jetstream.go` lines 636–696</span>
+<span id="L273" class="l"> </span>
+<span id="L274" class="l">```go</span>
+<span id="L275" class="l">   636	func (s *Server) jetStreamOOSPending() (wasPending bool) {</span>
+<span id="L276" class="l">   637		if js := s.getJetStream(); js != nil {</span>
+<span id="L277" class="l">   638			js.mu.Lock()</span>
+<span id="L278" class="l">   639			wasPending = js.oos</span>
+<span id="L279" class="l">   640			js.oos = true</span>
+<span id="L280" class="l">   641			js.mu.Unlock()</span>
+<span id="L281" class="l">   642		}</span>
+<span id="L282" class="l">   643		return wasPending</span>
+<span id="L283" class="l">   644	}</span>
+<span id="L284" class="l">   645	</span>
+<span id="L285" class="l">   646	func (s *Server) setJetStreamDisabled() {</span>
+<span id="L286" class="l">   647		if js := s.getJetStream(); js != nil {</span>
+<span id="L287" class="l">   648			js.disabled.Store(true)</span>
+<span id="L288" class="l">   649		}</span>
+<span id="L289" class="l">   650	}</span>
+<span id="L290" class="l">   651	</span>
+<span id="L291" class="l">   652	func (s *Server) handleOutOfSpace(mset *stream) {</span>
+<span id="L292" class="l">   653		if s.JetStreamEnabled() &amp;&amp; !s.jetStreamOOSPending() {</span>
+<span id="L293" class="l">   654			var stream string</span>
+<span id="L294" class="l">   655			if mset != nil {</span>
+<span id="L295" class="l">   656				stream = mset.name()</span>
+<span id="L296" class="l">   657				s.Errorf(&quot;JetStream out of %s resources, will be DISABLED&quot;, mset.Store().Type())</span>
+<span id="L297" class="l">   658			} else {</span>
+<span id="L298" class="l">   659				s.Errorf(&quot;JetStream out of resources, will be DISABLED&quot;)</span>
+<span id="L299" class="l">   660			}</span>
+<span id="L300" class="l">   661	</span>
+<span id="L301" class="l">   662			go s.ShutdownJetStream()</span>
+<span id="L302" class="l">   663	</span>
+<span id="L303" class="l">   664			adv := &amp;JSServerOutOfSpaceAdvisory{</span>
+<span id="L304" class="l">   665				TypedEvent: TypedEvent{</span>
+<span id="L305" class="l">   666					Type: JSServerOutOfStorageAdvisoryType,</span>
+<span id="L306" class="l">   667					ID:   nuid.Next(),</span>
+<span id="L307" class="l">   668					Time: time.Now().UTC(),</span>
+<span id="L308" class="l">   669				},</span>
+<span id="L309" class="l">   670				Server:   s.Name(),</span>
+<span id="L310" class="l">   671				ServerID: s.ID(),</span>
+<span id="L311" class="l">   672				Stream:   stream,</span>
+<span id="L312" class="l">   673				Cluster:  s.cachedClusterName(),</span>
+<span id="L313" class="l">   674				Domain:   s.getOpts().JetStreamDomain,</span>
+<span id="L314" class="l">   675			}</span>
+<span id="L315" class="l">   676			s.publishAdvisory(nil, JSAdvisoryServerOutOfStorage, adv)</span>
+<span id="L316" class="l">   677		}</span>
+<span id="L317" class="l">   678	}</span>
+<span id="L318" class="l">   679	</span>
+<span id="L319" class="l">   680	// DisableJetStream will turn off JetStream and signals in clustered mode</span>
+<span id="L320" class="l">   681	// to have the metacontroller remove us from the peer list. Persistent</span>
+<span id="L321" class="l">   682	// meta-raft state on disk is removed. For transient runtime errors where</span>
+<span id="L322" class="l">   683	// the server should rejoin its existing meta group on restart, use</span>
+<span id="L323" class="l">   684	// ShutdownJetStream instead.</span>
+<span id="L324" class="l">   685	func (s *Server) DisableJetStream() error {</span>
+<span id="L325" class="l">   686		return s.disableJetStream(true)</span>
+<span id="L326" class="l">   687	}</span>
+<span id="L327" class="l">   688	</span>
+<span id="L328" class="l">   689	// ShutdownJetStream is like DisableJetStream but preserves persistent</span>
+<span id="L329" class="l">   690	// meta-raft state on disk so the server can rejoin the existing meta</span>
+<span id="L330" class="l">   691	// group on restart. Use for transient runtime errors that the operator</span>
+<span id="L331" class="l">   692	// is expected to fix before restarting.</span>
+<span id="L332" class="l">   693	func (s *Server) ShutdownJetStream() error {</span>
+<span id="L333" class="l">   694		return s.disableJetStream(false)</span>
+<span id="L334" class="l">   695	}</span>
+<span id="L335" class="l">   696	</span>
+<span id="L336" class="l">```</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">### `server/raft.go` lines 752–759</span>
+<span id="L339" class="l"> </span>
+<span id="L340" class="l">```go</span>
+<span id="L341" class="l">   752	// outOfResources checks to see if we are out of resources.</span>
+<span id="L342" class="l">   753	func (n *raft) outOfResources() bool {</span>
+<span id="L343" class="l">   754		js := n.js</span>
+<span id="L344" class="l">   755		if !n.track || js == nil {</span>
+<span id="L345" class="l">   756			return false</span>
+<span id="L346" class="l">   757		}</span>
+<span id="L347" class="l">   758		return js.limitsExceeded(n.wtype)</span>
+<span id="L348" class="l">   759	}</span>
+<span id="L349" class="l">```</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">### `server/raft.go` lines 5155–5188</span>
+<span id="L352" class="l"> </span>
+<span id="L353" class="l">```go</span>
+<span id="L354" class="l">  5155		if err == ErrStoreClosed ||</span>
+<span id="L355" class="l">  5156			err == ErrStoreEOF ||</span>
+<span id="L356" class="l">  5157			err == ErrStoreMsgNotFound ||</span>
+<span id="L357" class="l">  5158			err == errNoPending ||</span>
+<span id="L358" class="l">  5159			err == errPartialCache {</span>
+<span id="L359" class="l">  5160			return</span>
+<span id="L360" class="l">  5161		}</span>
+<span id="L361" class="l">  5162		// If this is a not found report but do not disable.</span>
+<span id="L362" class="l">  5163		if os.IsNotExist(err) {</span>
+<span id="L363" class="l">  5164			n.warn(&quot;Resource not found: %v&quot;, err)</span>
+<span id="L364" class="l">  5165			return</span>
+<span id="L365" class="l">  5166		}</span>
+<span id="L366" class="l">  5167		n.error(&quot;Critical write error: %v&quot;, err)</span>
+<span id="L367" class="l">  5168		n.werr = err</span>
+<span id="L368" class="l">  5169		// Abort any inflight async snapshot checkpoint.</span>
+<span id="L369" class="l">  5170		n.snapshotting = false</span>
+<span id="L370" class="l">  5171		n.shutdown()</span>
+<span id="L371" class="l">  5172		assert.Unreachable(&quot;Raft encountered write error&quot;, map[string]any{</span>
+<span id="L372" class="l">  5173			&quot;n.accName&quot;: n.accName,</span>
+<span id="L373" class="l">  5174			&quot;n.group&quot;:   n.group,</span>
+<span id="L374" class="l">  5175			&quot;n.id&quot;:      n.id,</span>
+<span id="L375" class="l">  5176			&quot;err&quot;:       err,</span>
+<span id="L376" class="l">  5177		})</span>
+<span id="L377" class="l">  5178	</span>
+<span id="L378" class="l">  5179		if isPermissionError(err) {</span>
+<span id="L379" class="l">  5180			go n.s.handleWritePermissionError()</span>
+<span id="L380" class="l">  5181		}</span>
+<span id="L381" class="l">  5182	</span>
+<span id="L382" class="l">  5183		if isOutOfSpaceErr(err) {</span>
+<span id="L383" class="l">  5184			// For now since this can be happening all under the covers, we will call up and disable JetStream.</span>
+<span id="L384" class="l">  5185			go n.s.handleOutOfSpace(nil)</span>
+<span id="L385" class="l">  5186		}</span>
+<span id="L386" class="l">  5187	}</span>
+<span id="L387" class="l">  5188	</span>
+<span id="L388" class="l">```</span>
+<span id="L389" class="l"> </span>
+<span id="L390" class="l">---</span>
+<span id="L391" class="l"> </span>
+<span id="L392" class="l">## The generated config reference&#x27;s defaults, verified</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l">The values behind the `reference/config/jetstream` table, each at its definition site.</span>
+<span id="L395" class="l"> </span>
+<span id="L396" class="l">### `server/stream.go` lines 439–443</span>
+<span id="L397" class="l"> </span>
+<span id="L398" class="l">```go</span>
+<span id="L399" class="l">   439	// For managing stream ingest.</span>
+<span id="L400" class="l">   440	const (</span>
+<span id="L401" class="l">   441		streamDefaultMaxQueueMsgs  = 100_000</span>
+<span id="L402" class="l">   442		streamDefaultMaxQueueBytes = 128 * 1024 * 1024</span>
+<span id="L403" class="l">   443	)</span>
+<span id="L404" class="l">```</span>
+<span id="L405" class="l"> </span>
+<span id="L406" class="l">### `server/stream.go` lines 899–907</span>
+<span id="L407" class="l"> </span>
+<span id="L408" class="l">```go</span>
+<span id="L409" class="l">   899		// Work out the stream ingest limits.</span>
+<span id="L410" class="l">   900		mlen := s.opts.StreamMaxBufferedMsgs</span>
+<span id="L411" class="l">   901		msz := uint64(s.opts.StreamMaxBufferedSize)</span>
+<span id="L412" class="l">   902		if mlen == 0 {</span>
+<span id="L413" class="l">   903			mlen = streamDefaultMaxQueueMsgs</span>
+<span id="L414" class="l">   904		}</span>
+<span id="L415" class="l">   905		if msz == 0 {</span>
+<span id="L416" class="l">   906			msz = streamDefaultMaxQueueBytes</span>
+<span id="L417" class="l">   907		}</span>
+<span id="L418" class="l">```</span>
+<span id="L419" class="l"> </span>
+<span id="L420" class="l">### `server/jetstream_cluster.go` lines 11155–11159</span>
+<span id="L421" class="l"> </span>
+<span id="L422" class="l">```go</span>
+<span id="L423" class="l"> 11155	// 64MB for now, for the total server. This is max we will blast out if asked to</span>
+<span id="L424" class="l"> 11156	// do so to another server for purposes of catchups.</span>
+<span id="L425" class="l"> 11157	// This number should be ok on 1Gbit interface.</span>
+<span id="L426" class="l"> 11158	const defaultMaxTotalCatchupOutBytes = int64(64 * 1024 * 1024)</span>
+<span id="L427" class="l"> 11159	</span>
+<span id="L428" class="l">```</span>
+<span id="L429" class="l"> </span>
+<span id="L430" class="l">### `server/jetstream.go` lines 421–435</span>
+<span id="L431" class="l"> </span>
+<span id="L432" class="l">```go</span>
+<span id="L433" class="l">   421	func (s *Server) enableJetStream(cfg JetStreamConfig) error {</span>
+<span id="L434" class="l">   422		js := &amp;jetStream{srv: s, config: cfg, accounts: make(map[string]*jsAccount), apiSubs: NewSublistNoCache(), infoSubs: gsl.NewSimpleSublist()}</span>
+<span id="L435" class="l">   423		s.gcbMu.Lock()</span>
+<span id="L436" class="l">   424		if s.gcbOutMax = s.getOpts().JetStreamMaxCatchup; s.gcbOutMax == 0 {</span>
+<span id="L437" class="l">   425			s.gcbOutMax = defaultMaxTotalCatchupOutBytes</span>
+<span id="L438" class="l">   426		}</span>
+<span id="L439" class="l">   427		s.gcbMu.Unlock()</span>
+<span id="L440" class="l">   428	</span>
+<span id="L441" class="l">   429		atomic.StoreInt64(&amp;js.memMax, cfg.MaxMemory)</span>
+<span id="L442" class="l">   430		atomic.StoreInt64(&amp;js.storeMax, cfg.MaxStore)</span>
+<span id="L443" class="l">   431	</span>
+<span id="L444" class="l">   432		// TODO: Not currently reloadable.</span>
+<span id="L445" class="l">   433		atomic.StoreInt64(&amp;js.queueLimit, s.getOpts().JetStreamRequestQueueLimit)</span>
+<span id="L446" class="l">   434		atomic.StoreInt64(&amp;js.infoQueueLimit, s.getOpts().JetStreamInfoQueueLimit)</span>
+<span id="L447" class="l">   435	</span>
+<span id="L448" class="l">```</span>
+<span id="L449" class="l"> </span>
+<span id="L450" class="l">### `server/opts.go` lines 6177–6188</span>
+<span id="L451" class="l"> </span>
+<span id="L452" class="l">```go</span>
+<span id="L453" class="l">  6177		if opts.SyncInterval == 0 &amp;&amp; !opts.syncSet {</span>
+<span id="L454" class="l">  6178			opts.SyncInterval = defaultSyncInterval</span>
+<span id="L455" class="l">  6179		}</span>
+<span id="L456" class="l">  6180		if opts.JetStreamRequestQueueLimit &lt;= 0 {</span>
+<span id="L457" class="l">  6181			opts.JetStreamRequestQueueLimit = JSDefaultRequestQueueLimit</span>
+<span id="L458" class="l">  6182		}</span>
+<span id="L459" class="l">  6183		if opts.JetStreamInfoQueueLimit &lt;= 0 {</span>
+<span id="L460" class="l">  6184			opts.JetStreamInfoQueueLimit = opts.JetStreamRequestQueueLimit</span>
+<span id="L461" class="l">  6185		}</span>
+<span id="L462" class="l">  6186		if opts.JetStreamConcurrentIOs &lt;= 0 {</span>
+<span id="L463" class="l">  6187			opts.JetStreamConcurrentIOs = defaultConcurrentIOs</span>
+<span id="L464" class="l">  6188		}</span>
+<span id="L465" class="l">```</span>
+<span id="L466" class="l"> </span>
+<span id="L467" class="l">### `server/jetstream_api.go` lines 364–368</span>
+<span id="L468" class="l"> </span>
+<span id="L469" class="l">```go</span>
+<span id="L470" class="l">   364	</span>
+<span id="L471" class="l">   365	// JSDefaultRequestQueueLimit is the default number of entries that we will</span>
+<span id="L472" class="l">   366	// put on the global request queue before we react.</span>
+<span id="L473" class="l">   367	const JSDefaultRequestQueueLimit = 10_000</span>
+<span id="L474" class="l">   368	</span>
+<span id="L475" class="l">```</span>
+<span id="L476" class="l"> </span>
+<span id="L477" class="l">### `server/filestore.go` lines 331–335</span>
+<span id="L478" class="l"> </span>
+<span id="L479" class="l">```go</span>
+<span id="L480" class="l">   331		defaultCacheBufferExpiration = 10 * time.Second</span>
+<span id="L481" class="l">   332		// default sync interval</span>
+<span id="L482" class="l">   333		defaultSyncInterval = 2 * time.Minute</span>
+<span id="L483" class="l">   334		// default idle timeout to close FDs.</span>
+<span id="L484" class="l">   335		closeFDsIdle = 30 * time.Second</span>
+<span id="L485" class="l">```</span>
+<span id="L486" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/nats-server-src/jetstream-log-warnings-v2.14.6.md.html">← jetstream-log-warnings-v2.14.6.md</a> · <a href="../../raw/nats-server-src/lame-duck-v2.14.6.md.html">lame-duck-v2.14.6.md →</a></div></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

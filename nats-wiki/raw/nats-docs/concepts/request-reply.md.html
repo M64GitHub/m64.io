@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docs.nats.io — request-reply.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="stylesheet" href="../../../assets/theme.css">
+<link rel="stylesheet" href="../../../assets/types.css">
+<script>window.ROOT="../../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../../index.html" class="">Home</a><a href="../../../graph.html" class="">Graph</a><a href="../../../cheatsheets.html" class="">Cheat sheets</a><a href="../../../browse.html" class="">Browse</a><a href="../../../inbox/question-bank.html" class="">Questions</a><a href="../../../inbox/adr-toc.html" class="">ADRs</a><a href="../../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../../inbox/server-issues.html" class="">Server issues</a><a href="../../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../../sources.html" class="on">Sources</a><a href="../../../health.html" class="">Health</a><a href="../../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell norail">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../../graph.html">Link graph</a></li><li><a href="../../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../../browse.html">Browse by facet</a></li><li><a href="../../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../../sources.html">Raw sources</a></li><li><a href="../../../wanted.html">Wanted pages</a></li><li><a href="../../../health.html">Wiki health</a></li><li><a href="../../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../../index.html">Home</a> › <a href="../../../sources.html">Sources</a> › nats-docs</div>
+<h1>docs.nats.io — request-reply.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../../sources.html#nats-docs">nats-docs</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://docs.nats.io">https://docs.nats.io</a> — paths taken from the site's <code>llms.txt</code>, fetched by <code>tools/fetch-docs.py</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-docs/concepts/request-reply.md</code> · 2056 lines · 35 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../../raw/nats-docs/concepts/request-reply.md" download>download this file</a></div></div><div class="pn"><a href="../../../raw/nats-docs/concepts/queue-groups.md.html">← queue-groups.md</a> · <a href="../../../raw/nats-docs/concepts/security.md.html">security.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://docs.nats.io/concepts/request-reply.md · fetched 2026-08-31 · section: request-reply --&gt;</span>
+<span id="L2" class="l"># Request-Reply</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">Request-Reply is a communication pattern that brings synchronous communication to NATS&#x27;s asynchronous messaging system. It allows a client to send a request and wait for a response, building RPC-style interactions on top of the core publish-subscribe mechanism.</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">For a runnable, step-by-step treatment, see the [request-reply chapter in the Core NATS deep dive](/learn/core-nats/request-reply.md).</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">## How Request-Reply Works</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">Under the hood, request-reply uses NATS&#x27;s publish-subscribe with these steps:</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">1. **Client creates a unique reply subject** (inbox)</span>
+<span id="L13" class="l">2. **Client subscribes to the reply subject**</span>
+<span id="L14" class="l">3. **Client publishes the request** with the reply subject</span>
+<span id="L15" class="l">4. **Service receives the request** and sees the reply subject</span>
+<span id="L16" class="l">5. **Service publishes the response** to the reply subject</span>
+<span id="L17" class="l">6. **Client receives the response**</span>
+<span id="L18" class="l"> </span>
+<span id="L19" class="l">This pattern is so common that NATS clients provide a simplified `request()` method that handles all these steps automatically.</span>
+<span id="L20" class="l"> </span>
+<span id="L21" class="l">**Message flow — Request / Reply:** Request-reply pattern where a client sends a request and waits for a response from a service</span>
+<span id="L22" class="l"> </span>
+<span id="L23" class="l">* Client → NATS (subject: get.user.150)</span>
+<span id="L24" class="l">* NATS → Service (subject: get.user.150)</span>
+<span id="L25" class="l">* Service → NATS (subject: \_INBOX.\&lt;nuid&gt;)</span>
+<span id="L26" class="l">* NATS → Client (subject: \_INBOX.\&lt;nuid&gt;)</span>
+<span id="L27" class="l"> </span>
+<span id="L28" class="l">In the animation above:</span>
+<span id="L29" class="l"> </span>
+<span id="L30" class="l">* The **orange arrow** shows the request flowing from client to service</span>
+<span id="L31" class="l">* The **green dashed arrow** shows the reply flowing back</span>
+<span id="L32" class="l">* This demonstrates the bidirectional, synchronous nature of request-reply</span>
+<span id="L33" class="l"> </span>
+<span id="L34" class="l">## Basic Request-Reply</span>
+<span id="L35" class="l"> </span>
+<span id="L36" class="l">#### CLI</span>
+<span id="L37" class="l"> </span>
+<span id="L38" class="l">```</span>
+<span id="L39" class="l"># Terminal 1: Set up a service that responds to time requests</span>
+<span id="L40" class="l"> </span>
+<span id="L41" class="l">nats reply time --command &quot;date&quot;</span>
+<span id="L42" class="l"> </span>
+<span id="L43" class="l"> </span>
+<span id="L44" class="l"> </span>
+<span id="L45" class="l"># Terminal 2: Make a request</span>
+<span id="L46" class="l"> </span>
+<span id="L47" class="l">nats request time &quot;&quot;</span>
+<span id="L48" class="l"> </span>
+<span id="L49" class="l"> </span>
+<span id="L50" class="l"> </span>
+<span id="L51" class="l"># Output: Wed Nov 15 10:23:45 PST 2023</span>
+<span id="L52" class="l">```</span>
+<span id="L53" class="l"> </span>
+<span id="L54" class="l">#### JavaScript/TypeScript</span>
+<span id="L55" class="l"> </span>
+<span id="L56" class="l">```</span>
+<span id="L57" class="l">// Set up a service</span>
+<span id="L58" class="l"> </span>
+<span id="L59" class="l">nc.subscribe(&quot;time&quot;, {</span>
+<span id="L60" class="l"> </span>
+<span id="L61" class="l">  callback: (_err, msg) =&gt; {</span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l">    const time = new Date().toISOString();</span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l">    msg.respond(time);</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l">  },</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l">});</span>
+<span id="L70" class="l"> </span>
+<span id="L71" class="l"> </span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">// Make a request</span>
+<span id="L74" class="l"> </span>
+<span id="L75" class="l"> </span>
+<span id="L76" class="l"> </span>
+<span id="L77" class="l">await nc.request(&quot;time&quot;, &quot;&quot;)</span>
+<span id="L78" class="l"> </span>
+<span id="L79" class="l">  .then((m) =&gt; {</span>
+<span id="L80" class="l"> </span>
+<span id="L81" class="l">    console.log(`Response: ${m.string()}`);</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l">  })</span>
+<span id="L84" class="l"> </span>
+<span id="L85" class="l">  .catch((err) =&gt; {</span>
+<span id="L86" class="l"> </span>
+<span id="L87" class="l">    console.log(`Request failed: ${err.message}`);</span>
+<span id="L88" class="l"> </span>
+<span id="L89" class="l">  });</span>
+<span id="L90" class="l">```</span>
+<span id="L91" class="l"> </span>
+<span id="L92" class="l">#### Go</span>
+<span id="L93" class="l"> </span>
+<span id="L94" class="l">```</span>
+<span id="L95" class="l">// Set up a service</span>
+<span id="L96" class="l"> </span>
+<span id="L97" class="l">nc.Subscribe(&quot;time&quot;, func(m *nats.Msg) {</span>
+<span id="L98" class="l"> </span>
+<span id="L99" class="l">	timeStr := time.Now().Format(time.RFC3339)</span>
+<span id="L100" class="l"> </span>
+<span id="L101" class="l">	m.Respond([]byte(timeStr))</span>
+<span id="L102" class="l"> </span>
+<span id="L103" class="l">})</span>
+<span id="L104" class="l"> </span>
+<span id="L105" class="l"> </span>
+<span id="L106" class="l"> </span>
+<span id="L107" class="l">// Make a request</span>
+<span id="L108" class="l"> </span>
+<span id="L109" class="l">msg, err := nc.Request(&quot;time&quot;, nil, 1*time.Second)</span>
+<span id="L110" class="l"> </span>
+<span id="L111" class="l">if err != nil {</span>
+<span id="L112" class="l"> </span>
+<span id="L113" class="l">	fmt.Printf(&quot;Request failed: %v\n&quot;, err)</span>
+<span id="L114" class="l"> </span>
+<span id="L115" class="l">	return</span>
+<span id="L116" class="l"> </span>
+<span id="L117" class="l">}</span>
+<span id="L118" class="l"> </span>
+<span id="L119" class="l">fmt.Printf(&quot;Response: %s\n&quot;, string(msg.Data))</span>
+<span id="L120" class="l">```</span>
+<span id="L121" class="l"> </span>
+<span id="L122" class="l">#### Python</span>
+<span id="L123" class="l"> </span>
+<span id="L124" class="l">```</span>
+<span id="L125" class="l"># Set up a service</span>
+<span id="L126" class="l"> </span>
+<span id="L127" class="l">sub = await nc.subscribe(&quot;time&quot;)</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l"> </span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l">async def time_service():</span>
+<span id="L132" class="l"> </span>
+<span id="L133" class="l">    async for msg in sub:</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l">        now = datetime.now(timezone.utc).isoformat()</span>
+<span id="L136" class="l"> </span>
+<span id="L137" class="l">        if msg.reply:</span>
+<span id="L138" class="l"> </span>
+<span id="L139" class="l">            await nc.publish(msg.reply, now.encode())</span>
+<span id="L140" class="l"> </span>
+<span id="L141" class="l"> </span>
+<span id="L142" class="l"> </span>
+<span id="L143" class="l">asyncio.create_task(time_service())</span>
+<span id="L144" class="l"> </span>
+<span id="L145" class="l">await nc.flush()</span>
+<span id="L146" class="l"> </span>
+<span id="L147" class="l"> </span>
+<span id="L148" class="l"> </span>
+<span id="L149" class="l"># Make a request with a timeout and direct response</span>
+<span id="L150" class="l"> </span>
+<span id="L151" class="l">try:</span>
+<span id="L152" class="l"> </span>
+<span id="L153" class="l">    m = await nc.request(&quot;time&quot;, b&quot;&quot;, timeout=1)</span>
+<span id="L154" class="l"> </span>
+<span id="L155" class="l">    print(f&quot;Response: {m.data.decode()}&quot;)</span>
+<span id="L156" class="l"> </span>
+<span id="L157" class="l">except (TimeoutError, NoRespondersError):</span>
+<span id="L158" class="l"> </span>
+<span id="L159" class="l">    print(&quot;Request failed, no response.&quot;)</span>
+<span id="L160" class="l">```</span>
+<span id="L161" class="l"> </span>
+<span id="L162" class="l">#### Java</span>
+<span id="L163" class="l"> </span>
+<span id="L164" class="l">```</span>
+<span id="L165" class="l">// Set up a service</span>
+<span id="L166" class="l"> </span>
+<span id="L167" class="l">Dispatcher dTime = nc.createDispatcher(msg -&gt; {</span>
+<span id="L168" class="l"> </span>
+<span id="L169" class="l">    nc.publish(msg.getReplyTo(), ZonedDateTime.now()</span>
+<span id="L170" class="l"> </span>
+<span id="L171" class="l">        .withZoneSameInstant(ZoneId.of(&quot;GMT&quot;))</span>
+<span id="L172" class="l"> </span>
+<span id="L173" class="l">        .format(DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&#x27;T&#x27;HH:mm:ss.nnnnnnnnn&#x27;Z&#x27;&quot;))</span>
+<span id="L174" class="l"> </span>
+<span id="L175" class="l">        .getBytes(StandardCharsets.ISO_8859_1));</span>
+<span id="L176" class="l"> </span>
+<span id="L177" class="l">});</span>
+<span id="L178" class="l"> </span>
+<span id="L179" class="l">dTime.subscribe(&quot;time&quot;);</span>
+<span id="L180" class="l"> </span>
+<span id="L181" class="l"> </span>
+<span id="L182" class="l"> </span>
+<span id="L183" class="l">// Make a request with a timeout and direct response</span>
+<span id="L184" class="l"> </span>
+<span id="L185" class="l">Message m = nc.request(&quot;time&quot;, null, Duration.ofSeconds(1));</span>
+<span id="L186" class="l"> </span>
+<span id="L187" class="l">if (m == null) {</span>
+<span id="L188" class="l"> </span>
+<span id="L189" class="l">    System.out.println(&quot;Request failed, no response.&quot;);</span>
+<span id="L190" class="l"> </span>
+<span id="L191" class="l">}</span>
+<span id="L192" class="l"> </span>
+<span id="L193" class="l">else {</span>
+<span id="L194" class="l"> </span>
+<span id="L195" class="l">    System.out.println(&quot;Response: &quot; + new String(m.getData()));</span>
+<span id="L196" class="l"> </span>
+<span id="L197" class="l">}</span>
+<span id="L198" class="l">```</span>
+<span id="L199" class="l"> </span>
+<span id="L200" class="l">#### Rust</span>
+<span id="L201" class="l"> </span>
+<span id="L202" class="l">```</span>
+<span id="L203" class="l">// Set up a service</span>
+<span id="L204" class="l"> </span>
+<span id="L205" class="l">let mut sub = client.subscribe(&quot;time&quot;).await?;</span>
+<span id="L206" class="l"> </span>
+<span id="L207" class="l">let service_client = client.clone();</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l"> </span>
+<span id="L210" class="l"> </span>
+<span id="L211" class="l">tokio::spawn(async move {</span>
+<span id="L212" class="l"> </span>
+<span id="L213" class="l">    while let Some(msg) = sub.next().await {</span>
+<span id="L214" class="l"> </span>
+<span id="L215" class="l">        let time = chrono::Utc::now().to_rfc3339();</span>
+<span id="L216" class="l"> </span>
+<span id="L217" class="l">        if let Some(reply) = msg.reply {</span>
+<span id="L218" class="l"> </span>
+<span id="L219" class="l">            service_client.publish(reply, time.into()).await.ok();</span>
+<span id="L220" class="l"> </span>
+<span id="L221" class="l">        }</span>
+<span id="L222" class="l"> </span>
+<span id="L223" class="l">    }</span>
+<span id="L224" class="l"> </span>
+<span id="L225" class="l">});</span>
+<span id="L226" class="l"> </span>
+<span id="L227" class="l"> </span>
+<span id="L228" class="l"> </span>
+<span id="L229" class="l">// Make a request</span>
+<span id="L230" class="l"> </span>
+<span id="L231" class="l">let response = client.request(&quot;time&quot;, &quot;&quot;.into()).await?;</span>
+<span id="L232" class="l"> </span>
+<span id="L233" class="l">println!(&quot;Response: {}&quot;, String::from_utf8_lossy(&amp;response.payload));</span>
+<span id="L234" class="l">```</span>
+<span id="L235" class="l"> </span>
+<span id="L236" class="l">#### C#/.NET</span>
+<span id="L237" class="l"> </span>
+<span id="L238" class="l">```</span>
+<span id="L239" class="l">// Set up a service that replies with the current time</span>
+<span id="L240" class="l"> </span>
+<span id="L241" class="l">// DateTime would be serialized as an ISO-formatted string, just like all primitive types.</span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l">_ = Task.Run(async () =&gt;</span>
+<span id="L244" class="l"> </span>
+<span id="L245" class="l">{</span>
+<span id="L246" class="l"> </span>
+<span id="L247" class="l">    await foreach (var msg in client.SubscribeAsync&lt;DateTime&gt;(&quot;time&quot;))</span>
+<span id="L248" class="l"> </span>
+<span id="L249" class="l">    {</span>
+<span id="L250" class="l"> </span>
+<span id="L251" class="l">        await msg.ReplyAsync(DateTime.Now);</span>
+<span id="L252" class="l"> </span>
+<span id="L253" class="l">    }</span>
+<span id="L254" class="l"> </span>
+<span id="L255" class="l">});</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l"> </span>
+<span id="L258" class="l"> </span>
+<span id="L259" class="l">// Give the subscription task time to start before publishing</span>
+<span id="L260" class="l"> </span>
+<span id="L261" class="l">await Task.Delay(1000);</span>
+<span id="L262" class="l"> </span>
+<span id="L263" class="l"> </span>
+<span id="L264" class="l"> </span>
+<span id="L265" class="l">// Make a request</span>
+<span id="L266" class="l"> </span>
+<span id="L267" class="l">var reply = await client.RequestAsync&lt;DateTime&gt;(&quot;time&quot;);</span>
+<span id="L268" class="l"> </span>
+<span id="L269" class="l">output.WriteLine($&quot;Time is {reply.Data:O}&quot;);</span>
+<span id="L270" class="l">```</span>
+<span id="L271" class="l"> </span>
+<span id="L272" class="l">#### C</span>
+<span id="L273" class="l"> </span>
+<span id="L274" class="l">```</span>
+<span id="L275" class="l">// Set up a service: reply to each request with the current time</span>
+<span id="L276" class="l"> </span>
+<span id="L277" class="l">static void</span>
+<span id="L278" class="l"> </span>
+<span id="L279" class="l">onTimeRequest(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L280" class="l"> </span>
+<span id="L281" class="l">{</span>
+<span id="L282" class="l"> </span>
+<span id="L283" class="l">    char    timeStr[64];</span>
+<span id="L284" class="l"> </span>
+<span id="L285" class="l">    time_t  now = time(NULL);</span>
+<span id="L286" class="l"> </span>
+<span id="L287" class="l"> </span>
+<span id="L288" class="l"> </span>
+<span id="L289" class="l">    strftime(timeStr, sizeof(timeStr), &quot;%Y-%m-%dT%H:%M:%S%z&quot;, localtime(&amp;now));</span>
+<span id="L290" class="l"> </span>
+<span id="L291" class="l">    natsConnection_PublishString(nc, natsMsg_GetReply(msg), timeStr);</span>
+<span id="L292" class="l"> </span>
+<span id="L293" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L294" class="l"> </span>
+<span id="L295" class="l">}</span>
+<span id="L296" class="l"> </span>
+<span id="L297" class="l">    if (s == NATS_OK)</span>
+<span id="L298" class="l"> </span>
+<span id="L299" class="l">        s = natsConnection_Subscribe(&amp;sub, conn, &quot;time&quot;, onTimeRequest, NULL);</span>
+<span id="L300" class="l"> </span>
+<span id="L301" class="l"> </span>
+<span id="L302" class="l"> </span>
+<span id="L303" class="l">    // Make a request and wait up to 1 second for the reply</span>
+<span id="L304" class="l"> </span>
+<span id="L305" class="l">    if (s == NATS_OK)</span>
+<span id="L306" class="l"> </span>
+<span id="L307" class="l">        s = natsConnection_Request(&amp;reply, conn, &quot;time&quot;, NULL, 0, 1000);</span>
+<span id="L308" class="l"> </span>
+<span id="L309" class="l">    if (s == NATS_OK)</span>
+<span id="L310" class="l"> </span>
+<span id="L311" class="l">        printf(&quot;Response: %.*s\n&quot;,</span>
+<span id="L312" class="l"> </span>
+<span id="L313" class="l">               natsMsg_GetDataLength(reply), natsMsg_GetData(reply));</span>
+<span id="L314" class="l"> </span>
+<span id="L315" class="l">    else</span>
+<span id="L316" class="l"> </span>
+<span id="L317" class="l">        printf(&quot;Request failed: %s\n&quot;, natsStatus_GetText(s));</span>
+<span id="L318" class="l">```</span>
+<span id="L319" class="l"> </span>
+<span id="L320" class="l">## Handling Timeouts</span>
+<span id="L321" class="l"> </span>
+<span id="L322" class="l">Timeouts are crucial in request-reply to prevent indefinite waiting. All NATS clients support configurable timeouts:</span>
+<span id="L323" class="l"> </span>
+<span id="L324" class="l">#### CLI</span>
+<span id="L325" class="l"> </span>
+<span id="L326" class="l">```</span>
+<span id="L327" class="l"># Request with 2 second timeout</span>
+<span id="L328" class="l"> </span>
+<span id="L329" class="l">nats request service &quot;&quot; --timeout 2s</span>
+<span id="L330" class="l"> </span>
+<span id="L331" class="l"> </span>
+<span id="L332" class="l"> </span>
+<span id="L333" class="l"># If no response within 2 seconds, returns error</span>
+<span id="L334" class="l">```</span>
+<span id="L335" class="l"> </span>
+<span id="L336" class="l">#### JavaScript/TypeScript</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">```</span>
+<span id="L339" class="l">// Request with custom timeout</span>
+<span id="L340" class="l"> </span>
+<span id="L341" class="l">await nc.request(&quot;service&quot;, &quot;data&quot;, { timeout: 2000 })</span>
+<span id="L342" class="l"> </span>
+<span id="L343" class="l">  .then((m) =&gt; {</span>
+<span id="L344" class="l"> </span>
+<span id="L345" class="l">    console.log(`Response: ${m.string()}`);</span>
+<span id="L346" class="l"> </span>
+<span id="L347" class="l">  })</span>
+<span id="L348" class="l"> </span>
+<span id="L349" class="l">  .catch((err) =&gt; {</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">    console.log(`Request failed: ${err.message}`);</span>
+<span id="L352" class="l"> </span>
+<span id="L353" class="l">  });</span>
+<span id="L354" class="l">```</span>
+<span id="L355" class="l"> </span>
+<span id="L356" class="l">#### Go</span>
+<span id="L357" class="l"> </span>
+<span id="L358" class="l">```</span>
+<span id="L359" class="l">// Request with custom timeout</span>
+<span id="L360" class="l"> </span>
+<span id="L361" class="l">msg, err := nc.Request(&quot;service&quot;, []byte(&quot;data&quot;), 2*time.Second)</span>
+<span id="L362" class="l"> </span>
+<span id="L363" class="l">if err != nil {</span>
+<span id="L364" class="l"> </span>
+<span id="L365" class="l">	if err == nats.ErrTimeout {</span>
+<span id="L366" class="l"> </span>
+<span id="L367" class="l">		fmt.Println(&quot;Request timed out&quot;)</span>
+<span id="L368" class="l"> </span>
+<span id="L369" class="l">	} else {</span>
+<span id="L370" class="l"> </span>
+<span id="L371" class="l">		fmt.Printf(&quot;Request failed: %v\n&quot;, err)</span>
+<span id="L372" class="l"> </span>
+<span id="L373" class="l">	}</span>
+<span id="L374" class="l"> </span>
+<span id="L375" class="l">	return</span>
+<span id="L376" class="l"> </span>
+<span id="L377" class="l">}</span>
+<span id="L378" class="l"> </span>
+<span id="L379" class="l">fmt.Printf(&quot;Response: %s\n&quot;, string(msg.Data))</span>
+<span id="L380" class="l">```</span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l">#### Python</span>
+<span id="L383" class="l"> </span>
+<span id="L384" class="l">```</span>
+<span id="L385" class="l"># Request with custom timeout</span>
+<span id="L386" class="l"> </span>
+<span id="L387" class="l">try:</span>
+<span id="L388" class="l"> </span>
+<span id="L389" class="l">    m = await nc.request(&quot;service&quot;, b&quot;data&quot;, timeout=2)</span>
+<span id="L390" class="l"> </span>
+<span id="L391" class="l">    print(f&quot;Response: {m.data.decode()}&quot;)</span>
+<span id="L392" class="l"> </span>
+<span id="L393" class="l">except TimeoutError:</span>
+<span id="L394" class="l"> </span>
+<span id="L395" class="l">    print(&quot;Request timed out&quot;)</span>
+<span id="L396" class="l"> </span>
+<span id="L397" class="l">except NoRespondersError:</span>
+<span id="L398" class="l"> </span>
+<span id="L399" class="l">    print(&quot;No responders for the request&quot;)</span>
+<span id="L400" class="l">```</span>
+<span id="L401" class="l"> </span>
+<span id="L402" class="l">#### Java</span>
+<span id="L403" class="l"> </span>
+<span id="L404" class="l">```</span>
+<span id="L405" class="l">// Make a request expecting a future</span>
+<span id="L406" class="l"> </span>
+<span id="L407" class="l">CompletableFuture&lt;Message&gt; responseFuture = nc.request(&quot;service&quot;, null);</span>
+<span id="L408" class="l"> </span>
+<span id="L409" class="l">try {</span>
+<span id="L410" class="l"> </span>
+<span id="L411" class="l">    Message m = responseFuture.get(2, TimeUnit.SECONDS);</span>
+<span id="L412" class="l"> </span>
+<span id="L413" class="l">    System.out.println(&quot;1) Response: &quot; + new String(m.getData()));</span>
+<span id="L414" class="l"> </span>
+<span id="L415" class="l">}</span>
+<span id="L416" class="l"> </span>
+<span id="L417" class="l">catch (CancellationException | ExecutionException | TimeoutException e) {</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l">    System.out.println(&quot;1) No Response: &quot; + e);</span>
+<span id="L420" class="l"> </span>
+<span id="L421" class="l">}</span>
+<span id="L422" class="l"> </span>
+<span id="L423" class="l"> </span>
+<span id="L424" class="l"> </span>
+<span id="L425" class="l">// Make a request with a timeout and direct response</span>
+<span id="L426" class="l"> </span>
+<span id="L427" class="l">Message m = nc.request(&quot;service&quot;, null, Duration.ofSeconds(2));</span>
+<span id="L428" class="l"> </span>
+<span id="L429" class="l">if (m == null) {</span>
+<span id="L430" class="l"> </span>
+<span id="L431" class="l">    System.out.println(&quot;2) No Response&quot;);</span>
+<span id="L432" class="l"> </span>
+<span id="L433" class="l">}</span>
+<span id="L434" class="l"> </span>
+<span id="L435" class="l">else {</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">    System.out.println(&quot;2) Response: &quot; + new String(m.getData()));</span>
+<span id="L438" class="l"> </span>
+<span id="L439" class="l">}</span>
+<span id="L440" class="l">```</span>
+<span id="L441" class="l"> </span>
+<span id="L442" class="l">#### Rust</span>
+<span id="L443" class="l"> </span>
+<span id="L444" class="l">```</span>
+<span id="L445" class="l">// Request with custom timeout.</span>
+<span id="L446" class="l"> </span>
+<span id="L447" class="l">// `tokio::time::timeout` returns Ok(request_result) or Err(Elapsed).</span>
+<span id="L448" class="l"> </span>
+<span id="L449" class="l">match tokio::time::timeout(</span>
+<span id="L450" class="l"> </span>
+<span id="L451" class="l">    Duration::from_secs(2),</span>
+<span id="L452" class="l"> </span>
+<span id="L453" class="l">    client.request(&quot;service&quot;, &quot;data&quot;.into()),</span>
+<span id="L454" class="l"> </span>
+<span id="L455" class="l">)</span>
+<span id="L456" class="l"> </span>
+<span id="L457" class="l">.await</span>
+<span id="L458" class="l"> </span>
+<span id="L459" class="l">{</span>
+<span id="L460" class="l"> </span>
+<span id="L461" class="l">    // Request succeeded</span>
+<span id="L462" class="l"> </span>
+<span id="L463" class="l">    Ok(Ok(response)) =&gt; {</span>
+<span id="L464" class="l"> </span>
+<span id="L465" class="l">        println!(&quot;Response: {}&quot;, String::from_utf8_lossy(&amp;response.payload));</span>
+<span id="L466" class="l"> </span>
+<span id="L467" class="l">    }</span>
+<span id="L468" class="l"> </span>
+<span id="L469" class="l">    // Request failed (e.g. no responders)</span>
+<span id="L470" class="l"> </span>
+<span id="L471" class="l">    Ok(Err(e)) =&gt; {</span>
+<span id="L472" class="l"> </span>
+<span id="L473" class="l">        eprintln!(&quot;Request failed: {}&quot;, e);</span>
+<span id="L474" class="l"> </span>
+<span id="L475" class="l">    }</span>
+<span id="L476" class="l"> </span>
+<span id="L477" class="l">    // Timed out</span>
+<span id="L478" class="l"> </span>
+<span id="L479" class="l">    Err(_) =&gt; {</span>
+<span id="L480" class="l"> </span>
+<span id="L481" class="l">        println!(&quot;Request timed out&quot;);</span>
+<span id="L482" class="l"> </span>
+<span id="L483" class="l">    }</span>
+<span id="L484" class="l"> </span>
+<span id="L485" class="l">}</span>
+<span id="L486" class="l">```</span>
+<span id="L487" class="l"> </span>
+<span id="L488" class="l">#### C#/.NET</span>
+<span id="L489" class="l"> </span>
+<span id="L490" class="l">```</span>
+<span id="L491" class="l">// Set the per-request timeout via reply options</span>
+<span id="L492" class="l"> </span>
+<span id="L493" class="l">var replyOpts = new NatsSubOpts { Timeout = TimeSpan.FromSeconds(1) };</span>
+<span id="L494" class="l"> </span>
+<span id="L495" class="l">try</span>
+<span id="L496" class="l"> </span>
+<span id="L497" class="l">{</span>
+<span id="L498" class="l"> </span>
+<span id="L499" class="l">    var reply = await client.RequestAsync&lt;string&gt;(&quot;service&quot;, replyOpts: replyOpts);</span>
+<span id="L500" class="l"> </span>
+<span id="L501" class="l">    output.WriteLine($&quot;Response: {reply.Data}&quot;);</span>
+<span id="L502" class="l"> </span>
+<span id="L503" class="l">}</span>
+<span id="L504" class="l"> </span>
+<span id="L505" class="l">catch (NatsNoReplyException)</span>
+<span id="L506" class="l"> </span>
+<span id="L507" class="l">{</span>
+<span id="L508" class="l"> </span>
+<span id="L509" class="l">    output.WriteLine(&quot;No Response: timed out&quot;);</span>
+<span id="L510" class="l"> </span>
+<span id="L511" class="l">}</span>
+<span id="L512" class="l">```</span>
+<span id="L513" class="l"> </span>
+<span id="L514" class="l">#### C</span>
+<span id="L515" class="l"> </span>
+<span id="L516" class="l">```</span>
+<span id="L517" class="l">// Request with a custom timeout of 2 seconds</span>
+<span id="L518" class="l"> </span>
+<span id="L519" class="l">s = natsConnection_RequestString(&amp;reply, conn, &quot;service&quot;, &quot;data&quot;, 2000);</span>
+<span id="L520" class="l"> </span>
+<span id="L521" class="l">if (s == NATS_TIMEOUT)</span>
+<span id="L522" class="l"> </span>
+<span id="L523" class="l">    printf(&quot;Request timed out\n&quot;);</span>
+<span id="L524" class="l"> </span>
+<span id="L525" class="l">else if (s != NATS_OK)</span>
+<span id="L526" class="l"> </span>
+<span id="L527" class="l">    printf(&quot;Request failed: %s\n&quot;, natsStatus_GetText(s));</span>
+<span id="L528" class="l"> </span>
+<span id="L529" class="l">else</span>
+<span id="L530" class="l"> </span>
+<span id="L531" class="l">    printf(&quot;Response: %.*s\n&quot;,</span>
+<span id="L532" class="l"> </span>
+<span id="L533" class="l">           natsMsg_GetDataLength(reply), natsMsg_GetData(reply));</span>
+<span id="L534" class="l">```</span>
+<span id="L535" class="l"> </span>
+<span id="L536" class="l">## Multiple Responders</span>
+<span id="L537" class="l"> </span>
+<span id="L538" class="l">When multiple services subscribe to the same request subject, NATS supports two distinct patterns depending on whether queue groups are used:</span>
+<span id="L539" class="l"> </span>
+<span id="L540" class="l">### Pattern 1: All Services Respond (Scatter-Gather)</span>
+<span id="L541" class="l"> </span>
+<span id="L542" class="l">If each app creates a &quot;service&quot; subscription, all of them will receive the request and **all** can respond. The client can collect multiple responses:</span>
+<span id="L543" class="l"> </span>
+<span id="L544" class="l">**Message flow — Request / Reply — scatter-gather:** Request to multiple services - all respond (scatter-gather pattern)</span>
+<span id="L545" class="l"> </span>
+<span id="L546" class="l">* Client → NATS (subject: get.status)</span>
+<span id="L547" class="l">* NATS → Service A</span>
+<span id="L548" class="l">* NATS → Service B</span>
+<span id="L549" class="l">* NATS → Service C</span>
+<span id="L550" class="l">* Service A → NATS</span>
+<span id="L551" class="l">* Service B → NATS</span>
+<span id="L552" class="l">* Service C → NATS</span>
+<span id="L553" class="l">* NATS → Client (subject: 3 replies)</span>
+<span id="L554" class="l"> </span>
+<span id="L555" class="l">In this pattern, one request is broadcast to all three services (A, B, C), and all three send responses back. This is useful for:</span>
+<span id="L556" class="l"> </span>
+<span id="L557" class="l">* Gathering data from multiple sources</span>
+<span id="L558" class="l">* Aggregating results from distributed services</span>
+<span id="L559" class="l">* Querying multiple replicas for consensus</span>
+<span id="L560" class="l"> </span>
+<span id="L561" class="l">### Pattern 2: One Service Responds (Load Balancing)</span>
+<span id="L562" class="l"> </span>
+<span id="L563" class="l">With [queue groups](/concepts/queue-groups.md), **only one** service receives the request and responds, providing automatic load balancing for scalability:</span>
+<span id="L564" class="l"> </span>
+<span id="L565" class="l">**Message flow — Request / Reply with queue group:** Request with queue group - only one service responds (load balancing)</span>
+<span id="L566" class="l"> </span>
+<span id="L567" class="l">* Client → NATS (subject: work.process)</span>
+<span id="L568" class="l">* NATS → Service A</span>
+<span id="L569" class="l">* Service A → NATS</span>
+<span id="L570" class="l">* NATS → Client (subject: 1 reply)</span>
+<span id="L571" class="l">* Client → NATS</span>
+<span id="L572" class="l">* NATS → Service B</span>
+<span id="L573" class="l">* Service B → NATS</span>
+<span id="L574" class="l">* NATS → Client</span>
+<span id="L575" class="l">* Client → NATS</span>
+<span id="L576" class="l">* NATS → Service C</span>
+<span id="L577" class="l">* Service C → NATS</span>
+<span id="L578" class="l">* NATS → Client</span>
+<span id="L579" class="l">* NATS → Service A</span>
+<span id="L580" class="l">* NATS → Service B</span>
+<span id="L581" class="l">* NATS → Service C</span>
+<span id="L582" class="l"> </span>
+<span id="L583" class="l">In this pattern, NATS selects one service from the queue group (Service B in this example) to handle the request. This provides:</span>
+<span id="L584" class="l"> </span>
+<span id="L585" class="l">* Automatic load distribution across service instances</span>
+<span id="L586" class="l">* Horizontal scalability</span>
+<span id="L587" class="l">* Built-in failover (if one service is down, another handles it)</span>
+<span id="L588" class="l"> </span>
+<span id="L589" class="l">By default, the `request()` method returns the first response and drops the rest. The example below starts multiple responders and shows the client receiving a single reply. To gather every response, subscribe to a reply inbox directly and read messages until a timeout instead of calling `request()`.</span>
+<span id="L590" class="l"> </span>
+<span id="L591" class="l">#### CLI</span>
+<span id="L592" class="l"> </span>
+<span id="L593" class="l">```</span>
+<span id="L594" class="l"># Terminal 1: First service</span>
+<span id="L595" class="l"> </span>
+<span id="L596" class="l">nats reply service &quot;Response from service 1&quot;</span>
+<span id="L597" class="l"> </span>
+<span id="L598" class="l"> </span>
+<span id="L599" class="l"> </span>
+<span id="L600" class="l"># Terminal 2: Second service</span>
+<span id="L601" class="l"> </span>
+<span id="L602" class="l">nats reply service &quot;Response from service 2&quot;</span>
+<span id="L603" class="l"> </span>
+<span id="L604" class="l"> </span>
+<span id="L605" class="l"> </span>
+<span id="L606" class="l"># Terminal 3: Make request (nats reply puts both in a shared queue group,</span>
+<span id="L607" class="l"> </span>
+<span id="L608" class="l"># so one instance answers and the client gets a single reply)</span>
+<span id="L609" class="l"> </span>
+<span id="L610" class="l">nats request service &quot;&quot;</span>
+<span id="L611" class="l">```</span>
+<span id="L612" class="l"> </span>
+<span id="L613" class="l">#### JavaScript/TypeScript</span>
+<span id="L614" class="l"> </span>
+<span id="L615" class="l">```</span>
+<span id="L616" class="l">// Multiple responders - only first response is returned</span>
+<span id="L617" class="l"> </span>
+<span id="L618" class="l">const subA = nc.subscribe(&quot;calc.add&quot;);</span>
+<span id="L619" class="l"> </span>
+<span id="L620" class="l">(async (sub: Subscription) =&gt; {</span>
+<span id="L621" class="l"> </span>
+<span id="L622" class="l">  for await (const m of sub) {</span>
+<span id="L623" class="l"> </span>
+<span id="L624" class="l">    m.respond(&quot;calculated result from A&quot;);</span>
+<span id="L625" class="l"> </span>
+<span id="L626" class="l">  }</span>
+<span id="L627" class="l"> </span>
+<span id="L628" class="l">})(subA).catch(console.error);</span>
+<span id="L629" class="l"> </span>
+<span id="L630" class="l"> </span>
+<span id="L631" class="l"> </span>
+<span id="L632" class="l">const subB = nc.subscribe(&quot;calc.add&quot;);</span>
+<span id="L633" class="l"> </span>
+<span id="L634" class="l">(async (sub: Subscription) =&gt; {</span>
+<span id="L635" class="l"> </span>
+<span id="L636" class="l">  for await (const m of sub) {</span>
+<span id="L637" class="l"> </span>
+<span id="L638" class="l">    m.respond(&quot;calculated result from B&quot;);</span>
+<span id="L639" class="l"> </span>
+<span id="L640" class="l">  }</span>
+<span id="L641" class="l"> </span>
+<span id="L642" class="l">})(subB).catch(console.error);</span>
+<span id="L643" class="l"> </span>
+<span id="L644" class="l"> </span>
+<span id="L645" class="l"> </span>
+<span id="L646" class="l">// Gets one response</span>
+<span id="L647" class="l"> </span>
+<span id="L648" class="l">try {</span>
+<span id="L649" class="l"> </span>
+<span id="L650" class="l">  const response = await nc.request(&quot;calc.add&quot;, &quot;data&quot;);</span>
+<span id="L651" class="l"> </span>
+<span id="L652" class="l">  console.log(`Got response: ${response.string()}`);</span>
+<span id="L653" class="l"> </span>
+<span id="L654" class="l">} catch (e) {</span>
+<span id="L655" class="l"> </span>
+<span id="L656" class="l">  console.error(`Request failed: ${(e as Error).message}`);</span>
+<span id="L657" class="l"> </span>
+<span id="L658" class="l">}</span>
+<span id="L659" class="l">```</span>
+<span id="L660" class="l"> </span>
+<span id="L661" class="l">#### Go</span>
+<span id="L662" class="l"> </span>
+<span id="L663" class="l">```</span>
+<span id="L664" class="l">processCalculation := func(data []byte) []byte {</span>
+<span id="L665" class="l"> </span>
+<span id="L666" class="l">	return []byte(&quot;calculated result&quot;)</span>
+<span id="L667" class="l"> </span>
+<span id="L668" class="l">}</span>
+<span id="L669" class="l"> </span>
+<span id="L670" class="l"> </span>
+<span id="L671" class="l"> </span>
+<span id="L672" class="l">// Multiple responders - only first response is returned</span>
+<span id="L673" class="l"> </span>
+<span id="L674" class="l">nc.Subscribe(&quot;calc.add&quot;, func(m *nats.Msg) {</span>
+<span id="L675" class="l"> </span>
+<span id="L676" class="l">	result := processCalculation(m.Data)</span>
+<span id="L677" class="l"> </span>
+<span id="L678" class="l">	m.Respond(append(result, []byte(&quot; from A&quot;)...))</span>
+<span id="L679" class="l"> </span>
+<span id="L680" class="l">})</span>
+<span id="L681" class="l"> </span>
+<span id="L682" class="l"> </span>
+<span id="L683" class="l"> </span>
+<span id="L684" class="l">nc.Subscribe(&quot;calc.add&quot;, func(m *nats.Msg) {</span>
+<span id="L685" class="l"> </span>
+<span id="L686" class="l">	result := processCalculation(m.Data)</span>
+<span id="L687" class="l"> </span>
+<span id="L688" class="l">	m.Respond(append(result, []byte(&quot; from B&quot;)...))</span>
+<span id="L689" class="l"> </span>
+<span id="L690" class="l">})</span>
+<span id="L691" class="l"> </span>
+<span id="L692" class="l"> </span>
+<span id="L693" class="l"> </span>
+<span id="L694" class="l">// Gets one response</span>
+<span id="L695" class="l"> </span>
+<span id="L696" class="l">msg, _ := nc.Request(&quot;calc.add&quot;, []byte(&quot;data&quot;), time.Second)</span>
+<span id="L697" class="l"> </span>
+<span id="L698" class="l">fmt.Printf(&quot;Got response: %s\n&quot;, msg.Data)</span>
+<span id="L699" class="l">```</span>
+<span id="L700" class="l"> </span>
+<span id="L701" class="l">#### Python</span>
+<span id="L702" class="l"> </span>
+<span id="L703" class="l">```</span>
+<span id="L704" class="l"># Multiple responders - only the first response is returned to the requester</span>
+<span id="L705" class="l"> </span>
+<span id="L706" class="l">sub_a = await nc.subscribe(&quot;calc.add&quot;)</span>
+<span id="L707" class="l"> </span>
+<span id="L708" class="l">sub_b = await nc.subscribe(&quot;calc.add&quot;)</span>
+<span id="L709" class="l"> </span>
+<span id="L710" class="l"> </span>
+<span id="L711" class="l"> </span>
+<span id="L712" class="l">async def service(sub, label):</span>
+<span id="L713" class="l"> </span>
+<span id="L714" class="l">    async for msg in sub:</span>
+<span id="L715" class="l"> </span>
+<span id="L716" class="l">        if msg.reply:</span>
+<span id="L717" class="l"> </span>
+<span id="L718" class="l">            await nc.publish(msg.reply, f&quot;calculated result from {label}&quot;.encode())</span>
+<span id="L719" class="l"> </span>
+<span id="L720" class="l"> </span>
+<span id="L721" class="l"> </span>
+<span id="L722" class="l">asyncio.create_task(service(sub_a, &quot;A&quot;))</span>
+<span id="L723" class="l"> </span>
+<span id="L724" class="l">asyncio.create_task(service(sub_b, &quot;B&quot;))</span>
+<span id="L725" class="l"> </span>
+<span id="L726" class="l">await nc.flush()</span>
+<span id="L727" class="l"> </span>
+<span id="L728" class="l"> </span>
+<span id="L729" class="l"> </span>
+<span id="L730" class="l"># Gets one response</span>
+<span id="L731" class="l"> </span>
+<span id="L732" class="l">try:</span>
+<span id="L733" class="l"> </span>
+<span id="L734" class="l">    m = await nc.request(&quot;calc.add&quot;, b&quot;&quot;, timeout=0.5)</span>
+<span id="L735" class="l"> </span>
+<span id="L736" class="l">    print(f&quot;Got response: {m.data.decode()}&quot;)</span>
+<span id="L737" class="l"> </span>
+<span id="L738" class="l">except (TimeoutError, NoRespondersError):</span>
+<span id="L739" class="l"> </span>
+<span id="L740" class="l">    print(&quot;No Response&quot;)</span>
+<span id="L741" class="l">```</span>
+<span id="L742" class="l"> </span>
+<span id="L743" class="l">#### Java</span>
+<span id="L744" class="l"> </span>
+<span id="L745" class="l">```</span>
+<span id="L746" class="l">// Set up 2 instances of the service</span>
+<span id="L747" class="l"> </span>
+<span id="L748" class="l">Dispatcher dServiceA = nc.createDispatcher(msg -&gt; {</span>
+<span id="L749" class="l"> </span>
+<span id="L750" class="l">    byte[] response = (&quot;calculated result from A&quot;).getBytes(StandardCharsets.ISO_8859_1);</span>
+<span id="L751" class="l"> </span>
+<span id="L752" class="l">    nc.publish(msg.getReplyTo(), response);</span>
+<span id="L753" class="l"> </span>
+<span id="L754" class="l">});</span>
+<span id="L755" class="l"> </span>
+<span id="L756" class="l">dServiceA.subscribe(&quot;calc.add&quot;);</span>
+<span id="L757" class="l"> </span>
+<span id="L758" class="l"> </span>
+<span id="L759" class="l"> </span>
+<span id="L760" class="l">Dispatcher dServiceB = nc.createDispatcher(msg -&gt; {</span>
+<span id="L761" class="l"> </span>
+<span id="L762" class="l">    byte[] response = (&quot;calculated result from B&quot;).getBytes(StandardCharsets.ISO_8859_1);</span>
+<span id="L763" class="l"> </span>
+<span id="L764" class="l">    nc.publish(msg.getReplyTo(), response);</span>
+<span id="L765" class="l"> </span>
+<span id="L766" class="l">});</span>
+<span id="L767" class="l"> </span>
+<span id="L768" class="l">dServiceB.subscribe(&quot;calc.add&quot;);</span>
+<span id="L769" class="l"> </span>
+<span id="L770" class="l"> </span>
+<span id="L771" class="l"> </span>
+<span id="L772" class="l">// Make a request expecting a future</span>
+<span id="L773" class="l"> </span>
+<span id="L774" class="l">CompletableFuture&lt;Message&gt; responseFuture = nc.request(&quot;calc.add&quot;, null);</span>
+<span id="L775" class="l"> </span>
+<span id="L776" class="l">try {</span>
+<span id="L777" class="l"> </span>
+<span id="L778" class="l">    Message m = responseFuture.get(500, TimeUnit.MILLISECONDS);</span>
+<span id="L779" class="l"> </span>
+<span id="L780" class="l">    System.out.println(&quot;1) Got response: &quot; + new String(m.getData()));</span>
+<span id="L781" class="l"> </span>
+<span id="L782" class="l">}</span>
+<span id="L783" class="l"> </span>
+<span id="L784" class="l">catch (CancellationException | ExecutionException | TimeoutException e) {</span>
+<span id="L785" class="l"> </span>
+<span id="L786" class="l">    System.out.println(&quot;1) No Response&quot;);</span>
+<span id="L787" class="l"> </span>
+<span id="L788" class="l">}</span>
+<span id="L789" class="l"> </span>
+<span id="L790" class="l"> </span>
+<span id="L791" class="l"> </span>
+<span id="L792" class="l">// Make a request with a timeout and direct response</span>
+<span id="L793" class="l"> </span>
+<span id="L794" class="l">Message m = nc.request(&quot;calc.add&quot;, null, Duration.ofMillis(500));</span>
+<span id="L795" class="l"> </span>
+<span id="L796" class="l">if (m == null) {</span>
+<span id="L797" class="l"> </span>
+<span id="L798" class="l">    System.out.println(&quot;2) No Response&quot;);</span>
+<span id="L799" class="l"> </span>
+<span id="L800" class="l">}</span>
+<span id="L801" class="l"> </span>
+<span id="L802" class="l">else {</span>
+<span id="L803" class="l"> </span>
+<span id="L804" class="l">    System.out.println(&quot;2) Got response: &quot; + new String(m.getData()));</span>
+<span id="L805" class="l"> </span>
+<span id="L806" class="l">}</span>
+<span id="L807" class="l">```</span>
+<span id="L808" class="l"> </span>
+<span id="L809" class="l">#### Rust</span>
+<span id="L810" class="l"> </span>
+<span id="L811" class="l">```</span>
+<span id="L812" class="l">// Multiple responders - only first response is returned</span>
+<span id="L813" class="l"> </span>
+<span id="L814" class="l">let mut sub_a = client.subscribe(&quot;calc.add&quot;).await?;</span>
+<span id="L815" class="l"> </span>
+<span id="L816" class="l">let client_a = client.clone();</span>
+<span id="L817" class="l"> </span>
+<span id="L818" class="l">tokio::spawn(async move {</span>
+<span id="L819" class="l"> </span>
+<span id="L820" class="l">    while let Some(msg) = sub_a.next().await {</span>
+<span id="L821" class="l"> </span>
+<span id="L822" class="l">        let response = &quot;calculated result from A&quot;.to_string();</span>
+<span id="L823" class="l"> </span>
+<span id="L824" class="l">        if let Some(reply) = msg.reply {</span>
+<span id="L825" class="l"> </span>
+<span id="L826" class="l">            client_a.publish(reply, response.into()).await.ok();</span>
+<span id="L827" class="l"> </span>
+<span id="L828" class="l">        }</span>
+<span id="L829" class="l"> </span>
+<span id="L830" class="l">    }</span>
+<span id="L831" class="l"> </span>
+<span id="L832" class="l">});</span>
+<span id="L833" class="l"> </span>
+<span id="L834" class="l"> </span>
+<span id="L835" class="l"> </span>
+<span id="L836" class="l">let mut sub_b = client.subscribe(&quot;calc.add&quot;).await?;</span>
+<span id="L837" class="l"> </span>
+<span id="L838" class="l">let client_b = client.clone();</span>
+<span id="L839" class="l"> </span>
+<span id="L840" class="l">tokio::spawn(async move {</span>
+<span id="L841" class="l"> </span>
+<span id="L842" class="l">    while let Some(msg) = sub_b.next().await {</span>
+<span id="L843" class="l"> </span>
+<span id="L844" class="l">        let response = &quot;calculated result from B&quot;.to_string();</span>
+<span id="L845" class="l"> </span>
+<span id="L846" class="l">        if let Some(reply) = msg.reply {</span>
+<span id="L847" class="l"> </span>
+<span id="L848" class="l">            client_b.publish(reply, response.into()).await.ok();</span>
+<span id="L849" class="l"> </span>
+<span id="L850" class="l">        }</span>
+<span id="L851" class="l"> </span>
+<span id="L852" class="l">    }</span>
+<span id="L853" class="l"> </span>
+<span id="L854" class="l">});</span>
+<span id="L855" class="l"> </span>
+<span id="L856" class="l"> </span>
+<span id="L857" class="l"> </span>
+<span id="L858" class="l">// Gets one response</span>
+<span id="L859" class="l"> </span>
+<span id="L860" class="l">let response = client.request(&quot;calc.add&quot;, &quot;data&quot;.into()).await?;</span>
+<span id="L861" class="l"> </span>
+<span id="L862" class="l">println!(</span>
+<span id="L863" class="l"> </span>
+<span id="L864" class="l">    &quot;Got response: {}&quot;,</span>
+<span id="L865" class="l"> </span>
+<span id="L866" class="l">    String::from_utf8_lossy(&amp;response.payload)</span>
+<span id="L867" class="l"> </span>
+<span id="L868" class="l">);</span>
+<span id="L869" class="l">```</span>
+<span id="L870" class="l"> </span>
+<span id="L871" class="l">#### C#/.NET</span>
+<span id="L872" class="l"> </span>
+<span id="L873" class="l">```</span>
+<span id="L874" class="l">// Two service instances reply on the same subject; the first reply wins</span>
+<span id="L875" class="l"> </span>
+<span id="L876" class="l">_ = Task.Run(async () =&gt;</span>
+<span id="L877" class="l"> </span>
+<span id="L878" class="l">{</span>
+<span id="L879" class="l"> </span>
+<span id="L880" class="l">    await foreach (var msg in client.SubscribeAsync&lt;string&gt;(&quot;calc.add&quot;))</span>
+<span id="L881" class="l"> </span>
+<span id="L882" class="l">    {</span>
+<span id="L883" class="l"> </span>
+<span id="L884" class="l">        await msg.ReplyAsync(&quot;calculated result from A&quot;);</span>
+<span id="L885" class="l"> </span>
+<span id="L886" class="l">    }</span>
+<span id="L887" class="l"> </span>
+<span id="L888" class="l">});</span>
+<span id="L889" class="l"> </span>
+<span id="L890" class="l"> </span>
+<span id="L891" class="l"> </span>
+<span id="L892" class="l">_ = Task.Run(async () =&gt;</span>
+<span id="L893" class="l"> </span>
+<span id="L894" class="l">{</span>
+<span id="L895" class="l"> </span>
+<span id="L896" class="l">    await foreach (var msg in client.SubscribeAsync&lt;string&gt;(&quot;calc.add&quot;))</span>
+<span id="L897" class="l"> </span>
+<span id="L898" class="l">    {</span>
+<span id="L899" class="l"> </span>
+<span id="L900" class="l">        await msg.ReplyAsync(&quot;calculated result from B&quot;);</span>
+<span id="L901" class="l"> </span>
+<span id="L902" class="l">    }</span>
+<span id="L903" class="l"> </span>
+<span id="L904" class="l">});</span>
+<span id="L905" class="l"> </span>
+<span id="L906" class="l"> </span>
+<span id="L907" class="l"> </span>
+<span id="L908" class="l">// Give the subscription tasks time to start before publishing</span>
+<span id="L909" class="l"> </span>
+<span id="L910" class="l">await Task.Delay(1000);</span>
+<span id="L911" class="l"> </span>
+<span id="L912" class="l"> </span>
+<span id="L913" class="l"> </span>
+<span id="L914" class="l">var reply = await client.RequestAsync&lt;string&gt;(&quot;calc.add&quot;);</span>
+<span id="L915" class="l"> </span>
+<span id="L916" class="l">output.WriteLine($&quot;Got response: {reply.Data}&quot;);</span>
+<span id="L917" class="l">```</span>
+<span id="L918" class="l"> </span>
+<span id="L919" class="l">#### C</span>
+<span id="L920" class="l"> </span>
+<span id="L921" class="l">```</span>
+<span id="L922" class="l">// Each responder replies with its own name (passed as the closure)</span>
+<span id="L923" class="l"> </span>
+<span id="L924" class="l">static void</span>
+<span id="L925" class="l"> </span>
+<span id="L926" class="l">onCalcRequest(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L927" class="l"> </span>
+<span id="L928" class="l">{</span>
+<span id="L929" class="l"> </span>
+<span id="L930" class="l">    char result[64];</span>
+<span id="L931" class="l"> </span>
+<span id="L932" class="l"> </span>
+<span id="L933" class="l"> </span>
+<span id="L934" class="l">    snprintf(result, sizeof(result),</span>
+<span id="L935" class="l"> </span>
+<span id="L936" class="l">             &quot;calculated result from %s&quot;, (const char*) closure);</span>
+<span id="L937" class="l"> </span>
+<span id="L938" class="l">    natsConnection_PublishString(nc, natsMsg_GetReply(msg), result);</span>
+<span id="L939" class="l"> </span>
+<span id="L940" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L941" class="l"> </span>
+<span id="L942" class="l">}</span>
+<span id="L943" class="l"> </span>
+<span id="L944" class="l">    // Multiple responders - only the first response is returned</span>
+<span id="L945" class="l"> </span>
+<span id="L946" class="l">    if (s == NATS_OK)</span>
+<span id="L947" class="l"> </span>
+<span id="L948" class="l">        s = natsConnection_Subscribe(&amp;subA, conn, &quot;calc.add&quot;, onCalcRequest, (void*) &quot;A&quot;);</span>
+<span id="L949" class="l"> </span>
+<span id="L950" class="l">    if (s == NATS_OK)</span>
+<span id="L951" class="l"> </span>
+<span id="L952" class="l">        s = natsConnection_Subscribe(&amp;subB, conn, &quot;calc.add&quot;, onCalcRequest, (void*) &quot;B&quot;);</span>
+<span id="L953" class="l"> </span>
+<span id="L954" class="l"> </span>
+<span id="L955" class="l"> </span>
+<span id="L956" class="l">    // Gets one response</span>
+<span id="L957" class="l"> </span>
+<span id="L958" class="l">    if (s == NATS_OK)</span>
+<span id="L959" class="l"> </span>
+<span id="L960" class="l">        s = natsConnection_RequestString(&amp;reply, conn, &quot;calc.add&quot;, &quot;data&quot;, 1000);</span>
+<span id="L961" class="l"> </span>
+<span id="L962" class="l">    if (s == NATS_OK)</span>
+<span id="L963" class="l"> </span>
+<span id="L964" class="l">        printf(&quot;Got response: %.*s\n&quot;,</span>
+<span id="L965" class="l"> </span>
+<span id="L966" class="l">               natsMsg_GetDataLength(reply), natsMsg_GetData(reply));</span>
+<span id="L967" class="l">```</span>
+<span id="L968" class="l"> </span>
+<span id="L969" class="l">## No Responders Detection</span>
+<span id="L970" class="l"> </span>
+<span id="L971" class="l">NATS will detect when no services are available to handle a request. When there are no subscribers for the request subject, NATS server will return a &quot;no responders&quot; error immediately:</span>
+<span id="L972" class="l"> </span>
+<span id="L973" class="l">#### CLI</span>
+<span id="L974" class="l"> </span>
+<span id="L975" class="l">```</span>
+<span id="L976" class="l">#!/bin/bash</span>
+<span id="L977" class="l"> </span>
+<span id="L978" class="l"> </span>
+<span id="L979" class="l"> </span>
+<span id="L980" class="l"># Request to a subject with no subscribers</span>
+<span id="L981" class="l"> </span>
+<span id="L982" class="l">nats request no.such.service &quot;test&quot;</span>
+<span id="L983" class="l"> </span>
+<span id="L984" class="l"> </span>
+<span id="L985" class="l"> </span>
+<span id="L986" class="l"># Error: no responders available for request</span>
+<span id="L987" class="l">```</span>
+<span id="L988" class="l"> </span>
+<span id="L989" class="l">#### JavaScript/TypeScript</span>
+<span id="L990" class="l"> </span>
+<span id="L991" class="l">```</span>
+<span id="L992" class="l">await nc.request(&quot;no.such.service&quot;, &quot;test&quot;)</span>
+<span id="L993" class="l"> </span>
+<span id="L994" class="l">  .then((m) =&gt; {</span>
+<span id="L995" class="l"> </span>
+<span id="L996" class="l">    console.log(`Response: ${m.string()}`);</span>
+<span id="L997" class="l"> </span>
+<span id="L998" class="l">  })</span>
+<span id="L999" class="l"> </span>
+<span id="L1000" class="l">  .catch((err) =&gt; {</span>
+<span id="L1001" class="l"> </span>
+<span id="L1002" class="l">    console.log(`Request failed: ${err.message}`);</span>
+<span id="L1003" class="l"> </span>
+<span id="L1004" class="l">  });</span>
+<span id="L1005" class="l">```</span>
+<span id="L1006" class="l"> </span>
+<span id="L1007" class="l">#### Go</span>
+<span id="L1008" class="l"> </span>
+<span id="L1009" class="l">```</span>
+<span id="L1010" class="l">msg, err := nc.Request(&quot;no.such.service&quot;, []byte(&quot;test&quot;), time.Second)</span>
+<span id="L1011" class="l"> </span>
+<span id="L1012" class="l">if err == nats.ErrNoResponders {</span>
+<span id="L1013" class="l"> </span>
+<span id="L1014" class="l">	log.Println(&quot;No services available to handle request&quot;)</span>
+<span id="L1015" class="l"> </span>
+<span id="L1016" class="l">}</span>
+<span id="L1017" class="l">```</span>
+<span id="L1018" class="l"> </span>
+<span id="L1019" class="l">#### Python</span>
+<span id="L1020" class="l"> </span>
+<span id="L1021" class="l">```</span>
+<span id="L1022" class="l">try:</span>
+<span id="L1023" class="l"> </span>
+<span id="L1024" class="l">    m = await nc.request(&quot;no.such.service&quot;, b&quot;test&quot;, timeout=0.5)</span>
+<span id="L1025" class="l"> </span>
+<span id="L1026" class="l">    print(f&quot;Response: {m.data.decode()}&quot;)</span>
+<span id="L1027" class="l"> </span>
+<span id="L1028" class="l">except NoRespondersError:</span>
+<span id="L1029" class="l"> </span>
+<span id="L1030" class="l">    print(&quot;No services available to handle request&quot;)</span>
+<span id="L1031" class="l"> </span>
+<span id="L1032" class="l">except TimeoutError:</span>
+<span id="L1033" class="l"> </span>
+<span id="L1034" class="l">    print(&quot;Request timed out&quot;)</span>
+<span id="L1035" class="l">```</span>
+<span id="L1036" class="l"> </span>
+<span id="L1037" class="l">#### Java</span>
+<span id="L1038" class="l"> </span>
+<span id="L1039" class="l">```</span>
+<span id="L1040" class="l">// You must specify the reportNoResponders() connect option</span>
+<span id="L1041" class="l"> </span>
+<span id="L1042" class="l">Options options = Options.builder()</span>
+<span id="L1043" class="l"> </span>
+<span id="L1044" class="l">    .server(&quot;nats://localhost:4222&quot;)</span>
+<span id="L1045" class="l"> </span>
+<span id="L1046" class="l">    .reportNoResponders()</span>
+<span id="L1047" class="l"> </span>
+<span id="L1048" class="l">    .build();</span>
+<span id="L1049" class="l"> </span>
+<span id="L1050" class="l">try (Connection nc = Nats.connect(options)) {</span>
+<span id="L1051" class="l"> </span>
+<span id="L1052" class="l">    // Make a request expecting a future</span>
+<span id="L1053" class="l"> </span>
+<span id="L1054" class="l">    CompletableFuture&lt;Message&gt; responseFuture = nc.request(&quot;no.such.service&quot;, null);</span>
+<span id="L1055" class="l"> </span>
+<span id="L1056" class="l">    try {</span>
+<span id="L1057" class="l"> </span>
+<span id="L1058" class="l">        Message m = responseFuture.get(500, TimeUnit.MILLISECONDS);</span>
+<span id="L1059" class="l"> </span>
+<span id="L1060" class="l">        System.out.println(&quot;Response: &quot; + new String(m.getData()));</span>
+<span id="L1061" class="l"> </span>
+<span id="L1062" class="l">    }</span>
+<span id="L1063" class="l"> </span>
+<span id="L1064" class="l">    catch (CancellationException | ExecutionException | TimeoutException e) {</span>
+<span id="L1065" class="l"> </span>
+<span id="L1066" class="l">        System.out.println(&quot;No services available to handle request: &quot; + e);</span>
+<span id="L1067" class="l"> </span>
+<span id="L1068" class="l">    }</span>
+<span id="L1069" class="l"> </span>
+<span id="L1070" class="l">}</span>
+<span id="L1071" class="l">```</span>
+<span id="L1072" class="l"> </span>
+<span id="L1073" class="l">#### Rust</span>
+<span id="L1074" class="l"> </span>
+<span id="L1075" class="l">```</span>
+<span id="L1076" class="l">match client.request(&quot;no.such.service&quot;, &quot;test&quot;.into()).await {</span>
+<span id="L1077" class="l"> </span>
+<span id="L1078" class="l">    Err(e) if e.kind() == async_nats::RequestErrorKind::NoResponders =&gt; {</span>
+<span id="L1079" class="l"> </span>
+<span id="L1080" class="l">        println!(&quot;No services available to handle request&quot;);</span>
+<span id="L1081" class="l"> </span>
+<span id="L1082" class="l">    }</span>
+<span id="L1083" class="l"> </span>
+<span id="L1084" class="l">    Err(e) =&gt; println!(&quot;Request error: {}&quot;, e),</span>
+<span id="L1085" class="l"> </span>
+<span id="L1086" class="l">    Ok(msg) =&gt; println!(&quot;Response: {}&quot;, String::from_utf8_lossy(&amp;msg.payload)),</span>
+<span id="L1087" class="l"> </span>
+<span id="L1088" class="l">}</span>
+<span id="L1089" class="l">```</span>
+<span id="L1090" class="l"> </span>
+<span id="L1091" class="l">#### C#/.NET</span>
+<span id="L1092" class="l"> </span>
+<span id="L1093" class="l">```</span>
+<span id="L1094" class="l">// RequestAsync throws NatsNoRespondersException by default when nobody is listening</span>
+<span id="L1095" class="l"> </span>
+<span id="L1096" class="l">try</span>
+<span id="L1097" class="l"> </span>
+<span id="L1098" class="l">{</span>
+<span id="L1099" class="l"> </span>
+<span id="L1100" class="l">    var reply = await client.RequestAsync&lt;string, string&gt;(subject: &quot;no.such.service&quot;, data: &quot;test&quot;);</span>
+<span id="L1101" class="l"> </span>
+<span id="L1102" class="l">    output.WriteLine($&quot;Response: {reply.Data}&quot;);</span>
+<span id="L1103" class="l"> </span>
+<span id="L1104" class="l">}</span>
+<span id="L1105" class="l"> </span>
+<span id="L1106" class="l">catch (NatsNoRespondersException)</span>
+<span id="L1107" class="l"> </span>
+<span id="L1108" class="l">{</span>
+<span id="L1109" class="l"> </span>
+<span id="L1110" class="l">    output.WriteLine(&quot;No services available to handle the request&quot;);</span>
+<span id="L1111" class="l"> </span>
+<span id="L1112" class="l">}</span>
+<span id="L1113" class="l">```</span>
+<span id="L1114" class="l"> </span>
+<span id="L1115" class="l">#### C</span>
+<span id="L1116" class="l"> </span>
+<span id="L1117" class="l">```</span>
+<span id="L1118" class="l">// Nothing subscribes to this subject, so the server reports</span>
+<span id="L1119" class="l"> </span>
+<span id="L1120" class="l">// the missing service right away instead of waiting for the timeout.</span>
+<span id="L1121" class="l"> </span>
+<span id="L1122" class="l">if (s == NATS_OK)</span>
+<span id="L1123" class="l"> </span>
+<span id="L1124" class="l">{</span>
+<span id="L1125" class="l"> </span>
+<span id="L1126" class="l">    s = natsConnection_RequestString(&amp;reply, conn, &quot;no.such.service&quot;, &quot;test&quot;, 1000);</span>
+<span id="L1127" class="l"> </span>
+<span id="L1128" class="l">    if (s == NATS_NO_RESPONDERS)</span>
+<span id="L1129" class="l"> </span>
+<span id="L1130" class="l">        printf(&quot;No services available to handle request\n&quot;);</span>
+<span id="L1131" class="l"> </span>
+<span id="L1132" class="l">}</span>
+<span id="L1133" class="l">```</span>
+<span id="L1134" class="l"> </span>
+<span id="L1135" class="l">## Request with Headers</span>
+<span id="L1136" class="l"> </span>
+<span id="L1137" class="l">NATS supports headers in request-reply, enabling metadata exchange:</span>
+<span id="L1138" class="l"> </span>
+<span id="L1139" class="l">#### CLI</span>
+<span id="L1140" class="l"> </span>
+<span id="L1141" class="l">```</span>
+<span id="L1142" class="l">#!/bin/bash</span>
+<span id="L1143" class="l"> </span>
+<span id="L1144" class="l"> </span>
+<span id="L1145" class="l"> </span>
+<span id="L1146" class="l"># Send request with headers</span>
+<span id="L1147" class="l"> </span>
+<span id="L1148" class="l">nats request service &quot;data&quot; -H &quot;X-Request-ID:123&quot; -H &quot;X-Priority:high&quot;</span>
+<span id="L1149" class="l">```</span>
+<span id="L1150" class="l"> </span>
+<span id="L1151" class="l">#### JavaScript/TypeScript</span>
+<span id="L1152" class="l"> </span>
+<span id="L1153" class="l">```</span>
+<span id="L1154" class="l">// Header Aware service</span>
+<span id="L1155" class="l"> </span>
+<span id="L1156" class="l">const sub = nc.subscribe(&quot;service&quot;);</span>
+<span id="L1157" class="l"> </span>
+<span id="L1158" class="l">(async (sub: Subscription) =&gt; {</span>
+<span id="L1159" class="l"> </span>
+<span id="L1160" class="l">  for await (const m of sub) {</span>
+<span id="L1161" class="l"> </span>
+<span id="L1162" class="l">    const h = headers();</span>
+<span id="L1163" class="l"> </span>
+<span id="L1164" class="l">    const id = m.headers?.get(&quot;X-Request-ID&quot;);</span>
+<span id="L1165" class="l"> </span>
+<span id="L1166" class="l">    if (id) {</span>
+<span id="L1167" class="l"> </span>
+<span id="L1168" class="l">      h.append(&quot;X-Response-ID&quot;, id);</span>
+<span id="L1169" class="l"> </span>
+<span id="L1170" class="l">      h.append(&quot;X-Request-ID&quot;, id);</span>
+<span id="L1171" class="l"> </span>
+<span id="L1172" class="l">    }</span>
+<span id="L1173" class="l"> </span>
+<span id="L1174" class="l">    const pri = m.headers?.get(&quot;X-Priority&quot;);</span>
+<span id="L1175" class="l"> </span>
+<span id="L1176" class="l">    if (pri) {</span>
+<span id="L1177" class="l"> </span>
+<span id="L1178" class="l">      h.append(&quot;X-Priority&quot;, pri);</span>
+<span id="L1179" class="l"> </span>
+<span id="L1180" class="l">    }</span>
+<span id="L1181" class="l"> </span>
+<span id="L1182" class="l">    m.respond(m.data, {</span>
+<span id="L1183" class="l"> </span>
+<span id="L1184" class="l">      headers: h,</span>
+<span id="L1185" class="l"> </span>
+<span id="L1186" class="l">    });</span>
+<span id="L1187" class="l"> </span>
+<span id="L1188" class="l">  }</span>
+<span id="L1189" class="l"> </span>
+<span id="L1190" class="l">})(sub).catch(console.error);</span>
+<span id="L1191" class="l"> </span>
+<span id="L1192" class="l"> </span>
+<span id="L1193" class="l"> </span>
+<span id="L1194" class="l">// Create message with headers</span>
+<span id="L1195" class="l"> </span>
+<span id="L1196" class="l">const h = headers();</span>
+<span id="L1197" class="l"> </span>
+<span id="L1198" class="l">h.append(&quot;X-Request-ID&quot;, &quot;123&quot;);</span>
+<span id="L1199" class="l"> </span>
+<span id="L1200" class="l">h.append(&quot;X-Priority&quot;, &quot;high&quot;);</span>
+<span id="L1201" class="l"> </span>
+<span id="L1202" class="l"> </span>
+<span id="L1203" class="l"> </span>
+<span id="L1204" class="l">const response = await nc.request(&quot;service&quot;, &quot;data&quot;, {</span>
+<span id="L1205" class="l"> </span>
+<span id="L1206" class="l">  headers: h,</span>
+<span id="L1207" class="l"> </span>
+<span id="L1208" class="l">  timeout: 1000,</span>
+<span id="L1209" class="l"> </span>
+<span id="L1210" class="l">});</span>
+<span id="L1211" class="l"> </span>
+<span id="L1212" class="l">console.log(`Response: ${response.string()}`);</span>
+<span id="L1213" class="l"> </span>
+<span id="L1214" class="l">const responseId = response.headers?.get(&quot;X-Response-ID&quot;);</span>
+<span id="L1215" class="l"> </span>
+<span id="L1216" class="l">if (responseId) {</span>
+<span id="L1217" class="l"> </span>
+<span id="L1218" class="l">  console.log(`Response ID: ${responseId}`);</span>
+<span id="L1219" class="l"> </span>
+<span id="L1220" class="l">}</span>
+<span id="L1221" class="l">```</span>
+<span id="L1222" class="l"> </span>
+<span id="L1223" class="l">#### Go</span>
+<span id="L1224" class="l"> </span>
+<span id="L1225" class="l">```</span>
+<span id="L1226" class="l">// Header Aware service</span>
+<span id="L1227" class="l"> </span>
+<span id="L1228" class="l">nc.Subscribe(&quot;service&quot;, func(msg *nats.Msg) {</span>
+<span id="L1229" class="l"> </span>
+<span id="L1230" class="l">	responseMsg := nats.NewMsg(msg.Reply)</span>
+<span id="L1231" class="l"> </span>
+<span id="L1232" class="l">	responseMsg.Data = msg.Data</span>
+<span id="L1233" class="l"> </span>
+<span id="L1234" class="l">	responseMsg.Header.Add(&quot;X-Response-ID&quot;, &quot;123&quot;)</span>
+<span id="L1235" class="l"> </span>
+<span id="L1236" class="l">	responseMsg.Header.Add(&quot;X-Request-ID&quot;, msg.Header.Get(&quot;X-Request-ID&quot;))</span>
+<span id="L1237" class="l"> </span>
+<span id="L1238" class="l">	responseMsg.Header.Add(&quot;X-Priority&quot;, msg.Header.Get(&quot;X-Priority&quot;))</span>
+<span id="L1239" class="l"> </span>
+<span id="L1240" class="l">	nc.PublishMsg(responseMsg)</span>
+<span id="L1241" class="l"> </span>
+<span id="L1242" class="l">})</span>
+<span id="L1243" class="l"> </span>
+<span id="L1244" class="l"> </span>
+<span id="L1245" class="l"> </span>
+<span id="L1246" class="l">// Create message with headers</span>
+<span id="L1247" class="l"> </span>
+<span id="L1248" class="l">msg := nats.NewMsg(&quot;service&quot;)</span>
+<span id="L1249" class="l"> </span>
+<span id="L1250" class="l">msg.Header.Add(&quot;X-Request-ID&quot;, &quot;123&quot;)</span>
+<span id="L1251" class="l"> </span>
+<span id="L1252" class="l">msg.Header.Add(&quot;X-Priority&quot;, &quot;high&quot;)</span>
+<span id="L1253" class="l"> </span>
+<span id="L1254" class="l">msg.Data = []byte(&quot;data&quot;)</span>
+<span id="L1255" class="l"> </span>
+<span id="L1256" class="l"> </span>
+<span id="L1257" class="l"> </span>
+<span id="L1258" class="l">// Send request with headers</span>
+<span id="L1259" class="l"> </span>
+<span id="L1260" class="l">response, err := nc.RequestMsg(msg, time.Second)</span>
+<span id="L1261" class="l"> </span>
+<span id="L1262" class="l">if err == nil {</span>
+<span id="L1263" class="l"> </span>
+<span id="L1264" class="l">	fmt.Printf(&quot;Response: %s\n&quot;, response.Data)</span>
+<span id="L1265" class="l"> </span>
+<span id="L1266" class="l">	fmt.Printf(&quot;Response ID: %s\n&quot;, response.Header.Get(&quot;X-Response-ID&quot;))</span>
+<span id="L1267" class="l"> </span>
+<span id="L1268" class="l">} else {</span>
+<span id="L1269" class="l"> </span>
+<span id="L1270" class="l">	fmt.Printf(&quot;Error: %s\n&quot;, err)</span>
+<span id="L1271" class="l"> </span>
+<span id="L1272" class="l">}</span>
+<span id="L1273" class="l">```</span>
+<span id="L1274" class="l"> </span>
+<span id="L1275" class="l">#### Python</span>
+<span id="L1276" class="l"> </span>
+<span id="L1277" class="l">```</span>
+<span id="L1278" class="l"># Header aware service</span>
+<span id="L1279" class="l"> </span>
+<span id="L1280" class="l">sub = await nc.subscribe(&quot;service&quot;)</span>
+<span id="L1281" class="l"> </span>
+<span id="L1282" class="l"> </span>
+<span id="L1283" class="l"> </span>
+<span id="L1284" class="l">async def service():</span>
+<span id="L1285" class="l"> </span>
+<span id="L1286" class="l">    async for msg in sub:</span>
+<span id="L1287" class="l"> </span>
+<span id="L1288" class="l">        response_headers: dict[str, str | list[str]] = {}</span>
+<span id="L1289" class="l"> </span>
+<span id="L1290" class="l">        if msg.headers:</span>
+<span id="L1291" class="l"> </span>
+<span id="L1292" class="l">            request_id = msg.headers.get(&quot;X-Request-ID&quot;) or &quot;&quot;</span>
+<span id="L1293" class="l"> </span>
+<span id="L1294" class="l">            response_headers[&quot;X-Response-ID&quot;] = request_id</span>
+<span id="L1295" class="l"> </span>
+<span id="L1296" class="l">            for key, values in msg.headers.items():</span>
+<span id="L1297" class="l"> </span>
+<span id="L1298" class="l">                response_headers[key] = values</span>
+<span id="L1299" class="l"> </span>
+<span id="L1300" class="l">        if msg.reply:</span>
+<span id="L1301" class="l"> </span>
+<span id="L1302" class="l">            await nc.publish(msg.reply, msg.data, headers=response_headers)</span>
+<span id="L1303" class="l"> </span>
+<span id="L1304" class="l"> </span>
+<span id="L1305" class="l"> </span>
+<span id="L1306" class="l">asyncio.create_task(service())</span>
+<span id="L1307" class="l"> </span>
+<span id="L1308" class="l">await nc.flush()</span>
+<span id="L1309" class="l"> </span>
+<span id="L1310" class="l"> </span>
+<span id="L1311" class="l"> </span>
+<span id="L1312" class="l"># Make a request with headers</span>
+<span id="L1313" class="l"> </span>
+<span id="L1314" class="l">headers = {&quot;X-Request-ID&quot;: &quot;123&quot;, &quot;X-Priority&quot;: &quot;high&quot;}</span>
+<span id="L1315" class="l"> </span>
+<span id="L1316" class="l">try:</span>
+<span id="L1317" class="l"> </span>
+<span id="L1318" class="l">    m = await nc.request(&quot;service&quot;, b&quot;data&quot;, timeout=0.5, headers=headers)</span>
+<span id="L1319" class="l"> </span>
+<span id="L1320" class="l">    data = m.data.decode() if m.data else &quot;&quot;</span>
+<span id="L1321" class="l"> </span>
+<span id="L1322" class="l">    print(f&quot;Response: {data}&quot;)</span>
+<span id="L1323" class="l"> </span>
+<span id="L1324" class="l">    if m.headers:</span>
+<span id="L1325" class="l"> </span>
+<span id="L1326" class="l">        print(f&quot;Response ID: {m.headers.get(&#x27;X-Response-ID&#x27;)}&quot;)</span>
+<span id="L1327" class="l"> </span>
+<span id="L1328" class="l">except (TimeoutError, NoRespondersError):</span>
+<span id="L1329" class="l"> </span>
+<span id="L1330" class="l">    print(&quot;No Response&quot;)</span>
+<span id="L1331" class="l">```</span>
+<span id="L1332" class="l"> </span>
+<span id="L1333" class="l">#### Java</span>
+<span id="L1334" class="l"> </span>
+<span id="L1335" class="l">```</span>
+<span id="L1336" class="l">// Header Aware service</span>
+<span id="L1337" class="l"> </span>
+<span id="L1338" class="l">Dispatcher dService = nc.createDispatcher(msg -&gt; {</span>
+<span id="L1339" class="l"> </span>
+<span id="L1340" class="l">    Headers hIncoming = msg.getHeaders();</span>
+<span id="L1341" class="l"> </span>
+<span id="L1342" class="l">    Headers hResponse = new Headers();</span>
+<span id="L1343" class="l"> </span>
+<span id="L1344" class="l">    for (String keys : hIncoming.keySet()) {</span>
+<span id="L1345" class="l"> </span>
+<span id="L1346" class="l">        hResponse.put(&quot;X-Response-ID&quot;, hIncoming.getFirst(&quot;X-Request-ID&quot;));</span>
+<span id="L1347" class="l"> </span>
+<span id="L1348" class="l">        hResponse.put(keys, hIncoming.get(keys));</span>
+<span id="L1349" class="l"> </span>
+<span id="L1350" class="l">    }</span>
+<span id="L1351" class="l"> </span>
+<span id="L1352" class="l">    nc.publish(msg.getReplyTo(), hResponse, msg.getData());</span>
+<span id="L1353" class="l"> </span>
+<span id="L1354" class="l">});</span>
+<span id="L1355" class="l"> </span>
+<span id="L1356" class="l">dService.subscribe(&quot;service&quot;);</span>
+<span id="L1357" class="l"> </span>
+<span id="L1358" class="l"> </span>
+<span id="L1359" class="l"> </span>
+<span id="L1360" class="l">// Make a request expecting a future</span>
+<span id="L1361" class="l"> </span>
+<span id="L1362" class="l">Headers headers = new Headers();</span>
+<span id="L1363" class="l"> </span>
+<span id="L1364" class="l">headers.put(&quot;X-Request-ID&quot;, &quot;123&quot;);</span>
+<span id="L1365" class="l"> </span>
+<span id="L1366" class="l">headers.put(&quot;X-Priority&quot;, &quot;high&quot;);</span>
+<span id="L1367" class="l"> </span>
+<span id="L1368" class="l">CompletableFuture&lt;Message&gt; responseFuture = nc.request(&quot;service&quot;, headers, &quot;data&quot;.getBytes());</span>
+<span id="L1369" class="l"> </span>
+<span id="L1370" class="l">try {</span>
+<span id="L1371" class="l"> </span>
+<span id="L1372" class="l">    Message m = responseFuture.get(500, TimeUnit.MILLISECONDS);</span>
+<span id="L1373" class="l"> </span>
+<span id="L1374" class="l">    Headers hIncoming = m.getHeaders();</span>
+<span id="L1375" class="l"> </span>
+<span id="L1376" class="l">    byte[] data = m.getData();</span>
+<span id="L1377" class="l"> </span>
+<span id="L1378" class="l">    String s = data == null ? &quot;&quot; : new String(data);</span>
+<span id="L1379" class="l"> </span>
+<span id="L1380" class="l">    System.out.println(&quot;Response: &quot; + s);</span>
+<span id="L1381" class="l"> </span>
+<span id="L1382" class="l">    System.out.println(&quot;Response ID: &quot; + hIncoming.getFirst(&quot;X-Response-ID&quot;));</span>
+<span id="L1383" class="l"> </span>
+<span id="L1384" class="l">}</span>
+<span id="L1385" class="l"> </span>
+<span id="L1386" class="l">catch (CancellationException | ExecutionException | TimeoutException e) {</span>
+<span id="L1387" class="l"> </span>
+<span id="L1388" class="l">    System.out.println(&quot;No Response&quot;);</span>
+<span id="L1389" class="l"> </span>
+<span id="L1390" class="l">}</span>
+<span id="L1391" class="l">```</span>
+<span id="L1392" class="l"> </span>
+<span id="L1393" class="l">#### Rust</span>
+<span id="L1394" class="l"> </span>
+<span id="L1395" class="l">```</span>
+<span id="L1396" class="l">// Create message with headers</span>
+<span id="L1397" class="l"> </span>
+<span id="L1398" class="l">let mut headers = HeaderMap::new();</span>
+<span id="L1399" class="l"> </span>
+<span id="L1400" class="l">headers.insert(&quot;X-Request-ID&quot;, &quot;123&quot;);</span>
+<span id="L1401" class="l"> </span>
+<span id="L1402" class="l">headers.insert(&quot;X-Priority&quot;, &quot;high&quot;);</span>
+<span id="L1403" class="l"> </span>
+<span id="L1404" class="l"> </span>
+<span id="L1405" class="l"> </span>
+<span id="L1406" class="l">let response = client</span>
+<span id="L1407" class="l"> </span>
+<span id="L1408" class="l">    .request_with_headers(&quot;service&quot;, headers, &quot;data&quot;.into())</span>
+<span id="L1409" class="l"> </span>
+<span id="L1410" class="l">    .await?;</span>
+<span id="L1411" class="l"> </span>
+<span id="L1412" class="l"> </span>
+<span id="L1413" class="l"> </span>
+<span id="L1414" class="l">println!(&quot;Response: {}&quot;, String::from_utf8_lossy(&amp;response.payload));</span>
+<span id="L1415" class="l"> </span>
+<span id="L1416" class="l">if let Some(response_id) = response</span>
+<span id="L1417" class="l"> </span>
+<span id="L1418" class="l">    .headers</span>
+<span id="L1419" class="l"> </span>
+<span id="L1420" class="l">    .as_ref()</span>
+<span id="L1421" class="l"> </span>
+<span id="L1422" class="l">    .and_then(|h| h.get(&quot;X-Response-ID&quot;))</span>
+<span id="L1423" class="l"> </span>
+<span id="L1424" class="l">{</span>
+<span id="L1425" class="l"> </span>
+<span id="L1426" class="l">    println!(&quot;Response ID: {}&quot;, response_id);</span>
+<span id="L1427" class="l"> </span>
+<span id="L1428" class="l">}</span>
+<span id="L1429" class="l">```</span>
+<span id="L1430" class="l"> </span>
+<span id="L1431" class="l">#### C#/.NET</span>
+<span id="L1432" class="l"> </span>
+<span id="L1433" class="l">```</span>
+<span id="L1434" class="l">// Send a request with headers</span>
+<span id="L1435" class="l"> </span>
+<span id="L1436" class="l">var requestHeaders = new NatsHeaders</span>
+<span id="L1437" class="l"> </span>
+<span id="L1438" class="l">{</span>
+<span id="L1439" class="l"> </span>
+<span id="L1440" class="l">    [&quot;X-Request-ID&quot;] = &quot;123&quot;,</span>
+<span id="L1441" class="l"> </span>
+<span id="L1442" class="l">    [&quot;X-Priority&quot;] = &quot;high&quot;,</span>
+<span id="L1443" class="l"> </span>
+<span id="L1444" class="l">};</span>
+<span id="L1445" class="l"> </span>
+<span id="L1446" class="l"> </span>
+<span id="L1447" class="l"> </span>
+<span id="L1448" class="l">var reply = await client.RequestAsync&lt;string, string&gt;(subject: &quot;service&quot;, data: &quot;data&quot;, headers: requestHeaders);</span>
+<span id="L1449" class="l"> </span>
+<span id="L1450" class="l">output.WriteLine($&quot;Response: {reply.Data}&quot;);</span>
+<span id="L1451" class="l"> </span>
+<span id="L1452" class="l">output.WriteLine($&quot;Response ID: {reply.Headers?[&quot;X-Response-ID&quot;]}&quot;);</span>
+<span id="L1453" class="l">```</span>
+<span id="L1454" class="l"> </span>
+<span id="L1455" class="l">#### C</span>
+<span id="L1456" class="l"> </span>
+<span id="L1457" class="l">```</span>
+<span id="L1458" class="l">// Header aware service: echo the data and the request headers back</span>
+<span id="L1459" class="l"> </span>
+<span id="L1460" class="l">static void</span>
+<span id="L1461" class="l"> </span>
+<span id="L1462" class="l">onServiceRequest(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L1463" class="l"> </span>
+<span id="L1464" class="l">{</span>
+<span id="L1465" class="l"> </span>
+<span id="L1466" class="l">    natsMsg     *responseMsg = NULL;</span>
+<span id="L1467" class="l"> </span>
+<span id="L1468" class="l">    const char  *requestID   = NULL;</span>
+<span id="L1469" class="l"> </span>
+<span id="L1470" class="l">    const char  *priority    = NULL;</span>
+<span id="L1471" class="l"> </span>
+<span id="L1472" class="l"> </span>
+<span id="L1473" class="l"> </span>
+<span id="L1474" class="l">    natsMsgHeader_Get(msg, &quot;X-Request-ID&quot;, &amp;requestID);</span>
+<span id="L1475" class="l"> </span>
+<span id="L1476" class="l">    natsMsgHeader_Get(msg, &quot;X-Priority&quot;, &amp;priority);</span>
+<span id="L1477" class="l"> </span>
+<span id="L1478" class="l"> </span>
+<span id="L1479" class="l"> </span>
+<span id="L1480" class="l">    natsMsg_Create(&amp;responseMsg, natsMsg_GetReply(msg), NULL,</span>
+<span id="L1481" class="l"> </span>
+<span id="L1482" class="l">                   natsMsg_GetData(msg), natsMsg_GetDataLength(msg));</span>
+<span id="L1483" class="l"> </span>
+<span id="L1484" class="l">    natsMsgHeader_Add(responseMsg, &quot;X-Response-ID&quot;, &quot;123&quot;);</span>
+<span id="L1485" class="l"> </span>
+<span id="L1486" class="l">    if (requestID != NULL)</span>
+<span id="L1487" class="l"> </span>
+<span id="L1488" class="l">        natsMsgHeader_Add(responseMsg, &quot;X-Request-ID&quot;, requestID);</span>
+<span id="L1489" class="l"> </span>
+<span id="L1490" class="l">    if (priority != NULL)</span>
+<span id="L1491" class="l"> </span>
+<span id="L1492" class="l">        natsMsgHeader_Add(responseMsg, &quot;X-Priority&quot;, priority);</span>
+<span id="L1493" class="l"> </span>
+<span id="L1494" class="l"> </span>
+<span id="L1495" class="l"> </span>
+<span id="L1496" class="l">    natsConnection_PublishMsg(nc, responseMsg);</span>
+<span id="L1497" class="l"> </span>
+<span id="L1498" class="l"> </span>
+<span id="L1499" class="l"> </span>
+<span id="L1500" class="l">    natsMsg_Destroy(responseMsg);</span>
+<span id="L1501" class="l"> </span>
+<span id="L1502" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L1503" class="l"> </span>
+<span id="L1504" class="l">}</span>
+<span id="L1505" class="l"> </span>
+<span id="L1506" class="l">    if (s == NATS_OK)</span>
+<span id="L1507" class="l"> </span>
+<span id="L1508" class="l">        s = natsConnection_Subscribe(&amp;sub, conn, &quot;service&quot;, onServiceRequest, NULL);</span>
+<span id="L1509" class="l"> </span>
+<span id="L1510" class="l"> </span>
+<span id="L1511" class="l"> </span>
+<span id="L1512" class="l">    // Create a message with headers</span>
+<span id="L1513" class="l"> </span>
+<span id="L1514" class="l">    if (s == NATS_OK)</span>
+<span id="L1515" class="l"> </span>
+<span id="L1516" class="l">        s = natsMsg_Create(&amp;msg, &quot;service&quot;, NULL, &quot;data&quot;, 4);</span>
+<span id="L1517" class="l"> </span>
+<span id="L1518" class="l">    if (s == NATS_OK)</span>
+<span id="L1519" class="l"> </span>
+<span id="L1520" class="l">        s = natsMsgHeader_Add(msg, &quot;X-Request-ID&quot;, &quot;123&quot;);</span>
+<span id="L1521" class="l"> </span>
+<span id="L1522" class="l">    if (s == NATS_OK)</span>
+<span id="L1523" class="l"> </span>
+<span id="L1524" class="l">        s = natsMsgHeader_Add(msg, &quot;X-Priority&quot;, &quot;high&quot;);</span>
+<span id="L1525" class="l"> </span>
+<span id="L1526" class="l"> </span>
+<span id="L1527" class="l"> </span>
+<span id="L1528" class="l">    // Send the request with headers</span>
+<span id="L1529" class="l"> </span>
+<span id="L1530" class="l">    if (s == NATS_OK)</span>
+<span id="L1531" class="l"> </span>
+<span id="L1532" class="l">        s = natsConnection_RequestMsg(&amp;response, conn, msg, 1000);</span>
+<span id="L1533" class="l"> </span>
+<span id="L1534" class="l">    if (s == NATS_OK)</span>
+<span id="L1535" class="l"> </span>
+<span id="L1536" class="l">    {</span>
+<span id="L1537" class="l"> </span>
+<span id="L1538" class="l">        const char *responseID = NULL;</span>
+<span id="L1539" class="l"> </span>
+<span id="L1540" class="l"> </span>
+<span id="L1541" class="l"> </span>
+<span id="L1542" class="l">        printf(&quot;Response: %.*s\n&quot;,</span>
+<span id="L1543" class="l"> </span>
+<span id="L1544" class="l">               natsMsg_GetDataLength(response), natsMsg_GetData(response));</span>
+<span id="L1545" class="l"> </span>
+<span id="L1546" class="l">        if (natsMsgHeader_Get(response, &quot;X-Response-ID&quot;, &amp;responseID) == NATS_OK)</span>
+<span id="L1547" class="l"> </span>
+<span id="L1548" class="l">            printf(&quot;Response ID: %s\n&quot;, responseID);</span>
+<span id="L1549" class="l"> </span>
+<span id="L1550" class="l">    }</span>
+<span id="L1551" class="l"> </span>
+<span id="L1552" class="l">    else</span>
+<span id="L1553" class="l"> </span>
+<span id="L1554" class="l">        printf(&quot;Error: %s\n&quot;, natsStatus_GetText(s));</span>
+<span id="L1555" class="l">```</span>
+<span id="L1556" class="l"> </span>
+<span id="L1557" class="l">## Best Practices</span>
+<span id="L1558" class="l"> </span>
+<span id="L1559" class="l">### Timeout Strategy</span>
+<span id="L1560" class="l"> </span>
+<span id="L1561" class="l">* **Set appropriate timeouts**: Too short may miss valid responses, too long blocks unnecessarily</span>
+<span id="L1562" class="l">* **Consider network latency**: Add buffer for network round-trip time</span>
+<span id="L1563" class="l">* **Implement retry logic**: For transient failures</span>
+<span id="L1564" class="l"> </span>
+<span id="L1565" class="l">### Error Handling</span>
+<span id="L1566" class="l"> </span>
+<span id="L1567" class="l">* **Always handle timeouts**: Don&#x27;t assume responses will arrive</span>
+<span id="L1568" class="l">* **Check for no responders**: React appropriately when services are unavailable</span>
+<span id="L1569" class="l">* **Validate responses**: Ensure response data is valid before processing</span>
+<span id="L1570" class="l"> </span>
+<span id="L1571" class="l">### Service Design</span>
+<span id="L1572" class="l"> </span>
+<span id="L1573" class="l">* **Idempotent operations**: Requests might be retried</span>
+<span id="L1574" class="l">* **Lightweight processing**: Long operations should be async</span>
+<span id="L1575" class="l">* **Health checks**: Implement service health endpoints</span>
+<span id="L1576" class="l">* **Graceful shutdown**: Drain pending requests before shutting down</span>
+<span id="L1577" class="l"> </span>
+<span id="L1578" class="l">### Performance</span>
+<span id="L1579" class="l"> </span>
+<span id="L1580" class="l">* **Connection pooling**: Reuse connections for multiple requests</span>
+<span id="L1581" class="l">* **Inbox reuse**: Modern clients reuse inbox subjects for efficiency</span>
+<span id="L1582" class="l">* **Batch operations**: Group related requests when possible</span>
+<span id="L1583" class="l"> </span>
+<span id="L1584" class="l">## Request-Reply vs Publish-Subscribe</span>
+<span id="L1585" class="l"> </span>
+<span id="L1586" class="l">Choose request-reply when you need:</span>
+<span id="L1587" class="l"> </span>
+<span id="L1588" class="l">* **Synchronous communication**: Wait for a response before continuing</span>
+<span id="L1589" class="l">* **Service discovery**: Automatic &quot;no responders&quot; detection</span>
+<span id="L1590" class="l">* **Load balancing**: Combined with queue groups</span>
+<span id="L1591" class="l">* **RPC-style APIs**: Traditional request-response patterns</span>
+<span id="L1592" class="l"> </span>
+<span id="L1593" class="l">Use publish-subscribe when you need:</span>
+<span id="L1594" class="l"> </span>
+<span id="L1595" class="l">* **Fire-and-forget**: No response needed</span>
+<span id="L1596" class="l">* **Multiple consumers**: All subscribers should receive the message</span>
+<span id="L1597" class="l">* **Event streaming**: Continuous flow of events</span>
+<span id="L1598" class="l">* **Decoupled systems**: Publishers shouldn&#x27;t know about subscribers</span>
+<span id="L1599" class="l"> </span>
+<span id="L1600" class="l">## Related Concepts</span>
+<span id="L1601" class="l"> </span>
+<span id="L1602" class="l">* [Subjects](/concepts/subjects.md) - Understanding subject-based addressing</span>
+<span id="L1603" class="l">* [Queue Groups](/concepts/queue-groups.md) - Load balancing for services</span>
+<span id="L1604" class="l">* [Publish-Subscribe](/concepts/pub-sub-basics.md) - Asynchronous messaging patterns</span>
+<span id="L1605" class="l"> </span>
+<span id="L1606" class="l">## Try It Yourself</span>
+<span id="L1607" class="l"> </span>
+<span id="L1608" class="l">Create a simple calculator service:</span>
+<span id="L1609" class="l"> </span>
+<span id="L1610" class="l">#### CLI</span>
+<span id="L1611" class="l"> </span>
+<span id="L1612" class="l">```</span>
+<span id="L1613" class="l">#!/bin/bash</span>
+<span id="L1614" class="l"> </span>
+<span id="L1615" class="l"> </span>
+<span id="L1616" class="l"> </span>
+<span id="L1617" class="l"># Terminal 1: Calculator service (adds the two numbers in the request body)</span>
+<span id="L1618" class="l"> </span>
+<span id="L1619" class="l">nats reply calc.add --command &quot;sh -c \&quot;echo \$NATS_REQUEST_BODY | awk &#x27;{print \$1 + \$2}&#x27;\&quot;&quot;</span>
+<span id="L1620" class="l"> </span>
+<span id="L1621" class="l"> </span>
+<span id="L1622" class="l"> </span>
+<span id="L1623" class="l"># Terminal 2: Make calculations</span>
+<span id="L1624" class="l"> </span>
+<span id="L1625" class="l">nats request calc.add &quot;5 3&quot;</span>
+<span id="L1626" class="l"> </span>
+<span id="L1627" class="l"># Output: 8</span>
+<span id="L1628" class="l"> </span>
+<span id="L1629" class="l">nats request calc.add &quot;10 7&quot;</span>
+<span id="L1630" class="l"> </span>
+<span id="L1631" class="l"># Output: 17</span>
+<span id="L1632" class="l">```</span>
+<span id="L1633" class="l"> </span>
+<span id="L1634" class="l">#### JavaScript/TypeScript</span>
+<span id="L1635" class="l"> </span>
+<span id="L1636" class="l">```</span>
+<span id="L1637" class="l">// Calculator service</span>
+<span id="L1638" class="l"> </span>
+<span id="L1639" class="l">const sub = nc.subscribe(&quot;calc.add&quot;);</span>
+<span id="L1640" class="l"> </span>
+<span id="L1641" class="l">(async (sub: Subscription) =&gt; {</span>
+<span id="L1642" class="l"> </span>
+<span id="L1643" class="l">  for await (const m of sub) {</span>
+<span id="L1644" class="l"> </span>
+<span id="L1645" class="l">    try {</span>
+<span id="L1646" class="l"> </span>
+<span id="L1647" class="l">      const {a, b} = m.json&lt;{ a: number, b: number }&gt;();</span>
+<span id="L1648" class="l"> </span>
+<span id="L1649" class="l">      if (typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;) {</span>
+<span id="L1650" class="l"> </span>
+<span id="L1651" class="l">        throw new Error(&quot;invalid input&quot;);</span>
+<span id="L1652" class="l"> </span>
+<span id="L1653" class="l">      }</span>
+<span id="L1654" class="l"> </span>
+<span id="L1655" class="l">      m.respond(JSON.stringify({result: a+b}))</span>
+<span id="L1656" class="l"> </span>
+<span id="L1657" class="l">    } catch(err) {</span>
+<span id="L1658" class="l"> </span>
+<span id="L1659" class="l">      m.respond(&quot;error: invalid input&quot;);</span>
+<span id="L1660" class="l"> </span>
+<span id="L1661" class="l">    }</span>
+<span id="L1662" class="l"> </span>
+<span id="L1663" class="l">  }</span>
+<span id="L1664" class="l"> </span>
+<span id="L1665" class="l">})(sub).catch(console.error);</span>
+<span id="L1666" class="l"> </span>
+<span id="L1667" class="l"> </span>
+<span id="L1668" class="l"> </span>
+<span id="L1669" class="l">// Make calculations</span>
+<span id="L1670" class="l"> </span>
+<span id="L1671" class="l">let resp = await nc.request(&quot;calc.add&quot;, JSON.stringify({a: 5, b: 3}));</span>
+<span id="L1672" class="l"> </span>
+<span id="L1673" class="l">console.log(`5 + 3 = ${resp.string()}`);</span>
+<span id="L1674" class="l"> </span>
+<span id="L1675" class="l"> </span>
+<span id="L1676" class="l"> </span>
+<span id="L1677" class="l">resp = await nc.request(&quot;calc.add&quot;, JSON.stringify({a: 10, b: 7}));</span>
+<span id="L1678" class="l"> </span>
+<span id="L1679" class="l">console.log(`10 + 7 = ${resp.string()}`);</span>
+<span id="L1680" class="l"> </span>
+<span id="L1681" class="l"> </span>
+<span id="L1682" class="l"> </span>
+<span id="L1683" class="l">resp = await nc.request(&quot;calc.add&quot;, JSON.stringify({a: 10, b: &quot;x&quot;}));</span>
+<span id="L1684" class="l"> </span>
+<span id="L1685" class="l">console.log(`10 + x = ${resp.string()}`);</span>
+<span id="L1686" class="l">```</span>
+<span id="L1687" class="l"> </span>
+<span id="L1688" class="l">#### Go</span>
+<span id="L1689" class="l"> </span>
+<span id="L1690" class="l">```</span>
+<span id="L1691" class="l">// Calculator service</span>
+<span id="L1692" class="l"> </span>
+<span id="L1693" class="l">nc.Subscribe(&quot;calc.add&quot;, func(msg *nats.Msg) {</span>
+<span id="L1694" class="l"> </span>
+<span id="L1695" class="l">	parts := strings.Fields(string(msg.Data))</span>
+<span id="L1696" class="l"> </span>
+<span id="L1697" class="l">	if len(parts) == 2 {</span>
+<span id="L1698" class="l"> </span>
+<span id="L1699" class="l">		a, _ := strconv.Atoi(parts[0])</span>
+<span id="L1700" class="l"> </span>
+<span id="L1701" class="l">		b, _ := strconv.Atoi(parts[1])</span>
+<span id="L1702" class="l"> </span>
+<span id="L1703" class="l">		result := fmt.Sprintf(&quot;%d&quot;, a+b)</span>
+<span id="L1704" class="l"> </span>
+<span id="L1705" class="l">		msg.Respond([]byte(result))</span>
+<span id="L1706" class="l"> </span>
+<span id="L1707" class="l">	}</span>
+<span id="L1708" class="l"> </span>
+<span id="L1709" class="l">})</span>
+<span id="L1710" class="l"> </span>
+<span id="L1711" class="l"> </span>
+<span id="L1712" class="l"> </span>
+<span id="L1713" class="l">// Make calculations</span>
+<span id="L1714" class="l"> </span>
+<span id="L1715" class="l">time.Sleep(100 * time.Millisecond)</span>
+<span id="L1716" class="l"> </span>
+<span id="L1717" class="l"> </span>
+<span id="L1718" class="l"> </span>
+<span id="L1719" class="l">resp, _ := nc.Request(&quot;calc.add&quot;, []byte(&quot;5 3&quot;), time.Second)</span>
+<span id="L1720" class="l"> </span>
+<span id="L1721" class="l">fmt.Printf(&quot;5 + 3 = %s\n&quot;, string(resp.Data))</span>
+<span id="L1722" class="l"> </span>
+<span id="L1723" class="l"> </span>
+<span id="L1724" class="l"> </span>
+<span id="L1725" class="l">resp, _ = nc.Request(&quot;calc.add&quot;, []byte(&quot;10 7&quot;), time.Second)</span>
+<span id="L1726" class="l"> </span>
+<span id="L1727" class="l">fmt.Printf(&quot;10 + 7 = %s\n&quot;, string(resp.Data))</span>
+<span id="L1728" class="l">```</span>
+<span id="L1729" class="l"> </span>
+<span id="L1730" class="l">#### Python</span>
+<span id="L1731" class="l"> </span>
+<span id="L1732" class="l">```</span>
+<span id="L1733" class="l"># Calculator service</span>
+<span id="L1734" class="l"> </span>
+<span id="L1735" class="l">sub = await nc.subscribe(&quot;calc.add&quot;)</span>
+<span id="L1736" class="l"> </span>
+<span id="L1737" class="l"> </span>
+<span id="L1738" class="l"> </span>
+<span id="L1739" class="l">async def calc_service():</span>
+<span id="L1740" class="l"> </span>
+<span id="L1741" class="l">    async for msg in sub:</span>
+<span id="L1742" class="l"> </span>
+<span id="L1743" class="l">        # data is in the form &quot;x y&quot;</span>
+<span id="L1744" class="l"> </span>
+<span id="L1745" class="l">        try:</span>
+<span id="L1746" class="l"> </span>
+<span id="L1747" class="l">            parts = msg.data.decode().split()</span>
+<span id="L1748" class="l"> </span>
+<span id="L1749" class="l">            if len(parts) == 2 and msg.reply:</span>
+<span id="L1750" class="l"> </span>
+<span id="L1751" class="l">                x = int(parts[0])</span>
+<span id="L1752" class="l"> </span>
+<span id="L1753" class="l">                y = int(parts[1])</span>
+<span id="L1754" class="l"> </span>
+<span id="L1755" class="l">                await nc.publish(msg.reply, str(x + y).encode())</span>
+<span id="L1756" class="l"> </span>
+<span id="L1757" class="l">        except Exception:</span>
+<span id="L1758" class="l"> </span>
+<span id="L1759" class="l">            # you could send some other reply here</span>
+<span id="L1760" class="l"> </span>
+<span id="L1761" class="l">            pass</span>
+<span id="L1762" class="l"> </span>
+<span id="L1763" class="l"> </span>
+<span id="L1764" class="l"> </span>
+<span id="L1765" class="l">asyncio.create_task(calc_service())</span>
+<span id="L1766" class="l"> </span>
+<span id="L1767" class="l">await nc.flush()</span>
+<span id="L1768" class="l"> </span>
+<span id="L1769" class="l"> </span>
+<span id="L1770" class="l"> </span>
+<span id="L1771" class="l"># Make a request with a timeout</span>
+<span id="L1772" class="l"> </span>
+<span id="L1773" class="l">try:</span>
+<span id="L1774" class="l"> </span>
+<span id="L1775" class="l">    m = await nc.request(&quot;calc.add&quot;, b&quot;5 3&quot;, timeout=0.5)</span>
+<span id="L1776" class="l"> </span>
+<span id="L1777" class="l">    print(f&quot;5 + 3 = {m.data.decode()}&quot;)</span>
+<span id="L1778" class="l"> </span>
+<span id="L1779" class="l">except (TimeoutError, NoRespondersError):</span>
+<span id="L1780" class="l"> </span>
+<span id="L1781" class="l">    print(&quot;1) No Response&quot;)</span>
+<span id="L1782" class="l"> </span>
+<span id="L1783" class="l"> </span>
+<span id="L1784" class="l"> </span>
+<span id="L1785" class="l"># Make another request</span>
+<span id="L1786" class="l"> </span>
+<span id="L1787" class="l">try:</span>
+<span id="L1788" class="l"> </span>
+<span id="L1789" class="l">    m = await nc.request(&quot;calc.add&quot;, b&quot;10 7&quot;, timeout=0.5)</span>
+<span id="L1790" class="l"> </span>
+<span id="L1791" class="l">    print(f&quot;10 + 7 = {m.data.decode()}&quot;)</span>
+<span id="L1792" class="l"> </span>
+<span id="L1793" class="l">except (TimeoutError, NoRespondersError):</span>
+<span id="L1794" class="l"> </span>
+<span id="L1795" class="l">    print(&quot;2) No Response&quot;)</span>
+<span id="L1796" class="l">```</span>
+<span id="L1797" class="l"> </span>
+<span id="L1798" class="l">#### Java</span>
+<span id="L1799" class="l"> </span>
+<span id="L1800" class="l">```</span>
+<span id="L1801" class="l">// Calculator service</span>
+<span id="L1802" class="l"> </span>
+<span id="L1803" class="l">Dispatcher dCalcAdd = nc.createDispatcher(msg -&gt; {</span>
+<span id="L1804" class="l"> </span>
+<span id="L1805" class="l">    // data is in the form &quot;x y&quot;</span>
+<span id="L1806" class="l"> </span>
+<span id="L1807" class="l">    try {</span>
+<span id="L1808" class="l"> </span>
+<span id="L1809" class="l">        String[] parts = new String(msg.getData()).split(&quot; &quot;);</span>
+<span id="L1810" class="l"> </span>
+<span id="L1811" class="l">        if (parts.length == 2) {</span>
+<span id="L1812" class="l"> </span>
+<span id="L1813" class="l">            int x = Integer.parseInt(parts[0]);</span>
+<span id="L1814" class="l"> </span>
+<span id="L1815" class="l">            int y = Integer.parseInt(parts[1]);</span>
+<span id="L1816" class="l"> </span>
+<span id="L1817" class="l">            nc.publish(msg.getReplyTo(), (&quot;&quot; + (x + y)).getBytes(StandardCharsets.UTF_8));</span>
+<span id="L1818" class="l"> </span>
+<span id="L1819" class="l">            return;</span>
+<span id="L1820" class="l"> </span>
+<span id="L1821" class="l">        }</span>
+<span id="L1822" class="l"> </span>
+<span id="L1823" class="l">        // fall through</span>
+<span id="L1824" class="l"> </span>
+<span id="L1825" class="l">    }</span>
+<span id="L1826" class="l"> </span>
+<span id="L1827" class="l">    catch (Exception e) {</span>
+<span id="L1828" class="l"> </span>
+<span id="L1829" class="l">        // fall through</span>
+<span id="L1830" class="l"> </span>
+<span id="L1831" class="l">    }</span>
+<span id="L1832" class="l"> </span>
+<span id="L1833" class="l">    nc.publish(msg.getReplyTo(), &quot;error: invalid input&quot;.getBytes(StandardCharsets.UTF_8));</span>
+<span id="L1834" class="l"> </span>
+<span id="L1835" class="l">});</span>
+<span id="L1836" class="l"> </span>
+<span id="L1837" class="l">dCalcAdd.subscribe(&quot;calc.add&quot;);</span>
+<span id="L1838" class="l"> </span>
+<span id="L1839" class="l"> </span>
+<span id="L1840" class="l"> </span>
+<span id="L1841" class="l">// Make a request expecting a future</span>
+<span id="L1842" class="l"> </span>
+<span id="L1843" class="l">CompletableFuture&lt;Message&gt; responseFuture = nc.request(&quot;calc.add&quot;, &quot;5 3&quot;.getBytes(StandardCharsets.UTF_8));</span>
+<span id="L1844" class="l"> </span>
+<span id="L1845" class="l">try {</span>
+<span id="L1846" class="l"> </span>
+<span id="L1847" class="l">    Message m = responseFuture.get(500, TimeUnit.MILLISECONDS);</span>
+<span id="L1848" class="l"> </span>
+<span id="L1849" class="l">    System.out.printf(&quot;5 + 3 = %s\n&quot;, new String(m.getData()));</span>
+<span id="L1850" class="l"> </span>
+<span id="L1851" class="l">}</span>
+<span id="L1852" class="l"> </span>
+<span id="L1853" class="l">catch (CancellationException | ExecutionException | TimeoutException e) {</span>
+<span id="L1854" class="l"> </span>
+<span id="L1855" class="l">    System.out.println(&quot;1) No Response&quot;);</span>
+<span id="L1856" class="l"> </span>
+<span id="L1857" class="l">}</span>
+<span id="L1858" class="l"> </span>
+<span id="L1859" class="l"> </span>
+<span id="L1860" class="l"> </span>
+<span id="L1861" class="l">// Make a request with a timeout and direct response</span>
+<span id="L1862" class="l"> </span>
+<span id="L1863" class="l">Message m = nc.request(&quot;calc.add&quot;, &quot;10 7&quot;.getBytes(StandardCharsets.UTF_8), Duration.ofMillis(500));</span>
+<span id="L1864" class="l"> </span>
+<span id="L1865" class="l">if (m == null) {</span>
+<span id="L1866" class="l"> </span>
+<span id="L1867" class="l">    System.out.println(&quot;2) No Response&quot;);</span>
+<span id="L1868" class="l"> </span>
+<span id="L1869" class="l">}</span>
+<span id="L1870" class="l"> </span>
+<span id="L1871" class="l">else {</span>
+<span id="L1872" class="l"> </span>
+<span id="L1873" class="l">    System.out.printf(&quot;10 + 7 = %s\n&quot;, new String(m.getData()));</span>
+<span id="L1874" class="l"> </span>
+<span id="L1875" class="l">}</span>
+<span id="L1876" class="l"> </span>
+<span id="L1877" class="l"> </span>
+<span id="L1878" class="l"> </span>
+<span id="L1879" class="l">// Make a request with a timeout and direct response</span>
+<span id="L1880" class="l"> </span>
+<span id="L1881" class="l">m = nc.request(&quot;calc.add&quot;, &quot;10 x&quot;.getBytes(StandardCharsets.UTF_8), Duration.ofMillis(500));</span>
+<span id="L1882" class="l"> </span>
+<span id="L1883" class="l">if (m == null) {</span>
+<span id="L1884" class="l"> </span>
+<span id="L1885" class="l">    System.out.println(&quot;3) No Response&quot;);</span>
+<span id="L1886" class="l"> </span>
+<span id="L1887" class="l">}</span>
+<span id="L1888" class="l"> </span>
+<span id="L1889" class="l">else {</span>
+<span id="L1890" class="l"> </span>
+<span id="L1891" class="l">    System.out.printf(&quot;10 + x = %s\n&quot;, new String(m.getData()));</span>
+<span id="L1892" class="l"> </span>
+<span id="L1893" class="l">}</span>
+<span id="L1894" class="l">```</span>
+<span id="L1895" class="l"> </span>
+<span id="L1896" class="l">#### Rust</span>
+<span id="L1897" class="l"> </span>
+<span id="L1898" class="l">```</span>
+<span id="L1899" class="l">// Calculator service - replies with a fixed result for any request</span>
+<span id="L1900" class="l"> </span>
+<span id="L1901" class="l">let mut sub = client.subscribe(&quot;calc.add&quot;).await?;</span>
+<span id="L1902" class="l"> </span>
+<span id="L1903" class="l">let service_client = client.clone();</span>
+<span id="L1904" class="l"> </span>
+<span id="L1905" class="l">tokio::spawn(async move {</span>
+<span id="L1906" class="l"> </span>
+<span id="L1907" class="l">    while let Some(msg) = sub.next().await {</span>
+<span id="L1908" class="l"> </span>
+<span id="L1909" class="l">        if let Some(reply) = msg.reply {</span>
+<span id="L1910" class="l"> </span>
+<span id="L1911" class="l">            service_client.publish(reply, &quot;42&quot;.into()).await.ok();</span>
+<span id="L1912" class="l"> </span>
+<span id="L1913" class="l">        }</span>
+<span id="L1914" class="l"> </span>
+<span id="L1915" class="l">    }</span>
+<span id="L1916" class="l"> </span>
+<span id="L1917" class="l">});</span>
+<span id="L1918" class="l"> </span>
+<span id="L1919" class="l"> </span>
+<span id="L1920" class="l"> </span>
+<span id="L1921" class="l">// Make calculations</span>
+<span id="L1922" class="l"> </span>
+<span id="L1923" class="l">let resp = client.request(&quot;calc.add&quot;, &quot;5 3&quot;.into()).await?;</span>
+<span id="L1924" class="l"> </span>
+<span id="L1925" class="l">println!(&quot;5 + 3 = {}&quot;, String::from_utf8_lossy(&amp;resp.payload));</span>
+<span id="L1926" class="l"> </span>
+<span id="L1927" class="l"> </span>
+<span id="L1928" class="l"> </span>
+<span id="L1929" class="l">let resp = client.request(&quot;calc.add&quot;, &quot;10 7&quot;.into()).await?;</span>
+<span id="L1930" class="l"> </span>
+<span id="L1931" class="l">println!(&quot;10 + 7 = {}&quot;, String::from_utf8_lossy(&amp;resp.payload));</span>
+<span id="L1932" class="l">```</span>
+<span id="L1933" class="l"> </span>
+<span id="L1934" class="l">#### C#/.NET</span>
+<span id="L1935" class="l"> </span>
+<span id="L1936" class="l">```</span>
+<span id="L1937" class="l">// Calculator service: takes in an array of integers and replies with the sum</span>
+<span id="L1938" class="l"> </span>
+<span id="L1939" class="l">// An integer array would be serialized as a JSON array, while a single integer</span>
+<span id="L1940" class="l"> </span>
+<span id="L1941" class="l">// would be serialized as a string, just like all other primitive types.</span>
+<span id="L1942" class="l"> </span>
+<span id="L1943" class="l">_ = Task.Run(async () =&gt;</span>
+<span id="L1944" class="l"> </span>
+<span id="L1945" class="l">{</span>
+<span id="L1946" class="l"> </span>
+<span id="L1947" class="l">    await foreach (var msg in client.SubscribeAsync&lt;int[]&gt;(&quot;calc.sum&quot;))</span>
+<span id="L1948" class="l"> </span>
+<span id="L1949" class="l">    {</span>
+<span id="L1950" class="l"> </span>
+<span id="L1951" class="l">        var sum = msg.Data!.Sum();</span>
+<span id="L1952" class="l"> </span>
+<span id="L1953" class="l">        await msg.ReplyAsync(sum);</span>
+<span id="L1954" class="l"> </span>
+<span id="L1955" class="l">    }</span>
+<span id="L1956" class="l"> </span>
+<span id="L1957" class="l">});</span>
+<span id="L1958" class="l"> </span>
+<span id="L1959" class="l"> </span>
+<span id="L1960" class="l"> </span>
+<span id="L1961" class="l">// Give the subscription task time to start before publishing</span>
+<span id="L1962" class="l"> </span>
+<span id="L1963" class="l">await Task.Delay(1000);</span>
+<span id="L1964" class="l"> </span>
+<span id="L1965" class="l"> </span>
+<span id="L1966" class="l"> </span>
+<span id="L1967" class="l">var reply1 = await client.RequestAsync&lt;int[], int&gt;(&quot;calc.sum&quot;, [5, 3, 1]);</span>
+<span id="L1968" class="l"> </span>
+<span id="L1969" class="l">output.WriteLine($&quot;5 + 3 + 1 = {reply1.Data}&quot;);</span>
+<span id="L1970" class="l"> </span>
+<span id="L1971" class="l"> </span>
+<span id="L1972" class="l"> </span>
+<span id="L1973" class="l">var reply2 = await client.RequestAsync&lt;int[], int&gt;(&quot;calc.sum&quot;, [10, 7]);</span>
+<span id="L1974" class="l"> </span>
+<span id="L1975" class="l">output.WriteLine($&quot;10 + 7 = {reply2.Data}&quot;);</span>
+<span id="L1976" class="l">```</span>
+<span id="L1977" class="l"> </span>
+<span id="L1978" class="l">#### C</span>
+<span id="L1979" class="l"> </span>
+<span id="L1980" class="l">```</span>
+<span id="L1981" class="l">// Calculator service: parse two numbers and reply with their sum</span>
+<span id="L1982" class="l"> </span>
+<span id="L1983" class="l">static void</span>
+<span id="L1984" class="l"> </span>
+<span id="L1985" class="l">onCalcAdd(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L1986" class="l"> </span>
+<span id="L1987" class="l">{</span>
+<span id="L1988" class="l"> </span>
+<span id="L1989" class="l">    int     a = 0;</span>
+<span id="L1990" class="l"> </span>
+<span id="L1991" class="l">    int     b = 0;</span>
+<span id="L1992" class="l"> </span>
+<span id="L1993" class="l">    char    result[32];</span>
+<span id="L1994" class="l"> </span>
+<span id="L1995" class="l"> </span>
+<span id="L1996" class="l"> </span>
+<span id="L1997" class="l">    if (sscanf(natsMsg_GetData(msg), &quot;%d %d&quot;, &amp;a, &amp;b) == 2)</span>
+<span id="L1998" class="l"> </span>
+<span id="L1999" class="l">    {</span>
+<span id="L2000" class="l"> </span>
+<span id="L2001" class="l">        snprintf(result, sizeof(result), &quot;%d&quot;, a + b);</span>
+<span id="L2002" class="l"> </span>
+<span id="L2003" class="l">        natsConnection_PublishString(nc, natsMsg_GetReply(msg), result);</span>
+<span id="L2004" class="l"> </span>
+<span id="L2005" class="l">    }</span>
+<span id="L2006" class="l"> </span>
+<span id="L2007" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L2008" class="l"> </span>
+<span id="L2009" class="l">}</span>
+<span id="L2010" class="l"> </span>
+<span id="L2011" class="l">    if (s == NATS_OK)</span>
+<span id="L2012" class="l"> </span>
+<span id="L2013" class="l">        s = natsConnection_Subscribe(&amp;sub, conn, &quot;calc.add&quot;, onCalcAdd, NULL);</span>
+<span id="L2014" class="l"> </span>
+<span id="L2015" class="l"> </span>
+<span id="L2016" class="l"> </span>
+<span id="L2017" class="l">    // Give the service a moment to be ready, then make calculations</span>
+<span id="L2018" class="l"> </span>
+<span id="L2019" class="l">    nats_Sleep(100);</span>
+<span id="L2020" class="l"> </span>
+<span id="L2021" class="l"> </span>
+<span id="L2022" class="l"> </span>
+<span id="L2023" class="l">    if (s == NATS_OK)</span>
+<span id="L2024" class="l"> </span>
+<span id="L2025" class="l">        s = natsConnection_RequestString(&amp;reply, conn, &quot;calc.add&quot;, &quot;5 3&quot;, 1000);</span>
+<span id="L2026" class="l"> </span>
+<span id="L2027" class="l">    if (s == NATS_OK)</span>
+<span id="L2028" class="l"> </span>
+<span id="L2029" class="l">    {</span>
+<span id="L2030" class="l"> </span>
+<span id="L2031" class="l">        printf(&quot;5 + 3 = %.*s\n&quot;,</span>
+<span id="L2032" class="l"> </span>
+<span id="L2033" class="l">               natsMsg_GetDataLength(reply), natsMsg_GetData(reply));</span>
+<span id="L2034" class="l"> </span>
+<span id="L2035" class="l">        natsMsg_Destroy(reply);</span>
+<span id="L2036" class="l"> </span>
+<span id="L2037" class="l">        reply = NULL;</span>
+<span id="L2038" class="l"> </span>
+<span id="L2039" class="l"> </span>
+<span id="L2040" class="l"> </span>
+<span id="L2041" class="l">        s = natsConnection_RequestString(&amp;reply, conn, &quot;calc.add&quot;, &quot;10 7&quot;, 1000);</span>
+<span id="L2042" class="l"> </span>
+<span id="L2043" class="l">    }</span>
+<span id="L2044" class="l"> </span>
+<span id="L2045" class="l">    if (s == NATS_OK)</span>
+<span id="L2046" class="l"> </span>
+<span id="L2047" class="l">        printf(&quot;10 + 7 = %.*s\n&quot;,</span>
+<span id="L2048" class="l"> </span>
+<span id="L2049" class="l">               natsMsg_GetDataLength(reply), natsMsg_GetData(reply));</span>
+<span id="L2050" class="l">```</span>
+<span id="L2051" class="l"> </span>
+<span id="L2052" class="l">## Next steps</span>
+<span id="L2053" class="l"> </span>
+<span id="L2054" class="l">* [Request-reply in the Core NATS deep dive](/learn/core-nats/request-reply.md) — runnable, step-by-step walkthrough</span>
+<span id="L2055" class="l">* [The Services framework](/learn/services/.md) — build production request-reply services</span>
+<span id="L2056" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../../raw/nats-docs/concepts/queue-groups.md.html">← queue-groups.md</a> · <a href="../../../raw/nats-docs/concepts/security.md.html">security.md →</a></div></footer></article></main>
+  
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../../graph-data.js" defer></script>
+<script src="../../../assets/graph.js" defer></script>
+<script src="../../../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>issue-4281.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../assets/theme.css">
+<link rel="stylesheet" href="../../assets/types.css">
+<script>window.ROOT="../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/question-bank.html" class="">Questions</a><a href="../../inbox/adr-toc.html" class="">ADRs</a><a href="../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../inbox/server-issues.html" class="">Server issues</a><a href="../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by facet</a></li><li><a href="../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › gh-issues</div>
+<h1>issue-4281.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#gh-issues">gh-issues</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://github.com/nats-io/nats-server/issues">https://github.com/nats-io/nats-server/issues</a> — fetched one issue at a time through the GitHub <strong>GraphQL</strong> API (<code>repository.issue(number:)</code>), which returns the body, every comment and the closing pull request as Markdown</div><div class="mrow"><span class="mk">file</span> <code>raw/gh-issues/issue-4281.md</code> · 1561 lines · 45 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/gh-issues/issue-4281.md" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></div></div><div class="pn"><a href="../../raw/gh-issues/issue-5871.md.html">issue-5871.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://github.com/nats-io/nats-server/issues/4281 (GitHub GraphQL API) · fetched 2026-08-31 --&gt;</span>
+<span id="L2" class="l"># nats-server issue #4281 — nats: error: could not create Stream: insufficient storage resources available (10047)</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">State: OPEN · opened 2023-06-29 by @jeffmccune</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">## Original post</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">## Defect</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">Make sure that these boxes are checked before submitting your issue -- thank you!</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l"> - [x] Included `nats-server -DV` output</span>
+<span id="L13" class="l"> - [x] Included a [Minimal, Complete, and Verifiable example] (https://stackoverflow.com/help/mcve)</span>
+<span id="L14" class="l"> </span>
+<span id="L15" class="l">&lt;details&gt;&lt;summary&gt;nats-server -DV output&lt;/summary&gt;</span>
+<span id="L16" class="l"> </span>
+<span id="L17" class="l">```</span>
+<span id="L18" class="l">[7] 2023/04/28 18:18:19.790095 [INF] Starting nats-server</span>
+<span id="L19" class="l">[7] 2023/04/28 18:18:19.790168 [INF]   Version:  2.9.16</span>
+<span id="L20" class="l">[7] 2023/04/28 18:18:19.790172 [INF]   Git:      [f84ca24]</span>
+<span id="L21" class="l">[7] 2023/04/28 18:18:19.790187 [INF]   Cluster:  nats</span>
+<span id="L22" class="l">[7] 2023/04/28 18:18:19.790190 [INF]   Name:     nats-0</span>
+<span id="L23" class="l">[7] 2023/04/28 18:18:19.790194 [INF]   Node:     S1Nunr6R</span>
+<span id="L24" class="l">[7] 2023/04/28 18:18:19.790199 [INF]   ID:       NAVQ6FRDQ4DSFKGHYK4SPGOMT67P2SO522WWYAEYYUZRT2X3BEZO74Q2</span>
+<span id="L25" class="l">[7] 2023/04/28 18:18:19.790225 [INF] Using configuration file: /etc/nats-config/nats.conf</span>
+<span id="L26" class="l">[7] 2023/04/28 18:18:19.790229 [INF] Trusted Operators</span>
+<span id="L27" class="l">[7] 2023/04/28 18:18:19.790233 [INF]   System  : &quot;&quot;</span>
+<span id="L28" class="l">[7] 2023/04/28 18:18:19.790248 [INF]   Operator: &quot;OpenInfrastructureServices&quot;</span>
+<span id="L29" class="l">[7] 2023/04/28 18:18:19.790262 [INF]   Issued  : 2023-04-28 18:15:50 +0000 UTC</span>
+<span id="L30" class="l">[7] 2023/04/28 18:18:19.790274 [INF]   Expires : Never</span>
+<span id="L31" class="l">[7] 2023/04/28 18:18:19.791561 [INF] Starting http monitor on 0.0.0.0:8222</span>
+<span id="L32" class="l">[7] 2023/04/28 18:18:19.791696 [INF] Managing all jwt in exclusive directory /accounts/jwt</span>
+<span id="L33" class="l">[7] 2023/04/28 18:18:19.791751 [INF] Starting JetStream</span>
+<span id="L34" class="l">[7] 2023/04/28 18:18:19.793489 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __</span>
+<span id="L35" class="l">[7] 2023/04/28 18:18:19.793507 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |</span>
+<span id="L36" class="l">[7] 2023/04/28 18:18:19.793514 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |</span>
+<span id="L37" class="l">[7] 2023/04/28 18:18:19.793517 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|</span>
+<span id="L38" class="l">[7] 2023/04/28 18:18:19.793519 [INF]</span>
+<span id="L39" class="l">[7] 2023/04/28 18:18:19.793522 [INF]          https://docs.nats.io/jetstream</span>
+<span id="L40" class="l">[7] 2023/04/28 18:18:19.793524 [INF]</span>
+<span id="L41" class="l">[7] 2023/04/28 18:18:19.793526 [INF] ---------------- JETSTREAM ----------------</span>
+<span id="L42" class="l">[7] 2023/04/28 18:18:19.793538 [INF]   Max Memory:      2.00 GB</span>
+<span id="L43" class="l">[7] 2023/04/28 18:18:19.793543 [INF]   Max Storage:     10.00 GB</span>
+<span id="L44" class="l">[7] 2023/04/28 18:18:19.793546 [INF]   Store Directory: &quot;/data/jetstream&quot;</span>
+<span id="L45" class="l">[7] 2023/04/28 18:18:19.793548 [INF] -------------------------------------------</span>
+<span id="L46" class="l">[7] 2023/04/28 18:18:19.793998 [INF] Starting JetStream cluster</span>
+<span id="L47" class="l">[7] 2023/04/28 18:18:19.794025 [INF] Creating JetStream metadata controller</span>
+<span id="L48" class="l">[7] 2023/04/28 18:18:19.795194 [INF] JetStream cluster bootstrapping</span>
+<span id="L49" class="l">[7] 2023/04/28 18:18:19.795795 [INF] Listening for websocket clients on wss://0.0.0.0:443</span>
+<span id="L50" class="l">[7] 2023/04/28 18:18:19.796210 [INF] Listening for leafnode connections on 0.0.0.0:7422</span>
+<span id="L51" class="l">[7] 2023/04/28 18:18:19.796808 [INF] Listening for client connections on 0.0.0.0:4222</span>
+<span id="L52" class="l">[7] 2023/04/28 18:18:19.796827 [INF] TLS required for client connections</span>
+<span id="L53" class="l">[7] 2023/04/28 18:18:19.797130 [INF] Server is ready</span>
+<span id="L54" class="l">[7] 2023/04/28 18:18:19.797188 [INF] Cluster name is nats</span>
+<span id="L55" class="l">[7] 2023/04/28 18:18:19.797273 [INF] Listening for route connections on 0.0.0.0:6222</span>
+<span id="L56" class="l">[7] 2023/04/28 18:18:19.810518 [INF] 10.68.253.243:6222 - rid:6 - Route connection created</span>
+<span id="L57" class="l">[7] 2023/04/28 18:18:19.810647 [ERR] Error trying to connect to route (attempt 1): lookup for host &quot;nats-2.nats.holos-dev.svc.cluster.local&quot;: lookup nats-2.nats.holos-dev.svc.cluster.local on 10.64.64.10:53: no such host</span>
+<span id="L58" class="l">[7] 2023/04/28 18:18:19.897629 [WRN] Waiting for routing to be established...</span>
+<span id="L59" class="l">[7] 2023/04/28 18:18:19.899732 [INF] JetStream cluster new metadata leader: nats-1/nats</span>
+<span id="L60" class="l"> </span>
+<span id="L61" class="l">(Output truncated)</span>
+<span id="L62" class="l">```</span>
+<span id="L63" class="l">&lt;/details&gt;</span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l">#### Versions of `nats-server` and affected client libraries used:</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l">2.9.16</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l">#### OS/Container environment:</span>
+<span id="L70" class="l"> </span>
+<span id="L71" class="l">Kubernetes kubeadm on top of proxmox ceph rdb storage.</span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">```</span>
+<span id="L74" class="l">Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;26&quot;, GitVersion:&quot;v1.26.1&quot;, GitCommit:&quot;8f94681cd294aa8cfd3407b8191f6c70214973a4&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2023-01-18T15:58:16Z&quot;, GoVersion:&quot;go1.19.5&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}</span>
+<span id="L75" class="l">Kustomize Version: v4.5.7</span>
+<span id="L76" class="l">Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;25&quot;, GitVersion:&quot;v1.25.6&quot;, GitCommit:&quot;ff2c119726cc1f8926fb0585c74b25921e866a28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2023-01-18T19:15:26Z&quot;, GoVersion:&quot;go1.19.5&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}</span>
+<span id="L77" class="l">```</span>
+<span id="L78" class="l"> </span>
+<span id="L79" class="l">#### Steps or code to reproduce the issue:</span>
+<span id="L80" class="l"> </span>
+<span id="L81" class="l">```bash</span>
+<span id="L82" class="l">nats --creds tokyo-rain-123-admin.creds stream add MYSTREAM \</span>
+<span id="L83" class="l">  &#x27;--subjects=holos.releases.*.elements.&gt;&#x27; \</span>
+<span id="L84" class="l">  --storage=file \</span>
+<span id="L85" class="l">  --replicas=3 \</span>
+<span id="L86" class="l">  --retention=limits \</span>
+<span id="L87" class="l">  --discard=old \</span>
+<span id="L88" class="l">  --max-age=90d \</span>
+<span id="L89" class="l">  --max-bytes=32MiB \</span>
+<span id="L90" class="l">  --max-msg-size=128KiB \</span>
+<span id="L91" class="l">  --max-msgs=-1 \</span>
+<span id="L92" class="l">  --max-msgs-per-subject=1 \</span>
+<span id="L93" class="l">  --dupe-window=120s \</span>
+<span id="L94" class="l">  --no-allow-rollup \</span>
+<span id="L95" class="l">  --allow-direct \</span>
+<span id="L96" class="l">  --no-deny-delete \</span>
+<span id="L97" class="l">  --no-deny-purge</span>
+<span id="L98" class="l">```</span>
+<span id="L99" class="l"> </span>
+<span id="L100" class="l">```console</span>
+<span id="L101" class="l">nats: error: could not create Stream: insufficient storage resources available (10047)</span>
+<span id="L102" class="l">```</span>
+<span id="L103" class="l"> </span>
+<span id="L104" class="l">#### Expected result:</span>
+<span id="L105" class="l"> </span>
+<span id="L106" class="l">I first ran into this error with `--max-bytes=64MiB`.  The account had Max Disk Storage of `64 MB` and Max Mem Storage of `64 MB` (note, not MiB) so I made only one change to `--max-bytes=32MiB` and the stream created OK as follows:</span>
+<span id="L107" class="l"> </span>
+<span id="L108" class="l">&lt;details&gt;&lt;summary&gt;Stream MYSTREAM was created&lt;/summary&gt;</span>
+<span id="L109" class="l"> </span>
+<span id="L110" class="l">```console</span>
+<span id="L111" class="l">Stream MYSTREAM was created</span>
+<span id="L112" class="l"> </span>
+<span id="L113" class="l">Information for Stream MYSTREAM created 2023-06-29 10:59:11</span>
+<span id="L114" class="l"> </span>
+<span id="L115" class="l">          Description: Redacted</span>
+<span id="L116" class="l">             Subjects: holos.releases.*.elements.&gt;</span>
+<span id="L117" class="l">             Replicas: 3</span>
+<span id="L118" class="l">              Storage: File</span>
+<span id="L119" class="l"> </span>
+<span id="L120" class="l">Options:</span>
+<span id="L121" class="l"> </span>
+<span id="L122" class="l">            Retention: Limits</span>
+<span id="L123" class="l">     Acknowledgements: true</span>
+<span id="L124" class="l">       Discard Policy: Old</span>
+<span id="L125" class="l">     Duplicate Window: 15s</span>
+<span id="L126" class="l">           Direct Get: true</span>
+<span id="L127" class="l">    Allows Msg Delete: true</span>
+<span id="L128" class="l">         Allows Purge: true</span>
+<span id="L129" class="l">       Allows Rollups: false</span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l">Limits:</span>
+<span id="L132" class="l"> </span>
+<span id="L133" class="l">     Maximum Messages: unlimited</span>
+<span id="L134" class="l">  Maximum Per Subject: 1</span>
+<span id="L135" class="l">        Maximum Bytes: 32 MiB</span>
+<span id="L136" class="l">          Maximum Age: 90d0h0m0s</span>
+<span id="L137" class="l"> Maximum Message Size: 128 KiB</span>
+<span id="L138" class="l">    Maximum Consumers: unlimited</span>
+<span id="L139" class="l"> </span>
+<span id="L140" class="l">Cluster Information:</span>
+<span id="L141" class="l"> </span>
+<span id="L142" class="l">                 Name: nats</span>
+<span id="L143" class="l">               Leader: nats-2</span>
+<span id="L144" class="l">              Replica: nats-0, current, seen 0.00s ago</span>
+<span id="L145" class="l">              Replica: nats-1, current, seen 0.00s ago</span>
+<span id="L146" class="l"> </span>
+<span id="L147" class="l">State:</span>
+<span id="L148" class="l"> </span>
+<span id="L149" class="l">             Messages: 0</span>
+<span id="L150" class="l">                Bytes: 0 B</span>
+<span id="L151" class="l">             FirstSeq: 0</span>
+<span id="L152" class="l">              LastSeq: 0</span>
+<span id="L153" class="l">     Active Consumers: 0</span>
+<span id="L154" class="l">```</span>
+<span id="L155" class="l"> </span>
+<span id="L156" class="l">&lt;/details&gt;</span>
+<span id="L157" class="l"> </span>
+<span id="L158" class="l">I then deleted this stream intending to re-create it with 120s duplicate message window.</span>
+<span id="L159" class="l"> </span>
+<span id="L160" class="l">```</span>
+<span id="L161" class="l">❯ nats --cred tokyo-admin-123-admin.creds stream del</span>
+<span id="L162" class="l">? Select a Stream MYSTREAM</span>
+<span id="L163" class="l">? Really delete Stream MYSTREAM Yes</span>
+<span id="L164" class="l">```</span>
+<span id="L165" class="l"> </span>
+<span id="L166" class="l">#### Actual result:</span>
+<span id="L167" class="l"> </span>
+<span id="L168" class="l">After deleting the stream, I cannot re-create it using the command in &quot;steps to reproduce&quot; I always get the following error even when I put the original `--dupe-window=15s` back.</span>
+<span id="L169" class="l"> </span>
+<span id="L170" class="l">```console</span>
+<span id="L171" class="l">nats: error: could not create Stream: insufficient storage resources available (10047)</span>
+<span id="L172" class="l">```</span>
+<span id="L173" class="l"> </span>
+<span id="L174" class="l">Note, there&#x27;s plenty of storage available and the ext4 file system is writable.</span>
+<span id="L175" class="l"> </span>
+<span id="L176" class="l">```</span>
+<span id="L177" class="l">❯ for i in $(seq 0 2); do kubectl exec nats-$i --container nats -- df -h /data; done</span>
+<span id="L178" class="l">Filesystem                Size      Used Available Use% Mounted on</span>
+<span id="L179" class="l">/dev/rbd2                 9.7G    424.0K      9.7G   0% /data</span>
+<span id="L180" class="l">Filesystem                Size      Used Available Use% Mounted on</span>
+<span id="L181" class="l">/dev/rbd3                 9.7G    472.0K      9.7G   0% /data</span>
+<span id="L182" class="l">Filesystem                Size      Used Available Use% Mounted on</span>
+<span id="L183" class="l">/dev/rbd2                 9.7G    872.0K      9.7G   0% /data</span>
+<span id="L184" class="l">```</span>
+<span id="L185" class="l"> </span>
+<span id="L186" class="l">```</span>
+<span id="L187" class="l">❯ for i in $(seq 0 2); do kubectl exec nats-$i --container nats -- touch /data/jetstream/test; done</span>
+<span id="L188" class="l">```</span>
+<span id="L189" class="l"> </span>
+<span id="L190" class="l">```</span>
+<span id="L191" class="l">❯ for i in $(seq 0 2); do kubectl exec nats-$i --container nats -- ls -l  /data/jetstream/test; done</span>
+<span id="L192" class="l">-rw-r--r--    1 root     root             0 Jun 29 19:02 /data/jetstream/test</span>
+<span id="L193" class="l">-rw-r--r--    1 root     root             0 Jun 29 19:02 /data/jetstream/test</span>
+<span id="L194" class="l">-rw-r--r--    1 root     root             0 Jun 29 19:02 /data/jetstream/test</span>
+<span id="L195" class="l">```</span>
+<span id="L196" class="l">```</span>
+<span id="L197" class="l">for i in $(seq 0 2); do kubectl exec nats-$i --container nats -- unlink /data/jetstream/test; done</span>
+<span id="L198" class="l">```</span>
+<span id="L199" class="l"> </span>
+<span id="L200" class="l">## Comment — @jeffmccune (2023-06-29)</span>
+<span id="L201" class="l"> </span>
+<span id="L202" class="l">Searching through slack, it [was suggested](https://natsio.slack.com/archives/C069GSYFP/p1680785859403259?thread_ts=1680785764.882869&amp;cid=C069GSYFP) checking the user account limits, but those look OK:</span>
+<span id="L203" class="l"> </span>
+<span id="L204" class="l">&lt;details&gt;&lt;summary&gt;nats --creds tokyo-rain-123-admin.creds account info&lt;/summary&gt;</span>
+<span id="L205" class="l"> </span>
+<span id="L206" class="l">```console</span>
+<span id="L207" class="l">Connection Information:</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l">               Client ID: 370</span>
+<span id="L210" class="l">               Client IP: 192.168.2.21</span>
+<span id="L211" class="l">                     RTT: 975.641µs</span>
+<span id="L212" class="l">       Headers Supported: true</span>
+<span id="L213" class="l">         Maximum Payload: 1.0 MiB</span>
+<span id="L214" class="l">       Connected Cluster: nats</span>
+<span id="L215" class="l">           Connected URL: tls://nats.core1.ois.lan:4222</span>
+<span id="L216" class="l">       Connected Address: 10.64.192.3:4222</span>
+<span id="L217" class="l">     Connected Server ID: NCRYBVOYNQZP62YFMVEDFZ3BQJRQTI6R676RCIN5HM7GMLN5FDZX2CC2</span>
+<span id="L218" class="l">   Connected Server Name: nats-1</span>
+<span id="L219" class="l">             TLS Version: 1.3 using TLS_AES_128_GCM_SHA256</span>
+<span id="L220" class="l">              TLS Server: nats.core1.ois.lan</span>
+<span id="L221" class="l">            TLS Verified: issuer CN=core1 Cluster CA 45e455,O=Open Infrastructure Services LLC,ST=Oregon,C=US</span>
+<span id="L222" class="l"> </span>
+<span id="L223" class="l">JetStream Account Information:</span>
+<span id="L224" class="l"> </span>
+<span id="L225" class="l">Account Usage:</span>
+<span id="L226" class="l"> </span>
+<span id="L227" class="l">    Storage: 657 B</span>
+<span id="L228" class="l">     Memory: 0 B</span>
+<span id="L229" class="l">    Streams: 1</span>
+<span id="L230" class="l">  Consumers: 0</span>
+<span id="L231" class="l"> </span>
+<span id="L232" class="l">Account Limits:</span>
+<span id="L233" class="l"> </span>
+<span id="L234" class="l">   Max Message Payload: 1.0 MiB</span>
+<span id="L235" class="l"> </span>
+<span id="L236" class="l">   Tier: Default</span>
+<span id="L237" class="l"> </span>
+<span id="L238" class="l">      Configuration Requirements:</span>
+<span id="L239" class="l"> </span>
+<span id="L240" class="l">         Stream Requires Max Bytes Set: false</span>
+<span id="L241" class="l">          Consumer Maximum Ack Pending: Unlimited</span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l">      Stream Resource Usage Limits:</span>
+<span id="L244" class="l"> </span>
+<span id="L245" class="l">                    Memory: 0 B of 122 MiB</span>
+<span id="L246" class="l">         Memory Per Stream: Unlimited</span>
+<span id="L247" class="l">                   Storage: 657 B of 122 MiB</span>
+<span id="L248" class="l">        Storage Per Stream: Unlimited</span>
+<span id="L249" class="l">                   Streams: 1 of 3</span>
+<span id="L250" class="l">                 Consumers: 0 of 10</span>
+<span id="L251" class="l">```</span>
+<span id="L252" class="l"> </span>
+<span id="L253" class="l">&lt;/details&gt;</span>
+<span id="L254" class="l"> </span>
+<span id="L255" class="l">## Comment — @wallyqs (2023-06-29)</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l">Could you post your kubernetes helm config and which version of helm charts did you use?</span>
+<span id="L258" class="l"> </span>
+<span id="L259" class="l">## Comment — @jeffmccune (2023-06-29)</span>
+<span id="L260" class="l"> </span>
+<span id="L261" class="l">Thanks for taking a look @wallyqs looks like the nats-0.19.13 chart.</span>
+<span id="L262" class="l"> </span>
+<span id="L263" class="l">```</span>
+<span id="L264" class="l">NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION</span>
+<span id="L265" class="l">nats            holos-dev       3               2023-04-28 11:42:51.391311593 -0700 PDT deployed        nats-0.19.13            2.9.16</span>
+<span id="L266" class="l">```</span>
+<span id="L267" class="l"> </span>
+<span id="L268" class="l">&lt;details&gt;&lt;summary&gt;helm input values&lt;/summary&gt;</span>
+<span id="L269" class="l"> </span>
+<span id="L270" class="l">```yaml</span>
+<span id="L271" class="l">---</span>
+<span id="L272" class="l">auth:</span>
+<span id="L273" class="l">  # Operator JWT and SYS account secrets are stored in nats-auth-config</span>
+<span id="L274" class="l">  enabled: true</span>
+<span id="L275" class="l">  resolver:</span>
+<span id="L276" class="l">    type: full</span>
+<span id="L277" class="l">    store:</span>
+<span id="L278" class="l">      # Must match the path configured in auth.conf by the experiments/workflows/scripts/initialize-auth script</span>
+<span id="L279" class="l">      dir: &quot;/accounts/jwt&quot;</span>
+<span id="L280" class="l">      size: &quot;1Gi&quot;</span>
+<span id="L281" class="l">      storageClassName: &quot;ceph-ssd&quot;</span>
+<span id="L282" class="l"> </span>
+<span id="L283" class="l">cluster:</span>
+<span id="L284" class="l">  enabled: true</span>
+<span id="L285" class="l">  noAdvertise: true # for LoadBalancer</span>
+<span id="L286" class="l">  # name: nats (defaults to helm release name)</span>
+<span id="L287" class="l">  replicas: 3</span>
+<span id="L288" class="l"> </span>
+<span id="L289" class="l">  tls:</span>
+<span id="L290" class="l">    secret:</span>
+<span id="L291" class="l">      name: nats-server-tls # Generated by experiments/workflows/scripts/initialize-auth</span>
+<span id="L292" class="l">    ca: &quot;ca.crt&quot;</span>
+<span id="L293" class="l">    cert: &quot;tls.crt&quot;</span>
+<span id="L294" class="l">    key: &quot;tls.key&quot;</span>
+<span id="L295" class="l"> </span>
+<span id="L296" class="l"># JetStream</span>
+<span id="L297" class="l">nats:</span>
+<span id="L298" class="l">  # External Secrets automatically included from nats.conf</span>
+<span id="L299" class="l">  # https://github.com/nats-io/k8s/blob/nats-0.19.12/helm/charts/nats/templates/configmap.yaml#L17</span>
+<span id="L300" class="l">  config:</span>
+<span id="L301" class="l">    - name: auth # auth.conf</span>
+<span id="L302" class="l">      secret:</span>
+<span id="L303" class="l">        secretName: nats-auth-config</span>
+<span id="L304" class="l"> </span>
+<span id="L305" class="l">  tls:</span>
+<span id="L306" class="l">    secret:</span>
+<span id="L307" class="l">      name: nats-server-tls</span>
+<span id="L308" class="l">    ca: &quot;ca.crt&quot;</span>
+<span id="L309" class="l">    cert: &quot;tls.crt&quot;</span>
+<span id="L310" class="l">    key: &quot;tls.key&quot;</span>
+<span id="L311" class="l">    verifyAndMap: true</span>
+<span id="L312" class="l"> </span>
+<span id="L313" class="l">  jetstream:</span>
+<span id="L314" class="l">    enabled: true</span>
+<span id="L315" class="l"> </span>
+<span id="L316" class="l">    memStorage:</span>
+<span id="L317" class="l">      enabled: true</span>
+<span id="L318" class="l">      size: 2Gi</span>
+<span id="L319" class="l"> </span>
+<span id="L320" class="l">    fileStorage:</span>
+<span id="L321" class="l">      enabled: true</span>
+<span id="L322" class="l">      size: 10Gi</span>
+<span id="L323" class="l">      # storageClassName: gp2 # NOTE: AWS setup but customize as needed for your infra.</span>
+<span id="L324" class="l">      storageClassName: ceph-ssd</span>
+<span id="L325" class="l"> </span>
+<span id="L326" class="l">leafnodes:</span>
+<span id="L327" class="l">  enabled: true</span>
+<span id="L328" class="l">  noAdvertise: true # for LoadBalancer</span>
+<span id="L329" class="l"> </span>
+<span id="L330" class="l">natsbox:</span>
+<span id="L331" class="l">  enabled: true</span>
+<span id="L332" class="l"> </span>
+<span id="L333" class="l"># Websocket</span>
+<span id="L334" class="l">websocket:</span>
+<span id="L335" class="l">  enabled: true</span>
+<span id="L336" class="l">  port: 443</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">  tls:</span>
+<span id="L339" class="l">    secret:</span>
+<span id="L340" class="l">      name: nats-server-tls</span>
+<span id="L341" class="l">    cert: &quot;tls.crt&quot;</span>
+<span id="L342" class="l">    key: &quot;tls.key&quot;</span>
+<span id="L343" class="l"> </span>
+<span id="L344" class="l"># Prometheus Exporter</span>
+<span id="L345" class="l">exporter:</span>
+<span id="L346" class="l">  enabled: true</span>
+<span id="L347" class="l">  serviceMonitor:</span>
+<span id="L348" class="l">    enabled: true</span>
+<span id="L349" class="l"> </span>
+<span id="L350" class="l"># NACK JetStream Controller</span>
+<span id="L351" class="l"># https://github.com/nats-io/k8s/blob/main/helm/charts/nack/values.yaml</span>
+<span id="L352" class="l">jetstream:</span>
+<span id="L353" class="l">  enabled: true</span>
+<span id="L354" class="l">  nats:</span>
+<span id="L355" class="l">    url: nats://nats:4222</span>
+<span id="L356" class="l">    credentials:</span>
+<span id="L357" class="l">      secret:</span>
+<span id="L358" class="l">        name: nats-sys-creds</span>
+<span id="L359" class="l">        key: sys.creds</span>
+<span id="L360" class="l"> </span>
+<span id="L361" class="l">  tls:</span>
+<span id="L362" class="l">    enabled: true</span>
+<span id="L363" class="l">    secretName: nats-client-tls</span>
+<span id="L364" class="l">```</span>
+<span id="L365" class="l"> </span>
+<span id="L366" class="l">&lt;/details&gt;</span>
+<span id="L367" class="l"> </span>
+<span id="L368" class="l">Note, I&#x27;m fairly ignorant about the NACK jetstream controller at the bottom, that was an experiment of mine that didn&#x27;t pan out back in May.</span>
+<span id="L369" class="l"> </span>
+<span id="L370" class="l">My deployment script overlays the following resources into the rendered output using a kustomize post-renderer:</span>
+<span id="L371" class="l"> </span>
+<span id="L372" class="l">&lt;details&gt;&lt;summary&gt;overlay resources&lt;/summary&gt;</span>
+<span id="L373" class="l"> </span>
+<span id="L374" class="l">```yaml</span>
+<span id="L375" class="l">---</span>
+<span id="L376" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L377" class="l">kind: Certificate</span>
+<span id="L378" class="l">metadata:</span>
+<span id="L379" class="l">  name: &quot;{{ .Release.Name }}-server-tls&quot;</span>
+<span id="L380" class="l">  namespace: &quot;{{ .Release.Namespace }}&quot;</span>
+<span id="L381" class="l">spec:</span>
+<span id="L382" class="l">  secretName: &quot;{{ .Release.Name }}-server-tls&quot;</span>
+<span id="L383" class="l">  commonName: &quot;{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local&quot;</span>
+<span id="L384" class="l">  dnsNames:</span>
+<span id="L385" class="l">  # Simple service name, e.g. nats://nats</span>
+<span id="L386" class="l">  - &quot;{{ .Release.Name }}&quot;</span>
+<span id="L387" class="l">  - &quot;{{ .Release.Name }}.{{ .Release.Namespace }}.svc&quot;</span>
+<span id="L388" class="l">  - &quot;{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local&quot;</span>
+<span id="L389" class="l">  # Wildcards for individual pods in the stateful set</span>
+<span id="L390" class="l">  - &quot;*.{{ .Release.Name }}&quot;</span>
+<span id="L391" class="l">  - &quot;*.{{ .Release.Name }}.{{ .Release.Namespace }}.svc&quot;</span>
+<span id="L392" class="l">  - &quot;*.{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local&quot;</span>
+<span id="L393" class="l">  # Used interally in the saas environment</span>
+<span id="L394" class="l">  - &quot;{{ .Release.Name }}.{{ .Values.global.oixClusterName }}.ois.lan&quot;</span>
+<span id="L395" class="l">  # used externally in the saas environment</span>
+<span id="L396" class="l">  - &#x27;{{ .Release.Name }}.{{ required &quot;\n\nRequired: oixDnsDomain&quot; .Values.oixDnsDomain }}&#x27;</span>
+<span id="L397" class="l">  # Websocket matching the virtual-service</span>
+<span id="L398" class="l">  - &#x27;{{ .Release.Name }}.pub.{{ required &quot;\n\nRequired: oixDnsDomain&quot; .Values.oixDnsDomain }}&#x27;</span>
+<span id="L399" class="l">  ipAddresses:</span>
+<span id="L400" class="l">  - &#x27;{{ required &quot;\n\nRequired: global.natsLoadBalancerIP (Defined in k8s/values/cluster-NAME.yaml)&quot; .Values.global.natsLoadBalancerIP }}&#x27;</span>
+<span id="L401" class="l">  usages:</span>
+<span id="L402" class="l">  - signing</span>
+<span id="L403" class="l">  - key encipherment</span>
+<span id="L404" class="l">  - server auth</span>
+<span id="L405" class="l">  - client auth</span>
+<span id="L406" class="l">  issuerRef:</span>
+<span id="L407" class="l">    kind: ClusterIssuer</span>
+<span id="L408" class="l">    name: cluster-issuer</span>
+<span id="L409" class="l">---</span>
+<span id="L410" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L411" class="l">kind: Certificate</span>
+<span id="L412" class="l">metadata:</span>
+<span id="L413" class="l">  name: &quot;{{ .Release.Name }}-client-tls&quot;</span>
+<span id="L414" class="l">  namespace: &quot;{{ .Release.Namespace }}&quot;</span>
+<span id="L415" class="l">spec:</span>
+<span id="L416" class="l">  secretName: &quot;{{ .Release.Name }}-client-tls&quot;</span>
+<span id="L417" class="l">  commonName: &quot;{{ .Release.Name }}-client&quot;</span>
+<span id="L418" class="l">  usages:</span>
+<span id="L419" class="l">  - signing</span>
+<span id="L420" class="l">  - key encipherment</span>
+<span id="L421" class="l">  - client auth</span>
+<span id="L422" class="l">  issuerRef:</span>
+<span id="L423" class="l">    kind: ClusterIssuer</span>
+<span id="L424" class="l">    name: cluster-issuer</span>
+<span id="L425" class="l">---</span>
+<span id="L426" class="l"># Client certificate is used for development purposes by</span>
+<span id="L427" class="l"># experiments/workflows/scripts/nats/natscli</span>
+<span id="L428" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L429" class="l">kind: Certificate</span>
+<span id="L430" class="l">metadata:</span>
+<span id="L431" class="l">  name: &quot;{{ .Release.Name }}-client-bastion-tls&quot;</span>
+<span id="L432" class="l">  namespace: &quot;{{ .Release.Namespace }}&quot;</span>
+<span id="L433" class="l">spec:</span>
+<span id="L434" class="l">  secretName: &quot;{{ .Release.Name }}-client-bastion-tls&quot;</span>
+<span id="L435" class="l">  emailAddresses:</span>
+<span id="L436" class="l">    - root@bastion.ois.lan</span>
+<span id="L437" class="l">  usages:</span>
+<span id="L438" class="l">    - signing</span>
+<span id="L439" class="l">    - key encipherment</span>
+<span id="L440" class="l">    - client auth</span>
+<span id="L441" class="l">  issuerRef:</span>
+<span id="L442" class="l">    kind: ClusterIssuer</span>
+<span id="L443" class="l">    name: cluster-issuer</span>
+<span id="L444" class="l">---</span>
+<span id="L445" class="l"># Client certificate is used for development purposes by</span>
+<span id="L446" class="l"># experiments/workflows/scripts/nats/natscli</span>
+<span id="L447" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L448" class="l">kind: Certificate</span>
+<span id="L449" class="l">metadata:</span>
+<span id="L450" class="l">  name: &quot;{{ .Release.Name }}-client-shared-tls&quot;</span>
+<span id="L451" class="l">  namespace: &quot;{{ .Release.Namespace }}&quot;</span>
+<span id="L452" class="l">spec:</span>
+<span id="L453" class="l">  secretName: &quot;{{ .Release.Name }}-client-shared-tls&quot;</span>
+<span id="L454" class="l">  emailAddresses:</span>
+<span id="L455" class="l">    - shared@ois.run</span>
+<span id="L456" class="l">  usages:</span>
+<span id="L457" class="l">    - signing</span>
+<span id="L458" class="l">    - key encipherment</span>
+<span id="L459" class="l">    - client auth</span>
+<span id="L460" class="l">  issuerRef:</span>
+<span id="L461" class="l">    kind: ClusterIssuer</span>
+<span id="L462" class="l">    name: cluster-issuer</span>
+<span id="L463" class="l"># Necessary to enable TLS from the ingressgateway to the vault service.</span>
+<span id="L464" class="l">---</span>
+<span id="L465" class="l">apiVersion: networking.istio.io/v1alpha3</span>
+<span id="L466" class="l">kind: DestinationRule</span>
+<span id="L467" class="l">metadata:</span>
+<span id="L468" class="l">  name: nats</span>
+<span id="L469" class="l">spec:</span>
+<span id="L470" class="l">  host: nats</span>
+<span id="L471" class="l">  trafficPolicy:</span>
+<span id="L472" class="l">    tls:</span>
+<span id="L473" class="l">      mode: SIMPLE</span>
+<span id="L474" class="l">---</span>
+<span id="L475" class="l">apiVersion: external-secrets.io/v1beta1</span>
+<span id="L476" class="l">kind: ExternalSecret</span>
+<span id="L477" class="l">metadata:</span>
+<span id="L478" class="l">  name: nats-auth-config</span>
+<span id="L479" class="l">spec:</span>
+<span id="L480" class="l">  refreshInterval: 1h</span>
+<span id="L481" class="l">  secretStoreRef:</span>
+<span id="L482" class="l">    name: core-vault</span>
+<span id="L483" class="l">    kind: SecretStore</span>
+<span id="L484" class="l">  target:</span>
+<span id="L485" class="l">    name: nats-auth-config</span>
+<span id="L486" class="l">    creationPolicy: Owner</span>
+<span id="L487" class="l">  dataFrom:</span>
+<span id="L488" class="l">    - extract:</span>
+<span id="L489" class="l">        key: &quot;kv/{{ .Values.global.oixClusterName }}/kube-namespace/{{ .Release.Namespace}}/nats-auth-config&quot;</span>
+<span id="L490" class="l">---</span>
+<span id="L491" class="l">apiVersion: external-secrets.io/v1beta1</span>
+<span id="L492" class="l">kind: ExternalSecret</span>
+<span id="L493" class="l">metadata:</span>
+<span id="L494" class="l">  name: nats-sys-creds</span>
+<span id="L495" class="l">spec:</span>
+<span id="L496" class="l">  refreshInterval: 1h</span>
+<span id="L497" class="l">  secretStoreRef:</span>
+<span id="L498" class="l">    name: core-vault</span>
+<span id="L499" class="l">    kind: SecretStore</span>
+<span id="L500" class="l">  target:</span>
+<span id="L501" class="l">    name: nats-sys-creds</span>
+<span id="L502" class="l">    creationPolicy: Owner</span>
+<span id="L503" class="l">  dataFrom:</span>
+<span id="L504" class="l">    - extract:</span>
+<span id="L505" class="l">        key: &quot;kv/{{ .Values.global.oixClusterName }}/kube-namespace/{{ .Release.Namespace}}/nats-sys-creds&quot;</span>
+<span id="L506" class="l"># https://docs.nats.io/running-a-nats-service/nats-kubernetes/helm-charts#using-loadbalancers</span>
+<span id="L507" class="l">---</span>
+<span id="L508" class="l">apiVersion: v1</span>
+<span id="L509" class="l">kind: Service</span>
+<span id="L510" class="l">metadata:</span>
+<span id="L511" class="l">  name: &quot;{{ .Release.Name }}-lb&quot;</span>
+<span id="L512" class="l">spec:</span>
+<span id="L513" class="l">  type: LoadBalancer</span>
+<span id="L514" class="l">  externalTrafficPolicy: Local</span>
+<span id="L515" class="l">  loadBalancerIP: &#x27;{{ required &quot;\n\nRequired: global.natsLoadBalancerIP (Defined in k8s/values/cluster-NAME.yaml)&quot; .Values.global.natsLoadBalancerIP }}&#x27;</span>
+<span id="L516" class="l">  selector:</span>
+<span id="L517" class="l">    app.kubernetes.io/name: &quot;{{ .Release.Name }}&quot;</span>
+<span id="L518" class="l">  ports:</span>
+<span id="L519" class="l">    - protocol: TCP</span>
+<span id="L520" class="l">      port: 4222</span>
+<span id="L521" class="l">      targetPort: 4222</span>
+<span id="L522" class="l">      name: nats</span>
+<span id="L523" class="l">    - protocol: TCP</span>
+<span id="L524" class="l">      port: 7422</span>
+<span id="L525" class="l">      targetPort: 7422</span>
+<span id="L526" class="l">      name: leafnodes</span>
+<span id="L527" class="l">    - protocol: TCP</span>
+<span id="L528" class="l">      port: 7522</span>
+<span id="L529" class="l">      targetPort: 7522</span>
+<span id="L530" class="l">      name: gateways</span>
+<span id="L531" class="l">---</span>
+<span id="L532" class="l">apiVersion: networking.istio.io/v1alpha3</span>
+<span id="L533" class="l">kind: VirtualService</span>
+<span id="L534" class="l">metadata:</span>
+<span id="L535" class="l">  name: &#x27;{{ .Release.Name }}-ws&#x27;</span>
+<span id="L536" class="l">  namespace: {{ .Release.Namespace }}</span>
+<span id="L537" class="l">spec:</span>
+<span id="L538" class="l">  hosts:</span>
+<span id="L539" class="l">    - &#x27;{{ .Release.Name }}.pub.{{ required &quot;\n\nRequired: oixDnsDomain&quot; .Values.oixDnsDomain }}&#x27;</span>
+<span id="L540" class="l">  gateways:</span>
+<span id="L541" class="l">    - istio-ingress/wildcard-pub-gw</span>
+<span id="L542" class="l">  http:</span>
+<span id="L543" class="l">    - route:</span>
+<span id="L544" class="l">        - destination:</span>
+<span id="L545" class="l">            host: &#x27;{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local&#x27;</span>
+<span id="L546" class="l">            port:</span>
+<span id="L547" class="l">              number: 443</span>
+<span id="L548" class="l">```</span>
+<span id="L549" class="l"> </span>
+<span id="L550" class="l">&lt;/details&gt;</span>
+<span id="L551" class="l"> </span>
+<span id="L552" class="l">Here&#x27;s the complete build script for the helm chart plus overlay which renders the yaml to apply to the cluster.</span>
+<span id="L553" class="l"> </span>
+<span id="L554" class="l">&lt;details&gt;&lt;summary&gt;helm + kustomize build steps and output&lt;/summary&gt;</span>
+<span id="L555" class="l"> </span>
+<span id="L556" class="l">```console</span>
+<span id="L557" class="l">❯ bash -x build</span>
+<span id="L558" class="l">+ : nats</span>
+<span id="L559" class="l">+ export OIX_RELEASE_NAME</span>
+<span id="L560" class="l">+ NAMESPACE=holos-dev</span>
+<span id="L561" class="l">+ export NAMESPACE</span>
+<span id="L562" class="l">+ set -euo pipefail</span>
+<span id="L563" class="l">+++ dirname build</span>
+<span id="L564" class="l">++ cd .</span>
+<span id="L565" class="l">++ pwd</span>
+<span id="L566" class="l">+ CHART_PATH=/home/jeff/workspace/holos/experiments/components/holos-saas/nats</span>
+<span id="L567" class="l">+ export CHART_PATH</span>
+<span id="L568" class="l">++ kubectl config view --minify --flatten &#x27;-ojsonpath={.clusters[0].name}&#x27;</span>
+<span id="L569" class="l">+ : core1</span>
+<span id="L570" class="l">+ export OIX_CLUSTER_NAME</span>
+<span id="L571" class="l">+ [[ -z nats ]]</span>
+<span id="L572" class="l">++ cd /home/jeff/workspace/holos/experiments/components/holos-saas/nats</span>
+<span id="L573" class="l">++ git rev-parse --show-toplevel</span>
+<span id="L574" class="l">+ TOPLEVEL=/home/jeff/workspace/holos</span>
+<span id="L575" class="l">+ CLUSTER_VALUES=/home/jeff/workspace/holos/k8s/values/cluster-core1.yaml</span>
+<span id="L576" class="l">+ export CLUSTER_VALUES</span>
+<span id="L577" class="l">+ ORG_VALUES=/home/jeff/workspace/holos/k8s/values/org-ois.yaml</span>
+<span id="L578" class="l">+ export ORG_VALUES</span>
+<span id="L579" class="l">+ case &quot;$(basename &quot;$0&quot;)&quot; in</span>
+<span id="L580" class="l">++ basename build</span>
+<span id="L581" class="l">+ cmd=(&quot;template&quot;)</span>
+<span id="L582" class="l">+ helm repo add nats https://nats-io.github.io/k8s/helm/charts/</span>
+<span id="L583" class="l">&quot;nats&quot; already exists with the same configuration, skipping</span>
+<span id="L584" class="l">+ helm repo update</span>
+<span id="L585" class="l">Hang tight while we grab the latest from your chart repositories...</span>
+<span id="L586" class="l">...Successfully got an update from the &quot;nats&quot; chart repository</span>
+<span id="L587" class="l">Update Complete. ⎈Happy Helming!⎈</span>
+<span id="L588" class="l">+ helm template nats nats/nats --version 0.19.13 --namespace holos-dev --create-namespace --values /home/jeff/workspace/holos/k8s/values/org-ois.yaml --values /home/jeff/workspace/holos/k8s/values/cluster-core1.yaml --values /home/jeff/workspace/holos/experiments/components/holos-saas/nats/values.holos.yaml --post-renderer /home/jeff/workspace/holos/experiments/components/holos-saas/nats/kustomize/kustomize</span>
+<span id="L589" class="l">```</span>
+<span id="L590" class="l"> </span>
+<span id="L591" class="l">```yaml</span>
+<span id="L592" class="l">apiVersion: v1</span>
+<span id="L593" class="l">kind: ServiceAccount</span>
+<span id="L594" class="l">metadata:</span>
+<span id="L595" class="l">  labels:</span>
+<span id="L596" class="l">    app.kubernetes.io/instance: nats</span>
+<span id="L597" class="l">    app.kubernetes.io/managed-by: Helm</span>
+<span id="L598" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L599" class="l">    app.kubernetes.io/version: 2.9.16</span>
+<span id="L600" class="l">    helm.sh/chart: nats-0.19.13</span>
+<span id="L601" class="l">  name: nats</span>
+<span id="L602" class="l">  namespace: holos-dev</span>
+<span id="L603" class="l">---</span>
+<span id="L604" class="l">apiVersion: v1</span>
+<span id="L605" class="l">data:</span>
+<span id="L606" class="l">  nats.conf: &quot;# NATS Clients Port\nport: 4222\n\n# PID file shared with configuration</span>
+<span id="L607" class="l">    reloader.\npid_file: \&quot;/var/run/nats/nats.pid\&quot;\n###########\n#         #\n# Imports</span>
+<span id="L608" class="l">    #\n#         #\n###########\ninclude ./auth/auth.conf\n\n###############\n#             #\n#</span>
+<span id="L609" class="l">    Monitoring  #\n#             #\n###############\nhttp: 8222\nserver_name:$POD_NAME\n#####################\n#</span>
+<span id="L610" class="l">    \                  #\n# TLS Configuration #\n#                   #\n#####################\ntls</span>
+<span id="L611" class="l">    {\n    cert_file: /etc/nats-certs/clients/nats-server-tls/tls.crt\n    key_file:</span>
+<span id="L612" class="l">    \ /etc/nats-certs/clients/nats-server-tls/tls.key\n    ca_file: /etc/nats-certs/clients/nats-server-tls/ca.crt\n</span>
+<span id="L613" class="l">    \   verify_and_map: true\n}\n###################################\n#                                 #\n#</span>
+<span id="L614" class="l">    NATS JetStream                  #\n#                                 #\n###################################\njetstream</span>
+<span id="L615" class="l">    {\n  max_mem: 2Gi\n  store_dir: /data\n\n  max_file:10Gi\n}\n###################################\n#</span>
+<span id="L616" class="l">    \                                #\n# NATS Full Mesh Clustering Setup #\n#                                 #\n###################################\ncluster</span>
+<span id="L617" class="l">    {\n  port: 6222\n  name: nats\n  tls {\n      cert_file: /etc/nats-certs/cluster/nats-server-tls/tls.crt\n</span>
+<span id="L618" class="l">    \     key_file:  /etc/nats-certs/cluster/nats-server-tls/tls.key\n      ca_file:</span>
+<span id="L619" class="l">    /etc/nats-certs/cluster/nats-server-tls/ca.crt\n  }\n\n  routes = [\n    nats://nats-0.nats.holos-dev.svc.cluster.local:6222,nats://nats-1.nats.holos-dev.svc.cluster.local:6222,nats://nats-2.nats.holos-dev.svc.cluster.local:6222,\n</span>
+<span id="L620" class="l">    \   \n  ]\n  cluster_advertise: $CLUSTER_ADVERTISE\n  no_advertise: true\n\n  connect_retries:</span>
+<span id="L621" class="l">    120\n}\n#################\n#               #\n# NATS Leafnode #\n#               #\n#################\nleafnodes</span>
+<span id="L622" class="l">    {\n  listen: \&quot;0.0.0.0:7422\&quot;\n  no_advertise: true\n\n  remotes: [\n  ]\n}\nlame_duck_grace_period:</span>
+<span id="L623" class="l">    10s\nlame_duck_duration: 30s\n##################\n#                #\n# Websocket</span>
+<span id="L624" class="l">    \     #\n#                #\n##################\nwebsocket {\n  port: 443\n    \n</span>
+<span id="L625" class="l">    \   tls {\n    cert_file: /etc/nats-certs/ws/nats-server-tls/tls.crt\n    key_file:</span>
+<span id="L626" class="l">    /etc/nats-certs/ws/nats-server-tls/tls.key\n    }\n  same_origin: false\n}\n##################\n#</span>
+<span id="L627" class="l">    \               #\n# Authorization  #\n#                #\n##################\n\n</span>
+<span id="L628" class="l">    \     resolver: {\n        type: full\n        dir: \&quot;/accounts/jwt\&quot;\n\n        allow_delete:</span>
+<span id="L629" class="l">    false\n\n        interval: \&quot;2m\&quot;\n      }\n&quot;</span>
+<span id="L630" class="l">kind: ConfigMap</span>
+<span id="L631" class="l">metadata:</span>
+<span id="L632" class="l">  labels:</span>
+<span id="L633" class="l">    app.kubernetes.io/instance: nats</span>
+<span id="L634" class="l">    app.kubernetes.io/managed-by: Helm</span>
+<span id="L635" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L636" class="l">    app.kubernetes.io/version: 2.9.16</span>
+<span id="L637" class="l">    helm.sh/chart: nats-0.19.13</span>
+<span id="L638" class="l">  name: nats-config</span>
+<span id="L639" class="l">  namespace: holos-dev</span>
+<span id="L640" class="l">---</span>
+<span id="L641" class="l">apiVersion: v1</span>
+<span id="L642" class="l">kind: Service</span>
+<span id="L643" class="l">metadata:</span>
+<span id="L644" class="l">  labels:</span>
+<span id="L645" class="l">    app.kubernetes.io/instance: nats</span>
+<span id="L646" class="l">    app.kubernetes.io/managed-by: Helm</span>
+<span id="L647" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L648" class="l">    app.kubernetes.io/version: 2.9.16</span>
+<span id="L649" class="l">    helm.sh/chart: nats-0.19.13</span>
+<span id="L650" class="l">  name: nats</span>
+<span id="L651" class="l">  namespace: holos-dev</span>
+<span id="L652" class="l">spec:</span>
+<span id="L653" class="l">  clusterIP: None</span>
+<span id="L654" class="l">  ports:</span>
+<span id="L655" class="l">  - appProtocol: tcp</span>
+<span id="L656" class="l">    name: websocket</span>
+<span id="L657" class="l">    port: 443</span>
+<span id="L658" class="l">  - appProtocol: tcp</span>
+<span id="L659" class="l">    name: client</span>
+<span id="L660" class="l">    port: 4222</span>
+<span id="L661" class="l">  - appProtocol: tcp</span>
+<span id="L662" class="l">    name: cluster</span>
+<span id="L663" class="l">    port: 6222</span>
+<span id="L664" class="l">  - appProtocol: http</span>
+<span id="L665" class="l">    name: monitor</span>
+<span id="L666" class="l">    port: 8222</span>
+<span id="L667" class="l">  - appProtocol: http</span>
+<span id="L668" class="l">    name: metrics</span>
+<span id="L669" class="l">    port: 7777</span>
+<span id="L670" class="l">  - appProtocol: tcp</span>
+<span id="L671" class="l">    name: leafnodes</span>
+<span id="L672" class="l">    port: 7422</span>
+<span id="L673" class="l">  - appProtocol: tcp</span>
+<span id="L674" class="l">    name: gateways</span>
+<span id="L675" class="l">    port: 7522</span>
+<span id="L676" class="l">  publishNotReadyAddresses: true</span>
+<span id="L677" class="l">  selector:</span>
+<span id="L678" class="l">    app.kubernetes.io/instance: nats</span>
+<span id="L679" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L680" class="l">---</span>
+<span id="L681" class="l">apiVersion: v1</span>
+<span id="L682" class="l">kind: Service</span>
+<span id="L683" class="l">metadata:</span>
+<span id="L684" class="l">  name: nats-lb</span>
+<span id="L685" class="l">spec:</span>
+<span id="L686" class="l">  externalTrafficPolicy: Local</span>
+<span id="L687" class="l">  loadBalancerIP: 10.64.192.3</span>
+<span id="L688" class="l">  ports:</span>
+<span id="L689" class="l">  - name: nats</span>
+<span id="L690" class="l">    port: 4222</span>
+<span id="L691" class="l">    protocol: TCP</span>
+<span id="L692" class="l">    targetPort: 4222</span>
+<span id="L693" class="l">  - name: leafnodes</span>
+<span id="L694" class="l">    port: 7422</span>
+<span id="L695" class="l">    protocol: TCP</span>
+<span id="L696" class="l">    targetPort: 7422</span>
+<span id="L697" class="l">  - name: gateways</span>
+<span id="L698" class="l">    port: 7522</span>
+<span id="L699" class="l">    protocol: TCP</span>
+<span id="L700" class="l">    targetPort: 7522</span>
+<span id="L701" class="l">  selector:</span>
+<span id="L702" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L703" class="l">  type: LoadBalancer</span>
+<span id="L704" class="l">---</span>
+<span id="L705" class="l">apiVersion: apps/v1</span>
+<span id="L706" class="l">kind: Deployment</span>
+<span id="L707" class="l">metadata:</span>
+<span id="L708" class="l">  labels:</span>
+<span id="L709" class="l">    app: nats-box</span>
+<span id="L710" class="l">    chart: nats-0.19.13</span>
+<span id="L711" class="l">  name: nats-box</span>
+<span id="L712" class="l">  namespace: holos-dev</span>
+<span id="L713" class="l">spec:</span>
+<span id="L714" class="l">  replicas: 1</span>
+<span id="L715" class="l">  selector:</span>
+<span id="L716" class="l">    matchLabels:</span>
+<span id="L717" class="l">      app: nats-box</span>
+<span id="L718" class="l">  template:</span>
+<span id="L719" class="l">    metadata:</span>
+<span id="L720" class="l">      labels:</span>
+<span id="L721" class="l">        app: nats-box</span>
+<span id="L722" class="l">    spec:</span>
+<span id="L723" class="l">      containers:</span>
+<span id="L724" class="l">      - command:</span>
+<span id="L725" class="l">        - tail</span>
+<span id="L726" class="l">        - -f</span>
+<span id="L727" class="l">        - /dev/null</span>
+<span id="L728" class="l">        env:</span>
+<span id="L729" class="l">        - name: NATS_URL</span>
+<span id="L730" class="l">          value: nats</span>
+<span id="L731" class="l">        image: natsio/nats-box:0.13.8</span>
+<span id="L732" class="l">        imagePullPolicy: IfNotPresent</span>
+<span id="L733" class="l">        lifecycle:</span>
+<span id="L734" class="l">          postStart:</span>
+<span id="L735" class="l">            exec:</span>
+<span id="L736" class="l">              command:</span>
+<span id="L737" class="l">              - /bin/sh</span>
+<span id="L738" class="l">              - -c</span>
+<span id="L739" class="l">              - cp /etc/nats-certs/clients/nats-server-tls/* /usr/local/share/ca-certificates</span>
+<span id="L740" class="l">                &amp;&amp; update-ca-certificates</span>
+<span id="L741" class="l">        name: nats-box</span>
+<span id="L742" class="l">        resources: {}</span>
+<span id="L743" class="l">        volumeMounts:</span>
+<span id="L744" class="l">        - mountPath: /etc/nats-certs/clients/nats-server-tls</span>
+<span id="L745" class="l">          name: nats-server-tls-clients-volume</span>
+<span id="L746" class="l">      volumes:</span>
+<span id="L747" class="l">      - name: nats-server-tls-clients-volume</span>
+<span id="L748" class="l">        secret:</span>
+<span id="L749" class="l">          secretName: nats-server-tls</span>
+<span id="L750" class="l">---</span>
+<span id="L751" class="l">apiVersion: apps/v1</span>
+<span id="L752" class="l">kind: StatefulSet</span>
+<span id="L753" class="l">metadata:</span>
+<span id="L754" class="l">  labels:</span>
+<span id="L755" class="l">    app.kubernetes.io/instance: nats</span>
+<span id="L756" class="l">    app.kubernetes.io/managed-by: Helm</span>
+<span id="L757" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L758" class="l">    app.kubernetes.io/version: 2.9.16</span>
+<span id="L759" class="l">    helm.sh/chart: nats-0.19.13</span>
+<span id="L760" class="l">  name: nats</span>
+<span id="L761" class="l">  namespace: holos-dev</span>
+<span id="L762" class="l">spec:</span>
+<span id="L763" class="l">  podManagementPolicy: Parallel</span>
+<span id="L764" class="l">  replicas: 3</span>
+<span id="L765" class="l">  selector:</span>
+<span id="L766" class="l">    matchLabels:</span>
+<span id="L767" class="l">      app.kubernetes.io/instance: nats</span>
+<span id="L768" class="l">      app.kubernetes.io/name: nats</span>
+<span id="L769" class="l">  serviceName: nats</span>
+<span id="L770" class="l">  template:</span>
+<span id="L771" class="l">    metadata:</span>
+<span id="L772" class="l">      annotations:</span>
+<span id="L773" class="l">        checksum/config: b06e68b1e108bc5c97d9d5a3925a67aedff53304dd17709225c3b484232505fd</span>
+<span id="L774" class="l">        prometheus.io/path: /metrics</span>
+<span id="L775" class="l">        prometheus.io/port: &quot;7777&quot;</span>
+<span id="L776" class="l">        prometheus.io/scrape: &quot;true&quot;</span>
+<span id="L777" class="l">      labels:</span>
+<span id="L778" class="l">        app.kubernetes.io/instance: nats</span>
+<span id="L779" class="l">        app.kubernetes.io/name: nats</span>
+<span id="L780" class="l">    spec:</span>
+<span id="L781" class="l">      containers:</span>
+<span id="L782" class="l">      - command:</span>
+<span id="L783" class="l">        - nats-server</span>
+<span id="L784" class="l">        - --config</span>
+<span id="L785" class="l">        - /etc/nats-config/nats.conf</span>
+<span id="L786" class="l">        env:</span>
+<span id="L787" class="l">        - name: POD_NAME</span>
+<span id="L788" class="l">          valueFrom:</span>
+<span id="L789" class="l">            fieldRef:</span>
+<span id="L790" class="l">              fieldPath: metadata.name</span>
+<span id="L791" class="l">        - name: SERVER_NAME</span>
+<span id="L792" class="l">          value: $(POD_NAME)</span>
+<span id="L793" class="l">        - name: POD_NAMESPACE</span>
+<span id="L794" class="l">          valueFrom:</span>
+<span id="L795" class="l">            fieldRef:</span>
+<span id="L796" class="l">              fieldPath: metadata.namespace</span>
+<span id="L797" class="l">        - name: CLUSTER_ADVERTISE</span>
+<span id="L798" class="l">          value: $(POD_NAME).nats.$(POD_NAMESPACE).svc.cluster.local</span>
+<span id="L799" class="l">        image: nats:2.9.16-alpine</span>
+<span id="L800" class="l">        imagePullPolicy: IfNotPresent</span>
+<span id="L801" class="l">        lifecycle:</span>
+<span id="L802" class="l">          preStop:</span>
+<span id="L803" class="l">            exec:</span>
+<span id="L804" class="l">              command:</span>
+<span id="L805" class="l">              - nats-server</span>
+<span id="L806" class="l">              - -sl=ldm=/var/run/nats/nats.pid</span>
+<span id="L807" class="l">        livenessProbe:</span>
+<span id="L808" class="l">          failureThreshold: 3</span>
+<span id="L809" class="l">          httpGet:</span>
+<span id="L810" class="l">            path: /</span>
+<span id="L811" class="l">            port: 8222</span>
+<span id="L812" class="l">          initialDelaySeconds: 10</span>
+<span id="L813" class="l">          periodSeconds: 30</span>
+<span id="L814" class="l">          successThreshold: 1</span>
+<span id="L815" class="l">          timeoutSeconds: 5</span>
+<span id="L816" class="l">        name: nats</span>
+<span id="L817" class="l">        ports:</span>
+<span id="L818" class="l">        - containerPort: 4222</span>
+<span id="L819" class="l">          name: client</span>
+<span id="L820" class="l">        - containerPort: 7422</span>
+<span id="L821" class="l">          name: leafnodes</span>
+<span id="L822" class="l">        - containerPort: 6222</span>
+<span id="L823" class="l">          name: cluster</span>
+<span id="L824" class="l">        - containerPort: 8222</span>
+<span id="L825" class="l">          name: monitor</span>
+<span id="L826" class="l">        - containerPort: 443</span>
+<span id="L827" class="l">          name: websocket</span>
+<span id="L828" class="l">        readinessProbe:</span>
+<span id="L829" class="l">          failureThreshold: 3</span>
+<span id="L830" class="l">          httpGet:</span>
+<span id="L831" class="l">            path: /</span>
+<span id="L832" class="l">            port: 8222</span>
+<span id="L833" class="l">          initialDelaySeconds: 10</span>
+<span id="L834" class="l">          periodSeconds: 10</span>
+<span id="L835" class="l">          successThreshold: 1</span>
+<span id="L836" class="l">          timeoutSeconds: 5</span>
+<span id="L837" class="l">        resources: {}</span>
+<span id="L838" class="l">        startupProbe:</span>
+<span id="L839" class="l">          failureThreshold: 90</span>
+<span id="L840" class="l">          httpGet:</span>
+<span id="L841" class="l">            path: /healthz</span>
+<span id="L842" class="l">            port: 8222</span>
+<span id="L843" class="l">          initialDelaySeconds: 10</span>
+<span id="L844" class="l">          periodSeconds: 10</span>
+<span id="L845" class="l">          successThreshold: 1</span>
+<span id="L846" class="l">          timeoutSeconds: 5</span>
+<span id="L847" class="l">        volumeMounts:</span>
+<span id="L848" class="l">        - mountPath: /etc/nats-config</span>
+<span id="L849" class="l">          name: config-volume</span>
+<span id="L850" class="l">        - mountPath: /var/run/nats</span>
+<span id="L851" class="l">          name: pid</span>
+<span id="L852" class="l">        - mountPath: /etc/nats-config/auth</span>
+<span id="L853" class="l">          name: auth</span>
+<span id="L854" class="l">        - mountPath: /accounts/jwt</span>
+<span id="L855" class="l">          name: nats-jwt-pvc</span>
+<span id="L856" class="l">        - mountPath: /data</span>
+<span id="L857" class="l">          name: nats-js-pvc</span>
+<span id="L858" class="l">        - mountPath: /etc/nats-certs/clients/nats-server-tls</span>
+<span id="L859" class="l">          name: nats-server-tls-clients-volume</span>
+<span id="L860" class="l">        - mountPath: /etc/nats-certs/cluster/nats-server-tls</span>
+<span id="L861" class="l">          name: nats-server-tls-cluster-volume</span>
+<span id="L862" class="l">        - mountPath: /etc/nats-certs/ws/nats-server-tls</span>
+<span id="L863" class="l">          name: nats-server-tls-ws-volume</span>
+<span id="L864" class="l">      - command:</span>
+<span id="L865" class="l">        - nats-server-config-reloader</span>
+<span id="L866" class="l">        - -pid</span>
+<span id="L867" class="l">        - /var/run/nats/nats.pid</span>
+<span id="L868" class="l">        - -config</span>
+<span id="L869" class="l">        - /etc/nats-config/nats.conf</span>
+<span id="L870" class="l">        - -config</span>
+<span id="L871" class="l">        - /etc/nats-certs/clients/nats-server-tls/ca.crt</span>
+<span id="L872" class="l">        - -config</span>
+<span id="L873" class="l">        - /etc/nats-certs/clients/nats-server-tls/tls.crt</span>
+<span id="L874" class="l">        - -config</span>
+<span id="L875" class="l">        - /etc/nats-certs/clients/nats-server-tls/tls.key</span>
+<span id="L876" class="l">        - -config</span>
+<span id="L877" class="l">        - /etc/nats-certs/cluster/nats-server-tls/ca.crt</span>
+<span id="L878" class="l">        - -config</span>
+<span id="L879" class="l">        - /etc/nats-certs/cluster/nats-server-tls/tls.crt</span>
+<span id="L880" class="l">        - -config</span>
+<span id="L881" class="l">        - /etc/nats-certs/cluster/nats-server-tls/tls.key</span>
+<span id="L882" class="l">        - -config</span>
+<span id="L883" class="l">        - /etc/nats-config/auth/auth.conf</span>
+<span id="L884" class="l">        image: natsio/nats-server-config-reloader:0.10.1</span>
+<span id="L885" class="l">        imagePullPolicy: IfNotPresent</span>
+<span id="L886" class="l">        name: reloader</span>
+<span id="L887" class="l">        resources: {}</span>
+<span id="L888" class="l">        volumeMounts:</span>
+<span id="L889" class="l">        - mountPath: /etc/nats-config</span>
+<span id="L890" class="l">          name: config-volume</span>
+<span id="L891" class="l">        - mountPath: /var/run/nats</span>
+<span id="L892" class="l">          name: pid</span>
+<span id="L893" class="l">        - mountPath: /etc/nats-certs/clients/nats-server-tls</span>
+<span id="L894" class="l">          name: nats-server-tls-clients-volume</span>
+<span id="L895" class="l">        - mountPath: /etc/nats-certs/cluster/nats-server-tls</span>
+<span id="L896" class="l">          name: nats-server-tls-cluster-volume</span>
+<span id="L897" class="l">        - mountPath: /etc/nats-certs/ws/nats-server-tls</span>
+<span id="L898" class="l">          name: nats-server-tls-ws-volume</span>
+<span id="L899" class="l">        - mountPath: /etc/nats-config/auth</span>
+<span id="L900" class="l">          name: auth</span>
+<span id="L901" class="l">      - args:</span>
+<span id="L902" class="l">        - -connz</span>
+<span id="L903" class="l">        - -routez</span>
+<span id="L904" class="l">        - -subz</span>
+<span id="L905" class="l">        - -varz</span>
+<span id="L906" class="l">        - -prefix=nats</span>
+<span id="L907" class="l">        - -use_internal_server_id</span>
+<span id="L908" class="l">        - -jsz=all</span>
+<span id="L909" class="l">        - -leafz</span>
+<span id="L910" class="l">        - http://localhost:8222/</span>
+<span id="L911" class="l">        image: natsio/prometheus-nats-exporter:0.10.1</span>
+<span id="L912" class="l">        imagePullPolicy: IfNotPresent</span>
+<span id="L913" class="l">        name: metrics</span>
+<span id="L914" class="l">        ports:</span>
+<span id="L915" class="l">        - containerPort: 7777</span>
+<span id="L916" class="l">          name: metrics</span>
+<span id="L917" class="l">        resources: {}</span>
+<span id="L918" class="l">      dnsPolicy: ClusterFirst</span>
+<span id="L919" class="l">      serviceAccountName: nats</span>
+<span id="L920" class="l">      shareProcessNamespace: true</span>
+<span id="L921" class="l">      terminationGracePeriodSeconds: 60</span>
+<span id="L922" class="l">      volumes:</span>
+<span id="L923" class="l">      - configMap:</span>
+<span id="L924" class="l">          name: nats-config</span>
+<span id="L925" class="l">        name: config-volume</span>
+<span id="L926" class="l">      - name: auth</span>
+<span id="L927" class="l">        secret:</span>
+<span id="L928" class="l">          secretName: nats-auth-config</span>
+<span id="L929" class="l">      - emptyDir: {}</span>
+<span id="L930" class="l">        name: pid</span>
+<span id="L931" class="l">      - name: nats-server-tls-clients-volume</span>
+<span id="L932" class="l">        secret:</span>
+<span id="L933" class="l">          secretName: nats-server-tls</span>
+<span id="L934" class="l">      - name: nats-server-tls-cluster-volume</span>
+<span id="L935" class="l">        secret:</span>
+<span id="L936" class="l">          secretName: nats-server-tls</span>
+<span id="L937" class="l">      - name: nats-server-tls-ws-volume</span>
+<span id="L938" class="l">        secret:</span>
+<span id="L939" class="l">          secretName: nats-server-tls</span>
+<span id="L940" class="l">  volumeClaimTemplates:</span>
+<span id="L941" class="l">  - metadata:</span>
+<span id="L942" class="l">      name: nats-jwt-pvc</span>
+<span id="L943" class="l">    spec:</span>
+<span id="L944" class="l">      accessModes:</span>
+<span id="L945" class="l">      - ReadWriteOnce</span>
+<span id="L946" class="l">      resources:</span>
+<span id="L947" class="l">        requests:</span>
+<span id="L948" class="l">          storage: 1Gi</span>
+<span id="L949" class="l">      storageClassName: ceph-ssd</span>
+<span id="L950" class="l">  - metadata:</span>
+<span id="L951" class="l">      name: nats-js-pvc</span>
+<span id="L952" class="l">    spec:</span>
+<span id="L953" class="l">      accessModes:</span>
+<span id="L954" class="l">      - ReadWriteOnce</span>
+<span id="L955" class="l">      resources:</span>
+<span id="L956" class="l">        requests:</span>
+<span id="L957" class="l">          storage: 10Gi</span>
+<span id="L958" class="l">      storageClassName: ceph-ssd</span>
+<span id="L959" class="l">---</span>
+<span id="L960" class="l">apiVersion: policy/v1</span>
+<span id="L961" class="l">kind: PodDisruptionBudget</span>
+<span id="L962" class="l">metadata:</span>
+<span id="L963" class="l">  labels:</span>
+<span id="L964" class="l">    app.kubernetes.io/instance: nats</span>
+<span id="L965" class="l">    app.kubernetes.io/managed-by: Helm</span>
+<span id="L966" class="l">    app.kubernetes.io/name: nats</span>
+<span id="L967" class="l">    app.kubernetes.io/version: 2.9.16</span>
+<span id="L968" class="l">    helm.sh/chart: nats-0.19.13</span>
+<span id="L969" class="l">  name: nats</span>
+<span id="L970" class="l">  namespace: holos-dev</span>
+<span id="L971" class="l">spec:</span>
+<span id="L972" class="l">  maxUnavailable: 1</span>
+<span id="L973" class="l">  selector:</span>
+<span id="L974" class="l">    matchLabels:</span>
+<span id="L975" class="l">      app.kubernetes.io/instance: nats</span>
+<span id="L976" class="l">      app.kubernetes.io/name: nats</span>
+<span id="L977" class="l">---</span>
+<span id="L978" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L979" class="l">kind: Certificate</span>
+<span id="L980" class="l">metadata:</span>
+<span id="L981" class="l">  name: nats-client-bastion-tls</span>
+<span id="L982" class="l">  namespace: holos-dev</span>
+<span id="L983" class="l">spec:</span>
+<span id="L984" class="l">  emailAddresses:</span>
+<span id="L985" class="l">  - root@bastion.ois.lan</span>
+<span id="L986" class="l">  issuerRef:</span>
+<span id="L987" class="l">    kind: ClusterIssuer</span>
+<span id="L988" class="l">    name: cluster-issuer</span>
+<span id="L989" class="l">  secretName: nats-client-bastion-tls</span>
+<span id="L990" class="l">  usages:</span>
+<span id="L991" class="l">  - signing</span>
+<span id="L992" class="l">  - key encipherment</span>
+<span id="L993" class="l">  - client auth</span>
+<span id="L994" class="l">---</span>
+<span id="L995" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L996" class="l">kind: Certificate</span>
+<span id="L997" class="l">metadata:</span>
+<span id="L998" class="l">  name: nats-client-shared-tls</span>
+<span id="L999" class="l">  namespace: holos-dev</span>
+<span id="L1000" class="l">spec:</span>
+<span id="L1001" class="l">  emailAddresses:</span>
+<span id="L1002" class="l">  - shared@ois.run</span>
+<span id="L1003" class="l">  issuerRef:</span>
+<span id="L1004" class="l">    kind: ClusterIssuer</span>
+<span id="L1005" class="l">    name: cluster-issuer</span>
+<span id="L1006" class="l">  secretName: nats-client-shared-tls</span>
+<span id="L1007" class="l">  usages:</span>
+<span id="L1008" class="l">  - signing</span>
+<span id="L1009" class="l">  - key encipherment</span>
+<span id="L1010" class="l">  - client auth</span>
+<span id="L1011" class="l">---</span>
+<span id="L1012" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L1013" class="l">kind: Certificate</span>
+<span id="L1014" class="l">metadata:</span>
+<span id="L1015" class="l">  name: nats-client-tls</span>
+<span id="L1016" class="l">  namespace: holos-dev</span>
+<span id="L1017" class="l">spec:</span>
+<span id="L1018" class="l">  commonName: nats-client</span>
+<span id="L1019" class="l">  issuerRef:</span>
+<span id="L1020" class="l">    kind: ClusterIssuer</span>
+<span id="L1021" class="l">    name: cluster-issuer</span>
+<span id="L1022" class="l">  secretName: nats-client-tls</span>
+<span id="L1023" class="l">  usages:</span>
+<span id="L1024" class="l">  - signing</span>
+<span id="L1025" class="l">  - key encipherment</span>
+<span id="L1026" class="l">  - client auth</span>
+<span id="L1027" class="l">---</span>
+<span id="L1028" class="l">apiVersion: cert-manager.io/v1</span>
+<span id="L1029" class="l">kind: Certificate</span>
+<span id="L1030" class="l">metadata:</span>
+<span id="L1031" class="l">  name: nats-server-tls</span>
+<span id="L1032" class="l">  namespace: holos-dev</span>
+<span id="L1033" class="l">spec:</span>
+<span id="L1034" class="l">  commonName: nats.holos-dev.svc.cluster.local</span>
+<span id="L1035" class="l">  dnsNames:</span>
+<span id="L1036" class="l">  - nats</span>
+<span id="L1037" class="l">  - nats.holos-dev.svc</span>
+<span id="L1038" class="l">  - nats.holos-dev.svc.cluster.local</span>
+<span id="L1039" class="l">  - &#x27;*.nats&#x27;</span>
+<span id="L1040" class="l">  - &#x27;*.nats.holos-dev.svc&#x27;</span>
+<span id="L1041" class="l">  - &#x27;*.nats.holos-dev.svc.cluster.local&#x27;</span>
+<span id="L1042" class="l">  - nats.core1.ois.lan</span>
+<span id="L1043" class="l">  - nats.core1.ois.run</span>
+<span id="L1044" class="l">  - nats.pub.core1.ois.run</span>
+<span id="L1045" class="l">  ipAddresses:</span>
+<span id="L1046" class="l">  - 10.64.192.3</span>
+<span id="L1047" class="l">  issuerRef:</span>
+<span id="L1048" class="l">    kind: ClusterIssuer</span>
+<span id="L1049" class="l">    name: cluster-issuer</span>
+<span id="L1050" class="l">  secretName: nats-server-tls</span>
+<span id="L1051" class="l">  usages:</span>
+<span id="L1052" class="l">  - signing</span>
+<span id="L1053" class="l">  - key encipherment</span>
+<span id="L1054" class="l">  - server auth</span>
+<span id="L1055" class="l">  - client auth</span>
+<span id="L1056" class="l">---</span>
+<span id="L1057" class="l">apiVersion: external-secrets.io/v1beta1</span>
+<span id="L1058" class="l">kind: ExternalSecret</span>
+<span id="L1059" class="l">metadata:</span>
+<span id="L1060" class="l">  name: nats-auth-config</span>
+<span id="L1061" class="l">spec:</span>
+<span id="L1062" class="l">  dataFrom:</span>
+<span id="L1063" class="l">  - extract:</span>
+<span id="L1064" class="l">      key: kv/core1/kube-namespace/holos-dev/nats-auth-config</span>
+<span id="L1065" class="l">  refreshInterval: 1h</span>
+<span id="L1066" class="l">  secretStoreRef:</span>
+<span id="L1067" class="l">    kind: SecretStore</span>
+<span id="L1068" class="l">    name: core-vault</span>
+<span id="L1069" class="l">  target:</span>
+<span id="L1070" class="l">    creationPolicy: Owner</span>
+<span id="L1071" class="l">    name: nats-auth-config</span>
+<span id="L1072" class="l">---</span>
+<span id="L1073" class="l">apiVersion: external-secrets.io/v1beta1</span>
+<span id="L1074" class="l">kind: ExternalSecret</span>
+<span id="L1075" class="l">metadata:</span>
+<span id="L1076" class="l">  name: nats-sys-creds</span>
+<span id="L1077" class="l">spec:</span>
+<span id="L1078" class="l">  dataFrom:</span>
+<span id="L1079" class="l">  - extract:</span>
+<span id="L1080" class="l">      key: kv/core1/kube-namespace/holos-dev/nats-sys-creds</span>
+<span id="L1081" class="l">  refreshInterval: 1h</span>
+<span id="L1082" class="l">  secretStoreRef:</span>
+<span id="L1083" class="l">    kind: SecretStore</span>
+<span id="L1084" class="l">    name: core-vault</span>
+<span id="L1085" class="l">  target:</span>
+<span id="L1086" class="l">    creationPolicy: Owner</span>
+<span id="L1087" class="l">    name: nats-sys-creds</span>
+<span id="L1088" class="l">---</span>
+<span id="L1089" class="l">apiVersion: monitoring.coreos.com/v1</span>
+<span id="L1090" class="l">kind: ServiceMonitor</span>
+<span id="L1091" class="l">metadata:</span>
+<span id="L1092" class="l">  name: nats</span>
+<span id="L1093" class="l">  namespace: holos-dev</span>
+<span id="L1094" class="l">spec:</span>
+<span id="L1095" class="l">  endpoints:</span>
+<span id="L1096" class="l">  - path: /metrics</span>
+<span id="L1097" class="l">    port: metrics</span>
+<span id="L1098" class="l">  namespaceSelector:</span>
+<span id="L1099" class="l">    any: true</span>
+<span id="L1100" class="l">  selector:</span>
+<span id="L1101" class="l">    matchLabels:</span>
+<span id="L1102" class="l">      app.kubernetes.io/instance: nats</span>
+<span id="L1103" class="l">      app.kubernetes.io/name: nats</span>
+<span id="L1104" class="l">---</span>
+<span id="L1105" class="l">apiVersion: networking.istio.io/v1alpha3</span>
+<span id="L1106" class="l">kind: DestinationRule</span>
+<span id="L1107" class="l">metadata:</span>
+<span id="L1108" class="l">  name: nats</span>
+<span id="L1109" class="l">spec:</span>
+<span id="L1110" class="l">  host: nats</span>
+<span id="L1111" class="l">  trafficPolicy:</span>
+<span id="L1112" class="l">    tls:</span>
+<span id="L1113" class="l">      mode: SIMPLE</span>
+<span id="L1114" class="l">---</span>
+<span id="L1115" class="l">apiVersion: networking.istio.io/v1alpha3</span>
+<span id="L1116" class="l">kind: VirtualService</span>
+<span id="L1117" class="l">metadata:</span>
+<span id="L1118" class="l">  name: nats-ws</span>
+<span id="L1119" class="l">  namespace: holos-dev</span>
+<span id="L1120" class="l">spec:</span>
+<span id="L1121" class="l">  gateways:</span>
+<span id="L1122" class="l">  - istio-ingress/wildcard-pub-gw</span>
+<span id="L1123" class="l">  hosts:</span>
+<span id="L1124" class="l">  - nats.pub.core1.ois.run</span>
+<span id="L1125" class="l">  http:</span>
+<span id="L1126" class="l">  - route:</span>
+<span id="L1127" class="l">    - destination:</span>
+<span id="L1128" class="l">        host: nats.holos-dev.svc.cluster.local</span>
+<span id="L1129" class="l">        port:</span>
+<span id="L1130" class="l">          number: 443</span>
+<span id="L1131" class="l">---</span>
+<span id="L1132" class="l"># Source: nats/templates/tests/test-request-reply.yaml</span>
+<span id="L1133" class="l">apiVersion: v1</span>
+<span id="L1134" class="l">kind: Pod</span>
+<span id="L1135" class="l">metadata:</span>
+<span id="L1136" class="l">  name: &quot;nats-test-request-reply&quot;</span>
+<span id="L1137" class="l">  labels:</span>
+<span id="L1138" class="l">    chart: nats-0.19.13</span>
+<span id="L1139" class="l">    app: nats-test-request-reply</span>
+<span id="L1140" class="l">  annotations:</span>
+<span id="L1141" class="l">    &quot;helm.sh/hook&quot;: test</span>
+<span id="L1142" class="l">spec:</span>
+<span id="L1143" class="l">  containers:</span>
+<span id="L1144" class="l">  - name: nats-box</span>
+<span id="L1145" class="l">    image: natsio/nats-box:0.13.8</span>
+<span id="L1146" class="l">    env:</span>
+<span id="L1147" class="l">    - name: NATS_HOST</span>
+<span id="L1148" class="l">      value: nats</span>
+<span id="L1149" class="l">    command:</span>
+<span id="L1150" class="l">    - /bin/sh</span>
+<span id="L1151" class="l">    - -ec</span>
+<span id="L1152" class="l">    - |</span>
+<span id="L1153" class="l">      nats reply -s nats://$NATS_HOST:4222 &#x27;name.&gt;&#x27; --command &quot;echo 1&quot; &amp;</span>
+<span id="L1154" class="l">    - |</span>
+<span id="L1155" class="l">      &quot;&amp;&amp;&quot;</span>
+<span id="L1156" class="l">    - |</span>
+<span id="L1157" class="l">      name=$(nats request -s nats://$NATS_HOST:4222 name.test &#x27;&#x27; 2&gt;/dev/null)</span>
+<span id="L1158" class="l">    - |</span>
+<span id="L1159" class="l">      &quot;&amp;&amp;&quot;</span>
+<span id="L1160" class="l">    - |</span>
+<span id="L1161" class="l">      [ $name = test ]</span>
+<span id="L1162" class="l"> </span>
+<span id="L1163" class="l">  restartPolicy: Never</span>
+<span id="L1164" class="l"> </span>
+<span id="L1165" class="l"> </span>
+<span id="L1166" class="l">```</span>
+<span id="L1167" class="l"> </span>
+<span id="L1168" class="l">&lt;/details&gt;</span>
+<span id="L1169" class="l"> </span>
+<span id="L1170" class="l">## Comment — @jeffmccune (2023-06-29)</span>
+<span id="L1171" class="l"> </span>
+<span id="L1172" class="l">@wallyqs I unblocked myself by over-provisioning js-disk-storage from 128MiB to 256MiB.  It feels like there&#x27;s a bug in the limit calculations since the stream size is well within the 128 MiB limit but I&#x27;ll leave that determination up to you of course.</span>
+<span id="L1173" class="l"> </span>
+<span id="L1174" class="l">The only other stream in this account is a kv `CONFIG` bucket.  The KV_CONFIG stream is 32 MiB max and the DOM_ELEMENTS stream is 16 MiB max, which I&#x27;d expect to fit in the 128MiB account limit but I might misunderstand how replication is accounted for or something else.  It&#x27;s notable 32x3+16x3 = 144 which may explain why a 256 MiB account limit works fine.</span>
+<span id="L1175" class="l"> </span>
+<span id="L1176" class="l">&lt;details&gt;&lt;summary&gt;nats stream info KV_CONFIG&lt;/summary&gt;</span>
+<span id="L1177" class="l"> </span>
+<span id="L1178" class="l">```console</span>
+<span id="L1179" class="l">Information for Stream KV_CONFIG created 2023-06-29 12:13:24</span>
+<span id="L1180" class="l"> </span>
+<span id="L1181" class="l">             Subjects: $KV.CONFIG.&gt;</span>
+<span id="L1182" class="l">             Replicas: 3</span>
+<span id="L1183" class="l">              Storage: File</span>
+<span id="L1184" class="l"> </span>
+<span id="L1185" class="l">Options:</span>
+<span id="L1186" class="l"> </span>
+<span id="L1187" class="l">            Retention: Limits</span>
+<span id="L1188" class="l">     Acknowledgements: true</span>
+<span id="L1189" class="l">       Discard Policy: New</span>
+<span id="L1190" class="l">     Duplicate Window: 2m0s</span>
+<span id="L1191" class="l">           Direct Get: true</span>
+<span id="L1192" class="l">    Allows Msg Delete: false</span>
+<span id="L1193" class="l">         Allows Purge: true</span>
+<span id="L1194" class="l">       Allows Rollups: true</span>
+<span id="L1195" class="l"> </span>
+<span id="L1196" class="l">Limits:</span>
+<span id="L1197" class="l"> </span>
+<span id="L1198" class="l">     Maximum Messages: unlimited</span>
+<span id="L1199" class="l">  Maximum Per Subject: 1</span>
+<span id="L1200" class="l">        Maximum Bytes: 32 MiB</span>
+<span id="L1201" class="l">          Maximum Age: unlimited</span>
+<span id="L1202" class="l"> Maximum Message Size: 512 KiB</span>
+<span id="L1203" class="l">    Maximum Consumers: unlimited</span>
+<span id="L1204" class="l"> </span>
+<span id="L1205" class="l"> </span>
+<span id="L1206" class="l">Cluster Information:</span>
+<span id="L1207" class="l"> </span>
+<span id="L1208" class="l">                 Name: nats</span>
+<span id="L1209" class="l">               Leader: nats-2</span>
+<span id="L1210" class="l">              Replica: nats-0, current, seen 0.64s ago</span>
+<span id="L1211" class="l">              Replica: nats-1, current, seen 0.64s ago</span>
+<span id="L1212" class="l"> </span>
+<span id="L1213" class="l">State:</span>
+<span id="L1214" class="l"> </span>
+<span id="L1215" class="l">             Messages: 1</span>
+<span id="L1216" class="l">                Bytes: 219 B</span>
+<span id="L1217" class="l">             FirstSeq: 7 @ 2023-06-29T21:38:51 UTC</span>
+<span id="L1218" class="l">              LastSeq: 7 @ 2023-06-29T21:38:51 UTC</span>
+<span id="L1219" class="l">     Active Consumers: 0</span>
+<span id="L1220" class="l">   Number of Subjects: 1</span>
+<span id="L1221" class="l">```</span>
+<span id="L1222" class="l"> </span>
+<span id="L1223" class="l">&lt;/details&gt;</span>
+<span id="L1224" class="l"> </span>
+<span id="L1225" class="l">&lt;details&gt;&lt;summary&gt;Fails with nsc account edit --js-disk-storage 128MiB&lt;/summary&gt;</span>
+<span id="L1226" class="l"> </span>
+<span id="L1227" class="l">```bash</span>
+<span id="L1228" class="l">nsc edit account \</span>
+<span id="L1229" class="l">    --conns 20 \</span>
+<span id="L1230" class="l">    --data 512MiB \</span>
+<span id="L1231" class="l">    --js-consumer 10 \</span>
+<span id="L1232" class="l">    --js-disk-storage 128MiB \</span>
+<span id="L1233" class="l">    --js-mem-storage 32MiB \</span>
+<span id="L1234" class="l">    --js-max-disk-stream 128MiB \</span>
+<span id="L1235" class="l">    --js-max-mem-stream 32MiB \</span>
+<span id="L1236" class="l">    --js-streams 3 \</span>
+<span id="L1237" class="l">    --js-consumer 10</span>
+<span id="L1238" class="l">```</span>
+<span id="L1239" class="l"> </span>
+<span id="L1240" class="l">```bash</span>
+<span id="L1241" class="l">nsc push</span>
+<span id="L1242" class="l">```</span>
+<span id="L1243" class="l"> </span>
+<span id="L1244" class="l">```bash</span>
+<span id="L1245" class="l">nats stream add \</span>
+<span id="L1246" class="l">  &#x27;--subjects=holos.releases.*.elements.&gt;&#x27; \</span>
+<span id="L1247" class="l">  &#x27;--description=Persist dom elements for the web ui&#x27; \</span>
+<span id="L1248" class="l">  --storage=file \</span>
+<span id="L1249" class="l">  --replicas=3 \</span>
+<span id="L1250" class="l">  --retention=limits \</span>
+<span id="L1251" class="l">  --discard=old \</span>
+<span id="L1252" class="l">  --max-age=30d \</span>
+<span id="L1253" class="l">  --max-bytes=16MiB \</span>
+<span id="L1254" class="l">  --max-msg-size=256KiB \</span>
+<span id="L1255" class="l">  --max-msgs=-1 \</span>
+<span id="L1256" class="l">  --max-msgs-per-subject=1 \</span>
+<span id="L1257" class="l">  --dupe-window=120s \</span>
+<span id="L1258" class="l">  --no-allow-rollup \</span>
+<span id="L1259" class="l">  --allow-direct \</span>
+<span id="L1260" class="l">  --no-deny-delete \</span>
+<span id="L1261" class="l">  --no-deny-purge \</span>
+<span id="L1262" class="l">  DOM_ELEMENTS</span>
+<span id="L1263" class="l">```</span>
+<span id="L1264" class="l"> </span>
+<span id="L1265" class="l">```</span>
+<span id="L1266" class="l">nats: error: could not create Stream: insufficient storage resources available (10047)</span>
+<span id="L1267" class="l">```</span>
+<span id="L1268" class="l"> </span>
+<span id="L1269" class="l">&lt;/details&gt;</span>
+<span id="L1270" class="l"> </span>
+<span id="L1271" class="l">&lt;details&gt;&lt;summary&gt;Succeeds with nsc account edit --js-disk-storage 256MiB&lt;/summary&gt;</span>
+<span id="L1272" class="l"> </span>
+<span id="L1273" class="l">```bash</span>
+<span id="L1274" class="l">nsc edit account \</span>
+<span id="L1275" class="l">    --conns 20 \</span>
+<span id="L1276" class="l">    --data 512MiB \</span>
+<span id="L1277" class="l">    --js-consumer 10 \</span>
+<span id="L1278" class="l">    --js-disk-storage 256MiB \</span>
+<span id="L1279" class="l">    --js-mem-storage 32MiB \</span>
+<span id="L1280" class="l">    --js-max-disk-stream 128MiB \</span>
+<span id="L1281" class="l">    --js-max-mem-stream 32MiB \</span>
+<span id="L1282" class="l">    --js-streams 3 \</span>
+<span id="L1283" class="l">    --js-consumer 10</span>
+<span id="L1284" class="l">```</span>
+<span id="L1285" class="l"> </span>
+<span id="L1286" class="l">```bash</span>
+<span id="L1287" class="l">nsc push</span>
+<span id="L1288" class="l">```</span>
+<span id="L1289" class="l"> </span>
+<span id="L1290" class="l">```bash</span>
+<span id="L1291" class="l">nats stream add \</span>
+<span id="L1292" class="l">  &#x27;--subjects=holos.releases.*.elements.&gt;&#x27; \</span>
+<span id="L1293" class="l">  &#x27;--description=Persist dom elements for the web ui&#x27; \</span>
+<span id="L1294" class="l">  --storage=file \</span>
+<span id="L1295" class="l">  --replicas=3 \</span>
+<span id="L1296" class="l">  --retention=limits \</span>
+<span id="L1297" class="l">  --discard=old \</span>
+<span id="L1298" class="l">  --max-age=30d \</span>
+<span id="L1299" class="l">  --max-bytes=16MiB \</span>
+<span id="L1300" class="l">  --max-msg-size=256KiB \</span>
+<span id="L1301" class="l">  --max-msgs=-1 \</span>
+<span id="L1302" class="l">  --max-msgs-per-subject=1 \</span>
+<span id="L1303" class="l">  --dupe-window=120s \</span>
+<span id="L1304" class="l">  --no-allow-rollup \</span>
+<span id="L1305" class="l">  --allow-direct \</span>
+<span id="L1306" class="l">  --no-deny-delete \</span>
+<span id="L1307" class="l">  --no-deny-purge \</span>
+<span id="L1308" class="l">  DOM_ELEMENTS</span>
+<span id="L1309" class="l">```</span>
+<span id="L1310" class="l"> </span>
+<span id="L1311" class="l">```</span>
+<span id="L1312" class="l">Stream DOM_ELEMENTS was created                                                                                                                                                         [1/6884]</span>
+<span id="L1313" class="l"> </span>
+<span id="L1314" class="l">Information for Stream DOM_ELEMENTS created 2023-06-29 14:47:15</span>
+<span id="L1315" class="l"> </span>
+<span id="L1316" class="l">          Description: Persist dom elements for the web ui</span>
+<span id="L1317" class="l">             Subjects: holos.releases.*.elements.&gt;</span>
+<span id="L1318" class="l">             Replicas: 3</span>
+<span id="L1319" class="l">              Storage: File</span>
+<span id="L1320" class="l"> </span>
+<span id="L1321" class="l">Options:</span>
+<span id="L1322" class="l"> </span>
+<span id="L1323" class="l">            Retention: Limits</span>
+<span id="L1324" class="l">     Acknowledgements: true</span>
+<span id="L1325" class="l">       Discard Policy: Old</span>
+<span id="L1326" class="l">     Duplicate Window: 2m0s</span>
+<span id="L1327" class="l">           Direct Get: true</span>
+<span id="L1328" class="l">    Allows Msg Delete: true</span>
+<span id="L1329" class="l">         Allows Purge: true</span>
+<span id="L1330" class="l">       Allows Rollups: false</span>
+<span id="L1331" class="l"> </span>
+<span id="L1332" class="l">Limits:</span>
+<span id="L1333" class="l"> </span>
+<span id="L1334" class="l">     Maximum Messages: unlimited</span>
+<span id="L1335" class="l">  Maximum Per Subject: 1</span>
+<span id="L1336" class="l">        Maximum Bytes: 16 MiB</span>
+<span id="L1337" class="l">          Maximum Age: 30d0h0m0s</span>
+<span id="L1338" class="l"> Maximum Message Size: 256 KiB</span>
+<span id="L1339" class="l">    Maximum Consumers: unlimited</span>
+<span id="L1340" class="l"> </span>
+<span id="L1341" class="l"> </span>
+<span id="L1342" class="l">Cluster Information:</span>
+<span id="L1343" class="l"> </span>
+<span id="L1344" class="l">                 Name: nats</span>
+<span id="L1345" class="l">               Leader: nats-0</span>
+<span id="L1346" class="l">              Replica: nats-1, current, seen 0.00s ago</span>
+<span id="L1347" class="l">              Replica: nats-2, current, seen 0.00s ago</span>
+<span id="L1348" class="l"> </span>
+<span id="L1349" class="l">State:</span>
+<span id="L1350" class="l"> </span>
+<span id="L1351" class="l">             Messages: 0</span>
+<span id="L1352" class="l">                Bytes: 0 B</span>
+<span id="L1353" class="l">             FirstSeq: 0</span>
+<span id="L1354" class="l">              LastSeq: 0</span>
+<span id="L1355" class="l">     Active Consumers: 0</span>
+<span id="L1356" class="l">```</span>
+<span id="L1357" class="l"> </span>
+<span id="L1358" class="l">&lt;/details&gt;</span>
+<span id="L1359" class="l"> </span>
+<span id="L1360" class="l">## Comment — @wallyqs (2023-06-29)</span>
+<span id="L1361" class="l"> </span>
+<span id="L1362" class="l">thanks for the info, I will validate on my end whether this is a bug or something we can improve but good to hear that you are unblocked.</span>
+<span id="L1363" class="l"> </span>
+<span id="L1364" class="l">## Comment — @dee-ynput (2024-07-27)</span>
+<span id="L1365" class="l"> </span>
+<span id="L1366" class="l">I think I had the same issue.</span>
+<span id="L1367" class="l"> </span>
+<span id="L1368" class="l">I could not create more than a few (almost empty) streams before receiving err_code 10047 (or 10028 for memory streams).</span>
+<span id="L1369" class="l"> </span>
+<span id="L1370" class="l">I had to set jetstream max file to 100G instead of 10G in order to create my streams, even though my steams were less than 5Mo.</span>
+<span id="L1371" class="l"> </span>
+<span id="L1372" class="l">Hope this will help others to not lose the 3h I lost😭😅.</span>
+<span id="L1373" class="l">And thanks @jeffmccune for your detailed report which saved my night 🙏🦄 </span>
+<span id="L1374" class="l"> </span>
+<span id="L1375" class="l">&lt;details&gt;</span>
+<span id="L1376" class="l">&lt;summary&gt;here is the server varz&lt;/summary&gt;</span>
+<span id="L1377" class="l">&lt;pre&gt;</span>
+<span id="L1378" class="l">{</span>
+<span id="L1379" class="l">  &quot;server_id&quot;: &quot;NAFKEFDYMDCFWY5ZUKMAQEQ6XQ4XFHCFYZ6DOKXBRKYUPFNQD2SFJV7S&quot;,</span>
+<span id="L1380" class="l">  &quot;server_name&quot;: &quot;ayon_nats&quot;,</span>
+<span id="L1381" class="l">  &quot;version&quot;: &quot;2.10.17&quot;,</span>
+<span id="L1382" class="l">  &quot;proto&quot;: 1,</span>
+<span id="L1383" class="l">  &quot;git_commit&quot;: &quot;b91de03&quot;,</span>
+<span id="L1384" class="l">  &quot;go&quot;: &quot;go1.22.4&quot;,</span>
+<span id="L1385" class="l">  &quot;host&quot;: &quot;0.0.0.0&quot;,</span>
+<span id="L1386" class="l">  &quot;port&quot;: 4221,</span>
+<span id="L1387" class="l">  &quot;max_connections&quot;: 100,</span>
+<span id="L1388" class="l">  &quot;max_subscriptions&quot;: 1000,</span>
+<span id="L1389" class="l">  &quot;ping_interval&quot;: 60000000000,</span>
+<span id="L1390" class="l">  &quot;ping_max&quot;: 3,</span>
+<span id="L1391" class="l">  &quot;http_host&quot;: &quot;0.0.0.0&quot;,</span>
+<span id="L1392" class="l">  &quot;http_port&quot;: 8221,</span>
+<span id="L1393" class="l">  &quot;http_base_path&quot;: &quot;/&quot;,</span>
+<span id="L1394" class="l">  &quot;https_port&quot;: 0,</span>
+<span id="L1395" class="l">  &quot;auth_timeout&quot;: 2,</span>
+<span id="L1396" class="l">  &quot;max_control_line&quot;: 2048,</span>
+<span id="L1397" class="l">  &quot;max_payload&quot;: 65536,</span>
+<span id="L1398" class="l">  &quot;max_pending&quot;: 10000000,</span>
+<span id="L1399" class="l">  &quot;cluster&quot;: {</span>
+<span id="L1400" class="l"> </span>
+<span id="L1401" class="l">  },</span>
+<span id="L1402" class="l">  &quot;gateway&quot;: {</span>
+<span id="L1403" class="l"> </span>
+<span id="L1404" class="l">  },</span>
+<span id="L1405" class="l">  &quot;leaf&quot;: {</span>
+<span id="L1406" class="l"> </span>
+<span id="L1407" class="l">  },</span>
+<span id="L1408" class="l">  &quot;mqtt&quot;: {</span>
+<span id="L1409" class="l"> </span>
+<span id="L1410" class="l">  },</span>
+<span id="L1411" class="l">  &quot;websocket&quot;: {</span>
+<span id="L1412" class="l"> </span>
+<span id="L1413" class="l">  },</span>
+<span id="L1414" class="l">  &quot;jetstream&quot;: {</span>
+<span id="L1415" class="l">    &quot;config&quot;: {</span>
+<span id="L1416" class="l">      &quot;max_memory&quot;: 1000000000,</span>
+<span id="L1417" class="l">      &quot;max_storage&quot;: 100000000000,</span>
+<span id="L1418" class="l">      &quot;store_dir&quot;: &quot;/data/nats/jetstream&quot;,</span>
+<span id="L1419" class="l">      &quot;sync_interval&quot;: 120000000000,</span>
+<span id="L1420" class="l">      &quot;compress_ok&quot;: true</span>
+<span id="L1421" class="l">    },</span>
+<span id="L1422" class="l">    &quot;stats&quot;: {</span>
+<span id="L1423" class="l">      &quot;memory&quot;: 0,</span>
+<span id="L1424" class="l">      &quot;storage&quot;: 4022205,</span>
+<span id="L1425" class="l">      &quot;reserved_memory&quot;: 0,</span>
+<span id="L1426" class="l">      &quot;reserved_storage&quot;: 37580963840,</span>
+<span id="L1427" class="l">      &quot;accounts&quot;: 1,</span>
+<span id="L1428" class="l">      &quot;ha_assets&quot;: 0,</span>
+<span id="L1429" class="l">      &quot;api&quot;: {</span>
+<span id="L1430" class="l">        &quot;total&quot;: 52,</span>
+<span id="L1431" class="l">        &quot;errors&quot;: 4</span>
+<span id="L1432" class="l">      }</span>
+<span id="L1433" class="l">    }</span>
+<span id="L1434" class="l">  },</span>
+<span id="L1435" class="l">  &quot;tls_timeout&quot;: 2,</span>
+<span id="L1436" class="l">  &quot;write_deadline&quot;: 3000000000,</span>
+<span id="L1437" class="l">  &quot;start&quot;: &quot;2024-07-27T20:11:22.2576767Z&quot;,</span>
+<span id="L1438" class="l">  &quot;now&quot;: &quot;2024-07-27T20:16:15.5566358Z&quot;,</span>
+<span id="L1439" class="l">  &quot;uptime&quot;: &quot;4m53s&quot;,</span>
+<span id="L1440" class="l">  &quot;mem&quot;: 21278720,</span>
+<span id="L1441" class="l">  &quot;cores&quot;: 6,</span>
+<span id="L1442" class="l">  &quot;gomaxprocs&quot;: 6,</span>
+<span id="L1443" class="l">  &quot;cpu&quot;: 0,</span>
+<span id="L1444" class="l">  &quot;connections&quot;: 2,</span>
+<span id="L1445" class="l">  &quot;total_connections&quot;: 7,</span>
+<span id="L1446" class="l">  &quot;routes&quot;: 0,</span>
+<span id="L1447" class="l">  &quot;remotes&quot;: 0,</span>
+<span id="L1448" class="l">  &quot;leafnodes&quot;: 0,</span>
+<span id="L1449" class="l">  &quot;in_msgs&quot;: 5556,</span>
+<span id="L1450" class="l">  &quot;out_msgs&quot;: 5738,</span>
+<span id="L1451" class="l">  &quot;in_bytes&quot;: 3454832,</span>
+<span id="L1452" class="l">  &quot;out_bytes&quot;: 413704,</span>
+<span id="L1453" class="l">  &quot;slow_consumers&quot;: 0,</span>
+<span id="L1454" class="l">  &quot;subscriptions&quot;: 71,</span>
+<span id="L1455" class="l">  &quot;http_req_stats&quot;: {</span>
+<span id="L1456" class="l">    &quot;/&quot;: 1,</span>
+<span id="L1457" class="l">    &quot;/varz&quot;: 1</span>
+<span id="L1458" class="l">  },</span>
+<span id="L1459" class="l">  &quot;config_load_time&quot;: &quot;2024-07-27T20:11:22.2576767Z&quot;,</span>
+<span id="L1460" class="l">  &quot;system_account&quot;: &quot;$SYS&quot;,</span>
+<span id="L1461" class="l">  &quot;slow_consumer_stats&quot;: {</span>
+<span id="L1462" class="l">    &quot;clients&quot;: 0,</span>
+<span id="L1463" class="l">    &quot;routes&quot;: 0,</span>
+<span id="L1464" class="l">    &quot;gateways&quot;: 0,</span>
+<span id="L1465" class="l">    &quot;leafs&quot;: 0</span>
+<span id="L1466" class="l">  }</span>
+<span id="L1467" class="l">}</span>
+<span id="L1468" class="l">&lt;/pre&gt;</span>
+<span id="L1469" class="l">&lt;/details&gt;</span>
+<span id="L1470" class="l"> </span>
+<span id="L1471" class="l">## Comment — @derhuerst (2024-12-04)</span>
+<span id="L1472" class="l"> </span>
+<span id="L1473" class="l">I just ran into this error too.</span>
+<span id="L1474" class="l"> </span>
+<span id="L1475" class="l">```</span>
+<span id="L1476" class="l">port: 4222</span>
+<span id="L1477" class="l">http_port: 8222</span>
+<span id="L1478" class="l">server_name: vbb_gtfs_rt_production_2</span>
+<span id="L1479" class="l">jetstream {</span>
+<span id="L1480" class="l">  max_mem: 2G</span>
+<span id="L1481" class="l">  max_file: 16G</span>
+<span id="L1482" class="l">  store_dir: /var/lib/jetstream</span>
+<span id="L1483" class="l">}</span>
+<span id="L1484" class="l">```</span>
+<span id="L1485" class="l"> </span>
+<span id="L1486" class="l">```shell</span>
+<span id="L1487" class="l">nats stream add  --defaults  --subjects=&#x27;aus.istfahrt.&gt;&#x27;  --description=&#x27;VDV-454 AUS IstFahrt messages&#x27;  --ack --retention=limits --discard=old  --max-bytes=&#x27;10G&#x27;  &#x27;AUS_ISTFAHRT_2&#x27;</span>
+<span id="L1488" class="l">```</span>
+<span id="L1489" class="l"> </span>
+<span id="L1490" class="l">## Comment — @derekcollison (2024-12-04)</span>
+<span id="L1491" class="l"> </span>
+<span id="L1492" class="l">`max_bytes` will reserve that for you against the jetstream limits for the servers and the account.</span>
+<span id="L1493" class="l"> </span>
+<span id="L1494" class="l">We currently do not do overcommit in the face of max_bytes.</span>
+<span id="L1495" class="l"> </span>
+<span id="L1496" class="l">## Comment — @derhuerst (2024-12-05)</span>
+<span id="L1497" class="l"> </span>
+<span id="L1498" class="l">I don&#x27;t understand. Does this mean that using `max_bytes` for all streams is supposed to prevent this problem from occurring? That didn&#x27;t work for me.</span>
+<span id="L1499" class="l"> </span>
+<span id="L1500" class="l">## Comment — @derekcollison (2024-12-05)</span>
+<span id="L1501" class="l"> </span>
+<span id="L1502" class="l">When you specify max_bytes that is now considered &quot;used&quot; for all intent and purposes such that you should never fail to add a message to that stream since we pre-check for the reservation against all server and account limits.</span>
+<span id="L1503" class="l"> </span>
+<span id="L1504" class="l">So even though they might be empty the system will see those as reserved and deny new streams if the capacity limit has been reached.</span>
+<span id="L1505" class="l"> </span>
+<span id="L1506" class="l">## Comment — @heimalne (2025-01-06)</span>
+<span id="L1507" class="l"> </span>
+<span id="L1508" class="l">Just wanted to leave a note for Arm Mac users using Docker: On Mac Docker creates a virtual machine with a &quot;virtual size limit&quot;. When that limit is reached, running Nats inside a Docker container can also produce that insuffient storage error. The fix is to either increase the Docker limit, or prune/ delete old images.</span>
+<span id="L1509" class="l"> </span>
+<span id="L1510" class="l">## Comment — @derhuerst (2025-01-13)</span>
+<span id="L1511" class="l"> </span>
+<span id="L1512" class="l">&gt; So even though they might be empty the system will see those as reserved and deny new streams if the capacity limit has been reached.</span>
+<span id="L1513" class="l"> </span>
+<span id="L1514" class="l">I just configured `max_file: 16G` for the NATS server, and then tried to add two JetStream streams with `--max-bytes=10G` &amp; `--max-bytes=5G` (respectively). I still got the error message &quot;nats: error: could not create Stream: insufficient storage resources available (10047)&quot;.</span>
+<span id="L1515" class="l"> </span>
+<span id="L1516" class="l">```shell</span>
+<span id="L1517" class="l">nats-server --version</span>
+<span id="L1518" class="l"># nats-server: v2.10.22</span>
+<span id="L1519" class="l">nats --version</span>
+<span id="L1520" class="l"># 0.1.5</span>
+<span id="L1521" class="l">```</span>
+<span id="L1522" class="l"> </span>
+<span id="L1523" class="l">## Comment — @metacoma (2025-04-08)</span>
+<span id="L1524" class="l"> </span>
+<span id="L1525" class="l">facing with the same issue</span>
+<span id="L1526" class="l"> </span>
+<span id="L1527" class="l">```bash</span>
+<span id="L1528" class="l">$ nats -s ${nats_url} stream ls</span>
+<span id="L1529" class="l">╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</span>
+<span id="L1530" class="l">│                                                         Streams                                                         │</span>
+<span id="L1531" class="l">├─────────────────────────────────────────────────┬─────────────┬─────────────────────┬──────────┬─────────┬──────────────┤                                   </span>
+<span id="L1532" class="l">│ Name                                            │ Description │ Created             │ Messages │ Size    │ Last Message │                                   </span>
+<span id="L1533" class="l">├─────────────────────────────────────────────────┼─────────────┼─────────────────────┼──────────┼─────────┼──────────────┤                                   </span>
+<span id="L1534" class="l">│ KN_USER_BOB__HOST_UBUNTU_DEV_TO                 │             │ 2025-04-07 14:16:38 │ 0        │ 0 B     │ never        │                                   </span>
+<span id="L1535" class="l">│ KN_USER_BOB__HOST_UBUNTU_DEV_FROM               │             │ 2025-04-07 14:13:14 │ 3        │ 983 B   │ 1d1h42m41s   │                                   </span>
+<span id="L1536" class="l">│ KN_USER_BEBEBEKA__ALICE_HOST_BROKER_KNE_TRIGGER │             │ 2025-03-31 21:51:17 │ 225      │ 173 KiB │ 3d1h57m54s   │                                   </span>
+<span id="L1537" class="l">╰─────────────────────────────────────────────────┴─────────────┴─────────────────────┴──────────┴─────────┴──────────────╯</span>
+<span id="L1538" class="l">```</span>
+<span id="L1539" class="l"> </span>
+<span id="L1540" class="l">```</span>
+<span id="L1541" class="l">/ # du -h -s /data/jetstream/</span>
+<span id="L1542" class="l">116.0K  /data/jetstream/</span>
+<span id="L1543" class="l">```</span>
+<span id="L1544" class="l"> </span>
+<span id="L1545" class="l">```</span>
+<span id="L1546" class="l">[7] 2025/04/08 20:07:12.084012 [INF] Starting nats-server                                                                                                  │</span>
+<span id="L1547" class="l">[7] 2025/04/08 20:07:12.084133 [INF]   Version:  2.10.24</span>
+<span id="L1548" class="l">```</span>
+<span id="L1549" class="l"> </span>
+<span id="L1550" class="l">## Comment — @derekcollison (2025-04-11)</span>
+<span id="L1551" class="l"> </span>
+<span id="L1552" class="l">If you set max_bytes on a stream we use that to determine reservation and not overcommit.</span>
+<span id="L1553" class="l"> </span>
+<span id="L1554" class="l">## Comment — @derhuerst (2025-04-11)</span>
+<span id="L1555" class="l"> </span>
+<span id="L1556" class="l">But in my case, the sum of the two streams&#x27; `max_bytes` was *less* than NATS&#x27; `max_file`.</span>
+<span id="L1557" class="l"> </span>
+<span id="L1558" class="l">## Comment — @derekcollison (2025-04-11)</span>
+<span id="L1559" class="l"> </span>
+<span id="L1560" class="l">Can you upgrade to 2.10.27 and see if the issue persists?</span>
+<span id="L1561" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/gh-issues/issue-5871.md.html">issue-5871.md →</a></div></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

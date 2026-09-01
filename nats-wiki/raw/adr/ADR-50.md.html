@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-50 · NATS Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../assets/theme.css">
+<link rel="stylesheet" href="../../assets/types.css">
+<script>window.ROOT="../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/question-bank.html" class="">Questions</a><a href="../../inbox/adr-toc.html" class="">ADRs</a><a href="../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../inbox/server-issues.html" class="">Server issues</a><a href="../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell norail">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by facet</a></li><li><a href="../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › adr</div>
+<h1>ADR-50</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#adr">adr</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://github.com/nats-io/nats-architecture-and-design">https://github.com/nats-io/nats-architecture-and-design</a> (tarball of <code>main</code>)</div><div class="mrow"><span class="mk">file</span> <code>raw/adr/ADR-50.md</code> · 462 lines · 33 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/adr/ADR-50.md" download>download this file</a></div></div><div class="pn"><a href="../../raw/adr/ADR-5.md.html">← ADR-5.md</a> · <a href="../../raw/adr/ADR-51.md.html">ADR-51.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l"># JetStream Batch Publishing</span>
+<span id="L2" class="l"> </span>
+<span id="L3" class="l">| Metadata | Value                                 |</span>
+<span id="L4" class="l">|----------|---------------------------------------|</span>
+<span id="L5" class="l">| Date     | 2025-06-10                            |</span>
+<span id="L6" class="l">| Author   | @ripienaar                            |</span>
+<span id="L7" class="l">| Status   | Approved                              |</span>
+<span id="L8" class="l">| Tags     | jetstream, server, client, 2.12, 2.14 |</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">| Revision | Date       | Author                                          | Info                                                      | Server Version | API Level |</span>
+<span id="L11" class="l">|----------|------------|-------------------------------------------------|-----------------------------------------------------------|----------------|-----------|</span>
+<span id="L12" class="l">| 1        | 2025-06-10 | @ripienaar                                      | Initial design                                            | 2.12.0         | 2         |</span>
+<span id="L13" class="l">| 2        | 2025-09-08 | @MauriceVanVeen                                 | Initial release                                           | 2.12.0         | 2         |</span>
+<span id="L14" class="l">| 3        | 2025-09-11 | @piotrpio                                       | Add server codes                                          | 2.12.0         | 2         |</span>
+<span id="L15" class="l">| 4        | 2025-09-11 | @ripienaar                                      | Restore optional ack behavior                             | 2.12.0         | 2         |</span>
+<span id="L16" class="l">| 5        | 2025-09-25 | @ripienaar                                      | Support batch commit without storing the commit message   | 2.14.0         | 4         |</span>
+<span id="L17" class="l">| 6        | 2025-10-02 | @MauriceVanVeen                                 | Support deduplication                                     | 2.12.1         | 2         |</span>
+<span id="L18" class="l">| 7        | 2025-10-08 | @ripienaar, @MauriceVanVeen, @piotrpio, @Jarema | Support fast ingest                                       | 2.14.0         | 4         |</span>
+<span id="L19" class="l">| 8        | 2025-10-09 | @MauriceVanVeen                                 | Update fast ingest details                                | 2.14.0         | 4         |</span>
+<span id="L20" class="l">| 9        | 2026-01-28 | @MauriceVanVeen                                 | Finalize fast ingest details: type hints &amp; error handling | 2.14.0         | 4         |</span>
+<span id="L21" class="l">| 10       | 2026-03-13 | @MauriceVanVeen                                 | Update batch limits                                       | 2.14.0         | 4         |</span>
+<span id="L22" class="l"> </span>
+<span id="L23" class="l">## Context</span>
+<span id="L24" class="l"> </span>
+<span id="L25" class="l">There exists a need to treat groups of related messages in a batched manner, there are a few goals with this work:</span>
+<span id="L26" class="l"> </span>
+<span id="L27" class="l"> * We need to be able to improve performance</span>
+<span id="L28" class="l"> * We need to deliver Atomic Batch writes - where an entire batch is stored or abandoned</span>
+<span id="L29" class="l"> * We need to perform replication layer work to batch RAFT append entries</span>
+<span id="L30" class="l"> </span>
+<span id="L31" class="l">This ADR focus mainly on the first 2 sections.</span>
+<span id="L32" class="l"> </span>
+<span id="L33" class="l">## Atomic Batched Publishes</span>
+<span id="L34" class="l"> </span>
+<span id="L35" class="l">### Context </span>
+<span id="L36" class="l"> </span>
+<span id="L37" class="l">There are many use cases for this but one scenario would demonstrate the underlying need that is shared by these cases.</span>
+<span id="L38" class="l"> </span>
+<span id="L39" class="l">When a KV store is used to store a User record the it might span many keys, the address for example might be 5 keys. Performing updates on these related keys is not safe today as writes might fail after a first update resulting in an address line in one city but a post code in another.</span>
+<span id="L40" class="l"> </span>
+<span id="L41" class="l">To address this we want to be able to deliver the 5 writes as a batch and the entire batch either fails or succeeds.</span>
+<span id="L42" class="l"> </span>
+<span id="L43" class="l">### Client Design</span>
+<span id="L44" class="l"> </span>
+<span id="L45" class="l">The client will signal batch start and membership using headers on published messages.</span>
+<span id="L46" class="l"> </span>
+<span id="L47" class="l"> * A batch will be started by adding the `Nats-Batch-Id:uuid` and `Nats-Batch-Sequence:1` headers using a *request*, the server will reply with an error or zero byte message. Maximum length of the ID is 64 characters.</span>
+<span id="L48" class="l"> * Following messages in the same batch will include the `Nats-Batch-Id:uuid` header and increment `Nats-Batch-Sequence:n` by one, and might optionally include a reply subject that will receive a zero byte reply</span>
+<span id="L49" class="l"> * If the final message has the headers `Nats-Batch-Id:uuid`, `Nats-Batch-Sequence:n` and `Nats-Batch-Commit:1`, the server will store the message, commit the batch and reply with a pub ack. </span>
+<span id="L50" class="l"> * Otherwise, the final message will have headers `Nats-Batch-Id:uuid`, `Nats-Batch-Sequence:n` and `Nats-Batch-Commit:eob` and the server will commit the batch without storing the message and reply with a pub ack. The last message will be updated to have the `Nats-Batch-Commit:1` header set by the server before the batch is saved. The pub ack&#x27;s `BatchSize` will reflect the messages in the batch, without counting the EOB message.</span>
+<span id="L51" class="l"> </span>
+<span id="L52" class="l">The server will acknowledge in the following manner:</span>
+<span id="L53" class="l"> </span>
+<span id="L54" class="l"> * The initial message will get an error - for example, feature not supported - or a zero byte ack</span>
+<span id="L55" class="l"> * Following messages, that have a reply set, will get a zero byte ack</span>
+<span id="L56" class="l"> * The final message will get a pub ack as described later</span>
+<span id="L57" class="l"> * The server will check `Nats-Required-Api-Level` for every batch related message. If for any message the check fails the batch is abandoned, with advisory, and if a reply is set a full error ack is sent.</span>
+<span id="L58" class="l"> </span>
+<span id="L59" class="l">### Server Errors</span>
+<span id="L60" class="l"> </span>
+<span id="L61" class="l">The server will respond with the following errors if committing a batch fails:</span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l">| ErrCode | Code | Description                                                         |</span>
+<span id="L64" class="l">|---------|------|---------------------------------------------------------------------|</span>
+<span id="L65" class="l">| 10174   | 400  | Batch publish not enabled on stream                                 |</span>
+<span id="L66" class="l">| 10176   | 400  | Batch publish is incomplete and was abandoned                       |</span>
+<span id="L67" class="l">| 10179   | 400  | Batch publish ID is invalid (exceeds 64 characters)                 |</span>
+<span id="L68" class="l">| 10175   | 400  | Batch publish sequence is missing                                   |</span>
+<span id="L69" class="l">| 10199   | 400  | Batch publish sequence exceeds server limit (default 1000)          |</span>
+<span id="L70" class="l">| 10177   | 400  | Batch publish unsupported header used (`Nats-Expected-Last-Msg-Id`) |</span>
+<span id="L71" class="l">| 10201   | 400  | Batch publish contains duplicate message id (`Nats-Msg-Id`)         |</span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">### Server Behavior Design</span>
+<span id="L74" class="l"> </span>
+<span id="L75" class="l"> * The server will limit the `Nats-Batch-ID` to 64 characters and respond with an error Pub Ack if it&#x27;s too long</span>
+<span id="L76" class="l"> * Server will reject messages for which the batch is unknown with an error Pub Ack</span>
+<span id="L77" class="l"> * If messages in a batch is received and any gap is detected the batch will be rejected with a error Pub Ack</span>
+<span id="L78" class="l"> * Check properties like `ExpectedLastSeq` using the sequences found in the stream prior to the batch, at the time when the batch is committed under lock for consistency. Rejects the batch with an error Pub Ack if any message fails these checks, when the batch tries to commit. Only the first message of the batch may contain `Nats-Expected-Last-Sequence`. Checks using `Nats-Expected-Last-Subject-Sequence` can only be performed if prior entries in the batch do not also write to that same subject.</span>
+<span id="L79" class="l"> * Abandon without error reply anywhere a batch that has not had messages for 10 seconds, an advisory will be raised on abandonment in this case</span>
+<span id="L80" class="l"> * Send a pub ack on the final message that includes a new property `Batch:ID` and `Count:10`. The sequence in the ack would be the final message sequence, previous messages in the batch would be the preceding sequences</span>
+<span id="L81" class="l"> * If a stream is operating on the `PersistMode: async` mode, any batch published to it must fail</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l">The server will operate under limits to safeguard itself:</span>
+<span id="L84" class="l"> </span>
+<span id="L85" class="l"> * Each stream can only have 50 batches in flight at any time</span>
+<span id="L86" class="l"> * Each server can only have 1,000 batches in flight at any time</span>
+<span id="L87" class="l"> * A batch that has not had traffic for 10 seconds since the last message will be abandoned</span>
+<span id="L88" class="l"> * Each batch can have maximum 1000 messages</span>
+<span id="L89" class="l"> </span>
+<span id="L90" class="l">### Stream State Constraints</span>
+<span id="L91" class="l"> </span>
+<span id="L92" class="l">The `LastMsgId` header is currently not supported. A batch will be rejected if this header is used, but we might support this header in the future.</span>
+<span id="L93" class="l"> </span>
+<span id="L94" class="l">Initial release of this feature rejects the use of `MsgId`. Starting from 2.12.1 de-duplication is supported and a batch will be rejected with an error if it contains a duplicate message.</span>
+<span id="L95" class="l"> </span>
+<span id="L96" class="l">### Abandonment Advisories</span>
+<span id="L97" class="l"> </span>
+<span id="L98" class="l">When an atomic batch is abandoned it might be for reasons that will never be communicated back to clients, so we raise advisories:</span>
+<span id="L99" class="l"> </span>
+<span id="L100" class="l">```go</span>
+<span id="L101" class="l">type BatchAbandonReason string</span>
+<span id="L102" class="l"> </span>
+<span id="L103" class="l">var (</span>
+<span id="L104" class="l">	BatchTimeout              BatchAbandonReason = &quot;timeout&quot;</span>
+<span id="L105" class="l">	BatchLarge                BatchAbandonReason = &quot;large&quot;</span>
+<span id="L106" class="l">	BatchIncomplete           BatchAbandonReason = &quot;incomplete&quot;</span>
+<span id="L107" class="l">	BatchRequirementsNotMet   BatchAbandonReason = &quot;unsupported&quot;</span>
+<span id="L108" class="l">)</span>
+<span id="L109" class="l"> </span>
+<span id="L110" class="l">type Advisory struct {</span>
+<span id="L111" class="l">	// ...</span>
+<span id="L112" class="l">	BatchId      string             `json:&quot;batch&quot;`</span>
+<span id="L113" class="l">	Reason       BatchAbandonReason `json:&quot;reason&quot;`</span>
+<span id="L114" class="l">}</span>
+<span id="L115" class="l">```</span>
+<span id="L116" class="l"> </span>
+<span id="L117" class="l">The event type is `io.nats.jetstream.advisory.v1.stream_batch_abandoned`.</span>
+<span id="L118" class="l"> </span>
+<span id="L119" class="l">## Fast-ingest Batch Publishing</span>
+<span id="L120" class="l"> </span>
+<span id="L121" class="l">### Context</span>
+<span id="L122" class="l"> </span>
+<span id="L123" class="l">Today we have Async publishing in the clients that aims to move data into a stream at high speed, it works well but pays a very high cost for managing acknowledgements both in client and server.</span>
+<span id="L124" class="l"> </span>
+<span id="L125" class="l">We would like to build on the batching behaviours introduced here but deliver high performance ingest without atomicity.</span>
+<span id="L126" class="l"> </span>
+<span id="L127" class="l">These batches are not reliable, meaning messages can be lost and the batch will not be abandoned like atomic ones. For this reason we will also use a lighter method than headers for communicating the control state, since users are unlikely to carefully audit these like they would atomic batch publishes.</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l">Clients will have the flexibility to choose how missing messages are handled - gaps are allowed or any gap terminates the batch. The latter also guarantees messages are persisted in-order without gaps (although they can be interleaved with messages from other publishers).</span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l">Crucially these batches are not pre-staged and so will not be limited to 1000 messages like Atomic ones, they will be unlimited and, if gaps are allowed, can survive leader changes.</span>
+<span id="L132" class="l"> </span>
+<span id="L133" class="l">While we wish to go fast when possible, we also want to not fail when many concurrent producers are doing fast-ingest as we see today with ObjectStore writes - a few concurrently will fail due to pending API counts etc. We will therefor create a flow-control mechanism where the server can tell the clients to go slower. This way the focus is not just fast but being able to actively manage the concurrent pressure ensuring everyone goes as fast as possible while remaining reliable.</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l">The goal is to replace Async publish with one built on these behaviors.</span>
+<span id="L136" class="l"> </span>
+<span id="L137" class="l">### Control Channel</span>
+<span id="L138" class="l"> </span>
+<span id="L139" class="l">The heart of this design is a control channel that is open and kept open for the duration of the batch. In practice the reply subject uses a wildcard inbox, with all messages in the batch containing a unique reply subject for that message, but all under that wildcard inbox subject hierarchy.</span>
+<span id="L140" class="l"> </span>
+<span id="L141" class="l">The server will send acks over the channel on a frequency like once every 10. Crucially if at any stage an error is encountered errors can be sent back immediately and received by the client as the channel is always open.</span>
+<span id="L142" class="l"> </span>
+<span id="L143" class="l">Clients will not wait for each ack like they would in a standard JS Publish instead they will maintain a count of maximum outstanding acknowledgements from the server, this is part flow-control and part outage detection.</span>
+<span id="L144" class="l"> </span>
+<span id="L145" class="l">The server on the other hand will be able to adjust the frequency of acks based on internal metrics of the stream such as the amount of other fast publishers, the average message size they use, the size of the in-flight RAFT proposals, etc. In this way the server and clients will balance speed of fast ingest vs responsiveness of interactive commands requiring RAFT proposals.</span>
+<span id="L146" class="l"> </span>
+<span id="L147" class="l">At all times the server will maintain its self-protection mechanisms like dropping messages when buffers are full etc.</span>
+<span id="L148" class="l"> </span>
+<span id="L149" class="l">Clients should use old style inboxes not the mux inbox so that as soon as the server sends an error back the clients would drop interest. The reason is that with many in-flight messages once an error occurs the server might find it has to send thousands of Acks back to the client, if the client unsubscribes from the control channel completely the server will short circuit some of those acks.</span>
+<span id="L150" class="l"> </span>
+<span id="L151" class="l">### Client Design</span>
+<span id="L152" class="l"> </span>
+<span id="L153" class="l">The client will communicate key information about the batch using a reply subject, `&lt;prefix&gt;.&lt;uuid&gt;.&lt;initial flow&gt;.&lt;gap &#x27;ok&#x27; or &#x27;fail&#x27;&gt;.&lt;batch seq&gt;.&lt;operation&gt;.$FI`</span>
+<span id="L154" class="l"> </span>
+<span id="L155" class="l">| Operation | Description                                                             |</span>
+<span id="L156" class="l">|-----------|-------------------------------------------------------------------------|</span>
+<span id="L157" class="l">| 0         | Starts a batch                                                          |</span>
+<span id="L158" class="l">| 1         | Append to a batch                                                       |</span>
+<span id="L159" class="l">| 2         | Commit and store the final message                                      |</span>
+<span id="L160" class="l">| 3         | Commit without storing the final message (EOB mode)                     |</span>
+<span id="L161" class="l">| 4         | Ping a batch to keep it alive and receive the last flow control message |</span>
+<span id="L162" class="l"> </span>
+<span id="L163" class="l">The server MUST reject any operation that it does not know about</span>
+<span id="L164" class="l"> </span>
+<span id="L165" class="l"> * The client will set up an Inbox subscription that will be used for the duration of the batch, this must be an old style inbox. The inbox must subscribe to `&lt;prefix&gt;.uuid.&gt;`</span>
+<span id="L166" class="l"> * A batch will be started by setting a reply subject of `&lt;prefix&gt;.uuid.10.ok.1.0.$FI` (initial flow of `10`, gap `ok`, sequence `1`), the server will reply with an error or `BatchFlowAck` message. Maximum length of the ID is 64 characters. The client MUST wait for the first reply to detect if the feature is available on the server or Stream, and what flow control settings the server allows the client to start at. It is very important for a client to not immediately blast messages out at a speed that the server couldn&#x27;t support if it already had many other fast publishers, since this needs to be coordinated by the server.</span>
+<span id="L167" class="l"> * Following messages in the same batch must use a reply subject `&lt;prefix&gt;.uuid.10.ok.n.1.$FI` where `n` is the sequence incremented by one. We add the initial flow and gap information for replica followers who might have missed the first message due to limits</span>
+<span id="L168" class="l"> * If the final message has the reply subject `&lt;prefix&gt;.uuid.10.ok.n.2.$FI`, the server will store the message, end the batch and reply with a pub ack. This last message will not get the `Nats-Batch-Commit` header like with atomic batch publishing.</span>
+<span id="L169" class="l"> * Otherwise, the final message will have reply subject `&lt;prefix&gt;.uuid.10.ok.n.3.$FI` the server will end the batch without storing the message and reply with a pub ack.</span>
+<span id="L170" class="l"> * Clients will monitor the `BatchFlowAck` acks and should an ack have different flow settings different from the active one they will adjust accordingly.</span>
+<span id="L171" class="l"> * To deal with lost acks clients will manage outstanding `BatchFlowAck` acks in a way that ensures if an ack for message 30 comes in that it implies all earlier acks were received.</span>
+<span id="L172" class="l"> * The client may send a ping message to keep the batch alive and receive (missed) flow control messages. A ping reports about gaps, if any, and resends the latest flow control message. The client can use this to deal with lost acks. The sequence in the ping message must not itself increment the batch sequence; instead, it should be the highest batch sequence the client has sent. This ensures missed ping messages don&#x27;t show up as gaps which could otherwise fail the batch.</span>
+<span id="L173" class="l"> </span>
+<span id="L174" class="l">The server will acknowledge in the following manner:</span>
+<span id="L175" class="l"> </span>
+<span id="L176" class="l"> * The initial message will get an error - for example, feature not supported - or `BatchFlowAck` ack with the initial allowed flow rate in `AckMessages`.</span>
+<span id="L177" class="l"> * The server will then send `BatchFlowAck` back based on the flow rate - which might adjust the flow rate.</span>
+<span id="L178" class="l"> * The final message will get a standard pub ack as described later.</span>
+<span id="L179" class="l"> * The server will reject with an error any unsupported operation value.</span>
+<span id="L180" class="l"> </span>
+<span id="L181" class="l">By always sending the current flow state back in the `BatchFlowAck` we guard against lost acks.</span>
+<span id="L182" class="l"> </span>
+<span id="L183" class="l">The client specifies its initial/maximum flow rate, but the server dictates the actual flow rate. The server determines the flow rate in the following way:</span>
+<span id="L184" class="l"> </span>
+<span id="L185" class="l"> * The flow rate will start with a low flow value. For example, the client requests a maximum flow of 100 messages, but the server starts at a flow of 1.</span>
+<span id="L186" class="l"> * The server may use a higher initial flow value if this is the first fast publisher to the stream.</span>
+<span id="L187" class="l"> * The server may adjust the flow value when it&#x27;s meant to send its next flow control message according to the current active settings.</span>
+<span id="L188" class="l"> * The server may ramp up the flow of a client by increasing the flow value until it reaches the maximum flow rate. The server usually doubles the flow value in that case.</span>
+<span id="L189" class="l"> * The server may slow down the flow of a client by decreasing the flow value until it reaches 1 (ack every message). The server usually halves the flow value in that case.</span>
+<span id="L190" class="l"> * The server uses internal metrics to determine the flow rate for all fast publishers. For example, the total number of fast publishers, their average message sizes, the inflight messages pending to be persisted, etc.</span>
+<span id="L191" class="l"> </span>
+<span id="L192" class="l">### Message Gaps</span>
+<span id="L193" class="l"> </span>
+<span id="L194" class="l">We want to cater for 2 kinds of use cases around gaps:</span>
+<span id="L195" class="l"> </span>
+<span id="L196" class="l"> 1. Object store would not be ok with any gaps in the published messages because those would be gaps in files.</span>
+<span id="L197" class="l"> 2. Fast metric publishers would be ok with some gaps and would just want to continue publishing.</span>
+<span id="L198" class="l"> </span>
+<span id="L199" class="l">To support both we set the gap mode to `fail` or `ok` in the reply subject. Invalid values must result in a batch abandon error.</span>
+<span id="L200" class="l"> </span>
+<span id="L201" class="l">Upon detecting a gap, the server immediately sends a `BatchFlowGap` with the `ExpectedLastSequence` and `CurrentSequence` values set allowing clients to detect the gaps.</span>
+<span id="L202" class="l"> </span>
+<span id="L203" class="l">```go</span>
+<span id="L204" class="l">// BatchFlowGap is used for reporting gaps when fast batch publishing into a stream.</span>
+<span id="L205" class="l">// This message is purely informational and could technically be lost without the client receiving it.</span>
+<span id="L206" class="l">type BatchFlowGap struct {</span>
+<span id="L207" class="l">	// Type: &quot;gap&quot;</span>
+<span id="L208" class="l">	Type string `json:&quot;type&quot;`</span>
+<span id="L209" class="l">	// ExpectedLastSequence is the sequence expected to be received next.</span>
+<span id="L210" class="l">	// Messages starting from ExpectedLastSequence up to (but not including) CurrentSequence were lost.</span>
+<span id="L211" class="l">	ExpectedLastSequence uint64 `json:&quot;last_seq&quot;`</span>
+<span id="L212" class="l">	// CurrentSequence is the sequence of the message that just came in and detected the gap.</span>
+<span id="L213" class="l">	CurrentSequence uint64 `json:&quot;seq&quot;`</span>
+<span id="L214" class="l">}</span>
+<span id="L215" class="l">```</span>
+<span id="L216" class="l"> </span>
+<span id="L217" class="l">The `ExpectedLastSequence` was the expected next sequence to be received by the server before the gap, and the `CurrentSequence` is the sequence of the received batch message. The messages with sequences starting from `ExpectedLastSequence` up to (but not including) `CurrentSequence` were lost. Importantly, this flow control message MUST NOT be used to know whether `ExpectedLastSequence` or `CurrentSequence` was persisted, it&#x27;s purely informational. Also, this message will be immediately sent upon detecting a gap. This means it can be received out-of-order with the usual flow control messages that signal up to a certain batch sequence was persisted. Crucially, since these gap messages can be sent out-of-order, these messages don&#x27;t contain any flow updates or information.</span>
+<span id="L218" class="l"> </span>
+<span id="L219" class="l">Example: `{&quot;type&quot;:&quot;gap&quot;,&quot;last_seq&quot;:10,&quot;seq&quot;:15}`. The gap was detected at sequence 15, any prior messages up to and including 10 were lost.</span>
+<span id="L220" class="l"> </span>
+<span id="L221" class="l">When `fail` the server will abandon the batch and send the final ack back with `BatchSize` set to the last received sequence before the gap. The client will receive the gap message first, and should use this to stop sending messages before eventually receiving the final ack.</span>
+<span id="L222" class="l"> </span>
+<span id="L223" class="l">When `ok` the server will allow the gap, only send the gap message, and continue onward from the received sequence.</span>
+<span id="L224" class="l"> </span>
+<span id="L225" class="l">When the leader of the Stream changes:</span>
+<span id="L226" class="l"> </span>
+<span id="L227" class="l">* In `fail` gap mode the new leader will abandon the batch (if a gap resulted from the leader change), send a `BatchFlowGap` out indicating the gap, and send back a final pub ack with details up to the last received message for the batch.</span>
+<span id="L228" class="l">* In `ok` gap mode the new leader will continue and send a `BatchFlowGap` out indicating the gap.</span>
+<span id="L229" class="l"> </span>
+<span id="L230" class="l">When using per-message expected header checks, the server will either stop or continue the batch depending on the mode:</span>
+<span id="L231" class="l"> </span>
+<span id="L232" class="l">* In `fail` gap mode the error will commit/stop the batch. The final pub ack will contain the error, and no more messages are accepted in the batch after the batch sequence that triggered the error.</span>
+<span id="L233" class="l">* In `ok` gap mode the error will be sent to the client in the `BatchFlowGap` message with the `CurrentSequence` set to the sequence of the message that caused the error. The batch will continue to accept messages.</span>
+<span id="L234" class="l"> </span>
+<span id="L235" class="l">### Flow Control</span>
+<span id="L236" class="l"> </span>
+<span id="L237" class="l">The client and server will cooperate around flow control, there are a number of buffers of concern:</span>
+<span id="L238" class="l"> </span>
+<span id="L239" class="l"> 1. Socket buffers over client, server, gateways, routes, same as always.</span>
+<span id="L240" class="l"> 2. Stream pending RAFT proposals size and other related JetStream internal buffers.</span>
+<span id="L241" class="l"> </span>
+<span id="L242" class="l">The outstanding ack behaviour will address the first buffers and lead to client settling on a sustainable publish rate.</span>
+<span id="L243" class="l"> </span>
+<span id="L244" class="l">The 2nd is a concern because when there are too many outstanding RAFT proposals API requests like Msg Delete, Purge, Config change etc can take a long time to be serviced leading to client errors. Realistically we can&#x27;t have those take more than 2 seconds.</span>
+<span id="L245" class="l"> </span>
+<span id="L246" class="l">The server will thus have to monitor those internal Stream and Raft related buffers and communicate back to all fast-publishers that they need to adjust their flow rate.</span>
+<span id="L247" class="l"> </span>
+<span id="L248" class="l">The primary mechanism for this is the `flow` field in the initial reply subject, it can have a value like `10` meaning every 10th message gets an ack.</span>
+<span id="L249" class="l"> </span>
+<span id="L250" class="l">Clients will surface settings like how many outstanding acks there can be before the client stops publishing and waits for acks and how long the timeout is while waiting. The client though must take care to track not just the count of outstanding acks but also the sequence they are for. If acks for messages 10,20,30,40 and the one for 30 is lost - when the one for 40 comes the client must also treat the one for message 30 as seen, this is critical to avoid unrecoverable stalls.</span>
+<span id="L251" class="l"> </span>
+<span id="L252" class="l">Clients should only allow limited configurability of outstanding acks, since each ack represents a batch of N messages:</span>
+<span id="L253" class="l">- Outstanding acks = 1, functions like Async publishing up to N, but flow-controled.</span>
+<span id="L254" class="l">- Outstanding acks = 2, while the server is working on the first batch, continue sending the next batch, and then wait for the first. This setting is generally optimal, as it allows the server to keep working on the next batch while we&#x27;re waiting for the ack to come in.</span>
+<span id="L255" class="l">- Outstanding acks = 3, similar to 2, but may work better on setups with larger RTTs to allow the server to have a bit more work to compensate for this higher RTT. This should be a conscious decision though, and not a default. Outstanding acks 1 or 2 will work best for most use cases, especially ones intending to support many concurrent fast publishers.</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l">The server can adjust the active flow parameters once the batch is established by sending a new flow rate back to the client in `BatchFlowAck` messages. In effect this will mean that the frequency of acks will change, the client will then have to adjust its expectations accordingly to calculate the outstanding acks against the new expectation for new publishes.</span>
+<span id="L258" class="l"> </span>
+<span id="L259" class="l">The server must treat the initial flow parameters as the upper bound though, when a client says ack every 10 messages we cannot decide from the server side to change that to &gt; 10. </span>
+<span id="L260" class="l"> </span>
+<span id="L261" class="l">Aside from this, all current self-protection mechanisms in the server - dropping too fast messages etc - will remain in place.</span>
+<span id="L262" class="l"> </span>
+<span id="L263" class="l">```go</span>
+<span id="L264" class="l">// BatchFlowAck is used for flow control when fast batch publishing into a stream.</span>
+<span id="L265" class="l">// This message is vital to handling acknowledgements and flow control.</span>
+<span id="L266" class="l">// These may technically be lost without the client receiving it. The client can retrieve</span>
+<span id="L267" class="l">// these by using the &quot;ping&quot; operation if it&#x27;s expecting acks but not receiving any.</span>
+<span id="L268" class="l">type BatchFlowAck struct {</span>
+<span id="L269" class="l">    // Type: &quot;ack&quot;</span>
+<span id="L270" class="l">    Type string `json:&quot;type&quot;`</span>
+<span id="L271" class="l">    // Sequence is the sequence of the message that triggered the ack.</span>
+<span id="L272" class="l">    // If &quot;gap: fail&quot; this means the messages up to and including Sequence were persisted.</span>
+<span id="L273" class="l">    // If &quot;gap: ok&quot; this means _some_ of the messages up to and including Sequence were persisted.</span>
+<span id="L274" class="l">    // But there could have been gaps.</span>
+<span id="L275" class="l">    Sequence uint64 `json:&quot;seq&quot;`</span>
+<span id="L276" class="l">    // Messages indicates acknowledgements will be sent every N messages.</span>
+<span id="L277" class="l">    Messages uint16 `json:&quot;msgs&quot;`</span>
+<span id="L278" class="l">}</span>
+<span id="L279" class="l">```</span>
+<span id="L280" class="l"> </span>
+<span id="L281" class="l">Example: `{&quot;type&quot;:&quot;ack&quot;,&quot;seq&quot;:10,&quot;msgs&quot;:15}`. The ack was for message 10 (and below), and the server will send a new ack every 15 messages.</span>
+<span id="L282" class="l"> </span>
+<span id="L283" class="l">This kind of ack is differentiated from Pub Acks by the presence of `&quot;type&quot;:&quot;ack&quot;`.</span>
+<span id="L284" class="l"> </span>
+<span id="L285" class="l">The following sample Go code can be used when implementing support for this feature, importantly:</span>
+<span id="L286" class="l">- Manage the proper reply subject (and inbox subscription) used.</span>
+<span id="L287" class="l">- Publish the batch message.</span>
+<span id="L288" class="l">- If the batch is new (sequence 1), wait for confirmation (and initial flow settings) from the server.</span>
+<span id="L289" class="l">- The client waits for acknowledgements depending on the maximum outstanding acks and the coordinated ack per N messages value.</span>
+<span id="L290" class="l">- The client must update the flow values if the server tells it to, and adjust accordingly when it has to wait for acks.</span>
+<span id="L291" class="l">- The client needs to handle delivery of both flow and publish acknowledgements over the same inbox.</span>
+<span id="L292" class="l">- The client needs to return the batch and ack sequence so the application can be made aware of which messages were acknowledged.</span>
+<span id="L293" class="l"> </span>
+<span id="L294" class="l">```go</span>
+<span id="L295" class="l">type FastPubAck struct {</span>
+<span id="L296" class="l">    // BatchSequence is the sequence of this message within the current batch.</span>
+<span id="L297" class="l">    BatchSequence uint64</span>
+<span id="L298" class="l">    // AckSequence is the highest sequence within the current batch that has been acknowledged.</span>
+<span id="L299" class="l">    // This can be used by application code to release resources of the messages it might want to otherwise retry.</span>
+<span id="L300" class="l">    // If &quot;gap: fail&quot; is used this means all messages below and including this sequence were persisted.</span>
+<span id="L301" class="l">    // If &quot;gap: ok&quot; is used there&#x27;s no guarantee that all messages were persisted.</span>
+<span id="L302" class="l">    AckSequence uint64</span>
+<span id="L303" class="l">}</span>
+<span id="L304" class="l"> </span>
+<span id="L305" class="l">func (f *FastPublisher) AddMsg(m *nats.Msg) (FastPubAck, error) {</span>
+<span id="L306" class="l">    // Generate fast batch reply subject, and publish message.</span>
+<span id="L307" class="l">    f.batchSeq++</span>
+<span id="L308" class="l">    m.Reply = &quot;&lt;prefix&gt;.&lt;uuid&gt;.&lt;initial flow&gt;.&lt;gap mode&gt;.&lt;batch seq&gt;.&lt;operation&gt;.$FI&quot;</span>
+<span id="L309" class="l">    if err := f.js.Conn().PublishMsg(m); err != nil {</span>
+<span id="L310" class="l">        return FastPubAck{}, err</span>
+<span id="L311" class="l">    }</span>
+<span id="L312" class="l"> </span>
+<span id="L313" class="l">    // If this batch is new, we immediately get an ack back potentially updating settings.</span>
+<span id="L314" class="l">    if f.batchSeq == 1 {</span>
+<span id="L315" class="l">        // TODO: wait for and process ack, and store latest ack.Sequence and ack.Messages</span>
+<span id="L316" class="l">        // TODO: differentiate between flow and publish acknowledgements, as we could receive a publish</span>
+<span id="L317" class="l">        //  acknowledgement early if there was an error.</span>
+<span id="L318" class="l">    }</span>
+<span id="L319" class="l"> </span>
+<span id="L320" class="l">    // Check if we need to wait for acknowledgements.</span>
+<span id="L321" class="l">    // Repeat until we don&#x27;t need to wait for acknowledgements anymore.</span>
+<span id="L322" class="l">	// TODO: acks, gap, and error messages should be handled asynchronously</span>
+<span id="L323" class="l">	//  (gap and error should be sent as callbacks informing the user)</span>
+<span id="L324" class="l">    for {</span>
+<span id="L325" class="l">        // If there are any pending messages in our subscription, process them first.</span>
+<span id="L326" class="l">        // TODO: process pending acks, and store latest ack.Sequence and ack.Messages</span>
+<span id="L327" class="l">        // TODO: if the server detected a gap, it will send a flow message with</span>
+<span id="L328" class="l">        //  gap.ExpectedLastSequence and gap.CurrentSequence. It should purely be treated as informational, and</span>
+<span id="L329" class="l">        //  MUST NOT be used to update the ack.Sequence and ack.Messages settings.</span>
+<span id="L330" class="l">		// TODO: differentiate between flow and publish acknowledgements, as we could receive a publish</span>
+<span id="L331" class="l">		//  acknowledgement early if there was an error.</span>
+<span id="L332" class="l"> </span>
+<span id="L333" class="l">        // Otherwise, calculate if we should wait for acknowledgments based on the up-to-date flow values.</span>
+<span id="L334" class="l">        waitForAck := lastAck.Sequence+lastAck.Messages*opt.maxOutstandingAcks &lt;= f.batchSeq</span>
+<span id="L335" class="l">        // TODO: wait for and process ack, and store latest ack.Sequence and ack.Messages</span>
+<span id="L336" class="l">        //  if waited for ack, repeat until we don&#x27;t need to wait anymore.</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">        // Break from loop if there&#x27;s no more acknowledgements to receive/process.</span>
+<span id="L339" class="l">        return FastPubAck{BatchSequence: f.batchSeq, AckSequence: ack.Sequence}, nil</span>
+<span id="L340" class="l">    }</span>
+<span id="L341" class="l">}</span>
+<span id="L342" class="l"> </span>
+<span id="L343" class="l">func (f *FastPublisher) CommitMsg(m *nats.Msg) (*PubAck, error) {</span>
+<span id="L344" class="l">    // Generate fast batch reply subject, and publish message to commit (either through final message or EOB).</span>
+<span id="L345" class="l">    f.batchSeq++</span>
+<span id="L346" class="l">    m.Reply = &quot;&lt;prefix&gt;.&lt;uuid&gt;.&lt;initial flow&gt;.&lt;gap mode&gt;.&lt;batch seq&gt;.&lt;operation&gt;.$FI&quot;</span>
+<span id="L347" class="l">    if err := f.js.Conn().PublishMsg(m); err != nil {</span>
+<span id="L348" class="l">        return nil, err</span>
+<span id="L349" class="l">    }</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">    // If this batch is new and immediately commits, we can expect a publish acknowledgement immediately.</span>
+<span id="L352" class="l">    if f.batchSeq == 1 {</span>
+<span id="L353" class="l">        // TODO: parse publish acknowledgement.</span>
+<span id="L354" class="l">        return pubAck, nil</span>
+<span id="L355" class="l">    }</span>
+<span id="L356" class="l"> </span>
+<span id="L357" class="l">    // Wait for all remaining acknowledgements until we receive the final publish acknowledgement.</span>
+<span id="L358" class="l">    for {</span>
+<span id="L359" class="l">        // If a flow acknowledgement is received, we can just skip over it, and continue waiting for the final pub ack.</span>
+<span id="L360" class="l">        // If a publish acknowledgement is received, return it.</span>
+<span id="L361" class="l">        // TODO: parse and differentiate between flow and publish acknowledgements.</span>
+<span id="L362" class="l">        return pubAck, nil</span>
+<span id="L363" class="l">    }</span>
+<span id="L364" class="l">}</span>
+<span id="L365" class="l">```</span>
+<span id="L366" class="l"> </span>
+<span id="L367" class="l">### Server Errors</span>
+<span id="L368" class="l"> </span>
+<span id="L369" class="l">The server will respond with the following errors if using fast batch fails:</span>
+<span id="L370" class="l"> </span>
+<span id="L371" class="l">| ErrCode | Code | Description                                         |</span>
+<span id="L372" class="l">|---------|------|-----------------------------------------------------|</span>
+<span id="L373" class="l">| 10205   | 400  | Batch publish not enabled on stream                 |</span>
+<span id="L374" class="l">| 10206   | 400  | Batch publish invalid pattern used                  |</span>
+<span id="L375" class="l">| 10207   | 400  | Batch publish ID is invalid (exceeds 64 characters) |</span>
+<span id="L376" class="l">| 10208   | 400  | Batch publish ID is unknown                         |</span>
+<span id="L377" class="l"> </span>
+<span id="L378" class="l">The server will always send a `BatchFlowErr` containing an error if a message failed an expected header check, like `ExpectedLastSeq`.</span>
+<span id="L379" class="l"> </span>
+<span id="L380" class="l">There&#x27;s one exception: a batch with only one message that immediately commits. That will return a `PubAck` like you would receive if you had used `js.Publish` or `js.PublishAsync` instead. </span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l">```go</span>
+<span id="L383" class="l">// BatchFlowErr is used for reporting errors when fast batch publishing into a stream.</span>
+<span id="L384" class="l">// This message is purely informational and could technically be lost without the client receiving it.</span>
+<span id="L385" class="l">type BatchFlowErr struct {</span>
+<span id="L386" class="l">	// Type: &quot;err&quot;</span>
+<span id="L387" class="l">	Type string `json:&quot;type&quot;`</span>
+<span id="L388" class="l">	// Sequence is the sequence of the message that triggered the error.</span>
+<span id="L389" class="l">	// There are no (relative) guarantees whatsoever about whether the messages up to this sequence were persisted.</span>
+<span id="L390" class="l">	// Such guarantees require the use of &quot;gap: fail&quot; and listening for BatchFlowAck and PubAck.</span>
+<span id="L391" class="l">	Sequence uint64 `json:&quot;seq&quot;`</span>
+<span id="L392" class="l">	// Error is used to return the error for the Sequence.</span>
+<span id="L393" class="l">	Error *ApiError `json:&quot;error&quot;`</span>
+<span id="L394" class="l">}</span>
+<span id="L395" class="l">```</span>
+<span id="L396" class="l"> </span>
+<span id="L397" class="l">Example: `{&quot;type&quot;:&quot;err&quot;,&quot;seq&quot;:10,&quot;error&quot;:{&quot;code&quot;:400,&quot;err_code&quot;:10071,&quot;description&quot;:&quot;wrong last sequence: 1&quot;}}`.</span>
+<span id="L398" class="l"> </span>
+<span id="L399" class="l">The `BatchFlowErr` is sent as soon as the server receives and detects the error. This is mostly informational when using `gap: ok`, but may inform the client that the batch will fail when using `gap: fail`. The client can optimize to not allow sending more messages in this case, instead waiting for the final `PubAck`.</span>
+<span id="L400" class="l"> </span>
+<span id="L401" class="l">It&#x27;s a conscious decision to not use the `Error` field in the `PubAck` for this purpose.</span>
+<span id="L402" class="l"> </span>
+<span id="L403" class="l">- Having a separate `BatchFlowErr` makes the error handling consistent, regardless of the gap mode.</span>
+<span id="L404" class="l">- Having a separate `BatchFlowErr` makes it more responsive in the client, since the error can be surfaced immediately.</span>
+<span id="L405" class="l">- When using `gap: fail`, the client can optimize to not send more messages in this case, instead waiting for the final `PubAck`.</span>
+<span id="L406" class="l">- But most importantly: the `PubAck` contains either an error or the persisted information, but not both! Returning an error in the `PubAck` would mean the client wouldn&#x27;t know which batch sequence triggered the error, nor which messages in the batch were persisted, etc.</span>
+<span id="L407" class="l">- Having access to both the `BatchFlowErr` and `PubAck` gives the client (and therefore the user) the most context possible. Which messages were persisted, which were not, what the error was, and at what batch sequence.</span>
+<span id="L408" class="l"> </span>
+<span id="L409" class="l">### Server Behavior Design</span>
+<span id="L410" class="l"> </span>
+<span id="L411" class="l">* The server will limit the `uuid` to 64 characters and respond with an error Pub Ack if it&#x27;s too long.</span>
+<span id="L412" class="l">* Server will reject messages for which the batch is unknown with an error Pub Ack.</span>
+<span id="L413" class="l">* Server will reject values for `gap` that is not `ok` or `fail`.</span>
+<span id="L414" class="l">* If messages in a batch are received and any gap is detected an ack will be sent back indicating the gap and optionally abandon the batch based on the gap configuration.</span>
+<span id="L415" class="l">* Check properties like `ExpectedLastSeq` are handled as normal to be fully compatible with `Publish` and `PublishAsync`. Fast batch publishing changes the API through flow control, but per-message content can remain the same. This allows to swap between publish implementations as needed.</span>
+<span id="L416" class="l">* Abandon, without error reply, anywhere a batch that has not had messages for 10 seconds.</span>
+<span id="L417" class="l">* Send a pub ack on the final message that includes a new property `Batch:ID` and `Count:10`. The sequence in the ack would be the final message sequence, previous messages in the batch would be for earlier sequences.</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l">The server will operate under limits to safeguard itself:</span>
+<span id="L420" class="l"> </span>
+<span id="L421" class="l">* Each stream can only have 1,000 batches in flight at any time</span>
+<span id="L422" class="l">* Each server can only have 50,000 batches in flight at any time</span>
+<span id="L423" class="l">* A batch that has not had traffic for 10 seconds since the last message will be abandoned</span>
+<span id="L424" class="l">* There will be no maximum size for fast ingest batches</span>
+<span id="L425" class="l">* Streams with `PersistMode: async` set are compatible with fast ingest</span>
+<span id="L426" class="l"> </span>
+<span id="L427" class="l">## Publish Acknowledgements</span>
+<span id="L428" class="l"> </span>
+<span id="L429" class="l">When the server sends a Pub Ack at the end of a batch the `PubAck` will set these 2 new fields</span>
+<span id="L430" class="l"> </span>
+<span id="L431" class="l">```go</span>
+<span id="L432" class="l">type PubAck struct {</span>
+<span id="L433" class="l">	// ...</span>
+<span id="L434" class="l">	BatchId    string `json:&quot;batch,omitempty&quot;`</span>
+<span id="L435" class="l">	BatchSize  int    `json:&quot;count,omitempty&quot;`</span>
+<span id="L436" class="l">}</span>
+<span id="L437" class="l">```</span>
+<span id="L438" class="l"> </span>
+<span id="L439" class="l">## Stream Configuration</span>
+<span id="L440" class="l"> </span>
+<span id="L441" class="l">Streams get new properties that enable this behavior</span>
+<span id="L442" class="l"> </span>
+<span id="L443" class="l">```go</span>
+<span id="L444" class="l">type StreamConfig struct {</span>
+<span id="L445" class="l">	// ...</span>
+<span id="L446" class="l">	AllowAtomicPublish bool `json:&quot;allow_atomic,omitempty&quot;`</span>
+<span id="L447" class="l">	AllowBatchPublish bool `json:&quot;allow_batched,omitempty&quot;`</span>
+<span id="L448" class="l">}</span>
+<span id="L449" class="l">```</span>
+<span id="L450" class="l"> </span>
+<span id="L451" class="l">These settings can be disabled and enabled using configuration updates. Both can be active at the same time, or just one at a time.</span>
+<span id="L452" class="l"> </span>
+<span id="L453" class="l">Setting `AllowAtomicPublish` and `PersistMode: async` must error, but this is allowed for `AllowBatchPublish`</span>
+<span id="L454" class="l"> </span>
+<span id="L455" class="l">Setting `AllowAtomicPublish` to true should set the API level to 2, setting `AllowBatchPublish` to true should set the API level to 3.</span>
+<span id="L456" class="l"> </span>
+<span id="L457" class="l">## Mirrors and Sources</span>
+<span id="L458" class="l"> </span>
+<span id="L459" class="l">Mirrors can&#x27;t enable these settings, and will ignore the various headers like `ExpectedLastSeq` and the batching headers.</span>
+<span id="L460" class="l"> </span>
+<span id="L461" class="l">Streams with Sources can enable these settings, but sources will ignore the batching headers when sourced into the stream similar to how mirrors work.</span>
+<span id="L462" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/adr/ADR-5.md.html">← ADR-5.md</a> · <a href="../../raw/adr/ADR-51.md.html">ADR-51.md →</a></div></footer></article></main>
+  
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

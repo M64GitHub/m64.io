@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docs.nats.io — retention-policies.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="stylesheet" href="../../../../assets/theme.css">
+<link rel="stylesheet" href="../../../../assets/types.css">
+<script>window.ROOT="../../../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../../../index.html" class="">Home</a><a href="../../../../graph.html" class="">Graph</a><a href="../../../../cheatsheets.html" class="">Cheat sheets</a><a href="../../../../browse.html" class="">Browse</a><a href="../../../../inbox/question-bank.html" class="">Questions</a><a href="../../../../inbox/adr-toc.html" class="">ADRs</a><a href="../../../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../../../inbox/server-issues.html" class="">Server issues</a><a href="../../../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../../../sources.html" class="on">Sources</a><a href="../../../../health.html" class="">Health</a><a href="../../../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../../../graph.html">Link graph</a></li><li><a href="../../../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../../../browse.html">Browse by facet</a></li><li><a href="../../../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../../../sources.html">Raw sources</a></li><li><a href="../../../../wanted.html">Wanted pages</a></li><li><a href="../../../../health.html">Wiki health</a></li><li><a href="../../../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../../../index.html">Home</a> › <a href="../../../../sources.html">Sources</a> › nats-docs</div>
+<h1>docs.nats.io — retention-policies.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../../../sources.html#nats-docs">nats-docs</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://docs.nats.io">https://docs.nats.io</a> — paths taken from the site's <code>llms.txt</code>, fetched by <code>tools/fetch-docs.py</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-docs/learn/jetstream/retention-policies.md</code> · 1736 lines · 40 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../../../raw/nats-docs/learn/jetstream/retention-policies.md" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></div></div><div class="pn"><a href="../../../../raw/nats-docs/learn/jetstream/reading-back.md.html">← reading-back.md</a> · <a href="../../../../raw/nats-docs/learn/jetstream/shaping-the-stream.md.html">shaping-the-stream.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://docs.nats.io/learn/jetstream/retention-policies.md · fetched 2026-08-31 · section: retention-policies --&gt;</span>
+<span id="L2" class="l"># Retention policies</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">The previous page shaped `ORDERS` with limits: how many messages it keeps, for how long, in how many bytes. Those limits decide when a message leaves the stream because the stream ran out of room.</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">There&#x27;s a second, separate question: should a message ever leave the stream because a consumer finished with it? Limits don&#x27;t ask that. A message capped only by age or size stays until its limit hits, read or unread, acked or not.</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">Some workloads need the other behavior. A job queue wants a message gone once a worker completes it. A fan-out wants a message gone once every interested consumer has seen it. Limits can&#x27;t express either.</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">The **retention policy** is the field that does. It decides what makes a message ready to leave the stream. You picked one already, by accepting a default, when you created `ORDERS`.</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">## The three policies</span>
+<span id="L13" class="l"> </span>
+<span id="L14" class="l">A stream has exactly one retention policy, fixed by the `retention` field. There are three values.</span>
+<span id="L15" class="l"> </span>
+<span id="L16" class="l">**Limits** is the default, and the one `ORDERS` has. Messages stay until a limit is reached: `MaxMsgs`, `MaxBytes`, or `MaxAge`, whichever comes first. Consumers reading and acking messages has no effect on what the stream keeps. The stream is a log, and the log holds everything inside its limits.</span>
+<span id="L17" class="l"> </span>
+<span id="L18" class="l">**Message flow — Limits retention — acks keep the message (animated):** Limits retention. A consumer reads and acks every order in the ORDERS stream, and each one stays in place — acking never removes a message here. Only a limit (MaxAge, MaxBytes, or MaxMsgs) removes one. The read cursor sweeps the stored messages while all of them remain.</span>
+<span id="L19" class="l"> </span>
+<span id="L20" class="l">**Interest** keeps a message only while some consumer still wants it. A message is removed once *every* consumer whose filter covers it has acked it. If no consumer is interested in a subject, a message on that subject is removed right away.</span>
+<span id="L21" class="l"> </span>
+<span id="L22" class="l">**Message flow — Interest retention — all-ack and no-interest (animated):** Interest retention, both behaviors. When an order is published on orders.shipped, a subject both consumers subscribe to, it is stored and removed once every consumer has acked it. When an order is published on orders.archived, a subject no consumer subscribes to, it is dropped the instant it is published — no interest, nothing stored.</span>
+<span id="L23" class="l"> </span>
+<span id="L24" class="l">**WorkQueue** keeps a message only until *one* consumer acks it. The first ack removes the message for everyone. Each message is delivered once and then removed.</span>
+<span id="L25" class="l"> </span>
+<span id="L26" class="l">**Message flow — WorkQueue retention — first ack drains it (animated):** WorkQueue retention. Each order is delivered to exactly one worker; the first ack removes it for everyone, so the stream drains back to empty. Workers take turns: an order is published, one worker pulls and acks it, and the message is gone.</span>
+<span id="L27" class="l"> </span>
+<span id="L28" class="l">The three policies differ in who decides a message is finished. Under Limits, the limits decide. Under Interest, every consumer must ack before the message is removed. Under WorkQueue, the first consumer to ack removes it.</span>
+<span id="L29" class="l"> </span>
+<span id="L30" class="l">Limits still apply under all three. Retention removes a message when consumers are done with it; the stream&#x27;s limits remove it when the stream grows too old or too large. On an Interest or WorkQueue stream the limits are the backstop that keeps it bounded when consumers fall behind — retention doesn&#x27;t replace limits, it adds a second way a message can leave.</span>
+<span id="L31" class="l"> </span>
+<span id="L32" class="l">## Pick the policy from the kind of work</span>
+<span id="L33" class="l"> </span>
+<span id="L34" class="l">Choose a retention policy from the kind of work the stream does. The policy follows from the work, not the other way around.</span>
+<span id="L35" class="l"> </span>
+<span id="L36" class="l">**An audit log or event history → Limits.** You want to keep every message for a window of time no matter who read it, and you want to replay from any point. `ORDERS` is this kind of stream. Late consumers, re-reads, and the replay on the reading-back page all depend on messages staying after they&#x27;re consumed. Limits is the only policy that allows that, which is why it&#x27;s the default and why `ORDERS` keeps it.</span>
+<span id="L37" class="l"> </span>
+<span id="L38" class="l">**A fan-out where every consumer must process each message → Interest.** Several independent services each need to handle every order once, and once they all have, the message is no longer needed. The stream stays small because it drops a message once the last interested consumer is done. You get fan-out delivery without an ever-growing log.</span>
+<span id="L39" class="l"> </span>
+<span id="L40" class="l">**A job queue where each message is work for one worker → WorkQueue.** This is the home for Acme&#x27;s shipping workers from [Scaling a consumer](/learn/jetstream/worker-pool.md). Each message is an order to ship. One shipping worker claims it, ships it, and acks, and then the task is removed so no one ships the same order twice. The queue drains as the workers keep up, where a log would only grow.</span>
+<span id="L41" class="l"> </span>
+<span id="L42" class="l">## A WorkQueue stream for the shipping work</span>
+<span id="L43" class="l"> </span>
+<span id="L44" class="l">`ORDERS` stays Limits; don&#x27;t change it — it&#x27;s the record of what customers did. But Acme also has *work* to do on each order: when one is paid, a [shipping worker](/learn/jetstream/worker-pool.md) has to ship it, exactly once. Ship the same order twice and a second parcel goes out the door. That&#x27;s a job queue, not a log — each task goes to one worker and is gone once it&#x27;s done. Give it its own `FULFILLMENT` stream with WorkQueue retention:</span>
+<span id="L45" class="l"> </span>
+<span id="L46" class="l">#### CLI</span>
+<span id="L47" class="l"> </span>
+<span id="L48" class="l">```</span>
+<span id="L49" class="l">#!/bin/bash</span>
+<span id="L50" class="l"> </span>
+<span id="L51" class="l"> </span>
+<span id="L52" class="l"> </span>
+<span id="L53" class="l"># A WorkQueue stream for the shipping work. Leave ORDERS alone — that&#x27;s</span>
+<span id="L54" class="l"> </span>
+<span id="L55" class="l"># the record. FULFILLMENT is a separate queue of paid orders waiting to</span>
+<span id="L56" class="l"> </span>
+<span id="L57" class="l"># ship, worked by the shipping workers from the Scaling a consumer page.</span>
+<span id="L58" class="l"> </span>
+<span id="L59" class="l"> </span>
+<span id="L60" class="l"> </span>
+<span id="L61" class="l"># --retention work sets the WorkQueue policy. natscli accepts &quot;work&quot; and</span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l"># &quot;workq&quot; as aliases. Under WorkQueue a message is removed the moment the</span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l"># first consumer acks it, so the queue drains as the workers keep up.</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l">nats stream add FULFILLMENT \</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l">  --subjects &quot;fulfill.&gt;&quot; \</span>
+<span id="L70" class="l"> </span>
+<span id="L71" class="l">  --retention work \</span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">  --defaults</span>
+<span id="L74" class="l"> </span>
+<span id="L75" class="l"> </span>
+<span id="L76" class="l"> </span>
+<span id="L77" class="l"># Inspect it — the Options block now reads Retention: WorkQueue, where</span>
+<span id="L78" class="l"> </span>
+<span id="L79" class="l"># ORDERS reads Retention: Limits.</span>
+<span id="L80" class="l"> </span>
+<span id="L81" class="l">nats stream info FULFILLMENT</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l"> </span>
+<span id="L84" class="l"> </span>
+<span id="L85" class="l"># Enqueue one order to ship, then have a shipping worker pull and ack it.</span>
+<span id="L86" class="l"> </span>
+<span id="L87" class="l"># After the ack the task is gone — the message count drops back to zero,</span>
+<span id="L88" class="l"> </span>
+<span id="L89" class="l"># which no limit on a Limits stream like ORDERS would ever do.</span>
+<span id="L90" class="l"> </span>
+<span id="L91" class="l">nats pub fulfill.us &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L92" class="l"> </span>
+<span id="L93" class="l">nats consumer add FULFILLMENT shippers --pull --ack explicit --defaults</span>
+<span id="L94" class="l"> </span>
+<span id="L95" class="l">nats consumer next FULFILLMENT shippers --count 1 --ack</span>
+<span id="L96" class="l"> </span>
+<span id="L97" class="l"> </span>
+<span id="L98" class="l"> </span>
+<span id="L99" class="l"># Confirm the ack removed the task: Messages is back to 0.</span>
+<span id="L100" class="l"> </span>
+<span id="L101" class="l">nats stream info FULFILLMENT</span>
+<span id="L102" class="l">```</span>
+<span id="L103" class="l"> </span>
+<span id="L104" class="l">#### JavaScript/TypeScript</span>
+<span id="L105" class="l"> </span>
+<span id="L106" class="l">```</span>
+<span id="L107" class="l">// FULFILLMENT is the queue of paid orders waiting to ship. WorkQueue retention</span>
+<span id="L108" class="l"> </span>
+<span id="L109" class="l">// means the stream holds each task only until a worker acks it, then drops it.</span>
+<span id="L110" class="l"> </span>
+<span id="L111" class="l">// That is the opposite of a Limits stream like ORDERS, which keeps the record.</span>
+<span id="L112" class="l"> </span>
+<span id="L113" class="l">const info = await jsm.streams.add({</span>
+<span id="L114" class="l"> </span>
+<span id="L115" class="l">  name: &quot;FULFILLMENT&quot;,</span>
+<span id="L116" class="l"> </span>
+<span id="L117" class="l">  subjects: [&quot;fulfill.&gt;&quot;],</span>
+<span id="L118" class="l"> </span>
+<span id="L119" class="l">  retention: RetentionPolicy.Workqueue,</span>
+<span id="L120" class="l"> </span>
+<span id="L121" class="l">});</span>
+<span id="L122" class="l"> </span>
+<span id="L123" class="l">console.log(`Created stream FULFILLMENT, retention: ${info.config.retention}`);</span>
+<span id="L124" class="l"> </span>
+<span id="L125" class="l"> </span>
+<span id="L126" class="l"> </span>
+<span id="L127" class="l">// Queue one order to ship in the US region.</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l">const order = `{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;}`;</span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l">const pa = await js.publish(&quot;fulfill.us&quot;, order);</span>
+<span id="L132" class="l"> </span>
+<span id="L133" class="l">console.log(`Queued ${pa.stream} seq ${pa.seq}`);</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l"> </span>
+<span id="L136" class="l"> </span>
+<span id="L137" class="l">// A durable pull consumer drains the queue. WorkQueue streams require explicit</span>
+<span id="L138" class="l"> </span>
+<span id="L139" class="l">// ack, so the worker acks each task it finishes.</span>
+<span id="L140" class="l"> </span>
+<span id="L141" class="l">await jsm.consumers.add(&quot;FULFILLMENT&quot;, {</span>
+<span id="L142" class="l"> </span>
+<span id="L143" class="l">  durable_name: &quot;shippers&quot;,</span>
+<span id="L144" class="l"> </span>
+<span id="L145" class="l">  ack_policy: AckPolicy.Explicit,</span>
+<span id="L146" class="l"> </span>
+<span id="L147" class="l">});</span>
+<span id="L148" class="l"> </span>
+<span id="L149" class="l"> </span>
+<span id="L150" class="l"> </span>
+<span id="L151" class="l">// Pull the order, ship it, and ack. ackAck waits for the server to confirm the</span>
+<span id="L152" class="l"> </span>
+<span id="L153" class="l">// ack landed, so the next read sees the result.</span>
+<span id="L154" class="l"> </span>
+<span id="L155" class="l">const c = await js.consumers.get(&quot;FULFILLMENT&quot;, &quot;shippers&quot;);</span>
+<span id="L156" class="l"> </span>
+<span id="L157" class="l">const msgs = await c.fetch({ max_messages: 1, expires: 5000 });</span>
+<span id="L158" class="l"> </span>
+<span id="L159" class="l">for await (const m of msgs) {</span>
+<span id="L160" class="l"> </span>
+<span id="L161" class="l">  console.log(`Shipping ${m.subject}: ${m.string()}`);</span>
+<span id="L162" class="l"> </span>
+<span id="L163" class="l">  await m.ackAck();</span>
+<span id="L164" class="l"> </span>
+<span id="L165" class="l">}</span>
+<span id="L166" class="l"> </span>
+<span id="L167" class="l"> </span>
+<span id="L168" class="l"> </span>
+<span id="L169" class="l">// The ack removed the task, so the stream is now empty. A Limits stream would</span>
+<span id="L170" class="l"> </span>
+<span id="L171" class="l">// still hold the message; a WorkQueue stream drains to zero.</span>
+<span id="L172" class="l"> </span>
+<span id="L173" class="l">const after = await jsm.streams.info(&quot;FULFILLMENT&quot;);</span>
+<span id="L174" class="l"> </span>
+<span id="L175" class="l">console.log(`Messages in FULFILLMENT after ack: ${after.state.messages}`);</span>
+<span id="L176" class="l">```</span>
+<span id="L177" class="l"> </span>
+<span id="L178" class="l">#### Go</span>
+<span id="L179" class="l"> </span>
+<span id="L180" class="l">```</span>
+<span id="L181" class="l">// FULFILLMENT is the queue of paid orders awaiting shipment. With WorkQueue</span>
+<span id="L182" class="l"> </span>
+<span id="L183" class="l">// retention the server keeps each message only until a consumer acks it,</span>
+<span id="L184" class="l"> </span>
+<span id="L185" class="l">// then deletes it from the stream.</span>
+<span id="L186" class="l"> </span>
+<span id="L187" class="l">stream, err := js.CreateStream(ctx, jetstream.StreamConfig{</span>
+<span id="L188" class="l"> </span>
+<span id="L189" class="l">	Name:      &quot;FULFILLMENT&quot;,</span>
+<span id="L190" class="l"> </span>
+<span id="L191" class="l">	Subjects:  []string{&quot;fulfill.&gt;&quot;},</span>
+<span id="L192" class="l"> </span>
+<span id="L193" class="l">	Retention: jetstream.WorkQueuePolicy,</span>
+<span id="L194" class="l"> </span>
+<span id="L195" class="l">})</span>
+<span id="L196" class="l"> </span>
+<span id="L197" class="l">if err != nil {</span>
+<span id="L198" class="l"> </span>
+<span id="L199" class="l">	panic(err)</span>
+<span id="L200" class="l"> </span>
+<span id="L201" class="l">}</span>
+<span id="L202" class="l"> </span>
+<span id="L203" class="l">fmt.Printf(&quot;FULFILLMENT retention: %s\n&quot;, stream.CachedInfo().Config.Retention)</span>
+<span id="L204" class="l"> </span>
+<span id="L205" class="l"> </span>
+<span id="L206" class="l"> </span>
+<span id="L207" class="l">// Queue one order to ship.</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l">if _, err := js.Publish(ctx, &quot;fulfill.us&quot;, []byte(`{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;}`)); err != nil {</span>
+<span id="L210" class="l"> </span>
+<span id="L211" class="l">	panic(err)</span>
+<span id="L212" class="l"> </span>
+<span id="L213" class="l">}</span>
+<span id="L214" class="l"> </span>
+<span id="L215" class="l"> </span>
+<span id="L216" class="l"> </span>
+<span id="L217" class="l">// A shipping worker binds to a durable pull consumer with explicit ack.</span>
+<span id="L218" class="l"> </span>
+<span id="L219" class="l">cons, err := stream.CreateOrUpdateConsumer(ctx, jetstream.ConsumerConfig{</span>
+<span id="L220" class="l"> </span>
+<span id="L221" class="l">	Durable:   &quot;shippers&quot;,</span>
+<span id="L222" class="l"> </span>
+<span id="L223" class="l">	AckPolicy: jetstream.AckExplicitPolicy,</span>
+<span id="L224" class="l"> </span>
+<span id="L225" class="l">})</span>
+<span id="L226" class="l"> </span>
+<span id="L227" class="l">if err != nil {</span>
+<span id="L228" class="l"> </span>
+<span id="L229" class="l">	panic(err)</span>
+<span id="L230" class="l"> </span>
+<span id="L231" class="l">}</span>
+<span id="L232" class="l"> </span>
+<span id="L233" class="l"> </span>
+<span id="L234" class="l"> </span>
+<span id="L235" class="l">// Fetch the order and ack it once the worker has shipped it.</span>
+<span id="L236" class="l"> </span>
+<span id="L237" class="l">msgs, err := cons.Fetch(1)</span>
+<span id="L238" class="l"> </span>
+<span id="L239" class="l">if err != nil {</span>
+<span id="L240" class="l"> </span>
+<span id="L241" class="l">	panic(err)</span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l">}</span>
+<span id="L244" class="l"> </span>
+<span id="L245" class="l">for msg := range msgs.Messages() {</span>
+<span id="L246" class="l"> </span>
+<span id="L247" class="l">	fmt.Printf(&quot;shipping order: %s\n&quot;, string(msg.Data()))</span>
+<span id="L248" class="l"> </span>
+<span id="L249" class="l">	if err := msg.Ack(); err != nil {</span>
+<span id="L250" class="l"> </span>
+<span id="L251" class="l">		panic(err)</span>
+<span id="L252" class="l"> </span>
+<span id="L253" class="l">	}</span>
+<span id="L254" class="l"> </span>
+<span id="L255" class="l">}</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l">if msgs.Error() != nil {</span>
+<span id="L258" class="l"> </span>
+<span id="L259" class="l">	panic(msgs.Error())</span>
+<span id="L260" class="l"> </span>
+<span id="L261" class="l">}</span>
+<span id="L262" class="l"> </span>
+<span id="L263" class="l"> </span>
+<span id="L264" class="l"> </span>
+<span id="L265" class="l">// The ack removed the task from the queue, so the stream is now empty. A</span>
+<span id="L266" class="l"> </span>
+<span id="L267" class="l">// Limits stream like ORDERS would still hold the message; a WorkQueue</span>
+<span id="L268" class="l"> </span>
+<span id="L269" class="l">// stream drains to zero as workers finish.</span>
+<span id="L270" class="l"> </span>
+<span id="L271" class="l">info, err := stream.Info(ctx)</span>
+<span id="L272" class="l"> </span>
+<span id="L273" class="l">if err != nil {</span>
+<span id="L274" class="l"> </span>
+<span id="L275" class="l">	panic(err)</span>
+<span id="L276" class="l"> </span>
+<span id="L277" class="l">}</span>
+<span id="L278" class="l"> </span>
+<span id="L279" class="l">fmt.Printf(&quot;messages left in FULFILLMENT: %d\n&quot;, info.State.Msgs)</span>
+<span id="L280" class="l">```</span>
+<span id="L281" class="l"> </span>
+<span id="L282" class="l">#### Python</span>
+<span id="L283" class="l"> </span>
+<span id="L284" class="l">```</span>
+<span id="L285" class="l"># FULFILLMENT is the queue of paid orders awaiting shipment. WorkQueue</span>
+<span id="L286" class="l"> </span>
+<span id="L287" class="l"># retention delivers each order to a single worker; the first ack removes</span>
+<span id="L288" class="l"> </span>
+<span id="L289" class="l"># it for everyone, so the stream drains to empty.</span>
+<span id="L290" class="l"> </span>
+<span id="L291" class="l">info = await js.add_stream(</span>
+<span id="L292" class="l"> </span>
+<span id="L293" class="l">    StreamConfig(</span>
+<span id="L294" class="l"> </span>
+<span id="L295" class="l">        name=&quot;FULFILLMENT&quot;,</span>
+<span id="L296" class="l"> </span>
+<span id="L297" class="l">        subjects=[&quot;fulfill.&gt;&quot;],</span>
+<span id="L298" class="l"> </span>
+<span id="L299" class="l">        retention=RetentionPolicy.WORK_QUEUE,</span>
+<span id="L300" class="l"> </span>
+<span id="L301" class="l">    )</span>
+<span id="L302" class="l"> </span>
+<span id="L303" class="l">)</span>
+<span id="L304" class="l"> </span>
+<span id="L305" class="l">print(f&quot;FULFILLMENT retention is {info.config.retention}&quot;)</span>
+<span id="L306" class="l"> </span>
+<span id="L307" class="l"> </span>
+<span id="L308" class="l"> </span>
+<span id="L309" class="l"># A paid order arrives and needs shipping.</span>
+<span id="L310" class="l"> </span>
+<span id="L311" class="l">await js.publish(</span>
+<span id="L312" class="l"> </span>
+<span id="L313" class="l">    &quot;fulfill.us&quot;,</span>
+<span id="L314" class="l"> </span>
+<span id="L315" class="l">    json.dumps({&quot;order_id&quot;: &quot;ord_8w2k&quot;, &quot;customer&quot;: &quot;acme-co&quot;}).encode(),</span>
+<span id="L316" class="l"> </span>
+<span id="L317" class="l">)</span>
+<span id="L318" class="l"> </span>
+<span id="L319" class="l"> </span>
+<span id="L320" class="l"> </span>
+<span id="L321" class="l"># Shipping workers pull from a durable consumer with explicit ack.</span>
+<span id="L322" class="l"> </span>
+<span id="L323" class="l">await js.add_consumer(</span>
+<span id="L324" class="l"> </span>
+<span id="L325" class="l">    &quot;FULFILLMENT&quot;,</span>
+<span id="L326" class="l"> </span>
+<span id="L327" class="l">    ConsumerConfig(durable_name=&quot;shippers&quot;, ack_policy=AckPolicy.EXPLICIT),</span>
+<span id="L328" class="l"> </span>
+<span id="L329" class="l">)</span>
+<span id="L330" class="l"> </span>
+<span id="L331" class="l"> </span>
+<span id="L332" class="l"> </span>
+<span id="L333" class="l"># A worker takes one order and acks it once the order has shipped.</span>
+<span id="L334" class="l"> </span>
+<span id="L335" class="l">psub = await js.pull_subscribe_bind(&quot;shippers&quot;, stream=&quot;FULFILLMENT&quot;)</span>
+<span id="L336" class="l"> </span>
+<span id="L337" class="l">msgs = await psub.fetch(batch=1, timeout=5)</span>
+<span id="L338" class="l"> </span>
+<span id="L339" class="l">await msgs[0].ack()</span>
+<span id="L340" class="l"> </span>
+<span id="L341" class="l">print(f&quot;shipped {msgs[0].data.decode()}&quot;)</span>
+<span id="L342" class="l"> </span>
+<span id="L343" class="l"> </span>
+<span id="L344" class="l"> </span>
+<span id="L345" class="l"># The ack removed the task, so the WorkQueue stream is now empty. A Limits</span>
+<span id="L346" class="l"> </span>
+<span id="L347" class="l"># stream like ORDERS would still hold the message after the ack.</span>
+<span id="L348" class="l"> </span>
+<span id="L349" class="l">info = await js.stream_info(&quot;FULFILLMENT&quot;)</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">print(f&quot;messages left in FULFILLMENT: {info.state.messages}&quot;)</span>
+<span id="L352" class="l">```</span>
+<span id="L353" class="l"> </span>
+<span id="L354" class="l">#### Java</span>
+<span id="L355" class="l"> </span>
+<span id="L356" class="l">```</span>
+<span id="L357" class="l">// FULFILLMENT is the queue of paid orders awaiting shipment, separate</span>
+<span id="L358" class="l"> </span>
+<span id="L359" class="l">// from the ORDERS record stream. WorkQueue retention delivers each task</span>
+<span id="L360" class="l"> </span>
+<span id="L361" class="l">// to one consumer; the first ack removes it, so the stream drains to empty.</span>
+<span id="L362" class="l"> </span>
+<span id="L363" class="l">StreamInfo info = jsm.addStream(StreamConfiguration.builder()</span>
+<span id="L364" class="l"> </span>
+<span id="L365" class="l">    .name(&quot;FULFILLMENT&quot;)</span>
+<span id="L366" class="l"> </span>
+<span id="L367" class="l">    .subjects(&quot;fulfill.&gt;&quot;)</span>
+<span id="L368" class="l"> </span>
+<span id="L369" class="l">    .retentionPolicy(RetentionPolicy.WorkQueue)</span>
+<span id="L370" class="l"> </span>
+<span id="L371" class="l">    .build());</span>
+<span id="L372" class="l"> </span>
+<span id="L373" class="l"> </span>
+<span id="L374" class="l"> </span>
+<span id="L375" class="l">System.out.println(&quot;Retention policy: &quot; + info.getConfiguration().getRetentionPolicy());</span>
+<span id="L376" class="l"> </span>
+<span id="L377" class="l"> </span>
+<span id="L378" class="l"> </span>
+<span id="L379" class="l">// Queue one paid order for a US shipper to pick up.</span>
+<span id="L380" class="l"> </span>
+<span id="L381" class="l">js.publish(&quot;fulfill.us&quot;,</span>
+<span id="L382" class="l"> </span>
+<span id="L383" class="l">    &quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;}&quot;.getBytes(StandardCharsets.UTF_8));</span>
+<span id="L384" class="l"> </span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l"> </span>
+<span id="L387" class="l">// A durable pull consumer with explicit ack: a shipping worker must</span>
+<span id="L388" class="l"> </span>
+<span id="L389" class="l">// acknowledge each task once it has handled the order.</span>
+<span id="L390" class="l"> </span>
+<span id="L391" class="l">jsm.addOrUpdateConsumer(&quot;FULFILLMENT&quot;, ConsumerConfiguration.builder()</span>
+<span id="L392" class="l"> </span>
+<span id="L393" class="l">    .durable(&quot;shippers&quot;)</span>
+<span id="L394" class="l"> </span>
+<span id="L395" class="l">    .ackPolicy(AckPolicy.Explicit)</span>
+<span id="L396" class="l"> </span>
+<span id="L397" class="l">    .build());</span>
+<span id="L398" class="l"> </span>
+<span id="L399" class="l"> </span>
+<span id="L400" class="l"> </span>
+<span id="L401" class="l">// Fetch one task and ack it, as a shipping worker would.</span>
+<span id="L402" class="l"> </span>
+<span id="L403" class="l">ConsumerContext shippers = js.getConsumerContext(&quot;FULFILLMENT&quot;, &quot;shippers&quot;);</span>
+<span id="L404" class="l"> </span>
+<span id="L405" class="l">try (FetchConsumer fc = shippers.fetchMessages(1)) {</span>
+<span id="L406" class="l"> </span>
+<span id="L407" class="l">    Message task = fc.nextMessage();</span>
+<span id="L408" class="l"> </span>
+<span id="L409" class="l">    System.out.println(&quot;Shipping: &quot; + new String(task.getData(), StandardCharsets.UTF_8));</span>
+<span id="L410" class="l"> </span>
+<span id="L411" class="l">    task.ack();</span>
+<span id="L412" class="l"> </span>
+<span id="L413" class="l">}</span>
+<span id="L414" class="l"> </span>
+<span id="L415" class="l"> </span>
+<span id="L416" class="l"> </span>
+<span id="L417" class="l">// The ack removed the task, so the WorkQueue stream is now empty.</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l">// A Limits stream like ORDERS would still hold the message.</span>
+<span id="L420" class="l"> </span>
+<span id="L421" class="l">long count = jsm.getStreamInfo(&quot;FULFILLMENT&quot;).getStreamState().getMsgCount();</span>
+<span id="L422" class="l"> </span>
+<span id="L423" class="l">System.out.println(&quot;Messages remaining in FULFILLMENT: &quot; + count);</span>
+<span id="L424" class="l">```</span>
+<span id="L425" class="l"> </span>
+<span id="L426" class="l">#### Rust</span>
+<span id="L427" class="l"> </span>
+<span id="L428" class="l">```</span>
+<span id="L429" class="l">// FULFILLMENT is the queue of paid orders waiting to ship, separate from the</span>
+<span id="L430" class="l"> </span>
+<span id="L431" class="l">// ORDERS record. WorkQueue retention means each message is delivered to one</span>
+<span id="L432" class="l"> </span>
+<span id="L433" class="l">// consumer, and the first ack removes it for everyone, draining the stream.</span>
+<span id="L434" class="l"> </span>
+<span id="L435" class="l">let mut stream = js</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">    .create_stream(Config {</span>
+<span id="L438" class="l"> </span>
+<span id="L439" class="l">        name: &quot;FULFILLMENT&quot;.to_string(),</span>
+<span id="L440" class="l"> </span>
+<span id="L441" class="l">        subjects: vec![&quot;fulfill.&gt;&quot;.to_string()],</span>
+<span id="L442" class="l"> </span>
+<span id="L443" class="l">        retention: RetentionPolicy::WorkQueue,</span>
+<span id="L444" class="l"> </span>
+<span id="L445" class="l">        ..Default::default()</span>
+<span id="L446" class="l"> </span>
+<span id="L447" class="l">    })</span>
+<span id="L448" class="l"> </span>
+<span id="L449" class="l">    .await?;</span>
+<span id="L450" class="l"> </span>
+<span id="L451" class="l">println!(&quot;retention is {:?}&quot;, stream.cached_info().config.retention);</span>
+<span id="L452" class="l"> </span>
+<span id="L453" class="l"> </span>
+<span id="L454" class="l"> </span>
+<span id="L455" class="l">// Queue one paid order for a shipper to pick up.</span>
+<span id="L456" class="l"> </span>
+<span id="L457" class="l">js.publish(</span>
+<span id="L458" class="l"> </span>
+<span id="L459" class="l">    &quot;fulfill.us&quot;,</span>
+<span id="L460" class="l"> </span>
+<span id="L461" class="l">    r#&quot;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;}&quot;#.into(),</span>
+<span id="L462" class="l"> </span>
+<span id="L463" class="l">)</span>
+<span id="L464" class="l"> </span>
+<span id="L465" class="l">.await?</span>
+<span id="L466" class="l"> </span>
+<span id="L467" class="l">.await?;</span>
+<span id="L468" class="l"> </span>
+<span id="L469" class="l"> </span>
+<span id="L470" class="l"> </span>
+<span id="L471" class="l">// Shipping workers drain the queue through a durable pull consumer that</span>
+<span id="L472" class="l"> </span>
+<span id="L473" class="l">// acknowledges each task explicitly.</span>
+<span id="L474" class="l"> </span>
+<span id="L475" class="l">let consumer = stream</span>
+<span id="L476" class="l"> </span>
+<span id="L477" class="l">    .create_consumer(pull::Config {</span>
+<span id="L478" class="l"> </span>
+<span id="L479" class="l">        durable_name: Some(&quot;shippers&quot;.to_string()),</span>
+<span id="L480" class="l"> </span>
+<span id="L481" class="l">        ack_policy: AckPolicy::Explicit,</span>
+<span id="L482" class="l"> </span>
+<span id="L483" class="l">        ..Default::default()</span>
+<span id="L484" class="l"> </span>
+<span id="L485" class="l">    })</span>
+<span id="L486" class="l"> </span>
+<span id="L487" class="l">    .await?;</span>
+<span id="L488" class="l"> </span>
+<span id="L489" class="l"> </span>
+<span id="L490" class="l"> </span>
+<span id="L491" class="l">// Take one task and ack it once the order is shipped.</span>
+<span id="L492" class="l"> </span>
+<span id="L493" class="l">let mut messages = consumer.fetch().max_messages(1).messages().await?;</span>
+<span id="L494" class="l"> </span>
+<span id="L495" class="l">while let Some(message) = messages.next().await {</span>
+<span id="L496" class="l"> </span>
+<span id="L497" class="l">    let message = message?;</span>
+<span id="L498" class="l"> </span>
+<span id="L499" class="l">    println!(&quot;shipping {}&quot;, std::str::from_utf8(&amp;message.payload)?);</span>
+<span id="L500" class="l"> </span>
+<span id="L501" class="l">    message.ack().await?;</span>
+<span id="L502" class="l"> </span>
+<span id="L503" class="l">}</span>
+<span id="L504" class="l"> </span>
+<span id="L505" class="l"> </span>
+<span id="L506" class="l"> </span>
+<span id="L507" class="l">// The ack removed the task from the WorkQueue stream, so the count is now 0.</span>
+<span id="L508" class="l"> </span>
+<span id="L509" class="l">// A Limits stream like ORDERS would still hold the message after ack.</span>
+<span id="L510" class="l"> </span>
+<span id="L511" class="l">let count = stream.info().await?.state.messages;</span>
+<span id="L512" class="l"> </span>
+<span id="L513" class="l">println!(&quot;messages left in FULFILLMENT: {count}&quot;);</span>
+<span id="L514" class="l">```</span>
+<span id="L515" class="l"> </span>
+<span id="L516" class="l">#### C#/.NET</span>
+<span id="L517" class="l"> </span>
+<span id="L518" class="l">```</span>
+<span id="L519" class="l">// FULFILLMENT is the queue of paid orders waiting to ship. WorkQueue</span>
+<span id="L520" class="l"> </span>
+<span id="L521" class="l">// retention means an order leaves the stream the moment a worker acks it.</span>
+<span id="L522" class="l"> </span>
+<span id="L523" class="l">var stream = await js.CreateStreamAsync(new StreamConfig(name: &quot;FULFILLMENT&quot;, subjects: [&quot;fulfill.&gt;&quot;])</span>
+<span id="L524" class="l"> </span>
+<span id="L525" class="l">{</span>
+<span id="L526" class="l"> </span>
+<span id="L527" class="l">    Retention = StreamConfigRetention.Workqueue,</span>
+<span id="L528" class="l"> </span>
+<span id="L529" class="l">});</span>
+<span id="L530" class="l"> </span>
+<span id="L531" class="l"> </span>
+<span id="L532" class="l"> </span>
+<span id="L533" class="l">output.WriteLine($&quot;FULFILLMENT retention is {stream.Info.Config.Retention}&quot;);</span>
+<span id="L534" class="l"> </span>
+<span id="L535" class="l"> </span>
+<span id="L536" class="l"> </span>
+<span id="L537" class="l">// One paid order waiting to ship to a US address</span>
+<span id="L538" class="l"> </span>
+<span id="L539" class="l">await js.PublishAsync&lt;Order&gt;(subject: &quot;fulfill.us&quot;, data: new Order(OrderId: &quot;ord_8w2k&quot;, Customer: &quot;acme-co&quot;));</span>
+<span id="L540" class="l"> </span>
+<span id="L541" class="l"> </span>
+<span id="L542" class="l"> </span>
+<span id="L543" class="l">// A durable pull consumer the shipping workers share</span>
+<span id="L544" class="l"> </span>
+<span id="L545" class="l">var consumer = await js.CreateOrUpdateConsumerAsync(&quot;FULFILLMENT&quot;, new ConsumerConfig(&quot;shippers&quot;)</span>
+<span id="L546" class="l"> </span>
+<span id="L547" class="l">{</span>
+<span id="L548" class="l"> </span>
+<span id="L549" class="l">    AckPolicy = ConsumerConfigAckPolicy.Explicit,</span>
+<span id="L550" class="l"> </span>
+<span id="L551" class="l">});</span>
+<span id="L552" class="l"> </span>
+<span id="L553" class="l"> </span>
+<span id="L554" class="l"> </span>
+<span id="L555" class="l">// Fetch the one order and ack it. DoubleAck waits for the server to confirm</span>
+<span id="L556" class="l"> </span>
+<span id="L557" class="l">// the ack, so the WorkQueue removal has happened before we read the count.</span>
+<span id="L558" class="l"> </span>
+<span id="L559" class="l">await foreach (var msg in consumer.FetchAsync&lt;Order&gt;(opts: new NatsJSFetchOpts { MaxMsgs = 1 }))</span>
+<span id="L560" class="l"> </span>
+<span id="L561" class="l">{</span>
+<span id="L562" class="l"> </span>
+<span id="L563" class="l">    output.WriteLine($&quot;shipping {msg.Data}&quot;);</span>
+<span id="L564" class="l"> </span>
+<span id="L565" class="l">    await msg.AckAsync(new AckOpts { DoubleAck = true });</span>
+<span id="L566" class="l"> </span>
+<span id="L567" class="l">}</span>
+<span id="L568" class="l"> </span>
+<span id="L569" class="l"> </span>
+<span id="L570" class="l"> </span>
+<span id="L571" class="l">// The ack removed the task, so a WorkQueue stream drains back to empty. A</span>
+<span id="L572" class="l"> </span>
+<span id="L573" class="l">// Limits stream like ORDERS would still be holding this order.</span>
+<span id="L574" class="l"> </span>
+<span id="L575" class="l">var info = await js.GetStreamAsync(&quot;FULFILLMENT&quot;);</span>
+<span id="L576" class="l"> </span>
+<span id="L577" class="l">output.WriteLine($&quot;Messages left in FULFILLMENT: {info.Info.State.Messages}&quot;);</span>
+<span id="L578" class="l">```</span>
+<span id="L579" class="l"> </span>
+<span id="L580" class="l">#### C</span>
+<span id="L581" class="l"> </span>
+<span id="L582" class="l">```</span>
+<span id="L583" class="l">// FULFILLMENT is the queue of paid orders awaiting shipment. With</span>
+<span id="L584" class="l"> </span>
+<span id="L585" class="l">// WorkQueue retention the server keeps each message only until a</span>
+<span id="L586" class="l"> </span>
+<span id="L587" class="l">// consumer acks it, then deletes it from the stream.</span>
+<span id="L588" class="l"> </span>
+<span id="L589" class="l">jsStreamConfig  sc;</span>
+<span id="L590" class="l"> </span>
+<span id="L591" class="l">const char      *subjects[] = {&quot;fulfill.&gt;&quot;};</span>
+<span id="L592" class="l"> </span>
+<span id="L593" class="l">const char      *order = &quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;}&quot;;</span>
+<span id="L594" class="l"> </span>
+<span id="L595" class="l"> </span>
+<span id="L596" class="l"> </span>
+<span id="L597" class="l">jsStreamConfig_Init(&amp;sc);</span>
+<span id="L598" class="l"> </span>
+<span id="L599" class="l">sc.Name        = &quot;FULFILLMENT&quot;;</span>
+<span id="L600" class="l"> </span>
+<span id="L601" class="l">sc.Subjects    = subjects;</span>
+<span id="L602" class="l"> </span>
+<span id="L603" class="l">sc.SubjectsLen = 1;</span>
+<span id="L604" class="l"> </span>
+<span id="L605" class="l">sc.Retention   = js_WorkQueuePolicy;</span>
+<span id="L606" class="l"> </span>
+<span id="L607" class="l">s = js_AddStream(&amp;si, js, &amp;sc, NULL, &amp;jerr);</span>
+<span id="L608" class="l"> </span>
+<span id="L609" class="l">if (s == NATS_OK)</span>
+<span id="L610" class="l"> </span>
+<span id="L611" class="l">    printf(&quot;FULFILLMENT retention: %s\n&quot;,</span>
+<span id="L612" class="l"> </span>
+<span id="L613" class="l">           (si-&gt;Config-&gt;Retention == js_WorkQueuePolicy) ? &quot;workqueue&quot; : &quot;other&quot;);</span>
+<span id="L614" class="l"> </span>
+<span id="L615" class="l"> </span>
+<span id="L616" class="l"> </span>
+<span id="L617" class="l">// Queue one order to ship.</span>
+<span id="L618" class="l"> </span>
+<span id="L619" class="l">if (s == NATS_OK)</span>
+<span id="L620" class="l"> </span>
+<span id="L621" class="l">    s = js_Publish(NULL, js, &quot;fulfill.us&quot;, order, (int) strlen(order), NULL, &amp;jerr);</span>
+<span id="L622" class="l"> </span>
+<span id="L623" class="l"> </span>
+<span id="L624" class="l"> </span>
+<span id="L625" class="l">// A shipping worker binds to a durable pull consumer with explicit ack.</span>
+<span id="L626" class="l"> </span>
+<span id="L627" class="l">if (s == NATS_OK)</span>
+<span id="L628" class="l"> </span>
+<span id="L629" class="l">{</span>
+<span id="L630" class="l"> </span>
+<span id="L631" class="l">    jsConsumerConfig cc;</span>
+<span id="L632" class="l"> </span>
+<span id="L633" class="l"> </span>
+<span id="L634" class="l"> </span>
+<span id="L635" class="l">    jsConsumerConfig_Init(&amp;cc);</span>
+<span id="L636" class="l"> </span>
+<span id="L637" class="l">    cc.Durable   = &quot;shippers&quot;;</span>
+<span id="L638" class="l"> </span>
+<span id="L639" class="l">    cc.AckPolicy = js_AckExplicit;</span>
+<span id="L640" class="l"> </span>
+<span id="L641" class="l">    s = js_AddConsumer(NULL, js, &quot;FULFILLMENT&quot;, &amp;cc, NULL, &amp;jerr);</span>
+<span id="L642" class="l"> </span>
+<span id="L643" class="l">}</span>
+<span id="L644" class="l"> </span>
+<span id="L645" class="l">if (s == NATS_OK)</span>
+<span id="L646" class="l"> </span>
+<span id="L647" class="l">{</span>
+<span id="L648" class="l"> </span>
+<span id="L649" class="l">    jsSubOptions so;</span>
+<span id="L650" class="l"> </span>
+<span id="L651" class="l"> </span>
+<span id="L652" class="l"> </span>
+<span id="L653" class="l">    jsSubOptions_Init(&amp;so);</span>
+<span id="L654" class="l"> </span>
+<span id="L655" class="l">    so.Stream   = &quot;FULFILLMENT&quot;;</span>
+<span id="L656" class="l"> </span>
+<span id="L657" class="l">    so.Consumer = &quot;shippers&quot;;</span>
+<span id="L658" class="l"> </span>
+<span id="L659" class="l">    s = js_PullSubscribe(&amp;sub, js, NULL, &quot;shippers&quot;, NULL, &amp;so, &amp;jerr);</span>
+<span id="L660" class="l"> </span>
+<span id="L661" class="l">}</span>
+<span id="L662" class="l"> </span>
+<span id="L663" class="l"> </span>
+<span id="L664" class="l"> </span>
+<span id="L665" class="l">// Fetch the order and ack it once the worker has shipped it.</span>
+<span id="L666" class="l"> </span>
+<span id="L667" class="l">if (s == NATS_OK)</span>
+<span id="L668" class="l"> </span>
+<span id="L669" class="l">    s = natsSubscription_Fetch(&amp;list, sub, 1, 5000, &amp;jerr);</span>
+<span id="L670" class="l"> </span>
+<span id="L671" class="l">for (i = 0; (s == NATS_OK) &amp;&amp; (i &lt; list.Count); i++)</span>
+<span id="L672" class="l"> </span>
+<span id="L673" class="l">{</span>
+<span id="L674" class="l"> </span>
+<span id="L675" class="l">    printf(&quot;shipping order: %s\n&quot;, natsMsg_GetData(list.Msgs[i]));</span>
+<span id="L676" class="l"> </span>
+<span id="L677" class="l">    s = natsMsg_AckSync(list.Msgs[i], NULL, &amp;jerr);</span>
+<span id="L678" class="l"> </span>
+<span id="L679" class="l">}</span>
+<span id="L680" class="l"> </span>
+<span id="L681" class="l">natsMsgList_Destroy(&amp;list);</span>
+<span id="L682" class="l"> </span>
+<span id="L683" class="l"> </span>
+<span id="L684" class="l"> </span>
+<span id="L685" class="l">// The ack removed the task from the queue, so the stream is now</span>
+<span id="L686" class="l"> </span>
+<span id="L687" class="l">// empty. A Limits stream like ORDERS would still hold the message; a</span>
+<span id="L688" class="l"> </span>
+<span id="L689" class="l">// WorkQueue stream drains to zero as workers finish.</span>
+<span id="L690" class="l"> </span>
+<span id="L691" class="l">if (s == NATS_OK)</span>
+<span id="L692" class="l"> </span>
+<span id="L693" class="l">    s = js_GetStreamInfo(&amp;info, js, &quot;FULFILLMENT&quot;, NULL, &amp;jerr);</span>
+<span id="L694" class="l"> </span>
+<span id="L695" class="l">if (s == NATS_OK)</span>
+<span id="L696" class="l"> </span>
+<span id="L697" class="l">    printf(&quot;messages left in FULFILLMENT: %d\n&quot;, (int) info-&gt;State.Msgs);</span>
+<span id="L698" class="l">```</span>
+<span id="L699" class="l"> </span>
+<span id="L700" class="l">The `--retention work` flag is the only change from how you built `ORDERS`. `nats stream info FULFILLMENT` shows it in the `Options` block:</span>
+<span id="L701" class="l"> </span>
+<span id="L702" class="l">```</span>
+<span id="L703" class="l">nats stream info FULFILLMENT</span>
+<span id="L704" class="l">```</span>
+<span id="L705" class="l"> </span>
+<span id="L706" class="l">```</span>
+<span id="L707" class="l">             Subjects: fulfill.&gt;</span>
+<span id="L708" class="l"> </span>
+<span id="L709" class="l"> </span>
+<span id="L710" class="l"> </span>
+<span id="L711" class="l">Options:</span>
+<span id="L712" class="l"> </span>
+<span id="L713" class="l"> </span>
+<span id="L714" class="l"> </span>
+<span id="L715" class="l">            Retention: WorkQueue</span>
+<span id="L716" class="l"> </span>
+<span id="L717" class="l">       Discard Policy: Old</span>
+<span id="L718" class="l">```</span>
+<span id="L719" class="l"> </span>
+<span id="L720" class="l">Enqueue one order to ship and have a shipping worker ack it, and the stream&#x27;s message count drops back to zero. The ack removed the task, which no limit on `ORDERS` does. The worker publishes `orders.shipped` back to `ORDERS` as it finishes, so the record lands in the log while the task drains from the queue.</span>
+<span id="L721" class="l"> </span>
+<span id="L722" class="l">Those shipping workers run as a pool sharing **one** consumer on `FULFILLMENT`, exactly as on [Scaling a consumer](/learn/jetstream/worker-pool.md): WorkQueue hands each order to the consumer, one worker ships it, and the ack clears it. You scale by adding workers to that one consumer, not by adding consumers — WorkQueue won&#x27;t let two consumers claim the same order (the pitfalls below cover why).</span>
+<span id="L723" class="l"> </span>
+<span id="L724" class="l">## Switching retention on a live stream</span>
+<span id="L725" class="l"> </span>
+<span id="L726" class="l">Set retention when you create the stream, and leave it there.</span>
+<span id="L727" class="l"> </span>
+<span id="L728" class="l">The server allows exactly one live change: it swaps Limits and Interest, in either direction. Anything involving WorkQueue is locked — see the pitfall below. And even the allowed swap applies to messages already stored, right away. Say a stream has been collecting an audit history under Limits and you switch it to Interest. From that moment the server removes any message every consumer has already acked, and any message on a subject no consumer is interested in — including history you meant to keep.</span>
+<span id="L729" class="l"> </span>
+<span id="L730" class="l">Treat the policy as fixed at creation. If you want a different policy than the stream has, create a new stream with the right policy rather than editing the running one. `ORDERS` was created as Limits on purpose, and it stays Limits.</span>
+<span id="L731" class="l"> </span>
+<span id="L732" class="l">## How Interest and WorkQueue can go wrong</span>
+<span id="L733" class="l"> </span>
+<span id="L734" class="l">Interest and WorkQueue each have a way they can go wrong. Know it before you use them.</span>
+<span id="L735" class="l"> </span>
+<span id="L736" class="l">**Interest can fill the disk.** A message is removed only when every consumer whose filter covers it has acked it. A slow consumer holds up cleanup for every message it still owes an ack on. If a consumer stalls (a stuck worker, a service that&#x27;s down), its unacked messages never become ready to leave, and the stream grows until it hits its limits or runs out of room. Interest retention still needs limits set, and it makes watching consumer health more important.</span>
+<span id="L737" class="l"> </span>
+<span id="L738" class="l">**WorkQueue delivers each message once.** The first ack removes the message for everyone, so no two consumers can claim the same message — the server rejects overlapping consumers outright (the pitfall below). You can still run more than one consumer if their filters *partition* the subjects, but each then handles only its slice; none sees the whole stream. For several consumers that each see every message, use Interest or Limits instead. To scale a single workload, use a worker *pool* sharing one consumer (the worker-pool page), not multiple consumers.</span>
+<span id="L739" class="l"> </span>
+<span id="L740" class="l">The full set of retention behavior, including how Interest and WorkQueue interact with stream republish, mirrors, and sources, is in [Reference → Stream Configuration](/reference/jetstream/api/stream/create.md). This page uses only the three `retention` values.</span>
+<span id="L741" class="l"> </span>
+<span id="L742" class="l">## Pitfalls</span>
+<span id="L743" class="l"> </span>
+<span id="L744" class="l">Both of these are WorkQueue constraints. The server checks them when you create or edit a stream, so you find out right away rather than in production.</span>
+<span id="L745" class="l"> </span>
+<span id="L746" class="l">**Retention to or from WorkQueue is locked after creation.** The earlier section covered the Limits–Interest swap the server allows, and how even that rewrites your history. The rule underneath it is stricter: the server rejects any change that adds or removes WorkQueue. A stream that isn&#x27;t WorkQueue at creation can&#x27;t become one, and a WorkQueue stream can&#x27;t change to another policy.</span>
+<span id="L747" class="l"> </span>
+<span id="L748" class="l">Don&#x27;t plan a migration path that edits retention into or out of WorkQueue. Create a new stream with the policy you want and move the data. The edit below is rejected with `stream configuration update can not change retention policy to/from workqueue`.</span>
+<span id="L749" class="l"> </span>
+<span id="L750" class="l">#### CLI</span>
+<span id="L751" class="l"> </span>
+<span id="L752" class="l">```</span>
+<span id="L753" class="l">#!/bin/bash</span>
+<span id="L754" class="l"> </span>
+<span id="L755" class="l"> </span>
+<span id="L756" class="l"> </span>
+<span id="L757" class="l"># Pitfall: you cannot switch a stream&#x27;s retention to or from WorkQueue</span>
+<span id="L758" class="l"> </span>
+<span id="L759" class="l"># on a live stream. Limits and Interest can swap, but WorkQueue is fixed</span>
+<span id="L760" class="l"> </span>
+<span id="L761" class="l"># at creation. Try to move FULFILLMENT (WorkQueue) to Limits and the</span>
+<span id="L762" class="l"> </span>
+<span id="L763" class="l"># server refuses:</span>
+<span id="L764" class="l"> </span>
+<span id="L765" class="l">#   stream configuration update can not change retention policy to/from</span>
+<span id="L766" class="l"> </span>
+<span id="L767" class="l">#   workqueue</span>
+<span id="L768" class="l"> </span>
+<span id="L769" class="l"># The command exits non-zero — FULFILLMENT keeps its WorkQueue policy.</span>
+<span id="L770" class="l"> </span>
+<span id="L771" class="l">nats stream edit FULFILLMENT --retention limits --force</span>
+<span id="L772" class="l"> </span>
+<span id="L773" class="l"> </span>
+<span id="L774" class="l"> </span>
+<span id="L775" class="l"># The safe move is a new stream with the policy you want, then migrate.</span>
+<span id="L776" class="l"> </span>
+<span id="L777" class="l"># ORDERS itself stays Limits — never edit a live stream&#x27;s retention to</span>
+<span id="L778" class="l"> </span>
+<span id="L779" class="l"># WorkQueue hoping to convert it.</span>
+<span id="L780" class="l"> </span>
+<span id="L781" class="l">nats stream info FULFILLMENT</span>
+<span id="L782" class="l">```</span>
+<span id="L783" class="l"> </span>
+<span id="L784" class="l">#### JavaScript/TypeScript</span>
+<span id="L785" class="l"> </span>
+<span id="L786" class="l">```</span>
+<span id="L787" class="l">// Retention is fixed at creation. Read the live config, flip it from WorkQueue</span>
+<span id="L788" class="l"> </span>
+<span id="L789" class="l">// to Limits, and submit the update. The server rejects the change with err</span>
+<span id="L790" class="l"> </span>
+<span id="L791" class="l">// 10052: it won&#x27;t move a stream to or from workqueue retention. To change</span>
+<span id="L792" class="l"> </span>
+<span id="L793" class="l">// retention, create a new stream instead.</span>
+<span id="L794" class="l"> </span>
+<span id="L795" class="l">const fulfillment = await jsm.streams.info(&quot;FULFILLMENT&quot;);</span>
+<span id="L796" class="l"> </span>
+<span id="L797" class="l">fulfillment.config.retention = RetentionPolicy.Limits;</span>
+<span id="L798" class="l"> </span>
+<span id="L799" class="l">try {</span>
+<span id="L800" class="l"> </span>
+<span id="L801" class="l">  await jsm.streams.update(&quot;FULFILLMENT&quot;, fulfillment.config);</span>
+<span id="L802" class="l"> </span>
+<span id="L803" class="l">} catch (err) {</span>
+<span id="L804" class="l"> </span>
+<span id="L805" class="l">  if (err instanceof JetStreamApiError) {</span>
+<span id="L806" class="l"> </span>
+<span id="L807" class="l">    console.log(`Rejected (err ${err.code}): ${err.message}`);</span>
+<span id="L808" class="l"> </span>
+<span id="L809" class="l">  } else {</span>
+<span id="L810" class="l"> </span>
+<span id="L811" class="l">    throw err;</span>
+<span id="L812" class="l"> </span>
+<span id="L813" class="l">  }</span>
+<span id="L814" class="l"> </span>
+<span id="L815" class="l">}</span>
+<span id="L816" class="l">```</span>
+<span id="L817" class="l"> </span>
+<span id="L818" class="l">#### Go</span>
+<span id="L819" class="l"> </span>
+<span id="L820" class="l">```</span>
+<span id="L821" class="l">// Load FULFILLMENT and take its current config.</span>
+<span id="L822" class="l"> </span>
+<span id="L823" class="l">stream, err := js.Stream(ctx, &quot;FULFILLMENT&quot;)</span>
+<span id="L824" class="l"> </span>
+<span id="L825" class="l">if err != nil {</span>
+<span id="L826" class="l"> </span>
+<span id="L827" class="l">	panic(err)</span>
+<span id="L828" class="l"> </span>
+<span id="L829" class="l">}</span>
+<span id="L830" class="l"> </span>
+<span id="L831" class="l">cfg := stream.CachedInfo().Config</span>
+<span id="L832" class="l"> </span>
+<span id="L833" class="l"> </span>
+<span id="L834" class="l"> </span>
+<span id="L835" class="l">// Try to turn the WorkQueue stream into a Limits stream by flipping</span>
+<span id="L836" class="l"> </span>
+<span id="L837" class="l">// retention and pushing the update back.</span>
+<span id="L838" class="l"> </span>
+<span id="L839" class="l">cfg.Retention = jetstream.LimitsPolicy</span>
+<span id="L840" class="l"> </span>
+<span id="L841" class="l">if _, err := js.UpdateStream(ctx, cfg); err != nil {</span>
+<span id="L842" class="l"> </span>
+<span id="L843" class="l">	// The server refuses: a stream&#x27;s retention policy is fixed for its</span>
+<span id="L844" class="l"> </span>
+<span id="L845" class="l">	// lifetime (err 10052: stream configuration update can not change</span>
+<span id="L846" class="l"> </span>
+<span id="L847" class="l">	// retention policy to/from workqueue). To change it, recreate the stream.</span>
+<span id="L848" class="l"> </span>
+<span id="L849" class="l">	fmt.Printf(&quot;retention switch rejected: %v\n&quot;, err)</span>
+<span id="L850" class="l"> </span>
+<span id="L851" class="l">	return</span>
+<span id="L852" class="l"> </span>
+<span id="L853" class="l">}</span>
+<span id="L854" class="l"> </span>
+<span id="L855" class="l">fmt.Println(&quot;update unexpectedly succeeded&quot;)</span>
+<span id="L856" class="l">```</span>
+<span id="L857" class="l"> </span>
+<span id="L858" class="l">#### Python</span>
+<span id="L859" class="l"> </span>
+<span id="L860" class="l">```</span>
+<span id="L861" class="l"># Read the current config and try to switch FULFILLMENT from WorkQueue to</span>
+<span id="L862" class="l"> </span>
+<span id="L863" class="l"># Limits retention. The server refuses: retention is fixed at create time,</span>
+<span id="L864" class="l"> </span>
+<span id="L865" class="l"># so you cannot turn a queue into a record (or back) on an existing stream.</span>
+<span id="L866" class="l"> </span>
+<span id="L867" class="l">info = await js.stream_info(&quot;FULFILLMENT&quot;)</span>
+<span id="L868" class="l"> </span>
+<span id="L869" class="l">try:</span>
+<span id="L870" class="l"> </span>
+<span id="L871" class="l">    await js.update_stream(info.config, retention=RetentionPolicy.LIMITS)</span>
+<span id="L872" class="l"> </span>
+<span id="L873" class="l">    print(&quot;retention changed (unexpected)&quot;)</span>
+<span id="L874" class="l"> </span>
+<span id="L875" class="l">except APIError as e:</span>
+<span id="L876" class="l"> </span>
+<span id="L877" class="l">    print(f&quot;retention switch rejected: {e}&quot;)</span>
+<span id="L878" class="l">```</span>
+<span id="L879" class="l"> </span>
+<span id="L880" class="l">#### Java</span>
+<span id="L881" class="l"> </span>
+<span id="L882" class="l">```</span>
+<span id="L883" class="l">// You can&#x27;t change a stream&#x27;s retention policy after it&#x27;s created.</span>
+<span id="L884" class="l"> </span>
+<span id="L885" class="l">// Switching FULFILLMENT from WorkQueue to Limits is rejected; to change</span>
+<span id="L886" class="l"> </span>
+<span id="L887" class="l">// retention you would delete the stream and recreate it.</span>
+<span id="L888" class="l"> </span>
+<span id="L889" class="l">try {</span>
+<span id="L890" class="l"> </span>
+<span id="L891" class="l">    jsm.updateStream(StreamConfiguration.builder()</span>
+<span id="L892" class="l"> </span>
+<span id="L893" class="l">        .name(&quot;FULFILLMENT&quot;)</span>
+<span id="L894" class="l"> </span>
+<span id="L895" class="l">        .subjects(&quot;fulfill.&gt;&quot;)</span>
+<span id="L896" class="l"> </span>
+<span id="L897" class="l">        .retentionPolicy(RetentionPolicy.Limits)</span>
+<span id="L898" class="l"> </span>
+<span id="L899" class="l">        .build());</span>
+<span id="L900" class="l"> </span>
+<span id="L901" class="l">}</span>
+<span id="L902" class="l"> </span>
+<span id="L903" class="l">catch (JetStreamApiException e) {</span>
+<span id="L904" class="l"> </span>
+<span id="L905" class="l">    System.out.println(&quot;Rejected: &quot; + e.getMessage());</span>
+<span id="L906" class="l"> </span>
+<span id="L907" class="l">    // stream configuration update can not change retention policy to/from workqueue [10052]</span>
+<span id="L908" class="l"> </span>
+<span id="L909" class="l">}</span>
+<span id="L910" class="l">```</span>
+<span id="L911" class="l"> </span>
+<span id="L912" class="l">#### Rust</span>
+<span id="L913" class="l"> </span>
+<span id="L914" class="l">```</span>
+<span id="L915" class="l">// Retention is fixed once a stream exists. Trying to switch FULFILLMENT from</span>
+<span id="L916" class="l"> </span>
+<span id="L917" class="l">// WorkQueue to Limits is rejected by the server (err 10052: stream</span>
+<span id="L918" class="l"> </span>
+<span id="L919" class="l">// configuration update can not change retention policy to/from workqueue).</span>
+<span id="L920" class="l"> </span>
+<span id="L921" class="l">match js</span>
+<span id="L922" class="l"> </span>
+<span id="L923" class="l">    .update_stream(Config {</span>
+<span id="L924" class="l"> </span>
+<span id="L925" class="l">        name: &quot;FULFILLMENT&quot;.to_string(),</span>
+<span id="L926" class="l"> </span>
+<span id="L927" class="l">        subjects: vec![&quot;fulfill.&gt;&quot;.to_string()],</span>
+<span id="L928" class="l"> </span>
+<span id="L929" class="l">        retention: RetentionPolicy::Limits,</span>
+<span id="L930" class="l"> </span>
+<span id="L931" class="l">        ..Default::default()</span>
+<span id="L932" class="l"> </span>
+<span id="L933" class="l">    })</span>
+<span id="L934" class="l"> </span>
+<span id="L935" class="l">    .await</span>
+<span id="L936" class="l"> </span>
+<span id="L937" class="l">{</span>
+<span id="L938" class="l"> </span>
+<span id="L939" class="l">    Ok(_) =&gt; println!(&quot;unexpected: retention switch was accepted&quot;),</span>
+<span id="L940" class="l"> </span>
+<span id="L941" class="l">    Err(err) =&gt; println!(&quot;rejected: {err}&quot;),</span>
+<span id="L942" class="l"> </span>
+<span id="L943" class="l">}</span>
+<span id="L944" class="l">```</span>
+<span id="L945" class="l"> </span>
+<span id="L946" class="l">#### C#/.NET</span>
+<span id="L947" class="l"> </span>
+<span id="L948" class="l">```</span>
+<span id="L949" class="l">// Try to turn FULFILLMENT into a plain Limits stream after the fact.</span>
+<span id="L950" class="l"> </span>
+<span id="L951" class="l">var stream = await js.GetStreamAsync(&quot;FULFILLMENT&quot;);</span>
+<span id="L952" class="l"> </span>
+<span id="L953" class="l">var config = stream.Info.Config;</span>
+<span id="L954" class="l"> </span>
+<span id="L955" class="l">config.Retention = StreamConfigRetention.Limits;</span>
+<span id="L956" class="l"> </span>
+<span id="L957" class="l"> </span>
+<span id="L958" class="l"> </span>
+<span id="L959" class="l">try</span>
+<span id="L960" class="l"> </span>
+<span id="L961" class="l">{</span>
+<span id="L962" class="l"> </span>
+<span id="L963" class="l">    await js.UpdateStreamAsync(config);</span>
+<span id="L964" class="l"> </span>
+<span id="L965" class="l">    output.WriteLine(&quot;update accepted&quot;);</span>
+<span id="L966" class="l"> </span>
+<span id="L967" class="l">}</span>
+<span id="L968" class="l"> </span>
+<span id="L969" class="l">catch (NatsJSApiException e)</span>
+<span id="L970" class="l"> </span>
+<span id="L971" class="l">{</span>
+<span id="L972" class="l"> </span>
+<span id="L973" class="l">    // The server won&#x27;t switch retention into or out of WorkQueue on a live</span>
+<span id="L974" class="l"> </span>
+<span id="L975" class="l">    // stream. To change it, recreate the stream.</span>
+<span id="L976" class="l"> </span>
+<span id="L977" class="l">    output.WriteLine($&quot;rejected (err {e.Error.ErrCode}): {e.Error.Description}&quot;);</span>
+<span id="L978" class="l"> </span>
+<span id="L979" class="l">}</span>
+<span id="L980" class="l">```</span>
+<span id="L981" class="l"> </span>
+<span id="L982" class="l">#### C</span>
+<span id="L983" class="l"> </span>
+<span id="L984" class="l">```</span>
+<span id="L985" class="l">// Load FULFILLMENT and take its current config.</span>
+<span id="L986" class="l"> </span>
+<span id="L987" class="l">s = js_GetStreamInfo(&amp;si, js, &quot;FULFILLMENT&quot;, NULL, &amp;jerr);</span>
+<span id="L988" class="l"> </span>
+<span id="L989" class="l">if (s == NATS_OK)</span>
+<span id="L990" class="l"> </span>
+<span id="L991" class="l">{</span>
+<span id="L992" class="l"> </span>
+<span id="L993" class="l">    // Try to turn the WorkQueue stream into a Limits stream by</span>
+<span id="L994" class="l"> </span>
+<span id="L995" class="l">    // flipping retention and pushing the update back.</span>
+<span id="L996" class="l"> </span>
+<span id="L997" class="l">    jsStreamInfo *updated = NULL;</span>
+<span id="L998" class="l"> </span>
+<span id="L999" class="l"> </span>
+<span id="L1000" class="l"> </span>
+<span id="L1001" class="l">    si-&gt;Config-&gt;Retention = js_LimitsPolicy;</span>
+<span id="L1002" class="l"> </span>
+<span id="L1003" class="l"> </span>
+<span id="L1004" class="l"> </span>
+<span id="L1005" class="l">    s = js_UpdateStream(&amp;updated, js, si-&gt;Config, NULL, &amp;jerr);</span>
+<span id="L1006" class="l"> </span>
+<span id="L1007" class="l">    if (s != NATS_OK)</span>
+<span id="L1008" class="l"> </span>
+<span id="L1009" class="l">    {</span>
+<span id="L1010" class="l"> </span>
+<span id="L1011" class="l">        // The server refuses: a stream&#x27;s retention policy is fixed</span>
+<span id="L1012" class="l"> </span>
+<span id="L1013" class="l">        // for its lifetime (err 10052: stream configuration update</span>
+<span id="L1014" class="l"> </span>
+<span id="L1015" class="l">        // can not change retention policy to/from workqueue). To</span>
+<span id="L1016" class="l"> </span>
+<span id="L1017" class="l">        // change it, recreate the stream.</span>
+<span id="L1018" class="l"> </span>
+<span id="L1019" class="l">        printf(&quot;retention switch rejected: %s\n&quot;, nats_GetLastError(NULL));</span>
+<span id="L1020" class="l"> </span>
+<span id="L1021" class="l">        s = NATS_OK;</span>
+<span id="L1022" class="l"> </span>
+<span id="L1023" class="l">    }</span>
+<span id="L1024" class="l"> </span>
+<span id="L1025" class="l">    else</span>
+<span id="L1026" class="l"> </span>
+<span id="L1027" class="l">    {</span>
+<span id="L1028" class="l"> </span>
+<span id="L1029" class="l">        printf(&quot;update unexpectedly succeeded\n&quot;);</span>
+<span id="L1030" class="l"> </span>
+<span id="L1031" class="l">        jsStreamInfo_Destroy(updated);</span>
+<span id="L1032" class="l"> </span>
+<span id="L1033" class="l">    }</span>
+<span id="L1034" class="l"> </span>
+<span id="L1035" class="l">}</span>
+<span id="L1036" class="l">```</span>
+<span id="L1037" class="l"> </span>
+<span id="L1038" class="l">**WorkQueue rejects consumers that overlap.** The first ack removes a message for everyone, so the server won&#x27;t let two consumers claim the same message. Adding a second unfiltered consumer, or two consumers whose filters overlap, fails the create: `multiple non-filtered consumers not allowed on workqueue stream`, or `filtered consumer not unique on workqueue stream` for overlapping filters.</span>
+<span id="L1039" class="l"> </span>
+<span id="L1040" class="l">Give each consumer a filter that splits the subjects between them, so no message belongs to two consumers. A worker *pool* sharing one consumer is the other valid setup; see [A pool of workers](/learn/jetstream/worker-pool.md).</span>
+<span id="L1041" class="l"> </span>
+<span id="L1042" class="l">#### CLI</span>
+<span id="L1043" class="l"> </span>
+<span id="L1044" class="l">```</span>
+<span id="L1045" class="l">#!/bin/bash</span>
+<span id="L1046" class="l"> </span>
+<span id="L1047" class="l"> </span>
+<span id="L1048" class="l"> </span>
+<span id="L1049" class="l"># Pitfall: a WorkQueue stream rejects a second consumer whose subjects</span>
+<span id="L1050" class="l"> </span>
+<span id="L1051" class="l"># overlap an existing one. The server won&#x27;t let two consumers fight over</span>
+<span id="L1052" class="l"> </span>
+<span id="L1053" class="l"># the same task, so it refuses the create up front.</span>
+<span id="L1054" class="l"> </span>
+<span id="L1055" class="l"> </span>
+<span id="L1056" class="l"> </span>
+<span id="L1057" class="l"># FULFILLMENT is the WorkQueue stream from earlier on this page. Add one</span>
+<span id="L1058" class="l"> </span>
+<span id="L1059" class="l"># unfiltered consumer — fine, it owns the whole queue.</span>
+<span id="L1060" class="l"> </span>
+<span id="L1061" class="l">nats consumer add FULFILLMENT shippers --pull --ack explicit --defaults</span>
+<span id="L1062" class="l"> </span>
+<span id="L1063" class="l"> </span>
+<span id="L1064" class="l"> </span>
+<span id="L1065" class="l"># Now try to add a second unfiltered consumer. The server rejects it:</span>
+<span id="L1066" class="l"> </span>
+<span id="L1067" class="l">#   multiple non-filtered consumers not allowed on workqueue stream</span>
+<span id="L1068" class="l"> </span>
+<span id="L1069" class="l"># (error 10099). The command exits non-zero.</span>
+<span id="L1070" class="l"> </span>
+<span id="L1071" class="l">nats consumer add FULFILLMENT eu-shippers --pull --ack explicit --defaults</span>
+<span id="L1072" class="l"> </span>
+<span id="L1073" class="l"> </span>
+<span id="L1074" class="l"> </span>
+<span id="L1075" class="l"># The fix is non-overlapping filters so each task belongs to exactly one</span>
+<span id="L1076" class="l"> </span>
+<span id="L1077" class="l"># consumer — here, one shipper consumer per region. Delete the broad</span>
+<span id="L1078" class="l"> </span>
+<span id="L1079" class="l"># consumer, then split by subject.</span>
+<span id="L1080" class="l"> </span>
+<span id="L1081" class="l">nats consumer rm FULFILLMENT shippers --force</span>
+<span id="L1082" class="l"> </span>
+<span id="L1083" class="l"> </span>
+<span id="L1084" class="l"> </span>
+<span id="L1085" class="l">nats consumer add FULFILLMENT us-shippers --pull --ack explicit --filter &quot;fulfill.us&quot; --defaults</span>
+<span id="L1086" class="l"> </span>
+<span id="L1087" class="l">nats consumer add FULFILLMENT eu-shippers --pull --ack explicit --filter &quot;fulfill.eu&quot; --defaults</span>
+<span id="L1088" class="l"> </span>
+<span id="L1089" class="l"> </span>
+<span id="L1090" class="l"> </span>
+<span id="L1091" class="l"># These two coexist because fulfill.us and fulfill.eu never collide.</span>
+<span id="L1092" class="l"> </span>
+<span id="L1093" class="l"># A wildcard like fulfill.&gt; would overlap both and be rejected with</span>
+<span id="L1094" class="l"> </span>
+<span id="L1095" class="l"># &quot;filtered consumer not unique on workqueue stream&quot; (error 10100).</span>
+<span id="L1096" class="l">```</span>
+<span id="L1097" class="l"> </span>
+<span id="L1098" class="l">#### JavaScript/TypeScript</span>
+<span id="L1099" class="l"> </span>
+<span id="L1100" class="l">```</span>
+<span id="L1101" class="l">// One unfiltered consumer reads every subject in the queue. On a WorkQueue</span>
+<span id="L1102" class="l"> </span>
+<span id="L1103" class="l">// stream that is fine on its own.</span>
+<span id="L1104" class="l"> </span>
+<span id="L1105" class="l">await jsm.consumers.add(&quot;FULFILLMENT&quot;, {</span>
+<span id="L1106" class="l"> </span>
+<span id="L1107" class="l">  durable_name: &quot;shippers&quot;,</span>
+<span id="L1108" class="l"> </span>
+<span id="L1109" class="l">  ack_policy: AckPolicy.Explicit,</span>
+<span id="L1110" class="l"> </span>
+<span id="L1111" class="l">});</span>
+<span id="L1112" class="l"> </span>
+<span id="L1113" class="l">console.log(&quot;Created consumer: shippers&quot;);</span>
+<span id="L1114" class="l"> </span>
+<span id="L1115" class="l"> </span>
+<span id="L1116" class="l"> </span>
+<span id="L1117" class="l">// A WorkQueue stream hands each task to exactly one consumer, so two unfiltered</span>
+<span id="L1118" class="l"> </span>
+<span id="L1119" class="l">// consumers would both claim the same subjects. The server rejects the second</span>
+<span id="L1120" class="l"> </span>
+<span id="L1121" class="l">// one with err 10099.</span>
+<span id="L1122" class="l"> </span>
+<span id="L1123" class="l">try {</span>
+<span id="L1124" class="l"> </span>
+<span id="L1125" class="l">  await jsm.consumers.add(&quot;FULFILLMENT&quot;, {</span>
+<span id="L1126" class="l"> </span>
+<span id="L1127" class="l">    durable_name: &quot;eu-shippers&quot;,</span>
+<span id="L1128" class="l"> </span>
+<span id="L1129" class="l">    ack_policy: AckPolicy.Explicit,</span>
+<span id="L1130" class="l"> </span>
+<span id="L1131" class="l">  });</span>
+<span id="L1132" class="l"> </span>
+<span id="L1133" class="l">} catch (err) {</span>
+<span id="L1134" class="l"> </span>
+<span id="L1135" class="l">  if (err instanceof JetStreamApiError) {</span>
+<span id="L1136" class="l"> </span>
+<span id="L1137" class="l">    console.log(`Rejected (err ${err.code}): ${err.message}`);</span>
+<span id="L1138" class="l"> </span>
+<span id="L1139" class="l">  } else {</span>
+<span id="L1140" class="l"> </span>
+<span id="L1141" class="l">    throw err;</span>
+<span id="L1142" class="l"> </span>
+<span id="L1143" class="l">  }</span>
+<span id="L1144" class="l"> </span>
+<span id="L1145" class="l">}</span>
+<span id="L1146" class="l"> </span>
+<span id="L1147" class="l"> </span>
+<span id="L1148" class="l"> </span>
+<span id="L1149" class="l">// Give each worker its own slice of the queue instead. Drop the unfiltered</span>
+<span id="L1150" class="l"> </span>
+<span id="L1151" class="l">// consumer, then create one consumer per region. Their filters do not overlap,</span>
+<span id="L1152" class="l"> </span>
+<span id="L1153" class="l">// so both are allowed.</span>
+<span id="L1154" class="l"> </span>
+<span id="L1155" class="l">await jsm.consumers.delete(&quot;FULFILLMENT&quot;, &quot;shippers&quot;);</span>
+<span id="L1156" class="l"> </span>
+<span id="L1157" class="l"> </span>
+<span id="L1158" class="l"> </span>
+<span id="L1159" class="l">await jsm.consumers.add(&quot;FULFILLMENT&quot;, {</span>
+<span id="L1160" class="l"> </span>
+<span id="L1161" class="l">  durable_name: &quot;us-shippers&quot;,</span>
+<span id="L1162" class="l"> </span>
+<span id="L1163" class="l">  ack_policy: AckPolicy.Explicit,</span>
+<span id="L1164" class="l"> </span>
+<span id="L1165" class="l">  filter_subject: &quot;fulfill.us&quot;,</span>
+<span id="L1166" class="l"> </span>
+<span id="L1167" class="l">});</span>
+<span id="L1168" class="l"> </span>
+<span id="L1169" class="l">await jsm.consumers.add(&quot;FULFILLMENT&quot;, {</span>
+<span id="L1170" class="l"> </span>
+<span id="L1171" class="l">  durable_name: &quot;eu-shippers&quot;,</span>
+<span id="L1172" class="l"> </span>
+<span id="L1173" class="l">  ack_policy: AckPolicy.Explicit,</span>
+<span id="L1174" class="l"> </span>
+<span id="L1175" class="l">  filter_subject: &quot;fulfill.eu&quot;,</span>
+<span id="L1176" class="l"> </span>
+<span id="L1177" class="l">});</span>
+<span id="L1178" class="l"> </span>
+<span id="L1179" class="l">console.log(&quot;Created filtered consumers: us-shippers, eu-shippers&quot;);</span>
+<span id="L1180" class="l">```</span>
+<span id="L1181" class="l"> </span>
+<span id="L1182" class="l">#### Go</span>
+<span id="L1183" class="l"> </span>
+<span id="L1184" class="l">```</span>
+<span id="L1185" class="l">// One unfiltered consumer covers every order in the queue.</span>
+<span id="L1186" class="l"> </span>
+<span id="L1187" class="l">if _, err := stream.CreateConsumer(ctx, jetstream.ConsumerConfig{</span>
+<span id="L1188" class="l"> </span>
+<span id="L1189" class="l">	Durable:   &quot;shippers&quot;,</span>
+<span id="L1190" class="l"> </span>
+<span id="L1191" class="l">	AckPolicy: jetstream.AckExplicitPolicy,</span>
+<span id="L1192" class="l"> </span>
+<span id="L1193" class="l">}); err != nil {</span>
+<span id="L1194" class="l"> </span>
+<span id="L1195" class="l">	panic(err)</span>
+<span id="L1196" class="l"> </span>
+<span id="L1197" class="l">}</span>
+<span id="L1198" class="l"> </span>
+<span id="L1199" class="l">fmt.Println(&quot;created unfiltered consumer: shippers&quot;)</span>
+<span id="L1200" class="l"> </span>
+<span id="L1201" class="l"> </span>
+<span id="L1202" class="l"> </span>
+<span id="L1203" class="l">// A WorkQueue stream delivers each message to exactly one consumer, so it</span>
+<span id="L1204" class="l"> </span>
+<span id="L1205" class="l">// refuses a second consumer whose reach overlaps the first. Two unfiltered</span>
+<span id="L1206" class="l"> </span>
+<span id="L1207" class="l">// consumers both cover fulfill.&gt; , so this is rejected</span>
+<span id="L1208" class="l"> </span>
+<span id="L1209" class="l">// (err 10099: multiple non-filtered consumers not allowed on workqueue stream).</span>
+<span id="L1210" class="l"> </span>
+<span id="L1211" class="l">if _, err := stream.CreateConsumer(ctx, jetstream.ConsumerConfig{</span>
+<span id="L1212" class="l"> </span>
+<span id="L1213" class="l">	Durable:   &quot;eu-shippers&quot;,</span>
+<span id="L1214" class="l"> </span>
+<span id="L1215" class="l">	AckPolicy: jetstream.AckExplicitPolicy,</span>
+<span id="L1216" class="l"> </span>
+<span id="L1217" class="l">}); err != nil {</span>
+<span id="L1218" class="l"> </span>
+<span id="L1219" class="l">	fmt.Printf(&quot;second unfiltered consumer rejected: %v\n&quot;, err)</span>
+<span id="L1220" class="l"> </span>
+<span id="L1221" class="l">}</span>
+<span id="L1222" class="l"> </span>
+<span id="L1223" class="l"> </span>
+<span id="L1224" class="l"> </span>
+<span id="L1225" class="l">// Drop the catch-all consumer so we can split the queue by region instead.</span>
+<span id="L1226" class="l"> </span>
+<span id="L1227" class="l">if err := stream.DeleteConsumer(ctx, &quot;shippers&quot;); err != nil {</span>
+<span id="L1228" class="l"> </span>
+<span id="L1229" class="l">	panic(err)</span>
+<span id="L1230" class="l"> </span>
+<span id="L1231" class="l">}</span>
+<span id="L1232" class="l"> </span>
+<span id="L1233" class="l"> </span>
+<span id="L1234" class="l"> </span>
+<span id="L1235" class="l">// Filtered consumers are allowed as long as their subjects don&#x27;t overlap.</span>
+<span id="L1236" class="l"> </span>
+<span id="L1237" class="l">// us-shippers takes fulfill.us, eu-shippers takes fulfill.eu, and each</span>
+<span id="L1238" class="l"> </span>
+<span id="L1239" class="l">// order still goes to exactly one worker.</span>
+<span id="L1240" class="l"> </span>
+<span id="L1241" class="l">if _, err := stream.CreateConsumer(ctx, jetstream.ConsumerConfig{</span>
+<span id="L1242" class="l"> </span>
+<span id="L1243" class="l">	Durable:       &quot;us-shippers&quot;,</span>
+<span id="L1244" class="l"> </span>
+<span id="L1245" class="l">	FilterSubject: &quot;fulfill.us&quot;,</span>
+<span id="L1246" class="l"> </span>
+<span id="L1247" class="l">	AckPolicy:     jetstream.AckExplicitPolicy,</span>
+<span id="L1248" class="l"> </span>
+<span id="L1249" class="l">}); err != nil {</span>
+<span id="L1250" class="l"> </span>
+<span id="L1251" class="l">	panic(err)</span>
+<span id="L1252" class="l"> </span>
+<span id="L1253" class="l">}</span>
+<span id="L1254" class="l"> </span>
+<span id="L1255" class="l">if _, err := stream.CreateConsumer(ctx, jetstream.ConsumerConfig{</span>
+<span id="L1256" class="l"> </span>
+<span id="L1257" class="l">	Durable:       &quot;eu-shippers&quot;,</span>
+<span id="L1258" class="l"> </span>
+<span id="L1259" class="l">	FilterSubject: &quot;fulfill.eu&quot;,</span>
+<span id="L1260" class="l"> </span>
+<span id="L1261" class="l">	AckPolicy:     jetstream.AckExplicitPolicy,</span>
+<span id="L1262" class="l"> </span>
+<span id="L1263" class="l">}); err != nil {</span>
+<span id="L1264" class="l"> </span>
+<span id="L1265" class="l">	panic(err)</span>
+<span id="L1266" class="l"> </span>
+<span id="L1267" class="l">}</span>
+<span id="L1268" class="l"> </span>
+<span id="L1269" class="l">fmt.Println(&quot;created filtered consumers: us-shippers (fulfill.us), eu-shippers (fulfill.eu)&quot;)</span>
+<span id="L1270" class="l">```</span>
+<span id="L1271" class="l"> </span>
+<span id="L1272" class="l">#### Python</span>
+<span id="L1273" class="l"> </span>
+<span id="L1274" class="l">```</span>
+<span id="L1275" class="l"># One unfiltered consumer covers every fulfill.&gt; subject. That is allowed.</span>
+<span id="L1276" class="l"> </span>
+<span id="L1277" class="l">await js.add_consumer(</span>
+<span id="L1278" class="l"> </span>
+<span id="L1279" class="l">    &quot;FULFILLMENT&quot;,</span>
+<span id="L1280" class="l"> </span>
+<span id="L1281" class="l">    ConsumerConfig(durable_name=&quot;shippers&quot;, ack_policy=AckPolicy.EXPLICIT),</span>
+<span id="L1282" class="l"> </span>
+<span id="L1283" class="l">)</span>
+<span id="L1284" class="l"> </span>
+<span id="L1285" class="l">print(&quot;added unfiltered consumer shippers&quot;)</span>
+<span id="L1286" class="l"> </span>
+<span id="L1287" class="l"> </span>
+<span id="L1288" class="l"> </span>
+<span id="L1289" class="l"># A WorkQueue stream gives each message to exactly one consumer, so two</span>
+<span id="L1290" class="l"> </span>
+<span id="L1291" class="l"># consumers whose subjects overlap would compete for the same orders. A</span>
+<span id="L1292" class="l"> </span>
+<span id="L1293" class="l"># second unfiltered consumer overlaps with the first and is rejected.</span>
+<span id="L1294" class="l"> </span>
+<span id="L1295" class="l">try:</span>
+<span id="L1296" class="l"> </span>
+<span id="L1297" class="l">    await js.add_consumer(</span>
+<span id="L1298" class="l"> </span>
+<span id="L1299" class="l">        &quot;FULFILLMENT&quot;,</span>
+<span id="L1300" class="l"> </span>
+<span id="L1301" class="l">        ConsumerConfig(durable_name=&quot;eu-shippers&quot;, ack_policy=AckPolicy.EXPLICIT),</span>
+<span id="L1302" class="l"> </span>
+<span id="L1303" class="l">    )</span>
+<span id="L1304" class="l"> </span>
+<span id="L1305" class="l">except APIError as e:</span>
+<span id="L1306" class="l"> </span>
+<span id="L1307" class="l">    print(f&quot;second unfiltered consumer rejected: {e}&quot;)</span>
+<span id="L1308" class="l"> </span>
+<span id="L1309" class="l"> </span>
+<span id="L1310" class="l"> </span>
+<span id="L1311" class="l"># Drop the unfiltered consumer so the subject space is free again.</span>
+<span id="L1312" class="l"> </span>
+<span id="L1313" class="l">await js.delete_consumer(&quot;FULFILLMENT&quot;, &quot;shippers&quot;)</span>
+<span id="L1314" class="l"> </span>
+<span id="L1315" class="l"> </span>
+<span id="L1316" class="l"> </span>
+<span id="L1317" class="l"># Filtered consumers work as long as their subjects do not overlap. Split</span>
+<span id="L1318" class="l"> </span>
+<span id="L1319" class="l"># the queue by region: one worker pool per destination.</span>
+<span id="L1320" class="l"> </span>
+<span id="L1321" class="l">await js.add_consumer(</span>
+<span id="L1322" class="l"> </span>
+<span id="L1323" class="l">    &quot;FULFILLMENT&quot;,</span>
+<span id="L1324" class="l"> </span>
+<span id="L1325" class="l">    ConsumerConfig(</span>
+<span id="L1326" class="l"> </span>
+<span id="L1327" class="l">        durable_name=&quot;us-shippers&quot;,</span>
+<span id="L1328" class="l"> </span>
+<span id="L1329" class="l">        filter_subject=&quot;fulfill.us&quot;,</span>
+<span id="L1330" class="l"> </span>
+<span id="L1331" class="l">        ack_policy=AckPolicy.EXPLICIT,</span>
+<span id="L1332" class="l"> </span>
+<span id="L1333" class="l">    ),</span>
+<span id="L1334" class="l"> </span>
+<span id="L1335" class="l">)</span>
+<span id="L1336" class="l"> </span>
+<span id="L1337" class="l">await js.add_consumer(</span>
+<span id="L1338" class="l"> </span>
+<span id="L1339" class="l">    &quot;FULFILLMENT&quot;,</span>
+<span id="L1340" class="l"> </span>
+<span id="L1341" class="l">    ConsumerConfig(</span>
+<span id="L1342" class="l"> </span>
+<span id="L1343" class="l">        durable_name=&quot;eu-shippers&quot;,</span>
+<span id="L1344" class="l"> </span>
+<span id="L1345" class="l">        filter_subject=&quot;fulfill.eu&quot;,</span>
+<span id="L1346" class="l"> </span>
+<span id="L1347" class="l">        ack_policy=AckPolicy.EXPLICIT,</span>
+<span id="L1348" class="l"> </span>
+<span id="L1349" class="l">    ),</span>
+<span id="L1350" class="l"> </span>
+<span id="L1351" class="l">)</span>
+<span id="L1352" class="l"> </span>
+<span id="L1353" class="l">print(&quot;added filtered consumers us-shippers and eu-shippers&quot;)</span>
+<span id="L1354" class="l">```</span>
+<span id="L1355" class="l"> </span>
+<span id="L1356" class="l">#### Java</span>
+<span id="L1357" class="l"> </span>
+<span id="L1358" class="l">```</span>
+<span id="L1359" class="l">// One unfiltered consumer on a WorkQueue stream is fine: it owns every</span>
+<span id="L1360" class="l"> </span>
+<span id="L1361" class="l">// subject, so each task still has exactly one owner.</span>
+<span id="L1362" class="l"> </span>
+<span id="L1363" class="l">jsm.addOrUpdateConsumer(&quot;FULFILLMENT&quot;, ConsumerConfiguration.builder()</span>
+<span id="L1364" class="l"> </span>
+<span id="L1365" class="l">    .durable(&quot;shippers&quot;)</span>
+<span id="L1366" class="l"> </span>
+<span id="L1367" class="l">    .ackPolicy(AckPolicy.Explicit)</span>
+<span id="L1368" class="l"> </span>
+<span id="L1369" class="l">    .build());</span>
+<span id="L1370" class="l"> </span>
+<span id="L1371" class="l">System.out.println(&quot;Added consumer: shippers&quot;);</span>
+<span id="L1372" class="l"> </span>
+<span id="L1373" class="l"> </span>
+<span id="L1374" class="l"> </span>
+<span id="L1375" class="l">// A second unfiltered consumer would let two workers claim the same</span>
+<span id="L1376" class="l"> </span>
+<span id="L1377" class="l">// task, so the WorkQueue stream rejects it.</span>
+<span id="L1378" class="l"> </span>
+<span id="L1379" class="l">try {</span>
+<span id="L1380" class="l"> </span>
+<span id="L1381" class="l">    jsm.addOrUpdateConsumer(&quot;FULFILLMENT&quot;, ConsumerConfiguration.builder()</span>
+<span id="L1382" class="l"> </span>
+<span id="L1383" class="l">        .durable(&quot;eu-shippers&quot;)</span>
+<span id="L1384" class="l"> </span>
+<span id="L1385" class="l">        .ackPolicy(AckPolicy.Explicit)</span>
+<span id="L1386" class="l"> </span>
+<span id="L1387" class="l">        .build());</span>
+<span id="L1388" class="l"> </span>
+<span id="L1389" class="l">}</span>
+<span id="L1390" class="l"> </span>
+<span id="L1391" class="l">catch (JetStreamApiException e) {</span>
+<span id="L1392" class="l"> </span>
+<span id="L1393" class="l">    System.out.println(&quot;Rejected: &quot; + e.getMessage());</span>
+<span id="L1394" class="l"> </span>
+<span id="L1395" class="l">    // multiple non-filtered consumers not allowed on workqueue stream [10099]</span>
+<span id="L1396" class="l"> </span>
+<span id="L1397" class="l">}</span>
+<span id="L1398" class="l"> </span>
+<span id="L1399" class="l"> </span>
+<span id="L1400" class="l"> </span>
+<span id="L1401" class="l">// To split the work, drop the catch-all consumer...</span>
+<span id="L1402" class="l"> </span>
+<span id="L1403" class="l">jsm.deleteConsumer(&quot;FULFILLMENT&quot;, &quot;shippers&quot;);</span>
+<span id="L1404" class="l"> </span>
+<span id="L1405" class="l"> </span>
+<span id="L1406" class="l"> </span>
+<span id="L1407" class="l">// ...and give each region its own subject filter. The filters don&#x27;t</span>
+<span id="L1408" class="l"> </span>
+<span id="L1409" class="l">// overlap, so every task still maps to exactly one consumer.</span>
+<span id="L1410" class="l"> </span>
+<span id="L1411" class="l">jsm.addOrUpdateConsumer(&quot;FULFILLMENT&quot;, ConsumerConfiguration.builder()</span>
+<span id="L1412" class="l"> </span>
+<span id="L1413" class="l">    .durable(&quot;us-shippers&quot;)</span>
+<span id="L1414" class="l"> </span>
+<span id="L1415" class="l">    .filterSubject(&quot;fulfill.us&quot;)</span>
+<span id="L1416" class="l"> </span>
+<span id="L1417" class="l">    .ackPolicy(AckPolicy.Explicit)</span>
+<span id="L1418" class="l"> </span>
+<span id="L1419" class="l">    .build());</span>
+<span id="L1420" class="l"> </span>
+<span id="L1421" class="l">jsm.addOrUpdateConsumer(&quot;FULFILLMENT&quot;, ConsumerConfiguration.builder()</span>
+<span id="L1422" class="l"> </span>
+<span id="L1423" class="l">    .durable(&quot;eu-shippers&quot;)</span>
+<span id="L1424" class="l"> </span>
+<span id="L1425" class="l">    .filterSubject(&quot;fulfill.eu&quot;)</span>
+<span id="L1426" class="l"> </span>
+<span id="L1427" class="l">    .ackPolicy(AckPolicy.Explicit)</span>
+<span id="L1428" class="l"> </span>
+<span id="L1429" class="l">    .build());</span>
+<span id="L1430" class="l"> </span>
+<span id="L1431" class="l">System.out.println(&quot;Added filtered consumers: us-shippers (fulfill.us), eu-shippers (fulfill.eu)&quot;);</span>
+<span id="L1432" class="l">```</span>
+<span id="L1433" class="l"> </span>
+<span id="L1434" class="l">#### Rust</span>
+<span id="L1435" class="l"> </span>
+<span id="L1436" class="l">```</span>
+<span id="L1437" class="l">// One unfiltered consumer claims every order on the queue. That is allowed.</span>
+<span id="L1438" class="l"> </span>
+<span id="L1439" class="l">stream</span>
+<span id="L1440" class="l"> </span>
+<span id="L1441" class="l">    .create_consumer(pull::Config {</span>
+<span id="L1442" class="l"> </span>
+<span id="L1443" class="l">        durable_name: Some(&quot;shippers&quot;.to_string()),</span>
+<span id="L1444" class="l"> </span>
+<span id="L1445" class="l">        ack_policy: AckPolicy::Explicit,</span>
+<span id="L1446" class="l"> </span>
+<span id="L1447" class="l">        ..Default::default()</span>
+<span id="L1448" class="l"> </span>
+<span id="L1449" class="l">    })</span>
+<span id="L1450" class="l"> </span>
+<span id="L1451" class="l">    .await?;</span>
+<span id="L1452" class="l"> </span>
+<span id="L1453" class="l"> </span>
+<span id="L1454" class="l"> </span>
+<span id="L1455" class="l">// A WorkQueue stream gives each message to exactly one consumer, so two</span>
+<span id="L1456" class="l"> </span>
+<span id="L1457" class="l">// unfiltered consumers would both claim the same orders. The server rejects</span>
+<span id="L1458" class="l"> </span>
+<span id="L1459" class="l">// the second one (err 10099: multiple non-filtered consumers not allowed on</span>
+<span id="L1460" class="l"> </span>
+<span id="L1461" class="l">// workqueue stream).</span>
+<span id="L1462" class="l"> </span>
+<span id="L1463" class="l">match stream</span>
+<span id="L1464" class="l"> </span>
+<span id="L1465" class="l">    .create_consumer(pull::Config {</span>
+<span id="L1466" class="l"> </span>
+<span id="L1467" class="l">        durable_name: Some(&quot;eu-shippers&quot;.to_string()),</span>
+<span id="L1468" class="l"> </span>
+<span id="L1469" class="l">        ack_policy: AckPolicy::Explicit,</span>
+<span id="L1470" class="l"> </span>
+<span id="L1471" class="l">        ..Default::default()</span>
+<span id="L1472" class="l"> </span>
+<span id="L1473" class="l">    })</span>
+<span id="L1474" class="l"> </span>
+<span id="L1475" class="l">    .await</span>
+<span id="L1476" class="l"> </span>
+<span id="L1477" class="l">{</span>
+<span id="L1478" class="l"> </span>
+<span id="L1479" class="l">    Ok(_) =&gt; println!(&quot;unexpected: second unfiltered consumer was accepted&quot;),</span>
+<span id="L1480" class="l"> </span>
+<span id="L1481" class="l">    Err(err) =&gt; println!(&quot;rejected: {err}&quot;),</span>
+<span id="L1482" class="l"> </span>
+<span id="L1483" class="l">}</span>
+<span id="L1484" class="l"> </span>
+<span id="L1485" class="l"> </span>
+<span id="L1486" class="l"> </span>
+<span id="L1487" class="l">// Split the work by subject instead. Drop the unfiltered consumer, then add</span>
+<span id="L1488" class="l"> </span>
+<span id="L1489" class="l">// one consumer per region. Their filters do not overlap, so both succeed.</span>
+<span id="L1490" class="l"> </span>
+<span id="L1491" class="l">stream.delete_consumer(&quot;shippers&quot;).await?;</span>
+<span id="L1492" class="l"> </span>
+<span id="L1493" class="l"> </span>
+<span id="L1494" class="l"> </span>
+<span id="L1495" class="l">stream</span>
+<span id="L1496" class="l"> </span>
+<span id="L1497" class="l">    .create_consumer(pull::Config {</span>
+<span id="L1498" class="l"> </span>
+<span id="L1499" class="l">        durable_name: Some(&quot;us-shippers&quot;.to_string()),</span>
+<span id="L1500" class="l"> </span>
+<span id="L1501" class="l">        filter_subject: &quot;fulfill.us&quot;.to_string(),</span>
+<span id="L1502" class="l"> </span>
+<span id="L1503" class="l">        ack_policy: AckPolicy::Explicit,</span>
+<span id="L1504" class="l"> </span>
+<span id="L1505" class="l">        ..Default::default()</span>
+<span id="L1506" class="l"> </span>
+<span id="L1507" class="l">    })</span>
+<span id="L1508" class="l"> </span>
+<span id="L1509" class="l">    .await?;</span>
+<span id="L1510" class="l"> </span>
+<span id="L1511" class="l">stream</span>
+<span id="L1512" class="l"> </span>
+<span id="L1513" class="l">    .create_consumer(pull::Config {</span>
+<span id="L1514" class="l"> </span>
+<span id="L1515" class="l">        durable_name: Some(&quot;eu-shippers&quot;.to_string()),</span>
+<span id="L1516" class="l"> </span>
+<span id="L1517" class="l">        filter_subject: &quot;fulfill.eu&quot;.to_string(),</span>
+<span id="L1518" class="l"> </span>
+<span id="L1519" class="l">        ack_policy: AckPolicy::Explicit,</span>
+<span id="L1520" class="l"> </span>
+<span id="L1521" class="l">        ..Default::default()</span>
+<span id="L1522" class="l"> </span>
+<span id="L1523" class="l">    })</span>
+<span id="L1524" class="l"> </span>
+<span id="L1525" class="l">    .await?;</span>
+<span id="L1526" class="l"> </span>
+<span id="L1527" class="l">println!(&quot;us-shippers and eu-shippers created&quot;);</span>
+<span id="L1528" class="l">```</span>
+<span id="L1529" class="l"> </span>
+<span id="L1530" class="l">#### C#/.NET</span>
+<span id="L1531" class="l"> </span>
+<span id="L1532" class="l">```</span>
+<span id="L1533" class="l">// One unfiltered consumer over the whole queue is fine.</span>
+<span id="L1534" class="l"> </span>
+<span id="L1535" class="l">await js.CreateOrUpdateConsumerAsync(&quot;FULFILLMENT&quot;, new ConsumerConfig(&quot;shippers&quot;)</span>
+<span id="L1536" class="l"> </span>
+<span id="L1537" class="l">{</span>
+<span id="L1538" class="l"> </span>
+<span id="L1539" class="l">    AckPolicy = ConsumerConfigAckPolicy.Explicit,</span>
+<span id="L1540" class="l"> </span>
+<span id="L1541" class="l">});</span>
+<span id="L1542" class="l"> </span>
+<span id="L1543" class="l"> </span>
+<span id="L1544" class="l"> </span>
+<span id="L1545" class="l">// A second unfiltered consumer would see the same orders, so two workers</span>
+<span id="L1546" class="l"> </span>
+<span id="L1547" class="l">// could each be handed the same task. A WorkQueue stream refuses it.</span>
+<span id="L1548" class="l"> </span>
+<span id="L1549" class="l">try</span>
+<span id="L1550" class="l"> </span>
+<span id="L1551" class="l">{</span>
+<span id="L1552" class="l"> </span>
+<span id="L1553" class="l">    await js.CreateOrUpdateConsumerAsync(&quot;FULFILLMENT&quot;, new ConsumerConfig(&quot;eu-shippers&quot;)</span>
+<span id="L1554" class="l"> </span>
+<span id="L1555" class="l">    {</span>
+<span id="L1556" class="l"> </span>
+<span id="L1557" class="l">        AckPolicy = ConsumerConfigAckPolicy.Explicit,</span>
+<span id="L1558" class="l"> </span>
+<span id="L1559" class="l">    });</span>
+<span id="L1560" class="l"> </span>
+<span id="L1561" class="l">}</span>
+<span id="L1562" class="l"> </span>
+<span id="L1563" class="l">catch (NatsJSApiException e)</span>
+<span id="L1564" class="l"> </span>
+<span id="L1565" class="l">{</span>
+<span id="L1566" class="l"> </span>
+<span id="L1567" class="l">    output.WriteLine($&quot;rejected (err {e.Error.ErrCode}): {e.Error.Description}&quot;);</span>
+<span id="L1568" class="l"> </span>
+<span id="L1569" class="l">}</span>
+<span id="L1570" class="l"> </span>
+<span id="L1571" class="l"> </span>
+<span id="L1572" class="l"> </span>
+<span id="L1573" class="l">// Give each worker its own slice of the subjects instead. Drop the</span>
+<span id="L1574" class="l"> </span>
+<span id="L1575" class="l">// catch-all consumer first...</span>
+<span id="L1576" class="l"> </span>
+<span id="L1577" class="l">await js.DeleteConsumerAsync(&quot;FULFILLMENT&quot;, &quot;shippers&quot;);</span>
+<span id="L1578" class="l"> </span>
+<span id="L1579" class="l"> </span>
+<span id="L1580" class="l"> </span>
+<span id="L1581" class="l">// ...then create two consumers whose filters don&#x27;t overlap. Both succeed,</span>
+<span id="L1582" class="l"> </span>
+<span id="L1583" class="l">// because no order can be claimed by more than one of them.</span>
+<span id="L1584" class="l"> </span>
+<span id="L1585" class="l">await js.CreateOrUpdateConsumerAsync(&quot;FULFILLMENT&quot;, new ConsumerConfig(&quot;us-shippers&quot;)</span>
+<span id="L1586" class="l"> </span>
+<span id="L1587" class="l">{</span>
+<span id="L1588" class="l"> </span>
+<span id="L1589" class="l">    AckPolicy = ConsumerConfigAckPolicy.Explicit,</span>
+<span id="L1590" class="l"> </span>
+<span id="L1591" class="l">    FilterSubject = &quot;fulfill.us&quot;,</span>
+<span id="L1592" class="l"> </span>
+<span id="L1593" class="l">});</span>
+<span id="L1594" class="l"> </span>
+<span id="L1595" class="l"> </span>
+<span id="L1596" class="l"> </span>
+<span id="L1597" class="l">await js.CreateOrUpdateConsumerAsync(&quot;FULFILLMENT&quot;, new ConsumerConfig(&quot;eu-shippers&quot;)</span>
+<span id="L1598" class="l"> </span>
+<span id="L1599" class="l">{</span>
+<span id="L1600" class="l"> </span>
+<span id="L1601" class="l">    AckPolicy = ConsumerConfigAckPolicy.Explicit,</span>
+<span id="L1602" class="l"> </span>
+<span id="L1603" class="l">    FilterSubject = &quot;fulfill.eu&quot;,</span>
+<span id="L1604" class="l"> </span>
+<span id="L1605" class="l">});</span>
+<span id="L1606" class="l"> </span>
+<span id="L1607" class="l"> </span>
+<span id="L1608" class="l"> </span>
+<span id="L1609" class="l">output.WriteLine(&quot;Created us-shippers and eu-shippers on non-overlapping filters&quot;);</span>
+<span id="L1610" class="l">```</span>
+<span id="L1611" class="l"> </span>
+<span id="L1612" class="l">#### C</span>
+<span id="L1613" class="l"> </span>
+<span id="L1614" class="l">```</span>
+<span id="L1615" class="l">// One unfiltered consumer covers every order in the queue.</span>
+<span id="L1616" class="l"> </span>
+<span id="L1617" class="l">jsConsumerConfig cc;</span>
+<span id="L1618" class="l"> </span>
+<span id="L1619" class="l"> </span>
+<span id="L1620" class="l"> </span>
+<span id="L1621" class="l">jsConsumerConfig_Init(&amp;cc);</span>
+<span id="L1622" class="l"> </span>
+<span id="L1623" class="l">cc.Durable   = &quot;shippers&quot;;</span>
+<span id="L1624" class="l"> </span>
+<span id="L1625" class="l">cc.AckPolicy = js_AckExplicit;</span>
+<span id="L1626" class="l"> </span>
+<span id="L1627" class="l">s = js_AddConsumer(NULL, js, &quot;FULFILLMENT&quot;, &amp;cc, NULL, &amp;jerr);</span>
+<span id="L1628" class="l"> </span>
+<span id="L1629" class="l">if (s == NATS_OK)</span>
+<span id="L1630" class="l"> </span>
+<span id="L1631" class="l">    printf(&quot;created unfiltered consumer: shippers\n&quot;);</span>
+<span id="L1632" class="l"> </span>
+<span id="L1633" class="l"> </span>
+<span id="L1634" class="l"> </span>
+<span id="L1635" class="l">// A WorkQueue stream delivers each message to exactly one consumer,</span>
+<span id="L1636" class="l"> </span>
+<span id="L1637" class="l">// so it refuses a second consumer whose reach overlaps the first.</span>
+<span id="L1638" class="l"> </span>
+<span id="L1639" class="l">// Two unfiltered consumers both cover fulfill.&gt;, so this is rejected</span>
+<span id="L1640" class="l"> </span>
+<span id="L1641" class="l">// (err 10099: multiple non-filtered consumers not allowed on</span>
+<span id="L1642" class="l"> </span>
+<span id="L1643" class="l">// workqueue stream).</span>
+<span id="L1644" class="l"> </span>
+<span id="L1645" class="l">if (s == NATS_OK)</span>
+<span id="L1646" class="l"> </span>
+<span id="L1647" class="l">{</span>
+<span id="L1648" class="l"> </span>
+<span id="L1649" class="l">    jsConsumerConfig_Init(&amp;cc);</span>
+<span id="L1650" class="l"> </span>
+<span id="L1651" class="l">    cc.Durable   = &quot;eu-shippers&quot;;</span>
+<span id="L1652" class="l"> </span>
+<span id="L1653" class="l">    cc.AckPolicy = js_AckExplicit;</span>
+<span id="L1654" class="l"> </span>
+<span id="L1655" class="l">    if (js_AddConsumer(NULL, js, &quot;FULFILLMENT&quot;, &amp;cc, NULL, &amp;jerr) != NATS_OK)</span>
+<span id="L1656" class="l"> </span>
+<span id="L1657" class="l">        printf(&quot;second unfiltered consumer rejected: %s\n&quot;, nats_GetLastError(NULL));</span>
+<span id="L1658" class="l"> </span>
+<span id="L1659" class="l">}</span>
+<span id="L1660" class="l"> </span>
+<span id="L1661" class="l"> </span>
+<span id="L1662" class="l"> </span>
+<span id="L1663" class="l">// Drop the catch-all consumer so we can split the queue by region</span>
+<span id="L1664" class="l"> </span>
+<span id="L1665" class="l">// instead.</span>
+<span id="L1666" class="l"> </span>
+<span id="L1667" class="l">if (s == NATS_OK)</span>
+<span id="L1668" class="l"> </span>
+<span id="L1669" class="l">    s = js_DeleteConsumer(js, &quot;FULFILLMENT&quot;, &quot;shippers&quot;, NULL, &amp;jerr);</span>
+<span id="L1670" class="l"> </span>
+<span id="L1671" class="l"> </span>
+<span id="L1672" class="l"> </span>
+<span id="L1673" class="l">// Filtered consumers are allowed as long as their subjects don&#x27;t</span>
+<span id="L1674" class="l"> </span>
+<span id="L1675" class="l">// overlap. us-shippers takes fulfill.us, eu-shippers takes</span>
+<span id="L1676" class="l"> </span>
+<span id="L1677" class="l">// fulfill.eu, and each order still goes to exactly one worker.</span>
+<span id="L1678" class="l"> </span>
+<span id="L1679" class="l">if (s == NATS_OK)</span>
+<span id="L1680" class="l"> </span>
+<span id="L1681" class="l">{</span>
+<span id="L1682" class="l"> </span>
+<span id="L1683" class="l">    jsConsumerConfig_Init(&amp;cc);</span>
+<span id="L1684" class="l"> </span>
+<span id="L1685" class="l">    cc.Durable       = &quot;us-shippers&quot;;</span>
+<span id="L1686" class="l"> </span>
+<span id="L1687" class="l">    cc.FilterSubject = &quot;fulfill.us&quot;;</span>
+<span id="L1688" class="l"> </span>
+<span id="L1689" class="l">    cc.AckPolicy     = js_AckExplicit;</span>
+<span id="L1690" class="l"> </span>
+<span id="L1691" class="l">    s = js_AddConsumer(NULL, js, &quot;FULFILLMENT&quot;, &amp;cc, NULL, &amp;jerr);</span>
+<span id="L1692" class="l"> </span>
+<span id="L1693" class="l">}</span>
+<span id="L1694" class="l"> </span>
+<span id="L1695" class="l">if (s == NATS_OK)</span>
+<span id="L1696" class="l"> </span>
+<span id="L1697" class="l">{</span>
+<span id="L1698" class="l"> </span>
+<span id="L1699" class="l">    jsConsumerConfig_Init(&amp;cc);</span>
+<span id="L1700" class="l"> </span>
+<span id="L1701" class="l">    cc.Durable       = &quot;eu-shippers&quot;;</span>
+<span id="L1702" class="l"> </span>
+<span id="L1703" class="l">    cc.FilterSubject = &quot;fulfill.eu&quot;;</span>
+<span id="L1704" class="l"> </span>
+<span id="L1705" class="l">    cc.AckPolicy     = js_AckExplicit;</span>
+<span id="L1706" class="l"> </span>
+<span id="L1707" class="l">    s = js_AddConsumer(NULL, js, &quot;FULFILLMENT&quot;, &amp;cc, NULL, &amp;jerr);</span>
+<span id="L1708" class="l"> </span>
+<span id="L1709" class="l">}</span>
+<span id="L1710" class="l"> </span>
+<span id="L1711" class="l">if (s == NATS_OK)</span>
+<span id="L1712" class="l"> </span>
+<span id="L1713" class="l">    printf(&quot;created filtered consumers: us-shippers (fulfill.us), eu-shippers (fulfill.eu)\n&quot;);</span>
+<span id="L1714" class="l">```</span>
+<span id="L1715" class="l"> </span>
+<span id="L1716" class="l">## Where you are</span>
+<span id="L1717" class="l"> </span>
+<span id="L1718" class="l">`ORDERS` is unchanged. It&#x27;s a Limits stream that holds its order history and lets late and repeat consumers replay.</span>
+<span id="L1719" class="l"> </span>
+<span id="L1720" class="l">You now have:</span>
+<span id="L1721" class="l"> </span>
+<span id="L1722" class="l">* The three retention policies (Limits, Interest, WorkQueue) and the one question that separates them: who decides a message is finished.</span>
+<span id="L1723" class="l">* Which policy fits which kind of work: audit log → Limits, fan-out → Interest, job queue → WorkQueue.</span>
+<span id="L1724" class="l">* A `FULFILLMENT` WorkQueue stream — the shipping workers&#x27; queue — that dropped a task on ack while `ORDERS` kept the record.</span>
+<span id="L1725" class="l">* The rule that retention is fixed at creation, not switched on a live stream.</span>
+<span id="L1726" class="l"> </span>
+<span id="L1727" class="l">## What&#x27;s next</span>
+<span id="L1728" class="l"> </span>
+<span id="L1729" class="l">Retention removes messages on a schedule the server runs. The next page covers removing them by hand: [deleting a single message](/learn/jetstream/altering-stream-state.md) and purging the stream.</span>
+<span id="L1730" class="l"> </span>
+<span id="L1731" class="l">## See also</span>
+<span id="L1732" class="l"> </span>
+<span id="L1733" class="l">* [Reference → Stream Configuration](/reference/jetstream/api/stream/create.md) — the `retention` field, its three values, and how each interacts with limits, republish, and mirrors.</span>
+<span id="L1734" class="l">* [Shaping the stream](/learn/jetstream/shaping-the-stream.md) — the limits that govern a Limits stream.</span>
+<span id="L1735" class="l">* [A pool of workers](/learn/jetstream/worker-pool.md) — the worker pool that shares one consumer, the pattern that fits WorkQueue.</span>
+<span id="L1736" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../../../raw/nats-docs/learn/jetstream/reading-back.md.html">← reading-back.md</a> · <a href="../../../../raw/nats-docs/learn/jetstream/shaping-the-stream.md.html">shaping-the-stream.md →</a></div></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../../../graph-data.js" defer></script>
+<script src="../../../../assets/graph.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

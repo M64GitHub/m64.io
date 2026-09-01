@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docs.nats.io — decentralized-auth.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="stylesheet" href="../../../../assets/theme.css">
+<link rel="stylesheet" href="../../../../assets/types.css">
+<script>window.ROOT="../../../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../../../index.html" class="">Home</a><a href="../../../../graph.html" class="">Graph</a><a href="../../../../cheatsheets.html" class="">Cheat sheets</a><a href="../../../../browse.html" class="">Browse</a><a href="../../../../inbox/question-bank.html" class="">Questions</a><a href="../../../../inbox/adr-toc.html" class="">ADRs</a><a href="../../../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../../../inbox/server-issues.html" class="">Server issues</a><a href="../../../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../../../sources.html" class="on">Sources</a><a href="../../../../health.html" class="">Health</a><a href="../../../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../../../graph.html">Link graph</a></li><li><a href="../../../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../../../browse.html">Browse by facet</a></li><li><a href="../../../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../../../sources.html">Raw sources</a></li><li><a href="../../../../wanted.html">Wanted pages</a></li><li><a href="../../../../health.html">Wiki health</a></li><li><a href="../../../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../../../index.html">Home</a> › <a href="../../../../sources.html">Sources</a> › nats-docs</div>
+<h1>docs.nats.io — decentralized-auth.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../../../sources.html#nats-docs">nats-docs</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://docs.nats.io">https://docs.nats.io</a> — paths taken from the site's <code>llms.txt</code>, fetched by <code>tools/fetch-docs.py</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-docs/learn/security/decentralized-auth.md</code> · 462 lines · 22 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../../../raw/nats-docs/learn/security/decentralized-auth.md" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></div></div><div class="pn"><a href="../../../../raw/nats-docs/learn/security/cross-account.md.html">← cross-account.md</a> · <a href="../../../../raw/nats-docs/learn/security/encryption.md.html">encryption.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://docs.nats.io/learn/security/decentralized-auth.md · fetched 2026-08-31 · section: decentralized-auth --&gt;</span>
+<span id="L2" class="l"># Decentralized authentication</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">On the [previous page](/learn/security/operator-mode.md) you built the `ACME` operator, pushed the `ORDERS` and `ANALYTICS` accounts to the resolver, and connected `order-svc` with a credentials file. The commands worked; this page explains what the server actually verified when that connection came in. It then closes the one gap the build left open: `order-svc` is still unrestricted, while in config mode it was limited to `orders.&gt;`. By the end it&#x27;s re-issued from a scoped signing key that carries those permissions, with an expiring credentials file and a way to revoke it.</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">## The problem with one big user list</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">Why go through the operator setup at all? Suppose Acme is a year older: the `ORDERS` account holds 15 services, `ANALYTICS` holds eight, and a third team wants its own account. With centralized authentication (the model from the first half of this chapter), every one of those identities lives in the server config, and only the team holding that config can add one.</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">You want each team to manage its own users without touching the server. The server shouldn&#x27;t need to know every user in advance, only a way to tell a real user from a forged one. A signature check does that: on the previous page you created `order-svc` without adding any user config to the server.</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">## The three identities in the trust chain</span>
+<span id="L13" class="l"> </span>
+<span id="L14" class="l">Decentralized authentication arranges identities into a chain with three links.</span>
+<span id="L15" class="l"> </span>
+<span id="L16" class="l">The **operator** is the root of trust. There&#x27;s one per deployment — `ACME` in our setup. It&#x27;s the single identity the server is told to trust.</span>
+<span id="L17" class="l"> </span>
+<span id="L18" class="l">An **account** is the tenant you met on the [Accounts and multitenancy](/learn/security/accounts-and-multitenancy.md) page: `ORDERS` and `ANALYTICS` in our scenario. In this model each account is its own identity, and the operator vouches for it.</span>
+<span id="L19" class="l"> </span>
+<span id="L20" class="l">A **user** is the auth identity a client connects as: `order-svc` and `analytics-reader`. Each user belongs to an account, and the account vouches for it.</span>
+<span id="L21" class="l"> </span>
+<span id="L22" class="l">&quot;Vouches for&quot; has a precise meaning here: it means signs. The operator signs the account. The account signs the user. The result is a chain you can verify from any link back up to the root.</span>
+<span id="L23" class="l"> </span>
+<span id="L24" class="l">**Message flow — The trust chain at connect time (animated):** The operator-account-user trust chain at connect time. Operator ACME signs the ORDERS account JWT, and ORDERS signs the order-svc user JWT. The client presents its user JWT and signs the server&#x27;s challenge with its seed; the server verifies the user JWT against the stored ORDERS account JWT and verifies ORDERS against the one operator key it trusts. Two signature checks up the chain, and the client is admitted — the server never stores a user list.</span>
+<span id="L25" class="l"> </span>
+<span id="L26" class="l">* operator ACME → account ORDERS (subject: signs)</span>
+<span id="L27" class="l">* account ORDERS → user order-svc (subject: signs)</span>
+<span id="L28" class="l">* client → NATS (subject: presents user JWT)</span>
+<span id="L29" class="l">* user order-svc → account ORDERS (subject: verify ↑)</span>
+<span id="L30" class="l">* account ORDERS → operator ACME (subject: verify ↑)</span>
+<span id="L31" class="l">* NATS → client (subject: admitted)</span>
+<span id="L32" class="l"> </span>
+<span id="L33" class="l">## How an identity signs the next</span>
+<span id="L34" class="l"> </span>
+<span id="L35" class="l">Each identity holds a key it signs and verifies with. In NATS these are **NKeys**, built on Ed25519, the same elliptic-curve signature scheme used for SSH and modern code signing. An NKey comes in two forms: a public NKey others verify against, and a private seed the signer keeps. The signer signs with the seed; everyone else needs only the public NKey to check the signature. The server only ever handles public NKeys and signatures, never anyone&#x27;s seed.</span>
+<span id="L36" class="l"> </span>
+<span id="L37" class="l">An NKey is easy to recognize because its first letter names its role: an operator NKey starts with `O`, an account NKey with `A`, a user NKey with `U`, and any seed also prepends `S`. So `OD2A...` is an operator&#x27;s public NKey and `SUAH...` is a user&#x27;s seed.</span>
+<span id="L38" class="l"> </span>
+<span id="L39" class="l">An identity isn&#x27;t limited to its one built-in key pair. An account can hold extra **signing keys** that also count as valid issuers for its users — you&#x27;ll use one shortly — and the operator can hold signing keys for accounts the same way. A user signed by an account signing key carries an `issuer_account` field in its JWT naming the account it belongs to. (There&#x27;s always an issuer, it&#x27;s just that the default is implicit and is the signing key inherent in the account rather than an added key.)</span>
+<span id="L40" class="l"> </span>
+<span id="L41" class="l">## The user JWT</span>
+<span id="L42" class="l"> </span>
+<span id="L43" class="l">A user connection proves who it is by presenting a **JSON Web Token (JWT)**, which provably carries in it the public key corresponding to the private key which signed the server&#x27;s challenge. A JWT is a small, signed document that states a set of claims and carries the signature proving those claims haven&#x27;t been altered.</span>
+<span id="L44" class="l"> </span>
+<span id="L45" class="l">A user JWT isn&#x27;t the &quot;token&quot; from [Authentication basics](/learn/security/authentication-basics.md): that token is a password-style secret the server compares against its config, while a user JWT is a signed document anyone can inspect but only the right account (signing) key can produce. The credentials file from the previous page holds the user JWT in its first block; the second block is the user&#x27;s seed, and the next section shows why the client needs both.</span>
+<span id="L46" class="l"> </span>
+<span id="L47" class="l">A user JWT names the user and the account that issued it. When `order-svc` connects, it presents its user JWT. The server reads from it which account issued it, fetches that account&#x27;s own JWT from the resolver, and checks that the account JWT was signed by the operator. Each JWT references the next one up the chain.</span>
+<span id="L48" class="l"> </span>
+<span id="L49" class="l">## What the server actually checks</span>
+<span id="L50" class="l"> </span>
+<span id="L51" class="l">The server&#x27;s config replaces the user list with a single embedded operator JWT: the long `operator: eyJ...` line in the `server.conf` you generated. That JWT contains the operator&#x27;s public key, and it can list extra operator signing keys; any of those keys can vouch for an account.</span>
+<span id="L52" class="l"> </span>
+<span id="L53" class="l">One more input arrives at connect time. The server sends the client a **nonce**, a random value generated fresh for this connection. The client signs the nonce with the user seed and sends the signature back along with the user JWT.</span>
+<span id="L54" class="l"> </span>
+<span id="L55" class="l">Given all that, the server checks:</span>
+<span id="L56" class="l"> </span>
+<span id="L57" class="l">1. The nonce signature verifies against the user&#x27;s public key named in the user JWT. This proves the client holds the seed right now, not just a copy of the JWT.</span>
+<span id="L58" class="l">2. The user JWT was signed by the account that issued it. The server verifies that signature against the account&#x27;s identity key or one of its signing keys.</span>
+<span id="L59" class="l">3. The account JWT, fetched from the resolver, was signed by the operator. The server verifies it against the keys in the operator JWT it was configured with.</span>
+<span id="L60" class="l"> </span>
+<span id="L61" class="l">If all three hold, the user is genuine: the server admits it and applies whatever permissions and limits the JWTs carry.</span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l">The numbered checks also show why each kind of forgery fails. A copied user JWT without the seed can&#x27;t sign the nonce and fails check 1 — that&#x27;s why a stolen JWT alone is useless, and why the creds file has two sections. A homemade user JWT fails check 2, because the attacker holds no key of `ORDERS`. A homemade account JWT fails check 3, because only the operator&#x27;s seed can produce a signature the server&#x27;s operator JWT vouches for.</span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l">(But see below, re Bearer Tokens, for an exception to this.)</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l">## Why removing the user list matters</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l">Centralized authentication checks the user against a list. Decentralized authentication checks that the user&#x27;s JWT traces back to the operator, and that scales because a signature check works for a user the server has never seen — no config entry has to exist before the user connects.</span>
+<span id="L70" class="l"> </span>
+<span id="L71" class="l">This is what lets each team run its own account and create its own users. The `ORDERS` team signs `order-svc` with keys of the `ORDERS` account. The `ANALYTICS` team signs `analytics-reader` with keys of `ANALYTICS`. Neither team touches the server, and the server trusts both because the operator vouched for both accounts.</span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">## Scoped permissions with a signing key</span>
+<span id="L74" class="l"> </span>
+<span id="L75" class="l">One thing is still missing from parity with config mode. On the [Authorization](/learn/security/authorization.md) page, `order-svc` could publish only to `orders.&gt;`; the user you created on the previous page can publish anywhere in the account. In this model permissions travel inside the signed JWTs, and the clean way to assign them is a **scoped signing key**: an account signing key with a role name and a fixed permission set. Every user issued by that key gets exactly those permissions. Re-issue `order-svc` from a scoped key named `order-writer`:</span>
+<span id="L76" class="l"> </span>
+<span id="L77" class="l">#### CLI</span>
+<span id="L78" class="l"> </span>
+<span id="L79" class="l">```</span>
+<span id="L80" class="l">#!/bin/sh</span>
+<span id="L81" class="l"> </span>
+<span id="L82" class="l"># Re-issue order-svc from a scoped signing key instead of the ORDERS</span>
+<span id="L83" class="l"> </span>
+<span id="L84" class="l"># account&#x27;s identity key. The scoped key carries a fixed permission set,</span>
+<span id="L85" class="l"> </span>
+<span id="L86" class="l"># so every user it issues gets exactly those permissions.</span>
+<span id="L87" class="l"> </span>
+<span id="L88" class="l"> </span>
+<span id="L89" class="l"> </span>
+<span id="L90" class="l"># Add a scoped signing key with the role name &quot;order-writer&quot; to ORDERS.</span>
+<span id="L91" class="l"> </span>
+<span id="L92" class="l">nats auth account keys add ORDERS order-writer \</span>
+<span id="L93" class="l"> </span>
+<span id="L94" class="l">  --pub-allow &#x27;orders.&gt;&#x27; --sub-allow &#x27;_INBOX.&gt;&#x27;</span>
+<span id="L95" class="l"> </span>
+<span id="L96" class="l"># Expected output (your key will differ):</span>
+<span id="L97" class="l"> </span>
+<span id="L98" class="l"># Scoped Signing Key ACQFRPTMQBCYT7QB2PRHW3XEMBZYXLOXT5V7IBYTZP3CBPV6VCW2ME5E</span>
+<span id="L99" class="l"> </span>
+<span id="L100" class="l">#                Role: order-writer</span>
+<span id="L101" class="l"> </span>
+<span id="L102" class="l"> </span>
+<span id="L103" class="l"> </span>
+<span id="L104" class="l"># Remove the unrestricted order-svc from the previous page. --revoke</span>
+<span id="L105" class="l"> </span>
+<span id="L106" class="l"># records its key in the ORDERS account JWT, so the old creds stop</span>
+<span id="L107" class="l"> </span>
+<span id="L108" class="l"># working once the account is pushed again.</span>
+<span id="L109" class="l"> </span>
+<span id="L110" class="l">nats auth user rm order-svc ORDERS --revoke -f</span>
+<span id="L111" class="l"> </span>
+<span id="L112" class="l"># Removed user order-svc</span>
+<span id="L113" class="l"> </span>
+<span id="L114" class="l"> </span>
+<span id="L115" class="l"> </span>
+<span id="L116" class="l"># Re-issue order-svc signed by the scoped key. --key takes the role</span>
+<span id="L117" class="l"> </span>
+<span id="L118" class="l"># name; -f overwrites the creds file from the previous page.</span>
+<span id="L119" class="l"> </span>
+<span id="L120" class="l">nats auth user add order-svc ORDERS --key order-writer \</span>
+<span id="L121" class="l"> </span>
+<span id="L122" class="l">  --defaults --credential order-svc.creds -f</span>
+<span id="L123" class="l"> </span>
+<span id="L124" class="l"># User order-svc (UASBX5L3X7MSAAAPVRKNAQFRMAFKP4VOKB6O3ZZ72QYD2DQCL2W4TP5K)</span>
+<span id="L125" class="l"> </span>
+<span id="L126" class="l">#    Issuer: ACQFRPTM... (the scoped key)</span>
+<span id="L127" class="l"> </span>
+<span id="L128" class="l">#    Scoped: true</span>
+<span id="L129" class="l"> </span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l"> </span>
+<span id="L132" class="l"># Re-mint the creds file with a 720-hour expiry. Expiry lives on the</span>
+<span id="L133" class="l"> </span>
+<span id="L134" class="l"># minted credential; the stored user is untouched.</span>
+<span id="L135" class="l"> </span>
+<span id="L136" class="l">nats auth user credential order-svc.creds order-svc ORDERS --expire 720h -f</span>
+<span id="L137" class="l"> </span>
+<span id="L138" class="l"># Wrote credential for order-svc to order-svc.creds</span>
+<span id="L139" class="l"> </span>
+<span id="L140" class="l"> </span>
+<span id="L141" class="l"> </span>
+<span id="L142" class="l"># Confirm the issuer and the permissions applied from the scope.</span>
+<span id="L143" class="l"> </span>
+<span id="L144" class="l">nats auth user info order-svc ORDERS</span>
+<span id="L145" class="l">```</span>
+<span id="L146" class="l"> </span>
+<span id="L147" class="l">```</span>
+<span id="L148" class="l">Scoped Signing Key ACQFRPTMQBCYT7QB2PRHW3XEMBZYXLOXT5V7IBYTZP3CBPV6VCW2ME5E</span>
+<span id="L149" class="l"> </span>
+<span id="L150" class="l">...</span>
+<span id="L151" class="l"> </span>
+<span id="L152" class="l">Removed user order-svc</span>
+<span id="L153" class="l"> </span>
+<span id="L154" class="l">...</span>
+<span id="L155" class="l"> </span>
+<span id="L156" class="l">User order-svc (UASBX5L3X7MSAAAPVRKNAQFRMAFKP4VOKB6O3ZZ72QYD2DQCL2W4TP5K)</span>
+<span id="L157" class="l"> </span>
+<span id="L158" class="l"> </span>
+<span id="L159" class="l"> </span>
+<span id="L160" class="l">Configuration:</span>
+<span id="L161" class="l"> </span>
+<span id="L162" class="l"> </span>
+<span id="L163" class="l"> </span>
+<span id="L164" class="l">            Account: ORDERS (AC6S25M37MU5PJGKYF5QPJPJ6XDQZXJPIPTMCR5MK7ZALYQGX6MH4IRU)</span>
+<span id="L165" class="l"> </span>
+<span id="L166" class="l">             Issuer: ACQFRPTMQBCYT7QB2PRHW3XEMBZYXLOXT5V7IBYTZP3CBPV6VCW2ME5E</span>
+<span id="L167" class="l"> </span>
+<span id="L168" class="l">             Scoped: true</span>
+<span id="L169" class="l"> </span>
+<span id="L170" class="l">...</span>
+<span id="L171" class="l"> </span>
+<span id="L172" class="l">Permissions:</span>
+<span id="L173" class="l"> </span>
+<span id="L174" class="l"> </span>
+<span id="L175" class="l"> </span>
+<span id="L176" class="l">  Publish:</span>
+<span id="L177" class="l"> </span>
+<span id="L178" class="l"> </span>
+<span id="L179" class="l"> </span>
+<span id="L180" class="l">                Allow: orders.&gt;</span>
+<span id="L181" class="l"> </span>
+<span id="L182" class="l"> </span>
+<span id="L183" class="l"> </span>
+<span id="L184" class="l">  Subscribe:</span>
+<span id="L185" class="l"> </span>
+<span id="L186" class="l"> </span>
+<span id="L187" class="l"> </span>
+<span id="L188" class="l">                Allow: _INBOX.&gt;</span>
+<span id="L189" class="l">```</span>
+<span id="L190" class="l"> </span>
+<span id="L191" class="l">The `Issuer` line is the point: `order-svc` is now issued by `ACQFRPTM...`, the scoped key, not the `ORDERS` identity key, and `Scoped: true` confirms its permissions come from the key&#x27;s template. The permission set shown is the role&#x27;s — the same `orders.&gt;` publish and `_INBOX.&gt;` subscribe it had in config mode.</span>
+<span id="L192" class="l"> </span>
+<span id="L193" class="l">The scoped key lives inside the `ORDERS` account JWT, so the server doesn&#x27;t know it yet. Until you push, the new credentials are rejected:</span>
+<span id="L194" class="l"> </span>
+<span id="L195" class="l">```</span>
+<span id="L196" class="l">nats pub orders.created &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200}&#x27; --creds order-svc.creds</span>
+<span id="L197" class="l">```</span>
+<span id="L198" class="l"> </span>
+<span id="L199" class="l">```</span>
+<span id="L200" class="l">nats: error: nats: Authorization Violation</span>
+<span id="L201" class="l">```</span>
+<span id="L202" class="l"> </span>
+<span id="L203" class="l">Push the account as you did on the previous page (`nats auth account push ORDERS -s nats://127.0.0.1:4222 --creds sys.creds`) and try again:</span>
+<span id="L204" class="l"> </span>
+<span id="L205" class="l">```</span>
+<span id="L206" class="l">14:24:53 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L207" class="l">```</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l">Anything outside the scope now fails, and this time it&#x27;s a permission error rather than an authentication one:</span>
+<span id="L210" class="l"> </span>
+<span id="L211" class="l">```</span>
+<span id="L212" class="l">nats pub billing.charge &#x27;x&#x27; --creds order-svc.creds</span>
+<span id="L213" class="l">```</span>
+<span id="L214" class="l"> </span>
+<span id="L215" class="l">```</span>
+<span id="L216" class="l">nats: error: nats: permissions violation: Permissions Violation for Publish to &quot;billing.charge&quot;</span>
+<span id="L217" class="l">```</span>
+<span id="L218" class="l"> </span>
+<span id="L219" class="l">The scoped user&#x27;s own JWT carries an empty permission set (`&quot;pub&quot;: {}, &quot;sub&quot;: {}`). The server applies the key&#x27;s template at connect time, so a change to the template reaches every user signed by that key on the next account push, with no creds re-issued. The v0.4.0 CLI can&#x27;t yet edit a scope in place, though — see the Pitfalls.</span>
+<span id="L220" class="l"> </span>
+<span id="L221" class="l">The snippet also re-minted the creds file with `--expire 720h`, so the user JWT inside it lapses after 30 days. Expiry belongs to the minted credential, not the stored user: re-run `nats auth user credential` whenever you need a fresh one.</span>
+<span id="L222" class="l"> </span>
+<span id="L223" class="l">## Revoking a user</span>
+<span id="L224" class="l"> </span>
+<span id="L225" class="l">The snippet passed `--revoke` when it removed the old, unrestricted `order-svc`. `nats auth user rm` without it only deletes the user from your local store; credentials already handed out keep working, because the server never consults your store. With `--revoke`, the command writes an entry into the `ORDERS` account JWT: a `revocations` map from the user&#x27;s public key to a timestamp. Any user JWT for that key issued at or before that time is rejected. Like every account change, it takes effect on the next `nats auth account push ORDERS`, and the push also disconnects clients currently connected as the revoked user. Run the lifecycle end to end to see when the revocation takes effect:</span>
+<span id="L226" class="l"> </span>
+<span id="L227" class="l">#### CLI</span>
+<span id="L228" class="l"> </span>
+<span id="L229" class="l">```</span>
+<span id="L230" class="l">#!/bin/sh</span>
+<span id="L231" class="l"> </span>
+<span id="L232" class="l"># Revoke order-svc and watch when the revocation actually bites. The</span>
+<span id="L233" class="l"> </span>
+<span id="L234" class="l"># creds keep working until the updated account JWT reaches the server.</span>
+<span id="L235" class="l"> </span>
+<span id="L236" class="l"> </span>
+<span id="L237" class="l"> </span>
+<span id="L238" class="l"># Baseline: the scoped creds connect fine.</span>
+<span id="L239" class="l"> </span>
+<span id="L240" class="l">nats pub orders.created &#x27;{&quot;order_id&quot;:&quot;ord_9x3m&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:1850}&#x27; --creds order-svc.creds</span>
+<span id="L241" class="l"> </span>
+<span id="L242" class="l"># 18:04:03 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L243" class="l"> </span>
+<span id="L244" class="l"> </span>
+<span id="L245" class="l"> </span>
+<span id="L246" class="l"># Remove and revoke. This writes the revocation entry into your local</span>
+<span id="L247" class="l"> </span>
+<span id="L248" class="l"># copy of the ORDERS account JWT; the server hasn&#x27;t seen it yet.</span>
+<span id="L249" class="l"> </span>
+<span id="L250" class="l">nats auth user rm order-svc ORDERS --revoke -f</span>
+<span id="L251" class="l"> </span>
+<span id="L252" class="l"># Removed user order-svc</span>
+<span id="L253" class="l"> </span>
+<span id="L254" class="l"> </span>
+<span id="L255" class="l"> </span>
+<span id="L256" class="l"># The window: the same creds still connect and publish.</span>
+<span id="L257" class="l"> </span>
+<span id="L258" class="l">nats pub orders.created &#x27;{&quot;order_id&quot;:&quot;ord_9x3m&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:1850}&#x27; --creds order-svc.creds</span>
+<span id="L259" class="l"> </span>
+<span id="L260" class="l"># 18:04:03 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L261" class="l"> </span>
+<span id="L262" class="l"> </span>
+<span id="L263" class="l"> </span>
+<span id="L264" class="l"># Close the window: push the account. A client connected with the</span>
+<span id="L265" class="l"> </span>
+<span id="L266" class="l"># revoked creds is dropped as the push lands.</span>
+<span id="L267" class="l"> </span>
+<span id="L268" class="l">nats auth account push ORDERS -s nats://127.0.0.1:4222 --creds sys.creds</span>
+<span id="L269" class="l"> </span>
+<span id="L270" class="l"># ✓ Update completed on acme-1</span>
+<span id="L271" class="l"> </span>
+<span id="L272" class="l"># (in the revoked client&#x27;s terminal:)</span>
+<span id="L273" class="l"> </span>
+<span id="L274" class="l"># 18:04:04 &gt;&gt;&gt; Disconnected due to: EOF, will attempt reconnect</span>
+<span id="L275" class="l"> </span>
+<span id="L276" class="l"> </span>
+<span id="L277" class="l"> </span>
+<span id="L278" class="l"># A fresh connection with the revoked creds now fails.</span>
+<span id="L279" class="l"> </span>
+<span id="L280" class="l">nats pub orders.created &#x27;x&#x27; --creds order-svc.creds</span>
+<span id="L281" class="l"> </span>
+<span id="L282" class="l"># nats: error: nats: Authorization Violation</span>
+<span id="L283" class="l"> </span>
+<span id="L284" class="l"> </span>
+<span id="L285" class="l"> </span>
+<span id="L286" class="l"># Revocation pins the old user key, not the name. Re-issuing order-svc</span>
+<span id="L287" class="l"> </span>
+<span id="L288" class="l"># creates a new key, so the new creds work after the next push.</span>
+<span id="L289" class="l"> </span>
+<span id="L290" class="l">nats auth user add order-svc ORDERS --key order-writer --defaults \</span>
+<span id="L291" class="l"> </span>
+<span id="L292" class="l">  --credential order-svc.creds -f</span>
+<span id="L293" class="l"> </span>
+<span id="L294" class="l">nats auth user credential order-svc.creds order-svc ORDERS --expire 720h -f</span>
+<span id="L295" class="l"> </span>
+<span id="L296" class="l">nats auth account push ORDERS -s nats://127.0.0.1:4222 --creds sys.creds</span>
+<span id="L297" class="l"> </span>
+<span id="L298" class="l">nats pub orders.created &#x27;{&quot;order_id&quot;:&quot;ord_9x3m&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:1850}&#x27; --creds order-svc.creds</span>
+<span id="L299" class="l"> </span>
+<span id="L300" class="l"># 18:04:19 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L301" class="l">```</span>
+<span id="L302" class="l"> </span>
+<span id="L303" class="l">```</span>
+<span id="L304" class="l">18:04:03 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L305" class="l"> </span>
+<span id="L306" class="l">Removed user order-svc</span>
+<span id="L307" class="l"> </span>
+<span id="L308" class="l">18:04:03 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L309" class="l"> </span>
+<span id="L310" class="l">...</span>
+<span id="L311" class="l"> </span>
+<span id="L312" class="l">✓ Update completed on acme-1</span>
+<span id="L313" class="l"> </span>
+<span id="L314" class="l">...</span>
+<span id="L315" class="l"> </span>
+<span id="L316" class="l">18:04:04 &gt;&gt;&gt; Disconnected due to: EOF, will attempt reconnect</span>
+<span id="L317" class="l"> </span>
+<span id="L318" class="l">...</span>
+<span id="L319" class="l"> </span>
+<span id="L320" class="l">nats: error: nats: Authorization Violation</span>
+<span id="L321" class="l"> </span>
+<span id="L322" class="l">...</span>
+<span id="L323" class="l"> </span>
+<span id="L324" class="l">18:04:19 Published 63 bytes to &quot;orders.created&quot;</span>
+<span id="L325" class="l">```</span>
+<span id="L326" class="l"> </span>
+<span id="L327" class="l">The second publish is the point: between `user rm --revoke` and the push, the revocation exists only in your local store, so the revoked creds still connect and publish. The final publish shows the other half of the mechanic: revocation pins the old user&#x27;s public key, so the re-issued `order-svc` — a new key under the same name — connects fine after the next push.</span>
+<span id="L328" class="l"> </span>
+<span id="L329" class="l">## Bearer tokens</span>
+<span id="L330" class="l"> </span>
+<span id="L331" class="l">Check 1, the nonce signature, has one exception. A user can be marked as a **bearer** user; its JWT then connects with no seed and no nonce signature, so anyone holding the JWT can connect. Accounts disallow this by default (`Bearer Tokens Allowed: false` in the account listing). To use it, allow bearer tokens on the account (`--bearer` on `nats auth account add` or `account edit`) and mark the user (`--bearer` on `nats auth user add`). It&#x27;s a convenience for browser and websocket clients that have nowhere safe to keep a seed, and it reduces the credential to a single document that must never leak. A non-bearer JWT presented alone is still rejected with `Authorization Violation`. Try both with the creds you already have:</span>
+<span id="L332" class="l"> </span>
+<span id="L333" class="l">#### CLI</span>
+<span id="L334" class="l"> </span>
+<span id="L335" class="l">```</span>
+<span id="L336" class="l">#!/bin/sh</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l"># Connect with a user JWT alone, no seed. The JWT is the first block of</span>
+<span id="L339" class="l"> </span>
+<span id="L340" class="l"># a creds file; v0.4.0 has no command that prints it by itself, so cut</span>
+<span id="L341" class="l"> </span>
+<span id="L342" class="l"># it out with sed.</span>
+<span id="L343" class="l"> </span>
+<span id="L344" class="l">JWT=&quot;$(sed -n &#x27;/BEGIN NATS USER JWT/,/END NATS USER JWT/{/---/d;p;}&#x27; order-svc.creds)&quot;</span>
+<span id="L345" class="l"> </span>
+<span id="L346" class="l"> </span>
+<span id="L347" class="l"> </span>
+<span id="L348" class="l"># A normal user&#x27;s JWT alone is rejected: with no seed, the client</span>
+<span id="L349" class="l"> </span>
+<span id="L350" class="l"># can&#x27;t sign the server&#x27;s nonce.</span>
+<span id="L351" class="l"> </span>
+<span id="L352" class="l">nats pub orders.created &#x27;x&#x27; --jwt &quot;$JWT&quot;</span>
+<span id="L353" class="l"> </span>
+<span id="L354" class="l"># nats: error: nats: Authorization Violation</span>
+<span id="L355" class="l"> </span>
+<span id="L356" class="l"> </span>
+<span id="L357" class="l"> </span>
+<span id="L358" class="l"># Create a bearer user for a browser dashboard and push it.</span>
+<span id="L359" class="l"> </span>
+<span id="L360" class="l">nats auth user add orders-dashboard ORDERS --bearer --defaults \</span>
+<span id="L361" class="l"> </span>
+<span id="L362" class="l">  --credential orders-dashboard.creds</span>
+<span id="L363" class="l"> </span>
+<span id="L364" class="l">#        Bearer Token: true</span>
+<span id="L365" class="l"> </span>
+<span id="L366" class="l">nats auth account push ORDERS -s nats://127.0.0.1:4222 --creds sys.creds</span>
+<span id="L367" class="l"> </span>
+<span id="L368" class="l"> </span>
+<span id="L369" class="l"> </span>
+<span id="L370" class="l"># Marking the user isn&#x27;t enough: ORDERS still has Bearer Tokens</span>
+<span id="L371" class="l"> </span>
+<span id="L372" class="l"># Allowed: false, so its JWT alone gets the same rejection.</span>
+<span id="L373" class="l"> </span>
+<span id="L374" class="l">JWT=&quot;$(sed -n &#x27;/BEGIN NATS USER JWT/,/END NATS USER JWT/{/---/d;p;}&#x27; orders-dashboard.creds)&quot;</span>
+<span id="L375" class="l"> </span>
+<span id="L376" class="l">nats pub orders.created &#x27;x&#x27; --jwt &quot;$JWT&quot;</span>
+<span id="L377" class="l"> </span>
+<span id="L378" class="l"># nats: error: nats: Authorization Violation</span>
+<span id="L379" class="l"> </span>
+<span id="L380" class="l"> </span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l"># Allow bearer tokens on the account and push again.</span>
+<span id="L383" class="l"> </span>
+<span id="L384" class="l">nats auth account edit ORDERS --bearer</span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l">#   Bearer Tokens Allowed: true</span>
+<span id="L387" class="l"> </span>
+<span id="L388" class="l">nats auth account push ORDERS -s nats://127.0.0.1:4222 --creds sys.creds</span>
+<span id="L389" class="l"> </span>
+<span id="L390" class="l"> </span>
+<span id="L391" class="l"> </span>
+<span id="L392" class="l"># Now the JWT connects on its own: no seed, no nonce signature.</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l">nats pub orders.created &#x27;{&quot;order_id&quot;:&quot;ord_2f7q&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:990}&#x27; --jwt &quot;$JWT&quot;</span>
+<span id="L395" class="l"> </span>
+<span id="L396" class="l"># 18:05:09 Published 62 bytes to &quot;orders.created&quot;</span>
+<span id="L397" class="l">```</span>
+<span id="L398" class="l"> </span>
+<span id="L399" class="l">```</span>
+<span id="L400" class="l">nats: error: nats: Authorization Violation</span>
+<span id="L401" class="l"> </span>
+<span id="L402" class="l">...</span>
+<span id="L403" class="l"> </span>
+<span id="L404" class="l">       Bearer Token: true</span>
+<span id="L405" class="l"> </span>
+<span id="L406" class="l">...</span>
+<span id="L407" class="l"> </span>
+<span id="L408" class="l">nats: error: nats: Authorization Violation</span>
+<span id="L409" class="l"> </span>
+<span id="L410" class="l">...</span>
+<span id="L411" class="l"> </span>
+<span id="L412" class="l">  Bearer Tokens Allowed: true</span>
+<span id="L413" class="l"> </span>
+<span id="L414" class="l">...</span>
+<span id="L415" class="l"> </span>
+<span id="L416" class="l">18:05:09 Published 62 bytes to &quot;orders.created&quot;</span>
+<span id="L417" class="l">```</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l">Both rejections print the same `Authorization Violation`: the first because a non-bearer JWT arrives with no nonce signature, the second because the account still disallows bearer tokens. Only after the account-level allow is pushed does the JWT connect on its own.</span>
+<span id="L420" class="l"> </span>
+<span id="L421" class="l">## Multiple Operators</span>
+<span id="L422" class="l"> </span>
+<span id="L423" class="l">The nats-server supports having multiple operators configured. They are equivalent, and the namespace of accounts is flat across all operators. If you need to rotate operators (operator key compromised) then it is technically possible to rotate by adopting existing accounts into the new operator and migrating gradually.</span>
+<span id="L424" class="l"> </span>
+<span id="L425" class="l">It is not easy and there are no current affordances in the tooling to assist with such a migration.</span>
+<span id="L426" class="l"> </span>
+<span id="L427" class="l">Use operator signing keys and keep at least one off-line, and only keep one operator signing key exposed to risk. Then you can manage a migration between the signing keys of the existing operator instead of between operators. There still aren&#x27;t many helpers for this, at this time.</span>
+<span id="L428" class="l"> </span>
+<span id="L429" class="l">## Pitfalls</span>
+<span id="L430" class="l"> </span>
+<span id="L431" class="l">Four things commonly catch teams new to decentralized authentication.</span>
+<span id="L432" class="l"> </span>
+<span id="L433" class="l">**Losing the operator seed.** The operator&#x27;s seed is the only thing that can sign accounts. Lose it and you can&#x27;t add or re-sign an account; the tooling has nothing to sign with. Back the operator up before you build anything on top of it: `nats auth operator backup ACME acme-operator.backup` writes a portable backup file — a JSON document holding the operator&#x27;s keys and JWTs, so an unencrypted backup contains the operator seed in cleartext — and `--key` encrypts it with a curve NKey (pass a file containing the key). Restore it with `nats auth operator restore ACME acme-operator.backup`. Store the file offline.</span>
+<span id="L434" class="l"> </span>
+<span id="L435" class="l">**Pasting a seed where a public key belongs.** Server config and JWT fields only ever take public NKeys (`O...`, `A...`, `U...`). If you paste a seed (`S...`) into a config, a chat message, or a log, you&#x27;ve handed out the one secret that must stay private, and the only fix is to rotate the key. Treat every `S`-prefixed string like a password.</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">**Signing users with the account&#x27;s identity key.** This is what plain `nats auth user add` does, and it works — but permissions then live on each user, and whoever holds the account&#x27;s seed can issue a user with any permissions. A scoped key pins the permissions up front, so a leaked signing key can only issue users with the scope you already chose (see [ADR-14](https://github.com/nats-io/nats-architecture-and-design/blob/main/adr/ADR-14.md)). One operational limit to know: the CLI has no command to edit a scope in place, so the only way to change one is to remove its key (`nats auth account keys rm --key` takes the role name or the public key) and re-add the role. That creates a new key, and every user signed by the old one is locked out at the next push with `nats: Authorization Violation`. Treat key removal as mass revocation, not as an edit.</span>
+<span id="L438" class="l"> </span>
+<span id="L439" class="l">**Not planning for credential expiry.** A user JWT minted by `nats auth user add` never expires, so a leaked creds file is valid until you revoke it. The only expiry control in v0.4.0 is on the credentials file: `nats auth user credential order-svc.creds order-svc ORDERS --expire 720h -f` mints a fresh user JWT that lapses after 720 hours; there&#x27;s no expiry flag on `user add` or `user edit`. Pair a short expiry with a renewal step, because a lapsed client is rejected with plain `Authorization Violation`. The server&#x27;s default log records only an `authentication error`; the underlying reason, `claim is expired`, appears in its debug log.</span>
+<span id="L440" class="l"> </span>
+<span id="L441" class="l">## Where you are</span>
+<span id="L442" class="l"> </span>
+<span id="L443" class="l">The `ACME` setup from the previous page is unchanged; this page layered the model onto it and tightened `order-svc`:</span>
+<span id="L444" class="l"> </span>
+<span id="L445" class="l">* The server trusts one operator JWT and verifies three signatures per connection: the nonce, the user JWT, and the account JWT.</span>
+<span id="L446" class="l">* `order-svc` is re-issued from the `order-writer` scoped key: publish limited to `orders.&gt;`, subscribe to `_INBOX.&gt;`, matching its config-mode permissions.</span>
+<span id="L447" class="l">* Its creds file expires in 720 hours, and the old unrestricted user key is revoked.</span>
+<span id="L448" class="l">* `analytics-reader` is still a plain user of `ANALYTICS`, not signed by a scoped key.</span>
+<span id="L449" class="l"> </span>
+<span id="L450" class="l">## What&#x27;s next</span>
+<span id="L451" class="l"> </span>
+<span id="L452" class="l">Both authentication styles so far have the server decide from something it holds: a user list in its config, or a trust chain in JWTs. Sometimes the data that decides who may connect lives in a system NATS can&#x27;t read, and the next page hands the decision to a service you run.</span>
+<span id="L453" class="l"> </span>
+<span id="L454" class="l">Continue to [Auth callout](/learn/security/auth-callout.md).</span>
+<span id="L455" class="l"> </span>
+<span id="L456" class="l">## See also</span>
+<span id="L457" class="l"> </span>
+<span id="L458" class="l">* [Reference → operator](/reference/config/operator.md) — the config field that embeds the operator JWT.</span>
+<span id="L459" class="l">* [Core Concepts → Security](/concepts/security.md) — the five-minute overview of the same trust model.</span>
+<span id="L460" class="l">* [Operator mode](/learn/security/operator-mode.md) — the hands-on build this page explains.</span>
+<span id="L461" class="l">* [ADR-14](https://github.com/nats-io/nats-architecture-and-design/blob/main/adr/ADR-14.md) — issuing user JWTs under scoped signing keys, and why scoped keys limit the blast radius of a leaked key.</span>
+<span id="L462" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../../../raw/nats-docs/learn/security/cross-account.md.html">← cross-account.md</a> · <a href="../../../../raw/nats-docs/learn/security/encryption.md.html">encryption.md →</a></div></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../../../graph-data.js" defer></script>
+<script src="../../../../assets/graph.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

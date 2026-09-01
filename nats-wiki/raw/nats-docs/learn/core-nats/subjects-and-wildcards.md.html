@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docs.nats.io — subjects-and-wildcards.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="stylesheet" href="../../../../assets/theme.css">
+<link rel="stylesheet" href="../../../../assets/types.css">
+<script>window.ROOT="../../../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../../../index.html" class="">Home</a><a href="../../../../graph.html" class="">Graph</a><a href="../../../../cheatsheets.html" class="">Cheat sheets</a><a href="../../../../browse.html" class="">Browse</a><a href="../../../../inbox/question-bank.html" class="">Questions</a><a href="../../../../inbox/adr-toc.html" class="">ADRs</a><a href="../../../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../../../inbox/server-issues.html" class="">Server issues</a><a href="../../../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../../../sources.html" class="on">Sources</a><a href="../../../../health.html" class="">Health</a><a href="../../../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell norail">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../../../graph.html">Link graph</a></li><li><a href="../../../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../../../browse.html">Browse by facet</a></li><li><a href="../../../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../../../sources.html">Raw sources</a></li><li><a href="../../../../wanted.html">Wanted pages</a></li><li><a href="../../../../health.html">Wiki health</a></li><li><a href="../../../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../../../index.html">Home</a> › <a href="../../../../sources.html">Sources</a> › nats-docs</div>
+<h1>docs.nats.io — subjects-and-wildcards.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../../../sources.html#nats-docs">nats-docs</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://docs.nats.io">https://docs.nats.io</a> — paths taken from the site's <code>llms.txt</code>, fetched by <code>tools/fetch-docs.py</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-docs/learn/core-nats/subjects-and-wildcards.md</code> · 545 lines · 18 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../../../raw/nats-docs/learn/core-nats/subjects-and-wildcards.md" download>download this file</a></div></div><div class="pn"><a href="../../../../raw/nats-docs/learn/core-nats/subject-mapping.md.html">← subject-mapping.md</a> · <a href="../../../../raw/nats-docs/learn/core-nats/where-next.md.html">where-next.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://docs.nats.io/learn/core-nats/subjects-and-wildcards.md · fetched 2026-08-31 · section: subjects-and-wildcards --&gt;</span>
+<span id="L2" class="l"># Subjects &amp; wildcards</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">On the previous page Acme published `orders.created` and three services subscribed to it. That subject was a flat name. This page gives the subject some structure and lets a subscriber match a whole family of them at once.</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">Acme is opening regional fulfillment. Orders no longer all look the same: a US order and an EU order need to land somewhere a regional service can tell them apart. The subject is where that distinction lives.</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">## A subject is a sequence of tokens</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">A **subject** is a string the server uses to match publishers to subscribers. You already used one: `orders.created`.</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">The `.` (dot) splits the subject into **tokens**. `orders.created` is two tokens, `orders` then `created`. The server treats each token as a separate unit when it matches.</span>
+<span id="L13" class="l"> </span>
+<span id="L14" class="l">That splitting turns a flat name into a hierarchy. Acme can put the region in the middle:</span>
+<span id="L15" class="l"> </span>
+<span id="L16" class="l">```</span>
+<span id="L17" class="l">orders.us.created</span>
+<span id="L18" class="l"> </span>
+<span id="L19" class="l">orders.eu.created</span>
+<span id="L20" class="l"> </span>
+<span id="L21" class="l">orders.us.canceled</span>
+<span id="L22" class="l"> </span>
+<span id="L23" class="l">orders.eu.canceled</span>
+<span id="L24" class="l">```</span>
+<span id="L25" class="l"> </span>
+<span id="L26" class="l">Each of those is three tokens. The first token groups them all under `orders`. The second token says which region. The third says what happened. The server isn&#x27;t configured to know &quot;region&quot; means anything; the meaning lives entirely in the names Acme chose.</span>
+<span id="L27" class="l"> </span>
+<span id="L28" class="l">A few rules govern what a token may contain.</span>
+<span id="L29" class="l"> </span>
+<span id="L30" class="l">Subjects are **case-sensitive**. `Orders.created` and `orders.created` are two different subjects. A publisher to one won&#x27;t reach a subscriber on the other.</span>
+<span id="L31" class="l"> </span>
+<span id="L32" class="l">Tokens are split by single dots only. Spaces, tabs, and line breaks aren&#x27;t allowed anywhere in a subject. Stick to letters, digits, `-`, and `_` inside a token and you&#x27;ll never be surprised.</span>
+<span id="L33" class="l"> </span>
+<span id="L34" class="l">## Subjects cost almost nothing to create</span>
+<span id="L35" class="l"> </span>
+<span id="L36" class="l">Acme just invented four new subjects without telling the server first — that&#x27;s allowed, and it costs almost nothing. The interest graph from the previous page holds an entry for a subject only once something subscribes to it, so a subject nobody listens to has no presence on the server at all. You never declare or clean up subjects, and a system can use millions of them without slowing the server down, because matching walks the token tree rather than scanning every subscription.</span>
+<span id="L37" class="l"> </span>
+<span id="L38" class="l">## Wildcards: subscribe to many subjects at once</span>
+<span id="L39" class="l"> </span>
+<span id="L40" class="l">A publisher always names one full subject. `nats pub` to `orders.*.created` isn&#x27;t &quot;publish to every region&quot;: it would publish to the literal subject containing a `*`, which nobody wants. Wildcards are a **subscriber-only** tool.</span>
+<span id="L41" class="l"> </span>
+<span id="L42" class="l">A **wildcard** is a token in a subscription that matches more than one literal subject. NATS has exactly two of them, and they differ in how many tokens they match.</span>
+<span id="L43" class="l"> </span>
+<span id="L44" class="l">**Message flow — Subject wildcards (animated):** Animated subject wildcards: messages on different subjects (orders.us.created, orders.eu.created, …) are routed by matching wildcard subscriptions.</span>
+<span id="L45" class="l"> </span>
+<span id="L46" class="l">* Publisher 1 → NATS (subject: orders.retail.placed)</span>
+<span id="L47" class="l">* Publisher 2 → NATS (subject: orders.retail.shipped)</span>
+<span id="L48" class="l">* Publisher 3 → NATS (subject: orders.wholesale.placed)</span>
+<span id="L49" class="l">* NATS → Subscriber (subject: orders.retail.\*)</span>
+<span id="L50" class="l">* NATS → Subscriber</span>
+<span id="L51" class="l"> </span>
+<span id="L52" class="l">### The single-token wildcard `*`</span>
+<span id="L53" class="l"> </span>
+<span id="L54" class="l">The **single-token wildcard** `*` matches exactly one token — not zero, not two.</span>
+<span id="L55" class="l"> </span>
+<span id="L56" class="l">Acme wants one analytics view of created orders across every region. Instead of subscribing to `orders.us.created` and `orders.eu.created` separately, it subscribes once to `orders.*.created`:</span>
+<span id="L57" class="l"> </span>
+<span id="L58" class="l">#### CLI</span>
+<span id="L59" class="l"> </span>
+<span id="L60" class="l">```</span>
+<span id="L61" class="l">#!/bin/bash</span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l"> </span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l"># Regional analytics: catch created orders from every region with one</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l"># subscription. The single-token wildcard * matches exactly one token in</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l"># the region position, so orders.us.created and orders.eu.created both</span>
+<span id="L70" class="l"> </span>
+<span id="L71" class="l"># match, while orders.created and orders.us.west.created do not.</span>
+<span id="L72" class="l"> </span>
+<span id="L73" class="l">nats sub &quot;orders.*.created&quot;</span>
+<span id="L74" class="l">```</span>
+<span id="L75" class="l"> </span>
+<span id="L76" class="l">#### JavaScript/TypeScript</span>
+<span id="L77" class="l"> </span>
+<span id="L78" class="l">```</span>
+<span id="L79" class="l">// Regional analytics: one subscription catches created orders from every</span>
+<span id="L80" class="l"> </span>
+<span id="L81" class="l">// region. The single-token wildcard * matches exactly one token, so both</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l">// orders.us.created and orders.eu.created match, while orders.created and</span>
+<span id="L84" class="l"> </span>
+<span id="L85" class="l">// orders.us.west.created do not.</span>
+<span id="L86" class="l"> </span>
+<span id="L87" class="l">const sub = nc.subscribe(&quot;orders.*.created&quot;);</span>
+<span id="L88" class="l"> </span>
+<span id="L89" class="l">for await (const msg of sub) {</span>
+<span id="L90" class="l"> </span>
+<span id="L91" class="l">  console.log(`analytics: new order on ${msg.subject}`);</span>
+<span id="L92" class="l"> </span>
+<span id="L93" class="l">}</span>
+<span id="L94" class="l">```</span>
+<span id="L95" class="l"> </span>
+<span id="L96" class="l">#### Go</span>
+<span id="L97" class="l"> </span>
+<span id="L98" class="l">```</span>
+<span id="L99" class="l">// Regional analytics: one subscription catches created orders from every</span>
+<span id="L100" class="l"> </span>
+<span id="L101" class="l">// region. The single-token wildcard * matches exactly one token, so</span>
+<span id="L102" class="l"> </span>
+<span id="L103" class="l">// orders.us.created and orders.eu.created both match, while orders.created</span>
+<span id="L104" class="l"> </span>
+<span id="L105" class="l">// and orders.us.west.created do not.</span>
+<span id="L106" class="l"> </span>
+<span id="L107" class="l">nc.Subscribe(&quot;orders.*.created&quot;, func(m *nats.Msg) {</span>
+<span id="L108" class="l"> </span>
+<span id="L109" class="l">	fmt.Printf(&quot;analytics: new order on %s\n&quot;, m.Subject)</span>
+<span id="L110" class="l"> </span>
+<span id="L111" class="l">})</span>
+<span id="L112" class="l">```</span>
+<span id="L113" class="l"> </span>
+<span id="L114" class="l">#### Python</span>
+<span id="L115" class="l"> </span>
+<span id="L116" class="l">```</span>
+<span id="L117" class="l"># Regional analytics: one subscription catches created orders from every</span>
+<span id="L118" class="l"> </span>
+<span id="L119" class="l"># region. The single-token wildcard * matches exactly one token, so both</span>
+<span id="L120" class="l"> </span>
+<span id="L121" class="l"># orders.us.created and orders.eu.created match, while orders.created and</span>
+<span id="L122" class="l"> </span>
+<span id="L123" class="l"># orders.us.west.created do not.</span>
+<span id="L124" class="l"> </span>
+<span id="L125" class="l">async with await client.subscribe(&quot;orders.*.created&quot;) as subscription:</span>
+<span id="L126" class="l"> </span>
+<span id="L127" class="l">    async for message in subscription:</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l">        print(f&quot;analytics: new order on {message.subject}&quot;)</span>
+<span id="L130" class="l">```</span>
+<span id="L131" class="l"> </span>
+<span id="L132" class="l">#### Java</span>
+<span id="L133" class="l"> </span>
+<span id="L134" class="l">```</span>
+<span id="L135" class="l">// Regional analytics: one subscription catches created orders from every</span>
+<span id="L136" class="l"> </span>
+<span id="L137" class="l">// region. The single-token wildcard * matches exactly one token, so both</span>
+<span id="L138" class="l"> </span>
+<span id="L139" class="l">// orders.us.created and orders.eu.created match, while orders.created and</span>
+<span id="L140" class="l"> </span>
+<span id="L141" class="l">// orders.us.west.created do not.</span>
+<span id="L142" class="l"> </span>
+<span id="L143" class="l">nc.createDispatcher(msg -&gt;</span>
+<span id="L144" class="l"> </span>
+<span id="L145" class="l">    System.out.println(&quot;analytics: new order on &quot; + msg.getSubject())</span>
+<span id="L146" class="l"> </span>
+<span id="L147" class="l">).subscribe(&quot;orders.*.created&quot;);</span>
+<span id="L148" class="l">```</span>
+<span id="L149" class="l"> </span>
+<span id="L150" class="l">#### Rust</span>
+<span id="L151" class="l"> </span>
+<span id="L152" class="l">```</span>
+<span id="L153" class="l">// Regional analytics: one subscription catches created orders from every</span>
+<span id="L154" class="l"> </span>
+<span id="L155" class="l">// region. The single-token wildcard * matches exactly one token, so both</span>
+<span id="L156" class="l"> </span>
+<span id="L157" class="l">// orders.us.created and orders.eu.created match, while orders.created and</span>
+<span id="L158" class="l"> </span>
+<span id="L159" class="l">// orders.us.west.created do not.</span>
+<span id="L160" class="l"> </span>
+<span id="L161" class="l">let mut sub = client.subscribe(&quot;orders.*.created&quot;).await?;</span>
+<span id="L162" class="l"> </span>
+<span id="L163" class="l">while let Some(msg) = sub.next().await {</span>
+<span id="L164" class="l"> </span>
+<span id="L165" class="l">    println!(&quot;analytics: new order on {}&quot;, msg.subject);</span>
+<span id="L166" class="l"> </span>
+<span id="L167" class="l">}</span>
+<span id="L168" class="l">```</span>
+<span id="L169" class="l"> </span>
+<span id="L170" class="l">#### C#/.NET</span>
+<span id="L171" class="l"> </span>
+<span id="L172" class="l">```</span>
+<span id="L173" class="l">// Regional analytics: one subscription catches created orders from every</span>
+<span id="L174" class="l"> </span>
+<span id="L175" class="l">// region. The single-token wildcard * matches exactly one token, so both</span>
+<span id="L176" class="l"> </span>
+<span id="L177" class="l">// orders.us.created and orders.eu.created match, while orders.created and</span>
+<span id="L178" class="l"> </span>
+<span id="L179" class="l">// orders.us.west.created do not.</span>
+<span id="L180" class="l"> </span>
+<span id="L181" class="l">await foreach (var msg in client.SubscribeAsync&lt;Order&gt;(&quot;orders.*.created&quot;))</span>
+<span id="L182" class="l"> </span>
+<span id="L183" class="l">{</span>
+<span id="L184" class="l"> </span>
+<span id="L185" class="l">    output.WriteLine($&quot;analytics: new order on {msg.Subject}&quot;);</span>
+<span id="L186" class="l"> </span>
+<span id="L187" class="l">}</span>
+<span id="L188" class="l">```</span>
+<span id="L189" class="l"> </span>
+<span id="L190" class="l">#### C</span>
+<span id="L191" class="l"> </span>
+<span id="L192" class="l">```</span>
+<span id="L193" class="l">// Regional analytics: one subscription catches created orders from every</span>
+<span id="L194" class="l"> </span>
+<span id="L195" class="l">// region. The single-token wildcard * matches exactly one token, so</span>
+<span id="L196" class="l"> </span>
+<span id="L197" class="l">// orders.us.created and orders.eu.created both match, while orders.created</span>
+<span id="L198" class="l"> </span>
+<span id="L199" class="l">// and orders.us.west.created do not.</span>
+<span id="L200" class="l"> </span>
+<span id="L201" class="l">static void</span>
+<span id="L202" class="l"> </span>
+<span id="L203" class="l">onOrder(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L204" class="l"> </span>
+<span id="L205" class="l">{</span>
+<span id="L206" class="l"> </span>
+<span id="L207" class="l">    printf(&quot;analytics: new order on %s\n&quot;, natsMsg_GetSubject(msg));</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l"> </span>
+<span id="L210" class="l"> </span>
+<span id="L211" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L212" class="l"> </span>
+<span id="L213" class="l">}</span>
+<span id="L214" class="l"> </span>
+<span id="L215" class="l">    if (s == NATS_OK)</span>
+<span id="L216" class="l"> </span>
+<span id="L217" class="l">        s = natsConnection_Subscribe(&amp;sub, conn, &quot;orders.*.created&quot;,</span>
+<span id="L218" class="l"> </span>
+<span id="L219" class="l">                                     onOrder, NULL);</span>
+<span id="L220" class="l">```</span>
+<span id="L221" class="l"> </span>
+<span id="L222" class="l">The `*` sits in the region position. Walk through what it catches:</span>
+<span id="L223" class="l"> </span>
+<span id="L224" class="l">* `orders.us.created` matches: `*` takes the single token `us`.</span>
+<span id="L225" class="l">* `orders.eu.created` matches: `*` takes the single token `eu`.</span>
+<span id="L226" class="l">* `orders.created` does not match: there&#x27;s no token in the region position, and `*` needs exactly one.</span>
+<span id="L227" class="l">* `orders.us.west.created` does not match: two tokens sit where `*` allows only one.</span>
+<span id="L228" class="l"> </span>
+<span id="L229" class="l">The position of `*` is fixed; the token in it is free. You can also use more than one: `orders.*.*` matches any three-token subject under `orders`, with both middle and last tokens free.</span>
+<span id="L230" class="l"> </span>
+<span id="L231" class="l">### The multi-token wildcard `&gt;`</span>
+<span id="L232" class="l"> </span>
+<span id="L233" class="l">The **multi-token wildcard** `&gt;` matches one or more tokens, and it must be the last token in the pattern.</span>
+<span id="L234" class="l"> </span>
+<span id="L235" class="l">Acme is adding an audit service that wants every order message, at every depth, regardless of region or action. One subscription covers it:</span>
+<span id="L236" class="l"> </span>
+<span id="L237" class="l">#### CLI</span>
+<span id="L238" class="l"> </span>
+<span id="L239" class="l">```</span>
+<span id="L240" class="l">#!/bin/bash</span>
+<span id="L241" class="l"> </span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l"> </span>
+<span id="L244" class="l"># Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L245" class="l"> </span>
+<span id="L246" class="l"># wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L247" class="l"> </span>
+<span id="L248" class="l"># orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L249" class="l"> </span>
+<span id="L250" class="l"># orders.us.west.created alike.</span>
+<span id="L251" class="l"> </span>
+<span id="L252" class="l">nats sub &quot;orders.&gt;&quot;</span>
+<span id="L253" class="l">```</span>
+<span id="L254" class="l"> </span>
+<span id="L255" class="l">#### JavaScript/TypeScript</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l">```</span>
+<span id="L258" class="l">// Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L259" class="l"> </span>
+<span id="L260" class="l">// wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L261" class="l"> </span>
+<span id="L262" class="l">// orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L263" class="l"> </span>
+<span id="L264" class="l">// orders.us.west.created alike.</span>
+<span id="L265" class="l"> </span>
+<span id="L266" class="l">const sub = nc.subscribe(&quot;orders.&gt;&quot;);</span>
+<span id="L267" class="l"> </span>
+<span id="L268" class="l">for await (const msg of sub) {</span>
+<span id="L269" class="l"> </span>
+<span id="L270" class="l">  console.log(`audit: ${msg.subject}`);</span>
+<span id="L271" class="l"> </span>
+<span id="L272" class="l">}</span>
+<span id="L273" class="l">```</span>
+<span id="L274" class="l"> </span>
+<span id="L275" class="l">#### Go</span>
+<span id="L276" class="l"> </span>
+<span id="L277" class="l">```</span>
+<span id="L278" class="l">// Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L279" class="l"> </span>
+<span id="L280" class="l">// wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L281" class="l"> </span>
+<span id="L282" class="l">// orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L283" class="l"> </span>
+<span id="L284" class="l">// orders.us.west.created alike.</span>
+<span id="L285" class="l"> </span>
+<span id="L286" class="l">nc.Subscribe(&quot;orders.&gt;&quot;, func(m *nats.Msg) {</span>
+<span id="L287" class="l"> </span>
+<span id="L288" class="l">	fmt.Printf(&quot;audit: %s\n&quot;, m.Subject)</span>
+<span id="L289" class="l"> </span>
+<span id="L290" class="l">})</span>
+<span id="L291" class="l">```</span>
+<span id="L292" class="l"> </span>
+<span id="L293" class="l">#### Python</span>
+<span id="L294" class="l"> </span>
+<span id="L295" class="l">```</span>
+<span id="L296" class="l"># Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L297" class="l"> </span>
+<span id="L298" class="l"># wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L299" class="l"> </span>
+<span id="L300" class="l"># orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L301" class="l"> </span>
+<span id="L302" class="l"># orders.us.west.created alike.</span>
+<span id="L303" class="l"> </span>
+<span id="L304" class="l">async with await client.subscribe(&quot;orders.&gt;&quot;) as subscription:</span>
+<span id="L305" class="l"> </span>
+<span id="L306" class="l">    async for message in subscription:</span>
+<span id="L307" class="l"> </span>
+<span id="L308" class="l">        print(f&quot;audit: {message.subject}&quot;)</span>
+<span id="L309" class="l">```</span>
+<span id="L310" class="l"> </span>
+<span id="L311" class="l">#### Java</span>
+<span id="L312" class="l"> </span>
+<span id="L313" class="l">```</span>
+<span id="L314" class="l">// Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L315" class="l"> </span>
+<span id="L316" class="l">// wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L317" class="l"> </span>
+<span id="L318" class="l">// orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L319" class="l"> </span>
+<span id="L320" class="l">// orders.us.west.created alike.</span>
+<span id="L321" class="l"> </span>
+<span id="L322" class="l">nc.createDispatcher(msg -&gt;</span>
+<span id="L323" class="l"> </span>
+<span id="L324" class="l">    System.out.println(&quot;audit: &quot; + msg.getSubject())</span>
+<span id="L325" class="l"> </span>
+<span id="L326" class="l">).subscribe(&quot;orders.&gt;&quot;);</span>
+<span id="L327" class="l">```</span>
+<span id="L328" class="l"> </span>
+<span id="L329" class="l">#### Rust</span>
+<span id="L330" class="l"> </span>
+<span id="L331" class="l">```</span>
+<span id="L332" class="l">// Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L333" class="l"> </span>
+<span id="L334" class="l">// wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L335" class="l"> </span>
+<span id="L336" class="l">// orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">// orders.us.west.created alike.</span>
+<span id="L339" class="l"> </span>
+<span id="L340" class="l">let mut sub = client.subscribe(&quot;orders.&gt;&quot;).await?;</span>
+<span id="L341" class="l"> </span>
+<span id="L342" class="l">while let Some(msg) = sub.next().await {</span>
+<span id="L343" class="l"> </span>
+<span id="L344" class="l">    println!(&quot;audit: {}&quot;, msg.subject);</span>
+<span id="L345" class="l"> </span>
+<span id="L346" class="l">}</span>
+<span id="L347" class="l">```</span>
+<span id="L348" class="l"> </span>
+<span id="L349" class="l">#### C#/.NET</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">```</span>
+<span id="L352" class="l">// Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L353" class="l"> </span>
+<span id="L354" class="l">// wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L355" class="l"> </span>
+<span id="L356" class="l">// orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L357" class="l"> </span>
+<span id="L358" class="l">// orders.us.west.created alike.</span>
+<span id="L359" class="l"> </span>
+<span id="L360" class="l">await foreach (var msg in client.SubscribeAsync&lt;Order&gt;(&quot;orders.&gt;&quot;))</span>
+<span id="L361" class="l"> </span>
+<span id="L362" class="l">{</span>
+<span id="L363" class="l"> </span>
+<span id="L364" class="l">    output.WriteLine($&quot;audit: {msg.Subject}&quot;);</span>
+<span id="L365" class="l"> </span>
+<span id="L366" class="l">}</span>
+<span id="L367" class="l">```</span>
+<span id="L368" class="l"> </span>
+<span id="L369" class="l">#### C</span>
+<span id="L370" class="l"> </span>
+<span id="L371" class="l">```</span>
+<span id="L372" class="l">// Audit service: catch every order message at any depth. The multi-token</span>
+<span id="L373" class="l"> </span>
+<span id="L374" class="l">// wildcard &gt; matches one or more tokens and must be the last token, so</span>
+<span id="L375" class="l"> </span>
+<span id="L376" class="l">// orders.&gt; matches orders.created, orders.us.created, and</span>
+<span id="L377" class="l"> </span>
+<span id="L378" class="l">// orders.us.west.created alike.</span>
+<span id="L379" class="l"> </span>
+<span id="L380" class="l">static void</span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l">onOrder(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L383" class="l"> </span>
+<span id="L384" class="l">{</span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l">    printf(&quot;audit: %s\n&quot;, natsMsg_GetSubject(msg));</span>
+<span id="L387" class="l"> </span>
+<span id="L388" class="l"> </span>
+<span id="L389" class="l"> </span>
+<span id="L390" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L391" class="l"> </span>
+<span id="L392" class="l">}</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l">    if (s == NATS_OK)</span>
+<span id="L395" class="l"> </span>
+<span id="L396" class="l">        s = natsConnection_Subscribe(&amp;sub, conn, &quot;orders.&gt;&quot;, onOrder, NULL);</span>
+<span id="L397" class="l">```</span>
+<span id="L398" class="l"> </span>
+<span id="L399" class="l">`orders.&gt;` reaches the entire hierarchy under `orders`:</span>
+<span id="L400" class="l"> </span>
+<span id="L401" class="l">* `orders.created` matches: `&gt;` takes the one token `created`.</span>
+<span id="L402" class="l">* `orders.us.created` matches: `&gt;` takes the two tokens `us.created`.</span>
+<span id="L403" class="l">* `orders.us.west.created` matches: `&gt;` takes all three remaining tokens.</span>
+<span id="L404" class="l">* `orders` does not match: `&gt;` needs at least one token after the prefix.</span>
+<span id="L405" class="l"> </span>
+<span id="L406" class="l">Because `&gt;` matches a token *and everything after it*, it only makes sense at the end. `orders.&gt;.created` is invalid: the server rejects the subscription with an Invalid Subject error. There&#x27;s no way to anchor a tail wildcard in the middle and still know where it stops.</span>
+<span id="L407" class="l"> </span>
+<span id="L408" class="l">This is the difference to keep: `*` is a placeholder for one token in a known shape; `&gt;` is &quot;everything from here down.&quot;</span>
+<span id="L409" class="l"> </span>
+<span id="L410" class="l">## A wildcard subscriber behaves like any subscriber</span>
+<span id="L411" class="l"> </span>
+<span id="L412" class="l">A wildcard doesn&#x27;t change the delivery model from the last page. It changes which subjects count as a match, nothing else.</span>
+<span id="L413" class="l"> </span>
+<span id="L414" class="l">The audit service on `orders.&gt;` is just another interested subscriber. When Acme publishes `orders.us.created`, every matching subscriber gets its own copy: the warehouse on `orders.created` does *not* (different subject now), the regional analytics on `orders.*.created` does, and the audit service on `orders.&gt;` does. The server fans one publish out to all of them. Delivery is still [at-most-once](/learn/core-nats/publish-subscribe.md#at-most-once-delivery): a wildcard lets a service that joins now see everything published *from now on*, not what it missed before joining. Capturing that backlog is what [JetStream](/learn/jetstream/.md) adds.</span>
+<span id="L415" class="l"> </span>
+<span id="L416" class="l">## Reserved prefixes to avoid</span>
+<span id="L417" class="l"> </span>
+<span id="L418" class="l">Acme can name subjects almost anything, but two prefixes are reserved.</span>
+<span id="L419" class="l"> </span>
+<span id="L420" class="l">Subjects beginning with `$` belong to the server and its subsystems: `$SYS` for system events, and `$JS`, `$KV`, `$O`, and `$SRV` for the JetStream, Key-Value, Object-Store, and Services subsystems. Don&#x27;t publish application messages under `$`.</span>
+<span id="L421" class="l"> </span>
+<span id="L422" class="l">The `_INBOX` prefix is reserved for reply subjects that clients generate automatically. You don&#x27;t pick `_INBOX` names yourself, and you don&#x27;t publish business messages there. The next page, on request-reply, shows exactly what `_INBOX` is for.</span>
+<span id="L423" class="l"> </span>
+<span id="L424" class="l">## Try it in two terminals</span>
+<span id="L425" class="l"> </span>
+<span id="L426" class="l">With `nats-server` running, watch a wildcard catch messages it was never told about by name:</span>
+<span id="L427" class="l"> </span>
+<span id="L428" class="l">```</span>
+<span id="L429" class="l"># Terminal 1 — the audit service: every order message, any depth</span>
+<span id="L430" class="l"> </span>
+<span id="L431" class="l">nats sub &quot;orders.&gt;&quot;</span>
+<span id="L432" class="l">```</span>
+<span id="L433" class="l"> </span>
+<span id="L434" class="l">```</span>
+<span id="L435" class="l"># Terminal 2 — publish to two regions and a flat subject</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">nats pub orders.us.created &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L438" class="l"> </span>
+<span id="L439" class="l">nats pub orders.eu.created &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L440" class="l"> </span>
+<span id="L441" class="l">nats pub orders.shipped    &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L442" class="l">```</span>
+<span id="L443" class="l"> </span>
+<span id="L444" class="l">All three arrive in Terminal 1. Now restart Terminal 1 with `nats sub &quot;orders.*.created&quot;` and re-run Terminal 2: only the two `*.created` messages arrive; `orders.shipped` no longer matches.</span>
+<span id="L445" class="l"> </span>
+<span id="L446" class="l">## Pitfalls</span>
+<span id="L447" class="l"> </span>
+<span id="L448" class="l">**`&gt;` only works as the last token.** Use `*` for a free token in the middle: subscribe to `orders.*.created`, not the invalid `orders.&gt;.created`, which the server rejects.</span>
+<span id="L449" class="l"> </span>
+<span id="L450" class="l">**Publishers can&#x27;t publish &quot;to a wildcard.&quot;** Wildcards are a subscriber-only tool. A publisher always names one fully-qualified subject. The trap is that publishing to `orders.*.created` doesn&#x27;t produce an error: the `*` is taken as a literal character, so the message lands on the odd literal subject `orders.*.created`. A service subscribed to the exact subject `orders.us.created` never sees it, while wildcard subscribers like the regional analytics on `orders.*.created` and the audit service on `orders.&gt;` do get it — a subscription&#x27;s `*` matches any single token, including a literal `*` — which makes the mistake confusing to debug. Publish the real subject (`orders.us.created`); reserve `*` and `&gt;` for `nats sub` and the subscribe call in your client.</span>
+<span id="L451" class="l"> </span>
+<span id="L452" class="l">**An over-broad `orders.&gt;` pulls more than you want.** It&#x27;s tempting to subscribe to `orders.&gt;` and filter in code, but that subscriber then receives *every* order message at every depth, for all regions and actions, including subjects created later. Subscribe to the narrowest pattern that covers your need: `orders.*.created` for regional new-order analytics, the exact subject for a single concern. Narrow interest keeps unwanted traffic off the wire entirely, rather than having your code discard it after delivery.</span>
+<span id="L453" class="l"> </span>
+<span id="L454" class="l">**Whitespace is never allowed in a subject.** A token can&#x27;t contain a space, tab, or line break: on the wire, a space separates the subject from the reply subject and byte count, so a space inside a subject would be read as a boundary. The CLI and most clients catch this before sending — publishing to `orders.us created` fails with `nats: invalid subject`, and nothing is sent. A client that skips the check (nats.py&#x27;s `publish` does) writes the space straight into the `PUB` line, and the server silently misroutes: `orders.us` becomes the subject and `created` a reply subject. Don&#x27;t rely on the check; keep spaces out of the subject:</span>
+<span id="L455" class="l"> </span>
+<span id="L456" class="l">#### CLI</span>
+<span id="L457" class="l"> </span>
+<span id="L458" class="l">```</span>
+<span id="L459" class="l">#!/bin/bash</span>
+<span id="L460" class="l"> </span>
+<span id="L461" class="l"> </span>
+<span id="L462" class="l"> </span>
+<span id="L463" class="l"># A subject token can&#x27;t contain whitespace. On the wire, a space separates the</span>
+<span id="L464" class="l"> </span>
+<span id="L465" class="l"># subject from the reply subject and byte count, so a modern client rejects the</span>
+<span id="L466" class="l"> </span>
+<span id="L467" class="l"># subject before anything is sent. This publish therefore FAILS with</span>
+<span id="L468" class="l"> </span>
+<span id="L469" class="l">#   nats: error: nats: invalid subject</span>
+<span id="L470" class="l"> </span>
+<span id="L471" class="l"># and exits non-zero -- the message never reaches the server.</span>
+<span id="L472" class="l"> </span>
+<span id="L473" class="l">nats pub &quot;orders.us created&quot; &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L474" class="l"> </span>
+<span id="L475" class="l"> </span>
+<span id="L476" class="l"> </span>
+<span id="L477" class="l"># (An older client -- nats.go before v1.48.0 -- or a raw-protocol writer skips</span>
+<span id="L478" class="l"> </span>
+<span id="L479" class="l"># this check and would instead misroute silently: the server would read</span>
+<span id="L480" class="l"> </span>
+<span id="L481" class="l"># &quot;orders.us&quot; as the subject and &quot;created&quot; as a reply subject.)</span>
+<span id="L482" class="l"> </span>
+<span id="L483" class="l"> </span>
+<span id="L484" class="l"> </span>
+<span id="L485" class="l"># The fix is one token per dot, no spaces: orders.us.created</span>
+<span id="L486" class="l"> </span>
+<span id="L487" class="l">nats pub &quot;orders.us.created&quot; &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L488" class="l">```</span>
+<span id="L489" class="l"> </span>
+<span id="L490" class="l">#### C</span>
+<span id="L491" class="l"> </span>
+<span id="L492" class="l">```</span>
+<span id="L493" class="l">// A subject token can&#x27;t contain whitespace: on the wire, a space</span>
+<span id="L494" class="l"> </span>
+<span id="L495" class="l">// separates the subject from the reply subject and byte count. The C</span>
+<span id="L496" class="l"> </span>
+<span id="L497" class="l">// client&#x27;s publish skips the check, so this call does NOT fail: the</span>
+<span id="L498" class="l"> </span>
+<span id="L499" class="l">// space goes straight into the PUB line and the server silently</span>
+<span id="L500" class="l"> </span>
+<span id="L501" class="l">// misroutes: &quot;orders.us&quot; becomes the subject and &quot;created&quot; a reply</span>
+<span id="L502" class="l"> </span>
+<span id="L503" class="l">// subject. Nobody subscribed to orders.us.created ever sees it.</span>
+<span id="L504" class="l"> </span>
+<span id="L505" class="l">const char *order = &quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;,&quot;</span>
+<span id="L506" class="l"> </span>
+<span id="L507" class="l">                    &quot;\&quot;total_cents\&quot;:4200,\&quot;ts\&quot;:\&quot;2026-05-22T10:14:22Z\&quot;}&quot;;</span>
+<span id="L508" class="l"> </span>
+<span id="L509" class="l"> </span>
+<span id="L510" class="l"> </span>
+<span id="L511" class="l">s = natsConnection_PublishString(conn, &quot;orders.us created&quot;, order);</span>
+<span id="L512" class="l"> </span>
+<span id="L513" class="l">printf(&quot;publish with a space returned: %s\n&quot;, natsStatus_GetText(s));</span>
+<span id="L514" class="l"> </span>
+<span id="L515" class="l"> </span>
+<span id="L516" class="l"> </span>
+<span id="L517" class="l">// Don&#x27;t rely on a client-side check; keep spaces out of the subject.</span>
+<span id="L518" class="l"> </span>
+<span id="L519" class="l">// The fix is one token per dot: orders.us.created.</span>
+<span id="L520" class="l"> </span>
+<span id="L521" class="l">if (s == NATS_OK)</span>
+<span id="L522" class="l"> </span>
+<span id="L523" class="l">    s = natsConnection_PublishString(conn, &quot;orders.us.created&quot;, order);</span>
+<span id="L524" class="l">```</span>
+<span id="L525" class="l"> </span>
+<span id="L526" class="l">## Where you are</span>
+<span id="L527" class="l"> </span>
+<span id="L528" class="l">Acme&#x27;s order traffic now has a shape:</span>
+<span id="L529" class="l"> </span>
+<span id="L530" class="l">* Orders publish to structured subjects: `orders.created`, `orders.us.created`, `orders.eu.created`, and so on.</span>
+<span id="L531" class="l">* Regional analytics subscribes to `orders.*.created` to catch every region&#x27;s new orders with one subscription.</span>
+<span id="L532" class="l">* An audit service subscribes to `orders.&gt;` to catch the whole hierarchy.</span>
+<span id="L533" class="l"> </span>
+<span id="L534" class="l">Subjects address messages; wildcards let one subscriber match a family of them. That&#x27;s the addressing layer everything else in core NATS uses.</span>
+<span id="L535" class="l"> </span>
+<span id="L536" class="l">## What&#x27;s next</span>
+<span id="L537" class="l"> </span>
+<span id="L538" class="l">So far every message flows one way: a publisher sends, subscribers receive, and nobody sends a reply back. The next page, [Request-reply](/learn/core-nats/request-reply.md), adds a reply path: Acme builds an inventory service that *answers* a question on `orders.inventory.check`, using a reserved `_INBOX` subject you just met.</span>
+<span id="L539" class="l"> </span>
+<span id="L540" class="l">## See also</span>
+<span id="L541" class="l"> </span>
+<span id="L542" class="l">* [Core Concepts → Subjects](/concepts/subjects.md) — the short overview of tokens and wildcards.</span>
+<span id="L543" class="l">* [Learn → Security](/learn/security/.md) — granting or denying access per subject and wildcard.</span>
+<span id="L544" class="l">* [Learn → Super-clusters](/learn/topologies/super-clusters.md) — how subject interest propagates across servers and regions.</span>
+<span id="L545" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../../../raw/nats-docs/learn/core-nats/subject-mapping.md.html">← subject-mapping.md</a> · <a href="../../../../raw/nats-docs/learn/core-nats/where-next.md.html">where-next.md →</a></div></footer></article></main>
+  
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../../../graph-data.js" defer></script>
+<script src="../../../../assets/graph.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

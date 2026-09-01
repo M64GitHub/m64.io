@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docs.nats.io — request-reply.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="stylesheet" href="../../../../assets/theme.css">
+<link rel="stylesheet" href="../../../../assets/types.css">
+<script>window.ROOT="../../../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../../../index.html" class="">Home</a><a href="../../../../graph.html" class="">Graph</a><a href="../../../../cheatsheets.html" class="">Cheat sheets</a><a href="../../../../browse.html" class="">Browse</a><a href="../../../../inbox/question-bank.html" class="">Questions</a><a href="../../../../inbox/adr-toc.html" class="">ADRs</a><a href="../../../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../../../inbox/server-issues.html" class="">Server issues</a><a href="../../../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../../../sources.html" class="on">Sources</a><a href="../../../../health.html" class="">Health</a><a href="../../../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell norail">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../../../graph.html">Link graph</a></li><li><a href="../../../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../../../browse.html">Browse by facet</a></li><li><a href="../../../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../../../sources.html">Raw sources</a></li><li><a href="../../../../wanted.html">Wanted pages</a></li><li><a href="../../../../health.html">Wiki health</a></li><li><a href="../../../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../../../index.html">Home</a> › <a href="../../../../sources.html">Sources</a> › nats-docs</div>
+<h1>docs.nats.io — request-reply.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../../../sources.html#nats-docs">nats-docs</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://docs.nats.io">https://docs.nats.io</a> — paths taken from the site's <code>llms.txt</code>, fetched by <code>tools/fetch-docs.py</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-docs/learn/core-nats/request-reply.md</code> · 959 lines · 27 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../../../raw/nats-docs/learn/core-nats/request-reply.md" download>download this file</a></div></div><div class="pn"><a href="../../../../raw/nats-docs/learn/core-nats/queue-groups.md.html">← queue-groups.md</a> · <a href="../../../../raw/nats-docs/learn/core-nats/scatter-gather.md.html">scatter-gather.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://docs.nats.io/learn/core-nats/request-reply.md · fetched 2026-08-31 · section: request-reply --&gt;</span>
+<span id="L2" class="l"># Request-reply</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">Pub/sub is one-way. A publisher publishes to `orders.created`, and a copy goes to every interested subscriber. The publisher never hears back.</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">Acme needs the other direction too. When an order arrives, the warehouse wants to ask one question and get one answer: *is this item in stock?* That&#x27;s a request and a reply, not a broadcast.</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">This page builds an **inventory** service that answers that question on the subject `orders.inventory.check`. Along the way it shows the two things that make request-reply work: the private reply subject the client sets up for itself, and what happens when nobody is there to answer.</span>
+<span id="L9" class="l"> </span>
+<span id="L10" class="l">## How request-reply uses pub/sub</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">Request-reply isn&#x27;t a new protocol; it&#x27;s the pub/sub you already know, used twice.</span>
+<span id="L13" class="l"> </span>
+<span id="L14" class="l">Here are all the steps. The client invents a fresh, unique subject to receive the answer on. It subscribes to that subject. It then publishes the request, and includes that reply subject as a field on the message. The responder reads the request, sees the reply subject, and publishes its answer there. The client&#x27;s subscription receives it.</span>
+<span id="L15" class="l"> </span>
+<span id="L16" class="l">**Message flow — Request / Reply:** Request-reply pattern where a client sends a request and waits for a response from a service</span>
+<span id="L17" class="l"> </span>
+<span id="L18" class="l">* Client → NATS (subject: get.user.150)</span>
+<span id="L19" class="l">* NATS → Service (subject: get.user.150)</span>
+<span id="L20" class="l">* Service → NATS (subject: \_INBOX.\&lt;nuid&gt;)</span>
+<span id="L21" class="l">* NATS → Client (subject: \_INBOX.\&lt;nuid&gt;)</span>
+<span id="L22" class="l"> </span>
+<span id="L23" class="l">The orange arrow is the request traveling out on the request subject. The green dashed arrow is the reply traveling back on the private subject the client made for this one call.</span>
+<span id="L24" class="l"> </span>
+<span id="L25" class="l">Every NATS client wraps those steps in a single `request()` call, so you never write the subscribe-publish-wait by hand.</span>
+<span id="L26" class="l"> </span>
+<span id="L27" class="l">## The inbox</span>
+<span id="L28" class="l"> </span>
+<span id="L29" class="l">The private reply subject is called an **inbox**, and clients generate it under the reserved `_INBOX.` prefix: something like `_INBOX.nQ4k2v8...` with a random unique tail.</span>
+<span id="L30" class="l"> </span>
+<span id="L31" class="l">The inbox is per-request: each `request()` uses a fresh inbox, so two in-flight requests never get each other&#x27;s replies. The `_INBOX.` prefix is reserved, so it never collides with the subjects you pick yourself; the client owns that namespace.</span>
+<span id="L32" class="l"> </span>
+<span id="L33" class="l">A client doesn&#x27;t open a subscription for every `request()`. On its first request it subscribes once to a wildcard that stays fixed for the connection — a subject shaped like `_INBOX.&lt;connection&gt;.*` — and reuses that one subscription for every request after. Each request adds only its own final token to that prefix, so the per-request fresh inbox amounts to that fresh token, and the client routes each reply back to the request waiting on its token.</span>
+<span id="L34" class="l"> </span>
+<span id="L35" class="l">That&#x27;s why thousands of concurrent requests cost one subscription, not thousands: every reply arrives on the same wildcard, and its final token identifies which request it belongs to. (Clients can be configured to fall back to one subscription per request; the shared one is the default.)</span>
+<span id="L36" class="l"> </span>
+<span id="L37" class="l">There&#x27;s a size budget on the reply subject. The server limits the length of a single protocol line, subject plus reply subject combined, to 4 KB by default (`max_control_line`). Generated inbox names sit far under that, so this only matters if you hand-build unusually long subjects.</span>
+<span id="L38" class="l"> </span>
+<span id="L39" class="l">The default `_INBOX.` prefix is configurable per connection — a client option, exposed in natscli as the global `--inbox-prefix` flag. It exists for permissions: with a distinct prefix per application, an operator can grant each one its own reply-subject namespace instead of a shared `_INBOX.&gt;`. Subject permissions are covered on the [Authorization](/learn/security/authorization.md) page.</span>
+<span id="L40" class="l"> </span>
+<span id="L41" class="l">## The inventory service</span>
+<span id="L42" class="l"> </span>
+<span id="L43" class="l">Now make the responder real. The inventory service subscribes to `orders.inventory.check` and replies to each request with an in-stock answer.</span>
+<span id="L44" class="l"> </span>
+<span id="L45" class="l">From the CLI, `nats reply` does exactly this: it subscribes to the subject (joining the default queue group `NATS-RPLY-22`) and publishes a reply to whatever inbox each request carries.</span>
+<span id="L46" class="l"> </span>
+<span id="L47" class="l">#### CLI</span>
+<span id="L48" class="l"> </span>
+<span id="L49" class="l">```</span>
+<span id="L50" class="l">#!/bin/bash</span>
+<span id="L51" class="l"> </span>
+<span id="L52" class="l"># The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L53" class="l"> </span>
+<span id="L54" class="l"># every request. `nats reply` subscribes to the subject and publishes the</span>
+<span id="L55" class="l"> </span>
+<span id="L56" class="l"># given body to whatever inbox each request carries.</span>
+<span id="L57" class="l"> </span>
+<span id="L58" class="l">#</span>
+<span id="L59" class="l"> </span>
+<span id="L60" class="l"># Leave this running in its own terminal. It answers every request with</span>
+<span id="L61" class="l"> </span>
+<span id="L62" class="l"># an in-stock reply until you stop it with Ctrl-C.</span>
+<span id="L63" class="l"> </span>
+<span id="L64" class="l">nats reply orders.inventory.check &#x27;{&quot;in_stock&quot;:true,&quot;warehouse&quot;:&quot;us-east&quot;}&#x27;</span>
+<span id="L65" class="l">```</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l">#### JavaScript/TypeScript</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l">```</span>
+<span id="L70" class="l">// The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L71" class="l"> </span>
+<span id="L72" class="l">// every request by responding on the reply subject it carries.</span>
+<span id="L73" class="l"> </span>
+<span id="L74" class="l">const sub = nc.subscribe(&quot;orders.inventory.check&quot;);</span>
+<span id="L75" class="l"> </span>
+<span id="L76" class="l">for await (const msg of sub) {</span>
+<span id="L77" class="l"> </span>
+<span id="L78" class="l">  msg.respond(&#x27;{&quot;in_stock&quot;:true,&quot;warehouse&quot;:&quot;us-east&quot;}&#x27;);</span>
+<span id="L79" class="l"> </span>
+<span id="L80" class="l">}</span>
+<span id="L81" class="l">```</span>
+<span id="L82" class="l"> </span>
+<span id="L83" class="l">#### Go</span>
+<span id="L84" class="l"> </span>
+<span id="L85" class="l">```</span>
+<span id="L86" class="l">// The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L87" class="l"> </span>
+<span id="L88" class="l">// every request by responding on the reply subject it carries.</span>
+<span id="L89" class="l"> </span>
+<span id="L90" class="l">nc.Subscribe(&quot;orders.inventory.check&quot;, func(m *nats.Msg) {</span>
+<span id="L91" class="l"> </span>
+<span id="L92" class="l">	m.Respond([]byte(`{&quot;in_stock&quot;:true,&quot;warehouse&quot;:&quot;us-east&quot;}`))</span>
+<span id="L93" class="l"> </span>
+<span id="L94" class="l">})</span>
+<span id="L95" class="l">```</span>
+<span id="L96" class="l"> </span>
+<span id="L97" class="l">#### Python</span>
+<span id="L98" class="l"> </span>
+<span id="L99" class="l">```</span>
+<span id="L100" class="l"># The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L101" class="l"> </span>
+<span id="L102" class="l"># every request by publishing back to the reply subject each one carries.</span>
+<span id="L103" class="l"> </span>
+<span id="L104" class="l">async with await client.subscribe(&quot;orders.inventory.check&quot;) as subscription:</span>
+<span id="L105" class="l"> </span>
+<span id="L106" class="l">    async for message in subscription:</span>
+<span id="L107" class="l"> </span>
+<span id="L108" class="l">        if message.reply:</span>
+<span id="L109" class="l"> </span>
+<span id="L110" class="l">            await client.publish(message.reply, b&#x27;{&quot;in_stock&quot;:true,&quot;warehouse&quot;:&quot;us-east&quot;}&#x27;)</span>
+<span id="L111" class="l">```</span>
+<span id="L112" class="l"> </span>
+<span id="L113" class="l">#### Java</span>
+<span id="L114" class="l"> </span>
+<span id="L115" class="l">```</span>
+<span id="L116" class="l">// The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L117" class="l"> </span>
+<span id="L118" class="l">// every request by publishing back to the reply subject it carries.</span>
+<span id="L119" class="l"> </span>
+<span id="L120" class="l">nc.createDispatcher(msg -&gt; {</span>
+<span id="L121" class="l"> </span>
+<span id="L122" class="l">    if (msg.getReplyTo() != null) {</span>
+<span id="L123" class="l"> </span>
+<span id="L124" class="l">        nc.publish(msg.getReplyTo(),</span>
+<span id="L125" class="l"> </span>
+<span id="L126" class="l">            &quot;{\&quot;in_stock\&quot;:true,\&quot;warehouse\&quot;:\&quot;us-east\&quot;}&quot;.getBytes(StandardCharsets.UTF_8));</span>
+<span id="L127" class="l"> </span>
+<span id="L128" class="l">    }</span>
+<span id="L129" class="l"> </span>
+<span id="L130" class="l">}).subscribe(&quot;orders.inventory.check&quot;);</span>
+<span id="L131" class="l">```</span>
+<span id="L132" class="l"> </span>
+<span id="L133" class="l">#### Rust</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l">```</span>
+<span id="L136" class="l">// The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L137" class="l"> </span>
+<span id="L138" class="l">// every request by publishing back to the reply subject it carries.</span>
+<span id="L139" class="l"> </span>
+<span id="L140" class="l">let mut sub = client.subscribe(&quot;orders.inventory.check&quot;).await?;</span>
+<span id="L141" class="l"> </span>
+<span id="L142" class="l">while let Some(msg) = sub.next().await {</span>
+<span id="L143" class="l"> </span>
+<span id="L144" class="l">    if let Some(reply) = msg.reply {</span>
+<span id="L145" class="l"> </span>
+<span id="L146" class="l">        client</span>
+<span id="L147" class="l"> </span>
+<span id="L148" class="l">            .publish(reply, r#&quot;{&quot;in_stock&quot;:true,&quot;warehouse&quot;:&quot;us-east&quot;}&quot;#.into())</span>
+<span id="L149" class="l"> </span>
+<span id="L150" class="l">            .await?;</span>
+<span id="L151" class="l"> </span>
+<span id="L152" class="l">    }</span>
+<span id="L153" class="l"> </span>
+<span id="L154" class="l">}</span>
+<span id="L155" class="l">```</span>
+<span id="L156" class="l"> </span>
+<span id="L157" class="l">#### C#/.NET</span>
+<span id="L158" class="l"> </span>
+<span id="L159" class="l">```</span>
+<span id="L160" class="l">// The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L161" class="l"> </span>
+<span id="L162" class="l">// every request by replying on the subject each one carries.</span>
+<span id="L163" class="l"> </span>
+<span id="L164" class="l">await foreach (var msg in client.SubscribeAsync&lt;Order&gt;(&quot;orders.inventory.check&quot;))</span>
+<span id="L165" class="l"> </span>
+<span id="L166" class="l">{</span>
+<span id="L167" class="l"> </span>
+<span id="L168" class="l">    await msg.ReplyAsync(new InventoryReply(InStock: true, Warehouse: &quot;us-east&quot;));</span>
+<span id="L169" class="l"> </span>
+<span id="L170" class="l">}</span>
+<span id="L171" class="l">```</span>
+<span id="L172" class="l"> </span>
+<span id="L173" class="l">#### C</span>
+<span id="L174" class="l"> </span>
+<span id="L175" class="l">```</span>
+<span id="L176" class="l">// The inventory service: subscribe to orders.inventory.check and answer</span>
+<span id="L177" class="l"> </span>
+<span id="L178" class="l">// every request by publishing a reply on the reply subject it carries.</span>
+<span id="L179" class="l"> </span>
+<span id="L180" class="l">static void</span>
+<span id="L181" class="l"> </span>
+<span id="L182" class="l">onCheck(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)</span>
+<span id="L183" class="l"> </span>
+<span id="L184" class="l">{</span>
+<span id="L185" class="l"> </span>
+<span id="L186" class="l">    if (natsMsg_GetReply(msg) != NULL)</span>
+<span id="L187" class="l"> </span>
+<span id="L188" class="l">        natsConnection_PublishString(nc, natsMsg_GetReply(msg),</span>
+<span id="L189" class="l"> </span>
+<span id="L190" class="l">                                     &quot;{\&quot;in_stock\&quot;:true,\&quot;warehouse\&quot;:\&quot;us-east\&quot;}&quot;);</span>
+<span id="L191" class="l"> </span>
+<span id="L192" class="l"> </span>
+<span id="L193" class="l"> </span>
+<span id="L194" class="l">    natsMsg_Destroy(msg);</span>
+<span id="L195" class="l"> </span>
+<span id="L196" class="l">}</span>
+<span id="L197" class="l"> </span>
+<span id="L198" class="l">    if (s == NATS_OK)</span>
+<span id="L199" class="l"> </span>
+<span id="L200" class="l">        s = natsConnection_Subscribe(&amp;sub, conn, &quot;orders.inventory.check&quot;,</span>
+<span id="L201" class="l"> </span>
+<span id="L202" class="l">                                     onCheck, NULL);</span>
+<span id="L203" class="l">```</span>
+<span id="L204" class="l"> </span>
+<span id="L205" class="l">Leave that running. It&#x27;s now the one service in the Acme world that answers questions instead of just receiving messages. The warehouse, notifications, and analytics subscribers from the earlier pages keep running unchanged, and request-reply runs alongside them.</span>
+<span id="L206" class="l"> </span>
+<span id="L207" class="l">## Sending a request</span>
+<span id="L208" class="l"> </span>
+<span id="L209" class="l">In a second terminal, ask the question. The warehouse sends the order payload to `orders.inventory.check` and waits for the inventory service to answer.</span>
+<span id="L210" class="l"> </span>
+<span id="L211" class="l">#### CLI</span>
+<span id="L212" class="l"> </span>
+<span id="L213" class="l">```</span>
+<span id="L214" class="l">#!/bin/bash</span>
+<span id="L215" class="l"> </span>
+<span id="L216" class="l"># Ask the inventory service whether an order&#x27;s item is in stock.</span>
+<span id="L217" class="l"> </span>
+<span id="L218" class="l"># `nats request` creates a private inbox, subscribes to it, publishes the</span>
+<span id="L219" class="l"> </span>
+<span id="L220" class="l"># order payload to orders.inventory.check with the inbox attached, and</span>
+<span id="L221" class="l"> </span>
+<span id="L222" class="l"># prints the first reply it receives.</span>
+<span id="L223" class="l"> </span>
+<span id="L224" class="l">#</span>
+<span id="L225" class="l"> </span>
+<span id="L226" class="l"># --timeout bounds the wait: it is the longest the client waits for an answer</span>
+<span id="L227" class="l"> </span>
+<span id="L228" class="l"># before giving up. The CLI defaults it to 5s; here we set 2s. If no service is</span>
+<span id="L229" class="l"> </span>
+<span id="L230" class="l"># subscribed, the server sends a &quot;no responders&quot; signal immediately and the CLI</span>
+<span id="L231" class="l"> </span>
+<span id="L232" class="l"># logs &quot;No responders are available&quot; instead of waiting out the timeout.</span>
+<span id="L233" class="l"> </span>
+<span id="L234" class="l">nats request orders.inventory.check \</span>
+<span id="L235" class="l"> </span>
+<span id="L236" class="l">  &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27; \</span>
+<span id="L237" class="l"> </span>
+<span id="L238" class="l">  --timeout 2s</span>
+<span id="L239" class="l">```</span>
+<span id="L240" class="l"> </span>
+<span id="L241" class="l">#### JavaScript/TypeScript</span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l">```</span>
+<span id="L244" class="l">// Ask the inventory service whether an order&#x27;s item is in stock. The client</span>
+<span id="L245" class="l"> </span>
+<span id="L246" class="l">// creates a private inbox, sends the request, and waits up to the timeout for</span>
+<span id="L247" class="l"> </span>
+<span id="L248" class="l">// one reply. A missing service surfaces immediately as NoRespondersError; a</span>
+<span id="L249" class="l"> </span>
+<span id="L250" class="l">// slow one as TimeoutError.</span>
+<span id="L251" class="l"> </span>
+<span id="L252" class="l">const order =</span>
+<span id="L253" class="l"> </span>
+<span id="L254" class="l">  &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;;</span>
+<span id="L255" class="l"> </span>
+<span id="L256" class="l">try {</span>
+<span id="L257" class="l"> </span>
+<span id="L258" class="l">  const reply = await nc.request(&quot;orders.inventory.check&quot;, order, {</span>
+<span id="L259" class="l"> </span>
+<span id="L260" class="l">    timeout: 2000,</span>
+<span id="L261" class="l"> </span>
+<span id="L262" class="l">  });</span>
+<span id="L263" class="l"> </span>
+<span id="L264" class="l">  console.log(`inventory replied: ${reply.string()}`);</span>
+<span id="L265" class="l"> </span>
+<span id="L266" class="l">} catch (err) {</span>
+<span id="L267" class="l"> </span>
+<span id="L268" class="l">  if (err instanceof RequestError &amp;&amp; err.isNoResponders()) {</span>
+<span id="L269" class="l"> </span>
+<span id="L270" class="l">    console.log(&quot;no inventory service is running&quot;);</span>
+<span id="L271" class="l"> </span>
+<span id="L272" class="l">  } else if (err instanceof TimeoutError) {</span>
+<span id="L273" class="l"> </span>
+<span id="L274" class="l">    console.log(&quot;inventory service did not answer in time&quot;);</span>
+<span id="L275" class="l"> </span>
+<span id="L276" class="l">  } else {</span>
+<span id="L277" class="l"> </span>
+<span id="L278" class="l">    throw err;</span>
+<span id="L279" class="l"> </span>
+<span id="L280" class="l">  }</span>
+<span id="L281" class="l"> </span>
+<span id="L282" class="l">}</span>
+<span id="L283" class="l">```</span>
+<span id="L284" class="l"> </span>
+<span id="L285" class="l">#### Go</span>
+<span id="L286" class="l"> </span>
+<span id="L287" class="l">```</span>
+<span id="L288" class="l">// Ask the inventory service whether an order&#x27;s item is in stock. The client</span>
+<span id="L289" class="l"> </span>
+<span id="L290" class="l">// creates a private inbox, sends the request, and waits up to the timeout</span>
+<span id="L291" class="l"> </span>
+<span id="L292" class="l">// for one reply. A missing service surfaces immediately as</span>
+<span id="L293" class="l"> </span>
+<span id="L294" class="l">// nats.ErrNoResponders; a slow one as nats.ErrTimeout.</span>
+<span id="L295" class="l"> </span>
+<span id="L296" class="l">order := `{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}`</span>
+<span id="L297" class="l"> </span>
+<span id="L298" class="l">msg, err := nc.Request(&quot;orders.inventory.check&quot;, []byte(order), 2*time.Second)</span>
+<span id="L299" class="l"> </span>
+<span id="L300" class="l">switch err {</span>
+<span id="L301" class="l"> </span>
+<span id="L302" class="l">case nats.ErrNoResponders:</span>
+<span id="L303" class="l"> </span>
+<span id="L304" class="l">	fmt.Println(&quot;no inventory service is running&quot;)</span>
+<span id="L305" class="l"> </span>
+<span id="L306" class="l">case nats.ErrTimeout:</span>
+<span id="L307" class="l"> </span>
+<span id="L308" class="l">	fmt.Println(&quot;inventory service did not answer in time&quot;)</span>
+<span id="L309" class="l"> </span>
+<span id="L310" class="l">case nil:</span>
+<span id="L311" class="l"> </span>
+<span id="L312" class="l">	fmt.Printf(&quot;inventory replied: %s\n&quot;, string(msg.Data))</span>
+<span id="L313" class="l"> </span>
+<span id="L314" class="l">default:</span>
+<span id="L315" class="l"> </span>
+<span id="L316" class="l">	fmt.Printf(&quot;request failed: %v\n&quot;, err)</span>
+<span id="L317" class="l"> </span>
+<span id="L318" class="l">}</span>
+<span id="L319" class="l">```</span>
+<span id="L320" class="l"> </span>
+<span id="L321" class="l">#### Python</span>
+<span id="L322" class="l"> </span>
+<span id="L323" class="l">```</span>
+<span id="L324" class="l"># Ask the inventory service whether an order&#x27;s item is in stock. The client</span>
+<span id="L325" class="l"> </span>
+<span id="L326" class="l"># creates a private inbox, sends the request, and waits up to the timeout</span>
+<span id="L327" class="l"> </span>
+<span id="L328" class="l"># for one reply. A missing service surfaces immediately as</span>
+<span id="L329" class="l"> </span>
+<span id="L330" class="l"># NoRespondersError; a slow one surfaces as TimeoutError.</span>
+<span id="L331" class="l"> </span>
+<span id="L332" class="l">order = &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L333" class="l"> </span>
+<span id="L334" class="l">try:</span>
+<span id="L335" class="l"> </span>
+<span id="L336" class="l">    reply = await client.request(&quot;orders.inventory.check&quot;, order.encode(), timeout=2.0)</span>
+<span id="L337" class="l"> </span>
+<span id="L338" class="l">    print(f&quot;inventory replied: {reply.data.decode()}&quot;)</span>
+<span id="L339" class="l"> </span>
+<span id="L340" class="l">except NoRespondersError:</span>
+<span id="L341" class="l"> </span>
+<span id="L342" class="l">    print(&quot;no inventory service is running&quot;)</span>
+<span id="L343" class="l"> </span>
+<span id="L344" class="l">except TimeoutError:</span>
+<span id="L345" class="l"> </span>
+<span id="L346" class="l">    print(&quot;inventory service did not answer in time&quot;)</span>
+<span id="L347" class="l">```</span>
+<span id="L348" class="l"> </span>
+<span id="L349" class="l">#### Java</span>
+<span id="L350" class="l"> </span>
+<span id="L351" class="l">```</span>
+<span id="L352" class="l">// Ask the inventory service whether an order&#x27;s item is in stock. A missing</span>
+<span id="L353" class="l"> </span>
+<span id="L354" class="l">// service surfaces immediately as a canceled request; a slow one as a</span>
+<span id="L355" class="l"> </span>
+<span id="L356" class="l">// timeout.</span>
+<span id="L357" class="l"> </span>
+<span id="L358" class="l">byte[] order = (&quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;,&quot;</span>
+<span id="L359" class="l"> </span>
+<span id="L360" class="l">    + &quot;\&quot;total_cents\&quot;:4200,\&quot;ts\&quot;:\&quot;2026-05-22T10:14:22Z\&quot;}&quot;).getBytes(StandardCharsets.UTF_8);</span>
+<span id="L361" class="l"> </span>
+<span id="L362" class="l">CompletableFuture&lt;Message&gt; future = nc.request(&quot;orders.inventory.check&quot;, order);</span>
+<span id="L363" class="l"> </span>
+<span id="L364" class="l">try {</span>
+<span id="L365" class="l"> </span>
+<span id="L366" class="l">    Message reply = future.get(2, TimeUnit.SECONDS);</span>
+<span id="L367" class="l"> </span>
+<span id="L368" class="l">    System.out.println(&quot;inventory replied: &quot; + new String(reply.getData(), StandardCharsets.UTF_8));</span>
+<span id="L369" class="l"> </span>
+<span id="L370" class="l">}</span>
+<span id="L371" class="l"> </span>
+<span id="L372" class="l">catch (TimeoutException e) {</span>
+<span id="L373" class="l"> </span>
+<span id="L374" class="l">    System.out.println(&quot;inventory service did not answer in time&quot;);</span>
+<span id="L375" class="l"> </span>
+<span id="L376" class="l">}</span>
+<span id="L377" class="l"> </span>
+<span id="L378" class="l">catch (ExecutionException e) {</span>
+<span id="L379" class="l"> </span>
+<span id="L380" class="l">    // reportNoResponders() surfaces a missing service as a 503 status</span>
+<span id="L381" class="l"> </span>
+<span id="L382" class="l">    if (e.getCause() instanceof JetStreamStatusException) {</span>
+<span id="L383" class="l"> </span>
+<span id="L384" class="l">        System.out.println(&quot;no inventory service is running&quot;);</span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l">    }</span>
+<span id="L387" class="l"> </span>
+<span id="L388" class="l">    else {</span>
+<span id="L389" class="l"> </span>
+<span id="L390" class="l">        System.out.println(&quot;request failed: &quot; + e.getMessage());</span>
+<span id="L391" class="l"> </span>
+<span id="L392" class="l">    }</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l">}</span>
+<span id="L395" class="l">```</span>
+<span id="L396" class="l"> </span>
+<span id="L397" class="l">#### Rust</span>
+<span id="L398" class="l"> </span>
+<span id="L399" class="l">```</span>
+<span id="L400" class="l">// Ask the inventory service whether an order&#x27;s item is in stock. The client</span>
+<span id="L401" class="l"> </span>
+<span id="L402" class="l">// creates a private inbox, sends the request, and waits for one reply. A</span>
+<span id="L403" class="l"> </span>
+<span id="L404" class="l">// missing service surfaces as NoResponders; a slow one as TimedOut.</span>
+<span id="L405" class="l"> </span>
+<span id="L406" class="l">let order = r#&quot;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&quot;#;</span>
+<span id="L407" class="l"> </span>
+<span id="L408" class="l">match client.request(&quot;orders.inventory.check&quot;, order.into()).await {</span>
+<span id="L409" class="l"> </span>
+<span id="L410" class="l">    Ok(response) =&gt; {</span>
+<span id="L411" class="l"> </span>
+<span id="L412" class="l">        println!(</span>
+<span id="L413" class="l"> </span>
+<span id="L414" class="l">            &quot;inventory replied: {}&quot;,</span>
+<span id="L415" class="l"> </span>
+<span id="L416" class="l">            String::from_utf8_lossy(&amp;response.payload)</span>
+<span id="L417" class="l"> </span>
+<span id="L418" class="l">        );</span>
+<span id="L419" class="l"> </span>
+<span id="L420" class="l">    }</span>
+<span id="L421" class="l"> </span>
+<span id="L422" class="l">    Err(err) =&gt; match err.kind() {</span>
+<span id="L423" class="l"> </span>
+<span id="L424" class="l">        RequestErrorKind::NoResponders =&gt; println!(&quot;no inventory service is running&quot;),</span>
+<span id="L425" class="l"> </span>
+<span id="L426" class="l">        RequestErrorKind::TimedOut =&gt; println!(&quot;inventory service did not answer in time&quot;),</span>
+<span id="L427" class="l"> </span>
+<span id="L428" class="l">        _ =&gt; eprintln!(&quot;request failed: {}&quot;, err),</span>
+<span id="L429" class="l"> </span>
+<span id="L430" class="l">    },</span>
+<span id="L431" class="l"> </span>
+<span id="L432" class="l">}</span>
+<span id="L433" class="l">```</span>
+<span id="L434" class="l"> </span>
+<span id="L435" class="l">#### C#/.NET</span>
+<span id="L436" class="l"> </span>
+<span id="L437" class="l">```</span>
+<span id="L438" class="l">// Ask the inventory service whether an order&#x27;s item is in stock. The client</span>
+<span id="L439" class="l"> </span>
+<span id="L440" class="l">// creates a private inbox, sends the request, and waits for one reply.</span>
+<span id="L441" class="l"> </span>
+<span id="L442" class="l">// RequestAsync throws NatsNoRespondersException immediately when nothing is</span>
+<span id="L443" class="l"> </span>
+<span id="L444" class="l">// subscribed on the subject.</span>
+<span id="L445" class="l"> </span>
+<span id="L446" class="l">var order = new Order(OrderId: &quot;ord_8w2k&quot;, Customer: &quot;acme-co&quot;, TotalCents: 4200, Timestamp: DateTimeOffset.Parse(&quot;2026-05-22T10:14:22Z&quot;, CultureInfo.InvariantCulture));</span>
+<span id="L447" class="l"> </span>
+<span id="L448" class="l">try</span>
+<span id="L449" class="l"> </span>
+<span id="L450" class="l">{</span>
+<span id="L451" class="l"> </span>
+<span id="L452" class="l">    var reply = await client.RequestAsync&lt;Order, InventoryReply&gt;(&quot;orders.inventory.check&quot;, order);</span>
+<span id="L453" class="l"> </span>
+<span id="L454" class="l">    output.WriteLine($&quot;inventory replied: {reply.Data}&quot;);</span>
+<span id="L455" class="l"> </span>
+<span id="L456" class="l">}</span>
+<span id="L457" class="l"> </span>
+<span id="L458" class="l">catch (NatsNoRespondersException)</span>
+<span id="L459" class="l"> </span>
+<span id="L460" class="l">{</span>
+<span id="L461" class="l"> </span>
+<span id="L462" class="l">    output.WriteLine(&quot;no inventory service is running&quot;);</span>
+<span id="L463" class="l"> </span>
+<span id="L464" class="l">}</span>
+<span id="L465" class="l">```</span>
+<span id="L466" class="l"> </span>
+<span id="L467" class="l">#### C</span>
+<span id="L468" class="l"> </span>
+<span id="L469" class="l">```</span>
+<span id="L470" class="l">// Ask the inventory service whether an order&#x27;s item is in stock. The</span>
+<span id="L471" class="l"> </span>
+<span id="L472" class="l">// client creates a private inbox, sends the request, and waits up to</span>
+<span id="L473" class="l"> </span>
+<span id="L474" class="l">// the timeout for one reply. A missing service surfaces immediately as</span>
+<span id="L475" class="l"> </span>
+<span id="L476" class="l">// NATS_NO_RESPONDERS; a slow one as NATS_TIMEOUT.</span>
+<span id="L477" class="l"> </span>
+<span id="L478" class="l">const char *order = &quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;,&quot;</span>
+<span id="L479" class="l"> </span>
+<span id="L480" class="l">                    &quot;\&quot;total_cents\&quot;:4200,\&quot;ts\&quot;:\&quot;2026-05-22T10:14:22Z\&quot;}&quot;;</span>
+<span id="L481" class="l"> </span>
+<span id="L482" class="l">natsMsg    *reply = NULL;</span>
+<span id="L483" class="l"> </span>
+<span id="L484" class="l"> </span>
+<span id="L485" class="l"> </span>
+<span id="L486" class="l">s = natsConnection_RequestString(&amp;reply, conn, &quot;orders.inventory.check&quot;,</span>
+<span id="L487" class="l"> </span>
+<span id="L488" class="l">                                 order, 2000);</span>
+<span id="L489" class="l"> </span>
+<span id="L490" class="l">switch (s)</span>
+<span id="L491" class="l"> </span>
+<span id="L492" class="l">{</span>
+<span id="L493" class="l"> </span>
+<span id="L494" class="l">    case NATS_NO_RESPONDERS:</span>
+<span id="L495" class="l"> </span>
+<span id="L496" class="l">        printf(&quot;no inventory service is running\n&quot;);</span>
+<span id="L497" class="l"> </span>
+<span id="L498" class="l">        break;</span>
+<span id="L499" class="l"> </span>
+<span id="L500" class="l">    case NATS_TIMEOUT:</span>
+<span id="L501" class="l"> </span>
+<span id="L502" class="l">        printf(&quot;inventory service did not answer in time\n&quot;);</span>
+<span id="L503" class="l"> </span>
+<span id="L504" class="l">        break;</span>
+<span id="L505" class="l"> </span>
+<span id="L506" class="l">    case NATS_OK:</span>
+<span id="L507" class="l"> </span>
+<span id="L508" class="l">        printf(&quot;inventory replied: %.*s\n&quot;,</span>
+<span id="L509" class="l"> </span>
+<span id="L510" class="l">               natsMsg_GetDataLength(reply), natsMsg_GetData(reply));</span>
+<span id="L511" class="l"> </span>
+<span id="L512" class="l">        natsMsg_Destroy(reply);</span>
+<span id="L513" class="l"> </span>
+<span id="L514" class="l">        break;</span>
+<span id="L515" class="l"> </span>
+<span id="L516" class="l">    default:</span>
+<span id="L517" class="l"> </span>
+<span id="L518" class="l">        printf(&quot;request failed: %s\n&quot;, natsStatus_GetText(s));</span>
+<span id="L519" class="l"> </span>
+<span id="L520" class="l">        break;</span>
+<span id="L521" class="l"> </span>
+<span id="L522" class="l">}</span>
+<span id="L523" class="l">```</span>
+<span id="L524" class="l"> </span>
+<span id="L525" class="l">You should see the reply printed back. Behind that one line, the client picked a fresh inbox subject, published your payload with the inbox attached, and matched the answer back to this call by its token on the subscription it already holds for its inbox prefix.</span>
+<span id="L526" class="l"> </span>
+<span id="L527" class="l">## Every request needs a timeout</span>
+<span id="L528" class="l"> </span>
+<span id="L529" class="l">A request can fail to come back — the responder might be slow or busy, or the reply lost in flight. Replies are [at-most-once](/learn/core-nats/publish-subscribe.md#at-most-once-delivery) like everything else: one that doesn&#x27;t arrive is gone, not retried.</span>
+<span id="L530" class="l"> </span>
+<span id="L531" class="l">So every request carries a **timeout**: the longest the client will wait for the answer before giving up. The CLI sets `--timeout` for you (five seconds by default), and the request snippet above makes it explicit with `--timeout 2s`. Pick a value that covers the responder&#x27;s work plus the network round-trip. In a client library you pass the timeout on every `request()` call, so a request can&#x27;t wait indefinitely.</span>
+<span id="L532" class="l"> </span>
+<span id="L533" class="l">When the timeout expires with no reply, the call returns a timeout error. Your code decides what to do next: retry, fall back, or fail the caller. Core NATS won&#x27;t make that decision for you, and it won&#x27;t deliver the answer late.</span>
+<span id="L534" class="l"> </span>
+<span id="L535" class="l">A timeout tells you the answer didn&#x27;t arrive in time, not *why* — the responder might be slow, or not there at all. The next section tells those apart.</span>
+<span id="L536" class="l"> </span>
+<span id="L537" class="l">## No responders</span>
+<span id="L538" class="l"> </span>
+<span id="L539" class="l">Waiting two seconds to discover that nobody is even listening is wasteful. NATS has a faster signal for that exact case.</span>
+<span id="L540" class="l"> </span>
+<span id="L541" class="l">When you send a request to a subject with zero subscribers, the server knows immediately that nobody can answer. Rather than let your timeout run, it sends back a **no responders** signal right away: a reply carrying a `503` status. Your client surfaces it as a distinct no-responders error, not a timeout.</span>
+<span id="L542" class="l"> </span>
+<span id="L543" class="l">This is the difference between &quot;the inventory service is slow&quot; (you get a timeout after 2s) and &quot;the inventory service isn&#x27;t running at all&quot; (you get no responders in milliseconds). One is a latency problem; the other is a deployment problem. The signal lets your code react correctly to each.</span>
+<span id="L544" class="l"> </span>
+<span id="L545" class="l">See it for yourself. Stop the inventory service from the first terminal, then send the request again:</span>
+<span id="L546" class="l"> </span>
+<span id="L547" class="l">```</span>
+<span id="L548" class="l">nats request orders.inventory.check \</span>
+<span id="L549" class="l"> </span>
+<span id="L550" class="l">  &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27; \</span>
+<span id="L551" class="l"> </span>
+<span id="L552" class="l">  --timeout 2s</span>
+<span id="L553" class="l">```</span>
+<span id="L554" class="l"> </span>
+<span id="L555" class="l">```</span>
+<span id="L556" class="l">14:02:31 Sending request on &quot;orders.inventory.check&quot;</span>
+<span id="L557" class="l"> </span>
+<span id="L558" class="l">14:02:31 No responders are available</span>
+<span id="L559" class="l">```</span>
+<span id="L560" class="l"> </span>
+<span id="L561" class="l">The no-responders signal comes back instantly, not after two seconds. The CLI prints the line and exits cleanly; a client library surfaces the same case as a distinct error you can branch on (`ErrNoResponders` in the Go client, with an equivalent in each language). Start the service again and the same request succeeds.</span>
+<span id="L562" class="l"> </span>
+<span id="L563" class="l">The signal rides the message header mechanism: the server delivers a reply with the header line `NATS/1.0 503`. A client needs header support to receive it, which every current client enables.</span>
+<span id="L564" class="l"> </span>
+<span id="L565" class="l">## Headers</span>
+<span id="L566" class="l"> </span>
+<span id="L567" class="l">That `503` mechanism points to a wider capability: NATS messages can carry **headers**, key/value metadata that travels alongside the payload in a format that looks like HTTP. A request can attach headers, and so can a reply.</span>
+<span id="L568" class="l"> </span>
+<span id="L569" class="l">You won&#x27;t need them for the inventory call, so this page doesn&#x27;t build with them. [Message headers](/learn/core-nats/headers.md) shows how to set and read them; the full wire format is in [Reference](/reference/.md). Reach for them when you want metadata that isn&#x27;t part of the business payload: a request ID, a trace context, a content type.</span>
+<span id="L570" class="l"> </span>
+<span id="L571" class="l">## Request-reply, queue groups, and many answers</span>
+<span id="L572" class="l"> </span>
+<span id="L573" class="l">The inventory service has one responder. Two questions follow naturally, and each is its own page.</span>
+<span id="L574" class="l"> </span>
+<span id="L575" class="l">What if you run several inventory instances for capacity, and want exactly one of them to handle each request? That&#x27;s a **queue group**, and the [next page](/learn/core-nats/queue-groups.md) builds one.</span>
+<span id="L576" class="l"> </span>
+<span id="L577" class="l">What if you want *every* responder on a subject to answer the same request, and you collect all the replies? That&#x27;s [scatter-gather](/learn/core-nats/scatter-gather.md), two pages on.</span>
+<span id="L578" class="l"> </span>
+<span id="L579" class="l">If your request-reply services start to grow real endpoints, discovery, and stats, you&#x27;re describing the [Services framework](/learn/services/.md), a layer built on exactly the request-reply and queue-group primitives in this chapter. This chapter stays on the primitives.</span>
+<span id="L580" class="l"> </span>
+<span id="L581" class="l">## Pitfalls</span>
+<span id="L582" class="l"> </span>
+<span id="L583" class="l">**A request without a timeout can wait forever.** Pass a deadline on every `request()` call, sized to the responder&#x27;s work plus the round-trip — long enough not to give up on a merely-slow reply.</span>
+<span id="L584" class="l"> </span>
+<span id="L585" class="l">**Treating no responders as a hang.** No responders comes back in milliseconds, not as a slow timeout. Branch on it separately: no responders means nothing is deployed, a timeout means it&#x27;s deployed but slow.</span>
+<span id="L586" class="l"> </span>
+<span id="L587" class="l">**Assuming exactly one reply.** A plain `request()` returns the first reply and discards the rest. If two inventory instances both answer on `orders.inventory.check`, the second answer is lost silently, with no indication that it ever arrived. When more than one service may answer, ask for it explicitly and gather by count or deadline:</span>
+<span id="L588" class="l"> </span>
+<span id="L589" class="l">#### CLI</span>
+<span id="L590" class="l"> </span>
+<span id="L591" class="l">```</span>
+<span id="L592" class="l">#!/bin/bash</span>
+<span id="L593" class="l"> </span>
+<span id="L594" class="l"># A plain request returns only the FIRST reply and discards the rest.</span>
+<span id="L595" class="l"> </span>
+<span id="L596" class="l"># If more than one service answers on a subject, the extras are lost</span>
+<span id="L597" class="l"> </span>
+<span id="L598" class="l"># silently. Make the expectation explicit with --replies.</span>
+<span id="L599" class="l"> </span>
+<span id="L600" class="l">#</span>
+<span id="L601" class="l"> </span>
+<span id="L602" class="l"># --replies N waits for up to N replies instead of stopping at the first.</span>
+<span id="L603" class="l"> </span>
+<span id="L604" class="l"># --replies 0 collects every reply until --timeout ends the call.</span>
+<span id="L605" class="l"> </span>
+<span id="L606" class="l">nats request orders.inventory.check \</span>
+<span id="L607" class="l"> </span>
+<span id="L608" class="l">  &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27; \</span>
+<span id="L609" class="l"> </span>
+<span id="L610" class="l">  --replies 0 --timeout 2s</span>
+<span id="L611" class="l">```</span>
+<span id="L612" class="l"> </span>
+<span id="L613" class="l">#### JavaScript/TypeScript</span>
+<span id="L614" class="l"> </span>
+<span id="L615" class="l">```</span>
+<span id="L616" class="l">// Gather more than one reply to a single request. A plain request() returns</span>
+<span id="L617" class="l"> </span>
+<span id="L618" class="l">// only the first reply, so when several services may answer, subscribe to your</span>
+<span id="L619" class="l"> </span>
+<span id="L620" class="l">// own inbox, publish the request with that inbox as the reply subject, and</span>
+<span id="L621" class="l"> </span>
+<span id="L622" class="l">// collect replies until they stop arriving.</span>
+<span id="L623" class="l"> </span>
+<span id="L624" class="l">const order =</span>
+<span id="L625" class="l"> </span>
+<span id="L626" class="l">  &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;;</span>
+<span id="L627" class="l"> </span>
+<span id="L628" class="l">const inbox = createInbox();</span>
+<span id="L629" class="l"> </span>
+<span id="L630" class="l">const sub = nc.subscribe(inbox);</span>
+<span id="L631" class="l"> </span>
+<span id="L632" class="l">nc.publish(&quot;orders.inventory.check&quot;, order, { reply: inbox });</span>
+<span id="L633" class="l"> </span>
+<span id="L634" class="l"> </span>
+<span id="L635" class="l"> </span>
+<span id="L636" class="l">const replies: string[] = [];</span>
+<span id="L637" class="l"> </span>
+<span id="L638" class="l">const gather = (async () =&gt; {</span>
+<span id="L639" class="l"> </span>
+<span id="L640" class="l">  for await (const msg of sub) {</span>
+<span id="L641" class="l"> </span>
+<span id="L642" class="l">    replies.push(msg.string());</span>
+<span id="L643" class="l"> </span>
+<span id="L644" class="l">  }</span>
+<span id="L645" class="l"> </span>
+<span id="L646" class="l">})();</span>
+<span id="L647" class="l"> </span>
+<span id="L648" class="l"> </span>
+<span id="L649" class="l"> </span>
+<span id="L650" class="l">// Stop once no further reply is expected.</span>
+<span id="L651" class="l"> </span>
+<span id="L652" class="l">setTimeout(() =&gt; sub.unsubscribe(), 300);</span>
+<span id="L653" class="l"> </span>
+<span id="L654" class="l">await gather;</span>
+<span id="L655" class="l"> </span>
+<span id="L656" class="l"> </span>
+<span id="L657" class="l"> </span>
+<span id="L658" class="l">console.log(`gathered ${replies.length} replies`);</span>
+<span id="L659" class="l">```</span>
+<span id="L660" class="l"> </span>
+<span id="L661" class="l">#### Go</span>
+<span id="L662" class="l"> </span>
+<span id="L663" class="l">```</span>
+<span id="L664" class="l">// Gather more than one reply to a single request. A plain Request returns</span>
+<span id="L665" class="l"> </span>
+<span id="L666" class="l">// only the first reply, so when several services may answer, subscribe to</span>
+<span id="L667" class="l"> </span>
+<span id="L668" class="l">// your own inbox, publish the request with that inbox as the reply subject,</span>
+<span id="L669" class="l"> </span>
+<span id="L670" class="l">// and collect replies until they stop arriving.</span>
+<span id="L671" class="l"> </span>
+<span id="L672" class="l">order := `{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}`</span>
+<span id="L673" class="l"> </span>
+<span id="L674" class="l">inbox := nats.NewInbox()</span>
+<span id="L675" class="l"> </span>
+<span id="L676" class="l">sub, _ := nc.SubscribeSync(inbox)</span>
+<span id="L677" class="l"> </span>
+<span id="L678" class="l">nc.PublishRequest(&quot;orders.inventory.check&quot;, inbox, []byte(order))</span>
+<span id="L679" class="l"> </span>
+<span id="L680" class="l"> </span>
+<span id="L681" class="l"> </span>
+<span id="L682" class="l">var replies [][]byte</span>
+<span id="L683" class="l"> </span>
+<span id="L684" class="l">for {</span>
+<span id="L685" class="l"> </span>
+<span id="L686" class="l">	// Stop once no further reply arrives within the gap deadline.</span>
+<span id="L687" class="l"> </span>
+<span id="L688" class="l">	msg, err := sub.NextMsg(300 * time.Millisecond)</span>
+<span id="L689" class="l"> </span>
+<span id="L690" class="l">	if err != nil {</span>
+<span id="L691" class="l"> </span>
+<span id="L692" class="l">		break</span>
+<span id="L693" class="l"> </span>
+<span id="L694" class="l">	}</span>
+<span id="L695" class="l"> </span>
+<span id="L696" class="l">	replies = append(replies, msg.Data)</span>
+<span id="L697" class="l"> </span>
+<span id="L698" class="l">}</span>
+<span id="L699" class="l"> </span>
+<span id="L700" class="l">fmt.Printf(&quot;gathered %d replies\n&quot;, len(replies))</span>
+<span id="L701" class="l">```</span>
+<span id="L702" class="l"> </span>
+<span id="L703" class="l">#### Python</span>
+<span id="L704" class="l"> </span>
+<span id="L705" class="l">```</span>
+<span id="L706" class="l"># Gather more than one reply to a single request. A plain request() returns</span>
+<span id="L707" class="l"> </span>
+<span id="L708" class="l"># only the first reply, so when several services may answer, subscribe to</span>
+<span id="L709" class="l"> </span>
+<span id="L710" class="l"># your own inbox and collect replies until they stop arriving.</span>
+<span id="L711" class="l"> </span>
+<span id="L712" class="l">order = &#x27;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&#x27;</span>
+<span id="L713" class="l"> </span>
+<span id="L714" class="l">inbox = f&quot;_INBOX.{uuid.uuid4().hex}&quot;</span>
+<span id="L715" class="l"> </span>
+<span id="L716" class="l">async with await client.subscribe(inbox) as subscription:</span>
+<span id="L717" class="l"> </span>
+<span id="L718" class="l">    await client.publish(&quot;orders.inventory.check&quot;, order.encode(), reply=inbox)</span>
+<span id="L719" class="l"> </span>
+<span id="L720" class="l"> </span>
+<span id="L721" class="l"> </span>
+<span id="L722" class="l">    replies = []</span>
+<span id="L723" class="l"> </span>
+<span id="L724" class="l">    while True:</span>
+<span id="L725" class="l"> </span>
+<span id="L726" class="l">        try:</span>
+<span id="L727" class="l"> </span>
+<span id="L728" class="l">            # Stop once no further reply arrives within the gap deadline.</span>
+<span id="L729" class="l"> </span>
+<span id="L730" class="l">            message = await subscription.next(timeout=0.3)</span>
+<span id="L731" class="l"> </span>
+<span id="L732" class="l">            replies.append(message.data.decode())</span>
+<span id="L733" class="l"> </span>
+<span id="L734" class="l">        except TimeoutError:</span>
+<span id="L735" class="l"> </span>
+<span id="L736" class="l">            break</span>
+<span id="L737" class="l"> </span>
+<span id="L738" class="l"> </span>
+<span id="L739" class="l"> </span>
+<span id="L740" class="l">print(f&quot;gathered {len(replies)} replies: {replies}&quot;)</span>
+<span id="L741" class="l">```</span>
+<span id="L742" class="l"> </span>
+<span id="L743" class="l">#### Java</span>
+<span id="L744" class="l"> </span>
+<span id="L745" class="l">```</span>
+<span id="L746" class="l">// Gather more than one reply to a single request. A plain request returns</span>
+<span id="L747" class="l"> </span>
+<span id="L748" class="l">// only the first reply, so when several services may answer, subscribe to</span>
+<span id="L749" class="l"> </span>
+<span id="L750" class="l">// your own inbox, publish the request with that inbox as the reply subject,</span>
+<span id="L751" class="l"> </span>
+<span id="L752" class="l">// and collect replies until they stop arriving.</span>
+<span id="L753" class="l"> </span>
+<span id="L754" class="l">byte[] order = (&quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;,&quot;</span>
+<span id="L755" class="l"> </span>
+<span id="L756" class="l">    + &quot;\&quot;total_cents\&quot;:4200,\&quot;ts\&quot;:\&quot;2026-05-22T10:14:22Z\&quot;}&quot;).getBytes(StandardCharsets.UTF_8);</span>
+<span id="L757" class="l"> </span>
+<span id="L758" class="l">String inbox = nc.createInbox();</span>
+<span id="L759" class="l"> </span>
+<span id="L760" class="l">Subscription sub = nc.subscribe(inbox);</span>
+<span id="L761" class="l"> </span>
+<span id="L762" class="l">nc.publish(&quot;orders.inventory.check&quot;, inbox, order);</span>
+<span id="L763" class="l"> </span>
+<span id="L764" class="l"> </span>
+<span id="L765" class="l"> </span>
+<span id="L766" class="l">List&lt;String&gt; replies = new ArrayList&lt;&gt;();</span>
+<span id="L767" class="l"> </span>
+<span id="L768" class="l">Message m = sub.nextMessage(Duration.ofMillis(300));</span>
+<span id="L769" class="l"> </span>
+<span id="L770" class="l">while (m != null) {</span>
+<span id="L771" class="l"> </span>
+<span id="L772" class="l">    replies.add(new String(m.getData(), StandardCharsets.UTF_8));</span>
+<span id="L773" class="l"> </span>
+<span id="L774" class="l">    m = sub.nextMessage(Duration.ofMillis(300));</span>
+<span id="L775" class="l"> </span>
+<span id="L776" class="l">}</span>
+<span id="L777" class="l"> </span>
+<span id="L778" class="l">System.out.println(&quot;gathered &quot; + replies.size() + &quot; replies&quot;);</span>
+<span id="L779" class="l">```</span>
+<span id="L780" class="l"> </span>
+<span id="L781" class="l">#### Rust</span>
+<span id="L782" class="l"> </span>
+<span id="L783" class="l">```</span>
+<span id="L784" class="l">// Gather more than one reply to a single request. A plain request() returns</span>
+<span id="L785" class="l"> </span>
+<span id="L786" class="l">// only the first reply, so when several services may answer, subscribe to</span>
+<span id="L787" class="l"> </span>
+<span id="L788" class="l">// your own inbox, publish the request with that inbox as the reply subject,</span>
+<span id="L789" class="l"> </span>
+<span id="L790" class="l">// and collect replies until they stop arriving.</span>
+<span id="L791" class="l"> </span>
+<span id="L792" class="l">let order = r#&quot;{&quot;order_id&quot;:&quot;ord_8w2k&quot;,&quot;customer&quot;:&quot;acme-co&quot;,&quot;total_cents&quot;:4200,&quot;ts&quot;:&quot;2026-05-22T10:14:22Z&quot;}&quot;#;</span>
+<span id="L793" class="l"> </span>
+<span id="L794" class="l">let inbox = client.new_inbox();</span>
+<span id="L795" class="l"> </span>
+<span id="L796" class="l">let mut sub = client.subscribe(inbox.clone()).await?;</span>
+<span id="L797" class="l"> </span>
+<span id="L798" class="l">client</span>
+<span id="L799" class="l"> </span>
+<span id="L800" class="l">    .publish_with_reply(&quot;orders.inventory.check&quot;, inbox, order.into())</span>
+<span id="L801" class="l"> </span>
+<span id="L802" class="l">    .await?;</span>
+<span id="L803" class="l"> </span>
+<span id="L804" class="l">client.flush().await?;</span>
+<span id="L805" class="l"> </span>
+<span id="L806" class="l"> </span>
+<span id="L807" class="l"> </span>
+<span id="L808" class="l">let mut replies = Vec::new();</span>
+<span id="L809" class="l"> </span>
+<span id="L810" class="l">// Stop once no further reply arrives within the gap deadline.</span>
+<span id="L811" class="l"> </span>
+<span id="L812" class="l">while let Ok(Some(msg)) = tokio::time::timeout(Duration::from_millis(300), sub.next()).await {</span>
+<span id="L813" class="l"> </span>
+<span id="L814" class="l">    replies.push(String::from_utf8_lossy(&amp;msg.payload).to_string());</span>
+<span id="L815" class="l"> </span>
+<span id="L816" class="l">}</span>
+<span id="L817" class="l"> </span>
+<span id="L818" class="l"> </span>
+<span id="L819" class="l"> </span>
+<span id="L820" class="l">println!(&quot;gathered {} replies&quot;, replies.len());</span>
+<span id="L821" class="l">```</span>
+<span id="L822" class="l"> </span>
+<span id="L823" class="l">#### C#/.NET</span>
+<span id="L824" class="l"> </span>
+<span id="L825" class="l">```</span>
+<span id="L826" class="l">// Gather more than one reply to a single request. A plain request returns</span>
+<span id="L827" class="l"> </span>
+<span id="L828" class="l">// only the first reply, so when several services may answer, subscribe to</span>
+<span id="L829" class="l"> </span>
+<span id="L830" class="l">// your own inbox, publish the request with that inbox as the reply subject,</span>
+<span id="L831" class="l"> </span>
+<span id="L832" class="l">// and collect replies until they stop arriving.</span>
+<span id="L833" class="l"> </span>
+<span id="L834" class="l">var order = new Order(OrderId: &quot;ord_8w2k&quot;, Customer: &quot;acme-co&quot;, TotalCents: 4200, Timestamp: DateTimeOffset.Parse(&quot;2026-05-22T10:14:22Z&quot;, CultureInfo.InvariantCulture));</span>
+<span id="L835" class="l"> </span>
+<span id="L836" class="l">var inbox = client.Connection.NewInbox();</span>
+<span id="L837" class="l"> </span>
+<span id="L838" class="l">await using var sub = await client.Connection.SubscribeCoreAsync&lt;InventoryReply&gt;(inbox);</span>
+<span id="L839" class="l"> </span>
+<span id="L840" class="l">await client.PublishAsync&lt;Order&gt;(&quot;orders.inventory.check&quot;, order, replyTo: inbox);</span>
+<span id="L841" class="l"> </span>
+<span id="L842" class="l"> </span>
+<span id="L843" class="l"> </span>
+<span id="L844" class="l">var replies = new List&lt;InventoryReply&gt;();</span>
+<span id="L845" class="l"> </span>
+<span id="L846" class="l">using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(300));</span>
+<span id="L847" class="l"> </span>
+<span id="L848" class="l">try</span>
+<span id="L849" class="l"> </span>
+<span id="L850" class="l">{</span>
+<span id="L851" class="l"> </span>
+<span id="L852" class="l">    // Stop once no further reply arrives within the gap deadline.</span>
+<span id="L853" class="l"> </span>
+<span id="L854" class="l">    await foreach (var msg in sub.Msgs.ReadAllAsync(cts.Token))</span>
+<span id="L855" class="l"> </span>
+<span id="L856" class="l">    {</span>
+<span id="L857" class="l"> </span>
+<span id="L858" class="l">        replies.Add(msg.Data!);</span>
+<span id="L859" class="l"> </span>
+<span id="L860" class="l">    }</span>
+<span id="L861" class="l"> </span>
+<span id="L862" class="l">}</span>
+<span id="L863" class="l"> </span>
+<span id="L864" class="l">catch (OperationCanceledException)</span>
+<span id="L865" class="l"> </span>
+<span id="L866" class="l">{</span>
+<span id="L867" class="l"> </span>
+<span id="L868" class="l">}</span>
+<span id="L869" class="l"> </span>
+<span id="L870" class="l"> </span>
+<span id="L871" class="l"> </span>
+<span id="L872" class="l">output.WriteLine($&quot;gathered {replies.Count} replies&quot;);</span>
+<span id="L873" class="l">```</span>
+<span id="L874" class="l"> </span>
+<span id="L875" class="l">#### C</span>
+<span id="L876" class="l"> </span>
+<span id="L877" class="l">```</span>
+<span id="L878" class="l">// Gather more than one reply to a single request. A plain Request</span>
+<span id="L879" class="l"> </span>
+<span id="L880" class="l">// returns only the first reply, so when several services may answer,</span>
+<span id="L881" class="l"> </span>
+<span id="L882" class="l">// subscribe to your own inbox, publish the request with that inbox as</span>
+<span id="L883" class="l"> </span>
+<span id="L884" class="l">// the reply subject, and collect replies until they stop arriving.</span>
+<span id="L885" class="l"> </span>
+<span id="L886" class="l">const char *order = &quot;{\&quot;order_id\&quot;:\&quot;ord_8w2k\&quot;,\&quot;customer\&quot;:\&quot;acme-co\&quot;,&quot;</span>
+<span id="L887" class="l"> </span>
+<span id="L888" class="l">                    &quot;\&quot;total_cents\&quot;:4200,\&quot;ts\&quot;:\&quot;2026-05-22T10:14:22Z\&quot;}&quot;;</span>
+<span id="L889" class="l"> </span>
+<span id="L890" class="l">int        replies = 0;</span>
+<span id="L891" class="l"> </span>
+<span id="L892" class="l"> </span>
+<span id="L893" class="l"> </span>
+<span id="L894" class="l">if (s == NATS_OK)</span>
+<span id="L895" class="l"> </span>
+<span id="L896" class="l">    s = natsInbox_Create(&amp;inbox);</span>
+<span id="L897" class="l"> </span>
+<span id="L898" class="l">if (s == NATS_OK)</span>
+<span id="L899" class="l"> </span>
+<span id="L900" class="l">    s = natsConnection_SubscribeSync(&amp;sub, conn, (const char *) inbox);</span>
+<span id="L901" class="l"> </span>
+<span id="L902" class="l">if (s == NATS_OK)</span>
+<span id="L903" class="l"> </span>
+<span id="L904" class="l">    s = natsConnection_PublishRequestString(conn, &quot;orders.inventory.check&quot;,</span>
+<span id="L905" class="l"> </span>
+<span id="L906" class="l">                                            (const char *) inbox, order);</span>
+<span id="L907" class="l"> </span>
+<span id="L908" class="l"> </span>
+<span id="L909" class="l"> </span>
+<span id="L910" class="l">while (s == NATS_OK)</span>
+<span id="L911" class="l"> </span>
+<span id="L912" class="l">{</span>
+<span id="L913" class="l"> </span>
+<span id="L914" class="l">    natsMsg *reply = NULL;</span>
+<span id="L915" class="l"> </span>
+<span id="L916" class="l"> </span>
+<span id="L917" class="l"> </span>
+<span id="L918" class="l">    // Stop once no further reply arrives within the gap deadline.</span>
+<span id="L919" class="l"> </span>
+<span id="L920" class="l">    s = natsSubscription_NextMsg(&amp;reply, sub, 300);</span>
+<span id="L921" class="l"> </span>
+<span id="L922" class="l">    if (s != NATS_OK)</span>
+<span id="L923" class="l"> </span>
+<span id="L924" class="l">        break;</span>
+<span id="L925" class="l"> </span>
+<span id="L926" class="l"> </span>
+<span id="L927" class="l"> </span>
+<span id="L928" class="l">    replies++;</span>
+<span id="L929" class="l"> </span>
+<span id="L930" class="l">    natsMsg_Destroy(reply);</span>
+<span id="L931" class="l"> </span>
+<span id="L932" class="l">}</span>
+<span id="L933" class="l"> </span>
+<span id="L934" class="l">printf(&quot;gathered %d replies\n&quot;, replies);</span>
+<span id="L935" class="l">```</span>
+<span id="L936" class="l"> </span>
+<span id="L937" class="l">When you actually want every responder to answer, that&#x27;s [scatter-gather](/learn/core-nats/scatter-gather.md), not a bug. When you want exactly one of several instances to handle each request, that&#x27;s a [queue group](/learn/core-nats/queue-groups.md).</span>
+<span id="L938" class="l"> </span>
+<span id="L939" class="l">**Doing slow work inside the responder.** A responder that runs a slow lookup before replying serializes every request behind it, so one expensive call adds latency to all the callers waiting in line. Keep the reply path fast, or run several instances in a [queue group](/learn/core-nats/queue-groups.md) so the load spreads across them instead of stacking on one.</span>
+<span id="L940" class="l"> </span>
+<span id="L941" class="l">## Where you are</span>
+<span id="L942" class="l"> </span>
+<span id="L943" class="l">The Acme world now has its first two-way conversation:</span>
+<span id="L944" class="l"> </span>
+<span id="L945" class="l">* An inventory service answers on `orders.inventory.check`, built with `nats reply` (or a client&#x27;s `respond()`).</span>
+<span id="L946" class="l">* The warehouse asks with `nats request` (or `request()`), every call bounded by a timeout.</span>
+<span id="L947" class="l">* A missing responder surfaces instantly as no responders, not as a slow timeout.</span>
+<span id="L948" class="l">* Replies are at-most-once like everything else in core NATS: not retried, not held.</span>
+<span id="L949" class="l"> </span>
+<span id="L950" class="l">## What&#x27;s next</span>
+<span id="L951" class="l"> </span>
+<span id="L952" class="l">The inventory service is a single process. To scale it, you run several copies and let NATS hand each request to exactly one of them. That&#x27;s a queue group: built-in load balancing with no broker in the middle. Build one on the next page: [Queue groups](/learn/core-nats/queue-groups.md).</span>
+<span id="L953" class="l"> </span>
+<span id="L954" class="l">## See also</span>
+<span id="L955" class="l"> </span>
+<span id="L956" class="l">* [Core Concepts → Request-reply](/concepts/request-reply.md) — the five-minute overview of the same pattern.</span>
+<span id="L957" class="l">* [Learn → Services](/learn/services/.md) — the framework that turns request-reply responders into discoverable services.</span>
+<span id="L958" class="l">* [Reference → Client protocol](/reference/protocols/client.md) — the wire-level `PUB`/`SUB`/`MSG` and header format.</span>
+<span id="L959" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../../../raw/nats-docs/learn/core-nats/queue-groups.md.html">← queue-groups.md</a> · <a href="../../../../raw/nats-docs/learn/core-nats/scatter-gather.md.html">scatter-gather.md →</a></div></footer></article></main>
+  
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../../../graph-data.js" defer></script>
+<script src="../../../../assets/graph.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nats-io__natscli.README.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../assets/theme.css">
+<link rel="stylesheet" href="../../assets/types.css">
+<script>window.ROOT="../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/question-bank.html" class="">Questions</a><a href="../../inbox/adr-toc.html" class="">ADRs</a><a href="../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../inbox/server-issues.html" class="">Server issues</a><a href="../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell norail">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by facet</a></li><li><a href="../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › github-repos</div>
+<h1>nats-io__natscli.README.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#github-repos">github-repos</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://api.github.com/repos/{owner}/{name}">https://api.github.com/repos/{owner}/{name}</a> and <code>.../releases/latest</code> and <code>.../readme</code>, through the <code>gh</code> CLI — fetched by <code>tools/fetch-repo-facts.py</code></div><div class="mrow"><span class="mk">file</span> <code>raw/github-repos/nats-io__natscli.README.md</code> · 869 lines · 29 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/github-repos/nats-io__natscli.README.md" download>download this file</a></div></div><div class="pn"><a href="../../raw/github-repos/nats-io__nats.zig.release.json.html">← nats-io__nats.zig.release.json</a> · <a href="../../raw/github-repos/nats-io__natscli.account-tls-v0.4.0.md.html">nats-io__natscli.account-tls-v0.4.0.md →</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://github.com/nats-io/natscli/blob/main/README.md · fetched 2026-08-31 · README.md of nats-io/natscli --&gt;</span>
+<span id="L2" class="l">## The NATS Command Line Interface</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">A command line utility to interact with and manage NATS.</span>
+<span id="L5" class="l"> </span>
+<span id="L6" class="l">### Features</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">* JetStream management</span>
+<span id="L9" class="l">* Key-Value management</span>
+<span id="L10" class="l">* Object Store management</span>
+<span id="L11" class="l">* Service API management</span>
+<span id="L12" class="l">* JetStream data and configuration backup</span>
+<span id="L13" class="l">* Message publish and subscribe</span>
+<span id="L14" class="l">* Service requests and creation</span>
+<span id="L15" class="l">* Benchmarking and Latency testing</span>
+<span id="L16" class="l">* Deep system account inspection and reporting</span>
+<span id="L17" class="l">* Configuration context maintenance</span>
+<span id="L18" class="l">* NATS eco-system schema registry</span>
+<span id="L19" class="l">* Monitoring of Streams, Consumers, Services, Servers and Credentials</span>
+<span id="L20" class="l"> </span>
+<span id="L21" class="l">### Installation</span>
+<span id="L22" class="l"> </span>
+<span id="L23" class="l">Releases are [published to GitHub](https://github.com/nats-io/natscli/releases/) where Zip, RPMs and DEBs for various</span>
+<span id="L24" class="l">operating systems can be found.</span>
+<span id="L25" class="l"> </span>
+<span id="L26" class="l">#### Installation via go install</span>
+<span id="L27" class="l"> </span>
+<span id="L28" class="l">The nats cli can be installed directly via `go install`.</span>
+<span id="L29" class="l">To install the latest version:</span>
+<span id="L30" class="l"> </span>
+<span id="L31" class="l">```</span>
+<span id="L32" class="l">go install github.com/nats-io/natscli/nats@latest</span>
+<span id="L33" class="l">```</span>
+<span id="L34" class="l"> </span>
+<span id="L35" class="l">To install a specific release:</span>
+<span id="L36" class="l"> </span>
+<span id="L37" class="l">```</span>
+<span id="L38" class="l">go install github.com/nats-io/natscli/nats@v0.0.33</span>
+<span id="L39" class="l">```</span>
+<span id="L40" class="l"> </span>
+<span id="L41" class="l">#### macOS installation via Homebrew</span>
+<span id="L42" class="l"> </span>
+<span id="L43" class="l">For macOS `brew` can be used to install the latest released version:</span>
+<span id="L44" class="l"> </span>
+<span id="L45" class="l">```nohighlight</span>
+<span id="L46" class="l">brew install nats</span>
+<span id="L47" class="l">```</span>
+<span id="L48" class="l">#### Windows installation via scoop</span>
+<span id="L49" class="l">On Windows, [scoop](https://scoop.sh) has the latest released version:</span>
+<span id="L50" class="l">```</span>
+<span id="L51" class="l">scoop bucket add extras</span>
+<span id="L52" class="l">scoop install extras/natscli</span>
+<span id="L53" class="l">```</span>
+<span id="L54" class="l"> </span>
+<span id="L55" class="l">#### Arch Linux installation via yay</span>
+<span id="L56" class="l"> </span>
+<span id="L57" class="l">For Arch users there is an [AUR package](https://aur.archlinux.org/packages/natscli/) that you can install with:</span>
+<span id="L58" class="l"> </span>
+<span id="L59" class="l">```</span>
+<span id="L60" class="l">yay natscli</span>
+<span id="L61" class="l">```</span>
+<span id="L62" class="l"> </span>
+<span id="L63" class="l">#### Nightly docker images</span>
+<span id="L64" class="l"> </span>
+<span id="L65" class="l">Nightly builds are included in the `synadia/nats-server:nightly` Docker images.</span>
+<span id="L66" class="l"> </span>
+<span id="L67" class="l">### Configuration Contexts</span>
+<span id="L68" class="l"> </span>
+<span id="L69" class="l">The `nats` CLI supports multiple named configurations, for the rest of the document we&#x27;ll interact via `demo.nats.io`.</span>
+<span id="L70" class="l">To enable this we&#x27;ll create a `demo` configuration and set it as default.</span>
+<span id="L71" class="l"> </span>
+<span id="L72" class="l">First we add a configuration to capture the default `localhost` configuration.</span>
+<span id="L73" class="l">```</span>
+<span id="L74" class="l">nats context add localhost --description &quot;Localhost&quot;</span>
+<span id="L75" class="l">```</span>
+<span id="L76" class="l">Output</span>
+<span id="L77" class="l">```</span>
+<span id="L78" class="l">NATS Configuration Context &quot;localhost&quot;</span>
+<span id="L79" class="l"> </span>
+<span id="L80" class="l">  Description: Localhost</span>
+<span id="L81" class="l">  Server URLs: nats://127.0.0.1:4222</span>
+<span id="L82" class="l">```</span>
+<span id="L83" class="l"> </span>
+<span id="L84" class="l">💡 TIP: You can also add authentication configuration here, such as `user` and `password` or `creds`.</span>
+<span id="L85" class="l">(Either send them as command-line arguments or edit the whole context with `nats context edit localhost`.)</span>
+<span id="L86" class="l"> </span>
+<span id="L87" class="l">Next we add a context for `demo.nats.io:4222` and we select it as default.</span>
+<span id="L88" class="l"> </span>
+<span id="L89" class="l">```</span>
+<span id="L90" class="l">nats context add nats --server demo.nats.io:4222 --description &quot;NATS Demo&quot; --select</span>
+<span id="L91" class="l">```</span>
+<span id="L92" class="l">Output</span>
+<span id="L93" class="l">```</span>
+<span id="L94" class="l">NATS Configuration Context &quot;nats&quot;</span>
+<span id="L95" class="l"> </span>
+<span id="L96" class="l">  Description: NATS Demo</span>
+<span id="L97" class="l">  Server URLs: demo.nats.io:4222</span>
+<span id="L98" class="l">```</span>
+<span id="L99" class="l"> </span>
+<span id="L100" class="l">These are the contexts, the `*` indicates the default</span>
+<span id="L101" class="l">```</span>
+<span id="L102" class="l">nats context ls</span>
+<span id="L103" class="l">```</span>
+<span id="L104" class="l">Output</span>
+<span id="L105" class="l">```</span>
+<span id="L106" class="l">Known contexts:</span>
+<span id="L107" class="l"> </span>
+<span id="L108" class="l">   localhost           Localhost</span>
+<span id="L109" class="l">   nats*               NATS Demo</span>
+<span id="L110" class="l">```</span>
+<span id="L111" class="l"> </span>
+<span id="L112" class="l">The context is selected as default, use `nats context --help` to see how to add, remove and edit contexts.</span>
+<span id="L113" class="l"> </span>
+<span id="L114" class="l">To switch to another context we can use:</span>
+<span id="L115" class="l">```</span>
+<span id="L116" class="l">nats ctx select localhost</span>
+<span id="L117" class="l">```</span>
+<span id="L118" class="l">To switch context back to previous one, we can use `context previous` subcommand:</span>
+<span id="L119" class="l">```</span>
+<span id="L120" class="l">nats ctx -- -</span>
+<span id="L121" class="l">```</span>
+<span id="L122" class="l"> </span>
+<span id="L123" class="l">### Configuration file</span>
+<span id="L124" class="l"> </span>
+<span id="L125" class="l">nats-cli stores contextes in `~/.config/nats/context`. Those contextes are stored as JSON documents. You can find the description and expected value for this configuration file by running `nats --help` and look for the global flags.</span>
+<span id="L126" class="l"> </span>
+<span id="L127" class="l">### JetStream management</span>
+<span id="L128" class="l"> </span>
+<span id="L129" class="l">For full information on managing JetStream please refer to the [JetStream Documentation](https://docs.nats.io/jetstream)</span>
+<span id="L130" class="l"> </span>
+<span id="L131" class="l">As of [nats-server v2.2.0](https://docs.nats.io/release-notes/whats_new/whats_new_22) JetStream is GA.</span>
+<span id="L132" class="l"> </span>
+<span id="L133" class="l">### Publish and Subscribe</span>
+<span id="L134" class="l"> </span>
+<span id="L135" class="l">The `nats` CLI can publish messages and subscribe to subjects.</span>
+<span id="L136" class="l"> </span>
+<span id="L137" class="l">#### Basic Behaviours</span>
+<span id="L138" class="l"> </span>
+<span id="L139" class="l">We will subscribe to the `cli.demo` subject:</span>
+<span id="L140" class="l"> </span>
+<span id="L141" class="l">```</span>
+<span id="L142" class="l">nats sub cli.demo </span>
+<span id="L143" class="l">```</span>
+<span id="L144" class="l">Output</span>
+<span id="L145" class="l">```</span>
+<span id="L146" class="l">12:30:25 Subscribing on cli.demo</span>
+<span id="L147" class="l">``` </span>
+<span id="L148" class="l"> </span>
+<span id="L149" class="l">We can now publish messages to the `cli.demo` subject.</span>
+<span id="L150" class="l"> </span>
+<span id="L151" class="l">First we publish a single message:</span>
+<span id="L152" class="l"> </span>
+<span id="L153" class="l">```</span>
+<span id="L154" class="l">nats pub cli.demo &quot;hello world&quot; </span>
+<span id="L155" class="l">```</span>
+<span id="L156" class="l">Output</span>
+<span id="L157" class="l">```</span>
+<span id="L158" class="l">12:31:20 Published 11 bytes to &quot;cli.demo&quot;</span>
+<span id="L159" class="l">```</span>
+<span id="L160" class="l"> </span>
+<span id="L161" class="l">Next we publish 5 messages with a counter and timestamp in the format `message 5 @ 2020-12-03T12:33:18+01:00`:</span>
+<span id="L162" class="l"> </span>
+<span id="L163" class="l">```</span>
+<span id="L164" class="l">nats pub cli.demo &quot;message {{.Count}} @ {{.TimeStamp}}&quot; --count=5</span>
+<span id="L165" class="l">```</span>
+<span id="L166" class="l">Output</span>
+<span id="L167" class="l">```</span>
+<span id="L168" class="l">12:33:17 Published 33 bytes to &quot;cli.demo&quot;</span>
+<span id="L169" class="l">12:33:17 Published 33 bytes to &quot;cli.demo&quot;</span>
+<span id="L170" class="l">12:33:17 Published 33 bytes to &quot;cli.demo&quot;</span>
+<span id="L171" class="l">12:33:18 Published 33 bytes to &quot;cli.demo&quot;</span>
+<span id="L172" class="l">12:33:18 Published 33 bytes to &quot;cli.demo&quot;</span>
+<span id="L173" class="l">```</span>
+<span id="L174" class="l"> </span>
+<span id="L175" class="l">We can also publish messages read from STDIN:</span>
+<span id="L176" class="l"> </span>
+<span id="L177" class="l">```</span>
+<span id="L178" class="l">echo hello|nats pub cli.demo </span>
+<span id="L179" class="l">```</span>
+<span id="L180" class="l">Output</span>
+<span id="L181" class="l">```</span>
+<span id="L182" class="l">12:34:15 Reading payload from STDIN</span>
+<span id="L183" class="l">12:34:15 Published 6 bytes to &quot;cli.demo&quot;</span>
+<span id="L184" class="l">```</span>
+<span id="L185" class="l"> </span>
+<span id="L186" class="l">Finally, NATS supports HTTP style headers and the CLI behaves like `curl`:</span>
+<span id="L187" class="l"> </span>
+<span id="L188" class="l">```</span>
+<span id="L189" class="l">nats pub cli.demo &#x27;hello headers&#x27; -H Header1:One -H Header2:Two </span>
+<span id="L190" class="l">```</span>
+<span id="L191" class="l">Output</span>
+<span id="L192" class="l">```</span>
+<span id="L193" class="l">12:38:44 Published 13 bytes to &quot;cli.demo&quot;</span>
+<span id="L194" class="l">```</span>
+<span id="L195" class="l"> </span>
+<span id="L196" class="l">The receiver will show:</span>
+<span id="L197" class="l"> </span>
+<span id="L198" class="l">```</span>
+<span id="L199" class="l">nats sub cli.demo  </span>
+<span id="L200" class="l">```</span>
+<span id="L201" class="l">Output</span>
+<span id="L202" class="l">```</span>
+<span id="L203" class="l">[#47] Received on &quot;cli.demo&quot;</span>
+<span id="L204" class="l">Header1: One</span>
+<span id="L205" class="l">Header2: Two</span>
+<span id="L206" class="l"> </span>
+<span id="L207" class="l">hello headers</span>
+<span id="L208" class="l">```</span>
+<span id="L209" class="l"> </span>
+<span id="L210" class="l">### match requests and replies</span>
+<span id="L211" class="l">We can print matching replay-requests together</span>
+<span id="L212" class="l">```</span>
+<span id="L213" class="l">nats sub --match-replies cli.demo</span>
+<span id="L214" class="l">```</span>
+<span id="L215" class="l">Output</span>
+<span id="L216" class="l">```</span>
+<span id="L217" class="l">[#48] Received on &quot;cli.demo&quot; with reply &quot;_INBOX.12345&quot;</span>
+<span id="L218" class="l"> </span>
+<span id="L219" class="l">[#48] Matched reply on &quot;_INBOX.12345&quot;</span>
+<span id="L220" class="l">```</span>
+<span id="L221" class="l"> </span>
+<span id="L222" class="l">sub --match-replies --dump subject.name</span>
+<span id="L223" class="l">```</span>
+<span id="L224" class="l">Output</span>
+<span id="L225" class="l">X.json</span>
+<span id="L226" class="l">X_reply.json</span>
+<span id="L227" class="l">```</span>
+<span id="L228" class="l">#### JetStream</span>
+<span id="L229" class="l"> </span>
+<span id="L230" class="l">When receiving messages from a JetStream Push Consumer messages can be acknowledged when received by passing `--ack`, the</span>
+<span id="L231" class="l">message metadata is also produced:</span>
+<span id="L232" class="l"> </span>
+<span id="L233" class="l">```</span>
+<span id="L234" class="l">nats sub js.out.testing --ack </span>
+<span id="L235" class="l">```</span>
+<span id="L236" class="l">Output</span>
+<span id="L237" class="l">```</span>
+<span id="L238" class="l">12:55:23 Subscribing on js.out.testing with acknowledgement of JetStream messages</span>
+<span id="L239" class="l">[#1] Received JetStream message: consumer: TESTING &gt; TAIL / subject: js.in.testing / delivered: 1 / consumer seq: 568 / stream seq: 2638 / ack: true</span>
+<span id="L240" class="l">test JS message</span>
+<span id="L241" class="l">``` </span>
+<span id="L242" class="l"> </span>
+<span id="L243" class="l">#### Queue Groups</span>
+<span id="L244" class="l"> </span>
+<span id="L245" class="l">When subscribers join a Queue Group the messages are randomly load shared within the group. Perform the following</span>
+<span id="L246" class="l">subscribe in 2 or more shells and then publish messages using some of the methods shown above, these messages will</span>
+<span id="L247" class="l">only be received by one of the subscribers at a time.</span>
+<span id="L248" class="l"> </span>
+<span id="L249" class="l">```</span>
+<span id="L250" class="l">nats sub cli.demo --queue=Q1</span>
+<span id="L251" class="l">```</span>
+<span id="L252" class="l"> </span>
+<span id="L253" class="l">### Service Requests and Creation</span>
+<span id="L254" class="l"> </span>
+<span id="L255" class="l">NATS supports a RPC mechanism where a service received Requests and replies with data in response.</span>
+<span id="L256" class="l"> </span>
+<span id="L257" class="l">```</span>
+<span id="L258" class="l">nats reply &#x27;cli.weather.&gt;&#x27; &quot;Weather Service&quot; </span>
+<span id="L259" class="l">```</span>
+<span id="L260" class="l">Output</span>
+<span id="L261" class="l">```</span>
+<span id="L262" class="l">12:43:28 Listening on &quot;cli.weather.&gt;&quot; in group &quot;NATS-RPLY-22&quot;</span>
+<span id="L263" class="l">```</span>
+<span id="L264" class="l"> </span>
+<span id="L265" class="l">In another shell we can send a request to this service:</span>
+<span id="L266" class="l"> </span>
+<span id="L267" class="l">```</span>
+<span id="L268" class="l">nats request &quot;cli.weather.london&quot; &#x27;&#x27; </span>
+<span id="L269" class="l">```</span>
+<span id="L270" class="l">Output</span>
+<span id="L271" class="l">```</span>
+<span id="L272" class="l">12:46:34 Sending request on &quot;cli.weather.london&quot;</span>
+<span id="L273" class="l">12:46:35 Received on &quot;_INBOX.BJoZpwsshQM5cKUj8KAkT6.HF9jslpP&quot; rtt 404.76854ms</span>
+<span id="L274" class="l">Weather Service</span>
+<span id="L275" class="l">```</span>
+<span id="L276" class="l"> </span>
+<span id="L277" class="l">This shows that the service round trip was 404ms, and we can see the response `Weather Service`.</span>
+<span id="L278" class="l"> </span>
+<span id="L279" class="l">To make this a bit more interesting we can interact with the `wttr.in` web service:</span>
+<span id="L280" class="l"> </span>
+<span id="L281" class="l">```</span>
+<span id="L282" class="l">nats reply &#x27;cli.weather.&gt;&#x27; --command &quot;curl -s wttr.in/{{2}}?format=3&quot; </span>
+<span id="L283" class="l">```</span>
+<span id="L284" class="l">Output</span>
+<span id="L285" class="l">```</span>
+<span id="L286" class="l">12:47:03 Listening on &quot;cli.weather.&gt;&quot; in group &quot;NATS-RPLY-22&quot;</span>
+<span id="L287" class="l">```</span>
+<span id="L288" class="l"> </span>
+<span id="L289" class="l">We can perform the same request again:</span>
+<span id="L290" class="l"> </span>
+<span id="L291" class="l">```</span>
+<span id="L292" class="l">nats request &quot;cli.weather.{london,newyork}&quot; &#x27;&#x27; --raw </span>
+<span id="L293" class="l">```</span>
+<span id="L294" class="l">Output</span>
+<span id="L295" class="l">```</span>
+<span id="L296" class="l">london: 🌦 +7°C</span>
+<span id="L297" class="l">newyork: ☀️ +2°C</span>
+<span id="L298" class="l">```</span>
+<span id="L299" class="l"> </span>
+<span id="L300" class="l">Now the `nats` CLI parses the subject, extracts the `{london,newyork}` from the subjects and calls `curl`, replacing</span>
+<span id="L301" class="l">`{{2}}` with the body of the 2nd subject token - `{london,newyork}`.</span>
+<span id="L302" class="l"> </span>
+<span id="L303" class="l">## Translating message data using a converter command</span>
+<span id="L304" class="l"> </span>
+<span id="L305" class="l">Additional to the raw output of messages using `nats sub` and `nats stream view` you can also translate the message data by running it through a command. </span>
+<span id="L306" class="l"> </span>
+<span id="L307" class="l">The command receives the message data as raw bytes through stdin and the output of the command will be the shown output for the message. There is the additional possibility to add the filter subject by using `{{Subject}}` as part of the arguments for the tranlation command.</span>
+<span id="L308" class="l"> </span>
+<span id="L309" class="l">#### Examples for using the translation feature:</span>
+<span id="L310" class="l"> </span>
+<span id="L311" class="l">Here we use the [jq](https://github.com/stedolan/jq) tool to format our json message payload into a more readable format:</span>
+<span id="L312" class="l"> </span>
+<span id="L313" class="l">We subscribe to a subject that will receive json data.</span>
+<span id="L314" class="l">```</span>
+<span id="L315" class="l">nats sub --translate &#x27;jq .&#x27; cli.json</span>
+<span id="L316" class="l">```</span>
+<span id="L317" class="l">Now we publish some example data.</span>
+<span id="L318" class="l">```</span>
+<span id="L319" class="l">nats pub cli.json &#x27;{&quot;task&quot;:&quot;demo&quot;,&quot;duration&quot;:60}&#x27;</span>
+<span id="L320" class="l">```</span>
+<span id="L321" class="l"> </span>
+<span id="L322" class="l">The Output will show the message formatted.</span>
+<span id="L323" class="l">```</span>
+<span id="L324" class="l">23:54:35 Subscribing on cli.json</span>
+<span id="L325" class="l">[#1] Received on &quot;cli.json&quot;</span>
+<span id="L326" class="l">{</span>
+<span id="L327" class="l">  &quot;task&quot;: &quot;demo&quot;,</span>
+<span id="L328" class="l">  &quot;duration&quot;: 60</span>
+<span id="L329" class="l">}</span>
+<span id="L330" class="l">```</span>
+<span id="L331" class="l"> </span>
+<span id="L332" class="l">Another example is creating hex dumps from any message to avoid terminal corruption.</span>
+<span id="L333" class="l"> </span>
+<span id="L334" class="l">By changing the subscription into:</span>
+<span id="L335" class="l"> </span>
+<span id="L336" class="l">```</span>
+<span id="L337" class="l">nats sub --translate &#x27;xxd&#x27; cli.json</span>
+<span id="L338" class="l">```</span>
+<span id="L339" class="l"> </span>
+<span id="L340" class="l">We will get the following output for the same published msg:</span>
+<span id="L341" class="l">```</span>
+<span id="L342" class="l">00:02:56 Subscribing on cli.json</span>
+<span id="L343" class="l">[#1] Received on &quot;cli.json&quot;</span>
+<span id="L344" class="l">00000000: 7b22 7461 736b 223a 2264 656d 6f22 2c22  {&quot;task&quot;:&quot;demo&quot;,&quot;</span>
+<span id="L345" class="l">00000010: 6475 7261 7469 6f6e 223a 3630 7d         duration&quot;:60}</span>
+<span id="L346" class="l">```</span>
+<span id="L347" class="l"> </span>
+<span id="L348" class="l">#### Examples for using the translation feature with template:</span>
+<span id="L349" class="l"> </span>
+<span id="L350" class="l">A somewhat artificial example using the subject as argument would be:</span>
+<span id="L351" class="l">```</span>
+<span id="L352" class="l">nats sub --translate &quot;sed &#x27;s/\(.*\)/{{Subject}}: \1/&#x27;&quot; cli.json</span>
+<span id="L353" class="l">```</span>
+<span id="L354" class="l"> </span>
+<span id="L355" class="l">Output</span>
+<span id="L356" class="l">```</span>
+<span id="L357" class="l">00:22:19 Subscribing on cli.json</span>
+<span id="L358" class="l">[#1] Received on &quot;cli.json&quot;</span>
+<span id="L359" class="l">cli.json: {&quot;task&quot;:&quot;demo&quot;,&quot;duration&quot;:60}</span>
+<span id="L360" class="l">```</span>
+<span id="L361" class="l"> </span>
+<span id="L362" class="l">The translation feature makes it possible to write specialized or universal translators to aid in debugging messages in streams or core nats.</span>
+<span id="L363" class="l"> </span>
+<span id="L364" class="l">## Benchmarking and Latency Testing</span>
+<span id="L365" class="l"> </span>
+<span id="L366" class="l">Benchmarking and latency testing is key requirement for evaluating the production preparedness of your NATS network.</span>
+<span id="L367" class="l"> </span>
+<span id="L368" class="l">### Benchmarking</span>
+<span id="L369" class="l"> </span>
+<span id="L370" class="l">Here we&#x27;ll run these benchmarks against a local server instead of `demo.nats.io`.</span>
+<span id="L371" class="l"> </span>
+<span id="L372" class="l">```</span>
+<span id="L373" class="l">nats context select localhost </span>
+<span id="L374" class="l">```</span>
+<span id="L375" class="l">Output</span>
+<span id="L376" class="l">```</span>
+<span id="L377" class="l">NATS Configuration Context &quot;localhost&quot;</span>
+<span id="L378" class="l"> </span>
+<span id="L379" class="l">  Description: Localhost</span>
+<span id="L380" class="l">  Server URLs: nats://127.0.0.1:4222</span>
+<span id="L381" class="l">```</span>
+<span id="L382" class="l"> </span>
+<span id="L383" class="l">We can benchmark core NATS publishing performance, here we publish 10 million messages from 2 concurrent publishers. By default, messages are published as quick as possible without any acknowledgement or confirmations:</span>
+<span id="L384" class="l"> </span>
+<span id="L385" class="l">```</span>
+<span id="L386" class="l">nats bench pub test --msgs 10000000 --clients 2 --no-progress</span>
+<span id="L387" class="l">```</span>
+<span id="L388" class="l">Output</span>
+<span id="L389" class="l">```</span>
+<span id="L390" class="l">15:21:29 Starting Core NATS publish benchmark [clients=2, msg-size=128 B, msgs=10,000,000, multi-subject=false, multi-subject-max=100,000, sleep=0s, subject=test]</span>
+<span id="L391" class="l">15:21:29 Starting publisher, publishing 5,000,000 messages</span>
+<span id="L392" class="l">15:21:29 Starting publisher, publishing 5,000,000 messages</span>
+<span id="L393" class="l"> </span>
+<span id="L394" class="l">Pub stats: 5,577,271 msgs/sec ~ 680.82 MB/sec</span>
+<span id="L395" class="l"> [1] 2,794,891 msgs/sec ~ 341.17 MB/sec (5000000 msgs)</span>
+<span id="L396" class="l"> [2] 2,788,663 msgs/sec ~ 340.41 MB/sec (5000000 msgs)</span>
+<span id="L397" class="l"> min 2,788,663 | avg 2,791,777 | max 2,794,891 | stddev 3,114 msgs</span>
+<span id="L398" class="l">```</span>
+<span id="L399" class="l"> </span>
+<span id="L400" class="l">Run a `nats bench sub` instance with two concurrent subscribers on the same subject (so a fan out of 1 to 2) while publishing messages to measure the rate of messages being delivered:</span>
+<span id="L401" class="l"> </span>
+<span id="L402" class="l">```</span>
+<span id="L403" class="l">nats bench sub test --msgs 10000000 --clients 2 --no-progress &amp; nats bench pub test --msgs 10000000 --clients 2 --no-progress</span>
+<span id="L404" class="l">```</span>
+<span id="L405" class="l">Output</span>
+<span id="L406" class="l">```</span>
+<span id="L407" class="l">...</span>
+<span id="L408" class="l">15:28:02 Starting Core NATS publish benchmark [clients=2, msg-size=128 B, msgs=10,000,000, multi-subject=false, multi-subject-max=100,000, sleep=0s, subject=test]</span>
+<span id="L409" class="l">15:28:02 Starting Core NATS subscribe benchmark [clients=2, msg-size=128 B, msgs=10,000,000, multi-subject=false, subject=test]</span>
+<span id="L410" class="l">15:28:02 Starting publisher, publishing 5,000,000 messages</span>
+<span id="L411" class="l">15:28:02 Starting publisher, publishing 5,000,000 messages</span>
+<span id="L412" class="l"> </span>
+<span id="L413" class="l"> </span>
+<span id="L414" class="l">Pub stats: 1,174,233 msgs/sec ~ 143.34 MB/sec</span>
+<span id="L415" class="l"> [1] 587,522 msgs/sec ~ 71.72 MB/sec (5000000 msgs)</span>
+<span id="L416" class="l"> [2] 587,116 msgs/sec ~ 71.67 MB/sec (5000000 msgs)</span>
+<span id="L417" class="l"> min 587,116 | avg 587,319 | max 587,522 | stddev 203 msgs</span>
+<span id="L418" class="l"> </span>
+<span id="L419" class="l">Sub stats: 2,348,602 msgs/sec ~ 286.69 MB/sec</span>
+<span id="L420" class="l"> [1] 1,174,312 msgs/sec ~ 143.35 MB/sec (10000000 msgs)</span>
+<span id="L421" class="l"> [2] 1,174,301 msgs/sec ~ 143.35 MB/sec (10000000 msgs)</span>
+<span id="L422" class="l"> min 1,174,301 | avg 1,174,306 | max 1,174,312 | stddev 5 msgs</span>
+<span id="L423" class="l">```</span>
+<span id="L424" class="l"> </span>
+<span id="L425" class="l">JetStream testing can be done by using the `nats bench js` command. You can for example measure first the speed of publishing into a stream (that gets created first).</span>
+<span id="L426" class="l"> </span>
+<span id="L427" class="l">```</span>
+<span id="L428" class="l">nats bench js pub js.bench --clients 2 --msgs 1000000 --no-progress --create</span>
+<span id="L429" class="l">```</span>
+<span id="L430" class="l">Output</span>
+<span id="L431" class="l">```</span>
+<span id="L432" class="l">15:32:41 Starting JetStream publish benchmark [batch=500, clients=2, dedup-window=2m0s, deduplication=false, max-bytes=1,073,741,824, msg-size=128 B, msgs=1,000,000, multi-subject=false, multi-subject-max=100,000, purge=false, replicas=1, sleep=0s, storage=file, stream=benchstream, subject=js.bench]</span>
+<span id="L433" class="l">15:32:41 Starting JS publisher, publishing 500,000 messages</span>
+<span id="L434" class="l">15:32:41 Starting JS publisher, publishing 500,000 messages</span>
+<span id="L435" class="l"> </span>
+<span id="L436" class="l">Pub stats: 230,967 msgs/sec ~ 28.19 MB/sec</span>
+<span id="L437" class="l"> [1] 116,246 msgs/sec ~ 14.19 MB/sec (500000 msgs)</span>
+<span id="L438" class="l"> [2] 115,483 msgs/sec ~ 14.10 MB/sec (500000 msgs)</span>
+<span id="L439" class="l"> min 115,483 | avg 115,864 | max 116,246 | stddev 381 msgs</span>
+<span id="L440" class="l">```</span>
+<span id="L441" class="l">And then you can for example measure the speed of receiving (i.e. replay) the messages from the stream using ordered consumers</span>
+<span id="L442" class="l">```</span>
+<span id="L443" class="l">nats bench js ordered --msgs 1000000 --no-progress</span>
+<span id="L444" class="l">```</span>
+<span id="L445" class="l">Output</span>
+<span id="L446" class="l">```</span>
+<span id="L447" class="l">15:34:23 Starting JetStream ordered ephemeral consumer benchmark [clients=1, msg-size=128 B, msgs=1,000,000, purge=false, sleep=0s, stream=benchstream]</span>
+<span id="L448" class="l">15:34:23 Starting subscriber, expecting 1,000,000 messages</span>
+<span id="L449" class="l"> </span>
+<span id="L450" class="l">Sub stats: 621,415 msgs/sec ~ 75.86 MB/sec</span>
+<span id="L451" class="l">```</span>
+<span id="L452" class="l"> </span>
+<span id="L453" class="l">Similarily you can benchmark synchronous request-reply type of interactions using the NATS service functionality through the `nats service serve` and `nats service request` commands. For example you can first start 2 service instances in one window</span>
+<span id="L454" class="l"> </span>
+<span id="L455" class="l">```</span>
+<span id="L456" class="l">nats bench service serve test.service --clients 2</span>
+<span id="L457" class="l">```</span>
+<span id="L458" class="l"> </span>
+<span id="L459" class="l">And then run a benchmark with 10 synchronous requesters in another window</span>
+<span id="L460" class="l"> </span>
+<span id="L461" class="l">```</span>
+<span id="L462" class="l">nats bench service request test.service --clients 10 --no-progress</span>
+<span id="L463" class="l">```</span>
+<span id="L464" class="l">Output</span>
+<span id="L465" class="l">```</span>
+<span id="L466" class="l">15:39:08 Starting Core NATS service request benchmark [clients=10, msg-size=128 B, msgs=100,000, sleep=0s, subject=test.service]</span>
+<span id="L467" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L468" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L469" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L470" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L471" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L472" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L473" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L474" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L475" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L476" class="l">15:39:08 Starting requester, requesting 10,000 messages</span>
+<span id="L477" class="l"> </span>
+<span id="L478" class="l">Pub stats: 28,003 msgs/sec ~ 3.42 MB/sec</span>
+<span id="L479" class="l"> [1] 2,817 msgs/sec ~ 352.17 KB/sec (10000 msgs)</span>
+<span id="L480" class="l"> [2] 2,816 msgs/sec ~ 352.03 KB/sec (10000 msgs)</span>
+<span id="L481" class="l"> [3] 2,814 msgs/sec ~ 351.84 KB/sec (10000 msgs)</span>
+<span id="L482" class="l"> [4] 2,814 msgs/sec ~ 351.77 KB/sec (10000 msgs)</span>
+<span id="L483" class="l"> [5] 2,812 msgs/sec ~ 351.55 KB/sec (10000 msgs)</span>
+<span id="L484" class="l"> [6] 2,805 msgs/sec ~ 350.69 KB/sec (10000 msgs)</span>
+<span id="L485" class="l"> [7] 2,803 msgs/sec ~ 350.49 KB/sec (10000 msgs)</span>
+<span id="L486" class="l"> [8] 2,803 msgs/sec ~ 350.49 KB/sec (10000 msgs)</span>
+<span id="L487" class="l"> [9] 2,801 msgs/sec ~ 350.21 KB/sec (10000 msgs)</span>
+<span id="L488" class="l"> [10] 2,800 msgs/sec ~ 350.05 KB/sec (10000 msgs)</span>
+<span id="L489" class="l"> min 2,800 | avg 2,808 | max 2,817 | stddev 6 msgs</span>
+<span id="L490" class="l">```</span>
+<span id="L491" class="l"> </span>
+<span id="L492" class="l">To produce load at a fixed rate (useful for head-to-head comparisons against tools like Kafka&#x27;s `kafka-producer-perf-test.sh --throughput`), use `--throughput` on any generator-side bench command (`bench pub`, `bench service request`, `bench js pub sync|async|atomic|fast`, `bench kv put`). The rate is the aggregate target across all clients; each client targets `throughput / clients` msgs/sec. A value of `0` (the default) disables throttling. If `--sleep` is also set, both limits apply and the actual send rate will be the slower of the two, so `--sleep` can prevent reaching the configured `--throughput`.</span>
+<span id="L493" class="l"> </span>
+<span id="L494" class="l">```</span>
+<span id="L495" class="l">nats bench pub test --msgs 1000000 --clients 4 --throughput 50000 --no-progress</span>
+<span id="L496" class="l">```</span>
+<span id="L497" class="l"> </span>
+<span id="L498" class="l">There are numerous other flags that can be set to configure size of messages, using fetch or consume for JetStream consumers and much more, see `nats bench` and `nats cheat bench` for some examples.</span>
+<span id="L499" class="l"> </span>
+<span id="L500" class="l">### Latency</span>
+<span id="L501" class="l"> </span>
+<span id="L502" class="l">Latency is the rate at which messages can cross your network, with the `nats` CLI you can connect a publisher and subscriber</span>
+<span id="L503" class="l">to your NATS network and measure the latency between the publisher and subscriber.</span>
+<span id="L504" class="l"> </span>
+<span id="L505" class="l">```</span>
+<span id="L506" class="l">nats latency --server-b localhost:4222 --rate 500000  </span>
+<span id="L507" class="l">```</span>
+<span id="L508" class="l">Output</span>
+<span id="L509" class="l">```</span>
+<span id="L510" class="l">==============================</span>
+<span id="L511" class="l">Pub Server RTT : 64µs</span>
+<span id="L512" class="l">Sub Server RTT : 70µs</span>
+<span id="L513" class="l">Message Payload: 8B</span>
+<span id="L514" class="l">Target Duration: 5s</span>
+<span id="L515" class="l">Target Msgs/Sec: 500000</span>
+<span id="L516" class="l">Target Band/Sec: 7.6M</span>
+<span id="L517" class="l">==============================</span>
+<span id="L518" class="l">HDR Percentiles:</span>
+<span id="L519" class="l">10:       57µs</span>
+<span id="L520" class="l">50:       94µs</span>
+<span id="L521" class="l">75:       122µs</span>
+<span id="L522" class="l">90:       162µs</span>
+<span id="L523" class="l">99:       314µs</span>
+<span id="L524" class="l">99.9:     490µs</span>
+<span id="L525" class="l">99.99:    764µs</span>
+<span id="L526" class="l">99.999:   863µs</span>
+<span id="L527" class="l">99.9999:  886µs</span>
+<span id="L528" class="l">99.99999: 1.483ms</span>
+<span id="L529" class="l">100:      1.483ms</span>
+<span id="L530" class="l">==============================</span>
+<span id="L531" class="l">Actual Msgs/Sec: 499990</span>
+<span id="L532" class="l">Actual Band/Sec: 7.6M</span>
+<span id="L533" class="l">Minimum Latency: 25µs</span>
+<span id="L534" class="l">Median Latency : 94µs</span>
+<span id="L535" class="l">Maximum Latency: 1.483ms</span>
+<span id="L536" class="l">1st Sent Wall Time : 3.091ms</span>
+<span id="L537" class="l">Last Sent Wall Time: 5.000098s</span>
+<span id="L538" class="l">Last Recv Wall Time: 5.000168s</span>
+<span id="L539" class="l">```</span>
+<span id="L540" class="l"> </span>
+<span id="L541" class="l">Various flags exist to adjust message size and target rates, see `nats latency --help`</span>
+<span id="L542" class="l"> </span>
+<span id="L543" class="l">## Super Cluster observation</span>
+<span id="L544" class="l"> </span>
+<span id="L545" class="l">NATS publish a number of events and have a Request-Reply API that expose a wealth of internal information about the</span>
+<span id="L546" class="l">state of the network.</span>
+<span id="L547" class="l"> </span>
+<span id="L548" class="l">For most of these features you will need a [System Account](https://docs.nats.io/nats-server/configuration/sys_accounts)</span>
+<span id="L549" class="l">enabled, most of these commands are run against that account.</span>
+<span id="L550" class="l"> </span>
+<span id="L551" class="l">I create a `system` context before running these commands and pass that to the commands.</span>
+<span id="L552" class="l"> </span>
+<span id="L553" class="l">### Lifecycle Events</span>
+<span id="L554" class="l"> </span>
+<span id="L555" class="l">```</span>
+<span id="L556" class="l">nats event --context system </span>
+<span id="L557" class="l">```</span>
+<span id="L558" class="l">Output</span>
+<span id="L559" class="l">```</span>
+<span id="L560" class="l">Listening for Client Connection events on $SYS.ACCOUNT.*.CONNECT</span>
+<span id="L561" class="l">Listening for Client Disconnection events on $SYS.ACCOUNT.*.DISCONNECT</span>
+<span id="L562" class="l">Listening for Authentication Errors events on $SYS.SERVER.*.CLIENT.AUTH.ERR</span>
+<span id="L563" class="l"> </span>
+<span id="L564" class="l">[12:18:35] [puGCIK5UcWUxBXJ52q4Hti] Client Connection</span>
+<span id="L565" class="l"> </span>
+<span id="L566" class="l">   Server: nc1-c1</span>
+<span id="L567" class="l">  Cluster: c1</span>
+<span id="L568" class="l"> </span>
+<span id="L569" class="l">   Client:</span>
+<span id="L570" class="l">                 ID: 17</span>
+<span id="L571" class="l">               User: one</span>
+<span id="L572" class="l">               Name: NATS CLI Version development</span>
+<span id="L573" class="l">            Account: one</span>
+<span id="L574" class="l">    Library Version: 1.11.0  Language: go</span>
+<span id="L575" class="l">               Host: 172.21.0.1</span>
+<span id="L576" class="l"> </span>
+<span id="L577" class="l">[12:18:35] [puGCIK5UcWUxBXJ52q4Hw8] Client Disconnection</span>
+<span id="L578" class="l"> </span>
+<span id="L579" class="l">   Reason: Client Closed</span>
+<span id="L580" class="l">   Server: nc1-c1</span>
+<span id="L581" class="l">  Cluster: c1</span>
+<span id="L582" class="l"> </span>
+<span id="L583" class="l">   Client:</span>
+<span id="L584" class="l">                 ID: 17</span>
+<span id="L585" class="l">               User: one</span>
+<span id="L586" class="l">               Name: NATS CLI Version development</span>
+<span id="L587" class="l">            Account: one</span>
+<span id="L588" class="l">    Library Version: 1.11.0  Language: go</span>
+<span id="L589" class="l">               Host: 172.21.0.1</span>
+<span id="L590" class="l"> </span>
+<span id="L591" class="l">   Stats:</span>
+<span id="L592" class="l">      Received: 0 messages (0 B)</span>
+<span id="L593" class="l">     Published: 1 messages (0 B)</span>
+<span id="L594" class="l">           RTT: 1.551714ms</span>
+<span id="L595" class="l">```</span>
+<span id="L596" class="l"> </span>
+<span id="L597" class="l">Here one can see a client connected and disconnected shortly after, several other system events are supported.</span>
+<span id="L598" class="l"> </span>
+<span id="L599" class="l">If an account is running JetStream the `nats event` tool can also be used to look at JetStream advisories by passing</span>
+<span id="L600" class="l">`--js-metric --js-advisory`</span>
+<span id="L601" class="l"> </span>
+<span id="L602" class="l">These events are JSON messages and can be viewed raw using `--json` or in Cloud Events format with `--cloudevent`,</span>
+<span id="L603" class="l">finally a short version of the messages can be shown:</span>
+<span id="L604" class="l"> </span>
+<span id="L605" class="l">```</span>
+<span id="L606" class="l">nats event --short </span>
+<span id="L607" class="l">```</span>
+<span id="L608" class="l">Output</span>
+<span id="L609" class="l">```</span>
+<span id="L610" class="l">Listening for Client Connection events on $SYS.ACCOUNT.*.CONNECT</span>
+<span id="L611" class="l">Listening for Client Disconnection events on $SYS.ACCOUNT.*.DISCONNECT</span>
+<span id="L612" class="l">Listening for Authentication Errors events on $SYS.SERVER.*.CLIENT.AUTH.ERR</span>
+<span id="L613" class="l">12:20:58 [Connection] user: one cid: 19 in account one</span>
+<span id="L614" class="l">12:20:58 [Disconnection] user: one cid: 19 in account one: Client Closed</span>
+<span id="L615" class="l">12:21:00 [Connection] user: one cid: 20 in account one</span>
+<span id="L616" class="l">12:21:00 [Disconnection] user: one cid: 20 in account one: Client Closed</span>
+<span id="L617" class="l">12:21:00 [Connection] user: one cid: 21 in account one</span>
+<span id="L618" class="l">```</span>
+<span id="L619" class="l"> </span>
+<span id="L620" class="l">### Super Cluster Discovery and Observation</span>
+<span id="L621" class="l"> </span>
+<span id="L622" class="l">When a cluster or super cluster of NATS servers is configured with a system account a wealth of information is available</span>
+<span id="L623" class="l">via internal APIs, the `nats` tool can interact with these and observe your servers.</span>
+<span id="L624" class="l"> </span>
+<span id="L625" class="l">A quick view of the available servers and your network RTT to each can be seen with `nats server ping`:</span>
+<span id="L626" class="l"> </span>
+<span id="L627" class="l">```</span>
+<span id="L628" class="l">nats server ping </span>
+<span id="L629" class="l">```</span>
+<span id="L630" class="l">Output</span>
+<span id="L631" class="l">```</span>
+<span id="L632" class="l">nc1-c1                                                       rtt=2.30864ms</span>
+<span id="L633" class="l">nc3-c1                                                       rtt=2.396573ms</span>
+<span id="L634" class="l">nc2-c1                                                       rtt=2.484994ms</span>
+<span id="L635" class="l">nc3-c2                                                       rtt=2.549958ms</span>
+<span id="L636" class="l">...</span>
+<span id="L637" class="l"> </span>
+<span id="L638" class="l">---- ping statistics ----</span>
+<span id="L639" class="l">9 replies max: 3.00 min: 1.00 avg: 2.78</span>
+<span id="L640" class="l">```</span>
+<span id="L641" class="l"> </span>
+<span id="L642" class="l">A general server overview can be seen with `nats server list`:</span>
+<span id="L643" class="l"> </span>
+<span id="L644" class="l">```</span>
+<span id="L645" class="l">nats server list </span>
+<span id="L646" class="l">```</span>
+<span id="L647" class="l">Output</span>
+<span id="L648" class="l">```</span>
+<span id="L649" class="l">+----------------------------------------------------------------------------------------------------------------------------+</span>
+<span id="L650" class="l">|                                                      Server Overview                                                       |</span>
+<span id="L651" class="l">+--------+------------+-----------+---------------+-------+------+--------+-----+---------+-----+------+--------+------------+</span>
+<span id="L652" class="l">| Name   | Cluster    | IP        | Version       | Conns | Subs | Routes | GWs | Mem     | CPU | Slow | Uptime | RTT        |</span>
+<span id="L653" class="l">+--------+------------+-----------+---------------+-------+------+--------+-----+---------+-----+------+--------+------------+</span>
+<span id="L654" class="l">| nc1-c1 | c1         | localhost | 2.2.0-beta.34 | 1     | 97   | 2      | 2   | 13 MiB  | 0.0 | 0    | 5m29s  | 3.371675ms |</span>
+<span id="L655" class="l">| nc2-c1 | c1         | localhost | 2.2.0-beta.34 | 0     | 97   | 2      | 2   | 13 MiB  | 0.0 | 0    | 5m29s  | 3.48287ms  |</span>
+<span id="L656" class="l">| nc3-c1 | c1         | localhost | 2.2.0-beta.34 | 0     | 97   | 2      | 2   | 14 MiB  | 0.0 | 0    | 5m30s  | 3.57123ms  |</span>
+<span id="L657" class="l">| nc1-c3 | c3         | localhost | 2.2.0-beta.34 | 0     | 96   | 2      | 2   | 15 MiB  | 0.0 | 0    | 5m29s  | 3.655548ms |</span>
+<span id="L658" class="l">...</span>
+<span id="L659" class="l">+--------+------------+-----------+---------------+-------+------+--------+-----+---------+-----+------+--------+------------+</span>
+<span id="L660" class="l">|        | 3 Clusters | 9 Servers |               | 1     | 867  |        |     | 125 MiB |     | 0    |        |            |</span>
+<span id="L661" class="l">+--------+------------+-----------+---------------+-------+------+--------+-----+---------+-----+------+--------+------------+</span>
+<span id="L662" class="l"> </span>
+<span id="L663" class="l">+----------------------------------------------------------------------------+</span>
+<span id="L664" class="l">|                              Cluster Overview                              |</span>
+<span id="L665" class="l">+---------+------------+-------------------+-------------------+-------------+</span>
+<span id="L666" class="l">| Cluster | Node Count | Outgoing Gateways | Incoming Gateways | Connections |</span>
+<span id="L667" class="l">+---------+------------+-------------------+-------------------+-------------+</span>
+<span id="L668" class="l">| c1      | 3          | 6                 | 6                 | 1           |</span>
+<span id="L669" class="l">| c3      | 3          | 6                 | 6                 | 0           |</span>
+<span id="L670" class="l">| c2      | 3          | 6                 | 6                 | 0           |</span>
+<span id="L671" class="l">+---------+------------+-------------------+-------------------+-------------+</span>
+<span id="L672" class="l">|         | 9          | 18                | 18                | 1           |</span>
+<span id="L673" class="l">+---------+------------+-------------------+-------------------+-------------+</span>
+<span id="L674" class="l">```</span>
+<span id="L675" class="l"> </span>
+<span id="L676" class="l">Data from a specific server can be accessed using it&#x27;s server name or ID:</span>
+<span id="L677" class="l"> </span>
+<span id="L678" class="l">```</span>
+<span id="L679" class="l">nats server info nc1-c1 </span>
+<span id="L680" class="l">```</span>
+<span id="L681" class="l">Output</span>
+<span id="L682" class="l">```</span>
+<span id="L683" class="l">Server information for nc1-c1 (NBNIKFCQZ3J6I7JDTUDHAH3Z3HOQYEYGZZ5HOS63BX47PS66NHPT2P72)</span>
+<span id="L684" class="l"> </span>
+<span id="L685" class="l">Process Details:</span>
+<span id="L686" class="l"> </span>
+<span id="L687" class="l">         Version: 2.2.0-beta.34</span>
+<span id="L688" class="l">      Git Commit: 2e26d919</span>
+<span id="L689" class="l">      Go Version: go1.14.12</span>
+<span id="L690" class="l">      Start Time: 2020-12-03 12:18:00.423780567 +0000 UTC</span>
+<span id="L691" class="l">          Uptime: 10m1s</span>
+<span id="L692" class="l"> </span>
+<span id="L693" class="l">Connection Details:</span>
+<span id="L694" class="l"> </span>
+<span id="L695" class="l">   Auth Required: true</span>
+<span id="L696" class="l">    TLS Required: false</span>
+<span id="L697" class="l">            Host: localhost:10000</span>
+<span id="L698" class="l">     Client URLs: localhost:10000</span>
+<span id="L699" class="l">                  localhost:10002</span>
+<span id="L700" class="l">                  localhost:10001</span>
+<span id="L701" class="l"> </span>
+<span id="L702" class="l">Limits:</span>
+<span id="L703" class="l"> </span>
+<span id="L704" class="l">        Max Conn: 65536</span>
+<span id="L705" class="l">        Max Subs: 0</span>
+<span id="L706" class="l">     Max Payload: 1.0 MiB</span>
+<span id="L707" class="l">     TLS Timeout: 2s</span>
+<span id="L708" class="l">  Write Deadline: 10s</span>
+<span id="L709" class="l"> </span>
+<span id="L710" class="l">Statistics:</span>
+<span id="L711" class="l"> </span>
+<span id="L712" class="l">       CPU Cores: 2 1.00%</span>
+<span id="L713" class="l">          Memory: 13 MiB</span>
+<span id="L714" class="l">     Connections: 1</span>
+<span id="L715" class="l">   Subscriptions: 0</span>
+<span id="L716" class="l">            Msgs: 240 in 687 out</span>
+<span id="L717" class="l">           Bytes: 151 KiB in 416 KiB out</span>
+<span id="L718" class="l">  Slow Consumers: 0</span>
+<span id="L719" class="l"> </span>
+<span id="L720" class="l">Cluster:</span>
+<span id="L721" class="l"> </span>
+<span id="L722" class="l">            Name: c1</span>
+<span id="L723" class="l">            Host: 0.0.0.0:6222</span>
+<span id="L724" class="l">            URLs: nc1:6222</span>
+<span id="L725" class="l">                  nc2:6222</span>
+<span id="L726" class="l">                  nc3:6222</span>
+<span id="L727" class="l"> </span>
+<span id="L728" class="l">Super Cluster:</span>
+<span id="L729" class="l"> </span>
+<span id="L730" class="l">            Name: c1</span>
+<span id="L731" class="l">            Host: 0.0.0.0:7222</span>
+<span id="L732" class="l">        Clusters: c1</span>
+<span id="L733" class="l">                  c2</span>
+<span id="L734" class="l">                  c3</span>
+<span id="L735" class="l">```</span>
+<span id="L736" class="l"> </span>
+<span id="L737" class="l">Additional to this various reports can be generated using `nats server report`, this allows one to list all connections and</span>
+<span id="L738" class="l">subscriptions across the entire cluster with filtering to limit the results by account etc.</span>
+<span id="L739" class="l"> </span>
+<span id="L740" class="l">Additional raw information in JSON format can be retrieved using the `nats server request` commands.</span>
+<span id="L741" class="l"> </span>
+<span id="L742" class="l">### Monitoring</span>
+<span id="L743" class="l"> </span>
+<span id="L744" class="l">The `nats server check` command provides numerous monitoring utilities that supports the popular Nagios exist code based</span>
+<span id="L745" class="l">protocol, a format compatible with Prometheus `textfile` format and a human friendly textual output.</span>
+<span id="L746" class="l"> </span>
+<span id="L747" class="l">Using these tools one can create monitors for various aspects of NATS Server, JetStream and KV.</span>
+<span id="L748" class="l"> </span>
+<span id="L749" class="l">#### Stream and Consumer monitoring</span>
+<span id="L750" class="l"> </span>
+<span id="L751" class="l">The `nats server check stream` and `nats server check consumer` commands can be used to monitor the health of Streams and </span>
+<span id="L752" class="l">Consumers.</span>
+<span id="L753" class="l"> </span>
+<span id="L754" class="l">We&#x27;ll cover the flags below but since version `0.2.0` these commands support auto configuration from Metadata on the </span>
+<span id="L755" class="l">Stream and Consumer.  For example if the command accepts `--msgs-warn` then the metadata `io.nats.monitor.msgs-warn`</span>
+<span id="L756" class="l">can be used to set the same value.  Calling the check command without passing the value on the command will use the</span>
+<span id="L757" class="l">metadata value instead.</span>
+<span id="L758" class="l"> </span>
+<span id="L759" class="l">##### Streams</span>
+<span id="L760" class="l"> </span>
+<span id="L761" class="l">The stream check command allows the health of a stream to be monitored including Sources, Mirrors, Cluster Health </span>
+<span id="L762" class="l">and more. </span>
+<span id="L763" class="l"> </span>
+<span id="L764" class="l">To perform end to end health checks on a stream it is suggested that canary messages are published regularly into the </span>
+<span id="L765" class="l">stream with clients detecting those and discarding them after ACK.</span>
+<span id="L766" class="l"> </span>
+<span id="L767" class="l">The `nats server check message` command can be used to check such canary messages exist in the stream, how old they </span>
+<span id="L768" class="l">are and if the content is correct. We suggest using this in complex Sourcing and Mirroring setups to perform an </span>
+<span id="L769" class="l">additional out-of-band health check on the flow of messages.  This includes checking timestamps on the messages.</span>
+<span id="L770" class="l"> </span>
+<span id="L771" class="l">`--lag-critical=MSGS` Critical threshold to allow for lag on any source or mirror. Lag is how many tasks the source or </span>
+<span id="L772" class="l">mirror is behind, this means the mirror or source do not have complete data and would require fixing.</span>
+<span id="L773" class="l"> </span>
+<span id="L774" class="l">`--seen-critical=DURATION` Critical threshold for how long ago the source or mirror should have been seen. During </span>
+<span id="L775" class="l">network outages or problems with the foreign Stream this time would increase.  The duration can be a string like `5m`.</span>
+<span id="L776" class="l"> </span>
+<span id="L777" class="l">`--min-sources=SOURCES`, `--max-sources=SOURCES` Minimum and Maximum number of sources to expect, this allow you to </span>
+<span id="L778" class="l">monitor that in a dynamically configured environment that the set number of sources are configured.</span>
+<span id="L779" class="l"> </span>
+<span id="L780" class="l">`--peer-expect=SERVERS` Number of cluster replicas to expect, again allowing an assertion that the configuration does</span>
+<span id="L781" class="l">not change unexpectedly</span>
+<span id="L782" class="l"> </span>
+<span id="L783" class="l">`--peer-lag-critical=OPS` Critical threshold to allow for cluster peer lag, any RAFT peer that is further behind than</span>
+<span id="L784" class="l">this number of operations will result in a critical error</span>
+<span id="L785" class="l"> </span>
+<span id="L786" class="l">`--peer-seen-critical=DURATION` Critical threshold for how long ago a cluster peer should have been seen, this is </span>
+<span id="L787" class="l">sumular to the lag on Sources and Mirrors but checks the lag in the Raft cluster.</span>
+<span id="L788" class="l"> </span>
+<span id="L789" class="l">`--msgs-warn=MSGS` and `--msgs-critical=MSGS` Checks the number of messages in the stream, if warn is smaller than </span>
+<span id="L790" class="l">critical the check will alert for fewer messages than the thresholds.</span>
+<span id="L791" class="l"> </span>
+<span id="L792" class="l">`--subjects-warn=SUBJECTS` and `--subjects-critical=SUBJECTS` Checks the number of subjects in the stream.  If warn is </span>
+<span id="L793" class="l">bigger than critical the logic will be inverted ensuring that no more than the thresholds exist in the stream.</span>
+<span id="L794" class="l"> </span>
+<span id="L795" class="l">##### Consumers</span>
+<span id="L796" class="l"> </span>
+<span id="L797" class="l">The consumer check is concerned with message flow through a consumer and have various adjustable thresholds in duration</span>
+<span id="L798" class="l">and count to detect stalled consumers, consumers with no active clients, consumers with slow clients or ones where </span>
+<span id="L799" class="l">processing the messages are failing.</span>
+<span id="L800" class="l"> </span>
+<span id="L801" class="l">A suggested pattern is publishing canary messages into the stream regularly, perhaps with the header `Canary: 1` set, </span>
+<span id="L802" class="l">and having applications just ACK and discard those messages. This way even in idle times the end to end flow of messages </span>
+<span id="L803" class="l">can be monitored.</span>
+<span id="L804" class="l"> </span>
+<span id="L805" class="l">`--outstanding-ack-critical=-1` Maximum number of outstanding acks to allow, this allow you to alert on the scenario </span>
+<span id="L806" class="l">where clients consuming messages are slow to process messages and the number of outstanding acks are growing.  Once this</span>
+<span id="L807" class="l">hits the configured max the consumer will stall.</span>
+<span id="L808" class="l"> </span>
+<span id="L809" class="l">`--waiting-critical=-1` Maximum number of waiting pulls to allow</span>
+<span id="L810" class="l"> </span>
+<span id="L811" class="l">`--unprocessed-critical=-1` Maximum number of unprocessed messages to allow, this indicates how far behind the end </span>
+<span id="L812" class="l">of the stream the consumer is, in work queue scenarios this will indicate a alert if the amount of outstanding work </span>
+<span id="L813" class="l">grows.</span>
+<span id="L814" class="l"> </span>
+<span id="L815" class="l">`--last-delivery-critical=0s` This is the time duration since the last delivery to a client, if this number grows it </span>
+<span id="L816" class="l">could mean there are no messages to deliver or no clients to deliver messages to.</span>
+<span id="L817" class="l"> </span>
+<span id="L818" class="l">`--last-ack-critical=0s` This is the duration of time since the last message was acknowledged, this duration might </span>
+<span id="L819" class="l">indicate that no messages are being successfully processed.</span>
+<span id="L820" class="l"> </span>
+<span id="L821" class="l">`--redelivery-critical=-1` Alerts on the number of redeliveries currently in flight, a high number means many clients</span>
+<span id="L822" class="l">are doing NAKs or not completing message processing within the allowed Ack window.</span>
+<span id="L823" class="l"> </span>
+<span id="L824" class="l">### Schema Registry</span>
+<span id="L825" class="l"> </span>
+<span id="L826" class="l">We are adopting JSON Schema to describe the core data formats of events and advisories - as shown by `nats event`. Additionally</span>
+<span id="L827" class="l">all the API interactions with the JetStream API is documented using the same format.</span>
+<span id="L828" class="l"> </span>
+<span id="L829" class="l">These schemas can be used using tools like [QuickType](https://app.quicktype.io/) to generate stubs for various programming</span>
+<span id="L830" class="l">languages.</span>
+<span id="L831" class="l"> </span>
+<span id="L832" class="l">The `nats` CLI allows you to view these schemas and validate documents using these schemas.</span>
+<span id="L833" class="l"> </span>
+<span id="L834" class="l">```</span>
+<span id="L835" class="l">nats schema ls </span>
+<span id="L836" class="l">```</span>
+<span id="L837" class="l">Output</span>
+<span id="L838" class="l">```</span>
+<span id="L839" class="l">Matched Schemas:</span>
+<span id="L840" class="l"> </span>
+<span id="L841" class="l">  io.nats.jetstream.advisory.v1.api_audit</span>
+<span id="L842" class="l">  io.nats.jetstream.advisory.v1.consumer_action</span>
+<span id="L843" class="l">  io.nats.jetstream.advisory.v1.max_deliver</span>
+<span id="L844" class="l">...</span>
+<span id="L845" class="l">```</span>
+<span id="L846" class="l"> </span>
+<span id="L847" class="l">The schemas can be limited using a regular expression, try `nats schema ls request` to see all API requests.</span>
+<span id="L848" class="l"> </span>
+<span id="L849" class="l">Schemas can be viewed in their raw JSON or YAML formats using `nats schema info io.nats.jetstream.advisory.v1.consumer_action`,</span>
+<span id="L850" class="l">these schemas include descriptions about each field and more.</span>
+<span id="L851" class="l"> </span>
+<span id="L852" class="l">Finally, if you are interacting with the API using JSON request messages constructed using languages that is not supported</span>
+<span id="L853" class="l">by our own management libraries you can use this tool to validate your messages:</span>
+<span id="L854" class="l"> </span>
+<span id="L855" class="l">```</span>
+<span id="L856" class="l">nats schema validate io.nats.jetstream.api.v1.stream_create_request request.json </span>
+<span id="L857" class="l">```</span>
+<span id="L858" class="l">Output</span>
+<span id="L859" class="l">```</span>
+<span id="L860" class="l">Validation errors in request.json:</span>
+<span id="L861" class="l"> </span>
+<span id="L862" class="l">  retention: retention must be one of the following: &quot;limits&quot;, &quot;interest&quot;, &quot;workqueue&quot;</span>
+<span id="L863" class="l">  (root): Must validate all the schemas (allOf)</span>
+<span id="L864" class="l"> </span>
+<span id="L865" class="l">``` </span>
+<span id="L866" class="l"> </span>
+<span id="L867" class="l">Here I validate `request.json` against the Schema that describes the API to create Streams, the validation indicates</span>
+<span id="L868" class="l">that I have an incorrect value in the `retention` field.</span>
+<span id="L869" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/github-repos/nats-io__nats.zig.release.json.html">← nats-io__nats.zig.release.json</a> · <a href="../../raw/github-repos/nats-io__natscli.account-tls-v0.4.0.md.html">nats-io__natscli.account-tls-v0.4.0.md →</a></div></footer></article></main>
+  
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

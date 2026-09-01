@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>topology-v2.14.6.md · NATS Wiki</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="../../assets/theme.css">
+<link rel="stylesheet" href="../../assets/types.css">
+<script>window.ROOT="../../";window.WIKI_CFG={"facets": ["area", "since"], "types": ["concept", "internals", "operation", "gotcha", "reference", "entity", "summary"], "tocs": {"q": {"label": "question", "nav": "Questions"}, "adr": {"label": "ADR", "nav": "ADRs"}, "docs": {"label": "issue", "nav": "Docs issues"}, "srv": {"label": "finding", "nav": "Server issues"}, "cfg": {"label": "config key", "nav": "Config keys"}, "def": {"label": "default", "nav": "Defaults check"}}};</script>
+<script>try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+
+</head>
+<body class="raw-view">
+<header class="top">
+  <a class="logo" href="../../index.html"><span class="mark">NATS WIKI</span><span class="sub">llm wiki · 276 pages</span></a>
+  <nav class="topnav"><a href="../../index.html" class="">Home</a><a href="../../graph.html" class="">Graph</a><a href="../../cheatsheets.html" class="">Cheat sheets</a><a href="../../browse.html" class="">Browse</a><a href="../../inbox/question-bank.html" class="">Questions</a><a href="../../inbox/adr-toc.html" class="">ADRs</a><a href="../../inbox/docs-issues.html" class="">Docs issues</a><a href="../../inbox/server-issues.html" class="">Server issues</a><a href="../../inbox/config-keys-table.html" class="">Config keys</a><a href="../../inbox/check-defaults-v2.14.6.html" class="">Defaults check</a><a href="../../sources.html" class="on">Sources</a><a href="../../health.html" class="">Health</a><a href="../../wiki/log.html" class="">Log</a><a href="#" id="random" title="random page">Random</a></nav>
+  <button class="sbtn" id="sopen" type="button">search <kbd>/</kbd></button>
+  <button class="tbtn" id="theme" type="button" title="switch theme">◐</button>
+</header>
+<div class="shell">
+  <aside class="side"><div class="side-in"><input class="side-filter" type="search" placeholder="filter pages…" spellcheck="false"><details class="grp" data-grp="concept"><summary>Concepts <span class="n">28</span></summary><ul><li><a data-slug="account" class="t-concept" href="../../wiki/account.html">Account</a></li><li><a data-slug="ack-and-redelivery" class="t-concept" href="../../wiki/ack-and-redelivery.html">Ack and redelivery</a></li><li><a data-slug="auth-callout" class="t-concept" href="../../wiki/auth-callout.html">Auth callout</a></li><li><a data-slug="choosing-a-topology" class="t-concept" href="../../wiki/choosing-a-topology.html">Choosing a topology</a></li><li><a data-slug="consumer" class="t-concept" href="../../wiki/consumer.html">Consumer</a></li><li><a data-slug="cross-account-sharing" class="t-concept" href="../../wiki/cross-account-sharing.html">Cross-account sharing</a></li><li><a data-slug="direct-get" class="t-concept" href="../../wiki/direct-get.html">Direct Get</a></li><li><a data-slug="gateway" class="t-concept" href="../../wiki/gateway.html">Gateway</a></li><li><a data-slug="jetstream-domain" class="t-concept" href="../../wiki/jetstream-domain.html">JetStream domain</a></li><li><a data-slug="key-value" class="t-concept" href="../../wiki/key-value.html">Key-Value</a></li><li><a data-slug="leafnode" class="t-concept" href="../../wiki/leafnode.html">Leafnode</a></li><li><a data-slug="message-scheduling" class="t-concept" href="../../wiki/message-scheduling.html">Message scheduling</a></li><li><a data-slug="mirrors-and-sources" class="t-concept" href="../../wiki/mirrors-and-sources.html">Mirrors and sources</a></li><li><a data-slug="mqtt" class="t-concept" href="../../wiki/mqtt.html">MQTT</a></li><li><a data-slug="object-store" class="t-concept" href="../../wiki/object-store.html">Object Store</a></li><li><a data-slug="operator-mode" class="t-concept" href="../../wiki/operator-mode.html">Operator mode</a></li><li><a data-slug="ordered-consumer" class="t-concept" href="../../wiki/ordered-consumer.html">Ordered consumer</a></li><li><a data-slug="message-ttl" class="t-concept" href="../../wiki/message-ttl.html">Per-message TTL</a></li><li><a data-slug="priority-groups" class="t-concept" href="../../wiki/priority-groups.html">Priority groups</a></li><li><a data-slug="publishing" class="t-concept" href="../../wiki/publishing.html">Publishing to a stream</a></li><li><a data-slug="replicas" class="t-concept" href="../../wiki/replicas.html">Replicas</a></li><li><a data-slug="retention-policies" class="t-concept" href="../../wiki/retention-policies.html">Retention policies</a></li><li><a data-slug="stream" class="t-concept" href="../../wiki/stream.html">Stream</a></li><li><a data-slug="stream-compression" class="t-concept" href="../../wiki/stream-compression.html">Stream compression</a></li><li><a data-slug="subject-permissions" class="t-concept" href="../../wiki/subject-permissions.html">Subject permissions</a></li><li><a data-slug="subject-transforms" class="t-concept" href="../../wiki/subject-transforms.html">Subject transforms and republish</a></li><li><a data-slug="tls-in-nats" class="t-concept" href="../../wiki/tls-in-nats.html">TLS in NATS</a></li><li><a data-slug="websocket" class="t-concept" href="../../wiki/websocket.html">WebSocket</a></li></ul></details><details class="grp" data-grp="internals"><summary>Internals <span class="n">4</span></summary><ul><li><a data-slug="filestore-layout" class="t-internals" href="../../wiki/filestore-layout.html">Filestore layout on disk</a></li><li><a data-slug="raft-in-nats" class="t-internals" href="../../wiki/raft-in-nats.html">RAFT in nats-server</a></li><li><a data-slug="stream-placement" class="t-internals" href="../../wiki/stream-placement.html">Stream placement</a></li><li><a data-slug="js-api" class="t-internals" href="../../wiki/js-api.html">The JetStream API and its errors</a></li></ul></details><details class="grp" data-grp="kind-runbook"><summary>Runbooks <span class="n">12</span></summary><ul><li><a data-slug="backup-and-restore-identity" class="t-operation" href="../../wiki/backup-and-restore-identity.html">Back up and restore identity</a></li><li><a data-slug="backup-and-restore-jetstream" class="t-operation" href="../../wiki/backup-and-restore-jetstream.html">Back up and restore JetStream</a></li><li><a data-slug="build-a-3-node-cluster" class="t-operation" href="../../wiki/build-a-3-node-cluster.html">Build a 3-node cluster</a></li><li><a data-slug="cross-domain-sourcing" class="t-operation" href="../../wiki/cross-domain-sourcing.html">Cross-domain JetStream sourcing</a></li><li><a data-slug="disaster-recovery" class="t-operation" href="../../wiki/disaster-recovery.html">Disaster recovery</a></li><li><a data-slug="install-nats-server" class="t-operation" href="../../wiki/install-nats-server.html">Install nats-server</a></li><li><a data-slug="rebalance-streams" class="t-operation" href="../../wiki/rebalance-streams.html">Rebalance streams across a cluster</a></li><li><a data-slug="reload-server-config" class="t-operation" href="../../wiki/reload-server-config.html">Reload server config</a></li><li><a data-slug="rotate-tls-certificates" class="t-operation" href="../../wiki/rotate-tls-certificates.html">Rotate TLS certificates</a></li><li><a data-slug="run-nats-behind-a-proxy" class="t-operation" href="../../wiki/run-nats-behind-a-proxy.html">Run NATS WebSocket behind nginx or another proxy</a></li><li><a data-slug="set-up-operator-mode" class="t-operation" href="../../wiki/set-up-operator-mode.html">Set up operator mode</a></li><li><a data-slug="upgrade-a-cluster" class="t-operation" href="../../wiki/upgrade-a-cluster.html">Upgrade a cluster</a></li></ul></details><details class="grp" data-grp="kind-sizing"><summary>Sizing <span class="n">1</span></summary><ul><li><a data-slug="jetstream-sizing" class="t-operation" href="../../wiki/jetstream-sizing.html">JetStream sizing</a></li></ul></details><details class="grp" data-grp="kind-pattern"><summary>Patterns <span class="n">5</span></summary><ul><li><a data-slug="dead-letter-queue" class="t-operation" href="../../wiki/dead-letter-queue.html">Dead-letter queue</a></li><li><a data-slug="how-clients-reach-a-cluster" class="t-operation" href="../../wiki/how-clients-reach-a-cluster.html">How clients reach a cluster</a></li><li><a data-slug="kubernetes-storage" class="t-operation" href="../../wiki/kubernetes-storage.html">JetStream storage on Kubernetes</a></li><li><a data-slug="multi-region-jetstream" class="t-operation" href="../../wiki/multi-region-jetstream.html">Multi-region JetStream</a></li><li><a data-slug="worker-pool" class="t-operation" href="../../wiki/worker-pool.html">Worker pool</a></li></ul></details><details class="grp" data-grp="gotcha"><summary>Gotchas <span class="n">16</span></summary><ul><li><a data-slug="supercluster-slows-when-a-remote-subscriber-joins" class="t-gotcha" href="../../wiki/supercluster-slows-when-a-remote-subscriber-joins.html">a supercluster slows down when a remote subscriber joins</a></li><li><a data-slug="malformed-or-corrupt-message" class="t-gotcha" href="../../wiki/malformed-or-corrupt-message.html">Critical write error: malformed or corrupt message</a></li><li><a data-slug="duplicate-messages-across-a-leafnode" class="t-gotcha" href="../../wiki/duplicate-messages-across-a-leafnode.html">duplicate messages across a leafnode</a></li><li><a data-slug="jetstream-out-of-disk" class="t-gotcha" href="../../wiki/jetstream-out-of-disk.html">insufficient storage resources available (10047)</a></li><li><a data-slug="jetstream-slows-as-consumers-grow" class="t-gotcha" href="../../wiki/jetstream-slows-as-consumers-grow.html">JetStream slows down as the consumer count grows</a></li><li><a data-slug="stream-has-high-message-lag" class="t-gotcha" href="../../wiki/stream-has-high-message-lag.html">JetStream stream ... has high message lag</a></li><li><a data-slug="kv-watchers-stall-the-cluster" class="t-gotcha" href="../../wiki/kv-watchers-stall-the-cluster.html">KV watchers pile up and the cluster stops recovering</a></li><li><a data-slug="object-store-list-is-slow" class="t-gotcha" href="../../wiki/object-store-list-is-slow.html">Listing an object-store bucket is slow while uploads run</a></li><li><a data-slug="maximum-messages-exceeded" class="t-gotcha" href="../../wiki/maximum-messages-exceeded.html">maximum messages exceeded (10077) on publish</a></li><li><a data-slug="nats-timeout" class="t-gotcha" href="../../wiki/nats-timeout.html">nats: timeout</a></li><li><a data-slug="no-suitable-peers-for-placement" class="t-gotcha" href="../../wiki/no-suitable-peers-for-placement.html">no suitable peers for placement</a></li><li><a data-slug="slow-consumer-detected" class="t-gotcha" href="../../wiki/slow-consumer-detected.html">Slow Consumer Detected in the server log</a></li><li><a data-slug="stream-directories-disappear" class="t-gotcha" href="../../wiki/stream-directories-disappear.html">stream directories disappear from store_dir</a></li><li><a data-slug="streams-not-visible-across-a-leafnode" class="t-gotcha" href="../../wiki/streams-not-visible-across-a-leafnode.html">streams are not visible across a leafnode</a></li><li><a data-slug="streams-deleted-when-clustering-a-standalone-server" class="t-gotcha" href="../../wiki/streams-deleted-when-clustering-a-standalone-server.html">streams deleted when clustering a standalone server</a></li><li><a data-slug="unauthenticated-clients-still-connect" class="t-gotcha" href="../../wiki/unauthenticated-clients-still-connect.html">Unauthenticated clients still connect</a></li></ul></details><details class="grp" data-grp="reference"><summary>Reference <span class="n">6</span></summary><ul><li><a data-slug="js-api-subjects" class="t-reference" href="../../wiki/js-api-subjects.html">$JS.API subjects</a></li><li><a data-slug="advisories" class="t-reference" href="../../wiki/advisories.html">Advisories and system events</a></li><li><a data-slug="config-keys" class="t-reference" href="../../wiki/config-keys.html">Config keys</a></li><li><a data-slug="defaults-and-limits" class="t-reference" href="../../wiki/defaults-and-limits.html">Defaults and limits</a></li><li><a data-slug="error-codes" class="t-reference" href="../../wiki/error-codes.html">JetStream error codes</a></li><li><a data-slug="monitoring-endpoints" class="t-reference" href="../../wiki/monitoring-endpoints.html">Monitoring endpoints</a></li></ul></details><details class="grp" data-grp="kind-repo"><summary>Repos <span class="n">5</span></summary><ul><li><a data-slug="jsm-go" class="t-entity" href="../../wiki/jsm-go.html">jsm.go</a></li><li><a data-slug="nats-streaming" class="t-entity" href="../../wiki/nats-streaming.html">NATS Streaming (STAN) — deprecated</a></li><li><a data-slug="nats-architecture-and-design" class="t-entity" href="../../wiki/nats-architecture-and-design.html">nats-architecture-and-design (the ADR repo)</a></li><li><a data-slug="nats-server" class="t-entity" href="../../wiki/nats-server.html">nats-server</a></li><li><a data-slug="orbit" class="t-entity" href="../../wiki/orbit.html">Orbit (synadia-io/orbit.*)</a></li></ul></details><details class="grp" data-grp="kind-client"><summary>Clients <span class="n">12</span></summary><ul><li><a data-slug="nats-pure-rb" class="t-entity" href="../../wiki/nats-pure-rb.html">nats-pure.rb</a></li><li><a data-slug="nats-c" class="t-entity" href="../../wiki/nats-c.html">nats.c</a></li><li><a data-slug="nats-ex" class="t-entity" href="../../wiki/nats-ex.html">nats.ex (Gnat)</a></li><li><a data-slug="nats-go" class="t-entity" href="../../wiki/nats-go.html">nats.go</a></li><li><a data-slug="nats-java" class="t-entity" href="../../wiki/nats-java.html">nats.java</a></li><li><a data-slug="nats-js" class="t-entity" href="../../wiki/nats-js.html">nats.js</a></li><li><a data-slug="nats-net" class="t-entity" href="../../wiki/nats-net.html">nats.net</a></li><li><a data-slug="nats-py" class="t-entity" href="../../wiki/nats-py.html">nats.py</a></li><li><a data-slug="nats-rb" class="t-entity" href="../../wiki/nats-rb.html">nats.rb (legacy)</a></li><li><a data-slug="nats-rs" class="t-entity" href="../../wiki/nats-rs.html">nats.rs</a></li><li><a data-slug="nats-swift" class="t-entity" href="../../wiki/nats-swift.html">nats.swift</a></li><li><a data-slug="nats-zig" class="t-entity" href="../../wiki/nats-zig.html">nats.zig</a></li></ul></details><details class="grp" data-grp="kind-tool"><summary>Tools <span class="n">9</span></summary><ul><li><a data-slug="nack" class="t-entity" href="../../wiki/nack.html">NACK (JetStream controller for Kubernetes)</a></li><li><a data-slug="nats-helm-charts" class="t-entity" href="../../wiki/nats-helm-charts.html">NATS Helm charts (nats-io/k8s)</a></li><li><a data-slug="nats-box" class="t-entity" href="../../wiki/nats-box.html">nats-box</a></li><li><a data-slug="nats-surveyor" class="t-entity" href="../../wiki/nats-surveyor.html">nats-surveyor</a></li><li><a data-slug="nats-top" class="t-entity" href="../../wiki/nats-top.html">nats-top</a></li><li><a data-slug="nats-cli" class="t-entity" href="../../wiki/nats-cli.html">natscli (the nats CLI)</a></li><li><a data-slug="nk" class="t-entity" href="../../wiki/nk.html">nk (nkeys)</a></li><li><a data-slug="nsc" class="t-entity" href="../../wiki/nsc.html">nsc</a></li><li><a data-slug="prometheus-nats-exporter" class="t-entity" href="../../wiki/prometheus-nats-exporter.html">prometheus-nats-exporter</a></li></ul></details><details class="grp" data-grp="kind-release"><summary>Releases <span class="n">5</span></summary><ul><li><a data-slug="nats-server-2.10" class="t-entity" href="../../wiki/nats-server-2.10.html">nats-server 2.10</a></li><li><a data-slug="nats-server-2.11" class="t-entity" href="../../wiki/nats-server-2.11.html">nats-server 2.11</a></li><li><a data-slug="nats-server-2.12" class="t-entity" href="../../wiki/nats-server-2.12.html">nats-server 2.12</a></li><li><a data-slug="nats-server-2.14" class="t-entity" href="../../wiki/nats-server-2.14.html">nats-server 2.14</a></li><li><a data-slug="nats-server-2.15-preview" class="t-entity" href="../../wiki/nats-server-2.15-preview.html">nats-server 2.15 (preview)</a></li></ul></details><details class="grp" data-grp="kind-product"><summary>Products <span class="n">1</span></summary><ul><li><a data-slug="synadia-products" class="t-entity" href="../../wiki/synadia-products.html">Synadia commercial products</a></li></ul></details><details class="grp" data-grp="kind-org"><summary>Organisations <span class="n">2</span></summary><ul><li><a data-slug="cncf" class="t-entity" href="../../wiki/cncf.html">CNCF</a></li><li><a data-slug="synadia" class="t-entity" href="../../wiki/synadia.html">Synadia</a></li></ul></details><details class="grp" data-grp="summary"><summary>Summaries <span class="n">168</span></summary><ul><li><a data-slug="s-adr-1-jetstream-json-api" class="t-summary" href="../../wiki/s-adr-1-jetstream-json-api.html">ADR-1 — JetStream JSON API Design</a></li><li><a data-slug="s-adr-10-extended-purge" class="t-summary" href="../../wiki/s-adr-10-extended-purge.html">ADR-10 — JetStream extended purge</a></li><li><a data-slug="s-adr-17-ordered-consumer" class="t-summary" href="../../wiki/s-adr-17-ordered-consumer.html">ADR-17 — Ordered Consumer</a></li><li><a data-slug="s-adr-20-object-store" class="t-summary" href="../../wiki/s-adr-20-object-store.html">ADR-20 — JetStream based Object Stores</a></li><li><a data-slug="s-adr-31-direct-get" class="t-summary" href="../../wiki/s-adr-31-direct-get.html">ADR-31 — JetStream Direct Get</a></li><li><a data-slug="s-adr-35-filestore-compression" class="t-summary" href="../../wiki/s-adr-35-filestore-compression.html">ADR-35 — JetStream filestore compression</a></li><li><a data-slug="s-adr-40-nats-connection" class="t-summary" href="../../wiki/s-adr-40-nats-connection.html">ADR-40 — the NATS connection</a></li><li><a data-slug="s-adr-42-priority-groups" class="t-summary" href="../../wiki/s-adr-42-priority-groups.html">ADR-42 — Pull Consumer Priority Groups</a></li><li><a data-slug="s-adr-43-per-message-ttl" class="t-summary" href="../../wiki/s-adr-43-per-message-ttl.html">ADR-43 — JetStream Per-Message TTL</a></li><li><a data-slug="s-adr-48-kv-ttl" class="t-summary" href="../../wiki/s-adr-48-kv-ttl.html">ADR-48 — TTL support for Key-Value buckets</a></li><li><a data-slug="s-adr-51-message-scheduler" class="t-summary" href="../../wiki/s-adr-51-message-scheduler.html">ADR-51 — JetStream Message Scheduler</a></li><li><a data-slug="s-adr-54-kv-codecs" class="t-summary" href="../../wiki/s-adr-54-kv-codecs.html">ADR-54 — KV codecs (Proposed, client-side)</a></li><li><a data-slug="s-adr-57-kv-subject-transforms" class="t-summary" href="../../wiki/s-adr-57-kv-subject-transforms.html">ADR-57 — KV subject transforms, sources and mirrors</a></li><li><a data-slug="s-adr-59-sourcing-and-mirroring" class="t-summary" href="../../wiki/s-adr-59-sourcing-and-mirroring.html">ADR-59 — JetStream Stream Sourcing and Mirroring</a></li><li><a data-slug="s-adr-60-reliable-sourcing" class="t-summary" href="../../wiki/s-adr-60-reliable-sourcing.html">ADR-60 — reliable sourcing and mirroring of WorkQueue and Interest streams</a></li><li><a data-slug="s-adr-61-meta-quorum-rescue" class="t-summary" href="../../wiki/s-adr-61-meta-quorum-rescue.html">ADR-61 — unsafe meta group quorum rescue for disaster recovery</a></li><li><a data-slug="s-adr-7-server-error-codes" class="t-summary" href="../../wiki/s-adr-7-server-error-codes.html">ADR-7 — NATS Server Error Codes</a></li><li><a data-slug="s-adr-8-key-value-store" class="t-summary" href="../../wiki/s-adr-8-key-value-store.html">ADR-8 — JetStream based Key-Value Stores</a></li><li><a data-slug="s-cncf-nats-project" class="t-summary" href="../../wiki/s-cncf-nats-project.html">CNCF — NATS project page</a></li><li><a data-slug="s-synadia-delayed-scheduling" class="t-summary" href="../../wiki/s-synadia-delayed-scheduling.html">Delayed Message Scheduling in NATS JetStream</a></li><li><a data-slug="s-docs-advanced-publishing" class="t-summary" href="../../wiki/s-docs-advanced-publishing.html">docs — JetStream: Advanced publishing</a></li><li><a data-slug="s-docs-altering-stream-state" class="t-summary" href="../../wiki/s-docs-altering-stream-state.html">docs — JetStream: Altering stream state</a></li><li><a data-slug="s-docs-filtering" class="t-summary" href="../../wiki/s-docs-filtering.html">docs — JetStream: Filtering what you consume</a></li><li><a data-slug="s-docs-publishing" class="t-summary" href="../../wiki/s-docs-publishing.html">docs — JetStream: Publishing</a></li><li><a data-slug="s-docs-reading-back" class="t-summary" href="../../wiki/s-docs-reading-back.html">docs — JetStream: Reading back the stream</a></li><li><a data-slug="s-docs-shaping-the-stream" class="t-summary" href="../../wiki/s-docs-shaping-the-stream.html">docs — JetStream: Shaping the stream</a></li><li><a data-slug="s-docs-subject-mapping" class="t-summary" href="../../wiki/s-docs-subject-mapping.html">docs — JetStream: Subject mapping and transforms</a></li><li><a data-slug="s-docs-kv-history-and-revisions" class="t-summary" href="../../wiki/s-docs-kv-history-and-revisions.html">docs — Key/Value: History and revisions</a></li><li><a data-slug="s-docs-kv-ttl-and-limits" class="t-summary" href="../../wiki/s-docs-kv-ttl-and-limits.html">docs — Key/Value: TTL and limits</a></li><li><a data-slug="s-docs-kv-under-the-hood" class="t-summary" href="../../wiki/s-docs-kv-under-the-hood.html">docs — Key/Value: Under the hood</a></li><li><a data-slug="s-docs-kv-watching" class="t-summary" href="../../wiki/s-docs-kv-watching.html">docs — Key/Value: Watching</a></li><li><a data-slug="s-docs-kv-your-first-bucket" class="t-summary" href="../../wiki/s-docs-kv-your-first-bucket.html">docs — Key/Value: Your first bucket</a></li><li><a data-slug="s-docs-monitoring-advisories-and-events" class="t-summary" href="../../wiki/s-docs-monitoring-advisories-and-events.html">docs — Monitoring: Advisories &amp; events</a></li><li><a data-slug="s-docs-monitoring-jetstream-health" class="t-summary" href="../../wiki/s-docs-monitoring-jetstream-health.html">docs — Monitoring: JetStream health</a></li><li><a data-slug="s-docs-monitoring-profiling" class="t-summary" href="../../wiki/s-docs-monitoring-profiling.html">docs — Monitoring: Profiling the server</a></li><li><a data-slug="s-docs-mqtt-auth-and-clustering" class="t-summary" href="../../wiki/s-docs-mqtt-auth-and-clustering.html">docs — MQTT: Auth and clustering</a></li><li><a data-slug="s-docs-mqtt-qos-sessions-and-retained" class="t-summary" href="../../wiki/s-docs-mqtt-qos-sessions-and-retained.html">docs — MQTT: QoS, sessions, and retained messages</a></li><li><a data-slug="s-docs-mqtt-topics-and-subjects" class="t-summary" href="../../wiki/s-docs-mqtt-topics-and-subjects.html">docs — MQTT: Topics and subjects</a></li><li><a data-slug="s-docs-mqtt-your-first-mqtt-client" class="t-summary" href="../../wiki/s-docs-mqtt-your-first-mqtt-client.html">docs — MQTT: Your first MQTT client</a></li><li><a data-slug="s-docs-object-store-chunking" class="t-summary" href="../../wiki/s-docs-object-store-chunking.html">docs — Object Store: Chunking</a></li><li><a data-slug="s-docs-object-store-metadata-and-links" class="t-summary" href="../../wiki/s-docs-object-store-metadata-and-links.html">docs — Object Store: Metadata and links</a></li><li><a data-slug="s-docs-object-store-under-the-hood" class="t-summary" href="../../wiki/s-docs-object-store-under-the-hood.html">docs — Object Store: Under the hood</a></li><li><a data-slug="s-docs-object-store-watching-and-listing" class="t-summary" href="../../wiki/s-docs-object-store-watching-and-listing.html">docs — Object Store: Watching and listing</a></li><li><a data-slug="s-docs-object-store-your-first-object" class="t-summary" href="../../wiki/s-docs-object-store-your-first-object.html">docs — Object Store: Your first object</a></li><li><a data-slug="s-docs-websocket-browsers-and-origins" class="t-summary" href="../../wiki/s-docs-websocket-browsers-and-origins.html">docs — WebSocket: Browsers and origins</a></li><li><a data-slug="s-docs-websocket-leaf-nodes-over-websocket" class="t-summary" href="../../wiki/s-docs-websocket-leaf-nodes-over-websocket.html">docs — WebSocket: Leaf nodes over WebSocket</a></li><li><a data-slug="s-docs-websocket-tls-and-proxies" class="t-summary" href="../../wiki/s-docs-websocket-tls-and-proxies.html">docs — WebSocket: TLS and proxies</a></li><li><a data-slug="s-docs-websocket-your-first-websocket-connection" class="t-summary" href="../../wiki/s-docs-websocket-your-first-websocket-connection.html">docs — WebSocket: Your first WebSocket connection</a></li><li><a data-slug="s-docs-accounts-and-multitenancy" class="t-summary" href="../../wiki/s-docs-accounts-and-multitenancy.html">docs.nats.io — Accounts and multitenancy</a></li><li><a data-slug="s-docs-acknowledgment" class="t-summary" href="../../wiki/s-docs-acknowledgment.html">docs.nats.io — Ack responses and redelivery</a></li><li><a data-slug="s-docs-auth-callout" class="t-summary" href="../../wiki/s-docs-auth-callout.html">docs.nats.io — Auth callout</a></li><li><a data-slug="s-docs-authentication-basics" class="t-summary" href="../../wiki/s-docs-authentication-basics.html">docs.nats.io — Authentication basics</a></li><li><a data-slug="s-docs-authorization" class="t-summary" href="../../wiki/s-docs-authorization.html">docs.nats.io — Authorization</a></li><li><a data-slug="s-docs-config-and-jwt-backup" class="t-summary" href="../../wiki/s-docs-config-and-jwt-backup.html">docs.nats.io — Config and JWT backup</a></li><li><a data-slug="s-docs-config-management" class="t-summary" href="../../wiki/s-docs-config-management.html">docs.nats.io — Config management</a></li><li><a data-slug="s-docs-consumer-config" class="t-summary" href="../../wiki/s-docs-consumer-config.html">docs.nats.io — Create Consumer (ConsumerInfo reference)</a></li><li><a data-slug="s-docs-stream-config" class="t-summary" href="../../wiki/s-docs-stream-config.html">docs.nats.io — Create Stream (StreamConfig reference)</a></li><li><a data-slug="s-docs-cross-account" class="t-summary" href="../../wiki/s-docs-cross-account.html">docs.nats.io — Cross-account</a></li><li><a data-slug="s-docs-decentralized-auth" class="t-summary" href="../../wiki/s-docs-decentralized-auth.html">docs.nats.io — Decentralized authentication</a></li><li><a data-slug="s-docs-delivery-and-acknowledgment" class="t-summary" href="../../wiki/s-docs-delivery-and-acknowledgment.html">docs.nats.io — Delivery and acknowledgment</a></li><li><a data-slug="s-docs-disaster-recovery" class="t-summary" href="../../wiki/s-docs-disaster-recovery.html">docs.nats.io — Disaster recovery</a></li><li><a data-slug="s-docs-encryption-and-tls" class="t-summary" href="../../wiki/s-docs-encryption-and-tls.html">docs.nats.io — Encryption &amp; TLS</a></li><li><a data-slug="s-docs-forming-a-cluster" class="t-summary" href="../../wiki/s-docs-forming-a-cluster.html">docs.nats.io — Forming a cluster</a></li><li><a data-slug="s-docs-getting-started" class="t-summary" href="../../wiki/s-docs-getting-started.html">docs.nats.io — Getting Started</a></li><li><a data-slug="s-docs-hardening" class="t-summary" href="../../wiki/s-docs-hardening.html">docs.nats.io — Hardening</a></li><li><a data-slug="s-docs-jetstream-in-a-cluster" class="t-summary" href="../../wiki/s-docs-jetstream-in-a-cluster.html">docs.nats.io — JetStream in a cluster</a></li><li><a data-slug="s-docs-kubernetes" class="t-summary" href="../../wiki/s-docs-kubernetes.html">docs.nats.io — Kubernetes</a></li><li><a data-slug="s-docs-leaf-nodes" class="t-summary" href="../../wiki/s-docs-leaf-nodes.html">docs.nats.io — Leaf nodes</a></li><li><a data-slug="s-docs-connection-limits-config" class="t-summary" href="../../wiki/s-docs-connection-limits-config.html">docs.nats.io — max_payload, max_pending, max_connections, max_subscriptions</a></li><li><a data-slug="s-docs-mirrors-and-sources" class="t-summary" href="../../wiki/s-docs-mirrors-and-sources.html">docs.nats.io — Mirrors and sources</a></li><li><a data-slug="s-docs-mirrors-as-dr" class="t-summary" href="../../wiki/s-docs-mirrors-as-dr.html">docs.nats.io — Mirrors as a DR tool</a></li><li><a data-slug="s-docs-monitoring-endpoints" class="t-summary" href="../../wiki/s-docs-monitoring-endpoints.html">docs.nats.io — Monitoring endpoints</a></li><li><a data-slug="s-docs-operator-mode" class="t-summary" href="../../wiki/s-docs-operator-mode.html">docs.nats.io — Operator mode</a></li><li><a data-slug="s-docs-placement" class="t-summary" href="../../wiki/s-docs-placement.html">docs.nats.io — Placement</a></li><li><a data-slug="s-docs-prometheus-and-dashboards" class="t-summary" href="../../wiki/s-docs-prometheus-and-dashboards.html">docs.nats.io — Prometheus &amp; dashboards</a></li><li><a data-slug="s-docs-pull-consumers" class="t-summary" href="../../wiki/s-docs-pull-consumers.html">docs.nats.io — Pull consumers in depth</a></li><li><a data-slug="s-docs-putting-it-together" class="t-summary" href="../../wiki/s-docs-putting-it-together.html">docs.nats.io — Putting it together (composed topology)</a></li><li><a data-slug="s-docs-raft-and-leaders" class="t-summary" href="../../wiki/s-docs-raft-and-leaders.html">docs.nats.io — Raft and leaders</a></li><li><a data-slug="s-docs-get-direct" class="t-summary" href="../../wiki/s-docs-get-direct.html">docs.nats.io — Reading messages directly</a></li><li><a data-slug="s-docs-replication-and-r3" class="t-summary" href="../../wiki/s-docs-replication-and-r3.html">docs.nats.io — Replication and R=3</a></li><li><a data-slug="s-docs-retention-policies" class="t-summary" href="../../wiki/s-docs-retention-policies.html">docs.nats.io — Retention policies</a></li><li><a data-slug="s-docs-rolling-upgrades" class="t-summary" href="../../wiki/s-docs-rolling-upgrades.html">docs.nats.io — Rolling upgrades</a></li><li><a data-slug="s-docs-scaling-and-peers" class="t-summary" href="../../wiki/s-docs-scaling-and-peers.html">docs.nats.io — Scaling and peer management</a></li><li><a data-slug="s-docs-worker-pool" class="t-summary" href="../../wiki/s-docs-worker-pool.html">docs.nats.io — Scaling with a worker pool</a></li><li><a data-slug="s-docs-security-checklist" class="t-summary" href="../../wiki/s-docs-security-checklist.html">docs.nats.io — Security: where to go next (production checklist)</a></li><li><a data-slug="s-docs-single-server" class="t-summary" href="../../wiki/s-docs-single-server.html">docs.nats.io — Single server</a></li><li><a data-slug="s-docs-sizing-and-resources" class="t-summary" href="../../wiki/s-docs-sizing-and-resources.html">docs.nats.io — Sizing &amp; resources</a></li><li><a data-slug="s-docs-policies" class="t-summary" href="../../wiki/s-docs-policies.html">docs.nats.io — Stream and consumer policies</a></li><li><a data-slug="s-docs-stream-backup-restore" class="t-summary" href="../../wiki/s-docs-stream-backup-restore.html">docs.nats.io — Stream backup and restore</a></li><li><a data-slug="s-docs-super-clusters" class="t-summary" href="../../wiki/s-docs-super-clusters.html">docs.nats.io — Super-clusters</a></li><li><a data-slug="s-docs-surviving-node-loss" class="t-summary" href="../../wiki/s-docs-surviving-node-loss.html">docs.nats.io — Surviving node loss</a></li><li><a data-slug="s-docs-ecosystem" class="t-summary" href="../../wiki/s-docs-ecosystem.html">docs.nats.io — The NATS Ecosystem</a></li><li><a data-slug="s-docs-upgrade-to-2.12" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.12.html">docs.nats.io — Upgrade to NATS 2.12</a></li><li><a data-slug="s-docs-upgrade-to-2.14" class="t-summary" href="../../wiki/s-docs-upgrade-to-2.14.html">docs.nats.io — Upgrade to NATS 2.14</a></li><li><a data-slug="s-docs-your-first-cluster" class="t-summary" href="../../wiki/s-docs-your-first-cluster.html">docs.nats.io — Your first cluster</a></li><li><a data-slug="s-gh-3569-connect-to-route-port" class="t-summary" href="../../wiki/s-gh-3569-connect-to-route-port.html">gh#3569 — ERR Log \&quot;attempted to connect to route port\&quot;</a></li><li><a data-slug="s-gh-4342-memory-stream-backup" class="t-summary" href="../../wiki/s-gh-4342-memory-stream-backup.html">gh#4342 — Backup data in nats-server with jetstream enabled where storage is memory</a></li><li><a data-slug="s-gh-4535-unauthenticated-connections" class="t-summary" href="../../wiki/s-gh-4535-unauthenticated-connections.html">gh#4535 — Issue with denying unauthenticated connections</a></li><li><a data-slug="s-gh-4823-leafnode-supercluster-duplicates" class="t-summary" href="../../wiki/s-gh-4823-leafnode-supercluster-duplicates.html">gh#4823 — Duplicate messages on a leafnode cluster connected to a supercluster</a></li><li><a data-slug="s-gh-4972-nak-with-delay-blocks" class="t-summary" href="../../wiki/s-gh-4972-nak-with-delay-blocks.html">gh#4972 — Doesn&#x27;t NakWithDelay reduce the MaxAckPending counter and block the execution of other messages?</a></li><li><a data-slug="s-gh-4994-scale-to-zero-dlq" class="t-summary" href="../../wiki/s-gh-4994-scale-to-zero-dlq.html">gh#4994 — AckWait does not publish to dead letter queue with zero clients</a></li><li><a data-slug="s-gh-5044-restrict-durable-consumers" class="t-summary" href="../../wiki/s-gh-5044-restrict-durable-consumers.html">gh#5044 — Prevent a NATS user from creating durable consumers</a></li><li><a data-slug="s-gh-5243-kv-watchers-at-scale" class="t-summary" href="../../wiki/s-gh-5243-kv-watchers-at-scale.html">gh#5243 — 1000 nats cli watchers leads to unrecoverable state of servers</a></li><li><a data-slug="s-gh-5606-cross-account-jetstream" class="t-summary" href="../../wiki/s-gh-5606-cross-account-jetstream.html">gh#5606 — Manage streams / KVs across multiple accounts with one user</a></li><li><a data-slug="s-gh-5631-nak-not-immediate" class="t-summary" href="../../wiki/s-gh-5631-nak-not-immediate.html">gh#5631 — Nak does not immediately lead to a message redelivery</a></li><li><a data-slug="s-gh-5859-unexpected-nats-timeout" class="t-summary" href="../../wiki/s-gh-5859-unexpected-nats-timeout.html">gh#5859 — Symptom: Unexpected `nats: timeout`</a></li><li><a data-slug="s-gh-5924-filestore-dirs-vanished" class="t-summary" href="../../wiki/s-gh-5924-filestore-dirs-vanished.html">gh#5924 — Stream directories disappeared under a running server</a></li><li><a data-slug="s-gh-5941-restrict-leafnode-subjects" class="t-summary" href="../../wiki/s-gh-5941-restrict-leafnode-subjects.html">gh#5941 — Proper way to configure leaf nodes to only export some subjects</a></li><li><a data-slug="s-gh-6070-lame-duck-under-systemd" class="t-summary" href="../../wiki/s-gh-6070-lame-duck-under-systemd.html">gh#6070 — Lame Duck Mode (under systemd)</a></li><li><a data-slug="s-gh-6328-jetstream-behind-gateways" class="t-summary" href="../../wiki/s-gh-6328-jetstream-behind-gateways.html">gh#6328 — Is non-clustered JetStream possible with gateways?</a></li><li><a data-slug="s-gh-6350-exponential-backoff" class="t-summary" href="../../wiki/s-gh-6350-exponential-backoff.html">gh#6350 — Does NATS support exponential backoff consumption retry?</a></li><li><a data-slug="s-gh-6490-high-message-lag" class="t-summary" href="../../wiki/s-gh-6490-high-message-lag.html">gh#6490 — Understanding jetstream warnings (\&quot;has high message lag\&quot;)</a></li><li><a data-slug="s-gh-6605-which-consumer-is-slow" class="t-summary" href="../../wiki/s-gh-6605-which-consumer-is-slow.html">gh#6605 — How to find which consumer has been detected as slow?</a></li><li><a data-slug="s-gh-6628-ackwait-vs-dupe-window" class="t-summary" href="../../wiki/s-gh-6628-ackwait-vs-dupe-window.html">gh#6628 — ack-wait and dupe-window behavior when used together</a></li><li><a data-slug="s-gh-6746-watch-many-keys" class="t-summary" href="../../wiki/s-gh-6746-watch-many-keys.html">gh#6746 — Watch different keys without creating a watcher for each key?</a></li><li><a data-slug="s-gh-6836-object-store-list-slow" class="t-summary" href="../../wiki/s-gh-6836-object-store-list-slow.html">gh#6836 — object-store list slow, sometimes timing out, while an upload runs</a></li><li><a data-slug="s-gh-7017-kv-across-accounts" class="t-summary" href="../../wiki/s-gh-7017-kv-across-accounts.html">gh#7017 — Sharing a KV Store with Multiple Accounts – Is It Supported?</a></li><li><a data-slug="s-gh-7190-asymmetric-cluster" class="t-summary" href="../../wiki/s-gh-7190-asymmetric-cluster.html">gh#7190 — Asymmetric Cluster Formation Problem</a></li><li><a data-slug="s-gh-7362-routez-connz-rtt" class="t-summary" href="../../wiki/s-gh-7362-routez-connz-rtt.html">gh#7362 — how are routez/connz rtt measured?</a></li><li><a data-slug="s-gh-7438-multi-region-availability" class="t-summary" href="../../wiki/s-gh-7438-multi-region-availability.html">gh#7438 — Multi-region without sacrificing availability</a></li><li><a data-slug="s-gh-7463-jetstream-corruption" class="t-summary" href="../../wiki/s-gh-7463-jetstream-corruption.html">gh#7463 — How to find out what caused a corruption in JetStream Cluster?</a></li><li><a data-slug="s-gh-7483-varz-cpu-in-containers" class="t-summary" href="../../wiki/s-gh-7483-varz-cpu-in-containers.html">gh#7483 — what is /varz cpu relative to, on a 0.25 vCPU container?</a></li><li><a data-slug="s-gh-7494-supercluster-degradation" class="t-summary" href="../../wiki/s-gh-7494-supercluster-degradation.html">gh#7494 — Performance degradation in a global NATS super-cluster</a></li><li><a data-slug="s-gh-7505-auth-callout-nkey" class="t-summary" href="../../wiki/s-gh-7505-auth-callout-nkey.html">gh#7505 — Does NATS validate connect_opts.nkey before passing it to auth callout?</a></li><li><a data-slug="s-gh-7590-dlq-payload-loss" class="t-summary" href="../../wiki/s-gh-7590-dlq-payload-loss.html">gh#7590 — Automatic Message Payload Preservation in DLQ Stream</a></li><li><a data-slug="s-gh-7628-scheduler-vs-nak" class="t-summary" href="../../wiki/s-gh-7628-scheduler-vs-nak.html">gh#7628 — Message Scheduler vs NAK-with-delay for scheduled notifications at scale</a></li><li><a data-slug="s-gh-7672-cron-schedules" class="t-summary" href="../../wiki/s-gh-7672-cron-schedules.html">gh#7672 — Cron schedule supports ?</a></li><li><a data-slug="s-gh-7684-certificate-expiry" class="t-summary" href="../../wiki/s-gh-7684-certificate-expiry.html">gh#7684 — How to detect when the certificates used by nats-server will expire?</a></li><li><a data-slug="s-gh-7749-hostpath-jetstream" class="t-summary" href="../../wiki/s-gh-7749-hostpath-jetstream.html">gh#7749 — Should we use hostPath for a JetStream cluster running in K8S?</a></li><li><a data-slug="s-gh-7831-standalone-to-cluster" class="t-summary" href="../../wiki/s-gh-7831-standalone-to-cluster.html">gh#7831 — Streams marked orphan and deleted when converting standalone to cluster</a></li><li><a data-slug="s-gh-7834-leafnode-same-js-domain" class="t-summary" href="../../wiki/s-gh-7834-leafnode-same-js-domain.html">gh#7834 — JetStream shared with a leafnode, but streams aren&#x27;t visible on both ends</a></li><li><a data-slug="s-gh-7854-jwt-push-timeout" class="t-summary" href="../../wiki/s-gh-7854-jwt-push-timeout.html">gh#7854 — Example JWT setup from the docs is not working.. at all.</a></li><li><a data-slug="s-gh-7881-cross-domain-sourcing" class="t-summary" href="../../wiki/s-gh-7881-cross-domain-sourcing.html">gh#7881 — Cross-domain JetStream sourcing, how do I set that up?</a></li><li><a data-slug="s-gh-7982-no-suitable-peers" class="t-summary" href="../../wiki/s-gh-7982-no-suitable-peers.html">gh#7982 — Unable to increase stream replicas from 1 to 3 (no suitable peers, 10005)</a></li><li><a data-slug="s-github-repo-facts" class="t-summary" href="../../wiki/s-github-repo-facts.html">GitHub — repo facts for every NATS client and tool</a></li><li><a data-slug="s-nats-helm-chart-values-2.14.6" class="t-summary" href="../../wiki/s-nats-helm-chart-values-2.14.6.html">nats Helm chart nats-2.14.6 — values.yaml</a></li><li><a data-slug="s-k8s-760-jetstream-pvc-per-replica" class="t-summary" href="../../wiki/s-k8s-760-jetstream-pvc-per-replica.html">nats-io/k8s#760 — how to configure JetStream replicas to share a PVC?</a></li><li><a data-slug="s-issue-4281-insufficient-storage" class="t-summary" href="../../wiki/s-issue-4281-insufficient-storage.html">nats-server issue #4281 — insufficient storage resources available (10047)</a></li><li><a data-slug="s-issue-8322-dynamic-maxstore-shrinks" class="t-summary" href="../../wiki/s-issue-8322-dynamic-maxstore-shrinks.html">nats-server issues #8322 and #5871 — the dynamic max_file_store shrinks at every restart</a></li><li><a data-slug="s-relnotes-2.14.0" class="t-summary" href="../../wiki/s-relnotes-2.14.0.html">nats-server v2.14.0 release notes</a></li><li><a data-slug="s-nats-server-auth-and-tls" class="t-summary" href="../../wiki/s-nats-server-auth-and-tls.html">nats-server v2.14.6 — authentication, TLS and the account trust chain</a></li><li><a data-slug="s-nats-server-tls-reload" class="t-summary" href="../../wiki/s-nats-server-tls-reload.html">nats-server v2.14.6 — does a reload pick up a renewed certificate?</a></li><li><a data-slug="s-nats-server-topology" class="t-summary" href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li><li><a data-slug="s-nats-server-leafnode-js-domains" class="t-summary" href="../../wiki/s-nats-server-leafnode-js-domains.html">nats-server v2.14.6 — JetStream over a leafnode: domains and the system account</a></li><li><a data-slug="s-nats-server-jetstream-resources" class="t-summary" href="../../wiki/s-nats-server-jetstream-resources.html">nats-server v2.14.6 — JetStream storage limits, reservations and out-of-space</a></li><li><a data-slug="s-nats-server-lame-duck" class="t-summary" href="../../wiki/s-nats-server-lame-duck.html">nats-server v2.14.6 — lame-duck mode as implemented</a></li><li><a data-slug="s-nats-server-mqtt-websocket-observed" class="t-summary" href="../../wiki/s-nats-server-mqtt-websocket-observed.html">nats-server v2.14.6 — MQTT and WebSocket, run rather than read</a></li><li><a data-slug="s-nats-server-object-store-leafnode" class="t-summary" href="../../wiki/s-nats-server-object-store-leafnode.html">nats-server v2.14.6 — object-store subjects cross a leafnode where KV subjects do not</a></li><li><a data-slug="s-nats-server-route-cluster-formation" class="t-summary" href="../../wiki/s-nats-server-route-cluster-formation.html">nats-server v2.14.6 — route.go, cluster formation</a></li><li><a data-slug="s-nats-server-constants-2.14.6" class="t-summary" href="../../wiki/s-nats-server-constants-2.14.6.html">nats-server v2.14.6 — server constants</a></li><li><a data-slug="s-nats-server-snapshot-restore" class="t-summary" href="../../wiki/s-nats-server-snapshot-restore.html">nats-server v2.14.6 — snapshot and restore</a></li><li><a data-slug="s-nats-server-defaults-sweep" class="t-summary" href="../../wiki/s-nats-server-defaults-sweep.html">nats-server v2.14.6 — the config-default sweep: leafnode compression, mqtt.max_ack_pending, mqtt.port</a></li><li><a data-slug="s-nats-server-filestore-layout" class="t-summary" href="../../wiki/s-nats-server-filestore-layout.html">nats-server v2.14.6 — the filestore on disk</a></li><li><a data-slug="s-nats-server-jetstream-log-warnings" class="t-summary" href="../../wiki/s-nats-server-jetstream-log-warnings.html">nats-server v2.14.6 — the JetStream log warnings, read from source</a></li><li><a data-slug="s-nats-server-object-store-observed" class="t-summary" href="../../wiki/s-nats-server-object-store-observed.html">nats-server v2.14.6 — the object store, run rather than read</a></li><li><a data-slug="s-nats-server-systemd-units" class="t-summary" href="../../wiki/s-nats-server-systemd-units.html">nats-server v2.14.6 — the shipped systemd units</a></li><li><a data-slug="s-nats-server-signals" class="t-summary" href="../../wiki/s-nats-server-signals.html">nats-server v2.14.6 — the signal handler</a></li><li><a data-slug="s-nats-server-monitoring-observed" class="t-summary" href="../../wiki/s-nats-server-monitoring-observed.html">nats-server v2.14.6 — what `/varz` CPU and `/connz` RTT actually measure</a></li><li><a data-slug="s-nats-server-readme" class="t-summary" href="../../wiki/s-nats-server-readme.html">nats-server — repository README (v2.14.6)</a></li><li><a data-slug="s-natscli-account-tls" class="t-summary" href="../../wiki/s-natscli-account-tls.html">natscli v0.4.0 — nats account tls, nats account backup / restore</a></li><li><a data-slug="s-natscli-backup-restore" class="t-summary" href="../../wiki/s-natscli-backup-restore.html">natscli v0.4.0 — nats stream backup / restore</a></li><li><a data-slug="s-natscli-stream-external" class="t-summary" href="../../wiki/s-natscli-stream-external.html">natscli v0.4.0 — the cross-domain and cross-account prompts in `nats stream add`</a></li><li><a data-slug="s-nats-server-message-schedules-observed" class="t-summary" href="../../wiki/s-nats-server-message-schedules-observed.html">Observed on nats-server v2.14.6 — the message scheduler</a></li><li><a data-slug="s-nats-server-nak-backoff-observed" class="t-summary" href="../../wiki/s-nats-server-nak-backoff-observed.html">Observed on nats-server v2.14.6 — what a nak actually waits</a></li><li><a data-slug="s-docs-jetstream-headers" class="t-summary" href="../../wiki/s-docs-jetstream-headers.html">Reference — JetStream API headers</a></li><li><a data-slug="s-synadia-reliable-delivery-dlq" class="t-summary" href="../../wiki/s-synadia-reliable-delivery-dlq.html">Reliable Message Delivery in NATS JetStream: Acks, Retries, Dead Letters, and Replay</a></li><li><a data-slug="s-synadia-jetstream-anti-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-anti-patterns.html">Synadia — JetStream Anti-Patterns: pitfalls to avoid when scaling</a></li><li><a data-slug="s-synadia-jetstream-memory-patterns" class="t-summary" href="../../wiki/s-synadia-jetstream-memory-patterns.html">Synadia — Understanding JetStream Memory Usage Patterns</a></li></ul></details><details class="grp" data-grp="explore" open><summary>Explore</summary><ul><li><a href="../../graph.html">Link graph</a></li><li><a href="../../cheatsheets.html">Cheat sheets</a></li><li><a href="../../browse.html">Browse by facet</a></li><li><a href="../../inbox/question-bank.html">Questions articles</a></li><li><a href="../../inbox/adr-toc.html">ADRs articles</a></li><li><a href="../../inbox/docs-issues.html">Docs issues articles</a></li><li><a href="../../inbox/server-issues.html">Server issues articles</a></li><li><a href="../../inbox/config-keys-table.html">Config keys articles</a></li><li><a href="../../inbox/check-defaults-v2.14.6.html">Defaults check articles</a></li><li><a href="../../sources.html">Raw sources</a></li><li><a href="../../wanted.html">Wanted pages</a></li><li><a href="../../health.html">Wiki health</a></li><li><a href="../../wiki/log.html">Log</a></li></ul></details></div></aside>
+  <main class="main"><article class="page rawpage">
+<header class="ph"><div class="crumbs"><a href="../../index.html">Home</a> › <a href="../../sources.html">Sources</a> › nats-server-src</div>
+<h1>topology-v2.14.6.md</h1><div class="meta"><div class="mrow"><span class="mk">collection</span> <a href="../../sources.html#nats-server-src">nats-server-src</a></div><div class="mrow"><span class="mk">origin</span> <a class="ext" href="https://github.com/nats-io/nats-server">https://github.com/nats-io/nats-server</a> at tag <strong>v2.14.6</strong>, individual <code>server/*.go</code> files from <code>raw.githubusercontent.com</code></div><div class="mrow"><span class="mk">file</span> <code>raw/nats-server-src/topology-v2.14.6.md</code> · 671 lines · 23 KB · utf-8</div><div class="mrow"><span class="mk">download</span> <a href="../../raw/nats-server-src/topology-v2.14.6.md" download>download this file</a></div><div class="mrow"><span class="mk">summarised in</span> <a class="wl t-summary " href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></div></div><div class="pn"><a href="../../raw/nats-server-src/topology-observed-v2.14.6.md.html">← topology-observed-v2.14.6.md</a></div></header>
+<pre class="raw"><span id="L1" class="l">&lt;!-- source: https://github.com/nats-io/nats-server/tree/v2.14.6/server (raw.githubusercontent.com) · fetched 2026-08-31 --&gt;</span>
+<span id="L2" class="l"># nats-server v2.14.6 — topology: gateways, leafnodes, and the checks that run before the server starts</span>
+<span id="L3" class="l"> </span>
+<span id="L4" class="l">Only the ranges this wiki quotes are stored, with their real line numbers, so each claim links to</span>
+<span id="L5" class="l">`https://github.com/nats-io/nats-server/blob/v2.14.6/server/&lt;file&gt;#L&lt;line&gt;`. Fetched for plan step 6</span>
+<span id="L6" class="l">(topology). Apache-2.0.</span>
+<span id="L7" class="l"> </span>
+<span id="L8" class="l">Behaviour marked &quot;observed&quot; below was reproduced locally against **nats-server v2.14.5** (the binary</span>
+<span id="L9" class="l">on the machine, one patch behind the tag the source is read at); the configs used are quoted with</span>
+<span id="L10" class="l">each observation.</span>
+<span id="L11" class="l"> </span>
+<span id="L12" class="l">## `server/server.go` — the option checks that run inside `NewServer`, before anything starts</span>
+<span id="L13" class="l"> </span>
+<span id="L14" class="l">```go</span>
+<span id="L15" class="l">723:	httpBasePath := normalizeBasePath(opts.HTTPBasePath)</span>
+<span id="L16" class="l">724:</span>
+<span id="L17" class="l">725:	// Validate some options. This is here because we cannot assume that</span>
+<span id="L18" class="l">726:	// server will always be started with configuration parsing (that could</span>
+<span id="L19" class="l">727:	// report issues). Its options can be (incorrectly) set by hand when</span>
+<span id="L20" class="l">728:	// server is embedded. If there is an error, return nil.</span>
+<span id="L21" class="l">729:	if err := validateOptions(opts); err != nil {</span>
+<span id="L22" class="l">730:		return nil, err</span>
+<span id="L23" class="l">731:	}</span>
+<span id="L24" class="l">732:</span>
+<span id="L25" class="l">733:	info := Info{</span>
+<span id="L26" class="l">734:		ID:           pub,</span>
+<span id="L27" class="l">735:		XKey:         xpub,</span>
+<span id="L28" class="l">736:		Version:      VERSION,</span>
+<span id="L29" class="l">```</span>
+<span id="L30" class="l"> </span>
+<span id="L31" class="l">```go</span>
+<span id="L32" class="l">1151:func validateOptions(o *Options) error {</span>
+<span id="L33" class="l">1152:	if o.LameDuckDuration &gt; 0 &amp;&amp; o.LameDuckGracePeriod &gt;= o.LameDuckDuration {</span>
+<span id="L34" class="l">1153:		return fmt.Errorf(&quot;lame duck grace period (%v) should be strictly lower than lame duck duration (%v)&quot;,</span>
+<span id="L35" class="l">1154:			o.LameDuckGracePeriod, o.LameDuckDuration)</span>
+<span id="L36" class="l">1155:	}</span>
+<span id="L37" class="l">1156:	if int64(o.MaxPayload) &gt; o.MaxPending {</span>
+<span id="L38" class="l">1157:		return fmt.Errorf(&quot;max_payload (%v) cannot be higher than max_pending (%v)&quot;,</span>
+<span id="L39" class="l">1158:			o.MaxPayload, o.MaxPending)</span>
+<span id="L40" class="l">1159:	}</span>
+<span id="L41" class="l">1160:	if o.ServerName != _EMPTY_ &amp;&amp; strings.Contains(o.ServerName, &quot; &quot;) {</span>
+<span id="L42" class="l">1161:		return errors.New(&quot;server name cannot contain spaces&quot;)</span>
+<span id="L43" class="l">1162:	}</span>
+<span id="L44" class="l">1163:	// Check that the trust configuration is correct.</span>
+<span id="L45" class="l">1164:	if err := validateTrustedOperators(o); err != nil {</span>
+<span id="L46" class="l">1165:		return err</span>
+<span id="L47" class="l">1166:	}</span>
+<span id="L48" class="l">1167:	// Check on leaf nodes which will require a system</span>
+<span id="L49" class="l">1168:	// account when gateways are also configured.</span>
+<span id="L50" class="l">1169:	if err := validateLeafNode(o); err != nil {</span>
+<span id="L51" class="l">1170:		return err</span>
+<span id="L52" class="l">1171:	}</span>
+<span id="L53" class="l">1172:	// Check that authentication is properly configured.</span>
+<span id="L54" class="l">1173:	if err := validateAuth(o); err != nil {</span>
+<span id="L55" class="l">1174:		return err</span>
+<span id="L56" class="l">1175:	}</span>
+<span id="L57" class="l">1176:	// Check that proxies is properly configured.</span>
+<span id="L58" class="l">1177:	if err := validateProxies(o); err != nil {</span>
+<span id="L59" class="l">1178:		return err</span>
+<span id="L60" class="l">1179:	}</span>
+<span id="L61" class="l">1180:	// Check that gateway is properly configured. Returns no error</span>
+<span id="L62" class="l">1181:	// if there is no gateway defined.</span>
+<span id="L63" class="l">1182:	if err := validateGatewayOptions(o); err != nil {</span>
+<span id="L64" class="l">1183:		return err</span>
+<span id="L65" class="l">1184:	}</span>
+<span id="L66" class="l">1185:	// Check that cluster name if defined matches any gateway name.</span>
+<span id="L67" class="l">1186:	if err := validateCluster(o); err != nil {</span>
+<span id="L68" class="l">1187:		return err</span>
+<span id="L69" class="l">1188:	}</span>
+<span id="L70" class="l">1189:	if err := validateMQTTOptions(o); err != nil {</span>
+<span id="L71" class="l">1190:		return err</span>
+<span id="L72" class="l">1191:	}</span>
+<span id="L73" class="l">1192:	if err := validateJetStreamOptions(o); err != nil {</span>
+<span id="L74" class="l">1193:		return err</span>
+<span id="L75" class="l">1194:	}</span>
+<span id="L76" class="l">1195:	// Finally check websocket options.</span>
+<span id="L77" class="l">1196:	return validateWebsocketOptions(o)</span>
+<span id="L78" class="l">```</span>
+<span id="L79" class="l"> </span>
+<span id="L80" class="l">`validateCluster`, showing that an **unset** `cluster.name` is adopted from `gateway.name`:</span>
+<span id="L81" class="l"> </span>
+<span id="L82" class="l">```go</span>
+<span id="L83" class="l">1098:func validateCluster(o *Options) error {</span>
+<span id="L84" class="l">1099:	if o.Cluster.Name != _EMPTY_ &amp;&amp; strings.Contains(o.Cluster.Name, &quot; &quot;) {</span>
+<span id="L85" class="l">1100:		return ErrClusterNameHasSpaces</span>
+<span id="L86" class="l">1101:	}</span>
+<span id="L87" class="l">1102:	if p := o.Cluster.Permissions; p != nil {</span>
+<span id="L88" class="l">1103:		perms := &amp;Permissions{Publish: p.Import, Subscribe: p.Export}</span>
+<span id="L89" class="l">1104:		if err := checkClusterPermissionSubjects(perms); err != nil {</span>
+<span id="L90" class="l">1105:			return err</span>
+<span id="L91" class="l">1106:		}</span>
+<span id="L92" class="l">1107:	}</span>
+<span id="L93" class="l">1108:	if o.Cluster.Compression.Mode != _EMPTY_ {</span>
+<span id="L94" class="l">1109:		if err := validateAndNormalizeCompressionOption(&amp;o.Cluster.Compression, CompressionS2Fast); err != nil {</span>
+<span id="L95" class="l">1110:			return err</span>
+<span id="L96" class="l">1111:		}</span>
+<span id="L97" class="l">1112:	}</span>
+<span id="L98" class="l">1113:	if err := validatePinnedCerts(o.Cluster.TLSPinnedCerts); err != nil {</span>
+<span id="L99" class="l">1114:		return fmt.Errorf(&quot;cluster: %v&quot;, err)</span>
+<span id="L100" class="l">1115:	}</span>
+<span id="L101" class="l">1116:	// Check that cluster name if defined matches any gateway name.</span>
+<span id="L102" class="l">1117:	// Note that we have already verified that the gateway name does not have spaces.</span>
+<span id="L103" class="l">1118:	if o.Gateway.Name != _EMPTY_ &amp;&amp; o.Gateway.Name != o.Cluster.Name {</span>
+<span id="L104" class="l">1119:		if o.Cluster.Name != _EMPTY_ {</span>
+<span id="L105" class="l">1120:			return ErrClusterNameConfigConflict</span>
+<span id="L106" class="l">1121:		}</span>
+<span id="L107" class="l">1122:		// Set this here so we do not consider it dynamic.</span>
+<span id="L108" class="l">1123:		o.Cluster.Name = o.Gateway.Name</span>
+<span id="L109" class="l">1124:	}</span>
+<span id="L110" class="l">1125:	if l := len(o.Cluster.PinnedAccounts); l &gt; 0 {</span>
+<span id="L111" class="l">```</span>
+<span id="L112" class="l"> </span>
+<span id="L113" class="l">## `server/errors.go` — the two name errors the docs quote</span>
+<span id="L114" class="l"> </span>
+<span id="L115" class="l">```go</span>
+<span id="L116" class="l">164:	// ErrGatewayNameHasSpaces signals that the gateway name contains spaces, which is not allowed.</span>
+<span id="L117" class="l">165:	ErrGatewayNameHasSpaces = errors.New(&quot;gateway name cannot contain spaces&quot;)</span>
+<span id="L118" class="l">191:	// ErrClusterNameConfigConflict signals that the options for cluster name in cluster and gateway are in conflict.</span>
+<span id="L119" class="l">192:	ErrClusterNameConfigConflict = errors.New(&quot;cluster name conflicts between cluster and gateway definitions&quot;)</span>
+<span id="L120" class="l">193:</span>
+<span id="L121" class="l">194:	// ErrClusterNameRemoteConflict signals that a remote server has a different cluster name.</span>
+<span id="L122" class="l">195:	ErrClusterNameRemoteConflict = errors.New(&quot;cluster name from remote server conflicts&quot;)</span>
+<span id="L123" class="l">196:</span>
+<span id="L124" class="l">197:	// ErrClusterNameHasSpaces signals that the cluster name contains spaces, which is not allowed.</span>
+<span id="L125" class="l">198:	ErrClusterNameHasSpaces = errors.New(&quot;cluster name cannot contain spaces&quot;)</span>
+<span id="L126" class="l">```</span>
+<span id="L127" class="l"> </span>
+<span id="L128" class="l">## `server/leafnode.go` — the system-account requirement, and what `deny_imports` / `deny_exports` are</span>
+<span id="L129" class="l"> </span>
+<span id="L130" class="l">`validateLeafNodeOptions`, tail: no leafnode listener means no further checks; a leafnode listener **plus** a gateway requires a system account.</span>
+<span id="L131" class="l"> </span>
+<span id="L132" class="l">```go</span>
+<span id="L133" class="l">326:	}</span>
+<span id="L134" class="l">327:</span>
+<span id="L135" class="l">328:	if o.LeafNode.Port == 0 {</span>
+<span id="L136" class="l">329:		return nil</span>
+<span id="L137" class="l">330:	}</span>
+<span id="L138" class="l">331:</span>
+<span id="L139" class="l">332:	// If MinVersion is defined, check that it is valid.</span>
+<span id="L140" class="l">333:	if mv := o.LeafNode.MinVersion; mv != _EMPTY_ {</span>
+<span id="L141" class="l">334:		if err := checkLeafMinVersionConfig(mv); err != nil {</span>
+<span id="L142" class="l">335:			return err</span>
+<span id="L143" class="l">336:		}</span>
+<span id="L144" class="l">337:	}</span>
+<span id="L145" class="l">338:</span>
+<span id="L146" class="l">339:	// The checks below will be done only when detecting that we are configured</span>
+<span id="L147" class="l">340:	// with gateways. So if an option validation needs to be done regardless,</span>
+<span id="L148" class="l">341:	// it MUST be done before this point!</span>
+<span id="L149" class="l">342:</span>
+<span id="L150" class="l">343:	if o.Gateway.Name == _EMPTY_ &amp;&amp; o.Gateway.Port == 0 {</span>
+<span id="L151" class="l">344:		return nil</span>
+<span id="L152" class="l">345:	}</span>
+<span id="L153" class="l">346:	// If we are here we have both leaf nodes and gateways defined, make sure there</span>
+<span id="L154" class="l">347:	// is a system account defined.</span>
+<span id="L155" class="l">348:	if o.SystemAccount == _EMPTY_ {</span>
+<span id="L156" class="l">349:		return fmt.Errorf(&quot;leaf nodes and gateways (both being defined) require a system account to also be configured&quot;)</span>
+<span id="L157" class="l">350:	}</span>
+<span id="L158" class="l">```</span>
+<span id="L159" class="l"> </span>
+<span id="L160" class="l">`newLeafNodeCfg` — the two deny lists become a **publish** deny and a **subscribe** deny on the leaf connection. There is no allow list.</span>
+<span id="L161" class="l"> </span>
+<span id="L162" class="l">```go</span>
+<span id="L163" class="l">466:// Creates a leafNodeCfg object that wraps the RemoteLeafOpts.</span>
+<span id="L164" class="l">467:func newLeafNodeCfg(remote *RemoteLeafOpts) *leafNodeCfg {</span>
+<span id="L165" class="l">468:	cfg := &amp;leafNodeCfg{</span>
+<span id="L166" class="l">469:		RemoteLeafOpts: remote,</span>
+<span id="L167" class="l">470:		urls:           make([]*url.URL, 0, len(remote.URLs)),</span>
+<span id="L168" class="l">471:		quitCh:         make(chan struct{}, 1),</span>
+<span id="L169" class="l">472:	}</span>
+<span id="L170" class="l">473:	if len(remote.DenyExports) &gt; 0 || len(remote.DenyImports) &gt; 0 {</span>
+<span id="L171" class="l">474:		perms := &amp;Permissions{}</span>
+<span id="L172" class="l">475:		if len(remote.DenyExports) &gt; 0 {</span>
+<span id="L173" class="l">476:			perms.Publish = &amp;SubjectPermission{Deny: remote.DenyExports}</span>
+<span id="L174" class="l">477:		}</span>
+<span id="L175" class="l">478:		if len(remote.DenyImports) &gt; 0 {</span>
+<span id="L176" class="l">479:			perms.Subscribe = &amp;SubjectPermission{Deny: remote.DenyImports}</span>
+<span id="L177" class="l">480:		}</span>
+<span id="L178" class="l">481:		cfg.perms = perms</span>
+<span id="L179" class="l">482:	}</span>
+<span id="L180" class="l">483:	// Start with the one that is configured. We will add to this</span>
+<span id="L181" class="l">```</span>
+<span id="L182" class="l"> </span>
+<span id="L183" class="l">`processLeafNodeInfo` — the hub&#x27;s permissions for this leaf arrive in the INFO, and the remote&#x27;s local denies are **merged** on top.</span>
+<span id="L184" class="l"> </span>
+<span id="L185" class="l">```go</span>
+<span id="L186" class="l">1713:</span>
+<span id="L187" class="l">1714:	// Only solicited leafnode connections trust permission updates from INFO.</span>
+<span id="L188" class="l">1715:	if didSolicit &amp;&amp; (info.Import != nil || info.Export != nil) {</span>
+<span id="L189" class="l">1716:		perms := &amp;Permissions{</span>
+<span id="L190" class="l">1717:			Publish:   info.Export,</span>
+<span id="L191" class="l">1718:			Subscribe: info.Import,</span>
+<span id="L192" class="l">1719:		}</span>
+<span id="L193" class="l">1720:		// Check if we have local deny clauses that we need to merge.</span>
+<span id="L194" class="l">1721:		if remote := c.leaf.remote; remote != nil {</span>
+<span id="L195" class="l">1722:			if len(remote.DenyExports) &gt; 0 {</span>
+<span id="L196" class="l">1723:				if perms.Publish == nil {</span>
+<span id="L197" class="l">1724:					perms.Publish = &amp;SubjectPermission{}</span>
+<span id="L198" class="l">1725:				}</span>
+<span id="L199" class="l">1726:				perms.Publish.Deny = append(perms.Publish.Deny, remote.DenyExports...)</span>
+<span id="L200" class="l">1727:			}</span>
+<span id="L201" class="l">1728:			if len(remote.DenyImports) &gt; 0 {</span>
+<span id="L202" class="l">1729:				if perms.Subscribe == nil {</span>
+<span id="L203" class="l">1730:					perms.Subscribe = &amp;SubjectPermission{}</span>
+<span id="L204" class="l">1731:				}</span>
+<span id="L205" class="l">1732:				perms.Subscribe.Deny = append(perms.Subscribe.Deny, remote.DenyImports...)</span>
+<span id="L206" class="l">1733:			}</span>
+<span id="L207" class="l">1734:		}</span>
+<span id="L208" class="l">1735:		c.setPermissions(perms)</span>
+<span id="L209" class="l">1736:	}</span>
+<span id="L210" class="l">```</span>
+<span id="L211" class="l"> </span>
+<span id="L212" class="l">`processLeafNodeConnect` — on the hub the leaf&#x27;s permissions are **reversed**, because data flows the other way.</span>
+<span id="L213" class="l"> </span>
+<span id="L214" class="l">```go</span>
+<span id="L215" class="l">2306:</span>
+<span id="L216" class="l">2307:	// When a leaf solicits a connection to a hub, the perms that it will use on the soliciting leafnode&#x27;s</span>
+<span id="L217" class="l">2308:	// behalf are correct for them, but inside the hub need to be reversed since data is flowing in the opposite direction.</span>
+<span id="L218" class="l">2309:	if !c.isSolicitedLeafNode() &amp;&amp; c.perms != nil {</span>
+<span id="L219" class="l">2310:		sp, pp := c.perms.sub, c.perms.pub</span>
+<span id="L220" class="l">2311:		c.perms.sub, c.perms.pub = pp, sp</span>
+<span id="L221" class="l">2312:		// setPermissions populated darray from the subscribe permissions,</span>
+<span id="L222" class="l">2313:		// which are the import permissions advertised to the spoke. Keep</span>
+<span id="L223" class="l">2314:		// those parsed denies after reversing the live permission directions.</span>
+<span id="L224" class="l">2315:		if c.opts.Import == nil {</span>
+<span id="L225" class="l">2316:			c.darray = nil</span>
+<span id="L226" class="l">2317:		}</span>
+<span id="L227" class="l">2318:	}</span>
+<span id="L228" class="l">2319:</span>
+<span id="L229" class="l">```</span>
+<span id="L230" class="l"> </span>
+<span id="L231" class="l">`sendPermsAndAccountInfo` — what the hub pushes back for the leaf to enforce locally.</span>
+<span id="L232" class="l"> </span>
+<span id="L233" class="l">```go</span>
+<span id="L234" class="l">2414:// Sends back an info block to the soliciting leafnode to let it know about</span>
+<span id="L235" class="l">2415:// its permission settings for local enforcement.</span>
+<span id="L236" class="l">2416:func (s *Server) sendPermsAndAccountInfo(c *client) {</span>
+<span id="L237" class="l">2417:	// Copy</span>
+<span id="L238" class="l">2418:	s.mu.Lock()</span>
+<span id="L239" class="l">2419:	info := s.copyLeafNodeInfo()</span>
+<span id="L240" class="l">2420:	s.mu.Unlock()</span>
+<span id="L241" class="l">2421:	c.mu.Lock()</span>
+<span id="L242" class="l">2422:	info.CID = c.cid</span>
+<span id="L243" class="l">2423:	info.Import = c.opts.Import</span>
+<span id="L244" class="l">2424:	info.Export = c.opts.Export</span>
+<span id="L245" class="l">2425:	info.RemoteAccount = c.acc.Name</span>
+<span id="L246" class="l">2426:	// s.SystemAccount() uses an atomic operation and does not get the server lock, so this is safe.</span>
+<span id="L247" class="l">2427:	info.IsSystemAccount = c.acc == s.SystemAccount()</span>
+<span id="L248" class="l">2428:	info.ConnectInfo = true</span>
+<span id="L249" class="l">2429:	c.enqueueProto(generateInfoJSON(info))</span>
+<span id="L250" class="l">2430:	c.mu.Unlock()</span>
+<span id="L251" class="l">2431:}</span>
+<span id="L252" class="l">```</span>
+<span id="L253" class="l"> </span>
+<span id="L254" class="l">## `server/gateway.go` — the port check, and the name-mismatch pair of log lines</span>
+<span id="L255" class="l"> </span>
+<span id="L256" class="l">`validateGatewayOptions`: **`gateway.port` has no default.** A gateway block without a port is a startup error.</span>
+<span id="L257" class="l"> </span>
+<span id="L258" class="l">```go</span>
+<span id="L259" class="l">305:// Ensure that gateway is properly configured.</span>
+<span id="L260" class="l">306:func validateGatewayOptions(o *Options) error {</span>
+<span id="L261" class="l">307:	if o.Gateway.Name == _EMPTY_ &amp;&amp; o.Gateway.Port == 0 {</span>
+<span id="L262" class="l">308:		return nil</span>
+<span id="L263" class="l">309:	}</span>
+<span id="L264" class="l">310:	if o.Gateway.Name == _EMPTY_ {</span>
+<span id="L265" class="l">311:		return errors.New(&quot;gateway has no name&quot;)</span>
+<span id="L266" class="l">312:	}</span>
+<span id="L267" class="l">313:	if strings.Contains(o.Gateway.Name, &quot; &quot;) {</span>
+<span id="L268" class="l">314:		return ErrGatewayNameHasSpaces</span>
+<span id="L269" class="l">315:	}</span>
+<span id="L270" class="l">316:	if o.Gateway.Port == 0 {</span>
+<span id="L271" class="l">317:		return fmt.Errorf(&quot;gateway %q has no port specified (select -1 for random port)&quot;, o.Gateway.Name)</span>
+<span id="L272" class="l">318:	}</span>
+<span id="L273" class="l">319:	for i, g := range o.Gateway.Gateways {</span>
+<span id="L274" class="l">320:		if g.Name == _EMPTY_ {</span>
+<span id="L275" class="l">321:			return fmt.Errorf(&quot;gateway in the list %d has no name&quot;, i)</span>
+<span id="L276" class="l">322:		}</span>
+<span id="L277" class="l">323:		if len(g.URLs) == 0 {</span>
+<span id="L278" class="l">324:			return fmt.Errorf(&quot;gateway %q has no URL&quot;, g.Name)</span>
+<span id="L279" class="l">325:		}</span>
+<span id="L280" class="l">326:	}</span>
+<span id="L281" class="l">327:	if err := validatePinnedCerts(o.Gateway.TLSPinnedCerts); err != nil {</span>
+<span id="L282" class="l">328:		return fmt.Errorf(&quot;gateway %q: %v&quot;, o.Gateway.Name, err)</span>
+<span id="L283" class="l">329:	}</span>
+<span id="L284" class="l">330:	return nil</span>
+<span id="L285" class="l">```</span>
+<span id="L286" class="l"> </span>
+<span id="L287" class="l">The name mismatch. The local server logs the first line; the **remote** is sent the second, which names all three values.</span>
+<span id="L288" class="l"> </span>
+<span id="L289" class="l">```go</span>
+<span id="L290" class="l">1084:		// Check that the gateway name we got is what we expect</span>
+<span id="L291" class="l">1085:		if info.Gateway != gwName {</span>
+<span id="L292" class="l">1086:			// Unless this is the very first INFO, it may be ok if this is</span>
+<span id="L293" class="l">1087:			// a gossip request to connect to other gateways.</span>
+<span id="L294" class="l">1088:			if !isFirstINFO &amp;&amp; info.GatewayCmd == gatewayCmdGossip {</span>
+<span id="L295" class="l">1089:				// If we are configured to reject unknown, do not attempt to</span>
+<span id="L296" class="l">1090:				// connect to one that we don&#x27;t have configured.</span>
+<span id="L297" class="l">1091:				if s.gateway.rejectUnknown() &amp;&amp; s.getRemoteGateway(info.Gateway) == nil {</span>
+<span id="L298" class="l">1092:					return</span>
+<span id="L299" class="l">1093:				}</span>
+<span id="L300" class="l">1094:				s.processImplicitGateway(info)</span>
+<span id="L301" class="l">1095:				return</span>
+<span id="L302" class="l">1096:			}</span>
+<span id="L303" class="l">1097:			// Otherwise, this is a failure...</span>
+<span id="L304" class="l">1098:			// We are reporting this error in the log...</span>
+<span id="L305" class="l">1099:			c.Errorf(&quot;Failing connection to gateway %q, remote gateway name is %q&quot;,</span>
+<span id="L306" class="l">1100:				gwName, info.Gateway)</span>
+<span id="L307" class="l">1101:			// ...and sending this back to the remote so that the error</span>
+<span id="L308" class="l">1102:			// makes more sense in the remote server&#x27;s log.</span>
+<span id="L309" class="l">1103:			c.sendErr(fmt.Sprintf(&quot;Connection from %q rejected, wanted to connect to %q, this is %q&quot;,</span>
+<span id="L310" class="l">1104:				s.getGatewayName(), gwName, info.Gateway))</span>
+<span id="L311" class="l">1105:			c.closeConnection(WrongGateway)</span>
+<span id="L312" class="l">1106:			return</span>
+<span id="L313" class="l">1107:		}</span>
+<span id="L314" class="l">```</span>
+<span id="L315" class="l"> </span>
+<span id="L316" class="l">`sendMsgToGateways` — geo-affinity as implemented: a remote queue group whose name is already in `qgroups` (served locally) is dropped from the list, and if nothing is left **and** there is no plain-subscriber interest, the gateway is skipped entirely.</span>
+<span id="L317" class="l"> </span>
+<span id="L318" class="l">```go</span>
+<span id="L319" class="l">2611:		} else {</span>
+<span id="L320" class="l">2612:			// Plain sub interest and queue sub results for this account/subject</span>
+<span id="L321" class="l">2613:			psi, qr := gwc.gatewayInterest(accName, subject)</span>
+<span id="L322" class="l">2614:			if !psi &amp;&amp; qr == nil {</span>
+<span id="L323" class="l">2615:				continue</span>
+<span id="L324" class="l">2616:			}</span>
+<span id="L325" class="l">2617:			queues = queuesa[:0]</span>
+<span id="L326" class="l">2618:			if qr != nil {</span>
+<span id="L327" class="l">2619:				for i := 0; i &lt; len(qr.qsubs); i++ {</span>
+<span id="L328" class="l">2620:					qsubs := qr.qsubs[i]</span>
+<span id="L329" class="l">2621:					if len(qsubs) &gt; 0 {</span>
+<span id="L330" class="l">2622:						queue := qsubs[0].queue</span>
+<span id="L331" class="l">2623:						if checkLeafQF {</span>
+<span id="L332" class="l">2624:							// Skip any queue that is not in the leaf&#x27;s queue filter.</span>
+<span id="L333" class="l">2625:							skip := true</span>
+<span id="L334" class="l">2626:							for _, qn := range c.pa.queues {</span>
+<span id="L335" class="l">2627:								if bytes.Equal(queue, qn) {</span>
+<span id="L336" class="l">2628:									skip = false</span>
+<span id="L337" class="l">2629:									break</span>
+<span id="L338" class="l">2630:								}</span>
+<span id="L339" class="l">2631:							}</span>
+<span id="L340" class="l">2632:							if skip {</span>
+<span id="L341" class="l">2633:								continue</span>
+<span id="L342" class="l">2634:							}</span>
+<span id="L343" class="l">2635:							// Now we still need to check that it was not delivered</span>
+<span id="L344" class="l">2636:							// locally by checking the given `qgroups`.</span>
+<span id="L345" class="l">2637:						}</span>
+<span id="L346" class="l">2638:						add := true</span>
+<span id="L347" class="l">2639:						for _, qn := range qgroups {</span>
+<span id="L348" class="l">2640:							if bytes.Equal(queue, qn) {</span>
+<span id="L349" class="l">2641:								add = false</span>
+<span id="L350" class="l">2642:								break</span>
+<span id="L351" class="l">2643:							}</span>
+<span id="L352" class="l">2644:						}</span>
+<span id="L353" class="l">2645:						if add {</span>
+<span id="L354" class="l">2646:							qgroups = append(qgroups, queue)</span>
+<span id="L355" class="l">2647:							queues = append(queues, queue...)</span>
+<span id="L356" class="l">2648:							queues = append(queues, &#x27; &#x27;)</span>
+<span id="L357" class="l">2649:						}</span>
+<span id="L358" class="l">2650:					}</span>
+<span id="L359" class="l">2651:				}</span>
+<span id="L360" class="l">2652:			}</span>
+<span id="L361" class="l">2653:			if !psi &amp;&amp; len(queues) == 0 {</span>
+<span id="L362" class="l">2654:				continue</span>
+<span id="L363" class="l">2655:			}</span>
+<span id="L364" class="l">```</span>
+<span id="L365" class="l"> </span>
+<span id="L366" class="l">## `server/client.go` — the queue names the gateway carries, and the fast-producer stall</span>
+<span id="L367" class="l"> </span>
+<span id="L368" class="l">Why the queue names are collected at all:</span>
+<span id="L369" class="l"> </span>
+<span id="L370" class="l">```go</span>
+<span id="L371" class="l">4480:	if len(r.psubs)+len(r.qsubs) &gt; 0 {</span>
+<span id="L372" class="l">4481:		flag := pmrNoFlag</span>
+<span id="L373" class="l">4482:		// If there are matching queue subs and we are in gateway mode,</span>
+<span id="L374" class="l">4483:		// we need to keep track of the queue names the messages are</span>
+<span id="L375" class="l">4484:		// delivered to. When sending to the GWs, the RMSG will include</span>
+<span id="L376" class="l">4485:		// those names so that the remote clusters do not deliver messages</span>
+<span id="L377" class="l">4486:		// to their queue subs of the same names.</span>
+<span id="L378" class="l">4487:		if len(r.qsubs) &gt; 0 &amp;&amp; c.srv.gateway.enabled &amp;&amp;</span>
+<span id="L379" class="l">4488:			atomic.LoadInt64(&amp;c.srv.gateway.totalQSubs) &gt; 0 {</span>
+<span id="L380" class="l">4489:			flag |= pmrCollectQueueNames</span>
+<span id="L381" class="l">4490:		}</span>
+<span id="L382" class="l">4491:		didDeliver, qnames = c.processMsgResults(acc, r, msg, c.pa.deliver, c.pa.subject, c.pa.reply, flag)</span>
+<span id="L383" class="l">4492:	}</span>
+<span id="L384" class="l">```</span>
+<span id="L385" class="l"> </span>
+<span id="L386" class="l">The stall constants, the stall itself, and the log line it eventually prints:</span>
+<span id="L387" class="l"> </span>
+<span id="L388" class="l">```go</span>
+<span id="L389" class="l">124:	// For stalling fast producers</span>
+<span id="L390" class="l">125:	stallClientMinDuration = 2 * time.Millisecond</span>
+<span id="L391" class="l">126:	stallClientMaxDuration = 5 * time.Millisecond</span>
+<span id="L392" class="l">127:	stallTotalAllowed      = 10 * time.Millisecond</span>
+<span id="L393" class="l">128:)</span>
+<span id="L394" class="l">```</span>
+<span id="L395" class="l"> </span>
+<span id="L396" class="l">```go</span>
+<span id="L397" class="l">3935:	// sending to is in a stalled state, go ahead and wait here</span>
+<span id="L398" class="l">3936:	// with a limit.</span>
+<span id="L399" class="l">3937:	if c.kind == CLIENT &amp;&amp; client.out.stc != nil {</span>
+<span id="L400" class="l">3938:		if srv.getOpts().NoFastProducerStall {</span>
+<span id="L401" class="l">3939:			mt.addEgressEvent(client, sub, errMsgTraceFastProdNoStall)</span>
+<span id="L402" class="l">3940:			client.mu.Unlock()</span>
+<span id="L403" class="l">3941:			return false</span>
+<span id="L404" class="l">3942:		}</span>
+<span id="L405" class="l">3943:		client.stalledWait(c)</span>
+<span id="L406" class="l">3944:	}</span>
+<span id="L407" class="l">3945:</span>
+<span id="L408" class="l">```</span>
+<span id="L409" class="l"> </span>
+<span id="L410" class="l">```go</span>
+<span id="L411" class="l">3711:func (c *client) stalledWait(producer *client) {</span>
+<span id="L412" class="l">3712:	// Check to see if we have exceeded our total wait time per readLoop invocation.</span>
+<span id="L413" class="l">3713:	if producer.in.tst &gt; stallTotalAllowed {</span>
+<span id="L414" class="l">3714:		return</span>
+<span id="L415" class="l">3715:	}</span>
+<span id="L416" class="l">3716:</span>
+<span id="L417" class="l">3717:	// Grab stall channel which the slow consumer will close when caught up.</span>
+<span id="L418" class="l">3718:	stall := c.out.stc</span>
+<span id="L419" class="l">3719:</span>
+<span id="L420" class="l">3720:	// Calculate stall time.</span>
+<span id="L421" class="l">3721:	ttl := stallClientMinDuration</span>
+<span id="L422" class="l">3722:	if c.out.pb &gt;= c.out.mp {</span>
+<span id="L423" class="l">3723:		ttl = stallClientMaxDuration</span>
+<span id="L424" class="l">3724:	}</span>
+<span id="L425" class="l">3725:</span>
+<span id="L426" class="l">3726:	c.mu.Unlock()</span>
+<span id="L427" class="l">3727:	defer c.mu.Lock()</span>
+<span id="L428" class="l">3728:</span>
+<span id="L429" class="l">3729:	// Track per client and total client stalls.</span>
+<span id="L430" class="l">3730:	atomic.AddInt64(&amp;c.stalls, 1)</span>
+<span id="L431" class="l">3731:	if c.srv != nil {</span>
+<span id="L432" class="l">3732:		atomic.AddInt64(&amp;c.srv.stalls, 1)</span>
+<span id="L433" class="l">3733:	}</span>
+<span id="L434" class="l">3734:</span>
+<span id="L435" class="l">3735:	// Now check if we are close to total allowed.</span>
+<span id="L436" class="l">3736:	if producer.in.tst+ttl &gt; stallTotalAllowed {</span>
+<span id="L437" class="l">3737:		ttl = stallTotalAllowed - producer.in.tst</span>
+<span id="L438" class="l">3738:	}</span>
+<span id="L439" class="l">3739:	delay := time.NewTimer(ttl)</span>
+<span id="L440" class="l">3740:	defer delay.Stop()</span>
+<span id="L441" class="l">```</span>
+<span id="L442" class="l"> </span>
+<span id="L443" class="l">```go</span>
+<span id="L444" class="l">1449:</span>
+<span id="L445" class="l">1450:func (c *client) resetReadLoopStallTime() {</span>
+<span id="L446" class="l">1451:	if c.in.tst &gt;= stallClientMaxDuration {</span>
+<span id="L447" class="l">1452:		c.rateLimitFormatWarnf(&quot;Producer was stalled for a total of %v&quot;, c.in.tst.Round(time.Millisecond))</span>
+<span id="L448" class="l">1453:	}</span>
+<span id="L449" class="l">1454:	c.in.tst = 0</span>
+<span id="L450" class="l">1455:}</span>
+<span id="L451" class="l">```</span>
+<span id="L452" class="l"> </span>
+<span id="L453" class="l">## `server/monitor.go` — the two stall counters, neither of which the docs name</span>
+<span id="L454" class="l"> </span>
+<span id="L455" class="l">```go</span>
+<span id="L456" class="l">133:	Stalls         int64          `json:&quot;stalls,omitempty&quot;`</span>
+<span id="L457" class="l">597:	ci.Stalls = atomic.LoadInt64(&amp;client.stalls)</span>
+<span id="L458" class="l">1279:	StalledClients        int64                  `json:&quot;stalled_clients&quot;`                   // StalledClients is the total number of times that clients have been stalled.</span>
+<span id="L459" class="l">1909:	v.StalledClients = atomic.LoadInt64(&amp;s.stalls)</span>
+<span id="L460" class="l">```</span>
+<span id="L461" class="l"> </span>
+<span id="L462" class="l">## `server/opts.go` — what a leafnode user may carry, and the only place 7422 is used</span>
+<span id="L463" class="l"> </span>
+<span id="L464" class="l">`parseLeafUsers` — &quot;a trimmed down version of parseUsers&quot;: **four** fields, and `permissions` is not one of them.</span>
+<span id="L465" class="l"> </span>
+<span id="L466" class="l">```go</span>
+<span id="L467" class="l">3005:// This is a trimmed down version of parseUsers that is adapted</span>
+<span id="L468" class="l">3006:// for the users possibly defined in the authorization{} section</span>
+<span id="L469" class="l">3007:// of leafnodes {}.</span>
+<span id="L470" class="l">3008:func parseLeafUsers(mv any, errors *[]error) ([]*User, error) {</span>
+<span id="L471" class="l">3009:	var (</span>
+<span id="L472" class="l">3010:		tk    token</span>
+<span id="L473" class="l">3011:		lt    token</span>
+<span id="L474" class="l">3012:		users = []*User{}</span>
+<span id="L475" class="l">3013:	)</span>
+<span id="L476" class="l">3014:	defer convertPanicToErrorList(&amp;lt, errors)</span>
+<span id="L477" class="l">3015:</span>
+<span id="L478" class="l">3016:	tk, mv = unwrapValue(mv, &amp;lt)</span>
+<span id="L479" class="l">3017:	// Make sure we have an array</span>
+<span id="L480" class="l">3018:	uv, ok := mv.([]any)</span>
+<span id="L481" class="l">3019:	if !ok {</span>
+<span id="L482" class="l">3020:		return nil, &amp;configErr{tk, fmt.Sprintf(&quot;Expected users field to be an array, got %v&quot;, mv)}</span>
+<span id="L483" class="l">3021:	}</span>
+<span id="L484" class="l">3022:	for _, u := range uv {</span>
+<span id="L485" class="l">3023:		tk, u = unwrapValue(u, &amp;lt)</span>
+<span id="L486" class="l">3024:		// Check its a map/struct</span>
+<span id="L487" class="l">3025:		um, ok := u.(map[string]any)</span>
+<span id="L488" class="l">3026:		if !ok {</span>
+<span id="L489" class="l">3027:			err := &amp;configErr{tk, fmt.Sprintf(&quot;Expected user entry to be a map/struct, got %v&quot;, u)}</span>
+<span id="L490" class="l">3028:			*errors = append(*errors, err)</span>
+<span id="L491" class="l">3029:			continue</span>
+<span id="L492" class="l">3030:		}</span>
+<span id="L493" class="l">3031:		user := &amp;User{}</span>
+<span id="L494" class="l">3032:		for k, v := range um {</span>
+<span id="L495" class="l">3033:			tk, v = unwrapValue(v, &amp;lt)</span>
+<span id="L496" class="l">3034:			switch strings.ToLower(k) {</span>
+<span id="L497" class="l">3035:			case &quot;user&quot;, &quot;username&quot;:</span>
+<span id="L498" class="l">3036:				user.Username = v.(string)</span>
+<span id="L499" class="l">3037:			case &quot;pass&quot;, &quot;password&quot;:</span>
+<span id="L500" class="l">3038:				user.Password = v.(string)</span>
+<span id="L501" class="l">3039:			case &quot;account&quot;:</span>
+<span id="L502" class="l">3040:				// We really want to save just the account name here, but</span>
+<span id="L503" class="l">3041:				// the User object is *Account. So we create an account object</span>
+<span id="L504" class="l">3042:				// but it won&#x27;t be registered anywhere. The server will just</span>
+<span id="L505" class="l">3043:				// use opts.LeafNode.Users[].Account.Name. Alternatively</span>
+<span id="L506" class="l">3044:				// we need to create internal objects to store u/p and account</span>
+<span id="L507" class="l">3045:				// name and have a server structure to hold that.</span>
+<span id="L508" class="l">3046:				user.Account = NewAccount(v.(string))</span>
+<span id="L509" class="l">3047:			case &quot;proxy_required&quot;:</span>
+<span id="L510" class="l">3048:				user.ProxyRequired = v.(bool)</span>
+<span id="L511" class="l">3049:			default:</span>
+<span id="L512" class="l">3050:				if !tk.IsUsedVariable() {</span>
+<span id="L513" class="l">3051:					err := &amp;unknownConfigFieldErr{</span>
+<span id="L514" class="l">3052:						field: k,</span>
+<span id="L515" class="l">3053:						configErr: configErr{</span>
+<span id="L516" class="l">3054:							token: tk,</span>
+<span id="L517" class="l">3055:						},</span>
+<span id="L518" class="l">3056:					}</span>
+<span id="L519" class="l">3057:					*errors = append(*errors, err)</span>
+<span id="L520" class="l">3058:					continue</span>
+<span id="L521" class="l">3059:				}</span>
+<span id="L522" class="l">3060:			}</span>
+<span id="L523" class="l">3061:		}</span>
+<span id="L524" class="l">3062:		users = append(users, user)</span>
+<span id="L525" class="l">3063:	}</span>
+<span id="L526" class="l">3064:	return users, nil</span>
+<span id="L527" class="l">```</span>
+<span id="L528" class="l"> </span>
+<span id="L529" class="l">`DEFAULT_LEAFNODE_PORT` is used **once**, to fill in a missing port on a remote&#x27;s URL — never to open a listener:</span>
+<span id="L530" class="l"> </span>
+<span id="L531" class="l">```go</span>
+<span id="L532" class="l">6091:	// Set baseline connect port for remotes.</span>
+<span id="L533" class="l">6092:	for _, r := range opts.LeafNode.Remotes {</span>
+<span id="L534" class="l">6093:		if r != nil {</span>
+<span id="L535" class="l">6094:			for _, u := range r.URLs {</span>
+<span id="L536" class="l">6095:				if u.Port() == _EMPTY_ {</span>
+<span id="L537" class="l">6096:					u.Host = net.JoinHostPort(u.Host, strconv.Itoa(DEFAULT_LEAFNODE_PORT))</span>
+<span id="L538" class="l">6097:				}</span>
+<span id="L539" class="l">6098:			}</span>
+<span id="L540" class="l">```</span>
+<span id="L541" class="l"> </span>
+<span id="L542" class="l">The host defaults that *are* applied, and only when a port is already set:</span>
+<span id="L543" class="l"> </span>
+<span id="L544" class="l">```go</span>
+<span id="L545" class="l">6072:	if opts.LeafNode.Port != 0 {</span>
+<span id="L546" class="l">6073:		if opts.LeafNode.Host == _EMPTY_ {</span>
+<span id="L547" class="l">6074:			opts.LeafNode.Host = DEFAULT_HOST</span>
+<span id="L548" class="l">6075:		}</span>
+<span id="L549" class="l">6076:		if opts.LeafNode.TLSTimeout == 0 {</span>
+<span id="L550" class="l">6077:			opts.LeafNode.TLSTimeout = float64(TLS_TIMEOUT) / float64(time.Second)</span>
+<span id="L551" class="l">6078:		}</span>
+<span id="L552" class="l">```</span>
+<span id="L553" class="l"> </span>
+<span id="L554" class="l">```go</span>
+<span id="L555" class="l">6140:	if opts.Gateway.Port != 0 {</span>
+<span id="L556" class="l">6141:		if opts.Gateway.Host == _EMPTY_ {</span>
+<span id="L557" class="l">6142:			opts.Gateway.Host = DEFAULT_HOST</span>
+<span id="L558" class="l">6143:		}</span>
+<span id="L559" class="l">6144:		if opts.Gateway.TLSTimeout == 0 {</span>
+<span id="L560" class="l">6145:			opts.Gateway.TLSTimeout = float64(TLS_TIMEOUT) / float64(time.Second)</span>
+<span id="L561" class="l">6146:		}</span>
+<span id="L562" class="l">```</span>
+<span id="L563" class="l"> </span>
+<span id="L564" class="l">## `server/const.go` — the leafnode constants</span>
+<span id="L565" class="l"> </span>
+<span id="L566" class="l">```go</span>
+<span id="L567" class="l">160:</span>
+<span id="L568" class="l">161:	// DEFAULT_LEAF_NODE_RECONNECT LeafNode reconnect interval.</span>
+<span id="L569" class="l">162:	DEFAULT_LEAF_NODE_RECONNECT = time.Second</span>
+<span id="L570" class="l">163:</span>
+<span id="L571" class="l">164:	// DEFAULT_LEAF_TLS_TIMEOUT TLS timeout for LeafNodes</span>
+<span id="L572" class="l">165:	DEFAULT_LEAF_TLS_TIMEOUT = 2 * time.Second</span>
+<span id="L573" class="l">166:</span>
+<span id="L574" class="l">167:	// PROTO_SNIPPET_SIZE is the default size of proto to print on parse errors.</span>
+<span id="L575" class="l">202:	// DEFAULT_LEAFNODE_INFO_WAIT Route dial timeout.</span>
+<span id="L576" class="l">203:	DEFAULT_LEAFNODE_INFO_WAIT = 1 * time.Second</span>
+<span id="L577" class="l">204:</span>
+<span id="L578" class="l">205:	// DEFAULT_LEAFNODE_PORT is the default port for remote leafnode connections.</span>
+<span id="L579" class="l">206:	DEFAULT_LEAFNODE_PORT = 7422</span>
+<span id="L580" class="l">207:</span>
+<span id="L581" class="l">```</span>
+<span id="L582" class="l"> </span>
+<span id="L583" class="l">## Observed on nats-server v2.14.5</span>
+<span id="L584" class="l"> </span>
+<span id="L585" class="l">**1 · The docs&#x27; composed topology config does not start.** `learn/topologies/putting-it-together.md`</span>
+<span id="L586" class="l">prints an `n1-east.conf` with `cluster {}`, `gateway {}`, `leafnodes { listen }` and `jetstream {}`,</span>
+<span id="L587" class="l">and no `system_account`. Typed verbatim:</span>
+<span id="L588" class="l"> </span>
+<span id="L589" class="l">```</span>
+<span id="L590" class="l">$ nats-server -c n1-east.conf -t</span>
+<span id="L591" class="l">nats-server: configuration file n1-east.conf is valid (sha256:ddbe986aa9531262de2a5a88b79818e203cd2ae564edda74fdb1c1e9dd7c4431)</span>
+<span id="L592" class="l">$ nats-server -c n1-east.conf</span>
+<span id="L593" class="l">nats-server: leaf nodes and gateways (both being defined) require a system account to also be configured</span>
+<span id="L594" class="l">```</span>
+<span id="L595" class="l"> </span>
+<span id="L596" class="l">**2 · `-t` checks syntax, not options.** Every `validateOptions` failure passes the dry run:</span>
+<span id="L597" class="l"> </span>
+<span id="L598" class="l">```</span>
+<span id="L599" class="l">$ cat ld.conf</span>
+<span id="L600" class="l">listen: 127.0.0.1:4222</span>
+<span id="L601" class="l">lame_duck_duration: &quot;30s&quot;</span>
+<span id="L602" class="l">lame_duck_grace_period: &quot;60s&quot;</span>
+<span id="L603" class="l">$ nats-server -c ld.conf -t</span>
+<span id="L604" class="l">nats-server: configuration file ld.conf is valid (sha256:bcaec…)</span>
+<span id="L605" class="l">$ nats-server -c ld.conf</span>
+<span id="L606" class="l">nats-server: lame duck grace period (1m0s) should be strictly lower than lame duck duration (30s)</span>
+<span id="L607" class="l">```</span>
+<span id="L608" class="l"> </span>
+<span id="L609" class="l">**3 · `gateway.port` has no default.**</span>
+<span id="L610" class="l"> </span>
+<span id="L611" class="l">```</span>
+<span id="L612" class="l">$ cat gw.conf</span>
+<span id="L613" class="l">listen: 127.0.0.1:4222</span>
+<span id="L614" class="l">gateway {</span>
+<span id="L615" class="l">  name: east</span>
+<span id="L616" class="l">  gateways: [ { name: west, urls: [&quot;nats://127.0.0.1:7322&quot;] } ]</span>
+<span id="L617" class="l">}</span>
+<span id="L618" class="l">$ nats-server -c gw.conf -t</span>
+<span id="L619" class="l">nats-server: configuration file gw.conf is valid (sha256:4d532…)</span>
+<span id="L620" class="l">$ nats-server -c gw.conf</span>
+<span id="L621" class="l">nats-server: gateway &quot;east&quot; has no port specified (select -1 for random port)</span>
+<span id="L622" class="l">```</span>
+<span id="L623" class="l"> </span>
+<span id="L624" class="l">**4 · `leafnodes.port` has no default either — the block just does nothing.**</span>
+<span id="L625" class="l"> </span>
+<span id="L626" class="l">```</span>
+<span id="L627" class="l">$ cat lf.conf</span>
+<span id="L628" class="l">listen: 127.0.0.1:4222</span>
+<span id="L629" class="l">leafnodes { }</span>
+<span id="L630" class="l">$ nats-server -c lf.conf</span>
+<span id="L631" class="l">[INF] Listening for client connections on 127.0.0.1:4222</span>
+<span id="L632" class="l">$ lsof -nP -iTCP -sTCP:LISTEN -a -p &lt;pid&gt;</span>
+<span id="L633" class="l">nats-serv 30905 m64 6u IPv4 … TCP 127.0.0.1:4222 (LISTEN)</span>
+<span id="L634" class="l">```</span>
+<span id="L635" class="l"> </span>
+<span id="L636" class="l">Only 4222. No 7422. The same holds for `cluster { name: east }` with no port: no 6222 listener.</span>
+<span id="L637" class="l"> </span>
+<span id="L638" class="l">**5 · gh#5941&#x27;s follow-up reproduces exactly.** A hub with the leaf user&#x27;s permissions in the</span>
+<span id="L639" class="l">**global** `authorization {}` block, and the leaf user itself declared in `leafnodes.authorization`:</span>
+<span id="L640" class="l"> </span>
+<span id="L641" class="l">```</span>
+<span id="L642" class="l"># hub.conf</span>
+<span id="L643" class="l">leafnodes {</span>
+<span id="L644" class="l">  listen: 127.0.0.1:7422</span>
+<span id="L645" class="l">  authorization { user: &quot;leafuser&quot;, password: &quot;test&quot; }</span>
+<span id="L646" class="l">}</span>
+<span id="L647" class="l">authorization {</span>
+<span id="L648" class="l">  users = [</span>
+<span id="L649" class="l">    { user: default_user, permissions: { publish: &quot;&gt;&quot;, subscribe: &quot;&gt;&quot; } }</span>
+<span id="L650" class="l">    { user: leafuser, password: &quot;test&quot;, permissions: { publish: { deny: &quot;&gt;&quot; }, subscribe: { allow: &quot;&gt;&quot; } } }</span>
+<span id="L651" class="l">  ]</span>
+<span id="L652" class="l">}</span>
+<span id="L653" class="l">no_auth_user: default_user</span>
+<span id="L654" class="l">```</span>
+<span id="L655" class="l"> </span>
+<span id="L656" class="l">```</span>
+<span id="L657" class="l">$ nats pub cli.demo &quot;hello from leaf node&quot; --server nats://127.0.0.1:4300</span>
+<span id="L658" class="l">Published 20 bytes to &quot;cli.demo&quot;</span>
+<span id="L659" class="l">$ nats sub cli.demo --server nats://127.0.0.1:4222</span>
+<span id="L660" class="l">[#1] Received on &quot;cli.demo&quot;</span>
+<span id="L661" class="l">hello from leaf node</span>
+<span id="L662" class="l">```</span>
+<span id="L663" class="l"> </span>
+<span id="L664" class="l">The `publish: { deny: &quot;&gt;&quot; }` is not applied: that entry governs *client* connections. Moving the</span>
+<span id="L665" class="l">permissions into `leafnodes.authorization` does not work either — the config is rejected at parse</span>
+<span id="L666" class="l">time, which is `parseLeafUsers` above:</span>
+<span id="L667" class="l"> </span>
+<span id="L668" class="l">```</span>
+<span id="L669" class="l">nats-server: hub2.conf:8:9: unknown field &quot;permissions&quot;</span>
+<span id="L670" class="l">```</span>
+<span id="L671" class="l"> </span></pre>
+<footer class="pf"><div class="pn"><a href="../../raw/nats-server-src/topology-observed-v2.14.6.md.html">← topology-observed-v2.14.6.md</a></div></footer></article></main>
+  <aside class="rail"><section class="bl"><h4>Summaries</h4><ul><li><a class="wl t-summary " href="../../wiki/s-nats-server-topology.html">nats-server v2.14.6 — gateways, leafnodes and the checks that run before startup</a></li></ul></section></aside>
+</div>
+<div id="search" class="overlay" hidden>
+  <div class="sbox">
+    <div class="srow">
+      <input id="q" type="search" placeholder="search pages, cheat sheets, questions, ADRs…" autocomplete="off" spellcheck="false">
+      <label class="qopt" title="also search the full text of every raw source (loads ~9 MB once)"><input type="checkbox" id="qraw"> raw sources</label>
+      <button id="qclose" type="button" title="close">esc</button>
+    </div>
+    <div id="qhelp" class="qhelp">filters: <code>type:concept</code> <code>type:internals</code> <code>type:operation</code> <code>type:gotcha</code> <code>type:reference</code> <code>type:entity</code> <code>type:summary</code> <code>type:q</code> <code>type:adr</code> <code>type:docs</code> <code>type:srv</code> <code>type:cfg</code> <code>type:def</code> · <code>kind:runbook</code> <code>kind:sizing</code> <code>kind:pattern</code> … · <code>area:core</code> <code>area:jetstream</code> <code>area:kv</code> · <code>since:2.10</code> <code>since:2.11</code> <code>since:2.12</code> · <code>tag:…</code> · config keys, subjects and flags search as typed (<code>max_ack_pending</code>, <code>$JS.API.STREAM.INFO</code>, <code>--replicas</code>) · <kbd>↑</kbd><kbd>↓</kbd> <kbd>enter</kbd></div>
+    <div id="qres" class="qres"></div>
+  </div>
+</div>
+<footer class="foot">built 2026-09-01 · 276 pages · 3830 links · 3 wanted · plain Markdown + [[wikilinks]] rendered by <code>tools/build-site.py</code></footer>
+<script src="../../graph-data.js" defer></script>
+<script src="../../assets/graph.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>
