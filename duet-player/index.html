@@ -24,7 +24,10 @@
   header { background: var(--header); border-bottom: 1px solid var(--sep); padding: 0.3em 0.75em; display: flex; gap: 1.1em; align-items: baseline; flex-wrap: wrap; }
   header .mark { color: var(--pink); font-weight: bold; letter-spacing: 0.15em; }
   header .ver { color: var(--dim); }
-  header .badge { color: var(--sidhdr); margin-left: auto; }
+  header .badge { color: var(--sidhdr); }
+  /* the VIEW switch rides the top row beside the song's type, so the
+     transport line stays ONE line however wide the window is (m64, s138) */
+  header #b-view { margin-left: auto; padding: 0; }
   header .title { color: var(--bright); }
   header .author { color: var(--dim); }
   #hud { display: flex; gap: 1.4em; padding: 0.25em 0.75em; border-bottom: 1px solid var(--sep); color: var(--dim); flex-wrap: wrap; }
@@ -38,6 +41,57 @@
   input[type=range] { width: 7em; accent-color: var(--accent); }
   label { color: var(--dim); }
   #strip { display: block; width: 100%; height: 23em; }
+  #grid { display: none; width: 100%; height: 23em; }
+  body.grid #strip { display: none; } body.grid #grid { display: block; }
+  /* THE FILES PANEL (XXIII.a): the folder is the unit — one list over the gallery and
+     the folder you picked. It stands where the strip does; picking a song hands the
+     space back to the strip, and [FILES] brings it out again. */
+  #panel { display: none; flex-direction: column; height: 23em; }
+  body.panel #panel { display: flex; } body.panel #strip, body.panel #grid { display: none; }
+  #panel-head { display: flex; gap: 1em; align-items: baseline; padding: 0.25em 0.75em; border-bottom: 1px solid var(--sep); color: var(--dim); }
+  #panel-head input { background: var(--bg); color: var(--bright); border: 1px solid var(--sep); font: inherit; width: 14em; padding: 0 0.3em; }
+  #panel-head .hint { margin-left: auto; }
+  #panel-list { flex: 1; overflow-y: auto; overflow-x: hidden; }
+  #panel-list .group { color: var(--sidhdr); padding: 0.4em 0.75em 0.1em; position: sticky; top: 0; background: var(--bg); }
+  #panel-list .group .n, #panel-list .group .src { color: var(--dim); }
+  #panel-list .row { display: flex; gap: 0.7em; padding: 0.02em 0.75em; cursor: pointer; white-space: nowrap; scroll-margin-top: 1.7em; } /* the group header is sticky: leave it room */
+  #panel-list .row:hover { background: var(--rowbeatbg); }
+  #panel-list .row.sel { background: var(--playhead); }
+  #panel-list .row.on .name { color: var(--sidhdr); }
+  #panel-list .kind { width: 4.5em; color: var(--accent); }
+  #panel-list .kind.sw { color: var(--sidhdr); } #panel-list .kind.project { color: var(--fxduet); }
+  #panel-list .name { width: 17em; color: var(--bright); overflow: hidden; text-overflow: ellipsis; }
+  #panel-list .title { flex: 1 1 12em; overflow: hidden; text-overflow: ellipsis; }
+  #panel-list .by { width: 15em; color: var(--dim); overflow: hidden; text-overflow: ellipsis; }
+  #panel-list .meta { width: 11em; color: var(--dim); text-align: right; overflow: hidden; }
+  #panel-list .meta.bad { color: var(--mute); }
+  #panel-list .note { padding: 0.5em 0.75em; color: var(--dim); }
+  /* THE HELP (XXIII.j): the tracker's own help box, in a page — a rounded frame with
+     its title sitting ON the top border, a topic strip you page through with ←/→,
+     a scrolling body, and the closing hint on the bottom border. */
+  body.help::after { /* the page dims behind the box, the way a popup covers the grid in the tracker */
+    content: ''; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9; }
+  #help { position: fixed; inset: 2.2em 2.5em 1.8em; z-index: 10; display: none; flex-direction: column;
+          background: var(--bg); border: 1px solid var(--sep); border-radius: 0.5em; box-shadow: 0 0 4em 1em rgba(0,0,0,0.9); }
+  body.help #help { display: flex; }
+  #help .ftitle { position: absolute; top: -0.8em; left: 2em; background: var(--bg); padding: 0 0.6em; color: var(--sidhdr); }
+  #help .fhint { position: absolute; bottom: -0.8em; right: 2em; background: var(--bg); padding: 0 0.6em; color: var(--dim); }
+  #help .tabs { display: flex; gap: 0.9em; flex-wrap: wrap; padding: 0.6em 1.6em 0.4em; color: var(--dim); border-bottom: 1px solid var(--sep); }
+  #help .tabs span { cursor: pointer; } #help .tabs span.on { color: var(--sidhdr); }
+  #help .tabs .arrow { color: var(--sep); cursor: default; }
+  #help .body { flex: 1; overflow-y: auto; padding: 0.6em 1.6em 1.2em; scrollbar-color: var(--sep) transparent; }
+  #help .body::-webkit-scrollbar { width: 0.55em; }
+  #help .body::-webkit-scrollbar-thumb { background: var(--sep); }
+  #help section { display: none; } #help section.on { display: block; }
+  #help h3 { color: var(--hot); font-size: 1em; font-weight: normal; margin: 1.1em 0 0.35em; letter-spacing: 0.08em; }
+  #help h3:first-child { margin-top: 0.2em; }
+  #help p { margin: 0.35em 0; max-width: 68em; }
+  #help b { color: var(--bright); font-weight: normal; }
+  #help em { color: var(--sidhdr); font-style: normal; }
+  #help .r { display: flex; gap: 1em; align-items: baseline; padding: 0.02em 0; }
+  #help .r .k { flex: 0 0 15em; color: var(--accent); }
+  #help .r .d { flex: 1; max-width: 56em; }
+  #help .note { color: var(--dim); }
   #vizbox { position: relative; border-top: 1px solid var(--sep); }
   #viz { display: block; width: 100%; height: 18.5em; image-rendering: pixelated; background: #000; }
   #vizbox::after { /* the scanlines the terminal build draws with half-blocks */
@@ -49,9 +103,10 @@
   footer { margin-top: auto; padding: 0.3em 0.75em; border-top: 1px solid var(--sep); color: var(--dim); display: flex; gap: 1.2em; flex-wrap: wrap; }
   #status { color: var(--text); flex: 1 1 100%; min-height: 1.4em; }
   #status.bad { color: var(--mute); }
-  body.dragging::before { content: 'DROP TO OPEN — .it  .swm .sws .swt .swq  .zon (with its song files)'; position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  body.dragging::before { content: 'DROP TO OPEN — a song (.it  .swm .sws .swt .swq), a project (.zon) with its song files, or a whole folder'; position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
     background: rgba(3,10,26,0.9); color: var(--hot); font-size: 1.4em; z-index: 9; border: 2px dashed var(--accent); }
   #selftest { color: var(--dim); white-space: pre; }
+  footer .build { color: var(--off); }
   .hidden { display: none; }
 </style>
 </head>
@@ -59,6 +114,7 @@
 <header>
   <span class="mark">DUET</span><span class="ver" id="version">web player</span>
   <span class="title" id="title">no song</span><span class="author" id="author"></span>
+  <button id="b-view" title="the note strip, or the pattern grid — click it, or press V">VIEW STRIP</button>
   <span class="badge" id="badge">[ — ]</span>
 </header>
 <div id="hud">
@@ -78,20 +134,297 @@
   <button id="b-quality" title="reSID's sampling">interpolate</button>
   <label>vol</label><input type="range" id="vol" min="0" max="100" value="80">
   <label for="files">·</label><button id="b-open">OPEN FILES…</button><input type="file" id="files" multiple class="hidden">
-  <select id="gallery"><option value="">— the gallery —</option></select>
+  <button id="b-folder" title="a whole folder — a project opens with its song files (F)">OPEN FOLDER…</button>
+  <input type="file" id="folder" webkitdirectory class="hidden">
+  <button id="b-files" title="the gallery and your folder (F)">FILES</button>
+  <button id="b-help" title="what everything here does (? or F1)">HELP</button>
 </div>
+<section id="panel">
+  <div id="panel-head">
+    <span id="panel-count">the gallery</span>
+    <input id="panel-filter" type="text" placeholder="type to filter" spellcheck="false" autocomplete="off">
+    <span class="hint">↑↓ pick · Enter play · Esc close</span>
+  </div>
+  <div id="panel-list"></div>
+</section>
 <canvas id="strip"></canvas>
+<canvas id="grid"></canvas>
 <div id="modes">
   <span data-viz="vu">VU BARS</span><span data-viz="spectrum">SPECTRUM</span><span data-viz="scope" class="on">SCOPE</span>
   <span data-viz="plasma">PLASMA</span><span data-viz="copper">COPPER</span>
-  <span class="hint">←/→ mode · ↑/↓ bar style · click a column header to mute it</span>
+  <span class="hint">←/→ mode · ↑/↓ bar style · V strip / grid · click a column header to mute it · <b>? help</b></span>
 </div>
 <div id="vizbox"><canvas id="viz" width="320" height="120"></canvas></div>
+<div id="help">
+  <span class="ftitle">HELP: the DUET web player</span>
+  <div class="tabs" id="help-tabs"></div>
+  <div class="body" id="help-body">
+
+    <section data-title="THE PLAYER">
+      <h3>WHAT THIS IS</h3>
+      <p>The DUET engine, in your browser. DUET is an Impulse Tracker–compatible
+        tracker whose SID channels are real 6581/8580 chips (reSID), and this page
+        is that same engine — <b>libduet</b>, compiled to WebAssembly — with a player
+        built around it. Whatever the tracker plays, this plays: Impulse Tracker
+        modules, SID-Wizard modules, and DUET's own projects.</p>
+      <h3>NOTHING YOU OPEN IS UPLOADED</h3>
+      <p>There is no server here. The page loads one WebAssembly module and reads
+        your files <b>inside the browser</b> — a song you drop never leaves your
+        computer, and closing the tab is all it takes to be rid of it.</p>
+      <h3>THE ENGINE RUNS ON THE AUDIO THREAD</h3>
+      <p>The module lives in an <em>AudioWorklet</em>: it renders every 128-frame
+        block the sound card asks for, so what you hear is the same bytes
+        <span class="note">duet --render</span> would write to a file. The note
+        rows you see are stamped in the audio clock too — a row appears the moment
+        it is <b>heard</b>, not the moment it was computed.</p>
+      <h3>THE LINE AT THE TOP</h3>
+      <p>The header says which build is running and how big it is
+        (<span class="note">libduet 0.1.0-alpha · ReleaseSmall 2.3 MB</span>),
+        then the song's own title and author. On the right, what kind of song it
+        is: <em>[IT]</em> an Impulse Tracker module, <em>[SWM]</em> a SID-Wizard
+        module, <em>[DUET]</em> a project, <em>[CO]</em> a co-play — an .it and a
+        SID-Wizard module running on one clock.</p>
+    </section>
+
+    <section data-title="YOUR FILES">
+      <h3>DRAG AND DROP — THE SHORT WAY</h3>
+      <p>Drop a song <b>anywhere on this page</b> and it plays. One file, several
+        files, or a whole <b>folder</b> — the page walks a dropped folder itself,
+        keeps every song it finds, and opens the first one.</p>
+      <p>A DUET project (<b>.zon</b>) is not one file: it names the song file it
+        plays. Drop the project <b>together with</b> its <span class="note">.it</span>
+        / <span class="note">.swm</span>, or simply drop the folder they both live
+        in, and they arrive together.</p>
+      <h3>THE THREE BUTTONS</h3>
+      <div class="r"><span class="k">[OPEN FILES…]</span><span class="d">Pick one file, or several at once — a project and its song file in the same pick.</span></div>
+      <div class="r"><span class="k">[OPEN FOLDER…]</span><span class="d">Pick a whole folder. Every song in it is listed; a folder holding just one song plays it straight away. In Chrome and Edge the folder is <b>remembered</b> — next visit it is one click away, and the browser asks your permission once. Firefox and Safari have no such handle, so pick it again each visit.</span></div>
+      <div class="r"><span class="k">[FILES] &nbsp;or&nbsp; F</span><span class="d">The list: your folder at the top, then the gallery. <b>↑ ↓</b> move, <b>Enter</b> plays, <b>Esc</b> closes, and typing filters. It is also what the page shows when nothing is loaded.</span></div>
+      <h3>WHAT A ROW TELLS YOU</h3>
+      <p>The kind of file, its name, what it calls <b>itself</b> (read out of the
+        song's own header), who made it, and — for a project — whether the song
+        files it names were found. If they were not, the row says which is missing
+        in red, and so does the status line when you try to open it.</p>
+      <h3>THE GALLERY</h3>
+      <p>Ninety songs ship with the page: DUET's own demos, every SID-Wizard
+        example module, and Impulse Tracker modules by other musicians. Every one
+        of them carries its author, its licence and where it came from — see
+        <em>ABOUT</em>, or <a href="songs/MANIFEST.md">songs/MANIFEST.md</a>.</p>
+      <h3>A LINK STRAIGHT TO A SONG</h3>
+      <p><span class="note">?song=swm/congabeat.swm</span> on the page's address
+        opens that gallery song at once — any file under
+        <span class="note">songs/</span> works, and a project fetches its song
+        files beside it.</p>
+    </section>
+
+    <section data-title="THE CONTROLS">
+      <h3>THE TRANSPORT</h3>
+      <div class="r"><span class="k">▶ PLAY &nbsp;(Enter)</span><span class="d">Play from the top of the song.</span></div>
+      <div class="r"><span class="k">‖ PAUSE &nbsp;(Space)</span><span class="d">Freeze where it stands — silent, and nothing moves; the time halts with it. Press it again to carry on from exactly there. After a STOP it carries on from where you stopped.</span></div>
+      <div class="r"><span class="k">■ STOP &nbsp;(Esc)</span><span class="d">Silence, and the time back to 0:00. Every voice goes, and so does the mixer: a reverb or delay send is emptied with them, so nothing rings on. The position is kept — PAUSE carries on from where you stopped.</span></div>
+      <div class="r"><span class="k">⏮ REWIND</span><span class="d">Stop, and go back to the top of the song.</span></div>
+      <div class="r"><span class="k">LOOP ∞ / once &nbsp;(L)</span><span class="d">Play forever, or play once and stop at the end. The status line says when a song ends.</span></div>
+      <h3>THE SONG</h3>
+      <div class="r"><span class="k">subtune ‹ 1/3 ›</span><span class="d">A SID-Wizard module can hold several tunes in one file. Greyed out when there is only one.</span></div>
+      <h3>THE CHIPS</h3>
+      <div class="r"><span class="k">6581 / 8580</span><span class="d">The SID model, for every chip in the song. The 6581 is the old one — fatter, with the famous unpredictable filter; the 8580 is cleaner. It changes under your fingers, while the song plays.</span></div>
+      <div class="r"><span class="k">fast / interpolate / resample</span><span class="d">How reSID samples the chip. <b>fast</b> is cheapest, <b>interpolate</b> is the default and sounds right for almost everything, <b>resample</b> is the most accurate and the most expensive — watch <em>render</em> in the line above when you turn it on.</span></div>
+      <h3>THE PAGE</h3>
+      <div class="r"><span class="k">vol</span><span class="d">This page's own output level. It is not the song's volume and it changes nothing about the render — the numbers and the meters are the same wherever you put it.</span></div>
+      <div class="r"><span class="k">VIEW STRIP / GRID &nbsp;(V)</span><span class="d">On the top row, beside the song's type: which view the song plays in — the note strip, or the pattern grid. Click it or press <b>V</b>. Both are drawn from the same events at the same instant, so switching never loses your place.</span></div>
+      <div class="r"><span class="k">[FILES] &nbsp;[HELP]</span><span class="d">The file list, and this.</span></div>
+    </section>
+
+    <section data-title="WHAT YOU SEE">
+      <h3>THE NUMBERS</h3>
+      <div class="r"><span class="k">order · pattern · row</span><span class="d">Where the song is, in <b>hex</b>, exactly as the tracker shows it: which entry of the order list, which pattern that entry names, and which row inside it.</span></div>
+      <div class="r"><span class="k">speed · tempo</span><span class="d">Ticks per row, and beats per minute — the two knobs every tracker has.</span></div>
+      <div class="r"><span class="k">time</span><span class="d">How long this song has been playing. PAUSE halts it; PLAY, STOP and REWIND put it back to 0:00. It is not the engine's render clock, which keeps counting through a stop because the note events are stamped in it.</span></div>
+      <div class="r"><span class="k">chips</span><span class="d">How many SID chips the song asks for: 0 for a plain Impulse Tracker module, 1 to 4 otherwise.</span></div>
+      <div class="r"><span class="k">render</span><span class="d">How much of the audio budget the engine is using. 9% is a light song; near 100% your browser cannot keep up — try <b>interpolate</b> or <b>fast</b>. It also counts dropped events if any ever are.</span></div>
+      <h3>THE NOTE STRIP</h3>
+      <p>One column per channel or voice that <b>sounds</b> — columns appear as the
+        song uses them. Each row is a row of the song, newest at the bottom, fading
+        as it scrolls away, and each cell is the tracker's own spelling: the note,
+        the instrument, and the effect.</p>
+      <p>The colours say which dialect a column speaks: <em>blue</em> an Impulse
+        Tracker channel, <em>amber</em> a SID one, <em>green</em> a DUST synth slot,
+        <em>violet</em> a DUSK slot. The Impulse Tracker columns share one clock;
+        a SID-Wizard track has its own row count and scrolls at its own pace beside
+        them, which is what a co-play looks like from inside.</p>
+      <div class="r"><span class="k">click a column header</span><span class="d">Mutes that channel, voice or slot; the header turns red and says MUTE. Click it again to bring it back.</span></div>
+      <h3>THE PATTERN GRID</h3>
+      <p>The other view (<b>V</b>, or the VIEW button): the song's pattern as a
+        tracker draws it, the playing row on the bar near the middle, the rows
+        below it dim because they have not sounded yet. Row numbers are hex, and
+        each cell is spelled exactly as DUET spells it — the same characters the
+        tracker puts on screen, because the same library writes them.</p>
+      <p>An Impulse Tracker column shows note, instrument, volume and effect; a
+        SID column shows the SID-Wizard face instead — no volume column, and a
+        two-byte effect. A SID-Wizard track stands where <b>its</b> transport
+        stands, on its own pattern and its own row. Columns appear as the song
+        uses them, exactly as in the strip, and when there are more than fit the
+        view follows the ones that are sounding. Clicking a header mutes here
+        too.</p>
+      <h3>THE VISUALISER</h3>
+      <p>Five ways to watch the master mix, all drawn the way DUET draws them in a
+        terminal — a glow buffer under everything, scanlines over it.</p>
+      <div class="r"><span class="k">VU BARS</span><span class="d">Left and right, with peak caps that hold and fall, then a bar per sounding column in its own colour.</span></div>
+      <div class="r"><span class="k">SPECTRUM</span><span class="d">Thirty logarithmic bands, with peak caps.</span></div>
+      <div class="r"><span class="k">SCOPE</span><span class="d">The waveform, triggered on a rising zero crossing so a steady tone stands still.</span></div>
+      <div class="r"><span class="k">PLASMA · COPPER</span><span class="d">Demoscene furniture, driven by the level and the beat.</span></div>
+      <div class="r"><span class="k">← → &nbsp;and&nbsp; ↑ ↓</span><span class="d">The mode, and the bar style (solid, scanlines, gapped).</span></div>
+      <h3>THE WINDOW</h3>
+      <p>A bigger window shows the <b>same</b> rows and the same effects, larger —
+        the whole page is one design scaled to fit, never more rows in a smaller
+        font. <span class="note">?scale=1</span> pins it if you want the raw size.</p>
+    </section>
+
+    <section data-title="KEYS">
+      <h3>EVERYWHERE</h3>
+      <div class="r"><span class="k">Enter</span><span class="d">play from the top</span></div>
+      <div class="r"><span class="k">Space</span><span class="d">pause · carry on</span></div>
+      <div class="r"><span class="k">Esc</span><span class="d">stop — or close this help, or the file list, first</span></div>
+      <div class="r"><span class="k">L</span><span class="d">loop forever · loop once</span></div>
+      <div class="r"><span class="k">F</span><span class="d">the file list</span></div>
+      <div class="r"><span class="k">V</span><span class="d">the note strip · the pattern grid</span></div>
+      <div class="r"><span class="k">? &nbsp;or&nbsp; F1</span><span class="d">this help</span></div>
+      <div class="r"><span class="k">← →</span><span class="d">the visualiser's mode</span></div>
+      <div class="r"><span class="k">↑ ↓</span><span class="d">the visualiser's bar style</span></div>
+      <h3>IN THE FILE LIST</h3>
+      <div class="r"><span class="k">↑ ↓</span><span class="d">move the pick</span></div>
+      <div class="r"><span class="k">Enter</span><span class="d">open and play what is picked</span></div>
+      <div class="r"><span class="k">typing</span><span class="d">filter by name, title or author</span></div>
+      <div class="r"><span class="k">Esc</span><span class="d">close the list</span></div>
+      <h3>IN THIS HELP</h3>
+      <div class="r"><span class="k">← →</span><span class="d">the page you are reading</span></div>
+      <div class="r"><span class="k">↑ ↓ &nbsp;PgUp PgDn</span><span class="d">scroll · Home and End jump</span></div>
+      <div class="r"><span class="k">? &nbsp;Esc &nbsp;F1</span><span class="d">close</span></div>
+      <h3>WITH THE MOUSE</h3>
+      <div class="r"><span class="k">drop a file or folder</span><span class="d">anywhere on the page — it opens and plays</span></div>
+      <div class="r"><span class="k">a column header</span><span class="d">mute · unmute that column — in the strip and in the grid</span></div>
+      <div class="r"><span class="k">[VIEW …] on the top row</span><span class="d">the note strip · the pattern grid</span></div>
+      <div class="r"><span class="k">a visualiser name</span><span class="d">switch to it</span></div>
+    </section>
+
+    <section data-title="FORMATS">
+      <h3>IMPULSE TRACKER — .it</h3>
+      <p>The tracker format DUET is built on and the only module format it reads:
+        samples, instruments, envelopes, NNAs, the resonant filter, the lot.
+        Everything is played by DUET's own engine, judged against openmpt123 song
+        by song.</p>
+      <h3>SID-WIZARD — .swm .sws .swt .swq</h3>
+      <p>Hermit's C64 tracker, ported here from its 6502 driver — the four
+        extensions are one, two, three and four SID chips. The chips are real
+        reSID emulations, and the register stream DUET produces is compared against
+        the original driver's, row by row.</p>
+      <h3>A DUET PROJECT — .zon</h3>
+      <p>A project is a plain-text file that carries everything a song needs
+        <b>around</b> its notes: which song file to play, the chips and their model,
+        the DUST and DUSK synth patches, the mixer with its sends, the chord table,
+        the markers. The notes stay in a real <span class="note">.it</span> (or a
+        SID-Wizard module) beside it — DUET has no private format, so every file it
+        saves can be opened by other trackers too.</p>
+      <p>That is why a project needs its song file with it, and why the file list
+        tells you when one is missing.</p>
+      <h3>THE TWO SYNTHS</h3>
+      <p><em>DUST</em> is DUET's own SID synth — a chip per slot, its own tables,
+        four slots. <em>DUSK</em> is a wavetable synth over the .it sample bank,
+        eight slots, with a filter of its own. Both live in a project, and both
+        show up in the note strip as their own columns.</p>
+    </section>
+
+    <section data-title="TROUBLE">
+      <h3>NO SOUND</h3>
+      <p>Click once anywhere on the page. A browser will not start audio until you
+        have interacted with it — dropping a file or pressing a key counts too.</p>
+      <h3>“THIS IS A DEBUG MODULE”</h3>
+      <p>In red, on the status line: the build being served is the slow one and it
+        cannot keep up with a heavy song. Whoever serves this page should run
+        <span class="note">zig build wasm</span> and reload. The header line always
+        says which build you have.</p>
+      <h3>IT STUTTERS</h3>
+      <p>Watch <em>render</em> in the number line. Near 100% the engine is using the
+        whole audio budget: turn <b>resample</b> down to <b>interpolate</b> or
+        <b>fast</b>, or try a lighter song. Two chips at <b>resample</b> is the
+        heaviest thing here.</p>
+      <h3>“THIS PROJECT NAMES x.it — NOT IN THE FOLDER YOU OPENED”</h3>
+      <p>A project needs the song file it names. Open the whole folder, or drop the
+        project and its song file together.</p>
+      <h3>THE SONG ENDED, OR NOTHING APPEARS</h3>
+      <p>The status line says when a song ends — press <b>Enter</b> to start it
+        again, or turn <b>LOOP ∞</b> on. If the strip stays empty while the time
+        runs, the song is playing something the strip has no column for yet; the
+        visualiser will still show it.</p>
+      <h3>A FOLDER WAS NOT REMEMBERED</h3>
+      <p>Only Chrome and Edge can hand a page a folder it may open again. Elsewhere
+        the folder is a one-visit snapshot — pick it again, or drop it.</p>
+    </section>
+
+    <section data-title="ABOUT">
+      <h3>DUET</h3>
+      <p>An Impulse Tracker–compatible tracker with real SID channels, written in
+        Zig: a terminal build, a window build, and this — the same engine three
+        ways. The tracker edits; this page only plays.</p>
+      <h3>THE LICENCES</h3>
+      <p>The module and this page are <b>GPL-2.0-or-later</b>: DUET carries
+        <b>reSID</b> by Dag Lem, which is GPL, so anything that links the engine is
+        too. The font is <b>JetBrains Mono</b> under the SIL Open Font License.
+        The full texts are in <a href="LICENSES/README.txt">LICENSES/</a>.</p>
+      <h3>THE MUSIC</h3>
+      <p>The SID-Wizard example modules are Hermit's (Mihaly Horvath) and his
+        friends', under the WTF licence — DUET's whole SID-Wizard side is a port of
+        his 6502 driver, and each module is credited by the name inside it. The
+        Impulse Tracker modules were taken only where their author attached a
+        licence that allows passing them on — Public Domain, CC0 or CC BY — and
+        each one names its author, its licence and the page it came from in
+        <a href="songs/MANIFEST.md">songs/MANIFEST.md</a>. DUET's own demos are
+        m64's and Claude's.</p>
+      <p><b>If you wrote one of these and would rather it were not here, say so and
+        it goes — no argument, no delay.</b></p>
+      <h3>THE ENGINE IN A PAGE OF YOUR OWN</h3>
+      <p>Three files are the engine: <span class="note">duet-web.js</span> (one
+        class, <b>DuetEngine</b>), <span class="note">duet-worklet.js</span> and
+        <span class="note">duet.wasm</span>. Put them beside your page, import the
+        class, and a demo or a game plays any of these formats and syncs to the
+        rows, the notes and the markers — <a href="embed.html">embed.html</a> is
+        the whole of it in thirty lines. This player is that class with a page
+        around it.</p>
+      <h3>THE SOURCE, AND HOSTING IT</h3>
+      <p>Everything here is in the DUET repository at
+        <a href="https://github.com/M64GitHub/duetracker">github.com/M64GitHub/duetracker</a>;
+        the build stamp in the footer names the exact files. To host the player
+        yourself, unzip <span class="note">duet-web-&lt;version&gt;.zip</span> (or
+        copy this directory) onto any static web server, under any path, and open
+        it over <b>https://</b> or from <b>localhost</b> — a page with an audio
+        worklet needs a secure context, and nothing else: no special headers, no
+        server-side code. The README in the directory says the same.</p>
+      <h3>WHAT IS NOT HERE YET</h3>
+      <p>A keyboard to play the instruments, a shared <span class="note">.zip</span>
+        you can drop, and a few things m64 has not thought of yet.</p>
+    </section>
+
+  </div>
+  <span class="fhint">← → page · ↑ ↓ scroll · ? or Esc closes</span>
+</div>
 <footer>
   <span id="status">loading duet.wasm …</span>
   <span>libduet — the DUET engine in your browser · GPL-2.0-or-later (reSID by Dag Lem) · SID-Wizard examples by Hermit and friends (WTFPL) · font: JetBrains Mono (<a href="OFL.txt">OFL</a>)</span>
+  <span><a href="https://github.com/M64GitHub/duetracker" title="DUET's source — the tracker, the library, this page">source</a> · <a href="embed.html" title="the engine in a page of your own: duet-web.js">embed it</a> · <a href="LICENSES/README.txt">licences</a> · <span class="build" title="the build stamp: a hash of the engine's files">build aeb2d12d3d18</span></span>
   <span id="selftest"></span>
 </footer>
-<script type="module" src="duet-player.js"></script>
+<!-- THE STAMP (XXIII.e): `zig build wasm` writes this page out with the placeholder
+     below replaced by a hash of the engine's files (tools/webstamp.zig), and the same
+     stamp rides every script and the module — so a browser can never pair a new
+     page with an old duet-player.js (it did once: GOTCHAS, s136d/s137), and a file
+     that did not change stays cached on a public host. Served straight from the
+     source tree the placeholder is still here, and the page falls back to a fresh
+     stamp per load. -->
+<script type="module">
+  const STAMP = 'aeb2d12d3d18'.startsWith('__DUET_') ? String(Date.now()) : 'aeb2d12d3d18';
+  import('./duet-player.js?v=' + STAMP).catch((e) => {
+    document.getElementById('status').textContent = 'the page could not load duet-player.js: ' + e.message;
+    document.getElementById('status').classList.add('bad');
+  });
+</script>
 </body>
 </html>

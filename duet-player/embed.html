@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DUET — the engine in a page of your own</title>
+<link rel="icon" href="data:,">
+<style>
+  body { margin: 0; padding: 2em 3em; background: #000; color: #a8d0f8; font: 14px/1.5 ui-monospace, Menlo, Consolas, monospace; max-width: 70em; }
+  h1 { color: #e080ff; font-size: 1.2em; letter-spacing: 0.15em; margin: 0 0 0.4em; }
+  a { color: #56a8ff; text-decoration: none; } a:hover { color: #96e0ff; }
+  code, pre { color: #ecf6ff; }
+  button { background: transparent; border: 0; color: #56a8ff; font: inherit; cursor: pointer; padding: 0.1em 0.3em; }
+  button::before { content: '['; color: #587eb4; } button::after { content: ']'; color: #587eb4; } button:hover { color: #96e0ff; }
+  input[type=file] { color: #587eb4; font: inherit; }
+  #status { color: #ffc460; min-height: 1.5em; }
+  #rows { color: #587eb4; white-space: pre; min-height: 9em; }
+  #rows b { color: #ecf6ff; font-weight: normal; }
+  .dim { color: #587eb4; }
+  #selftest { color: #2e5a94; white-space: pre; }
+</style>
+</head>
+<body>
+<h1>DUET · EMBED</h1>
+<p class="dim">The DUET engine in a page of your own: <code>duet-web.js</code> + <code>duet-worklet.js</code> + <code>duet.wasm</code>,
+  three files beside your page and one class. This is the whole of it — view the source. <a href="index.html">The full player</a> is the same class with a page around it.</p>
+<p>
+  <button id="demo">▶ PLAY THE CO-PLAY DEMO</button>
+  <button id="stop">■ STOP</button>
+  <button id="pause">‖ PAUSE</button>
+  <span class="dim">or your own:</span> <input type="file" id="files" multiple>
+</p>
+<div id="status">loading the engine …</div>
+<div id="rows"></div>
+<span id="selftest"></span>
+
+<script type="module">
+import { DuetEngine } from './duet-web.js';
+const duet = new DuetEngine();                                    // the AudioContext + the worklet; the module found beside duet-web.js
+const say = (t) => (document.getElementById('status').textContent = t);
+const rows = document.getElementById('rows'), last = [];
+duet.ready.then(({ version, mode }) => say(`libduet ${version} (${mode}) is ready — press play`)).catch((e) => say(e.message));
+document.getElementById('demo').onclick = () => duet.open('songs/duet/co-demo.zon', { play: true }).then((i) => i && say(`playing ${i.title} — ${i.channels} channels, ${i.chips} chip(s)`)).catch((e) => say(e.message));
+document.getElementById('files').onchange = (e) => duet.open(e.target.files, { play: true }).then((i) => i && say(`playing ${i.title || i.name}`)).catch((e) => say(e.message));
+document.getElementById('stop').onclick = () => duet.stop();
+document.getElementById('pause').onclick = () => duet.togglePause();
+// the event ring, fired the moment each event is HEARD: rows for sync, notes for the show, markers for the script
+duet.on('row', (ev) => { if (ev.dialect === 4) return; last.push(`order ${ev.order} row ${ev.row}`); if (last.length > 8) last.shift(); });
+duet.on('note_on', (ev) => { last[last.length - 1] += `  <b>ch ${ev.channel + 1} note ${ev.a} ins ${ev.b}</b>`; });
+duet.on('marker', (ev) => say(`marker ${ev.a | (ev.b << 8)} on channel ${ev.channel + 1}`));
+duet.on('ended', () => say('the song ended'));
+duet.on('position', (p) => { rows.innerHTML = `time ${duet.time.toFixed(1)} s · order ${p.order} pattern ${p.pattern} row ${p.row} · tempo ${p.tempo} speed ${p.speed}\n` + last.join('\n'); });
+// tools/webplay-smoke.mjs --page embed.html drives this page like the player: ?autotest=N plays the demo and writes the line it reads
+const auto = Number(new URLSearchParams(location.search).get('autotest'));
+if (auto) {
+  duet.ready.then(() => document.getElementById('demo').click());
+  setTimeout(() => { document.getElementById('selftest').textContent = `SELFTEST ${duet.info && duet.frames > 0 && duet.eventsSeen > 0 ? 'ok' : 'FAIL'} page=embed version=${duet.version} mode=${duet.mode} title="${duet.info ? duet.info.title : ''}" kind=${duet.info ? duet.info.kind : '-'} frames=${duet.frames} events=${duet.eventsSeen} time=${duet.time.toFixed(1)} ready=${duet.isReady} ctx=${duet.context.state} status="${document.getElementById('status').textContent}"`; }, auto > 1 ? auto : 4000);
+}
+window.duet = duet;
+</script>
+</body>
+</html>

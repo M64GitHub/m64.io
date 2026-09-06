@@ -1,12 +1,24 @@
-// duet-player.js — THE PAGE (XXII.d): the main thread. Loads duet.wasm,
-// hosts it in the worklet (duet-worklet.js), feeds it FILES — a drop, the
-// file dialog, the gallery, ?song= — and draws what the event ring says:
-// the live note strip (a row appears the instant it is heard), the HUD,
-// and a movy-style glow visualiser over the master mix. Nothing here
-// knows a format; the page speaks include/duet.h's words. The palette
+// duet-player.js — THE PAGE (XXII.d): the main thread. Everything a PLAYER
+// is — the file roads (a drop, the file dialog, a whole FOLDER, the gallery,
+// ?song=), the live note strip (a row appears the instant it is heard), the
+// pattern grid, the HUD, the help box and a movy-style glow visualiser over
+// the master mix — drawn over the ENGINE, which is duet-web.js's DuetEngine
+// (XXIII.e): the AudioContext, the worklet that owns duet.wasm, the verbs,
+// the event ring re-stamped into the audio clock, the playing time. Nothing
+// here knows a format; the page speaks include/duet.h's words. The palette
 // is src/app/ui/theme.zig's; the meter ballistics are ui/vizmath.zig's.
+//
+// THE STAMP: index.html imports this file with `?v=<build stamp>` and the
+// engine's files are fetched with the same one (duet-web.js reads it off its
+// own URL) — a browser can never pair a new page with an old script, and an
+// unchanged file stays cached. Served straight from the source tree there is
+// no stamp, and every file is revalidated on each load instead.
+
+const STAMP = new URL(import.meta.url).searchParams.get('v') || '';
+const { DuetEngine, TARGET, QUALITY, SW_PATTERN } = await import('./duet-web.js' + (STAMP ? '?v=' + STAMP : ''));
 
 const $ = (s) => document.querySelector(s);
+if (!STAMP) $('footer .build').textContent = 'unstamped — served from the source tree';
 const T = {
   bg: '#000', header: '#030a1a', text: '#a8d0f8', dim: '#587eb4', bright: '#ecf6ff', off: '#4e525c', accent: '#56a8ff', hot: '#96e0ff',
   pink: '#e080ff', pinkdim: '#9e62c0', sep: '#2e5a94', note: '#ecf6ff', ins: '#78c8ff', vol: '#8cb4f0', fx: '#6496dc', fxduet: '#78e6aa',
@@ -14,23 +26,36 @@ const T = {
   chanhdr: '#466eaa', sidhdr: '#ffc460', mute: '#eb544a', solo: '#5ce080', marker: '#966418', paperbeat: '#5c1c68', papernote: '#164a8e', papersid: '#8a5214',
 };
 const DIALECT = ['IT', 'SD', 'DUST', 'DUSK', 'SW'];
-const TARGET = { CHANNEL: 0, IT_SUM: 1, CHIP: 2, DUST: 3, DUSK: 4, VOICE: 5, FX: 6 };
 const NOTE_NAMES = ['C-', 'C#', 'D-', 'D#', 'E-', 'F-', 'F#', 'G-', 'G#', 'A-', 'A#', 'B-'];
-const QUALITY = ['fast', 'interpolate', 'resample'];
 const VIZ_MODES = ['vu', 'spectrum', 'scope', 'plasma', 'copper'];
 const BAR_STYLES = ['normal', 'scanlines', 'gap'];
 const MAX_CELLS = 64, SONG_EXT = /\.(it|swm|sws|swt|swq|zon)$/i;
+const FACE = [                                            // the character layout per dialect face, XXIII.d
+  { w: 14, note: [0, 3], ins: [4, 6], vol: [7, 10], fx: [11, 14] },   // IT
+  { w: 11, note: [0, 3], ins: [4, 6], vol: null, fx: [7, 11] },       // SD
+  { w: 11, note: [0, 3], ins: [4, 6], vol: null, fx: [7, 11] },       // SW
+];
+const LOADABLE = /\.(it|swm|sws|swt|swq|zon|swi)$/i;      // what a folder listing keeps (a v10 project may still name a .swi)
+const FOLDER_MAX = 4096, FOLDER_DEPTH = 6, PEEK_MAX = 512; // a folder can be enormous: the walk and the header peek are bounded
 const DESIGN_W = 1280, DESIGN_H = 720; // THE FIT: the page's design size; the window scales it uniformly
 const params = new URLSearchParams(location.search);
-
+const duet = new DuetEngine({ sampleRate: 48000 });   // the tracker's rate: the render is --render's
 const S = {
-  ctx: null, node: null, gain: null, analyser: null, anL: null, anR: null, ready: false, version: '',
-  info: null, position: null, load: 0, dropped: 0, ended: false, loop: -1,
-  columns: new Map(), queue: [], viz: 'scope', bars: 'normal', gallery: [], eventsSeen: 0, rowsSeen: 0,
-  beat: 0, bar: 0, markerFlash: 0, lastOrder: -1, badgeCo: false, frames: 0, scale: 1,
+  analyser: null, anL: null, anR: null,
+  columns: new Map(), viz: 'scope', bars: 'normal', rowsSeen: 0,
+  gallery: [], folder: [], folderTitle: '', rows: [], sel: 0, filter: '', panelOpen: false, pendingFolder: null, playing: '',
+  view: 'strip', gridFrom: 0,
+  helpOpen: false, helpAt: 0,
+  beat: 0, bar: 0, markerFlash: 0, badgeCo: false, scale: 1, pageError: '',
   spec: new Float32Array(30), specPeak: new Float32Array(30), specVel: new Float32Array(30), specHold: new Float32Array(30),
   vu: [0, 0], vuPeak: [0, 0], vuVel: [0, 0], vuHold: [0, 0], time: 0,
+  // the engine's state, read through: the browser console and tools/webplay-smoke.mjs look here
+  engine: duet, stamp: STAMP,
+  get ctx() { return duet.context; }, get node() { return duet.node; }, get ready() { return duet.isReady; }, get stage() { return duet.stage; },
+  get lastError() { return duet.lastError || S.pageError; }, get frames() { return duet.frames; }, get eventsSeen() { return duet.eventsSeen; },
+  get info() { return duet.info; }, get position() { return duet.position; }, get load() { return duet.load; },
 };
+window.duet = S; // the page's state, for the browser console and tools/webplay-smoke.mjs
 
 // ------------------------------------------------------------- words
 const hex2 = (n) => n.toString(16).toUpperCase().padStart(2, '0');
@@ -44,7 +69,6 @@ function fxText(dialect, a, b) {
 function setStatus(text, bad) { const el = $('#status'); el.textContent = text; el.classList.toggle('bad', !!bad); }
 function kindBadge(info) { return info.kind === 0 ? '[IT]' : info.kind === 1 ? '[SWM]' : S.badgeCo ? '[CO]' : '[DUET]'; }
 function mmss(frames, rate) { const s = Math.floor(frames / rate); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
-
 // ---------------------------------------------------------- columns
 // A column per (group, channel): the IT grid's columns share the IT
 // clock (IT, SD, DUST 48..51 and DUSK 40..47 all sit in the one pattern);
@@ -81,10 +105,10 @@ function pushCell(col, ev) {
   if (col.cells.length > MAX_CELLS) col.cells.shift();
 }
 function lastCell(col, ev) { if (!col.cells.length) pushCell(col, ev); return col.cells[col.cells.length - 1]; }
-
 // ------------------------------------------------------------ events
+// The engine fires each ring event the moment it is HEARD (duet-web.js re-stamps
+// the engine's output clock into the context's); this only draws what it says.
 function apply(ev) {
-  S.eventsSeen++;
   switch (ev.kind) {
     case 'row':
       if (ev.dialect === 4) { pushCell(columnFor(4, ev.channel, true), ev); }
@@ -98,16 +122,12 @@ function apply(ev) {
     case 'effect': { const col = columnFor(ev.dialect, ev.channel, true); lastCell(col, ev).fx = fxText(ev.dialect, ev.a, ev.b); break; }
     case 'volcol': { const col = columnFor(ev.dialect, ev.channel, true); const c = lastCell(col, ev); if (!c.fx) c.fx = 'v' + hex2(ev.b); break; }
     case 'marker': S.markerFlash = 1; $('#p-marker').textContent = 'marker ' + (ev.a | (ev.b << 8)) + ' (ch ' + (ev.channel + 1) + ')'; break;
-    case 'song_end': case 'ended': S.ended = true; setStatus('the song ended'); break;
+    case 'song_end': setStatus('the song ended'); break;
   }
-  if (ev.dialect === 4 && S.info && S.info.kind === 2 && !S.badgeCo) { S.badgeCo = true; $('#badge').textContent = kindBadge(S.info); }
+  if (ev.dialect === 4 && duet.info && duet.info.kind === 2 && !S.badgeCo) { S.badgeCo = true; $('#badge').textContent = kindBadge(duet.info); }
 }
-function heardTime() { const c = S.ctx; return c.currentTime - (c.outputLatency || c.baseLatency || 0); }
-function drainDue() {
-  const now = heardTime(); let i = 0;
-  while (i < S.queue.length && S.queue[i].t <= now) apply(S.queue[i++]);
-  if (i) S.queue.splice(0, i);
-}
+duet.on('event', apply);
+duet.on('ended', () => setStatus('the song ended'));
 
 // ---------------------------------------------------------- the strip
 const strip = $('#strip'), sctx = strip.getContext('2d');
@@ -119,7 +139,7 @@ function drawStrip() {
   const cols = [...S.columns.values()];
   if (!cols.length) {
     sctx.fillStyle = T.dim; sctx.font = Math.round(13 * S.scale) + 'px "JetBrains Mono", monospace';
-    sctx.fillText(S.info ? 'playing — the rows appear here as they sound' : 'drop a song here, open files, or pick one from the gallery', 12 * S.scale, 24 * S.scale);
+    sctx.fillText(duet.info ? 'playing — the rows appear here as they sound' : 'drop a song here, or press F for your files and the gallery', 12 * S.scale, 24 * S.scale);
     return;
   }
   const CW = 15; // "rr C#5 01 5A70 " — the row, the note, the instrument, the effect (an IT letter + byte, or a dialect's two bytes)
@@ -150,12 +170,157 @@ function drawStrip() {
 strip.addEventListener('click', (e) => {
   const charW = Number(strip.dataset.charW || 8), CW = Number(strip.dataset.cw || 15);
   const ci = Math.floor((e.offsetX - 4 * S.scale) / (CW * charW)), cols = [...S.columns.values()];
-  if (e.offsetY > 18 * S.scale || ci < 0 || ci >= cols.length || !S.node) return;
+  if (e.offsetY > 18 * S.scale || ci < 0 || ci >= cols.length || !duet.info) return;
   const col = cols[ci]; col.muted = !col.muted;
   const [target, index] = muteTarget(col);
-  S.node.port.postMessage({ type: 'mute', target, index, on: col.muted });
+  duet.mute(target, index, col.muted);
   setStatus((col.muted ? 'muted ' : 'unmuted ') + col.label);
 });
+
+// ------------------------------------------------------------ the grid
+// XXIII.d THE GRID VIEW — the tracker's pattern view as a SECOND view
+// over the same columns the strip draws (m64's ruling: the strip stays
+// the default). Nothing is spelled here: the library formats every cell
+// (`duet_song_format_cell`, through the worklet), and this file slices
+// the fixed character layout back into fields to colour them.
+//
+// WHERE THE PLAYHEAD IS comes from the same due-event clock the strip
+// reads — each column's last cell carries its pattern and row — so the
+// two views are audio-synced to the same frame, and a SID-Wizard track
+// stands where ITS transport stands, not where the IT one does.
+const grid = $('#grid'), gctx = grid.getContext('2d');
+
+function patternId(col) {
+  const c = col.cells[col.cells.length - 1];
+  if (!c) return -1;
+  return col.group === 'sw' ? SW_PATTERN + c.pattern : c.pattern;
+}
+/// The pattern as the library spells it, if it has arrived — the engine keeps
+/// the cache and asks the worklet once per pattern; until then, nothing to draw.
+function patFor(id) {
+  if (id < 0) return null;
+  const p = duet.patternNow(id);
+  if (p === undefined) { duet.pattern(id); return null; }
+  return p;
+}
+
+/// A field's colour: dots stay dots, a note that is a stop glyph goes
+/// dim, and the rest wear the column's own hues.
+function fieldColor(text, kind) {
+  if (!text || text[0] === '·' || text[0] === ' ') return T.dots;
+  if (kind === 'note') return '=^~'.includes(text[0]) ? T.pinkdim : T.note;
+  if (kind === 'ins') return T.ins;
+  if (kind === 'vol') return T.vol;
+  return T.fx;
+}
+
+function drawGrid() {
+  const dpr = window.devicePixelRatio || 1, W = grid.clientWidth, H = grid.clientHeight;
+  if (grid.width !== Math.floor(W * dpr) || grid.height !== Math.floor(H * dpr)) { grid.width = Math.floor(W * dpr); grid.height = Math.floor(H * dpr); }
+  gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  gctx.fillStyle = T.bg; gctx.fillRect(0, 0, W, H);
+  const k = S.scale, cols = [...S.columns.values()];
+  if (!cols.length) {
+    gctx.fillStyle = T.dim; gctx.font = Math.round(13 * k) + 'px "JetBrains Mono", monospace';
+    gctx.fillText(duet.info ? 'playing — the pattern appears here as it sounds' : 'drop a song here, or press F for your files and the gallery', 12 * k, 24 * k);
+    return;
+  }
+  // the widths every column asks for, and the ones that fit
+  const faceOf = (col) => FACE[col.group === 'sw' ? 2 : col.dialect === 1 ? 1 : 0];
+  const GUT = 3;                                   // the row number and its space
+  const want = cols.map((c) => faceOf(c).w + 1);   // a cell plus one column of air
+  const total = want.reduce((a, b) => a + b, GUT);
+  const charW = Math.min(8 * k, Math.max(4.2 * k, (W - 8 * k) / total));
+  const font = Math.round(charW / 0.6), rowH = Math.round(font * 1.25);
+  gctx.font = font + 'px "JetBrains Mono", monospace'; gctx.textBaseline = 'top';
+  const head = rowH, rows = Math.max(Math.floor((H - head) / rowH), 1);
+  // A CHANNEL WINDOW when they do not fit (58 of them is a real song):
+  // it follows the column that sounded last, and never scrolls past an end.
+  let fit = 0, used = GUT;
+  while (fit < cols.length && used + want[fit] <= (W - 8 * k) / charW) { used += want[fit]; fit++; }
+  if (fit < cols.length) {
+    const live = cols.reduce((best, c, i) => (c.level > cols[best].level ? i : best), 0);
+    if (live < S.gridFrom) S.gridFrom = live;
+    else if (live >= S.gridFrom + fit) S.gridFrom = live - fit + 1;
+    S.gridFrom = Math.max(0, Math.min(S.gridFrom, cols.length - fit));
+  } else S.gridFrom = 0;
+  const shown = cols.slice(S.gridFrom, S.gridFrom + Math.max(fit, 1));
+  // the row numbers ride the IT block's playhead (a pure SWM has none:
+  // track 0's own row stands in, which is what its transport counts)
+  const anchor = shown.find((c) => c.group === 'it') || shown[0];
+  const anchorRow = anchor.cells.length ? anchor.cells[anchor.cells.length - 1].row : 0;
+  const anchorPat = patFor(patternId(anchor));
+  // WHERE THE PLAYING ROW SITS: a pattern taller than the view scrolls
+  // under a fixed playhead just above the middle; a pattern that FITS
+  // is drawn whole from its first row and the playhead moves through it
+  // — anything else would park a short pattern under eight empty rows.
+  const whole = anchorPat && anchorPat.rows <= rows;
+  const mid = whole ? anchorRow : Math.floor((rows - 1) * 0.45);
+  gctx.fillStyle = T.dim;
+  for (let r = 0; r < rows; r++) {
+    const row = anchorRow - mid + r;
+    if (row < 0 || (anchorPat && row >= anchorPat.rows)) continue;
+    const y = head + r * rowH;
+    if (r === mid) { gctx.fillStyle = T.playhead; gctx.fillRect(0, y - 1, W, rowH); }
+    else if (row % 4 === 0) { gctx.fillStyle = T.rowbeatbg; gctx.fillRect(0, y - 1, W, rowH); }
+    gctx.globalAlpha = r > mid ? 0.5 : 1;
+    gctx.fillStyle = row % 4 === 0 ? T.rowbeat : T.rownum;
+    gctx.fillText(hex2(row), 4 * k, y);
+    gctx.globalAlpha = 1;
+  }
+  let x = 4 * k + GUT * charW;
+  for (const col of shown) {
+    const face = faceOf(col), id = patternId(col), pat = patFor(id);
+    const cur = col.cells.length ? col.cells[col.cells.length - 1].row : 0;
+    gctx.fillStyle = col.muted ? T.mute : col.color;
+    gctx.fillText(col.muted ? col.label + ' MUTE' : col.label, x, 1 * k);
+    for (let r = 0; r < rows; r++) {
+      const row = cur - mid + r, y = head + r * rowH;
+      if (row < 0 || !pat || row >= pat.rows) continue;
+      const ch = col.group === 'sw' ? 0 : Math.min(col.channel, pat.channels - 1);
+      const text = pat.cells[row * pat.channels + ch] || '';
+      if (!text) continue;
+      gctx.globalAlpha = r > mid ? 0.5 : 1;
+      for (const [kind, span] of [['note', face.note], ['ins', face.ins], ['vol', face.vol], ['fx', face.fx]]) {
+        if (!span) continue;
+        const piece = text.slice(span[0], span[1]);
+        gctx.fillStyle = col.muted ? T.off : fieldColor(piece, kind);
+        gctx.fillText(piece, x + span[0] * charW, y);
+      }
+      gctx.globalAlpha = 1;
+    }
+    x += want[cols.indexOf(col)] * charW;
+  }
+  grid.dataset.charW = charW; grid.dataset.gut = GUT;
+  grid.dataset.cols = shown.map((c) => faceOf(c).w + 1).join(',');
+}
+/// The grid's headers mute like the strip's.
+grid.addEventListener('click', (e) => {
+  const charW = Number(grid.dataset.charW || 8), GUT = Number(grid.dataset.gut || 3);
+  const widths = String(grid.dataset.cols || '').split(',').filter(Boolean).map(Number);
+  const cols = [...S.columns.values()].slice(S.gridFrom);
+  if (e.offsetY > 18 * S.scale || !duet.info) return;
+  let x = 4 * S.scale + GUT * charW;
+  for (let i = 0; i < widths.length; i++) {
+    const w = widths[i] * charW;
+    if (e.offsetX >= x && e.offsetX < x + w) {
+      const col = cols[i]; if (!col) return;
+      col.muted = !col.muted;
+      const [target, index] = muteTarget(col);
+      duet.mute(target, index, col.muted);
+      setStatus((col.muted ? 'muted ' : 'unmuted ') + col.label);
+      return;
+    }
+    x += w;
+  }
+});
+function setView(v) {
+  S.view = v;
+  document.body.classList.toggle('grid', v === 'grid');
+  $('#b-view').textContent = v === 'grid' ? 'VIEW GRID' : 'VIEW STRIP';
+  $('#b-view').classList.toggle('on', v === 'grid');
+}
+function toggleView() { setView(S.view === 'grid' ? 'strip' : 'grid'); }
 
 // ------------------------------------------------------ the visualiser
 // vizmath.zig's ballistics: fast attack, exponential release; a peak cap
@@ -253,180 +418,437 @@ function drawViz() {
   vctx.globalCompositeOperation = 'lighter'; vctx.filter = 'blur(3px)'; vctx.drawImage(trail, 0, 0); vctx.drawImage(trail, 0, 0);
   vctx.filter = 'none'; vctx.drawImage(trail, 0, 0);
 }
-
 // --------------------------------------------------------------- HUD
 function drawHud() {
-  const p = S.position; if (!p || !S.ctx) return;
+  const p = duet.position; if (!p) return;
   $('#p-order').textContent = hex2(p.order); $('#p-pattern').textContent = hex2(p.pattern); $('#p-row').textContent = hex2(p.row);
   $('#p-speed').textContent = p.speed || '—'; $('#p-tempo').textContent = p.tempo || '—';
-  $('#p-time').textContent = mmss(p.frames, S.ctx.sampleRate); $('#p-load').textContent = Math.round(S.load * 100) + '%' + (S.dropped ? ' (dropped ' + S.dropped + ')' : '');
+  $('#p-time').textContent = mmss(duet.playFrames, duet.context.sampleRate); $('#p-load').textContent = Math.round(duet.load * 100) + '%' + (duet.dropped ? ' (dropped ' + duet.dropped + ')' : '');
   $('#b-pause').textContent = p.paused ? '‖ UNPAUSE' : '‖ PAUSE';
   $('#b-pause').classList.toggle('on', !!p.paused);
   $('#b-play').classList.toggle('on', !!p.playing && !p.paused);
 }
 function frame() {
-  if (S.ctx) { drainDue(); drawStrip(); drawViz(); drawHud(); }
+  duet.drain(); // the events due this frame, before anything is drawn
+  if (S.view === 'grid') drawGrid(); else drawStrip();
+  drawViz(); drawHud();
   requestAnimationFrame(frame);
 }
 
 // ------------------------------------------------------------- audio
-async function boot() {
-  const ctx = new AudioContext({ sampleRate: 48000, latencyHint: 'playback' }); // the tracker's rate: the render is --render's
-  S.ctx = ctx;
-  window.duet = S; // the page's state, for the browser console and tools/webplay-smoke.mjs
-  if (params.get('autotest')) { ctx.resume(); setTimeout(selfTest, Number(params.get('autotest')) > 1 ? Number(params.get('autotest')) : 4000); }
-  // the worklet script and the module are fetched fresh (revalidated) on every load: a browser once kept
-  // serving a Debug module a check had installed for a minute, and the page could not tell (s136d)
-  S.stage = 'context up'; await ctx.audioWorklet.addModule('duet-worklet.js?v=' + Date.now()); S.stage = 'worklet added';
-  const node = new AudioWorkletNode(ctx, 'duet-processor', { numberOfInputs: 0, numberOfOutputs: 1, outputChannelCount: [2] });
-  const gain = ctx.createGain(); gain.gain.value = 0.8;
+// THE ENGINE IS duet-web.js's: it made the context, added the worklet and posted
+// the module; `ready` settles when the module is instantiated. The page hangs its
+// analysers off the engine's gain and reports what the module says it is.
+if (params.get('autotest')) { duet.context.resume(); setTimeout(selfTest, Number(params.get('autotest')) > 1 ? Number(params.get('autotest')) : 4000); }
+duet.ready.then((m) => {
+  const ctx = duet.context, gain = duet.gain;
   const analyser = ctx.createAnalyser(); analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0.6;
   const split = ctx.createChannelSplitter(2), anL = ctx.createAnalyser(), anR = ctx.createAnalyser(); anL.fftSize = 1024; anR.fftSize = 1024;
-  node.connect(gain); gain.connect(ctx.destination); gain.connect(analyser); gain.connect(split); split.connect(anL, 0); split.connect(anR, 1);
-  Object.assign(S, { node, gain, analyser, anL, anR });
-  node.port.onmessage = (e) => onWorklet(e.data);
-  const bytes = await (await fetch('duet.wasm', { cache: 'no-cache' })).arrayBuffer(); // revalidated; the worklet compiles it itself
-  S.stage = 'wasm fetched';
-  node.port.postMessage({ type: 'module', bytes }, [bytes]);
-  S.stage = 'module posted';
-  setTimeout(() => { if (!S.ready && !S.lastError) setStatus('the worklet did not answer in 10 s — is this browser blocking AudioWorklet or WebAssembly?', true); }, 10000);
-  const resume = () => { if (ctx.state !== 'running') ctx.resume(); };
-  document.addEventListener('pointerdown', resume); document.addEventListener('keydown', resume);
+  gain.connect(analyser); gain.connect(split); split.connect(anL, 0); split.connect(anR, 1);
+  Object.assign(S, { analyser, anL, anR });
+  duet.volume = $('#vol').value / 100;
+  const mb = (m.bytes / 1048576).toFixed(1) + ' MB';
+  $('#version').textContent = 'libduet ' + m.version + ' · ' + m.mode + ' ' + mb + ' · web player';
+  if (m.mode === 'Debug') setStatus('this is a DEBUG module (' + mb + '): it cannot keep up with a heavy song — run `zig build wasm` for the fast one and reload', true);
+  else setStatus('ready (' + m.mode + ', ' + mb + ') — pick a song below, drop one on the page, or open your own folder');
+  afterReady();
+}).catch((e) => setStatus(e.message, true));
+duet.on('error', (message) => setStatus(message, true));
+duet.on('opened', (info) => {   // a fresh song, or the same one rebuilt for a subtune / model / quality change
+  S.columns.clear(); S.badgeCo = false; S.rowsSeen = 0;
+  $('#title').textContent = info.title || info.name; $('#author').textContent = info.author ? '(' + info.author + ')' : '';
+  $('#badge').textContent = kindBadge(info); $('#p-chips').textContent = info.chips;
+  $('#p-subtune').textContent = (info.subtune + 1) + '/' + info.subtunes; $('#b-sub-prev').disabled = $('#b-sub-next').disabled = info.subtunes < 2;
+  $('#b-model').textContent = info.model === 1 ? '8580' : '6581'; $('#b-quality').textContent = QUALITY[info.quality] || 'interpolate';
+  $('#p-marker').textContent = info.markers.length ? info.markers.length + ' marker(s)' : '';
+  if (info.channels <= 16 && info.kind !== 1) for (let c = 0; c < info.channels; c++) columnFor(0, c, true);
+  setStatus(`opened ${info.name}: ${info.channels} channels, ${info.orders} orders, ${info.patterns} patterns, ${info.chips} chip(s)` + (info.message ? ' — ' + info.message.split('\n')[0] : ''));
+  if (S.panelOpen) showPanel(false); // the song has the space now; [FILES] brings the list back
+});
+
+// ----------------------------------------------------------- the listing
+// THE FOLDER IS THE UNIT (XXIII.a). A browser never shows a picked file's
+// siblings, so no page can do what DUET's open dialog does from one project
+// pick: the unit is the FOLDER, and the page keeps a LISTING of it — entries,
+// never bytes. A song's bytes are read when you pick it; a project's song
+// files are read with it, resolved by the project's OWN spelling against its
+// folder, then by name anywhere in the listing (the file table's own law).
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const extOf = (name) => { const m = /\.([a-z0-9]+)$/i.exec(name); return m ? m[1].toLowerCase() : ''; };
+const dirOf = (path) => { const i = path.lastIndexOf('/'); return i < 0 ? '' : path.slice(0, i + 1); };
+const baseOf = (path) => path.slice(path.lastIndexOf('/') + 1);
+const normPath = (p) => { const out = []; for (const part of p.split('/')) { if (!part || part === '.') continue; if (part === '..') out.pop(); else out.push(part); } return out.join('/'); };
+function entryOf(path, src, extra) {
+  const name = baseOf(path), ext = extOf(name);
+  return Object.assign({ path, name, ext, kind: ext === 'zon' ? 'PROJECT' : ext.toUpperCase(), src, title: '', by: '', meta: '', bad: false }, extra);
 }
-function send(m) { if (S.node) S.node.port.postMessage(m); }
-function onWorklet(m) {
-  switch (m.type) {
-    case 'ready': {
-      S.ready = true; S.version = m.version; S.mode = m.mode; S.moduleBytes = m.bytes;
-      const mb = (m.bytes / 1048576).toFixed(1) + ' MB';
-      $('#version').textContent = 'libduet ' + m.version + ' · ' + m.mode + ' ' + mb + ' · web player';
-      if (m.mode === 'Debug') setStatus('this is a DEBUG module (' + mb + '): it cannot keep up with a heavy song — run `zig build wasm` for the fast one and reload', true);
-      else setStatus('ready (' + m.mode + ', ' + mb + ') — drop a song, open files, or pick one from the gallery');
-      afterReady(); break;
-    }
-    case 'opened': {
-      const info = m.info; S.info = info; S.ended = false; S.columns.clear(); S.queue.length = 0; S.badgeCo = false; S.rowsSeen = 0;
-      $('#title').textContent = info.title || info.name; $('#author').textContent = info.author ? '(' + info.author + ')' : '';
-      $('#badge').textContent = kindBadge(info); $('#p-chips').textContent = info.chips;
-      $('#p-subtune').textContent = (info.subtune + 1) + '/' + info.subtunes; $('#b-sub-prev').disabled = $('#b-sub-next').disabled = info.subtunes < 2;
-      $('#b-model').textContent = info.model === 1 ? '8580' : '6581'; $('#b-quality').textContent = QUALITY[info.quality] || 'interpolate';
-      $('#p-marker').textContent = info.markers.length ? info.markers.length + ' marker(s)' : '';
-      if (info.channels <= 16 && info.kind !== 1) for (let c = 0; c < info.channels; c++) columnFor(0, c, true);
-      setStatus(`opened ${info.name}: ${info.channels} channels, ${info.orders} orders, ${info.patterns} patterns, ${info.chips} chip(s)` + (info.message ? ' — ' + info.message.split('\n')[0] : ''));
-      if (S.pendingPlay) { S.pendingPlay = false; send({ type: 'play' }); }
-      break;
-    }
-    case 'error': S.lastError = (m.name ? m.name + ': ' : '') + m.message; setStatus(S.lastError, true); break;
-    case 'tick': S.position = m.position; S.load = m.load; S.dropped += m.dropped; S.frames = m.position.frames; for (const ev of m.events) S.queue.push(ev); break;
-    case 'log': console.log('[libduet]', m.text); break;
+async function entryBytes(e) {
+  if (e.file) return await e.file.arrayBuffer();
+  if (e.handle) return await (await e.handle.getFile()).arrayBuffer();
+  const r = await fetch(e.url); if (!r.ok) throw new Error('the server answered ' + r.status);
+  return await r.arrayBuffer();
+}
+function pickMainEntry(entries) { return entries.find((e) => e.ext === 'zon') || entries.find((e) => SONG_EXT.test(e.name)) || null; }
+// a project names its song files; each is looked for where the project came from
+function resolveSongFiles(entry, text) {
+  const rels = [...text.matchAll(/\.(it|swm)\s*=\s*"([^"]+)"/g)].map((m) => m[2]);
+  const dir = dirOf(entry.path);
+  return rels.map((rel) => {
+    if (entry.src === 'gallery') return { rel, found: entryOf(normPath(dir + rel), 'gallery', { url: new URL(rel, entry.url).href }) };
+    const full = normPath(dir + rel), base = baseOf(rel).toLowerCase();
+    return { rel, found: S.folder.find((e) => e.path === full) || S.folder.find((e) => e.name.toLowerCase() === base) || null };
+  });
+}
+function openEntry(e, thenPlay) {
+  if (!e) return;
+  setStatus('opening ' + e.name + ' …');
+  return (async () => {
+    const files = [];
+    try {
+      const bytes = await entryBytes(e);
+      files.push({ name: e.name, bytes });
+      if (e.ext === 'zon') { // the project's song files travel under the project's own spelling
+        const missing = [];
+        for (const s of resolveSongFiles(e, new TextDecoder().decode(new Uint8Array(bytes)))) {
+          if (!s.found) { missing.push(s.rel); continue; }
+          try { files.push({ name: s.rel, bytes: await entryBytes(s.found) }); } catch { missing.push(s.rel); }
+        }
+        if (missing.length) setStatus('this project names ' + missing.join(', ') + ' — ' + (e.src === 'gallery' ? 'not on the server' : 'not in the folder you opened'), true);
+      }
+    } catch (err) { return setStatus('cannot read ' + e.name + ': ' + err.message, true); }
+    S.playing = e.src + ':' + e.path;
+    // the engine takes the set under the project's own spellings; a newer pick resolves this one null
+    duet.open({ files, main: e.name }, { play: thenPlay }).catch((err) => setStatus(err.message, true));
+  })();
+}
+// ------------------------------------------------------ your own folder
+function setFolder(entries, title) {
+  entries.sort((a, b) => a.path.localeCompare(b.path));
+  S.folder = entries; S.folderTitle = title; S.sel = 0;
+  peekFolder(entries);
+  renderPanel();
+}
+// WHAT EACH ROW SAYS, before you pick it. A song's title sits in the first
+// bytes of its header, so a 70-byte slice is all it takes: an .it spells its
+// title at 4, a SID-Wizard module its "AUTHOR:TITLE" at the offset its magic
+// picks (src/sid/swmod.zig's layout table). A project is read whole — a few
+// KB — for its name and to look its song files up in the listing. Bounded:
+// a folder may hold thousands.
+const SW_LOAD = 2, SW_AUTHOR = { SWM1: 24, SWMS: 24, SWMT: 25, SWMQ: 29 }; // the 40-char field, per magic; a module opens with its C64 load address
+const latin1 = (b) => { let s = ''; for (const c of b) s += String.fromCharCode(c); return s.replace(/[\0-\x1f]/g, ' ').trim(); };
+async function headOf(e, n) {
+  if (e.file) return new Uint8Array(await e.file.slice(0, n).arrayBuffer());
+  if (e.handle) return new Uint8Array(await (await e.handle.getFile()).slice(0, n).arrayBuffer());
+  return new Uint8Array(await entryBytes(e));
+}
+async function peekFolder(entries) {
+  let n = 0;
+  for (const e of entries) {
+    if (n++ >= PEEK_MAX) break;
+    try {
+      if (e.ext === 'zon') {
+        const text = new TextDecoder().decode(new Uint8Array(await entryBytes(e)));
+        const want = resolveSongFiles(e, text), miss = want.filter((s) => !s.found);
+        e.bad = miss.length > 0;
+        e.meta = miss.length ? 'missing ' + miss.map((s) => baseOf(s.rel)).join(' ') : want.length ? want.length + (want.length === 1 ? ' song file' : ' song files') : 'no song file';
+        const t = /\.name\s*=\s*"([^"]*)"/.exec(text); if (t) e.title = t[1];
+      } else if (e.ext === 'it') {
+        const h = await headOf(e, 32);
+        if (latin1(h.subarray(0, 4)) === 'IMPM') e.title = latin1(h.subarray(4, 30));
+      } else if (e.ext !== 'swi') {
+        const h = await headOf(e, 72), off = SW_AUTHOR[latin1(h.subarray(SW_LOAD, SW_LOAD + 4))];
+        if (off) { // "AUTHOR:TITLE", and a field with no colon is all title
+          const field = latin1(h.subarray(SW_LOAD + off, SW_LOAD + off + 40)), i = field.indexOf(':');
+          e.title = i < 0 ? field : field.slice(i + 1).trim();
+          e.by = i < 0 ? '' : field.slice(0, i).trim();
+        }
+      }
+    } catch { /* unreadable: the row still opens, and says why then */ }
+    if (entries === S.folder && n % 16 === 0) renderPanel();
   }
+  if (entries === S.folder) renderPanel();
+}
+async function walkEntry(entry, out, depth) {
+  if (out.length >= FOLDER_MAX || depth > FOLDER_DEPTH) return;
+  if (entry.isFile) {
+    if (!LOADABLE.test(entry.name)) return;
+    out.push(entryOf(entry.fullPath.replace(/^\//, ''), 'folder', { file: await new Promise((res, rej) => entry.file(res, rej)) }));
+  } else if (entry.isDirectory) {
+    const reader = entry.createReader(); let batch;
+    do { batch = await new Promise((res, rej) => reader.readEntries(res, rej)); for (const e of batch) await walkEntry(e, out, depth + 1); } while (batch.length);
+  }
+}
+function fromFileList(list, title) {
+  const files = [...list].filter((f) => LOADABLE.test(f.name));
+  if (!files.length) { setStatus('nothing to open there — a song (.it .swm .sws .swt .swq) or a project (.zon) with its song files', true); return null; }
+  // a folder pick spells every name under the folder itself; drop that first part
+  const root = files[0].webkitRelativePath ? files[0].webkitRelativePath.split('/')[0] + '/' : '';
+  const entries = files.map((f) => {
+    const p = f.webkitRelativePath || f.name;
+    return entryOf(root && p.startsWith(root) ? p.slice(root.length) : p, 'folder', { file: f });
+  });
+  setFolder(entries, title || (root ? 'YOUR FOLDER — ' + root.slice(0, -1) : 'THE FILES YOU PICKED'));
+  return entries;
+}
+// a folder that holds ONE song is the song you meant; a folder of many is a list
+function afterFolder(entries) {
+  const songs = entries.filter((e) => SONG_EXT.test(e.name) && (e.ext !== 'it' || !entries.some((z) => z.ext === 'zon')));
+  if (songs.length === 1) return openEntry(songs[0], true);
+  showPanel(true);
+  setStatus(entries.length + (entries.length === 1 ? ' file' : ' files') + ' — pick one and press Enter');
 }
 
-// ------------------------------------------------------------- files
-function pickMain(files, preferred) {
-  if (preferred) { const f = files.find((f) => f.name === preferred); if (f) return f.name; }
-  const zon = files.find((f) => /\.zon$/i.test(f.name)); if (zon) return zon.name;
-  const song = files.find((f) => SONG_EXT.test(f.name)); return song ? song.name : null;
+// THE FOLDER THE BROWSER REMEMBERS (Chrome/Edge): showDirectoryPicker hands
+// back a HANDLE, which survives in IndexedDB. On the next visit the folder is
+// one click away instead of one dialog — the permission is re-asked once, and
+// only on a gesture. Firefox/Safari have no handle: their folder is the
+// one-shot snapshot the <input webkitdirectory> makes.
+const IDB_DB = 'duet-web', IDB_STORE = 'folders';
+function idb(mode, fn) {
+  return new Promise((res, rej) => {
+    const rq = indexedDB.open(IDB_DB, 1);
+    rq.onupgradeneeded = () => rq.result.createObjectStore(IDB_STORE);
+    rq.onerror = () => rej(rq.error);
+    rq.onsuccess = () => {
+      const tx = rq.result.transaction(IDB_STORE, mode), r = fn(tx.objectStore(IDB_STORE));
+      r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+    };
+  });
 }
-function openFiles(files, preferred, thenPlay) {
-  const main = pickMain(files, preferred);
-  if (!main) return setStatus('nothing to open: a .it, .swm/.sws/.swt/.swq or .zon (a .zon with its song files)', true);
-  S.pendingPlay = !!thenPlay;
-  if (S.ctx && S.ctx.state !== 'running') S.ctx.resume(); // a drop or a file pick is a gesture too: a suspended context never runs the worklet
-  setStatus('opening ' + main + ' …');
-  const enc = new TextEncoder();
-  const wire = files.map((f) => ({ nameBytes: enc.encode(f.name).buffer, bytes: f.bytes }));
-  send({ type: 'open', files: wire, main: { name: main, nameBytes: enc.encode(main).buffer } });
-}
-async function readFileList(list) {
+async function listHandle(dir) {
+  setStatus('reading ' + dir.name + ' …');
   const out = [];
-  for (const f of list) if (SONG_EXT.test(f.name) || /\.(swi)$/i.test(f.name)) out.push({ name: f.webkitRelativePath || f.name, bytes: await f.arrayBuffer() });
-  return out;
+  await walkHandle(dir, '', out, 0);
+  S.pendingFolder = null;
+  setFolder(out, 'YOUR FOLDER — ' + dir.name);
+  if (!out.length) return setStatus('no songs in ' + dir.name + ' — DUET opens .it, .swm/.sws/.swt/.swq and .zon projects', true);
+  afterFolder(out);
 }
-async function walkEntry(entry, out) {
-  if (entry.isFile) { const f = await new Promise((res, rej) => entry.file(res, rej)); if (SONG_EXT.test(f.name)) out.push({ name: entry.fullPath.replace(/^\//, ''), bytes: await f.arrayBuffer() }); }
-  else if (entry.isDirectory) {
-    const reader = entry.createReader(); let batch;
-    do { batch = await new Promise((res, rej) => reader.readEntries(res, rej)); for (const e of batch) await walkEntry(e, out); } while (batch.length);
+async function walkHandle(dir, prefix, out, depth) {
+  if (depth > FOLDER_DEPTH || out.length >= FOLDER_MAX) return;
+  for await (const [name, h] of dir.entries()) {
+    if (out.length >= FOLDER_MAX) break;
+    if (h.kind === 'directory') await walkHandle(h, prefix + name + '/', out, depth + 1);
+    else if (LOADABLE.test(name)) out.push(entryOf(prefix + name, 'folder', { handle: h }));
   }
 }
+async function pickFolder() {
+  if (!window.showDirectoryPicker) return $('#folder').click(); // Firefox, Safari: the input's snapshot
+  let dir;
+  try { dir = await window.showDirectoryPicker({ id: 'duet-songs', mode: 'read' }); } catch { return; } // closed the dialog
+  try { await idb('readwrite', (st) => st.put(dir, 'last')); } catch { /* private window: it just is not remembered */ }
+  await listHandle(dir);
+}
+// a handle's permission verbs are Chrome's own: if they are missing, try the
+// folder and let the walk say no
+const askPerm = async (dir, verb) => (dir[verb] ? await dir[verb]({ mode: 'read' }).catch(() => 'denied') : 'granted');
+async function restoreFolder() {
+  if (!window.showDirectoryPicker) return;
+  let dir; try { dir = await idb('readonly', (st) => st.get('last')); } catch { return; }
+  if (!dir) return;
+  const perm = await askPerm(dir, 'queryPermission');
+  if (perm === 'granted') return listHandle(dir).catch(() => { S.pendingFolder = dir; renderPanel(); });
+  if (perm === 'prompt') { S.pendingFolder = dir; renderPanel(); } // the browser asks once per visit, and only on a click
+}
+
+// ------------------------------------------------------ the files panel
+function showPanel(on) {
+  S.panelOpen = on;
+  document.body.classList.toggle('panel', on);
+  $('#b-files').classList.toggle('on', on);
+  if (on) { renderPanel(); $('#panel-filter').focus(); } else $('#panel-filter').blur();
+}
+function panelGroups() {
+  const f = S.filter.trim().toLowerCase();
+  const match = (e) => !f || (e.name + ' ' + e.title + ' ' + e.by).toLowerCase().includes(f);
+  const groups = [];
+  if (S.folder.length) groups.push({ label: S.folderTitle, items: S.folder.filter(match) });
+  const gal = S.gallery.filter(match), seen = [];
+  for (const e of gal) if (!seen.includes(e.group)) seen.push(e.group);
+  for (const g of seen) {
+    const items = gal.filter((e) => e.group === g);
+    // a licence every song in the group shares is the GROUP's, said once; where
+    // it differs song by song (the IT modules) each row carries its own
+    const one = items.every((e) => e.license === items[0].license) ? items[0].license : '';
+    for (const e of items) e.meta = one ? '' : e.license;
+    groups.push({ label: g, note: one, items });
+  }
+  return groups;
+}
+function renderPanel() {
+  if (!S.panelOpen) return;
+  const groups = panelGroups();
+  S.rows = [];
+  let html = '';
+  if (S.pendingFolder) html += `<div class="note">the folder <b>${esc(S.pendingFolder.name)}</b> is remembered — <button id="b-regrant">OPEN IT AGAIN</button></div>`;
+  for (const g of groups) {
+    if (!g.items.length) continue;
+    html += `<div class="group">${esc(g.label)} <span class="n">${g.items.length}</span>${g.note ? ' <span class="src">· ' + esc(g.note) + '</span>' : ''}</div>`;
+    for (const e of g.items) {
+      const i = S.rows.push(e) - 1, cls = e.ext === 'zon' ? 'project' : e.ext === 'it' ? 'it' : 'sw';
+      html += `<div class="row${i === S.sel ? ' sel' : ''}${S.playing === e.src + ':' + e.path ? ' on' : ''}" data-i="${i}">` +
+        `<span class="kind ${cls}">${esc(e.kind)}</span><span class="name">${esc(e.name)}</span>` +
+        `<span class="title">${esc(e.title)}</span><span class="by">${esc(e.by)}</span>` +
+        `<span class="meta${e.bad ? ' bad' : ''}">${esc(e.meta)}</span></div>`;
+    }
+  }
+  if (!S.rows.length) html += `<div class="note">${S.filter ? 'nothing here matches “' + esc(S.filter) + '”' : 'no songs yet — open a folder, or drop one on the page'}</div>`;
+  $('#panel-list').innerHTML = html;
+  const n = S.folder.length + S.gallery.length;
+  $('#panel-count').textContent = n + (n === 1 ? ' song' : ' songs') + (S.folder.length ? ' — your folder and the gallery' : ' — the gallery');
+  const sel = $('#panel-list .row.sel'); if (sel) sel.scrollIntoView({ block: 'nearest' });
+  const re = $('#b-regrant');
+  if (re) re.addEventListener('click', async () => {
+    const dir = S.pendingFolder;
+    if (await askPerm(dir, 'requestPermission') === 'granted') listHandle(dir).catch((err) => setStatus('cannot read ' + dir.name + ': ' + err.message, true));
+    else setStatus('the browser did not let the page read ' + dir.name + ' — open it again with [OPEN FOLDER…]', true);
+  });
+}
+function moveSel(d) {
+  if (!S.rows.length) return;
+  S.sel = Math.max(0, Math.min(S.rows.length - 1, S.sel + d));
+  renderPanel();
+}
+$('#panel-list').addEventListener('click', (e) => {
+  const row = e.target.closest('.row'); if (!row) return;
+  S.sel = Number(row.dataset.i);
+  openEntry(S.rows[S.sel], true);
+});
+$('#panel-filter').addEventListener('input', (e) => { S.filter = e.target.value; S.sel = 0; renderPanel(); });
+
+// ------------------------------------------------------------- the help
+// THE HELP (XXIII.j) — the tracker's own help box, in a page: a framed panel
+// whose title sits on the top border, a topic strip you page with ←/→, one
+// scrolling section at a time, `? or Esc closes` on the bottom border. The
+// prose lives in index.html, where prose belongs; this only pages it.
+const helpSections = [...document.querySelectorAll('#help section')];
+function showHelp(on, page) {
+  S.helpOpen = on;
+  document.body.classList.toggle('help', on);
+  $('#b-help').classList.toggle('on', on);
+  if (on) helpPage(page === undefined ? S.helpAt : page);
+}
+function helpPage(i) {
+  S.helpAt = (i + helpSections.length) % helpSections.length;
+  helpSections.forEach((s, k) => s.classList.toggle('on', k === S.helpAt));
+  $('#help-tabs').innerHTML = '<span class="arrow">◀</span>' +
+    helpSections.map((s, k) => `<span data-i="${k}"${k === S.helpAt ? ' class="on"' : ''}>${esc(s.dataset.title)}</span>`).join('<span class="arrow">·</span>') +
+    '<span class="arrow">▶</span>';
+  $('#help-body').scrollTop = 0;
+}
+$('#help-tabs').addEventListener('click', (e) => { const t = e.target.closest('[data-i]'); if (t) helpPage(Number(t.dataset.i)); });
+$('#b-help').addEventListener('click', () => showHelp(!S.helpOpen));
+// the keys the help box takes while it is up; everything else is refused so a
+// stray Space cannot pause the song you are reading about
+function helpKey(e) {
+  const body = $('#help-body'), step = body.clientHeight * 0.85;
+  switch (e.key) {
+    case 'ArrowRight': helpPage(S.helpAt + 1); return true;
+    case 'ArrowLeft': helpPage(S.helpAt - 1); return true;
+    case 'ArrowDown': body.scrollTop += 40; return true;
+    case 'ArrowUp': body.scrollTop -= 40; return true;
+    case 'PageDown': body.scrollTop += step; return true;
+    case 'PageUp': body.scrollTop -= step; return true;
+    case 'Home': body.scrollTop = 0; return true;
+    case 'End': body.scrollTop = body.scrollHeight; return true;
+    case 'Escape': case '?': case 'F1': showHelp(false); return true;
+  }
+  return false;
+}
+
+// ----------------------------------------------------------- the roads
 document.addEventListener('dragover', (e) => { e.preventDefault(); document.body.classList.add('dragging'); });
 document.addEventListener('dragleave', (e) => { if (!e.relatedTarget) document.body.classList.remove('dragging'); });
 document.addEventListener('drop', async (e) => {
   e.preventDefault(); document.body.classList.remove('dragging');
   const out = [], items = [...(e.dataTransfer.items || [])];
-  if (items.length && items[0].webkitGetAsEntry) { for (const it of items) { const en = it.webkitGetAsEntry(); if (en) await walkEntry(en, out); } }
-  else out.push(...await readFileList(e.dataTransfer.files));
-  // a dropped folder: names relative to the folder the song sits in, so the .zon's spellings resolve
-  const main = pickMain(out); if (main && main.includes('/')) { const dir = main.slice(0, main.lastIndexOf('/') + 1); for (const f of out) if (f.name.startsWith(dir)) f.name = f.name.slice(dir.length); }
-  openFiles(out, null, true);
+  if (items.length && items[0].webkitGetAsEntry) { for (const it of items) { const en = it.webkitGetAsEntry(); if (en) await walkEntry(en, out, 0); } }
+  else for (const f of e.dataTransfer.files) if (LOADABLE.test(f.name)) out.push(entryOf(f.name, 'folder', { file: f }));
+  if (!out.length) return setStatus('nothing to open there — a song (.it .swm .sws .swt .swq), a project (.zon) with its song files, or a folder', true);
+  // a dropped folder: the names go relative to the folder the song sits in, so a project's spellings resolve
+  const main = pickMainEntry(out), dir = main ? dirOf(main.path) : '';
+  if (dir) for (const en of out) if (en.path.startsWith(dir)) en.path = en.path.slice(dir.length);
+  setFolder(out, dir ? 'YOUR FOLDER — ' + dir.replace(/\/$/, '').split('/').pop() : 'THE FILES YOU DROPPED');
+  if (main) openEntry(main, true); else afterFolder(out);
 });
 $('#b-open').addEventListener('click', () => $('#files').click());
-$('#files').addEventListener('change', async (e) => openFiles(await readFileList(e.target.files), null, true));
+$('#files').addEventListener('change', (e) => { const en = fromFileList(e.target.files, 'THE FILES YOU PICKED'); if (en) { const m = pickMainEntry(en); if (m) openEntry(m, true); else afterFolder(en); } });
+$('#b-folder').addEventListener('click', pickFolder);
+$('#folder').addEventListener('change', (e) => { const en = fromFileList(e.target.files, null); if (en) afterFolder(en); });
+$('#b-files').addEventListener('click', () => showPanel(!S.panelOpen));
 
-// the gallery: songs.json + the files under songs/ in the corpus's layout
+// the gallery: songs.json names every song it ships, with who made it and
+// under what licence; the files sit under songs/ in the gallery's own layout
 async function loadGallery() {
-  try { S.gallery = await (await fetch('songs.json')).json(); } catch { S.gallery = []; return; }
-  const sel = $('#gallery');
-  for (const g of S.gallery) { const o = document.createElement('option'); o.value = g.main; o.textContent = g.title + ' — ' + g.by; sel.appendChild(o); }
-  sel.addEventListener('change', () => { const g = S.gallery.find((g) => g.main === sel.value); if (g) openGallery(g, true); });
+  let list = [];
+  try { list = await (await fetch('songs.json')).json(); } catch { list = []; }
+  if (list && list.songs) list = list.songs;
+  S.gallery = (list || []).map((g) => entryOf(g.main, 'gallery', {
+    url: new URL('songs/' + g.main, location.href).href,
+    title: g.title || '', by: g.by || '', group: g.group || 'THE GALLERY',
+    license: g.license || '', source: g.source || '', meta: g.license || '',
+  }));
+  renderPanel();
 }
-async function openGallery(g, thenPlay) {
-  const base = new URL('songs/' + g.main, location.href), name = g.main.split('/').pop();
-  setStatus('fetching ' + g.main + ' …');
-  const r = await fetch(base); if (!r.ok) return setStatus('cannot fetch ' + g.main, true);
-  const files = [{ name, bytes: await r.arrayBuffer() }];
-  if (/\.zon$/i.test(name)) { // the .zon names its song files; fetch them by its spelling, against its folder
-    const text = new TextDecoder().decode(files[0].bytes);
-    for (const m of text.matchAll(/\.(it|swm)\s*=\s*"([^"]+)"/g)) {
-      const rel = m[2], rr = await fetch(new URL(rel, base));
-      if (rr.ok) files.push({ name: rel, bytes: await rr.arrayBuffer() }); else setStatus('missing ' + rel, true);
-    }
-  }
-  openFiles(files, name, thenPlay);
-}
-
 // ---------------------------------------------------------- controls
-function loopToggle() { S.loop = S.loop === -1 ? 0 : -1; send({ type: 'loop', times: S.loop }); $('#b-loop').textContent = S.loop === -1 ? 'LOOP ∞' : 'LOOP once'; $('#b-loop').classList.toggle('on', S.loop === -1); }
-$('#b-play').addEventListener('click', () => { send({ type: 'play' }); S.ended = false; });
-$('#b-pause').addEventListener('click', () => { const p = S.position; if (!p) return; if (p.paused) send({ type: 'unpause' }); else if (p.playing) send({ type: 'pause' }); else send({ type: 'resume' }); });
-$('#b-stop').addEventListener('click', () => send({ type: 'stop' }));
-$('#b-rewind').addEventListener('click', () => send({ type: 'rewind' }));
+function loopToggle() { duet.loop = duet.loop !== -1; $('#b-loop').textContent = duet.loop === -1 ? 'LOOP ∞' : 'LOOP once'; $('#b-loop').classList.toggle('on', duet.loop === -1); }
+$('#b-play').addEventListener('click', () => duet.play());            // from the top: the clock starts again
+$('#b-pause').addEventListener('click', () => duet.togglePause());
+$('#b-stop').addEventListener('click', () => duet.stop());            // m64's ruling: STOP puts the time back to 0:00
+$('#b-rewind').addEventListener('click', () => duet.rewind());
 $('#b-loop').addEventListener('click', loopToggle);
-$('#b-sub-prev').addEventListener('click', () => S.info && send({ type: 'subtune', subtune: (S.info.subtune + S.info.subtunes - 1) % S.info.subtunes }));
-$('#b-sub-next').addEventListener('click', () => S.info && send({ type: 'subtune', subtune: (S.info.subtune + 1) % S.info.subtunes }));
-$('#b-model').addEventListener('click', () => S.info && send({ type: 'model', model: S.info.model === 1 ? 0 : 1 }));
-$('#b-quality').addEventListener('click', () => S.info && send({ type: 'quality', quality: (S.info.quality + 1) % 3 }));
-$('#vol').addEventListener('input', (e) => { if (S.gain) S.gain.gain.value = e.target.value / 100; });
+$('#b-view').addEventListener('click', toggleView);
+$('#b-sub-prev').addEventListener('click', () => { const i = duet.info; if (i) duet.subtune = (i.subtune + i.subtunes - 1) % i.subtunes; });
+$('#b-sub-next').addEventListener('click', () => { const i = duet.info; if (i) duet.subtune = (i.subtune + 1) % i.subtunes; });
+$('#b-model').addEventListener('click', () => { const i = duet.info; if (i) duet.model = i.model === 1 ? 0 : 1; });
+$('#b-quality').addEventListener('click', () => { const i = duet.info; if (i) duet.quality = (i.quality + 1) % 3; });
+$('#vol').addEventListener('input', (e) => { duet.volume = e.target.value / 100; });
 document.querySelectorAll('#modes span[data-viz]').forEach((el) => el.addEventListener('click', () => setViz(el.dataset.viz)));
 function setViz(mode) { S.viz = mode; document.querySelectorAll('#modes span[data-viz]').forEach((el) => el.classList.toggle('on', el.dataset.viz === mode)); }
 document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
-  const p = S.position || {};
+  const inField = e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT';
+  if (S.helpOpen) { if (helpKey(e)) e.preventDefault(); return; } // the help is on top: it takes its keys and swallows the rest
+  if (S.panelOpen) { // the panel takes the four keys that move it; the filter box takes the rest
+    switch (e.key) {
+      case 'ArrowDown': e.preventDefault(); return moveSel(1);
+      case 'ArrowUp': e.preventDefault(); return moveSel(-1);
+      case 'Enter': e.preventDefault(); return void openEntry(S.rows[S.sel], true);
+      case 'Escape': e.preventDefault(); return showPanel(false);
+    }
+    if (inField) return;
+  }
+  if (inField) return;
   switch (e.key) {
     case ' ': e.preventDefault(); $('#b-pause').click(); break;
     case 'Enter': $('#b-play').click(); break;
     case 'Escape': $('#b-stop').click(); break;
+    case 'f': case 'F': e.preventDefault(); showPanel(true); break; // the panel takes the filter's focus: the f must not land in it
+    case '?': case 'F1': e.preventDefault(); showHelp(true); break;
     case 'l': case 'L': loopToggle(); break;
+    case 'v': case 'V': toggleView(); break;
     case 'ArrowLeft': setViz(VIZ_MODES[(VIZ_MODES.indexOf(S.viz) + VIZ_MODES.length - 1) % VIZ_MODES.length]); break;
     case 'ArrowRight': setViz(VIZ_MODES[(VIZ_MODES.indexOf(S.viz) + 1) % VIZ_MODES.length]); break;
     case 'ArrowUp': S.bars = BAR_STYLES[(BAR_STYLES.indexOf(S.bars) + BAR_STYLES.length - 1) % BAR_STYLES.length]; break;
     case 'ArrowDown': S.bars = BAR_STYLES[(BAR_STYLES.indexOf(S.bars) + 1) % BAR_STYLES.length]; break;
   }
-  void p;
 });
 
 // ------------------------------------------------- ?song= and the self-test
 async function afterReady() {
   await loadGallery();
+  restoreFolder();
   const want = params.get('song');
-  // ?song= names a gallery entry, or any file under songs/ (a .zon fetches its song files beside it)
-  const g = want ? (S.gallery.find((g) => g.main === want || g.main.endsWith('/' + want)) || { main: want, title: want, by: '' }) : null;
-  if (g) { $('#gallery').value = g.main; openGallery(g, !!params.get('autotest')); }
-  else if (params.get('autotest') && S.gallery.length) { $('#gallery').value = S.gallery[0].main; openGallery(S.gallery[0], true); }
+  // ?song= names a gallery entry, or any file under songs/ (a project fetches its song files beside it)
+  const e = want
+    ? S.gallery.find((g) => g.path === want || g.path.endsWith('/' + want))
+      || entryOf(want, 'gallery', { url: new URL('songs/' + want, location.href).href, title: want, group: 'THE GALLERY' })
+    : null;
+  if (e) return void openEntry(e, !!params.get('autotest'));
+  if (params.get('autotest') && S.gallery.length) return void openEntry(S.gallery[0], true);
+  showPanel(true); // nothing named: the page opens on its files
 }
 function selfTest() {
-  const p = S.position || {}, line = `SELFTEST ${S.info && S.frames > 0 && S.eventsSeen > 0 ? 'ok' : 'FAIL'} version=${S.version} mode=${S.mode} bytes=${S.moduleBytes} title="${S.info ? S.info.title : ''}" kind=${S.info ? S.info.kind : '-'} frames=${S.frames} events=${S.eventsSeen} rows=${S.rowsSeen} columns=${S.columns.size} load=${Math.round(S.load * 100)}% ready=${S.ready} ctx=${S.ctx ? S.ctx.state : '-'} status="${$('#status').textContent}"`;
+  const info = duet.info, line = `SELFTEST ${info && duet.frames > 0 && duet.eventsSeen > 0 ? 'ok' : 'FAIL'} version=${duet.version} mode=${duet.mode} bytes=${duet.moduleBytes} build=${STAMP || '-'} title="${info ? info.title : ''}" kind=${info ? info.kind : '-'} frames=${duet.frames} events=${duet.eventsSeen} rows=${S.rowsSeen} columns=${S.columns.size} view=${S.view} gallery=${S.gallery.length} files=${S.folder.length} folders=${window.showDirectoryPicker ? 'handle' : 'snapshot'} help=${S.helpOpen ? 'p' + S.helpAt : 'closed'}/${helpSections.length} time=${duet.time.toFixed(1)} load=${Math.round(duet.load * 100)}% ready=${duet.isReady} ctx=${duet.context.state} status="${$('#status').textContent}"`;
   $('#selftest').textContent = line; console.log(line);
 }
 
@@ -444,4 +866,3 @@ window.addEventListener('resize', fit);
 fit();
 setViz('scope');
 requestAnimationFrame(frame);
-boot().catch((e) => { S.lastError = 'the page could not start: ' + e.message; setStatus(S.lastError, true); });

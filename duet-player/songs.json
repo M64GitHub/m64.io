@@ -1,20 +1,722 @@
 [
-  {"title": "Feel the Conga Beat (cover)", "by": "Hermit - SID-Wizard example", "main": "swm/congabeat.swm"},
-  {"title": "A Childhood Dream (2SID)", "by": "G. Chiummo - SID-Wizard example", "main": "swm/childhood.sws"},
-  {"title": "Stickman (2SID)", "by": "Chabee - SID-Wizard example", "main": "swm/chb-stickman.sws"},
-  {"title": "Thiz Iz Da Gizda (3SID)", "by": "Hermit - SID-Wizard example", "main": "swm/thizizda.swt"},
-  {"title": "4SID example", "by": "Hermit - SID-Wizard example", "main": "swm/4sid-example.swq"},
-  {"title": "Fallout 4 Main Theme (cover; 2 subtunes)", "by": "Hermit - SID-Wizard example", "main": "swm/fallout-menu.swm"},
-  {"title": "Subtune Jumper (3 subtunes)", "by": "Necropolo - SID-Wizard example", "main": "swm/subjumper.swm"},
-  {"title": "M8 Co-Play Demo (an .it and an .swm on one clock)", "by": "DUET corpus; the SWM half is Hermit's", "main": "coplay/co-demo.zon"},
-  {"title": "CO3 SD FX Duet (3 chips)", "by": "DUET corpus", "main": "coplay/co3-demo.zon"},
-  {"title": "hybrid demo (SID columns in an .it)", "by": "DUET corpus", "main": "hybrid/hybrid-demo.it"},
-  {"title": "dust-demo (DUST)", "by": "DUET corpus", "main": "dust/dust-demo.zon"},
-  {"title": "dust-topos (DUST)", "by": "DUET corpus", "main": "dust/dust-topos.zon"},
-  {"title": "dust-cloud (DUST)", "by": "DUET corpus", "main": "dust/dust-cloud.zon"},
-  {"title": "dust-wobble (DUST)", "by": "DUET corpus", "main": "dust/dust-wobble.zon"},
-  {"title": "dusk first (DUSK)", "by": "DUET corpus", "main": "dusk/dusk-first.zon"},
-  {"title": "acid demo (DUSK, the 303 filter)", "by": "DUET corpus", "main": "dusk/acid-demo.zon"},
-  {"title": "acid demo 2 (DUSK)", "by": "DUET corpus", "main": "dusk/acid-demo2.zon"},
-  {"title": "send automation (the room)", "by": "DUET corpus", "main": "sends.zon"}
+ {
+  "main": "duet/acid-demo.zon",
+  "title": "acid demo (DUSK, the 303 filter)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/acid-demo2.zon",
+  "title": "acid demo II (DUSK)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/bam1.zon",
+  "title": "bam1 (hybrid: 4 IT channels and an 8580)",
+  "by": "m64",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/co-demo.zon",
+  "title": "M8 Co-Play Demo (an .it and an .swm on one clock)",
+  "by": "m64 + Claude (the SID half: Hermit)",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/co3-demo.zon",
+  "title": "CO3 SD FX Duet (3 chips)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/dusk-first.zon",
+  "title": "dusk first (DUSK)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/dust-cloud.zon",
+  "title": "dust-cloud (DUST, the grain engine)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/dust-demo.zon",
+  "title": "dust-demo (DUST, the default patch)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/dust-topos.zon",
+  "title": "dust-topos (DUST)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/dust-wobble.zon",
+  "title": "dust-wobble (DUST)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/hybrid-demo.it",
+  "title": "hybrid demo (SID columns inside an .it)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/sends.zon",
+  "title": "send automation (the mixer's sends)",
+  "by": "m64 + Claude",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "duet/test1.zon",
+  "title": "duet-test (58 channels, 2 chips)",
+  "by": "m64",
+  "group": "DUET DEMOS",
+  "license": "GPL-2.0-or-later",
+  "source": "tests/corpus/ in this repository"
+ },
+ {
+  "main": "swm/4sid-example.swq",
+  "title": "4SID EXAMPLE-TUNE",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/60minuteman.swm",
+  "title": "SIXTY MINUTE MAN COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/banditradio.swm",
+  "title": "STALKER BANDIT BASE RADIO MUSIC",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/bronkosaurus.swm",
+  "title": "BRONKOSAURUS",
+  "by": "SPIDER JERUSALEM",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/c0z-50shades.swm",
+  "title": "50 SHADES OF GRADIUS -8580-",
+  "by": "C0ZMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/c0z-bldrdash.swm",
+  "title": "BOULDER DASH REMAKE FOR GAB -8580-",
+  "by": "C0ZMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/c0z-lstninja.swm",
+  "title": "LAST NINJA REMIX-REMIX -8580-",
+  "by": "C0ZMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/c0z-treasure.swm",
+  "title": "THE TREASURE IS ALL MINE -8580-",
+  "by": "C0ZMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/chb-stickman.sws",
+  "title": "STICKMAN",
+  "by": "CHABEE",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/childhood.sws",
+  "title": "A CHILDHOOD DREAM",
+  "by": "G. CHIUMMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/civilization.swm",
+  "title": "CIVILIZATION COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/clear-sky.swm",
+  "title": "STALKER CLEAR SKY BASE RADIO",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/cloudlessr.swm",
+  "title": "CLOUDLESS RAIN",
+  "by": "TRITON",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/congabeat.swm",
+  "title": "FEEL THE CONGA BEAT COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/crawl-out.swm",
+  "title": "CRAWL OUT COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/csillag102.swm",
+  "title": "*102#",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/demo-example.swm",
+  "title": "DEMO PLAYER-TYPE SHORT EXAMPLE",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/dirge-planet.swm",
+  "title": "DIRGE FOR PLANET-STALKER RADIOZAK",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/dudelking.swm",
+  "title": "DUDELKING RETURNS",
+  "by": "SPIDER JERUSALEM",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/easyliving.swm",
+  "title": "EASY LIVING COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/echo-test.swm",
+  "title": "ECHO ENGINE TEST",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/egblues.sws",
+  "title": "MEZZOFORTE E.G. BLUES COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/end-ot-world.swm",
+  "title": "END OF THE WORLD COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/euphoria.swm",
+  "title": "TOGGLE        EUPHORIA",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/fallonitsway.swm",
+  "title": "FALL IS ON ITS WAY",
+  "by": "SPIDER JERUSALEM",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/fallout-menu.swm",
+  "title": "FALLOUT4 MAIN THEME COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/fightunknown.swm",
+  "title": "FIGHTING UNKNOWN-STALKER RADIOZAK",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/flashitback.swm",
+  "title": "FLASH IT BACK",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/friendlyfire.swm",
+  "title": "FRIENDLY FIRE",
+  "by": "CHABEE AND HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/fuck yer cma.swm",
+  "title": "FUCK YOUR C-MAJOR",
+  "by": "NECROPOLO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/funktheworld.swm",
+  "title": "FUNK THE WORLD",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/funtempo.swm",
+  "title": "FUNTEMPO",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/futuco.swm",
+  "title": "FUTURE COMETS",
+  "by": "TRITON",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/glacialblues.swm",
+  "title": "TOGGLE        GLACIAL BLUES",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/gurza-dream.swm",
+  "title": "ADDARAYA GURZA DREAMING",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/idontwant.swm",
+  "title": "I DONT WANT TO SET THE WORLD ON",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/kerekesintro.swm",
+  "title": "CHABEE - KB-INTRO",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/kickslamule.swm",
+  "title": "TOGGLE        KICKS LIKE A M.U.L.E.",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/lastsummer.swm",
+  "title": "LAST SUMMER TASTE",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/lenore.swm",
+  "title": "CHICK COREA LENORE COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/lirai-onvall.swm",
+  "title": "LIRAI ONVALLOMAS",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/nepzenek.swm",
+  "title": "MAGYAR NEPZENEK",
+  "by": "HERMIT AND SHOKEY",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/newwave.swt",
+  "title": "NEW WAVE",
+  "by": "GAETANO CHIUMMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/ninfa.swm",
+  "title": "NINFA MAIN1",
+  "by": "2012 NECROPOLO/L64",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/np-monologue.swm",
+  "title": "MONOLOGUE",
+  "by": "NECROPOLO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/np-sw19-emu.swm",
+  "title": "NECROPOLO-SW19-EMU",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/oakyardmemo.swm",
+  "title": "TOGGLE        OAKYARD MEMORIES",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/pantheon.swm",
+  "title": "PANTHEON",
+  "by": "TOGGLE",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/pimpmycomm.swm",
+  "title": "PIMP MY COMMODORE DEMO-MUSIC 5",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/profugos.swm",
+  "title": "PROFUGOS COVER",
+  "by": "UCTUMI",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/quickscore.swm",
+  "title": "QUICK SCORE BALLAD",
+  "by": "SPIDER JERUSALEM",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/rain8580.swm",
+  "title": "MUSIC BY ADAM/ONSLAUGHT      17/NOV/2012",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/ramos.swt",
+  "title": "RAMOS 2016",
+  "by": "G.CHIUMMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/samar20-out.swm",
+  "title": "SAMAR IS 20  - OUTRO...",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/sidhack.swm",
+  "title": "HACKED/STOLEN SID-WIZARD INSTRUMENTS",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/stalker-menu.swm",
+  "title": "STALKER MAIN MENU MUSIC",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/subjumper.swm",
+  "title": "SUBTUNE JUMPER",
+  "by": "NECROPOLO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/techno.swt",
+  "title": "TECHNO",
+  "by": "GAETANO CHIUMMO",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/tevagyazakit.swm",
+  "title": "TEVAGYAZAKITALEGJOBBAN COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/thizizda.swt",
+  "title": "THIZ IZ DA GIZDA 3SID",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/uraniumfever.swm",
+  "title": "URANIUM FEVER COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/versenyvagym.swm",
+  "title": "VERSENY VAGY MI A SZOSZ",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/vigasz.swm",
+  "title": "VIGASZ",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/villanyleo.swm",
+  "title": "A NEVEM VILLANY LEO",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/vn-drdudas.swm",
+  "title": "VINCENZO - DR DUDAS C64 REMIX",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/vn-pimasz.swm",
+  "title": "VINCENZO - PIMASZ C64 REMIX",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/vn-waiting.swm",
+  "title": "VINCENZO - WAITING FOR THE SUNSHINE C64",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/vn-wtfrmx.swm",
+  "title": "VINCENZO - WHAT THE FOLK C64 REMIX",
+  "by": "",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/warissavage.swm",
+  "title": "WAR IS SAVAGE",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "swm/wonderfulguy.swm",
+  "title": "WONDERFUL GUY COVER",
+  "by": "HERMIT",
+  "group": "SID-WIZARD EXAMPLES",
+  "license": "WTFPL",
+  "source": "SID-Wizard 1.97, resources/examples/ (Hermit)"
+ },
+ {
+  "main": "it/breakingthrough.it",
+  "title": "BreakingThrough...Finally",
+  "by": "Beyond",
+  "group": "IT MODULES",
+  "license": "Public Domain",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=172073"
+ },
+ {
+  "main": "it/djfl_-_unafraid.it",
+  "title": "Unafraid",
+  "by": "Djego Flochs (djfl)",
+  "group": "IT MODULES",
+  "license": "CC BY 4.0",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=210671"
+ },
+ {
+  "main": "it/ekorren_-_littledanyjel.it",
+  "title": "Little Danyjel",
+  "by": "Beyond",
+  "group": "IT MODULES",
+  "license": "Public Domain",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=176209"
+ },
+ {
+  "main": "it/k_jose_-_a_light_waltz.it",
+  "title": "A Light Waltz",
+  "by": "K. Jose",
+  "group": "IT MODULES",
+  "license": "CC0 1.0",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=209322"
+ },
+ {
+  "main": "it/neptunium237_-_stars.it",
+  "title": "stars",
+  "by": "NEPTUNIUM237",
+  "group": "IT MODULES",
+  "license": "Public Domain",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=213283"
+ },
+ {
+  "main": "it/pxf_squarevox.it",
+  "title": "Squarevox",
+  "by": "elPatrixF",
+  "group": "IT MODULES",
+  "license": "CC BY 4.0",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=175472"
+ },
+ {
+  "main": "it/tix0.it",
+  "title": "TIXO",
+  "by": "NEPTUNIUM237",
+  "group": "IT MODULES",
+  "license": "Public Domain",
+  "source": "https://modarchive.org/index.php?request=view_by_moduleid&query=208927"
+ }
 ]

@@ -14,6 +14,11 @@ const ENOSYS = 52, EBADF = 8, ENOENT = 44;
 // An AudioWorkletGlobalScope is a small world: no text codec is promised
 // there, so the page sends names as UTF-8 bytes and this decodes the
 // library's C strings by hand.
+// XXIII.d: the C ABI's own two numbers for the pattern data — a SW
+// module's patterns live above the offset, and a formatted cell never
+// needs more bytes than this (include/duet.h).
+const SW_PATTERN = 256, CELL_TEXT_MAX = 40;
+
 function utf8(bytes) {
   let out = '', i = 0;
   while (i < bytes.length) {
@@ -167,6 +172,32 @@ class DuetProcessor extends AudioWorkletProcessor {
       model: E.duet_song_sid_model(s), quality: E.duet_song_sid_quality(s), markers, loop: this.loop,
     };
   }
+  /// XXIII.d THE GRID VIEW: one pattern's cells, as the LIBRARY spells
+  /// them (`duet_song_format_cell`), so the page's grid and the
+  /// tracker's own read the same characters. A fixed byte stride and
+  /// one transferred buffer — this scope has no TextDecoder and the
+  /// page does, so the bytes are decoded there, once per pattern.
+  pattern(id) {
+    const E = this.E, s = this.song;
+    const rows = s ? E.duet_song_pattern_rows(s, id) : -1;
+    if (!s || rows <= 0) { this.port.postMessage({ type: 'pattern', id, rows: -1 }); return; }
+    const channels = id >= SW_PATTERN ? 1 : Math.max(E.duet_song_num_channels(s), 1);
+    const buf = E.duet_wasm_alloc(CELL_TEXT_MAX), cell = E.duet_wasm_alloc(8);
+    const text = new Uint8Array(rows * channels * CELL_TEXT_MAX);
+    const dialects = new Uint8Array(channels);
+    for (let c = 0; c < channels; c++)
+      dialects[c] = E.duet_song_cell(s, id, 0, c, cell) === 0 ? this.mem()[cell] : 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < channels; c++) {
+        const n = E.duet_song_format_cell(s, id, r, c, buf, CELL_TEXT_MAX);
+        if (n > 0) text.set(this.mem().subarray(buf, buf + n), (r * channels + c) * CELL_TEXT_MAX);
+      }
+    }
+    E.duet_wasm_free(cell, 8);
+    E.duet_wasm_free(buf, CELL_TEXT_MAX);
+    this.port.postMessage({ type: 'pattern', id, rows, channels, stride: CELL_TEXT_MAX, dialects, text }, [text.buffer, dialects.buffer]);
+  }
+
   fail(message, name) { this.port.postMessage({ type: 'error', message, name }); }
 
   // --------------------------------------------------------- verbs
@@ -180,6 +211,9 @@ class DuetProcessor extends AudioWorkletProcessor {
     if (!E) { if (m.type === 'open') this.fail('the wasm module did not start — reload the page; the console has the reason'); return; }
     if (m.type === 'open') { this.open(m.files, m.main); return; }
     if (m.type === 'close') { this.close(); return; }
+    // XXIII.d: a pattern read needs the SONG, not the engine — and it
+    // always answers, so a page waiting on one never waits forever
+    if (m.type === 'pattern') { this.pattern(m.id); return; }
     if (!this.eng) return;
     switch (m.type) {
       case 'play': E.duet_engine_play(this.eng); this.ended = false; break;
