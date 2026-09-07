@@ -6,7 +6,7 @@
 
 :root {
   /* grounds (near-black) */
-  --bg:            #081020;   /* deep blue-black — preferred ground */
+  --bg:            #0a0e18;   /* blue-black ground, desaturated (was #081020) */
   --bg-void:       #000000;
   --surface:       #0d0d14;
   --surface-2:     #11131c;
@@ -83,6 +83,10 @@ body {
   z-index: 91;
   background: radial-gradient(ellipse 90% 80% at 50% 45%, transparent 55%, rgba(0,0,0,0.55) 100%);
 }
+
+/* ---- flat mode (2026-09-07): no grid, no scanlines, calmer ground --------- */
+/* toggle here: .bg-grid = Tron raster · .bg-scan = CRT scanlines · .bg-vignette */
+.bg-grid, .bg-scan { display: none; }
 
 /* keep content above the FX */
 .page, .topbar, footer.site { position: relative; z-index: 10; }
