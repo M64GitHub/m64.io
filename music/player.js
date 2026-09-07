@@ -37,17 +37,21 @@
       '</div>';
   }
 
-  /* ---- music index ------------------------------------------------------- */
-  function renderIndex(containerId) {
+  /* ---- music index (music page; the homepage strip passes opts) ---------- */
+  /* opts: { base: 'music/' (path prefix for album links), captions: false }   */
+  function renderIndex(containerId, opts) {
+    opts = opts || {};
+    var base = opts.base || '', captions = opts.captions !== false;
     var data = window.M64_MUSIC, root = byId(containerId);
     if (!root || !data) return;
     root.innerHTML = data.albums.map(function (al) {
       var a = acc(al.accent), n = al.tracks.length;
       var meta = al.locked ? 'locked' : (n + (n === 1 ? ' track' : ' tracks'));
-      return '<a class="album-card" href="album.html?id=' + encodeURIComponent(al.id) + '">' +
+      return '<a class="album-card" href="' + esc(base) + 'album.html?id=' + encodeURIComponent(al.id) + '" title="' + esc(al.title) + '">' +
         coverHTML(al) +
-        '<div class="acap"><div class="aname" style="color:' + a[0] + '">' + esc(al.title) + '</div>' +
-        '<div class="ameta">' + esc(al.artist) + ' · ' + al.year + ' · ' + meta + '</div></div></a>';
+        (captions ? '<div class="acap"><div class="aname" style="color:' + a[0] + '">' + esc(al.title) + '</div>' +
+        '<div class="ameta">' + esc(al.artist) + ' · ' + al.year + ' · ' + meta + '</div></div>' : '') +
+        '</a>';
     }).join('');
   }
 
