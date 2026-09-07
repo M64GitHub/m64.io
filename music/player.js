@@ -46,12 +46,16 @@
     if (!root || !data) return;
     root.innerHTML = data.albums.map(function (al) {
       var a = acc(al.accent), n = al.tracks.length;
-      var meta = al.locked ? 'locked' : (n + (n === 1 ? ' track' : ' tracks'));
+      var meta = esc(al.artist) + (al.year ? ' · ' + al.year : '') + ' · ' +
+        (al.locked ? 'soon' : n + (n === 1 ? ' track' : ' tracks'));
+      var cap = captions ? '<div class="acap"><div class="aname" style="color:' + a[0] + '">' + esc(al.title) + '</div>' +
+        '<div class="ameta">' + meta + '</div></div>' : '';
+      if (al.locked) {   /* a placeholder for the future — not clickable yet */
+        return '<div class="album-card is-locked" title="' + esc(al.title + ' — ' + (al.lockMsg || 'coming soon')) + '">' +
+          coverHTML(al) + cap + '</div>';
+      }
       return '<a class="album-card" href="' + esc(base) + 'album.html?id=' + encodeURIComponent(al.id) + '" title="' + esc(al.title) + '">' +
-        coverHTML(al) +
-        (captions ? '<div class="acap"><div class="aname" style="color:' + a[0] + '">' + esc(al.title) + '</div>' +
-        '<div class="ameta">' + esc(al.artist) + ' · ' + al.year + ' · ' + meta + '</div></div>' : '') +
-        '</a>';
+        coverHTML(al) + cap + '</a>';
     }).join('');
   }
 
@@ -72,7 +76,7 @@
       '<section class="album-hero" style="--cv:' + a[0] + ';--cvt:' + a[1] + '">' +
         '<div>' + coverHTML(al) + '</div>' +
         '<div class="ainfo"><h1>' + esc(al.title) + '</h1>' +
-          '<div class="asub">' + esc(al.artist) + ' · ' + al.year + '</div>' +
+          '<div class="asub">' + esc(al.artist) + (al.year ? ' · ' + al.year : '') + '</div>' +
           '<div class="adesc">' + esc(al.desc || '') + '</div>' +
           '<div class="gear">' + gear + '</div>' +
           (links ? '<div style="margin-top:16px;font-family:var(--font-mono);font-size:13px">' + links + '</div>' : '') +

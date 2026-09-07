@@ -19,6 +19,29 @@ window.M64_MUSIC = {
       tracks: [
         { t: 'Pixel Surge', d: '5:00', src: 'pixel-surge.mp3' }
       ]
+    },
+    /* placeholders for the future — locked albums render as covers that are not clickable yet */
+    {
+      id: 'gr1d-ost',
+      title: 'GR1D — Original Soundtrack',
+      cover: 'GR1D · OST',
+      artist: 'm64',
+      accent: 'cyan',
+      locked: true,
+      lockMsg: 'ships with the game',
+      desc: 'The light-cycle arena, scored. Deterministic neon to race, derez and lockstep to — written for GR1D, arriving with it.',
+      tracks: []
+    },
+    {
+      id: 'phaze-ost',
+      title: 'PHAZE — Original Soundtrack',
+      cover: 'PHAZE · OST',
+      artist: 'm64',
+      accent: 'magenta',
+      locked: true,
+      lockMsg: 'ships with the game',
+      desc: 'Run, gun, flip. Heavier, hotter, magenta — the polarity-soaked soundtrack to PHAZE, arriving with the launch.',
+      tracks: []
     }
   ]
 };
