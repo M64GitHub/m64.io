@@ -15,9 +15,9 @@ window.M64_MUSIC = {
       accent: 'magenta',
       gear: ['Suno 4.5', 'Reason', '140 BPM'],
       links: [{ label: 'the demo → m64.io/pxlv', href: '../pxlv/' }],
-      desc: 'The soundtrack of PIXEL LOVE — the terminal demo that placed 4th at Assembly 2026. "Pixel Surge" came from Suno 4.5, from one prompt: chiptune EDM with Game Boy and Commodore 64 colors. Suno returned 5:40 at 140 BPM; the demo runs on a 5:00 cut of it, every effect locked to the beat. This is the full track, uncut.',
+      desc: 'The soundtrack of PIXEL LOVE — the terminal demo that placed 4th at Assembly 2026. "Pixel Surge" came from Suno 4.5, from one prompt: chiptune EDM with Game Boy and Commodore 64 colors. Suno returned 5:40 at 140 BPM; I cut it by hand to exactly 5:00 — 700 beats — and every effect in the demo is locked to it. This is that cut: the track exactly as the demo plays it.',
       tracks: [
-        { t: 'Pixel Surge', d: '5:40', src: 'pixel-surge.mp3' }
+        { t: 'Pixel Surge', d: '5:00', src: 'pixel-surge.mp3' }
       ]
     }
   ]
