@@ -1,12 +1,14 @@
 /* m64 blog — neon article style.
    Re-skinned to the loud-neon brand (see m64-core/identity/visual.md). Same selectors as
    before, so existing post HTML is untouched. Fonts come in via @import; the grid + scanline
-   FX are drawn with body pseudo-elements, so no markup changes are needed. */
+   FX are drawn with body pseudo-elements, so no markup changes are needed.
+   Flat ground since 2026-09-07 (see identity/visual.md → Motifs → Flat ground): the grid and
+   scanlines are switched off below and the ground is desaturated. */
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-  --bg: #081020;  --bg-void: #04080f;  --surface: #0d131f;
+  --bg: #0a0e18;  --bg-void: #05070c;  --surface: #0f121b;   /* desaturated 2026-09-07 (were #081020 / #04080f / #0d131f) */
   --cyan: #00ffff;  --cyan-glow: #00b4c8;  --magenta: #ff40c0;  --amber: #ffa032;  --violet: #a070ff;
   --text: #e6e6ec;  --text-2: #9aa0aa;  --text-dim: #55606a;
   --border: rgba(0, 255, 255, 0.10);  --hair: rgba(255, 255, 255, 0.06);
@@ -16,7 +18,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; background: radial-gradient(ellipse 100% 80% at 50% 0%, #0b1426, #060a14); }
+html { scroll-behavior: smooth; background: radial-gradient(ellipse 100% 80% at 50% 0%, #0d121e, #07090f); }
 body {
   font-family: var(--sans); font-size: 18px; font-weight: 350; line-height: 1.75;
   color: var(--text); background: transparent;
@@ -24,6 +26,11 @@ body {
 }
 
 /* FX layers via pseudo-elements — no HTML edits required */
+/* ---- flat mode (2026-09-07): no scanlines, no grid ------------------------- */
+/* toggle here: body::before = CRT scanlines · body::after = Tron grid            */
+/* (to bring scanlines back soft, also drop the .16 alphas below to ~.07)         */
+body::before, body::after { display: none; }
+
 body::before { content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none;
   background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.16) 3px, rgba(0,0,0,.16) 4px); }
 body::after { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
