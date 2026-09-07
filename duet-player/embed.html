@@ -34,6 +34,10 @@
 <div id="rows"></div>
 <span id="selftest"></span>
 
+<script>
+  // a file:// page has no origin: the module import below would be refused with a bare console error — say why instead
+  if (location.protocol === 'file:') document.getElementById('status').textContent = 'this page cannot run from a file:// address — serve the directory and open it over http (python3 -m http.server -b 127.0.0.1 8000 in this folder, then http://localhost:8000/embed.html)';
+</script>
 <script type="module">
 import { DuetEngine } from './duet-web.js';
 const duet = new DuetEngine();                                    // the AudioContext + the worklet; the module found beside duet-web.js

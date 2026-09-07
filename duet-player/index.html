@@ -334,6 +334,13 @@
     </section>
 
     <section data-title="TROUBLE">
+      <h3>"THIS PAGE CANNOT RUN FROM A FILE:// ADDRESS"</h3>
+      <p>You opened <span class="note">index.html</span> straight from the disk. A
+        browser gives such a page no origin and refuses its scripts, the audio
+        worklet and the module. Serve the directory instead and open it over
+        <b>http</b>: <span class="note">zig build serve</span>, or
+        <span class="note">python3 -m http.server</span> in the folder, then
+        <span class="note">http://localhost:8000/</span>.</p>
       <h3>NO SOUND</h3>
       <p>Click once anywhere on the page. A browser will not start audio until you
         have interacted with it — dropping a file or pressing a key counts too.</p>
@@ -409,7 +416,7 @@
 <footer>
   <span id="status">loading duet.wasm …</span>
   <span>libduet — the DUET engine in your browser · GPL-2.0-or-later (reSID by Dag Lem) · SID-Wizard examples by Hermit and friends (WTFPL) · font: JetBrains Mono (<a href="OFL.txt">OFL</a>)</span>
-  <span><a href="https://github.com/M64GitHub/duetracker" title="DUET's source — the tracker, the library, this page">source</a> · <a href="embed.html" title="the engine in a page of your own: duet-web.js">embed it</a> · <a href="LICENSES/README.txt">licences</a> · <span class="build" title="the build stamp: a hash of the engine's files">build aeb2d12d3d18</span></span>
+  <span><a href="https://github.com/M64GitHub/duetracker" title="DUET's source — the tracker, the library, this page">source</a> · <a href="embed.html" title="the engine in a page of your own: duet-web.js">embed it</a> · <a href="LICENSES/README.txt">licences</a> · <span class="build" title="the build stamp: a hash of the engine's files">build 10ade56fa8d8</span></span>
   <span id="selftest"></span>
 </footer>
 <!-- THE STAMP (XXIII.e): `zig build wasm` writes this page out with the placeholder
@@ -420,11 +427,20 @@
      source tree the placeholder is still here, and the page falls back to a fresh
      stamp per load. -->
 <script type="module">
-  const STAMP = 'aeb2d12d3d18'.startsWith('__DUET_') ? String(Date.now()) : 'aeb2d12d3d18';
-  import('./duet-player.js?v=' + STAMP).catch((e) => {
-    document.getElementById('status').textContent = 'the page could not load duet-player.js: ' + e.message;
-    document.getElementById('status').classList.add('bad');
-  });
+  const STAMP = '10ade56fa8d8'.startsWith('__DUET_') ? String(Date.now()) : '10ade56fa8d8';
+  const status = document.getElementById('status');
+  // A file:// page has no origin: a browser refuses its module imports, the audio
+  // worklet's script and the module's fetch alike — so say so, in place of the
+  // import error a browser would print (m64 opened zig-out/web/index.html in Firefox).
+  if (location.protocol === 'file:') {
+    status.textContent = 'this page cannot run from a file:// address — a browser will not load its scripts, the audio worklet or duet.wasm without a web server. Serve the directory and open it over http: `zig build serve` (http://localhost:8000/), or `python3 -m http.server -b 127.0.0.1 8000` in this folder.';
+    status.classList.add('bad');
+  } else {
+    import('./duet-player.js?v=' + STAMP).catch((e) => {
+      status.textContent = 'the page could not load duet-player.js: ' + e.message;
+      status.classList.add('bad');
+    });
+  }
 </script>
 </body>
 </html>

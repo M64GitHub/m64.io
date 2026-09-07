@@ -46,7 +46,7 @@ const S = {
   gallery: [], folder: [], folderTitle: '', rows: [], sel: 0, filter: '', panelOpen: false, pendingFolder: null, playing: '',
   view: 'strip', gridFrom: 0,
   helpOpen: false, helpAt: 0,
-  beat: 0, bar: 0, markerFlash: 0, badgeCo: false, scale: 1, pageError: '',
+  beat: 0, bar: 0, markerFlash: 0, badgeCo: false, scale: 1, pageError: '', drawErrors: 0,
   spec: new Float32Array(30), specPeak: new Float32Array(30), specVel: new Float32Array(30), specHold: new Float32Array(30),
   vu: [0, 0], vuPeak: [0, 0], vuVel: [0, 0], vuHold: [0, 0], time: 0,
   // the engine's state, read through: the browser console and tools/webplay-smoke.mjs look here
@@ -133,6 +133,7 @@ duet.on('ended', () => setStatus('the song ended'));
 const strip = $('#strip'), sctx = strip.getContext('2d');
 function drawStrip() {
   const dpr = window.devicePixelRatio || 1, W = strip.clientWidth, H = strip.clientHeight;
+  if (!W || !H) return; // hidden behind the FILES panel: no size to draw into, and the last frame is kept
   if (strip.width !== Math.floor(W * dpr) || strip.height !== Math.floor(H * dpr)) { strip.width = Math.floor(W * dpr); strip.height = Math.floor(H * dpr); }
   sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   sctx.fillStyle = T.bg; sctx.fillRect(0, 0, W, H);
@@ -216,6 +217,7 @@ function fieldColor(text, kind) {
 
 function drawGrid() {
   const dpr = window.devicePixelRatio || 1, W = grid.clientWidth, H = grid.clientHeight;
+  if (!W || !H) return; // hidden behind the FILES panel (s146: a 0-wide canvas fit no column, the window slid past the end, and the throw ended the frame loop)
   if (grid.width !== Math.floor(W * dpr) || grid.height !== Math.floor(H * dpr)) { grid.width = Math.floor(W * dpr); grid.height = Math.floor(H * dpr); }
   gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   gctx.fillStyle = T.bg; gctx.fillRect(0, 0, W, H);
@@ -238,13 +240,14 @@ function drawGrid() {
   // it follows the column that sounded last, and never scrolls past an end.
   let fit = 0, used = GUT;
   while (fit < cols.length && used + want[fit] <= (W - 8 * k) / charW) { used += want[fit]; fit++; }
+  fit = Math.max(fit, 1);                          // one column always shows, clipped if it must: `shown` is never empty
   if (fit < cols.length) {
     const live = cols.reduce((best, c, i) => (c.level > cols[best].level ? i : best), 0);
     if (live < S.gridFrom) S.gridFrom = live;
     else if (live >= S.gridFrom + fit) S.gridFrom = live - fit + 1;
     S.gridFrom = Math.max(0, Math.min(S.gridFrom, cols.length - fit));
   } else S.gridFrom = 0;
-  const shown = cols.slice(S.gridFrom, S.gridFrom + Math.max(fit, 1));
+  const shown = cols.slice(S.gridFrom, S.gridFrom + fit);
   // the row numbers ride the IT block's playhead (a pure SWM has none:
   // track 0's own row stands in, which is what its transport counts)
   const anchor = shown.find((c) => c.group === 'it') || shown[0];
@@ -428,10 +431,20 @@ function drawHud() {
   $('#b-pause').classList.toggle('on', !!p.paused);
   $('#b-play').classList.toggle('on', !!p.playing && !p.paused);
 }
+// THE FRAME LOOP NEVER DIES (s146, m64: *"SOMETIMES the animated parts
+// freeze"*): a throw anywhere in a draw ended the requestAnimationFrame
+// chain for good — the grid, the strip, the visualiser and the HUD all
+// stood still while the worklet played on, and no button could bring
+// them back. A draw error is said ONCE, on the status line and the
+// console, counted for the self-test, and the next frame runs.
 function frame() {
-  duet.drain(); // the events due this frame, before anything is drawn
-  if (S.view === 'grid') drawGrid(); else drawStrip();
-  drawViz(); drawHud();
+  try {
+    duet.drain(); // the events due this frame, before anything is drawn
+    if (S.view === 'grid') drawGrid(); else drawStrip();
+    drawViz(); drawHud();
+  } catch (e) {
+    if (!S.drawErrors++) { console.error('[duet-player] draw', e); setStatus('the display failed to draw: ' + (e && e.message ? e.message : e) + ' — the sound goes on; if the display stays stuck, reload the page', true); }
+  }
   requestAnimationFrame(frame);
 }
 
@@ -848,7 +861,7 @@ async function afterReady() {
   showPanel(true); // nothing named: the page opens on its files
 }
 function selfTest() {
-  const info = duet.info, line = `SELFTEST ${info && duet.frames > 0 && duet.eventsSeen > 0 ? 'ok' : 'FAIL'} version=${duet.version} mode=${duet.mode} bytes=${duet.moduleBytes} build=${STAMP || '-'} title="${info ? info.title : ''}" kind=${info ? info.kind : '-'} frames=${duet.frames} events=${duet.eventsSeen} rows=${S.rowsSeen} columns=${S.columns.size} view=${S.view} gallery=${S.gallery.length} files=${S.folder.length} folders=${window.showDirectoryPicker ? 'handle' : 'snapshot'} help=${S.helpOpen ? 'p' + S.helpAt : 'closed'}/${helpSections.length} time=${duet.time.toFixed(1)} load=${Math.round(duet.load * 100)}% ready=${duet.isReady} ctx=${duet.context.state} status="${$('#status').textContent}"`;
+  const info = duet.info, line = `SELFTEST ${info && duet.frames > 0 && duet.eventsSeen > 0 && !S.drawErrors ? 'ok' : 'FAIL'} version=${duet.version} mode=${duet.mode} bytes=${duet.moduleBytes} build=${STAMP || '-'} title="${info ? info.title : ''}" kind=${info ? info.kind : '-'} frames=${duet.frames} events=${duet.eventsSeen} rows=${S.rowsSeen} columns=${S.columns.size} view=${S.view} drawErrors=${S.drawErrors} gallery=${S.gallery.length} files=${S.folder.length} folders=${window.showDirectoryPicker ? 'handle' : 'snapshot'} help=${S.helpOpen ? 'p' + S.helpAt : 'closed'}/${helpSections.length} time=${duet.time.toFixed(1)} load=${Math.round(duet.load * 100)}% ready=${duet.isReady} ctx=${duet.context.state} status="${$('#status').textContent}"`;
   $('#selftest').textContent = line; console.log(line);
 }
 
