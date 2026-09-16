@@ -120,7 +120,7 @@ payload field is replaced by a stand-in — both additive, both the same layout 
     <thead><tr><th><code>v</code></th><th>Layout</th><th>Section</th></tr></thead>
     <tbody>
       <tr><td><code>1</code></td><td>the base layout</td><td>§5.1</td></tr>
-      <tr><td><code>2</code></td><td>one <code>*Ref</code> in place of one payload field (offloaded)</td><td>canonical §5.6</td></tr>
+      <tr><td><code>2</code></td><td>one <code>*Ref</code> in place of one payload field (offloaded)</td><td><a href="#5-6-large-payload-offload">§5.6</a></td></tr>
       <tr><td><code>3</code></td><td>one <code>*Enc</code> in place of one payload field, or a <code>*Ref</code> whose blob holds transformed bytes</td><td>§5.7 below</td></tr>
     </tbody>
   </table></div>
@@ -232,7 +232,7 @@ a read-only hint and never gates progress.</p>
 <td><code>DE_BLOBS</code></td>
 <td>Object store</td>
 <td>object name = <code>{runId}/{digest}</code></td>
-<td>For large-payload offload (§5.6 in the canonical spec; default on, skippable when disabled). File storage; <strong><code>discard: new</code></strong>; <code>max_bytes</code>.</td>
+<td>For large-payload offload (<a href="#5-6-large-payload-offload">§5.6</a>; default on, skippable when disabled). File storage; <strong><code>discard: new</code></strong>; <code>max_bytes</code>.</td>
 </tr>
 </tbody></table>
 </div><p>Requirements:</p>
@@ -785,6 +785,76 @@ with <code>next_by_subj</code> and <code>batch</code>; the journal stream is pro
 consumer — and verify it against the leader&#39;s per-subject count obtained concurrently. A direct get on a replicated stream
 <strong>MAY be answered by a follower</strong> and is then a consistent prefix, which is exactly why the count check is not optional. An
 implementation that reads through an ordered consumer instead is conformant; one that skips the completeness check is not.</p>
+<h3 id="5-6-large-payload-offload"><a class="h-anchor" href="#5-6-large-payload-offload" aria-label="Link to this section">#</a>5.6 Large-payload offload (blob refs, wire <code>v:2</code>)</h3>
+<p>When an encoded entry would exceed the deployment&#39;s offload threshold (<strong>SHOULD</strong> default to
+<code>max_payload</code> minus a headers margin — i.e. offload only what could not publish inline; deployments MAY
+configure it lower), the entry&#39;s <strong>payload slot</strong> is written to the <code>DE_BLOBS</code> object store and the
+entry carries a <strong>blob ref</strong> in its place, stamped <code>&quot;v&quot;: 2</code>.</p>
+<p><strong>Payload slots.</strong> Exactly one field per kind is offloadable; every other field is metadata and <strong>MUST</strong>
+stay inline (an entry oversized from metadata alone fails deterministically, §12):</p>
+<div class="table-wrap"><table>
+    <thead><tr><th>Kind</th><th>Slot</th><th>Ref field</th></tr></thead>
+    <tbody>
+      <tr><td><code>start</code> / <code>call</code> / <code>continued</code></td><td><code>input</code></td><td><code>inputRef</code></td></tr>
+      <tr><td><code>step-end</code> / <code>result</code></td><td><code>value</code></td><td><code>valueRef</code></td></tr>
+      <tr><td><code>signal</code></td><td><code>data</code></td><td><code>dataRef</code></td></tr>
+      <tr><td><code>fail</code></td><td><code>error</code></td><td><code>errorRef</code></td></tr>
+      <tr><td><code>resolve</code> (holds value XOR error)</td><td>whichever is populated</td><td><code>valueRef</code> / <code>errorRef</code></td></tr>
+    </tbody>
+  </table></div>
+<p><strong>The ref.</strong> The slot field is <strong>absent</strong> on the wire and the matching <code>*Ref</code> field carries:</p>
+<pre class="diagram"><code>{
+  "name": "{runId}/sha256:&lt;64 lowercase hex&gt;",
+  "digest": "sha256:&lt;64 lowercase hex&gt;",
+  "size": 3145728
+}</code></pre>
+<ul>
+<li><code>name</code> — the object&#39;s name in <code>DE_BLOBS</code>: <strong><code>{runId}/{digest}</code></strong>, where <code>{runId}</code> is the run whose
+journal carries the ref (the <strong>GC unit</strong>: deleting a run&#39;s journal + its <code>{runId}/</code>-prefixed objects
+is complete and cannot break any other run — which also means the same content embedded in two runs&#39;
+journals is stored once <strong>per run</strong>, deliberately).</li>
+<li><code>digest</code> — SHA-256 of the blob&#39;s bytes, lowercase hex, prefixed <code>sha256:</code>.</li>
+<li><code>size</code> — the blob&#39;s byte length.</li>
+</ul>
+<p><strong>Blob content.</strong> The bytes of the slot <strong>value alone</strong>, encoded by the journal codec&#39;s value encoding
+(for <code>v:1</code>/JSON: the value&#39;s compact JSON — with the same fidelity rules as inline encoding, so an
+offloaded value round-trips exactly as it would have inline).</p>
+<p><strong>Writer rules.</strong></p>
+<ul>
+<li><strong>Blob-before-pointer:</strong> the object <strong>MUST</strong> be fully written before any message carrying its ref is
+published (journal entry, work item, or KV record). A ref on a stream therefore always resolves.</li>
+<li>Names <strong>MUST</strong> be content-addressed as above. Two concurrent CAS racers at one <code>seq</code> holding
+<strong>different</strong> bytes (step functions may be nondeterministic) then write <strong>different</strong> objects and the
+journal CAS alone picks the surviving ref — a per-seq (msgID-derived) name would let the loser
+overwrite the winner&#39;s bytes <em>after</em> the winner&#39;s ref landed.</li>
+<li>A writer that loses the CAS <strong>MUST NOT</strong> delete the blob it wrote: an identical-bytes racer shares the
+winner&#39;s object name. The loser&#39;s divergent blob is an inert orphan, reclaimed by the run&#39;s GC.</li>
+<li>A <code>put</code> to an existing complete object of the same size MAY be skipped (same name ⇒ same bytes).</li>
+<li>Entries <strong>without</strong> a ref <strong>SHOULD</strong> be written as <code>v:1</code> (maximally compatible); an entry <strong>with</strong> a
+ref <strong>MUST</strong> be <code>v:2</code>.</li>
+</ul>
+<p><strong>Reader rules.</strong></p>
+<ul>
+<li>A reader <strong>MUST</strong> verify the fetched bytes&#39; digest against <code>ref.digest</code> before use and treat a
+mismatch as corruption (fail loud; never use the bytes).</li>
+<li>Refs are resolved at journal load, before entries reach the replay engine (the engine never sees a
+ref). Observers that only scan kinds/metadata MAY skip resolution.</li>
+<li>A ref whose object is <strong>definitively absent</strong> makes the journal unreadable: the run <strong>MUST be parked</strong>
+(redeliver with backoff, loudly), <strong>never</strong> terminally failed — the condition is operational and
+recoverable (restore the object, or cancel the run). A transient blob-store failure retries like any
+infrastructure error.</li>
+<li>A reader without §5.6 support (or without the bucket) encountering <code>v:2</code> fails at decode/resolve —
+loud, and safe for mixed fleets. Rollout rule: <strong>upgrade workers before clients</strong> start offloading.</li>
+</ul>
+<p><strong>Work items and the status record</strong> reuse the same refs (§6.1, §10): a value is offloaded <strong>once</strong> by
+whichever side journals-or-enqueues it first, and every downstream embedding carries the ref verbatim.</p>
+<blockquote>
+<p>Reading a blob: the reference implementations resolve the object&#39;s meta record (a last-by-subject
+stream get) and read its chunks with a batched direct get on <code>$O.{bucket}.C.{nuid}</code> — no consumer —
+verifying the byte count and chunk count the meta records before the content-address digest check
+above. An object-store client library&#39;s own <code>get</code> may leave an ephemeral consumer behind per read; an
+implementation is free to use it, and responsible for deleting what it creates.</p>
+</blockquote>
 <hr>
 <h3 id="5-7-payload-transform"><a class="h-anchor" href="#5-7-payload-transform" aria-label="Link to this section">#</a>5.7 Payload transform (encryption at rest, wire <code>v:3</code>) — OPTIONAL</h3>
 <p>A deployment MAY configure a <strong>payload codec</strong>: a reversible <code>bytes → bytes</code> transform applied to an entry&#x27;s
@@ -1469,6 +1539,7 @@ and <a href="./design.html"><code>DESIGN.md</code></a> for the design rationale 
         <a href="#5-3-entry-kinds" class="lvl-3" data-toc="5-3-entry-kinds">5.3 Entry kinds</a>
         <a href="#5-4-append-rules-msgid-expect" class="lvl-3" data-toc="5-4-append-rules-msgid-expect">5.4 Append rules — msgID & expect</a>
         <a href="#5-5-reading-a-journal" class="lvl-3" data-toc="5-5-reading-a-journal">5.5 Reading a journal</a>
+        <a href="#5-6-large-payload-offload" class="lvl-3" data-toc="5-6-large-payload-offload">5.6 Large-payload offload (v:2)</a>
         <a href="#5-7-payload-transform" class="lvl-3" data-toc="5-7-payload-transform">5.7 Payload transform (v:3)</a>
         <a href="#6-the-work-queue" class="lvl-2" data-toc="6-the-work-queue">6. The work queue</a>
         <a href="#6-1-work-item-shape" class="lvl-3" data-toc="6-1-work-item-shape">6.1 Work-item shape</a>
