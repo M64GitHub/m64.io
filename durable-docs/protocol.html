@@ -775,8 +775,16 @@ entry: a second writer attempting a different terminal is deduplicated, and the 
 canonical.</p>
 <h3 id="5-5-reading-a-journal"><a class="h-anchor" href="#5-5-reading-a-journal" aria-label="Link to this section">#</a>5.5 Reading a journal</h3>
 <p>To load a run, read all messages on <code>de.journal.{runId}</code> <strong>in stream order</strong> and decode each (§5.1). The
-ordered list is the run&#39;s full state. A run is <strong>terminal</strong> iff it contains a <code>result</code>, <code>fail</code>, or
-<code>continued</code> entry; it has <strong>at most one</strong> such entry (§5.4).</p>
+ordered list is the run&#39;s full state. A run is <strong>terminal</strong> iff it contains a <code>result</code>, <code>fail</code>,
+<code>continued</code>, or <code>cancelled</code> entry; it has <strong>at most one</strong> such entry (§5.4).</p>
+<p>A reader <strong>MUST verify the read is complete</strong> (e.g. against the stream&#39;s reported per-subject message count) and
+treat a short read as a transient failure to retry — never as the run&#39;s state. Replaying over a truncated prefix mis-places
+the frontier and fences on an already-recorded command, indistinguishable from a real concurrent writer (invariant #2).</p>
+<p>The reference implementations read the subject with a <strong>batched direct get</strong> (<code>$JS.API.DIRECT.GET.{stream}</code>
+with <code>next_by_subj</code> and <code>batch</code>; the journal stream is provisioned with <code>allow_direct</code>, §3) — one request, no
+consumer — and verify it against the leader&#39;s per-subject count obtained concurrently. A direct get on a replicated stream
+<strong>MAY be answered by a follower</strong> and is then a consistent prefix, which is exactly why the count check is not optional. An
+implementation that reads through an ordered consumer instead is conformant; one that skips the completeness check is not.</p>
 <hr>
 <h3 id="5-7-payload-transform"><a class="h-anchor" href="#5-7-payload-transform" aria-label="Link to this section">#</a>5.7 Payload transform (encryption at rest, wire <code>v:3</code>) — OPTIONAL</h3>
 <p>A deployment MAY configure a <strong>payload codec</strong>: a reversible <code>bytes → bytes</code> transform applied to an entry&#x27;s

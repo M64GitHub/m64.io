@@ -81,8 +81,8 @@
 
 <article class="prose">
 
-<h2 id="unreleased"><a class="h-anchor" href="#unreleased" aria-label="Link to this section">#</a>Unreleased — Payload encryption at rest</h2>
-<p style="color:var(--ink-dim)"><em>wire <code>v:1</code> + additive <code>v:2</code> + additive <code>v:3</code> · 492 tests in TypeScript, 495 in Python</em></p>
+<h2 id="unreleased"><a class="h-anchor" href="#unreleased" aria-label="Link to this section">#</a>Unreleased — Payload encryption at rest; reads that leave nothing behind</h2>
+<p style="color:var(--ink-dim)"><em>wire <code>v:1</code> + additive <code>v:2</code> + additive <code>v:3</code> · 504 tests in TypeScript, 506 in Python</em></p>
 <p>
   NATS authorization is this library&#x27;s security boundary — there is no server between principals and
   the streams — so a principal with read rights on <code>de.journal.&gt;</code> could see every workflow input
@@ -98,6 +98,17 @@
   <li><strong>A large payload was offloaded in the clear.</strong> A signal&#x27;s data and a child&#x27;s outcome ride the work queue, and an oversized one is written to the blob store at publish time — before any journal entry exists to transform. So a small payload was encrypted inline and a large one was stored in the clear, with nothing on the journal to show which. Whether a payload was encrypted depended on its <strong>size</strong>. The work-item offload now applies the transform and marks the item, so the entry that references the blob is stamped <code>v:3</code> — see <a href="./protocol.html#6-1-work-item-shape">§6.1</a>.</li>
   <li><strong>A continue-as-new rollover raced by two workers could start its next generation from the wrong input.</strong> Every other terminal adopts the journaled entry when its compare-and-swap is lost; the rollover reported its own instead. The next run identifier is derived, so the chain&#x27;s shape was never at risk — but the rollover input and target version are computed per attempt, and whichever worker won a second, unrelated race decided what the next generation actually ran with. The journal is the source of truth for the chain again.</li>
   <li><strong>A misconfigured client hung instead of failing.</strong> A reader that cannot decode never heals by waiting, so it now fails loudly rather than timing out.</li>
+  <li><strong>A waiting <code>result()</code> left one consumer behind per call.</strong> The status watch it used created an ordered consumer that the KV client stops but never deletes, and a managed service caps consumers <em>per stream</em> — so the 251st waiting caller inside five minutes was refused while every run completed. The wake-up hint is a plain subscription on the run&#x27;s status key now, in both SDKs, and creates nothing.</li>
+  <li><strong>Every blob read, and every maintenance pass, left one consumer behind too.</strong> The object-store client&#x27;s read and the KV client&#x27;s key walk have the same shape. Blob chunks and the parked-timer index are read with one batched direct get now, in both SDKs, verified against the size the object&#x27;s meta records.</li>
+  <li><strong>A waiting client re-read the whole journal every second.</strong> A hundred pending <code>result()</code> calls made hundreds of API requests per second from one idle process. The tick behind the push hint is coarse now, and each tick is one request.</li>
+  <li><strong>The two SDKs provisioned different KV buckets.</strong> The Python client creates a bucket without direct reads enabled unless asked; the TypeScript client always enables them. It is a reconciled field on every bucket now, so an older deployment picks it up on the next start.</li>
+  <li><strong>Provisioning&#x27;s first API call could time out on a fresh account</strong> and surface as a raw timeout from <code>start</code>. Provisioning uses a 15 s API timeout now.</li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul>
+  <li><strong>Journal loads are one request, and create no consumer.</strong> A load was a stream-info call, an ordered-consumer create, a fetch and a consumer delete — four sequential API calls, and the create and delete serialize on the stream. Both SDKs read a run&#x27;s subject with a <em>batched direct get</em> now, continuing across batches from the last sequence; measured against NGS at a 50 ms round trip, a load went from about 570 ms to about 55 ms. The completeness guard stays: the leader&#x27;s per-subject count is fetched alongside and a shorter read is still a transient short read, because a direct get on a replicated stream may be answered by a follower. <code>allow_direct</code> is a reconciled field on the journal stream (nats-server 2.11 or newer), preflighted at provision time — <a href="./protocol.html#5-5-reading-a-journal">§5.5</a>.</li>
+  <li><strong>A load and soak harness</strong> under <code>bench/</code>: a worker that records every metric event, a paced seeder, a report of round trips per run, latency percentiles, memory and journal growth, and a probe for the read path. Its first numbers against NGS: a five-step run is 12 appends and 4 loads, one round trip each, and three laptop workers sustain about 20 runs per second with zero failures.</li>
+  <li><strong>Two footprint guards in both test suites.</strong> The harness teardown fails the whole run if any consumer without a durable name is left on the test server — the library creates none — and a cost-budget test taps every JetStream API request one run makes and pins the numbers. A client&#x27;s steady-state consumer count is zero; a worker&#x27;s is two per workflow.</li>
 </ul>
 <p>
   The cross-SDK conformance corpus grew from 24 golden journal entries to <strong>34</strong>, and the
@@ -221,7 +232,7 @@
           </main>
           <nav class="toc" aria-label="On this page">
         <div class="toc-h">On this page</div>
-        <a href="#unreleased" class="lvl-2" data-toc="unreleased">Unreleased — Payload encryption at rest</a>
+        <a href="#unreleased" class="lvl-2" data-toc="unreleased">Unreleased — Payload encryption at rest; reads that leave nothing behind</a>
         <a href="#v0-6-1" class="lvl-2" data-toc="v0-6-1">v0.6.1 — Two ways a run could stop making progress</a>
         <a href="#v0-6-0" class="lvl-2" data-toc="v0-6-0">v0.6.0 — The lost wake, repaired</a>
         <a href="#v0-5-1" class="lvl-2" data-toc="v0-5-1">v0.5.1 — Discard compat &amp; timers headroom</a>
