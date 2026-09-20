@@ -416,7 +416,7 @@
 <footer>
   <span id="status">loading duet.wasm …</span>
   <span>libduet — the DUET engine in your browser · GPL-2.0-or-later (reSID by Dag Lem) · SID-Wizard examples by Hermit and friends (WTFPL) · font: JetBrains Mono (<a href="OFL.txt">OFL</a>)</span>
-  <span><a href="https://github.com/M64GitHub/duetracker" title="DUET's source — the tracker, the library, this page">source</a> · <a href="embed.html" title="the engine in a page of your own: duet-web.js">embed it</a> · <a href="LICENSES/README.txt">licences</a> · <span class="build" title="the build stamp: a hash of the engine's files">build 10ade56fa8d8</span></span>
+  <span><a href="https://github.com/M64GitHub/duetracker" title="DUET's source — the tracker, the library, this page">source</a> · <a href="embed.html" title="the engine in a page of your own: duet-web.js">embed it</a> · <a href="LICENSES/README.txt">licences</a> · <span class="build" title="the build stamp: a hash of the engine's files">build 5d50227f0659</span></span>
   <span id="selftest"></span>
 </footer>
 <!-- THE STAMP (XXIII.e): `zig build wasm` writes this page out with the placeholder
@@ -427,7 +427,7 @@
      source tree the placeholder is still here, and the page falls back to a fresh
      stamp per load. -->
 <script type="module">
-  const STAMP = '10ade56fa8d8'.startsWith('__DUET_') ? String(Date.now()) : '10ade56fa8d8';
+  const STAMP = '5d50227f0659'.startsWith('__DUET_') ? String(Date.now()) : '5d50227f0659';
   const status = document.getElementById('status');
   // A file:// page has no origin: a browser refuses its module imports, the audio
   // worklet's script and the module's fetch alike — so say so, in place of the
