@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="qartz — flash EMS 64M USB Game Boy carts from the terminal. Read, write and verify both ROM banks and the save RAM, back up your LSDj songs, hotplug. A 60fps neon pixel-art TUI on movy, plus a CLI. Universal macOS binary, open source (Zig).">
+  <meta property="og:title" content="qartz — flash EMS 64M Game Boy carts from the terminal">
+  <meta property="og:description" content="Read, write + verify, back up. A 60fps neon pixel-art TUI for EMS 64M USB carts, on movy. Universal macOS binary, open source.">
+  <meta property="og:image" content="https://m64.io/qartz/qartz-og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>m64 — qartz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* the DMG's own green, lit from behind */
+    :root { --dmg: #b4e03c; --dmg-glow: rgba(180,224,60,0.55); --dmg-deep: #8bac0f; }
+    .demo-hero { text-align: center; padding: 36px 0 8px; }
+    .demo-hero .name { font-family: var(--font-mono); font-size: clamp(38px, 8vw, 64px); font-weight: 600; letter-spacing: 0.22em; color: var(--dmg); text-shadow: 0 0 22px var(--dmg-glow), 0 0 60px rgba(180,224,60,0.25); margin: 0; }
+    .pill { display: inline-block; margin-top: 18px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dmg); border: 1px solid var(--dmg-deep); border-radius: 999px; padding: 6px 16px; background: rgba(180,224,60,0.06); box-shadow: 0 0 18px rgba(180,224,60,0.22); }
+    .pill b { color: #e8f8b0; }
+    .clip { margin: 28px auto 0; max-width: 560px; }
+    .clip video, .wide-shot img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid rgba(180,224,60,0.35); box-shadow: 0 0 28px rgba(180,224,60,0.22), 0 0 80px rgba(0,255,255,0.08); background: #000; }
+    .clip figcaption, .wide-shot figcaption { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim); margin-top: 10px; text-align: center; }
+    .wide-shot { margin: 22px 0 0; }
+    .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 20px 0 4px; }
+    .section p + p { margin-top: 14px; }
+    .fact { border: 1px solid var(--hair); border-radius: var(--radius); padding: 12px 14px; background: rgba(180,224,60,0.03); }
+    .fact .v { font-family: var(--font-mono); font-size: 20px; font-weight: 500; color: var(--dmg); text-shadow: 0 0 12px var(--dmg-glow); }
+    .fact .k { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-dim); margin-top: 4px; letter-spacing: 0.04em; }
+    .dl { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 18px; }
+    .dl .btn small { font-weight: 300; opacity: 0.7; margin-left: 6px; }
+    .section pre { overflow-x: auto; font-size: 12.5px; line-height: 1.45; }
+    .feat { list-style: none; padding: 0; margin: 6px 0 0; }
+    .feat li { padding: 7px 0 7px 22px; position: relative; line-height: 1.6; }
+    .feat li::before { content: '▸'; position: absolute; left: 0; color: var(--dmg); text-shadow: 0 0 10px var(--dmg-glow); }
+    .keys { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; font-size: 14.5px; margin-top: 10px; }
+    .keys code { color: var(--dmg); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 6px; }
+    .split > div { border: 1px solid var(--hair-soft); border-radius: var(--radius); padding: 14px 16px; }
+    .split h3 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px; color: var(--dmg); }
+    .split p { font-size: 14.5px; line-height: 1.65; margin: 0; }
+    .split p + p { margin-top: 10px; }
+    .links a { color: var(--cyan); text-decoration: none; font-family: var(--font-mono); font-size: 14px; }
+    .links a:hover { text-shadow: 0 0 12px var(--cyan-glow); }
+    @media (max-width: 560px) { .split { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-scan" aria-hidden="true"></div>
+  <div class="bg-vignette" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html">m64</a>
+    <nav class="nav">
+      <a href="../index.html">// home</a>
+      <a href="../projects.html" class="active">// projects</a>
+      <a href="../music/">// music</a>
+      <a href="../posts/">// blog</a>
+      <a href="../chiptune-wiki/">// wiki</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="demo-hero">
+      <h1 class="name">QARTZ</h1>
+      <div class="tagline">flash EMS 64M Game Boy carts<span class="sep">·</span>from the terminal</div>
+      <div class="pill"><b>v0.1.0</b> · universal macOS binary · open source</div>
+      <figure class="clip">
+        <video controls playsinline preload="metadata" poster="qartz-poster.png" width="1080" height="1226">
+          <source src="qartz-demo.mp4" type="video/mp4">
+        </video>
+        <figcaption>Dump bank 1, flash LSDj into bank 2, verify — then four of the eleven themes.<br>Music: an LSDj track by m64. Transfers sped up for the video.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">what this is</h2>
+      <p>
+        The <span class="hl">EMS 64M</span> is the USB flash cart a lot of Game Boy musicians keep
+        <span class="am">LSDj</span> on: two 4 MB ROM banks and one 128 KB battery-backed save RAM — where the
+        songs live. The app that flashed it, ems-qart, is a Qt app from 2016 that no longer opens on a current Mac.
+      </p>
+      <p>
+        <span class="hl">qartz</span> is its replacement, rebuilt from scratch in <span class="hl">Zig</span> on
+        <span class="am">movy</span>: the two banks and the SRAM become pixel-art slots on a glowing PCB bus, and
+        during a transfer the data runs along the traces as packets of light — cart to computer on a read,
+        computer to cart on a write, and back again for the verify. Plus a plain CLI for scripts.
+      </p>
+      <div class="facts">
+        <div class="fact"><div class="v">60 fps</div><div class="k">neon, in a text terminal</div></div>
+        <div class="fact"><div class="v">3 slots</div><div class="k">bank 1 · bank 2 · sram</div></div>
+        <div class="fact"><div class="v">100%</div><div class="k">of every write verified</div></div>
+        <div class="fact"><div class="v">11</div><div class="k">colour themes · DMG first</div></div>
+        <div class="fact"><div class="v">1 MB</div><div class="k">one binary, libusb inside</div></div>
+        <div class="fact"><div class="v">0</div><div class="k">dependencies, drivers</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">download</h2>
+      <div class="dl">
+        <a class="btn" href="https://github.com/M64GitHub/qartz/releases/latest">latest release <small>macOS 13+ · Apple Silicon + Intel</small></a>
+        <a class="btn mg" href="https://github.com/M64GitHub/qartz">source on GitHub <small>GPL-3.0</small></a>
+      </div>
+      <p>Or straight from a terminal — then just run <code>qartz</code>:</p>
+<pre>curl -L https://github.com/M64GitHub/qartz/releases/latest/download/qartz-macos-universal.tar.gz | tar xz
+mv qartz-*-macos-universal/qartz /usr/local/bin/</pre>
+      <p style="font-size:14px;color:var(--text-dim)">
+        Downloaded in a browser instead? qartz is ad-hoc signed, not notarized — clear the quarantine flag once:
+        <code>xattr -d com.apple.quarantine qartz</code>. Linux: build from source with <code>zig build</code>
+        (needs libusb and a udev rule).
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">what it does</h2>
+      <ul class="feat">
+        <li><span class="hl">Read</span> any slot into a file, <span class="hl">write</span> a file into any slot — the labels show what the cart really holds: title, size, mapper, GBC flag, RAM.</li>
+        <li><span class="hl">Every write is verified</span> by reading it all back; every ROM dump is checked against the ROM's own global checksum.</li>
+        <li><span class="hl">Backup</span>: both banks and the SRAM — your songs — into one folder, named after the ROM titles.</li>
+        <li><span class="hl">Hotplug</span>: plug the cart in and the slots power on, left to right. USB hubs are fine.</li>
+        <li><span class="hl">Safe</span>: a write asks before it flashes and asks twice before it aborts; closing the window or Ctrl+C finish the USB block in flight, so the cart is never left hanging.</li>
+        <li>A fuzzy file picker with favorites, and a confirm screen that shows the file's header next to what the bank holds now.</li>
+      </ul>
+      <figure class="wide-shot">
+        <img src="qartz-themes.png" alt="the qartz screen in four colour themes: DUET, NEBULA, VOLTAGE, EMBER" width="2020" height="560">
+        <figcaption>DUET · NEBULA · VOLTAGE · EMBER — <code>t</code> cycles all eleven, with a crossfade</figcaption>
+      </figure>
+      <div class="keys">
+        <code>← → 1 2 3</code><span>pick a slot</span>
+        <code>r · w</code><span>read the slot · write a file into it</span>
+        <code>b</code><span>back up everything</span>
+        <code>t · T</code><span>next · previous theme</span>
+        <code>esc · q</code><span>cancel a transfer · quit</span>
+      </div>
+<pre style="margin-top:16px">qartz info                        # cart status + both banks
+qartz read rom 1 lsdj.gb          # dump a bank
+qartz write rom 2 lsdj.gb         # flash + verify
+qartz backup ~/lsdj-backup        # everything</pre>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">how it's built</h2>
+      <div class="split">
+        <div>
+          <h3>on the screen</h3>
+          <p>movy's <span class="hl">Frame</span>: a float framebuffer with a persistent glow buffer that blurs and decays every
+            frame — the bloom on the carts and the trails behind the packets come from there, for free. Half-block pixels,
+            a dirty-row ANSI writer, 60 fps at about 3% CPU when idle.</p>
+          <p>The file picker, the widgets and the eleven themes come from <span class="am">DUET</span>, my tracker — the DMG
+            green is qartz's own.</p>
+        </div>
+        <div>
+          <h3>on the wire</h3>
+          <p>One worker thread owns the cart: it watches the USB bus, reads both bank headers when the cart arrives, and runs
+            the jobs while the UI only reads snapshots. libusb is compiled in, so the macOS binary needs nothing installed.</p>
+          <p>The USB protocol is ems-qart's, which got it from ems-flasher. Tested on a real EMS 64M through a USB hub.
+            Written with <span class="mg">Claude Code</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="shead">links</h2>
+      <p class="links">
+        <a href="https://github.com/M64GitHub/qartz">github.com/M64GitHub/qartz</a> &nbsp;·&nbsp;
+        <a href="https://github.com/M64GitHub/qartz/releases/latest">releases</a> &nbsp;·&nbsp;
+        <a href="https://github.com/M64GitHub/movy">movy</a> &nbsp;·&nbsp;
+        <a href="../duet-player/">DUET</a>
+      </p>
+      <p style="font-size:14px;color:var(--text-dim)">
+        USB protocol: <a href="https://github.com/rbino/ems-qart" style="color:var(--cyan);text-decoration:none">ems-qart</a>
+        by Riccardo Binetti, from ems-flasher by Mike Ryan. GPL-3.0-or-later.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p>m64 / Mario Schallner · Vienna</p>
+    <p>Made with <span class="heart">&lt;3</span> and Zig</p>
+  </footer>
+</body>
+</html>

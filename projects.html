@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="m64 projects — a terminal graphics engine and the demo that placed at Assembly 2026, a C64 emulation stack, a tracker, a theory lab and a wiki for chip music, and terminal games — mostly in Zig.">
+  <meta name="description" content="m64 projects — a terminal graphics engine and the demo that placed at Assembly 2026, a C64 emulation stack, a tracker, a Game Boy cart flasher, a theory lab and a wiki for chip music, and terminal games — mostly in Zig.">
   <title>m64 — projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
         Unusual systems at the intersection of low-level engineering and creative computing —
         mostly in <span class="hl">Zig</span>, mostly open source. A terminal graphics engine and the
         demo that ran on it at Assembly, a true-color video player, a <span class="hl">Commodore 64</span>
-        emulation stack, a tracker, a theory lab and a wiki for chip music, and a terminal game. From a
+        emulation stack, a tracker, a Game Boy cart flasher, a theory lab and a wiki for chip music, and a terminal game. From a
         1982 sound chip up to neon at 60fps in a text terminal.
       </p>
     </section>
@@ -70,7 +70,8 @@
       <h2 class="shead">chip music</h2>
       <p style="max-width:660px;margin-bottom:20px">
         The Commodore 64, brought to Zig — emulate the CPU, then the sound chip, then play real C64 music. And then
-        the rest of making it: a tracker, a theory lab that speaks tracker, and a wiki on how chip music is done.
+        the rest of making it: a tracker, a flasher for the Game Boy carts LSDj lives on, a theory lab that speaks
+        tracker, and a wiki on how chip music is done.
       </p>
       <div class="grid">
         <a class="card a-green" href="https://github.com/M64GitHub/zigreSID">
@@ -91,6 +92,13 @@
             side from ITTECH.TXT, the SID-Wizard side reimplemented from Hermit's 6502 player and verified register-for-register
             through reSID; up to four SID chips as pattern columns. Repo's private for now — hear it in the web player.</div>
           <div class="meta"><span class="tag">#tracker #sid #zig</span></div>
+        </a>
+        <a class="card a-green" href="qartz/">
+          <div class="pname">qartz <span class="badge public">v0.1.0</span></div>
+          <div class="pone">Flash EMS 64M USB Game Boy carts from the terminal — both 4 MB banks and the save RAM as pixel-art
+            slots on a glowing bus: read, write + verify, back up, hotplug. A from-scratch port of ems-qart as a 60fps neon TUI
+            on movy, plus a CLI. Universal macOS binary.</div>
+          <div class="meta"><span class="tag">#gameboy #lsdj #movy</span></div>
         </a>
         <a class="card a-amber" href="037-lab/">
           <div class="pname">0 3 7 lab <span class="badge live">live</span></div>
